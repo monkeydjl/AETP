@@ -1,0 +1,362 @@
+{
+  "schema_version": "aetp-development-status-0.1",
+  "updated_at": "2026-10-09T21:40:00+08:00",
+  "phase": "preparation",
+  "product_completion_percent": 0,
+  "bootstrap_status": "not_started",
+  "conformance": {
+    "status": "passed",
+    "registered_tests": 28,
+    "passed_tests": 28,
+    "failed_tests": 0,
+    "not_applicable_tests": 0,
+    "evidence": "Docs/development/evidence/2026-10-09-m4-02-conformance-review.json",
+    "note": "28 conformance tests pass (reproducible, digest zero-drift) under a LIMITED compatibility scope: Runtime Adapter enforces a working_copy path-prefix boundary and mediated pre-tool authorization; real OS/container sandbox, credential isolation and network egress allowlist remain unimplemented. Complete AETP Compatible (17.4) is therefore NOT claimed. Separately accepted M0-only execution is recorded under m0_subset."
+  },
+  "milestones": {
+    "PREP": {
+      "status": "done",
+      "total": 8,
+      "blocked": 0,
+      "done": 8,
+      "in_progress": 0,
+      "ready": 0,
+      "review": 0,
+      "todo": 0
+    },
+    "M0": {
+      "status": "done",
+      "total": 6,
+      "blocked": 0,
+      "done": 6,
+      "in_progress": 0,
+      "ready": 0,
+      "review": 0,
+      "todo": 0
+    },
+    "M1": {
+      "status": "done",
+      "total": 2,
+      "blocked": 0,
+      "done": 2,
+      "in_progress": 0,
+      "ready": 0,
+      "review": 0,
+      "todo": 0
+    },
+    "M2": {
+      "status": "done",
+      "total": 2,
+      "blocked": 0,
+      "done": 2,
+      "in_progress": 0,
+      "ready": 0,
+      "review": 0,
+      "todo": 0
+    },
+    "M3": {
+      "status": "done",
+      "total": 2,
+      "blocked": 0,
+      "done": 2,
+      "in_progress": 0,
+      "ready": 0,
+      "review": 0,
+      "todo": 0
+    },
+    "M4": {
+      "status": "blocked",
+      "total": 3,
+      "blocked": 2,
+      "done": 1,
+      "in_progress": 0,
+      "ready": 0,
+      "review": 0,
+      "todo": 0
+    }
+  },
+  "work_item_status_counts": {
+    "ready": 0,
+    "review": 0,
+    "done": 21,
+    "blocked": 2,
+    "todo": 0,
+    "in_progress": 0
+  },
+  "active_work_items": [],
+  "evidence_paths": [
+    "Docs/development/evidence/preparation-log.md",
+    "Docs/development/evidence/preparation-report.json",
+    "Docs/development/evidence/environment.json",
+    "Docs/development/evidence/devprep-check.json",
+    "Docs/development/evidence/knowledge-graph-check.json",
+    "Docs/development/evidence/backlog-check.json",
+    "Docs/development/evidence/skill-protocol-navigation.md",
+    "Docs/development/evidence/skill-execution-contracts.md",
+    "Docs/development/evidence/skill-evidence-handoff.md",
+    "Docs/development/evidence/m0-plan-review.md",
+    "Docs/development/evidence/prep-007-markdown-red.txt",
+    "Docs/development/evidence/prep-007-markdown-green.json",
+    "Docs/development/evidence/prep-007-final-validation.json",
+    "Docs/development/evidence/2026-09-07-prep-001-006-review.json",
+    "Docs/development/evidence/2026-09-07-skill-markers-red.json",
+    "Docs/development/evidence/2026-09-07-skill-coverage-red-rerun.json",
+    "Docs/development/evidence/2026-09-07-skill-coverage-green.json",
+    "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+    "Docs/development/evidence/2026-09-08-preparation-closeout.json",
+    "Docs/development/evidence/2026-09-08-prep-007-review.json",
+    "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+    "Docs/development/evidence/2026-09-08-prep-acceptance-index.json",
+    "Docs/development/evidence/2026-09-08-prep-008-review.json",
+    "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json",
+    "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json",
+    "Docs/development/evidence/2026-09-09-preparation-regression-review.json",
+    "artifacts/m0-02-test-report.json",
+    "Docs/development/evidence/2026-09-10-m0-continuation.json",
+    "artifacts/m0-03-test-report.json",
+    "Docs/development/evidence/2026-09-10-m0-next-slice.json",
+    "artifacts/m0-04-test-report.json",
+    "Docs/development/evidence/2026-09-11-m0-04-development.json",
+    "Docs/development/evidence/2026-09-11-m0-04-probes.json",
+    "Docs/development/evidence/2026-09-11-m0-04-review.json",
+    "Docs/development/evidence/2026-09-11-m0-04-unicode-review-fix.json",
+    "Docs/development/evidence/2026-09-11-m0-04-review-snapshot.json",
+    "Docs/development/evidence/2026-09-11-m0-04-probes.py",
+    "Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py",
+    "Docs/development/evidence/2026-09-11-m0-04-acceptance-probes.json",
+    "Docs/development/evidence/2026-09-11-m0-04-handoff.md",
+    "Docs/development/evidence/2026-09-11-m0-05-development.json",
+    "artifacts/m0-05-test-report.json",
+    "Docs/development/evidence/2026-09-11-m0-05-review-snapshot.json",
+    "Docs/development/evidence/2026-09-11-m0-05-review.json",
+    "Docs/development/evidence/2026-09-11-m0-05-identity-review-fix.json",
+    "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json",
+    "Docs/development/evidence/2026-09-11-m0-05-handoff.md",
+    "Docs/development/evidence/2026-09-11-m0-05-probes.py",
+    "Docs/development/evidence/2026-09-11-m0-05-probes.json",
+    "artifacts/m0-conformance-report.json",
+    "Docs/development/evidence/2026-09-11-m0-06-development.json",
+    "Docs/development/evidence/2026-09-11-m0-06-candidate-snapshot.json",
+    "artifacts/m0-conformance-report-v2.json",
+    "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+    "artifacts/m0-handoff.json",
+    "Docs/development/evidence/2026-09-11-m0-06-review.json",
+    "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+    "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+    "Docs/development/evidence/2026-09-11-m0-06-r1-review-verification.json",
+    "Docs/development/evidence/2026-09-11-m0-06-handoff.md",
+    "artifacts/m1-01-test-report.json",
+    "Docs/development/evidence/2026-09-11-m1-01-candidate-snapshot.json",
+    "artifacts/m1-01-test-report-v2.json",
+    "Docs/development/evidence/2026-09-11-m1-01-candidate-v2-snapshot.json",
+    "Docs/development/evidence/2026-09-11-m1-01-review.json",
+    "Docs/development/evidence/2026-09-11-m1-01-candidate-v1-archive.json",
+    "artifacts/m1-01-demo-v2.json",
+    "Docs/development/evidence/2026-09-11-m1-01-review-v2.json",
+    "Docs/development/evidence/2026-09-11-m1-01-review-v2-consumption.json",
+    "Docs/development/evidence/2026-09-11-m1-01-v2-integrity.json",
+    "Docs/development/evidence/2026-09-11-m1-01-handoff.md",
+    "artifacts/m1-02-test-report-v2.json",
+    "Docs/development/evidence/2026-09-12-m1-02-candidate-v2-snapshot.json",
+    "Docs/development/evidence/2026-09-12-m1-02-candidate-v1-archive.json",
+    "Docs/development/evidence/2026-09-12-m1-02-review.json",
+    "Docs/development/evidence/2026-09-12-m1-02-handoff.md",
+    "Docs/development/evidence/2026-09-12-m1-02-review-v2.json",
+    "Docs/development/evidence/2026-09-12-m1-02-review-consumption.json",
+    "Docs/development/evidence/2026-09-12-m1-02-author-audit-v2.json",
+    "Docs/development/evidence/2026-09-12-m2-01-review-v2.json",
+    "Docs/development/evidence/2026-09-12-m2-01-review-consumption.json",
+    "Docs/development/evidence/2026-09-12-m2-01-author-audit-v2.json",
+    "Docs/development/evidence/2026-09-12-m2-01-handoff-v2.md",
+    "Docs/development/evidence/2026-09-12-m2-01-closeout.json",
+    "Docs/development/evidence/2026-09-12-m2-02-review.json",
+    "Docs/development/evidence/2026-09-12-m2-02-review-consumption.json",
+    "Docs/development/evidence/2026-09-12-m2-02-handoff-final.md",
+    "Docs/development/evidence/2026-09-12-m2-02-closeout.json",
+    "Docs/development/evidence/2026-09-13-m3-01-review.json",
+    "Docs/development/evidence/2026-09-13-m3-01-review-consumption.json",
+    "Docs/development/evidence/2026-09-13-m3-01-handoff-final.md",
+    "Docs/development/evidence/2026-09-13-m3-01-closeout.json",
+    "Docs/development/evidence/2026-09-14-m3-02-review.json",
+    "Docs/development/evidence/2026-09-14-m3-02-review.md",
+    "Docs/development/evidence/2026-09-14-m3-02-review-consumption.json",
+    "Docs/development/evidence/2026-09-14-m3-02-handoff-final.md",
+    "Docs/development/evidence/2026-09-14-m3-02-closeout.json",
+    "Docs/development/evidence/2026-09-14-m3-02-next-slice-inputs.md",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-baseline.json",
+    "artifacts/m3-02-quality-test-report-v1.json",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-candidate-v1-snapshot.json",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-handoff-v1.md",
+    "artifacts/m3-02-quality-demo-v1.json",
+    "artifacts/m3-02-quality-compatibility-v1.json",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-review.json",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-review.md",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-consumption-inputs-v1.json",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-review-consumption.json",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-handoff-final.md",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-next-slice-inputs.md",
+    "Docs/development/evidence/2026-09-15-m3-02-quality-closeout.json",
+    "Docs/development/evidence/2026-09-17-m3-02-integration-review-v1.json",
+    "Docs/development/evidence/2026-09-17-m3-02-integration-review-consumption.json"
+  ],
+  "limitations": [
+    "工作区没有 Git repository，未创建 commit、branch 或 push。",
+    "User explicitly disabled ClaudeLink; one independent reviewer is reused.",
+    "M0 five-object simulation and fixed M0-only conformance subset are independently accepted in their stated scope; full Runtime/Orchestrator, external Action recovery beyond the fixed document Provider, dependency lock and full-protocol Conformance acceptance remain unestablished.",
+    "M1-01 and fixed M1-02 work-item criteria are independently accepted. Whole M1 remains not_accepted. Legacy M1 verification.run reporting INCONCLUSIVE/ENFORCEMENT_UNAVAILABLE is by design: that old entry has no formal submission round or final-use proof, so it must not fabricate a formal PASS (verified by tests/m1/test_verification.py); the formal Verification execution path is supplied by M3 AcceptanceService/TaskQualityService. M3-02's bounded trusted JSON Runner has independent first-batch acceptance. The bounded explicit Task quality/exemption batch has independent acceptance. Working copies are not a general OS sandbox; five additional reviewer methods were not executed against M1-02 v2.",
+    "M2-01 and M2-02 work-item criteria are independently accepted within their frozen local scopes. Approval and governed Decision activation exist only for decision/task adapters at the fixed document boundary. Original M2-01 examples stay proposed; admission metering is not model billing. Full M2/protocol, general execution isolation, real Integration and Mission Acceptance remain unestablished.",
+    "M3-01's three work-item criteria are independently accepted in candidate-only planning. Formal Bootstrap, Team/Blueprint activation, executable planning graphs, Integration, Mission Acceptance and TEST-028 remain unaccepted; deterministic identity fixtures do not certify autonomous models.",
+    "M3-02's first prerequisite implements fixed, data-only JSON Verification with human Quality/Governance limits, independent execution Task, single-use dispatch, immutable reports and recovery. All four first-batch criteria have independent acceptance; the deferred stale comment is corrected in the current Task quality candidate. PASSED means fixed checks matched; Bounded Task completion is covered by the separately accepted Task quality batch; real Integration, Mission Acceptance, real model delivery and TEST-028 remain unaccepted. The original three work-item criteria are unchanged.",
+    "M3-02 Task quality v1 is independently accepted for explicit enrollment/complete submission, independent Reviews, all-record evidence applicability, rework, and atomic completion under a human-owner declaration for the specific standalone JSON Task. No automatic discovery of integration requirements or real Integration Gate is implemented. Whole M3-02, full M1, Mission Acceptance, Bootstrap and TEST-028 remain unaccepted."
+  ],
+  "m0_subset": {
+    "work_item": "M0-06",
+    "scope": "m0-core-only",
+    "status": "accepted",
+    "accepted_at": "2026-09-11T13:17:17.286835+08:00",
+    "recorded_at": "2026-09-11T13:31:35.580244+08:00",
+    "counts": {
+      "passed": 6,
+      "failed": 0,
+      "pending": 3,
+      "not_applicable": 19
+    },
+    "execution_counts": {
+      "passed": 9,
+      "failed": 0,
+      "not_run": 19
+    },
+    "test_ids_by_status": {
+      "passed": [
+        "TEST-001",
+        "TEST-002",
+        "TEST-005",
+        "TEST-017",
+        "TEST-018",
+        "TEST-021"
+      ],
+      "pending": [
+        "TEST-012",
+        "TEST-016",
+        "TEST-019"
+      ],
+      "not_applicable": [
+        "TEST-003",
+        "TEST-004",
+        "TEST-006",
+        "TEST-007",
+        "TEST-008",
+        "TEST-009",
+        "TEST-010",
+        "TEST-011",
+        "TEST-013",
+        "TEST-014",
+        "TEST-015",
+        "TEST-020",
+        "TEST-022",
+        "TEST-023",
+        "TEST-024",
+        "TEST-025",
+        "TEST-026",
+        "TEST-027",
+        "TEST-028"
+      ],
+      "failed": []
+    },
+    "execution_report": {
+      "path": "artifacts/m0-conformance-report-v2.json",
+      "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    },
+    "candidate_snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+      "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+    },
+    "independent_review": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+      "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+    },
+    "review_narrative_addendum": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+      "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+    },
+    "reviewer": "Lorentz (01a08e64-7ed1-7db0-846c-82feb095ae71)",
+    "handoff": "artifacts/m0-handoff.json",
+    "claims": {
+      "full_aetp_compatible": false,
+      "protocol_task_completed": false,
+      "bootstrap_verified": false
+    },
+    "note": "Development-time acceptance of this fixed M0 candidate only. Three partial requirements remain pending and 19 later requirements are not run. Not the preparation/full-protocol conformance counter or product completion percentage."
+  },
+  "m1_acceptance": {
+    "status": "not_accepted",
+    "note": "Whole M1 remains not_accepted. The fixed JSON Verification prerequisite and bounded explicit Task quality/exemption batch are independently accepted. A specific standalone document Task can reach COMPLETED under the current human owner's explicit declaration. Legacy M1 prechecks remain INCONCLUSIVE. Real Integration, Mission Acceptance, Bootstrap and autonomous delivery remain unaccepted."
+  },
+  "m3_02_first_batch": {
+    "scope": "trusted fixed JSON document Verification prerequisite",
+    "status": "accepted",
+    "candidate_revision": "v1",
+    "report": "artifacts/m3-02-verification-test-report.json",
+    "note": "Four prerequisite criteria independently accepted. None of the original three M3-02 criteria is satisfied by this batch; M3-02 remains in_progress.",
+    "accepted_at": "2026-09-15T00:33:17.849585+08:00",
+    "independent_review": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-review.json",
+      "sha256": "e10a48530491af94c53e4c473f7dc39004b1ed489d1dbaaf456ca6b360ef5d54"
+    },
+    "independent_reviewer": "/root/m1_reviewer",
+    "original_work_item_accepted": false,
+    "author_passing_methods": 555,
+    "independent_passing_methods": 567,
+    "findings": {
+      "Critical": 0,
+      "Important": 0,
+      "Minor": 1
+    },
+    "deferred_findings": [
+      {
+        "id": "M3-02-R1",
+        "scope": "stale quality-gate comment only",
+        "disposition": "Correct the explanation in the next Task quality source batch; preserve the current closed gate."
+      }
+    ]
+  },
+  "m3_02_task_quality_batch": {
+    "scope": "fixed document Task quality transitions and explicit no-integration exemption",
+    "status": "accepted",
+    "executor": "/root",
+    "reviewer": "/root/m1_reviewer",
+    "started_at": "2026-09-15T02:12:17.100788+08:00",
+    "baseline": "Docs/development/evidence/2026-09-15-m3-02-quality-baseline.json",
+    "design": "Docs/superpowers/specs/2026-09-15-m3-02-quality-design.md",
+    "plan": "Docs/superpowers/plans/2026-09-15-m3-02-quality.md",
+    "original_work_item_accepted": false,
+    "acceptance": [
+      "Explicit enrollment/submission and independent quality stages",
+      "Versioned evidence applicability without legacy promotion",
+      "Explicit Task-specific exemption and terminal execution retirement",
+      "Atomic/retry/race integrity and pure old/new Replay"
+    ],
+    "note": "Four bounded Task quality criteria independently accepted. Real Integration, Mission Acceptance and autonomous peer delivery remain unaccepted; M3-02 stays in_progress.",
+    "candidate_revision": "v1",
+    "report": "artifacts/m3-02-quality-test-report-v1.json",
+    "addressed_prior_finding": {
+      "id": "M3-02-R1",
+      "scope": "legacy quality-gate comment",
+      "status": "corrected_and_independently_reviewed"
+    },
+    "accepted_at": "2026-09-15T04:46:41.798977+08:00",
+    "independent_review": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review.json",
+      "bytes": 19792,
+      "sha256": "5130b221b88627219069a906f16ce27eba7d30fbf85cc782b7779b88a8ba8c11"
+    },
+    "independent_reviewer": "/root/m1_reviewer",
+    "author_passing_methods": 644,
+    "independent_passing_methods": 657,
+    "findings": {
+      "Critical": 0,
+      "Important": 0,
+      "Minor": 0
+    }
+  }
+}

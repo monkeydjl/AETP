@@ -1,0 +1,179 @@
+{
+  "work_item": "M0-05",
+  "issue": "Duplicate Command identity used Python dataclass equality, collapsing distinct canonical JSON scalar types.",
+  "status": "accepted",
+  "started_at": "2026-09-11T03:35:09.465023+08:00",
+  "reviewer_probe": "Docs/development/evidence/2026-09-11-m0-05-reviewer-command-identity.log",
+  "root_cause": "Command payload dict/list equality considers bool/int and int/float equal; the last duplicate replaces the first. A receipt matching the second then passes its digest validation.",
+  "normative_basis": [
+    "14.1 immutable Command / normalized content",
+    "14.2 causal identity"
+  ],
+  "planned_fix": "Use the existing Command.to_json canonical representation, as Projection.apply already does for Event identity. No model or protocol normalization changes.",
+  "source_sha256_before": {
+    "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+    "src/aetp/core/projection.py": "94dc5d2eb78c31d4ed428c524a65852e621dbb5a91127f8a98e9b83b602bad0b",
+    "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+    "tests/m0/test_replay_recovery.py": "cb8053c183d006d859fb2823aac3c133aaa7d386d5ed13cf0d40d66e51707566",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+  },
+  "regression_tests": [
+    "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+    "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+    "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless"
+  ],
+  "mutation_caught": "Restoring dataclass equality instead of canonical JSON equality accepts conflicting duplicate identities.",
+  "runs": {
+    "identity_red": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:35:45.776621+08:00",
+      "finished_at": "2026-09-11T03:35:46.173714+08:00",
+      "exit_code": 1,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_red-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_red-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 3,
+      "failures": 2,
+      "errors": 0,
+      "expected_red": true
+    },
+    "identity_green": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:37:24.744559+08:00",
+      "finished_at": "2026-09-11T03:37:25.116388+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_green-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_green-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 3,
+      "passed": 3
+    },
+    "identity_focused": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests/m0/test_replay_recovery.py",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:37:25.126262+08:00",
+      "finished_at": "2026-09-11T03:37:29.196099+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_focused-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_focused-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 38,
+      "passed": 38
+    },
+    "identity_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:37:29.206998+08:00",
+      "finished_at": "2026-09-11T03:37:42.045103+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_m0-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_m0-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 131,
+      "passed": 131
+    },
+    "identity_probes": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "Docs/development/evidence/2026-09-11-m0-05-probes.py",
+        "--repetitions",
+        "5",
+        "--output",
+        "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json"
+      ],
+      "started_at": "2026-09-11T03:37:42.054711+08:00",
+      "finished_at": "2026-09-11T03:37:49.479025+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_probes-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_probes-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    }
+  },
+  "implementation_changed_at": "2026-09-11T03:36:28.163393+08:00",
+  "source_sha256_after": {
+    "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+    "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+    "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+    "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+  },
+  "changed_files": [
+    "src/aetp/core/projection.py",
+    "tests/m0/test_replay_recovery.py"
+  ],
+  "source_freeze_verified_at": "2026-09-11T03:37:49.490793+08:00",
+  "acceptance_probes": "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json",
+  "independent_review": {
+    "status": "accepted",
+    "decision": "accepted_in_scope",
+    "reviewer": "Kuhn",
+    "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+    "evidence": "Docs/development/evidence/2026-09-11-m0-05-review.json",
+    "evidence_sha256": "ff9ea2955ad92edc3e0688687ec1ca683851b2a2e590a332ff071bc431fc98b1",
+    "review_completed_at": "2026-09-11T04:14:51.112061+08:00",
+    "recorded_at": "2026-09-11T10:38:35.162013+08:00",
+    "open_findings": 0,
+    "resolved_important": [
+      "M0-05-R1"
+    ],
+    "scope_note": "Independent acceptance of the corrected M0-05 implementation only; dynamic closeout metadata verified by executor."
+  },
+  "acceptance_recorded_at": "2026-09-11T10:38:35.162013+08:00",
+  "metadata_note": "Reviewer delta_sha256_at_re_review records the historical pre-acceptance metadata. Only acceptance metadata changed afterward; source_sha256_after remains the exact independently accepted code."
+}

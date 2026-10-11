@@ -1,0 +1,82 @@
+{
+  "schema_version": "aetp-preparation-run-log-0.1",
+  "scope": "PREP-007 final local verification; independent review pending",
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "independent_review": {
+    "status": "pending",
+    "reviewers": [
+      {
+        "name": "Mill",
+        "agent_id": "01a07535-69d0-7ea3-b87d-5453b341684b",
+        "attempts_this_turn": 2
+      },
+      {
+        "name": "Plato",
+        "agent_id": "01a0771e-3f88-7c10-be23-0e8e73f112df",
+        "attempts_this_turn": 2
+      }
+    ],
+    "observed_error": "stream disconnected before completion: Our servers are currently overloaded. Please try again later.",
+    "new_review_verdict_received": false
+  },
+  "runs": [
+    {
+      "command": "python tools/devprep.py environment",
+      "started_at": "2026-09-06T22:49:08+08:00",
+      "finished_at": "2026-09-06T22:49:08+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development environment facts\npython: 3.14.6\nnode: v24.18.1\ngit: git version 2.54.0.windows.1\nuv: uv 0.12.5 (210d1f678 2026-08-14 x86_64-pc-windows-msvc)\nworkspace_git_repository: False\nreport: Docs/development/evidence/environment.json\n",
+      "stderr": ""
+    },
+    {
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-06T22:49:08+08:00",
+      "finished_at": "2026-09-06T22:49:08+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (2/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-06T22:49:08+08:00",
+      "finished_at": "2026-09-06T22:49:08+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-06T22:49:08+08:00",
+      "finished_at": "2026-09-06T22:49:10+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 1.519s\n\nOK\n"
+    }
+  ],
+  "observed_state": {
+    "prep_status_counts": {
+      "review": 3,
+      "done": 2,
+      "todo": 3
+    },
+    "product_work_items": "all_todo",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance_registered": 28,
+    "conformance_passed": 0,
+    "preparation_tests_run": 10,
+    "graph_nodes": 101,
+    "graph_edges": 144
+  },
+  "source_sha256": {
+    "tools/devprep.py": "ef446133648b4cdcb08632baf980eb3c41022e8c1efccd15e36bc25125e3f08d",
+    "tests/preparation/test_devprep.py": "b64f2202d4a70a4d7167915e87d412b275b0140c23b75dfe3ce2ffc368733069",
+    "Docs/development/backlog.json": "fd1a6c1561da532240ae603978644088182bea9416c7e6ac7e09056fcb66c6e3",
+    "Docs/development/status.json": "0f73b989b52bfb7115e5ed3de6f61b5f7c67cff64711bf99049087815af34953",
+    "Docs/development/evidence/preparation-log.md": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141",
+    "Docs/development/evidence/skill-execution-contracts.md": "9ec6be2344efcc99bc0f2a13147375e39ddc172e548e97c595c94676c713d90e",
+    "Docs/development/evidence/skill-evidence-handoff.md": "c26e22cf6f59e1767a94383750a5f3d08833f33a4f3c39f81e25ce394378bf52"
+  },
+  "all_commands_passed": true
+}

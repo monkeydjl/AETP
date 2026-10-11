@@ -1,0 +1,44 @@
+{
+  "scope": "PREP-007 Markdown link report regression; preparation tools only",
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "red_evidence": "Docs/development/evidence/prep-007-markdown-red.txt",
+  "source_sha256": {
+    "tools/devprep.py": "ef446133648b4cdcb08632baf980eb3c41022e8c1efccd15e36bc25125e3f08d",
+    "tests/preparation/test_devprep.py": "b64f2202d4a70a4d7167915e87d412b275b0140c23b75dfe3ce2ffc368733069"
+  },
+  "runs": [
+    {
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-06T22:29:59+08:00",
+      "finished_at": "2026-09-06T22:29:59+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-06T22:29:59+08:00",
+      "finished_at": "2026-09-06T22:30:00+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (2/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "command": "python tools/devprep.py environment",
+      "started_at": "2026-09-06T22:30:00+08:00",
+      "finished_at": "2026-09-06T22:30:00+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development environment facts\npython: 3.14.6\nnode: v24.18.1\ngit: git version 2.54.0.windows.1\nuv: uv 0.12.5 (210d1f678 2026-08-14 x86_64-pc-windows-msvc)\nworkspace_git_repository: False\nreport: Docs/development/evidence/environment.json\n",
+      "stderr": ""
+    },
+    {
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-06T22:30:00+08:00",
+      "finished_at": "2026-09-06T22:30:02+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 1.425s\n\nOK\n"
+    }
+  ]
+}

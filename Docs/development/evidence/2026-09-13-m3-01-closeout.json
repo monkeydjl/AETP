@@ -1,0 +1,390 @@
+{
+  "work_item": "M3-01",
+  "candidate_revision": "v1",
+  "status": "done",
+  "recorded_at": "2026-09-14T21:01:21.962844+08:00",
+  "purpose": "operational evidence readback, not another independent review",
+  "candidate_audit": {
+    "work_item": "M3-01",
+    "audited_at": "2026-09-14T21:01:21.742200+08:00",
+    "purpose": "author verification, not independent acceptance",
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-candidate-snapshot.json",
+      "sha256": "1cf84b0c54ec6936fbee3b915231daa49b313f6aeaaa60254267f7c0814e0532"
+    },
+    "report": {
+      "path": "artifacts/m3-01-test-report.json",
+      "sha256": "20c6538d2836d51ece938d32c8e2b1125cc42038e492daf85cc1d1d5e0a20c3d"
+    },
+    "sources_checked": 221,
+    "metadata_checked": 3,
+    "prefixes_checked": 2,
+    "history": {
+      "archived_files_checked": 252,
+      "accepted_history_pins_checked": 6,
+      "intentional_changed_baseline_paths": [
+        {
+          "path": "Docs/development/backlog.json",
+          "accepted_sha256": "e13a8a3fb9b07294fb14a747ddde33e57e79df9dbbe6ff29326574cb5bd06cc2",
+          "current_sha256": "2ac74328256c8de7e5bee68de1996969ba76abdca056b8077fddd6a8ee25fb37"
+        },
+        {
+          "path": "Docs/development/evidence/devprep-check.json",
+          "accepted_sha256": "7c04389e42676be611ce04f39a96aecc14c80b6455b60bb16de610c72d2a6c00",
+          "current_sha256": "5ff0c9c11738e35ef29dc4f3123b1d7691922c82b69ee902ed22e5e51b1ce626"
+        },
+        {
+          "path": "Docs/development/evidence/preparation-report.json",
+          "accepted_sha256": "3f89c34c6af36a2fb734bbb23247235980dcbfbacf3458cc37d8d0d0d231582a",
+          "current_sha256": "41515ce45bd7a261a0970c36fa2f1513f4414c2815bdd37096f7f0d50b076070"
+        },
+        {
+          "path": "Docs/development/status.json",
+          "accepted_sha256": "f98289622b6445702f86fe3eb1682ee9c17914ed47fb869fb0547f5c2fc91ac5",
+          "current_sha256": "757856ceec8517d3e34077d61da02f7300951aa009c2f35d260cf7f26a83a67c"
+        },
+        {
+          "path": "MEMORY.md",
+          "accepted_sha256": "f7ad4563eb7d3b5f61dc311165e145eba28508323d265d7ac11bfa5ebc89c53d",
+          "current_sha256": "0a38abca47dd375ce40d37679a804d735948cd209831a1954e49a08e1d2bd279"
+        },
+        {
+          "path": "src/aetp/core/commands.py",
+          "accepted_sha256": "cb6bc95a715def0011d331b2f60d76f30954f089b8fa5d50f715fc5255825a92",
+          "current_sha256": "c5d5f9f21deab739cc6bb9a0a8401f4e24f1101209275242f4adaa118d373c70"
+        },
+        {
+          "path": "src/aetp/core/projection.py",
+          "accepted_sha256": "76d73d3c72858fca5dcc844acd4f8ab808242070bf8577055da589c9d42ebc24",
+          "current_sha256": "886be46e6c2d6a96a26440c953e6b22c28761d91efe9072cbf883305d16481c8"
+        },
+        {
+          "path": "src/aetp/domain/models.py",
+          "accepted_sha256": "23b7a2371ca94fe366bce41102a6e0b43f424e52f6bdc46698e170b4d0bf739a",
+          "current_sha256": "c68c12ac9331bce504f74583779aab6b0badea364d528113755eb97b3218aff3"
+        }
+      ]
+    },
+    "read_only_replay_equal": [
+      {
+        "path": "artifacts/m3-01-demo-candidate-v1.sqlite",
+        "sha256": "e8e99e1b30f99317aaa632a20e106f1811c1b6a2f0a200f9830af9c3388800fc",
+        "event_count": 56,
+        "command_count": 28,
+        "prefixes_checked": 56,
+        "prefixes_with_pending_commands": 30,
+        "state_digest": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+        "database_bytes_unchanged": true,
+        "guard_calls": {
+          "aetp.planning.service.PlanningService.handle": 0,
+          "aetp.planning.service.PlanningService.candidate": 0,
+          "aetp.planning.service.PlanningService.preview": 0,
+          "aetp.governance.service.GovernanceService._followups": 0,
+          "aetp.governance.service.GovernanceService.tick": 0,
+          "aetp.governance.trust.InputAuthority.issue": 0,
+          "aetp.governance.trust.InputAuthority.verify": 0,
+          "aetp.meetings.process.ProcessLog.read": 0,
+          "aetp.runtime.document.DocumentRuntime.register": 0,
+          "aetp.runtime.service.ExecutionService.start_session": 0,
+          "aetp.runtime.service.ExecutionService.dispatch": 0,
+          "aetp.runtime.service.ExecutionService.recover": 0,
+          "aetp.workspace.documents.DocumentWorkspace.write": 0,
+          "aetp.workspace.documents.DocumentWorkspace.query": 0,
+          "aetp.core.runtime.SimulatedRuntime.execute": 0,
+          "time.time_ns": 0,
+          "subprocess.Popen": 0
+        }
+      },
+      {
+        "path": "artifacts/m3-01-demo-candidate-v1-facts.sqlite",
+        "sha256": "44624f4851d74604e655b4ef2702d45a938ab775b05633787de107113bf429e9",
+        "event_count": 56,
+        "command_count": 28,
+        "prefixes_checked": 56,
+        "prefixes_with_pending_commands": 30,
+        "state_digest": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+        "database_bytes_unchanged": true,
+        "guard_calls": {
+          "aetp.planning.service.PlanningService.handle": 0,
+          "aetp.planning.service.PlanningService.candidate": 0,
+          "aetp.planning.service.PlanningService.preview": 0,
+          "aetp.governance.service.GovernanceService._followups": 0,
+          "aetp.governance.service.GovernanceService.tick": 0,
+          "aetp.governance.trust.InputAuthority.issue": 0,
+          "aetp.governance.trust.InputAuthority.verify": 0,
+          "aetp.meetings.process.ProcessLog.read": 0,
+          "aetp.runtime.document.DocumentRuntime.register": 0,
+          "aetp.runtime.service.ExecutionService.start_session": 0,
+          "aetp.runtime.service.ExecutionService.dispatch": 0,
+          "aetp.runtime.service.ExecutionService.recover": 0,
+          "aetp.workspace.documents.DocumentWorkspace.write": 0,
+          "aetp.workspace.documents.DocumentWorkspace.query": 0,
+          "aetp.core.runtime.SimulatedRuntime.execute": 0,
+          "time.time_ns": 0,
+          "subprocess.Popen": 0
+        }
+      }
+    ]
+  },
+  "independent_acceptance": {
+    "path": "Docs/development/evidence/2026-09-13-m3-01-review.json",
+    "sha256": "774e38ed220d44d193c95fed202ecb0161de19bff96dfb88b72354825a1c75d5"
+  },
+  "acceptance_consumption": {
+    "path": "Docs/development/evidence/2026-09-13-m3-01-review-consumption.json",
+    "sha256": "0a953251e2a628afb03d7c5977a6d8e30b95ee1a17d72499f1e676a550f1382c"
+  },
+  "independent_post_report_validation": {
+    "record": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/report_validate-01/command.json",
+      "sha256": "942d6a56e002c64c6f4ae938464e5ef027e2484a5ce973dc5bf0b99b03c3a867"
+    },
+    "result": {
+      "report": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review.json",
+        "bytes": 55581,
+        "sha256": "774e38ed220d44d193c95fed202ecb0161de19bff96dfb88b72354825a1c75d5"
+      },
+      "decision": "accepted",
+      "report_references_valid": true,
+      "commands_referenced": 17,
+      "whole_m3_accepted": false,
+      "test_028_passed": false,
+      "frozen_author_report_status": "pending"
+    }
+  },
+  "independent_report_assembly": {
+    "record": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/report_assembly-01/command.json",
+      "sha256": "2d72a810433e93c882034f749e42bafdc8bc29c97394a093b1128105384ebeb0"
+    },
+    "result": {
+      "report": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review.json",
+        "bytes": 55581,
+        "sha256": "774e38ed220d44d193c95fed202ecb0161de19bff96dfb88b72354825a1c75d5"
+      },
+      "decision": "accepted",
+      "criteria": 3,
+      "commands_referenced": 17,
+      "final_passing_methods": 505
+    }
+  },
+  "independent_final_passing_methods": 505,
+  "accepted_notes": {
+    "path": "Docs/development/evidence/2026-09-13-m3-01-final-notes.json",
+    "sha256": "55ce306a109f27eacf32b884b577f91b1409f88c43d4b51fc08049687ca98d06"
+  },
+  "final_commands": [
+    {
+      "work_item": "M3-01",
+      "label": "closeout_render_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:00:17.020220+08:00",
+      "finished_at": "2026-09-14T21:00:17.332329+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-closeout_render_v1.stdout.txt",
+        "sha256": "9989fa20385853fce89af9837dbb79bd8847065ad065b02dd18f8dee3d1f0bea"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-closeout_render_v1.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-01",
+      "label": "closeout_check_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:00:18.452808+08:00",
+      "finished_at": "2026-09-14T21:00:18.748389+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-closeout_check_v1.stdout.txt",
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-closeout_check_v1.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-01",
+      "label": "closeout_preparation_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:00:19.797504+08:00",
+      "finished_at": "2026-09-14T21:00:24.413260+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-closeout_preparation_v1.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-closeout_preparation_v1.stderr.txt",
+        "sha256": "b6c0c40a3e889e2931ab7d02e5f1600738d0e0ac7a6d0b74986942b45097edb9"
+      }
+    }
+  ],
+  "status_counts": {
+    "ready": 1,
+    "review": 0,
+    "done": 19,
+    "blocked": 0,
+    "todo": 0,
+    "in_progress": 0
+  },
+  "unchanged_claims": {
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Full-protocol requirements remain registered; no complete protocol conformance is accepted. Separately accepted M0-only execution is recorded under m0_subset."
+    },
+    "m0_subset": {
+      "work_item": "M0-06",
+      "scope": "m0-core-only",
+      "status": "accepted",
+      "accepted_at": "2026-09-11T13:17:17.286835+08:00",
+      "recorded_at": "2026-09-11T13:31:35.580244+08:00",
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "pending": 3,
+        "not_applicable": 19
+      },
+      "execution_counts": {
+        "passed": 9,
+        "failed": 0,
+        "not_run": 19
+      },
+      "test_ids_by_status": {
+        "passed": [
+          "TEST-001",
+          "TEST-002",
+          "TEST-005",
+          "TEST-017",
+          "TEST-018",
+          "TEST-021"
+        ],
+        "pending": [
+          "TEST-012",
+          "TEST-016",
+          "TEST-019"
+        ],
+        "not_applicable": [
+          "TEST-003",
+          "TEST-004",
+          "TEST-006",
+          "TEST-007",
+          "TEST-008",
+          "TEST-009",
+          "TEST-010",
+          "TEST-011",
+          "TEST-013",
+          "TEST-014",
+          "TEST-015",
+          "TEST-020",
+          "TEST-022",
+          "TEST-023",
+          "TEST-024",
+          "TEST-025",
+          "TEST-026",
+          "TEST-027",
+          "TEST-028"
+        ],
+        "failed": []
+      },
+      "execution_report": {
+        "path": "artifacts/m0-conformance-report-v2.json",
+        "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+      },
+      "candidate_snapshot": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+        "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+      },
+      "independent_review": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+        "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+      },
+      "review_narrative_addendum": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+        "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+      },
+      "reviewer": "Lorentz (01a08e64-7ed1-7db0-846c-82feb095ae71)",
+      "handoff": "artifacts/m0-handoff.json",
+      "claims": {
+        "full_aetp_compatible": false,
+        "protocol_task_completed": false,
+        "bootstrap_verified": false
+      },
+      "note": "Development-time acceptance of this fixed M0 candidate only. Three partial requirements remain pending and 19 later requirements are not run. Not the preparation/full-protocol conformance counter or product completion percentage."
+    },
+    "m1_acceptance": {
+      "status": "not_accepted",
+      "note": "Work-item acceptance is separate from whole M1. Formal Verification, Task quality transitions and explicit integration exemption remain outstanding."
+    }
+  },
+  "operational_outputs": [
+    {
+      "path": "MEMORY.md",
+      "sha256": "0a38abca47dd375ce40d37679a804d735948cd209831a1954e49a08e1d2bd279"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-handoff-final.md",
+      "sha256": "4d8bd13b925cba23c5afadd8adc21eb72c0614a8e3c4a087254f8b868d897ec0"
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-13-m3-01-planning.md",
+      "sha256": "9d4952a3bbface5627b1e588d3ef0d21be021aa04ebba7e4531a708083617266"
+    },
+    {
+      "path": "Docs/development/backlog.json",
+      "sha256": "2ac74328256c8de7e5bee68de1996969ba76abdca056b8077fddd6a8ee25fb37"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "sha256": "757856ceec8517d3e34077d61da02f7300951aa009c2f35d260cf7f26a83a67c"
+    },
+    {
+      "path": "Docs/development/evidence/preparation-report.json",
+      "sha256": "41515ce45bd7a261a0970c36fa2f1513f4414c2815bdd37096f7f0d50b076070"
+    },
+    {
+      "path": "Docs/development/evidence/devprep-check.json",
+      "sha256": "5ff0c9c11738e35ef29dc4f3123b1d7691922c82b69ee902ed22e5e51b1ce626"
+    }
+  ],
+  "historical_memory_prefixes_preserved": true,
+  "new_text_utf8_readback": true,
+  "next": {
+    "work_item": "M3-02",
+    "status": "ready",
+    "implemented_in_this_work_item": false
+  },
+  "environment": "Local Windows; no ClaudeLink/new agent, Git operation, installation, networking or global configuration change."
+}

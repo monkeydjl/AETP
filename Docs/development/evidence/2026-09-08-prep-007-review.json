@@ -1,0 +1,1673 @@
+﻿{
+    "schema_version":  "aetp-independent-preparation-review-1.0",
+    "reviewer":  {
+                     "nickname":  "Kant",
+                     "previous_report_alias":  "Codex",
+                     "same_reviewer_as_previous_codex_report":  true,
+                     "tool_session_id":  "01a07cac-b6db-7393-ae38-bce13d69c67d",
+                     "identity_source":  "主会话通过用户消息提供实际工具映射；不构造额外独立审查人"
+                 },
+    "started_at":  "2026-09-08T00:58:07.1727222+08:00",
+    "finished_at":  "2026-09-08T01:21:30.3703756+08:00",
+    "timezone":  "Asia/Shanghai",
+    "handoff_to":  "main session",
+    "write_set":  [
+                      "Docs/development/evidence/2026-09-08-prep-007-review.json"
+                  ],
+    "reviewed_scope":  [
+                           "tools/devprep.py",
+                           "tests/preparation/test_devprep.py",
+                           "tests/preparation/test_devprep_fail_closed.py"
+                       ],
+    "tool_availability":  {
+                              "exec_command":  "available; local PowerShell/Python used",
+                              "ClaudeLink":  "unavailable; no inbox/send/get_agents/post_bulletin calls claimed",
+                              "subagents_created":  0,
+                              "network_used":  false
+                          },
+    "conclusions":  {
+                        "PREP-007":  {
+                                         "assessment":  "preparation-level pass",
+                                         "acceptance":  [
+                                                            {
+                                                                "id":  "PREP-007-A1",
+                                                                "acceptance":  "check 能校验 JSON、关系、依赖和状态",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "JSON语法/对象形状、图谱关系、依赖和状态均有真实正反例；失败返回1且不生成/改写成功报告。review允许收集证据；ready/in_progress/done对未完成依赖拒绝。",
+                                                                "references":  [
+                                                                                   "tools/devprep.py:80-89",
+                                                                                   "tools/devprep.py:347-511",
+                                                                                   "tools/devprep.py:557-583",
+                                                                                   "tools/devprep.py:701-766"
+                                                                               ],
+                                                                "evidence":  [
+                                                                                 "scoped-unit-tests",
+                                                                                 "private-check",
+                                                                                 "independent-probe-harness-attempt2"
+                                                                             ],
+                                                                "independent_cases":  [
+                                                                                          "invalid-json-backlog",
+                                                                                          "invalid-json-knowledge-graph",
+                                                                                          "invalid-json-status",
+                                                                                          "json-root-array",
+                                                                                          "duplicate-work-item",
+                                                                                          "dangling-dependency",
+                                                                                          "dependency-cycle",
+                                                                                          "duplicate-graph-node",
+                                                                                          "duplicate-graph-edge",
+                                                                                          "dangling-graph-edge",
+                                                                                          "a2a-required-edge",
+                                                                                          "unknown-work-status",
+                                                                                          "done-without-evidence",
+                                                                                          "unfinished-dependency-ready",
+                                                                                          "unfinished-dependency-in_progress",
+                                                                                          "unfinished-dependency-done",
+                                                                                          "stale-status-counts-check",
+                                                                                          "stale-status-counts-render",
+                                                                                          "product-percent-overclaim",
+                                                                                          "bootstrap-overclaim",
+                                                                                          "conformance-passed-overclaim",
+                                                                                          "review-with-unfinished-dependency"
+                                                                                      ]
+                                                            },
+                                                            {
+                                                                "id":  "PREP-007-A2",
+                                                                "acceptance":  "render 生成可读进度摘要",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "实际副本输出20项全计划、PREP 3/8 done；独立构造全部六种状态验证全计划/各milestone计数与控制台一致；脏status计数使render拒绝，不伪报产品或Bootstrap通过。",
+                                                                "references":  [
+                                                                                   "tools/devprep.py:288-307",
+                                                                                   "tools/devprep.py:470-511",
+                                                                                   "tools/devprep.py:665-698",
+                                                                                   "tools/devprep.py:767-786"
+                                                                               ],
+                                                                "evidence":  [
+                                                                                 "private-render",
+                                                                                 "render-six-states",
+                                                                                 "stale-status-counts-render"
+                                                                             ],
+                                                                "observed_snapshot":  {
+                                                                                          "all_plan_total":  20,
+                                                                                          "all_plan_counts":  {
+                                                                                                                  "done":  3,
+                                                                                                                  "review":  4,
+                                                                                                                  "todo":  13
+                                                                                                              },
+                                                                                          "prep_total":  8,
+                                                                                          "prep_counts":  {
+                                                                                                              "done":  3,
+                                                                                                              "review":  4,
+                                                                                                              "todo":  1
+                                                                                                          }
+                                                                                      }
+                                                            },
+                                                            {
+                                                                "id":  "PREP-007-A3",
+                                                                "acceptance":  "environment 只报告可验证工具，不读取或打印密钥",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "实际版本探测仅返回本地可验证格式并正规化版本；未知/多行/双通道/错误退出/超时/不可用路径均有测试，不回显原始输出。源代码仅探测存在性、未显式读取密钥或用户配置；mock查找和子进程条件下的Python文件内容读取守卫无触发。",
+                                                                "references":  [
+                                                                                   "tools/devprep.py:586-662",
+                                                                                   "tools/devprep.py:789-798",
+                                                                                   "tests/preparation/test_devprep_fail_closed.py:129-205"
+                                                                               ],
+                                                                "evidence":  [
+                                                                                 "scoped-unit-tests",
+                                                                                 "private-environment",
+                                                                                 "environment-no-file-content-reads",
+                                                                                 "environment-no-untrusted-echo"
+                                                                             ],
+                                                                "boundaries":  "可验证版本格式与本地能力事实，不是可执行文件身份认证；未证明外部可执行文件/OS内部绝不读取配置。"
+                                                            }
+                                                        ],
+                                         "status_changed":  false,
+                                         "dependency_gate":  {
+                                                                 "snapshot_status":  "review",
+                                                                 "depends_on":  [
+                                                                                    "PREP-001",
+                                                                                    "PREP-005",
+                                                                                    "PREP-006"
+                                                                                ],
+                                                                 "dependency_status_at_private_snapshot":  {
+                                                                                                               "PREP-001":  "done",
+                                                                                                               "PREP-005":  "done",
+                                                                                                               "PREP-006":  "review"
+                                                                                                           },
+                                                                 "advance_to_done_allowed_by_this_report":  false,
+                                                                 "required_next_step":  "由主会话核验本报告；PREP-006 done后方可推进PREP-007验收状态。"
+                                                             }
+                                     }
+                    },
+    "scenario_results":  [
+                             {
+                                 "id":  "invalid-json-backlog",
+                                 "expected":  "malformed JSON rejected without success-report writes",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "exit_code":  1,
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR cannot parse Docs\\development\\backlog.json: Expecting value: line 1 column 15 (char 14)"
+                                              }
+                             },
+                             {
+                                 "id":  "invalid-json-knowledge-graph",
+                                 "expected":  "malformed JSON rejected without success-report writes",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "exit_code":  1,
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR cannot parse Docs\\development\\knowledge-graph.json: Expecting value: line 1 column 15 (char 14)"
+                                              }
+                             },
+                             {
+                                 "id":  "invalid-json-status",
+                                 "expected":  "malformed JSON rejected without success-report writes",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "exit_code":  1,
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR cannot parse Docs\\development\\status.json: Expecting value: line 1 column 15 (char 14)"
+                                              }
+                             },
+                             {
+                                 "id":  "json-root-array",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR JSON root must be an object: Docs\\development\\backlog.json",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "duplicate-work-item",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR backlog work-item IDs are not unique",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "dangling-dependency",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR M3-02: dangling dependency PREP-NOT-REGISTERED",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "dependency-cycle",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR backlog dependency graph is cyclic: PREP-001 -\u003e PREP-002 -\u003e PREP-001",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "duplicate-graph-node",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR knowledge graph node IDs are not unique",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "duplicate-graph-edge",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR duplicate knowledge graph edge: aetp -[defines]-\u003e AETP-001 (§4.2)",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "dangling-graph-edge",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR edge has unknown target \u0027NOT-A-NODE\u0027",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "a2a-required-edge",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR A2A transport must not be represented as a required depends_on edge",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "unknown-work-status",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR PREP-001: invalid status \u0027accepted\u0027",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "done-without-evidence",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR M3-02: done requires acceptance_evidence\nERROR M3-02: done requires reproduction_command\nERROR M3-02: done requires independent_reviewer",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "unfinished-dependency-ready",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR PREP-007: ready requires dependency PREP-006 to be done",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "unfinished-dependency-in_progress",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR PREP-007: in_progress requires dependency PREP-006 to be done",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "unfinished-dependency-done",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR PREP-007: done requires dependency PREP-006 to be done",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "stale-status-counts-check",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR status.work_item_status_counts does not match backlog: expected={\u0027done\u0027: 3, \u0027review\u0027: 4, \u0027todo\u0027: 13, \u0027blocked\u0027: 0, \u0027ready\u0027: 0, \u0027in_progress\u0027: 0}, actual={\u0027blocked\u0027: 0, \u0027done\u0027: 999, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027review\u0027: 4, \u0027todo\u0027: 13}",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "stale-status-counts-render",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR status.work_item_status_counts does not match backlog: expected={\u0027done\u0027: 3, \u0027review\u0027: 4, \u0027todo\u0027: 13, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027blocked\u0027: 0}, actual={\u0027blocked\u0027: 0, \u0027done\u0027: 999, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027review\u0027: 4, \u0027todo\u0027: 13}",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "product-percent-overclaim",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR product_completion_percent must remain 0 during preparation",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "bootstrap-overclaim",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR preparation cannot claim BOOTSTRAP_VERIFIED\nERROR bootstrap_status must remain not_started during preparation",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "conformance-passed-overclaim",
+                                 "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "success_reports_unchanged":  true,
+                                                  "diagnostic":  "ERROR status.conformance.passed_tests must remain 0 during preparation",
+                                                  "exit_code":  1
+                                              }
+                             },
+                             {
+                                 "id":  "review-with-unfinished-dependency",
+                                 "expected":  "review may collect evidence but does not satisfy dependency gate for done",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "prep007_status":  "review",
+                                                  "prep006_status":  "review",
+                                                  "exit_code":  0
+                                              }
+                             },
+                             {
+                                 "id":  "render-six-states",
+                                 "expected":  "counts and milestone text exactly match independent six-state fixture totals; no product claims",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "expected_counts":  {
+                                                                          "todo":  4,
+                                                                          "ready":  4,
+                                                                          "in_progress":  3,
+                                                                          "review":  3,
+                                                                          "done":  3,
+                                                                          "blocked":  3
+                                                                      },
+                                                  "actual_counts":  {
+                                                                        "todo":  4,
+                                                                        "ready":  4,
+                                                                        "in_progress":  3,
+                                                                        "review":  3,
+                                                                        "done":  3,
+                                                                        "blocked":  3
+                                                                    },
+                                                  "expected_milestones":  {
+                                                                              "PREP":  {
+                                                                                           "status":  "in_progress",
+                                                                                           "total":  8,
+                                                                                           "todo":  2,
+                                                                                           "ready":  2,
+                                                                                           "in_progress":  1,
+                                                                                           "review":  1,
+                                                                                           "done":  1,
+                                                                                           "blocked":  1
+                                                                                       },
+                                                                              "M0":  {
+                                                                                         "status":  "in_progress",
+                                                                                         "total":  6,
+                                                                                         "todo":  1,
+                                                                                         "ready":  1,
+                                                                                         "in_progress":  1,
+                                                                                         "review":  1,
+                                                                                         "done":  1,
+                                                                                         "blocked":  1
+                                                                                     },
+                                                                              "M1":  {
+                                                                                         "status":  "in_progress",
+                                                                                         "total":  2,
+                                                                                         "todo":  0,
+                                                                                         "ready":  0,
+                                                                                         "in_progress":  1,
+                                                                                         "review":  1,
+                                                                                         "done":  0,
+                                                                                         "blocked":  0
+                                                                                     },
+                                                                              "M2":  {
+                                                                                         "status":  "blocked",
+                                                                                         "total":  2,
+                                                                                         "todo":  0,
+                                                                                         "ready":  0,
+                                                                                         "in_progress":  0,
+                                                                                         "review":  0,
+                                                                                         "done":  1,
+                                                                                         "blocked":  1
+                                                                                     },
+                                                                              "M3":  {
+                                                                                         "status":  "todo",
+                                                                                         "total":  2,
+                                                                                         "todo":  1,
+                                                                                         "ready":  1,
+                                                                                         "in_progress":  0,
+                                                                                         "review":  0,
+                                                                                         "done":  0,
+                                                                                         "blocked":  0
+                                                                                     }
+                                                                          },
+                                                  "actual_milestones":  {
+                                                                            "PREP":  {
+                                                                                         "status":  "in_progress",
+                                                                                         "total":  8,
+                                                                                         "blocked":  1,
+                                                                                         "done":  1,
+                                                                                         "in_progress":  1,
+                                                                                         "ready":  2,
+                                                                                         "review":  1,
+                                                                                         "todo":  2
+                                                                                     },
+                                                                            "M0":  {
+                                                                                       "status":  "in_progress",
+                                                                                       "total":  6,
+                                                                                       "blocked":  1,
+                                                                                       "done":  1,
+                                                                                       "in_progress":  1,
+                                                                                       "ready":  1,
+                                                                                       "review":  1,
+                                                                                       "todo":  1
+                                                                                   },
+                                                                            "M1":  {
+                                                                                       "status":  "in_progress",
+                                                                                       "total":  2,
+                                                                                       "blocked":  0,
+                                                                                       "done":  0,
+                                                                                       "in_progress":  1,
+                                                                                       "ready":  0,
+                                                                                       "review":  1,
+                                                                                       "todo":  0
+                                                                                   },
+                                                                            "M2":  {
+                                                                                       "status":  "blocked",
+                                                                                       "total":  2,
+                                                                                       "blocked":  1,
+                                                                                       "done":  1,
+                                                                                       "in_progress":  0,
+                                                                                       "ready":  0,
+                                                                                       "review":  0,
+                                                                                       "todo":  0
+                                                                                   },
+                                                                            "M3":  {
+                                                                                       "status":  "todo",
+                                                                                       "total":  2,
+                                                                                       "blocked":  0,
+                                                                                       "done":  0,
+                                                                                       "in_progress":  0,
+                                                                                       "ready":  1,
+                                                                                       "review":  0,
+                                                                                       "todo":  1
+                                                                                   }
+                                                                        },
+                                                  "product_boundaries_preserved":  true,
+                                                  "console_matches":  true
+                                              }
+                             },
+                             {
+                                 "id":  "environment-no-file-content-reads",
+                                 "expected":  "collection performs no Python file-content reads; unsupported raw versions omitted",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "guarded_read_attempts":  0,
+                                                  "started_at":  "2026-09-08T01:14:00.462898+08:00",
+                                                  "finished_at":  "2026-09-08T01:14:00.490435+08:00",
+                                                  "lookup_and_subprocess":  "mocked; filesystem metadata probes remain real"
+                                              }
+                             },
+                             {
+                                 "id":  "environment-no-untrusted-echo",
+                                 "expected":  "malformed version output is unavailable; neither console nor report includes raw sentinel",
+                                 "result":  "pass",
+                                 "observed":  {
+                                                  "started_at":  "2026-09-08T01:14:00.490481+08:00",
+                                                  "finished_at":  "2026-09-08T01:14:00.504100+08:00",
+                                                  "exit_code":  0,
+                                                  "stdout":  "AETP development environment facts\npython: 3.14.6\nnode: unavailable\ngit: unavailable\nuv: unavailable\nworkspace_git_repository: False\nreport: _audit/synthetic-environment.json\n",
+                                                  "facts":  {
+                                                                "schema_version":  "aetp-preparation-environment-0.1",
+                                                                "observed_at":  "2026-09-07T17:14:00+00:00",
+                                                                "platform":  {
+                                                                                 "system":  "Windows",
+                                                                                 "release":  "10",
+                                                                                 "python":  "3.14.6"
+                                                                             },
+                                                                "tools":  {
+                                                                              "python":  {
+                                                                                             "available":  true,
+                                                                                             "version":  "3.14.6",
+                                                                                             "executable":  "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe"
+                                                                                         },
+                                                                              "node":  {
+                                                                                           "available":  false,
+                                                                                           "version":  null,
+                                                                                           "returncode":  0,
+                                                                                           "reason":  "unrecognized_version_output"
+                                                                                       },
+                                                                              "git":  {
+                                                                                          "available":  false,
+                                                                                          "version":  null,
+                                                                                          "returncode":  0,
+                                                                                          "reason":  "unrecognized_version_output"
+                                                                                      },
+                                                                              "uv":  {
+                                                                                         "available":  false,
+                                                                                         "version":  null,
+                                                                                         "returncode":  0,
+                                                                                         "reason":  "unrecognized_version_output"
+                                                                                     }
+                                                                          },
+                                                                "workspace":  {
+                                                                                  "root":  ".",
+                                                                                  "git_repository_detected":  false,
+                                                                                  "product_source_present":  false,
+                                                                                  "dependency_lock_present":  false
+                                                                              },
+                                                                "actions_performed":  [
+
+                                                                                      ],
+                                                                "limitations":  [
+                                                                                    "仅采集版本和工作区事实；未读取凭证、环境变量或用户配置。",
+                                                                                    "脚本不安装依赖、不初始化 Git、不启动 Runtime。"
+                                                                                ]
+                                                            }
+                                              }
+                             }
+                         ],
+    "findings":  [
+
+                 ],
+    "test_results":  {
+                         "preparation_unit_tests":  27,
+                         "unit_exit_code":  0,
+                         "independent_scenarios":  25,
+                         "final_independent_harness_exit_code":  0,
+                         "product_tests_run":  0
+                     },
+    "reviewer_harness_correction":  {
+                                        "first_exit_code":  1,
+                                        "first_started_at":  "2026-09-08T01:13:11.085044+08:00",
+                                        "first_finished_at":  "2026-09-08T01:13:16.809412+08:00",
+                                        "false_failures":  [
+                                                               {
+                                                                   "id":  "dependency-cycle",
+                                                                   "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                                                   "result":  "fail",
+                                                                   "observed":  {
+                                                                                    "success_reports_unchanged":  true,
+                                                                                    "diagnostic":  "ERROR backlog dependency graph is cyclic: PREP-001 -\u003e PREP-002 -\u003e PREP-001",
+                                                                                    "exit_code":  1
+                                                                                }
+                                                               },
+                                                               {
+                                                                   "id":  "dangling-graph-edge",
+                                                                   "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                                                   "result":  "fail",
+                                                                   "observed":  {
+                                                                                    "success_reports_unchanged":  true,
+                                                                                    "diagnostic":  "ERROR edge has unknown target \u0027NOT-A-NODE\u0027",
+                                                                                    "exit_code":  1
+                                                                                }
+                                                               },
+                                                               {
+                                                                   "id":  "unfinished-dependency-ready",
+                                                                   "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                                                   "result":  "fail",
+                                                                   "observed":  {
+                                                                                    "success_reports_unchanged":  true,
+                                                                                    "diagnostic":  "ERROR PREP-007: ready requires dependency PREP-006 to be done",
+                                                                                    "exit_code":  1
+                                                                                }
+                                                               },
+                                                               {
+                                                                   "id":  "unfinished-dependency-in_progress",
+                                                                   "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                                                   "result":  "fail",
+                                                                   "observed":  {
+                                                                                    "success_reports_unchanged":  true,
+                                                                                    "diagnostic":  "ERROR PREP-007: in_progress requires dependency PREP-006 to be done",
+                                                                                    "exit_code":  1
+                                                                                }
+                                                               },
+                                                               {
+                                                                   "id":  "unfinished-dependency-done",
+                                                                   "expected":  "exit 1 with diagnostic, no replacement of existing success reports",
+                                                                   "result":  "fail",
+                                                                   "observed":  {
+                                                                                    "success_reports_unchanged":  true,
+                                                                                    "diagnostic":  "ERROR PREP-007: done requires dependency PREP-006 to be done",
+                                                                                    "exit_code":  1
+                                                                                }
+                                                               }
+                                                           ],
+                                        "cause":  "审查脚本对诊断英文用词的断言过窄（cycle/cyclic、dangling/unknown target、requires done dependency/requires dependency ... to be done）；这5个被测CLI实际都已正确exit1且未改写报告。",
+                                        "action":  "只纠正私有审查脚本诊断子串后重跑25项全通过；没有修被审工具/测试，不冒称产品或源码RED→GREEN。"
+                                    },
+    "commands":  [
+                     {
+                         "id":  "copy-private-materials",
+                         "shell":  "powershell",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "\n  $workspace = (Resolve-Path -LiteralPath \u0027D:\\Github\\AETP\u0027).Path\n  $scratch = Join-Path $workspace \u0027.prep-007-review-codex-20260908\u0027\n  if (Test-Path -LiteralPath $scratch) { throw \"Private path already exists; refusing overwrite: $scratch\" }\n  if (-not ([IO.Path]::GetFullPath($scratch).StartsWith($workspace + \u0027\\\u0027, [StringComparison]::OrdinalIgnoreCase))) { throw \u0027Private path is outside workspace\u0027 }\n  New-Item -ItemType Directory -Path $scratch | Out-Null\n  $excluded = @()\n  $copied = @()\n  $queue = [Collections.Generic.Queue[string]]::new()\n  foreach ($name in @(\u0027Docs\u0027,\u0027skills\u0027,\u0027tools\u0027,\u0027tests\u0027)) { $queue.Enqueue((Join-Path $workspace $name)) }\n  while ($queue.Count -gt 0) {\n    $dir = $queue.Dequeue()\n    $dirItem = Get-Item -LiteralPath $dir -Force\n    if (($dirItem.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { $excluded += $dir; continue }\n    $relDir = $dir.Substring($workspace.Length + 1)\n    New-Item -ItemType Directory -Force -Path (Join-Path $scratch $relDir) | Out-Null\n    foreach ($item in Get-ChildItem -LiteralPath $dir -Force) {\n      if (($item.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0 -or $item.Name -match \u0027^(\\.claude|\\.codex|\\.agents|\\.git|\\.config|__pycache__|node_modules|\\.venv|venv)$\u0027 -or $item.Name -match \u0027^\\.env($|\\.)\u0027 -or $item.Name -match \u0027(?i)(^credentials|^secrets?|^id_rsa|^id_ed25519|\\.(pem|key|pfx|p12)$)\u0027 -or $item.Name -match \u0027(?i)^(settings(\\.local)?\\.json|config\\.toml|auth\\.json|mcp\\.json)$\u0027) {\n        $excluded += $item.FullName; continue\n      }\n      if ($item.PSIsContainer) { $queue.Enqueue($item.FullName); continue }\n      $relative = $item.FullName.Substring($workspace.Length + 1)\n      Copy-Item -LiteralPath $item.FullName -Destination (Join-Path $scratch $relative)\n      $copied += $relative\n    }\n  }\n  foreach ($name in @(\u0027README.md\u0027,\u0027AGENTS.md\u0027,\u0027.gitignore\u0027,\u0027.editorconfig\u0027)) {\n    $source = Join-Path $workspace $name\n    if (Test-Path -LiteralPath $source -PathType Leaf) {\n      if (((Get-Item -LiteralPath $source -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw \"Root whitelist file is a reparse point: $name\" }\n      Copy-Item -LiteralPath $source -Destination (Join-Path $scratch $name)\n      $copied += $name\n    }\n  }\n  New-Item -ItemType Directory -Path (Join-Path $scratch \u0027_audit\u0027),(Join-Path $scratch \u0027_audit\\tmp\u0027) | Out-Null\n  $hashes = @()\n  foreach ($relative in @(\u0027tools/devprep.py\u0027,\u0027tests/preparation/test_devprep.py\u0027,\u0027tests/preparation/test_devprep_fail_closed.py\u0027)) {\n    $original = (Get-FileHash -LiteralPath (Join-Path $workspace $relative) -Algorithm SHA256).Hash.ToLowerInvariant()\n    $copy = (Get-FileHash -LiteralPath (Join-Path $scratch $relative) -Algorithm SHA256).Hash.ToLowerInvariant()\n    if ($original -ne $copy) { throw \"Source/copy hash mismatch: $relative\" }\n    $hashes += [ordered]@{path=$relative;original_sha256=$original;copy_sha256=$copy}\n  }\n  $manifest = [ordered]@{workspace=$workspace;scratch=$scratch;copied_count=$copied.Count;copied=$copied;excluded=$excluded;source_hashes_at_copy=$hashes}\n  $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $scratch \u0027_audit\\copy-manifest.json\u0027) -Encoding UTF8\n  [ordered]@{scratch=$scratch;copied_count=$copied.Count;excluded_count=$excluded.Count;source_hashes_at_copy=$hashes} | ConvertTo-Json -Depth 8\n",
+                         "started_at":  "2026-09-08T01:06:52.9928851+08:00",
+                         "finished_at":  "2026-09-08T01:06:53.4770830+08:00",
+                         "exit_code":  0
+                     },
+                     {
+                         "id":  "read-bounded-probe-targets",
+                         "shell":  "powershell",
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "command":  "\n  function Show-Lines([string]$Path,[int]$First,[int]$Last) { $data = Get-Content -LiteralPath $Path -Encoding UTF8; for ($i=$First; $i -le [Math]::Min($Last,$data.Count); $i++) { \u0027{0}:{1}: {2}\u0027 -f $Path,$i,$data[$i-1] } }\n  Show-Lines \u0027tools\\devprep.py\u0027 20 100\n  Show-Lines \u0027tools\\devprep.py\u0027 385 470\n  Show-Lines \u0027tools\\devprep.py\u0027 586 698\n  Show-Lines \u0027tests\\preparation\\test_devprep_fail_closed.py\u0027 44 206\n  Get-Content -LiteralPath \u0027Docs\\development\\evidence\\preparation-report.json\u0027 -Encoding UTF8\n  Get-Content -LiteralPath \u0027Docs\\development\\evidence\\environment.json\u0027 -Encoding UTF8\n",
+                         "started_at":  "2026-09-08T01:09:14.7536172+08:00",
+                         "finished_at":  "2026-09-08T01:09:14.9647344+08:00",
+                         "exit_code":  0
+                     },
+                     {
+                         "id":  "read-environment-and-cli-contract",
+                         "shell":  "powershell",
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "command":  "\n  $lines = Get-Content -LiteralPath \u0027tools\\devprep.py\u0027 -Encoding UTF8\n  foreach ($range in @(@(586,698),@(701,766))) { for ($i=$range[0]; $i -le $range[1]; $i++) { \u0027{0}: {1}\u0027 -f $i,$lines[$i-1] } }\n",
+                         "started_at":  "2026-09-08T01:10:48.7992226+08:00",
+                         "finished_at":  "2026-09-08T01:10:48.9109518+08:00",
+                         "exit_code":  0
+                     },
+                     {
+                         "id":  "scoped-unit-tests",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "-m",
+                                      "unittest",
+                                      "discover",
+                                      "-s",
+                                      "tests/preparation",
+                                      "-p",
+                                      "test_devprep*.py",
+                                      "-v"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:08:36.396493+08:00",
+                         "finished_at":  "2026-09-08T01:08:38.805084+08:00",
+                         "exit_code":  0,
+                         "stdout":  "",
+                         "stderr":  "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 2.074s\n\nOK\n",
+                         "environment_overrides":  {
+                                                       "PYTHONIOENCODING":  "utf-8",
+                                                       "PYTHONDONTWRITEBYTECODE":  "1",
+                                                       "TEMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp",
+                                                       "TMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp"
+                                                   }
+                     },
+                     {
+                         "id":  "private-check",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:08:38.805934+08:00",
+                         "finished_at":  "2026-09-08T01:08:39.009126+08:00",
+                         "exit_code":  0,
+                         "stdout":  "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+                         "stderr":  "",
+                         "environment_overrides":  {
+                                                       "PYTHONIOENCODING":  "utf-8",
+                                                       "PYTHONDONTWRITEBYTECODE":  "1",
+                                                       "TEMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp",
+                                                       "TMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp"
+                                                   }
+                     },
+                     {
+                         "id":  "private-render",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "render"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:08:39.009724+08:00",
+                         "finished_at":  "2026-09-08T01:08:39.218538+08:00",
+                         "exit_code":  0,
+                         "stdout":  "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (3/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+                         "stderr":  "",
+                         "environment_overrides":  {
+                                                       "PYTHONIOENCODING":  "utf-8",
+                                                       "PYTHONDONTWRITEBYTECODE":  "1",
+                                                       "TEMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp",
+                                                       "TMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp"
+                                                   }
+                     },
+                     {
+                         "id":  "private-environment",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "environment"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:08:39.219665+08:00",
+                         "finished_at":  "2026-09-08T01:08:39.584791+08:00",
+                         "exit_code":  0,
+                         "stdout":  "AETP development environment facts\npython: 3.14.6\nnode: v24.18.1\ngit: git version 2.54.0\nuv: uv 0.12.5\nworkspace_git_repository: False\nreport: Docs/development/evidence/environment.json\n",
+                         "stderr":  "",
+                         "environment_overrides":  {
+                                                       "PYTHONIOENCODING":  "utf-8",
+                                                       "PYTHONDONTWRITEBYTECODE":  "1",
+                                                       "TEMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp",
+                                                       "TMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp"
+                                                   }
+                     },
+                     {
+                         "id":  "independent-probe-harness",
+                         "argv":  [
+                                      "python",
+                                      "-B",
+                                      "_audit\\independent_probes.py"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:10.7694729+08:00",
+                         "finished_at":  "2026-09-08T01:13:16.8654642+08:00",
+                         "exit_code":  1,
+                         "environment_overrides":  {
+                                                       "TEMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp",
+                                                       "PYTHONDONTWRITEBYTECODE":  "1",
+                                                       "PYTHONPATH":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                                                       "TMP":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908\\_audit\\tmp",
+                                                       "PYTHONIOENCODING":  "utf-8"
+                                                   }
+                     },
+                     {
+                         "id":  "invalid-json-backlog",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:11.124238+08:00",
+                         "finished_at":  "2026-09-08T01:13:11.332570+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR cannot parse Docs\\development\\backlog.json: Expecting value: line 1 column 15 (char 14)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "invalid-json-knowledge-graph",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:11.335498+08:00",
+                         "finished_at":  "2026-09-08T01:13:11.556083+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR cannot parse Docs\\development\\knowledge-graph.json: Expecting value: line 1 column 15 (char 14)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "invalid-json-status",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:11.561158+08:00",
+                         "finished_at":  "2026-09-08T01:13:11.842567+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR cannot parse Docs\\development\\status.json: Expecting value: line 1 column 15 (char 14)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "json-root-array",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:11.852889+08:00",
+                         "finished_at":  "2026-09-08T01:13:12.060173+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR JSON root must be an object: Docs\\development\\backlog.json\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "duplicate-work-item",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:12.072725+08:00",
+                         "finished_at":  "2026-09-08T01:13:12.307704+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR backlog work-item IDs are not unique\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "dangling-dependency",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:12.320045+08:00",
+                         "finished_at":  "2026-09-08T01:13:12.541220+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR M3-02: dangling dependency PREP-NOT-REGISTERED\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "dependency-cycle",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:12.553330+08:00",
+                         "finished_at":  "2026-09-08T01:13:12.784494+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR backlog dependency graph is cyclic: PREP-001 -\u003e PREP-002 -\u003e PREP-001\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "duplicate-graph-node",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:12.790805+08:00",
+                         "finished_at":  "2026-09-08T01:13:13.026425+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR knowledge graph node IDs are not unique\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "duplicate-graph-edge",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:13.031912+08:00",
+                         "finished_at":  "2026-09-08T01:13:13.259028+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR duplicate knowledge graph edge: aetp -[defines]-\u003e AETP-001 (§4.2)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "dangling-graph-edge",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:13.265483+08:00",
+                         "finished_at":  "2026-09-08T01:13:13.496763+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR edge has unknown target \u0027NOT-A-NODE\u0027\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "a2a-required-edge",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:13.502856+08:00",
+                         "finished_at":  "2026-09-08T01:13:13.733661+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR A2A transport must not be represented as a required depends_on edge\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unknown-work-status",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:13.739198+08:00",
+                         "finished_at":  "2026-09-08T01:13:13.977774+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-001: invalid status \u0027accepted\u0027\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "done-without-evidence",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:13.985269+08:00",
+                         "finished_at":  "2026-09-08T01:13:14.234125+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR M3-02: done requires acceptance_evidence\nERROR M3-02: done requires reproduction_command\nERROR M3-02: done requires independent_reviewer\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unfinished-dependency-ready",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:14.240447+08:00",
+                         "finished_at":  "2026-09-08T01:13:14.492075+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-007: ready requires dependency PREP-006 to be done\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unfinished-dependency-in_progress",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:14.499127+08:00",
+                         "finished_at":  "2026-09-08T01:13:14.753722+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-007: in_progress requires dependency PREP-006 to be done\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unfinished-dependency-done",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:14.761146+08:00",
+                         "finished_at":  "2026-09-08T01:13:14.994447+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-007: done requires dependency PREP-006 to be done\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "stale-status-counts-check",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:15.000092+08:00",
+                         "finished_at":  "2026-09-08T01:13:15.224321+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR status.work_item_status_counts does not match backlog: expected={\u0027done\u0027: 3, \u0027review\u0027: 4, \u0027todo\u0027: 13, \u0027blocked\u0027: 0, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0}, actual={\u0027blocked\u0027: 0, \u0027done\u0027: 999, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027review\u0027: 4, \u0027todo\u0027: 13}\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "stale-status-counts-render",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "render"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:15.236348+08:00",
+                         "finished_at":  "2026-09-08T01:13:15.483242+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR status.work_item_status_counts does not match backlog: expected={\u0027done\u0027: 3, \u0027review\u0027: 4, \u0027todo\u0027: 13, \u0027blocked\u0027: 0, \u0027ready\u0027: 0, \u0027in_progress\u0027: 0}, actual={\u0027blocked\u0027: 0, \u0027done\u0027: 999, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027review\u0027: 4, \u0027todo\u0027: 13}\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "product-percent-overclaim",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:15.490356+08:00",
+                         "finished_at":  "2026-09-08T01:13:15.748290+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR product_completion_percent must remain 0 during preparation\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "bootstrap-overclaim",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:15.760307+08:00",
+                         "finished_at":  "2026-09-08T01:13:16.020408+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR preparation cannot claim BOOTSTRAP_VERIFIED\nERROR bootstrap_status must remain not_started during preparation\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "conformance-passed-overclaim",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:16.025893+08:00",
+                         "finished_at":  "2026-09-08T01:13:16.266496+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR status.conformance.passed_tests must remain 0 during preparation\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "review-with-unfinished-dependency",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:16.271048+08:00",
+                         "finished_at":  "2026-09-08T01:13:16.515610+08:00",
+                         "exit_code":  0,
+                         "expected_exit_code":  0,
+                         "stdout":  "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "render-six-states",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "render"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:16.521329+08:00",
+                         "finished_at":  "2026-09-08T01:13:16.753716+08:00",
+                         "exit_code":  0,
+                         "expected_exit_code":  0,
+                         "stdout":  "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (1/8 done)\nM0: in_progress (1/6 done)\nM1: in_progress (0/2 done)\nM2: blocked (1/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "independent-probe-harness-attempt2",
+                         "argv":  [
+                                      "python",
+                                      "-B",
+                                      "_audit\\independent_probes.py"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:54.6055160+08:00",
+                         "finished_at":  "2026-09-08T01:14:00.5745492+08:00",
+                         "exit_code":  0,
+                         "adjustment":  "Only reviewer-owned diagnostic substrings corrected: cycle -\u003e cyclic; dangling -\u003e unknown target; requires done dependency -\u003e requires dependency PREP-006 to be done. No audited source changed."
+                     },
+                     {
+                         "id":  "invalid-json-backlog",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:54.944730+08:00",
+                         "finished_at":  "2026-09-08T01:13:55.149888+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR cannot parse Docs\\development\\backlog.json: Expecting value: line 1 column 15 (char 14)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "invalid-json-knowledge-graph",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:55.152692+08:00",
+                         "finished_at":  "2026-09-08T01:13:55.360386+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR cannot parse Docs\\development\\knowledge-graph.json: Expecting value: line 1 column 15 (char 14)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "invalid-json-status",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:55.365425+08:00",
+                         "finished_at":  "2026-09-08T01:13:55.598697+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR cannot parse Docs\\development\\status.json: Expecting value: line 1 column 15 (char 14)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "json-root-array",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:55.608955+08:00",
+                         "finished_at":  "2026-09-08T01:13:55.801302+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR JSON root must be an object: Docs\\development\\backlog.json\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "duplicate-work-item",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:55.808522+08:00",
+                         "finished_at":  "2026-09-08T01:13:56.046725+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR backlog work-item IDs are not unique\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "dangling-dependency",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:56.052929+08:00",
+                         "finished_at":  "2026-09-08T01:13:56.282824+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR M3-02: dangling dependency PREP-NOT-REGISTERED\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "dependency-cycle",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:56.288979+08:00",
+                         "finished_at":  "2026-09-08T01:13:56.522253+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR backlog dependency graph is cyclic: PREP-001 -\u003e PREP-002 -\u003e PREP-001\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "duplicate-graph-node",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:56.528438+08:00",
+                         "finished_at":  "2026-09-08T01:13:56.769041+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR knowledge graph node IDs are not unique\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "duplicate-graph-edge",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:56.776243+08:00",
+                         "finished_at":  "2026-09-08T01:13:56.995621+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR duplicate knowledge graph edge: aetp -[defines]-\u003e AETP-001 (§4.2)\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "dangling-graph-edge",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:57.002334+08:00",
+                         "finished_at":  "2026-09-08T01:13:57.238703+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR edge has unknown target \u0027NOT-A-NODE\u0027\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "a2a-required-edge",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:57.246033+08:00",
+                         "finished_at":  "2026-09-08T01:13:57.505023+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR A2A transport must not be represented as a required depends_on edge\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unknown-work-status",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:57.510597+08:00",
+                         "finished_at":  "2026-09-08T01:13:57.746526+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-001: invalid status \u0027accepted\u0027\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "done-without-evidence",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:57.752749+08:00",
+                         "finished_at":  "2026-09-08T01:13:57.986478+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR M3-02: done requires acceptance_evidence\nERROR M3-02: done requires reproduction_command\nERROR M3-02: done requires independent_reviewer\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unfinished-dependency-ready",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:57.992048+08:00",
+                         "finished_at":  "2026-09-08T01:13:58.252906+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-007: ready requires dependency PREP-006 to be done\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unfinished-dependency-in_progress",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:58.258514+08:00",
+                         "finished_at":  "2026-09-08T01:13:58.486192+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-007: in_progress requires dependency PREP-006 to be done\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "unfinished-dependency-done",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:58.492484+08:00",
+                         "finished_at":  "2026-09-08T01:13:58.720136+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR PREP-007: done requires dependency PREP-006 to be done\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "stale-status-counts-check",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:58.726302+08:00",
+                         "finished_at":  "2026-09-08T01:13:58.954527+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR status.work_item_status_counts does not match backlog: expected={\u0027done\u0027: 3, \u0027review\u0027: 4, \u0027todo\u0027: 13, \u0027blocked\u0027: 0, \u0027ready\u0027: 0, \u0027in_progress\u0027: 0}, actual={\u0027blocked\u0027: 0, \u0027done\u0027: 999, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027review\u0027: 4, \u0027todo\u0027: 13}\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "stale-status-counts-render",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "render"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:58.960124+08:00",
+                         "finished_at":  "2026-09-08T01:13:59.241563+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR status.work_item_status_counts does not match backlog: expected={\u0027done\u0027: 3, \u0027review\u0027: 4, \u0027todo\u0027: 13, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027blocked\u0027: 0}, actual={\u0027blocked\u0027: 0, \u0027done\u0027: 999, \u0027in_progress\u0027: 0, \u0027ready\u0027: 0, \u0027review\u0027: 4, \u0027todo\u0027: 13}\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "product-percent-overclaim",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:59.253464+08:00",
+                         "finished_at":  "2026-09-08T01:13:59.470516+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR product_completion_percent must remain 0 during preparation\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "bootstrap-overclaim",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:59.476663+08:00",
+                         "finished_at":  "2026-09-08T01:13:59.700376+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR preparation cannot claim BOOTSTRAP_VERIFIED\nERROR bootstrap_status must remain not_started during preparation\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "conformance-passed-overclaim",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:59.715032+08:00",
+                         "finished_at":  "2026-09-08T01:13:59.929766+08:00",
+                         "exit_code":  1,
+                         "expected_exit_code":  1,
+                         "stdout":  "ERROR status.conformance.passed_tests must remain 0 during preparation\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "review-with-unfinished-dependency",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "check"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:13:59.934388+08:00",
+                         "finished_at":  "2026-09-08T01:14:00.198846+08:00",
+                         "exit_code":  0,
+                         "expected_exit_code":  0,
+                         "stdout":  "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "render-six-states",
+                         "argv":  [
+                                      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+                                      "-B",
+                                      "tools/devprep.py",
+                                      "render"
+                                  ],
+                         "cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                         "started_at":  "2026-09-08T01:14:00.202650+08:00",
+                         "finished_at":  "2026-09-08T01:14:00.452236+08:00",
+                         "exit_code":  0,
+                         "expected_exit_code":  0,
+                         "stdout":  "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (1/8 done)\nM0: in_progress (1/6 done)\nM1: in_progress (0/2 done)\nM2: blocked (1/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+                         "stderr":  ""
+                     },
+                     {
+                         "id":  "native-private-cleanup",
+                         "shell":  "powershell",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "\n  $root = (Resolve-Path -LiteralPath \u0027D:\\Github\\AETP\u0027).Path\n  $expected = [IO.Path]::GetFullPath(\u0027D:\\Github\\AETP\\.prep-007-review-codex-20260908\u0027)\n  $resolved = (Resolve-Path -LiteralPath $expected).Path\n  if ($resolved -ne $expected -or -not $resolved.StartsWith($root + \u0027\\\u0027, [StringComparison]::OrdinalIgnoreCase)) { throw \u0027Private cleanup path failed boundary/exact-owner checks\u0027 }\n  $items = @((Get-Item -LiteralPath $resolved -Force)) + @(Get-ChildItem -LiteralPath $resolved -Force -Recurse)\n  if (@($items | Where-Object { ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0 }).Count -gt 0) { throw \u0027Refusing cleanup with reparse points\u0027 }\n  Remove-Item -LiteralPath $resolved -Recurse -Force\n  if (Test-Path -LiteralPath $expected) { throw \u0027Private cleanup did not complete\u0027 }\n",
+                         "started_at":  "2026-09-08T01:21:30.1625419+08:00",
+                         "finished_at":  "2026-09-08T01:21:30.2735083+08:00",
+                         "exit_code":  0
+                     }
+                 ],
+    "source_sha256":  [
+                          {
+                              "path":  "tools/devprep.py",
+                              "before_sha256":  "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+                              "before_observed_at":  "2026-09-08T00:58:49.7115502+08:00",
+                              "copied_sha256":  "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+                              "after_sha256":  "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+                              "after_observed_at":  "2026-09-08T01:21:30.3638499+08:00",
+                              "unchanged":  true
+                          },
+                          {
+                              "path":  "tests/preparation/test_devprep.py",
+                              "before_sha256":  "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+                              "before_observed_at":  "2026-09-08T00:58:49.7115502+08:00",
+                              "copied_sha256":  "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+                              "after_sha256":  "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+                              "after_observed_at":  "2026-09-08T01:21:30.3673784+08:00",
+                              "unchanged":  true
+                          },
+                          {
+                              "path":  "tests/preparation/test_devprep_fail_closed.py",
+                              "before_sha256":  "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+                              "before_observed_at":  "2026-09-08T00:58:49.7115502+08:00",
+                              "copied_sha256":  "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+                              "after_sha256":  "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+                              "after_observed_at":  "2026-09-08T01:21:30.3703756+08:00",
+                              "unchanged":  true
+                          }
+                      ],
+    "isolation":  {
+                      "private_workspace":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                      "copy_manifest":  {
+                                            "workspace":  "D:\\Github\\AETP",
+                                            "scratch":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                                            "copied_count":  49,
+                                            "copied":  [
+                                                           "Docs\\AETP-设计方案-补充建议.md",
+                                                           "Docs\\AETP-设计方案.md",
+                                                           "Docs\\Docs.zip",
+                                                           "tools\\devprep.py",
+                                                           "Docs\\development\\backlog.json",
+                                                           "Docs\\development\\knowledge-graph.json",
+                                                           "Docs\\development\\knowledge-map.md",
+                                                           "Docs\\development\\README.md",
+                                                           "Docs\\development\\roadmap.md",
+                                                           "Docs\\development\\status.json",
+                                                           "skills\\aetp-evidence-handoff\\SKILL.md",
+                                                           "skills\\aetp-execution-contracts\\SKILL.md",
+                                                           "skills\\aetp-protocol-navigation\\SKILL.md",
+                                                           "tests\\preparation\\test_devprep.py",
+                                                           "tests\\preparation\\test_devprep_fail_closed.py",
+                                                           "Docs\\development\\evidence\\2026-09-07-memory-check.txt",
+                                                           "Docs\\development\\evidence\\2026-09-07-prep-001-006-review.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-prep-006-plan-structure.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-prep-007-review-green.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-prep-007-review-red-extended.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-prep-007-review-red-rerun.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-prep-007-review-red.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-skill-coverage-green.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-skill-coverage-red-rerun.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-skill-coverage-red.json",
+                                                           "Docs\\development\\evidence\\2026-09-07-skill-markers-red.json",
+                                                           "Docs\\development\\evidence\\2026-09-08-prep-003-004-review.json",
+                                                           "Docs\\development\\evidence\\2026-09-08-prep-006-review.json",
+                                                           "Docs\\development\\evidence\\2026-09-08-preparation-closeout.json",
+                                                           "Docs\\development\\evidence\\2026-09-08-preparation-handoff.md",
+                                                           "Docs\\development\\evidence\\backlog-check.json",
+                                                           "Docs\\development\\evidence\\devprep-check.json",
+                                                           "Docs\\development\\evidence\\environment.json",
+                                                           "Docs\\development\\evidence\\knowledge-graph-check.json",
+                                                           "Docs\\development\\evidence\\m0-plan-review.md",
+                                                           "Docs\\development\\evidence\\prep-007-final-validation.json",
+                                                           "Docs\\development\\evidence\\prep-007-markdown-green.json",
+                                                           "Docs\\development\\evidence\\prep-007-markdown-red.txt",
+                                                           "Docs\\development\\evidence\\preparation-log.md",
+                                                           "Docs\\development\\evidence\\preparation-report.json",
+                                                           "Docs\\development\\evidence\\skill-evidence-handoff.md",
+                                                           "Docs\\development\\evidence\\skill-execution-contracts.md",
+                                                           "Docs\\development\\evidence\\skill-protocol-navigation.md",
+                                                           "Docs\\superpowers\\plans\\2026-09-06-m0-first-slice.md",
+                                                           "Docs\\superpowers\\plans\\2026-09-08-preparation-closeout.md",
+                                                           "README.md",
+                                                           "AGENTS.md",
+                                                           ".gitignore",
+                                                           ".editorconfig"
+                                                       ],
+                                            "excluded":  [
+                                                             "D:\\Github\\AETP\\tools\\__pycache__",
+                                                             "D:\\Github\\AETP\\tests\\preparation\\__pycache__"
+                                                         ],
+                                            "source_hashes_at_copy":  [
+                                                                          {
+                                                                              "path":  "tools/devprep.py",
+                                                                              "original_sha256":  "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+                                                                              "copy_sha256":  "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583"
+                                                                          },
+                                                                          {
+                                                                              "path":  "tests/preparation/test_devprep.py",
+                                                                              "original_sha256":  "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+                                                                              "copy_sha256":  "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a"
+                                                                          },
+                                                                          {
+                                                                              "path":  "tests/preparation/test_devprep_fail_closed.py",
+                                                                              "original_sha256":  "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+                                                                              "copy_sha256":  "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215"
+                                                                          }
+                                                                      ]
+                                        },
+                      "run_cwd":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                      "root_binding_verified":  true,
+                      "temporary_directory_overrides":  "TEMP/TMP位于私有副本_audit/tmp；-B和PYTHONDONTWRITEBYTECODE=1；未复制.git/.claude/.codex/.env/用户配置/__pycache__。",
+                      "permanent_shared_reports_written":  false,
+                      "main_session_concurrent_docs_excluded_from_source_concurrency_check":  true,
+                      "cleanup":  {
+                                      "status":  "complete",
+                                      "resolved_absolute_target":  "D:\\Github\\AETP\\.prep-007-review-codex-20260908",
+                                      "inside_workspace_verified":  true,
+                                      "exact_owned_path_verified":  true,
+                                      "no_reparse_points_verified":  true,
+                                      "target_absent_after":  true,
+                                      "started_at":  "2026-09-08T01:21:30.1625419+08:00",
+                                      "finished_at":  "2026-09-08T01:21:30.2735083+08:00"
+                                  }
+                  },
+    "reproducibility":  {
+                            "final_probe_source_sha256":  "46cd8531acf4165c9a3f825424782e0b52ef362bbe5423f54249672f25dce91d",
+                            "final_probe_source":  "import collections, copy, datetime, hashlib, io, json, pathlib, subprocess, sys\nfrom contextlib import redirect_stdout\nfrom unittest.mock import patch\nfrom tools import devprep\n\nROOT = pathlib.Path.cwd().resolve()\nassert ROOT == pathlib.Path(r\u0027D:\\Github\\AETP\\.prep-007-review-codex-20260908\u0027).resolve()\nassert devprep.ROOT == ROOT\nAUDIT = ROOT / \u0027_audit\u0027\nSTART = datetime.datetime.now().astimezone().isoformat()\npaths = {name: ROOT / \u0027Docs/development\u0027 / (name + \u0027.json\u0027) for name in (\u0027backlog\u0027, \u0027knowledge-graph\u0027, \u0027status\u0027)}\noriginal = {name: path.read_bytes() for name, path in paths.items()}\nbaseline = {name: json.loads(data.decode(\u0027utf-8-sig\u0027)) for name, data in original.items()}\nreports = [devprep.DEVPREP_CHECK_PATH, devprep.GRAPH_CHECK_PATH, devprep.BACKLOG_CHECK_PATH, devprep.REPORT_PATH]\ncommands, scenarios = [], []\n\n\ndef now():\n    return datetime.datetime.now().astimezone().isoformat()\n\n\ndef restore():\n    for name, data in original.items():\n        paths[name].write_bytes(data)\n\n\ndef material(name, data):\n    paths[name].write_text(json.dumps(data, ensure_ascii=False, indent=2) + \u0027\\n\u0027, encoding=\u0027utf-8\u0027)\n\n\ndef report_facts():\n    return {p.name: {\u0027sha256\u0027: hashlib.sha256(p.read_bytes()).hexdigest(), \u0027mtime_ns\u0027: p.stat().st_mtime_ns} for p in reports}\n\n\ndef run_cli(label, subcommand, expected_exit):\n    start = now()\n    argv = [sys.executable, \u0027-B\u0027, \u0027tools/devprep.py\u0027, subcommand]\n    result = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True, encoding=\u0027utf-8\u0027, timeout=30)\n    commands.append(dict(id=label, argv=argv, cwd=str(ROOT), started_at=start, finished_at=now(), exit_code=result.returncode, expected_exit_code=expected_exit, stdout=result.stdout, stderr=result.stderr))\n    return result\n\n\ndef add(label, expected, ok, **observed):\n    scenarios.append(dict(id=label, expected=expected, result=\u0027pass\u0027 if ok else \u0027fail\u0027, observed=observed))\n\n\ndef reject(label, mutate, subcommand=\u0027check\u0027, diagnostic=None):\n    restore()\n    data = copy.deepcopy(baseline)\n    mutate(data)\n    for name, document in data.items():\n        material(name, document)\n    before = report_facts()\n    result = run_cli(label, subcommand, 1)\n    unchanged = before == report_facts()\n    ok = result.returncode == 1 and unchanged and \u0027ERROR \u0027 in result.stdout and \u0027Traceback\u0027 not in result.stderr\n    if diagnostic:\n        ok = ok and diagnostic in result.stdout\n    add(label, \u0027exit 1 with diagnostic, no replacement of existing success reports\u0027, ok, success_reports_unchanged=unchanged, diagnostic=result.stdout.strip(), exit_code=result.returncode)\n    restore()\n\n\ndef sync_status(data):\n    items = data[\u0027backlog\u0027][\u0027work_items\u0027]\n    states = (\u0027todo\u0027,\u0027ready\u0027,\u0027in_progress\u0027,\u0027review\u0027,\u0027done\u0027,\u0027blocked\u0027)\n    counts = {state: sum(item[\u0027status\u0027] == state for item in items) for state in states}\n    milestones = {}\n    for milestone in (\u0027PREP\u0027,\u0027M0\u0027,\u0027M1\u0027,\u0027M2\u0027,\u0027M3\u0027):\n        group = [item for item in items if item[\u0027milestone\u0027] == milestone]\n        c = {state: sum(item[\u0027status\u0027] == state for item in group) for state in states}\n        status = \u0027done\u0027 if group and c[\u0027done\u0027] == len(group) else \u0027in_progress\u0027 if c[\u0027in_progress\u0027] or c[\u0027review\u0027] else \u0027blocked\u0027 if c[\u0027blocked\u0027] else \u0027todo\u0027\n        milestones[milestone] = dict(status=status, total=len(group), **c)\n    data[\u0027status\u0027][\u0027work_item_status_counts\u0027] = counts\n    data[\u0027status\u0027][\u0027milestones\u0027] = milestones\n    data[\u0027status\u0027][\u0027active_work_items\u0027] = sorted(item[\u0027id\u0027] for item in items if item[\u0027status\u0027] == \u0027in_progress\u0027)\n    return counts, milestones\n\n\ntry:\n    for name in paths:\n        restore()\n        paths[name].write_text(\u0027{\"unfinished\":\u0027, encoding=\u0027utf-8\u0027)\n        before = report_facts()\n        result = run_cli(\u0027invalid-json-\u0027 + name, \u0027check\u0027, 1)\n        unchanged = before == report_facts()\n        add(\u0027invalid-json-\u0027 + name, \u0027malformed JSON rejected without success-report writes\u0027, result.returncode == 1 and unchanged and \u0027cannot parse\u0027 in result.stdout, exit_code=result.returncode, success_reports_unchanged=unchanged, diagnostic=result.stdout.strip())\n    reject(\u0027json-root-array\u0027, lambda d: d.__setitem__(\u0027backlog\u0027, []), diagnostic=\u0027JSON root must be an object\u0027)\n    reject(\u0027duplicate-work-item\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027].append(copy.deepcopy(d[\u0027backlog\u0027][\u0027work_items\u0027][0])), diagnostic=\u0027not unique\u0027)\n    reject(\u0027dangling-dependency\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027][-1][\u0027depends_on\u0027].append(\u0027PREP-NOT-REGISTERED\u0027), diagnostic=\u0027dangling dependency\u0027)\n    def cycle(d):\n        a, b = d[\u0027backlog\u0027][\u0027work_items\u0027][:2]\n        a[\u0027depends_on\u0027], b[\u0027depends_on\u0027] = [b[\u0027id\u0027]], [a[\u0027id\u0027]]\n    reject(\u0027dependency-cycle\u0027, cycle, diagnostic=\u0027cyclic\u0027)\n    reject(\u0027duplicate-graph-node\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027nodes\u0027].append(copy.deepcopy(d[\u0027knowledge-graph\u0027][\u0027nodes\u0027][0])), diagnostic=\u0027not unique\u0027)\n    reject(\u0027duplicate-graph-edge\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027edges\u0027].append(copy.deepcopy(d[\u0027knowledge-graph\u0027][\u0027edges\u0027][0])), diagnostic=\u0027duplicate\u0027)\n    reject(\u0027dangling-graph-edge\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027edges\u0027][0].__setitem__(\u0027target\u0027, \u0027NOT-A-NODE\u0027), diagnostic=\u0027unknown target\u0027)\n    reject(\u0027a2a-required-edge\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027edges\u0027].append(dict(source=d[\u0027knowledge-graph\u0027][\u0027nodes\u0027][0][\u0027id\u0027], target=\u0027concept-a2a\u0027, relation=\u0027depends_on\u0027, source_reference=\u0027synthetic audit fixture\u0027)), diagnostic=\u0027must not\u0027)\n    reject(\u0027unknown-work-status\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027][0].__setitem__(\u0027status\u0027, \u0027accepted\u0027), diagnostic=\u0027invalid status\u0027)\n    reject(\u0027done-without-evidence\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027][-1].__setitem__(\u0027status\u0027, \u0027done\u0027), diagnostic=\u0027done requires\u0027)\n    for target_status in (\u0027ready\u0027,\u0027in_progress\u0027,\u0027done\u0027):\n        def incomplete(d, state=target_status):\n            item = next(i for i in d[\u0027backlog\u0027][\u0027work_items\u0027] if i[\u0027id\u0027] == \u0027PREP-007\u0027)\n            item[\u0027status\u0027] = state\n            if state == \u0027done\u0027:\n                item.update(acceptance_evidence=\u0027synthetic fixture only\u0027, reproduction_command=\u0027synthetic fixture only\u0027, independent_reviewer=\u0027synthetic reviewer\u0027)\n            sync_status(d)\n        reject(\u0027unfinished-dependency-\u0027 + target_status, incomplete, diagnostic=\u0027requires dependency PREP-006 to be done\u0027)\n    reject(\u0027stale-status-counts-check\u0027, lambda d: d[\u0027status\u0027][\u0027work_item_status_counts\u0027].__setitem__(\u0027done\u0027, 999), diagnostic=\u0027does not match backlog\u0027)\n    reject(\u0027stale-status-counts-render\u0027, lambda d: d[\u0027status\u0027][\u0027work_item_status_counts\u0027].__setitem__(\u0027done\u0027, 999), \u0027render\u0027, \u0027does not match backlog\u0027)\n    reject(\u0027product-percent-overclaim\u0027, lambda d: d[\u0027status\u0027].__setitem__(\u0027product_completion_percent\u0027, 1), diagnostic=\u0027must remain 0\u0027)\n    reject(\u0027bootstrap-overclaim\u0027, lambda d: d[\u0027status\u0027].__setitem__(\u0027bootstrap_status\u0027, \u0027BOOTSTRAP_VERIFIED\u0027), diagnostic=\u0027cannot claim\u0027)\n    reject(\u0027conformance-passed-overclaim\u0027, lambda d: d[\u0027status\u0027][\u0027conformance\u0027].__setitem__(\u0027passed_tests\u0027, 1), diagnostic=\u0027must remain 0\u0027)\n\n    restore()\n    prep7 = next(i for i in baseline[\u0027backlog\u0027][\u0027work_items\u0027] if i[\u0027id\u0027] == \u0027PREP-007\u0027)\n    prep6 = next(i for i in baseline[\u0027backlog\u0027][\u0027work_items\u0027] if i[\u0027id\u0027] == \u0027PREP-006\u0027)\n    result = run_cli(\u0027review-with-unfinished-dependency\u0027, \u0027check\u0027, 0)\n    add(\u0027review-with-unfinished-dependency\u0027, \u0027review may collect evidence but does not satisfy dependency gate for done\u0027, result.returncode == 0 and prep7[\u0027status\u0027] == \u0027review\u0027 and prep6[\u0027status\u0027] != \u0027done\u0027, prep007_status=prep7[\u0027status\u0027], prep006_status=prep6[\u0027status\u0027], exit_code=result.returncode)\n\n    data = copy.deepcopy(baseline)\n    states = (\u0027todo\u0027,\u0027ready\u0027,\u0027in_progress\u0027,\u0027review\u0027,\u0027done\u0027,\u0027blocked\u0027)\n    for i, item in enumerate(data[\u0027backlog\u0027][\u0027work_items\u0027]):\n        item[\u0027status\u0027] = states[i % len(states)]\n        item[\u0027depends_on\u0027] = []\n        if item[\u0027status\u0027] == \u0027done\u0027:\n            item.update(acceptance_evidence=\u0027synthetic audit fixture\u0027, reproduction_command=\u0027synthetic audit fixture\u0027, independent_reviewer=\u0027synthetic reviewer\u0027)\n    expected_counts, expected_milestones = sync_status(data)\n    for name, document in data.items():\n        material(name, document)\n    result = run_cli(\u0027render-six-states\u0027, \u0027render\u0027, 0)\n    actual = json.loads(devprep.REPORT_PATH.read_text(encoding=\u0027utf-8\u0027))\n    count_ok = actual[\u0027work_item_status_counts\u0027] == expected_counts and actual[\u0027milestones\u0027] == expected_milestones\n    boundaries_ok = actual[\u0027product_completion_percent\u0027] == 0 and actual[\u0027bootstrap_status\u0027] == \u0027not_started\u0027 and actual[\u0027conformance\u0027][\u0027passed_count\u0027] == 0 and all(value is False for value in actual[\u0027claims\u0027].values())\n    console_ok = all(f\"{m}: {v[\u0027status\u0027]} ({v[\u0027done\u0027]}/{v[\u0027total\u0027]} done)\" in result.stdout for m,v in expected_milestones.items())\n    add(\u0027render-six-states\u0027, \u0027counts and milestone text exactly match independent six-state fixture totals; no product claims\u0027, result.returncode == 0 and count_ok and boundaries_ok and console_ok, expected_counts=expected_counts, actual_counts=actual[\u0027work_item_status_counts\u0027], expected_milestones=expected_milestones, actual_milestones=actual[\u0027milestones\u0027], product_boundaries_preserved=boundaries_ok, console_matches=console_ok)\n    restore()\n\n    sentinel = \u0027PREP007_SYNTHETIC_NOT_A_SECRET\u0027\n    guarded_reads = []\n    def forbidden_read(*args, **kwargs):\n        guarded_reads.append(\u0027file-content read attempted\u0027)\n        raise AssertionError(\u0027file-content read forbidden for environment collection\u0027)\n    bad_output = subprocess.CompletedProcess([\u0027synthetic\u0027], 0, \u0027v24.18.1\\n\u0027 + sentinel, \u0027\u0027)\n    start = now()\n    with patch.object(devprep.shutil, \u0027which\u0027, return_value=\u0027synthetic-executable\u0027), patch.object(devprep.subprocess, \u0027run\u0027, return_value=bad_output), patch.object(pathlib.Path, \u0027read_text\u0027, side_effect=forbidden_read), patch.object(pathlib.Path, \u0027read_bytes\u0027, side_effect=forbidden_read), patch(\u0027builtins.open\u0027, side_effect=forbidden_read), patch(\u0027io.open\u0027, side_effect=forbidden_read):\n        facts = devprep.collect_environment()\n    add(\u0027environment-no-file-content-reads\u0027, \u0027collection performs no Python file-content reads; unsupported raw versions omitted\u0027, not guarded_reads and sentinel not in json.dumps(facts) and all(not facts[\u0027tools\u0027][name][\u0027available\u0027] for name in (\u0027node\u0027,\u0027git\u0027,\u0027uv\u0027)), guarded_read_attempts=len(guarded_reads), started_at=start, finished_at=now(), lookup_and_subprocess=\u0027mocked; filesystem metadata probes remain real\u0027)\n\n    stdout = io.StringIO()\n    synthetic_report = AUDIT / \u0027synthetic-environment.json\u0027\n    start = now()\n    with patch.object(devprep.shutil, \u0027which\u0027, return_value=\u0027synthetic-executable\u0027), patch.object(devprep.subprocess, \u0027run\u0027, return_value=bad_output), patch.object(devprep, \u0027ENVIRONMENT_PATH\u0027, synthetic_report), redirect_stdout(stdout):\n        exit_code = devprep.command_environment()\n    report = synthetic_report.read_text(encoding=\u0027utf-8\u0027)\n    add(\u0027environment-no-untrusted-echo\u0027, \u0027malformed version output is unavailable; neither console nor report includes raw sentinel\u0027, exit_code == 0 and sentinel not in stdout.getvalue() + report, started_at=start, finished_at=now(), exit_code=exit_code, stdout=stdout.getvalue(), facts=json.loads(report))\nfinally:\n    restore()\n\nfinish = now()\nscript = pathlib.Path(__file__).resolve()\nresult = dict(schema_version=\u0027prep007-private-probes-1\u0027, started_at=START, finished_at=finish, commands=commands, scenarios=scenarios, all_passed=all(s[\u0027result\u0027]==\u0027pass\u0027 for s in scenarios), probe_script_sha256=hashlib.sha256(script.read_bytes()).hexdigest(), source_script=script.read_text(encoding=\u0027utf-8-sig\u0027), original_materials_restored=all(path.read_bytes() == original[name] for name,path in paths.items()))\n(AUDIT / \u0027independent-probes.json\u0027).write_text(json.dumps(result, ensure_ascii=False, indent=2)+\u0027\\n\u0027, encoding=\u0027utf-8\u0027)\nprint(json.dumps({k: result[k] for k in (\u0027started_at\u0027,\u0027finished_at\u0027,\u0027all_passed\u0027,\u0027original_materials_restored\u0027)}, ensure_ascii=False))\nfor scenario in scenarios:\n    print(scenario[\u0027id\u0027] + \u0027: \u0027 + scenario[\u0027result\u0027])\n    if scenario[\u0027result\u0027] != \u0027pass\u0027:\n        print(json.dumps(scenario, ensure_ascii=False))\nsys.exit(0 if result[\u0027all_passed\u0027] else 1)\n\n",
+                            "first_probe_source_sha256":  "de2165514d833520c44e5d3ed7d66f3532c46eaf3a9be55fe9ae8801f3f9e33d",
+                            "first_probe_source":  "import collections, copy, datetime, hashlib, io, json, pathlib, subprocess, sys\nfrom contextlib import redirect_stdout\nfrom unittest.mock import patch\nfrom tools import devprep\n\nROOT = pathlib.Path.cwd().resolve()\nassert ROOT == pathlib.Path(r\u0027D:\\Github\\AETP\\.prep-007-review-codex-20260908\u0027).resolve()\nassert devprep.ROOT == ROOT\nAUDIT = ROOT / \u0027_audit\u0027\nSTART = datetime.datetime.now().astimezone().isoformat()\npaths = {name: ROOT / \u0027Docs/development\u0027 / (name + \u0027.json\u0027) for name in (\u0027backlog\u0027, \u0027knowledge-graph\u0027, \u0027status\u0027)}\noriginal = {name: path.read_bytes() for name, path in paths.items()}\nbaseline = {name: json.loads(data.decode(\u0027utf-8-sig\u0027)) for name, data in original.items()}\nreports = [devprep.DEVPREP_CHECK_PATH, devprep.GRAPH_CHECK_PATH, devprep.BACKLOG_CHECK_PATH, devprep.REPORT_PATH]\ncommands, scenarios = [], []\n\n\ndef now():\n    return datetime.datetime.now().astimezone().isoformat()\n\n\ndef restore():\n    for name, data in original.items():\n        paths[name].write_bytes(data)\n\n\ndef material(name, data):\n    paths[name].write_text(json.dumps(data, ensure_ascii=False, indent=2) + \u0027\\n\u0027, encoding=\u0027utf-8\u0027)\n\n\ndef report_facts():\n    return {p.name: {\u0027sha256\u0027: hashlib.sha256(p.read_bytes()).hexdigest(), \u0027mtime_ns\u0027: p.stat().st_mtime_ns} for p in reports}\n\n\ndef run_cli(label, subcommand, expected_exit):\n    start = now()\n    argv = [sys.executable, \u0027-B\u0027, \u0027tools/devprep.py\u0027, subcommand]\n    result = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True, encoding=\u0027utf-8\u0027, timeout=30)\n    commands.append(dict(id=label, argv=argv, cwd=str(ROOT), started_at=start, finished_at=now(), exit_code=result.returncode, expected_exit_code=expected_exit, stdout=result.stdout, stderr=result.stderr))\n    return result\n\n\ndef add(label, expected, ok, **observed):\n    scenarios.append(dict(id=label, expected=expected, result=\u0027pass\u0027 if ok else \u0027fail\u0027, observed=observed))\n\n\ndef reject(label, mutate, subcommand=\u0027check\u0027, diagnostic=None):\n    restore()\n    data = copy.deepcopy(baseline)\n    mutate(data)\n    for name, document in data.items():\n        material(name, document)\n    before = report_facts()\n    result = run_cli(label, subcommand, 1)\n    unchanged = before == report_facts()\n    ok = result.returncode == 1 and unchanged and \u0027ERROR \u0027 in result.stdout and \u0027Traceback\u0027 not in result.stderr\n    if diagnostic:\n        ok = ok and diagnostic in result.stdout\n    add(label, \u0027exit 1 with diagnostic, no replacement of existing success reports\u0027, ok, success_reports_unchanged=unchanged, diagnostic=result.stdout.strip(), exit_code=result.returncode)\n    restore()\n\n\ndef sync_status(data):\n    items = data[\u0027backlog\u0027][\u0027work_items\u0027]\n    states = (\u0027todo\u0027,\u0027ready\u0027,\u0027in_progress\u0027,\u0027review\u0027,\u0027done\u0027,\u0027blocked\u0027)\n    counts = {state: sum(item[\u0027status\u0027] == state for item in items) for state in states}\n    milestones = {}\n    for milestone in (\u0027PREP\u0027,\u0027M0\u0027,\u0027M1\u0027,\u0027M2\u0027,\u0027M3\u0027):\n        group = [item for item in items if item[\u0027milestone\u0027] == milestone]\n        c = {state: sum(item[\u0027status\u0027] == state for item in group) for state in states}\n        status = \u0027done\u0027 if group and c[\u0027done\u0027] == len(group) else \u0027in_progress\u0027 if c[\u0027in_progress\u0027] or c[\u0027review\u0027] else \u0027blocked\u0027 if c[\u0027blocked\u0027] else \u0027todo\u0027\n        milestones[milestone] = dict(status=status, total=len(group), **c)\n    data[\u0027status\u0027][\u0027work_item_status_counts\u0027] = counts\n    data[\u0027status\u0027][\u0027milestones\u0027] = milestones\n    data[\u0027status\u0027][\u0027active_work_items\u0027] = sorted(item[\u0027id\u0027] for item in items if item[\u0027status\u0027] == \u0027in_progress\u0027)\n    return counts, milestones\n\n\ntry:\n    for name in paths:\n        restore()\n        paths[name].write_text(\u0027{\"unfinished\":\u0027, encoding=\u0027utf-8\u0027)\n        before = report_facts()\n        result = run_cli(\u0027invalid-json-\u0027 + name, \u0027check\u0027, 1)\n        unchanged = before == report_facts()\n        add(\u0027invalid-json-\u0027 + name, \u0027malformed JSON rejected without success-report writes\u0027, result.returncode == 1 and unchanged and \u0027cannot parse\u0027 in result.stdout, exit_code=result.returncode, success_reports_unchanged=unchanged, diagnostic=result.stdout.strip())\n    reject(\u0027json-root-array\u0027, lambda d: d.__setitem__(\u0027backlog\u0027, []), diagnostic=\u0027JSON root must be an object\u0027)\n    reject(\u0027duplicate-work-item\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027].append(copy.deepcopy(d[\u0027backlog\u0027][\u0027work_items\u0027][0])), diagnostic=\u0027not unique\u0027)\n    reject(\u0027dangling-dependency\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027][-1][\u0027depends_on\u0027].append(\u0027PREP-NOT-REGISTERED\u0027), diagnostic=\u0027dangling dependency\u0027)\n    def cycle(d):\n        a, b = d[\u0027backlog\u0027][\u0027work_items\u0027][:2]\n        a[\u0027depends_on\u0027], b[\u0027depends_on\u0027] = [b[\u0027id\u0027]], [a[\u0027id\u0027]]\n    reject(\u0027dependency-cycle\u0027, cycle, diagnostic=\u0027cycle\u0027)\n    reject(\u0027duplicate-graph-node\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027nodes\u0027].append(copy.deepcopy(d[\u0027knowledge-graph\u0027][\u0027nodes\u0027][0])), diagnostic=\u0027not unique\u0027)\n    reject(\u0027duplicate-graph-edge\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027edges\u0027].append(copy.deepcopy(d[\u0027knowledge-graph\u0027][\u0027edges\u0027][0])), diagnostic=\u0027duplicate\u0027)\n    reject(\u0027dangling-graph-edge\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027edges\u0027][0].__setitem__(\u0027target\u0027, \u0027NOT-A-NODE\u0027), diagnostic=\u0027dangling\u0027)\n    reject(\u0027a2a-required-edge\u0027, lambda d: d[\u0027knowledge-graph\u0027][\u0027edges\u0027].append(dict(source=d[\u0027knowledge-graph\u0027][\u0027nodes\u0027][0][\u0027id\u0027], target=\u0027concept-a2a\u0027, relation=\u0027depends_on\u0027, source_reference=\u0027synthetic audit fixture\u0027)), diagnostic=\u0027must not\u0027)\n    reject(\u0027unknown-work-status\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027][0].__setitem__(\u0027status\u0027, \u0027accepted\u0027), diagnostic=\u0027invalid status\u0027)\n    reject(\u0027done-without-evidence\u0027, lambda d: d[\u0027backlog\u0027][\u0027work_items\u0027][-1].__setitem__(\u0027status\u0027, \u0027done\u0027), diagnostic=\u0027done requires\u0027)\n    for target_status in (\u0027ready\u0027,\u0027in_progress\u0027,\u0027done\u0027):\n        def incomplete(d, state=target_status):\n            item = next(i for i in d[\u0027backlog\u0027][\u0027work_items\u0027] if i[\u0027id\u0027] == \u0027PREP-007\u0027)\n            item[\u0027status\u0027] = state\n            if state == \u0027done\u0027:\n                item.update(acceptance_evidence=\u0027synthetic fixture only\u0027, reproduction_command=\u0027synthetic fixture only\u0027, independent_reviewer=\u0027synthetic reviewer\u0027)\n            sync_status(d)\n        reject(\u0027unfinished-dependency-\u0027 + target_status, incomplete, diagnostic=\u0027requires done dependency\u0027)\n    reject(\u0027stale-status-counts-check\u0027, lambda d: d[\u0027status\u0027][\u0027work_item_status_counts\u0027].__setitem__(\u0027done\u0027, 999), diagnostic=\u0027does not match backlog\u0027)\n    reject(\u0027stale-status-counts-render\u0027, lambda d: d[\u0027status\u0027][\u0027work_item_status_counts\u0027].__setitem__(\u0027done\u0027, 999), \u0027render\u0027, \u0027does not match backlog\u0027)\n    reject(\u0027product-percent-overclaim\u0027, lambda d: d[\u0027status\u0027].__setitem__(\u0027product_completion_percent\u0027, 1), diagnostic=\u0027must remain 0\u0027)\n    reject(\u0027bootstrap-overclaim\u0027, lambda d: d[\u0027status\u0027].__setitem__(\u0027bootstrap_status\u0027, \u0027BOOTSTRAP_VERIFIED\u0027), diagnostic=\u0027cannot claim\u0027)\n    reject(\u0027conformance-passed-overclaim\u0027, lambda d: d[\u0027status\u0027][\u0027conformance\u0027].__setitem__(\u0027passed_tests\u0027, 1), diagnostic=\u0027must remain 0\u0027)\n\n    restore()\n    prep7 = next(i for i in baseline[\u0027backlog\u0027][\u0027work_items\u0027] if i[\u0027id\u0027] == \u0027PREP-007\u0027)\n    prep6 = next(i for i in baseline[\u0027backlog\u0027][\u0027work_items\u0027] if i[\u0027id\u0027] == \u0027PREP-006\u0027)\n    result = run_cli(\u0027review-with-unfinished-dependency\u0027, \u0027check\u0027, 0)\n    add(\u0027review-with-unfinished-dependency\u0027, \u0027review may collect evidence but does not satisfy dependency gate for done\u0027, result.returncode == 0 and prep7[\u0027status\u0027] == \u0027review\u0027 and prep6[\u0027status\u0027] != \u0027done\u0027, prep007_status=prep7[\u0027status\u0027], prep006_status=prep6[\u0027status\u0027], exit_code=result.returncode)\n\n    data = copy.deepcopy(baseline)\n    states = (\u0027todo\u0027,\u0027ready\u0027,\u0027in_progress\u0027,\u0027review\u0027,\u0027done\u0027,\u0027blocked\u0027)\n    for i, item in enumerate(data[\u0027backlog\u0027][\u0027work_items\u0027]):\n        item[\u0027status\u0027] = states[i % len(states)]\n        item[\u0027depends_on\u0027] = []\n        if item[\u0027status\u0027] == \u0027done\u0027:\n            item.update(acceptance_evidence=\u0027synthetic audit fixture\u0027, reproduction_command=\u0027synthetic audit fixture\u0027, independent_reviewer=\u0027synthetic reviewer\u0027)\n    expected_counts, expected_milestones = sync_status(data)\n    for name, document in data.items():\n        material(name, document)\n    result = run_cli(\u0027render-six-states\u0027, \u0027render\u0027, 0)\n    actual = json.loads(devprep.REPORT_PATH.read_text(encoding=\u0027utf-8\u0027))\n    count_ok = actual[\u0027work_item_status_counts\u0027] == expected_counts and actual[\u0027milestones\u0027] == expected_milestones\n    boundaries_ok = actual[\u0027product_completion_percent\u0027] == 0 and actual[\u0027bootstrap_status\u0027] == \u0027not_started\u0027 and actual[\u0027conformance\u0027][\u0027passed_count\u0027] == 0 and all(value is False for value in actual[\u0027claims\u0027].values())\n    console_ok = all(f\"{m}: {v[\u0027status\u0027]} ({v[\u0027done\u0027]}/{v[\u0027total\u0027]} done)\" in result.stdout for m,v in expected_milestones.items())\n    add(\u0027render-six-states\u0027, \u0027counts and milestone text exactly match independent six-state fixture totals; no product claims\u0027, result.returncode == 0 and count_ok and boundaries_ok and console_ok, expected_counts=expected_counts, actual_counts=actual[\u0027work_item_status_counts\u0027], expected_milestones=expected_milestones, actual_milestones=actual[\u0027milestones\u0027], product_boundaries_preserved=boundaries_ok, console_matches=console_ok)\n    restore()\n\n    sentinel = \u0027PREP007_SYNTHETIC_NOT_A_SECRET\u0027\n    guarded_reads = []\n    def forbidden_read(*args, **kwargs):\n        guarded_reads.append(\u0027file-content read attempted\u0027)\n        raise AssertionError(\u0027file-content read forbidden for environment collection\u0027)\n    bad_output = subprocess.CompletedProcess([\u0027synthetic\u0027], 0, \u0027v24.18.1\\n\u0027 + sentinel, \u0027\u0027)\n    start = now()\n    with patch.object(devprep.shutil, \u0027which\u0027, return_value=\u0027synthetic-executable\u0027), patch.object(devprep.subprocess, \u0027run\u0027, return_value=bad_output), patch.object(pathlib.Path, \u0027read_text\u0027, side_effect=forbidden_read), patch.object(pathlib.Path, \u0027read_bytes\u0027, side_effect=forbidden_read), patch(\u0027builtins.open\u0027, side_effect=forbidden_read), patch(\u0027io.open\u0027, side_effect=forbidden_read):\n        facts = devprep.collect_environment()\n    add(\u0027environment-no-file-content-reads\u0027, \u0027collection performs no Python file-content reads; unsupported raw versions omitted\u0027, not guarded_reads and sentinel not in json.dumps(facts) and all(not facts[\u0027tools\u0027][name][\u0027available\u0027] for name in (\u0027node\u0027,\u0027git\u0027,\u0027uv\u0027)), guarded_read_attempts=len(guarded_reads), started_at=start, finished_at=now(), lookup_and_subprocess=\u0027mocked; filesystem metadata probes remain real\u0027)\n\n    stdout = io.StringIO()\n    synthetic_report = AUDIT / \u0027synthetic-environment.json\u0027\n    start = now()\n    with patch.object(devprep.shutil, \u0027which\u0027, return_value=\u0027synthetic-executable\u0027), patch.object(devprep.subprocess, \u0027run\u0027, return_value=bad_output), patch.object(devprep, \u0027ENVIRONMENT_PATH\u0027, synthetic_report), redirect_stdout(stdout):\n        exit_code = devprep.command_environment()\n    report = synthetic_report.read_text(encoding=\u0027utf-8\u0027)\n    add(\u0027environment-no-untrusted-echo\u0027, \u0027malformed version output is unavailable; neither console nor report includes raw sentinel\u0027, exit_code == 0 and sentinel not in stdout.getvalue() + report, started_at=start, finished_at=now(), exit_code=exit_code, stdout=stdout.getvalue(), facts=json.loads(report))\nfinally:\n    restore()\n\nfinish = now()\nscript = pathlib.Path(__file__).resolve()\nresult = dict(schema_version=\u0027prep007-private-probes-1\u0027, started_at=START, finished_at=finish, commands=commands, scenarios=scenarios, all_passed=all(s[\u0027result\u0027]==\u0027pass\u0027 for s in scenarios), probe_script_sha256=hashlib.sha256(script.read_bytes()).hexdigest(), source_script=script.read_text(encoding=\u0027utf-8-sig\u0027), original_materials_restored=all(path.read_bytes() == original[name] for name,path in paths.items()))\n(AUDIT / \u0027independent-probes.json\u0027).write_text(json.dumps(result, ensure_ascii=False, indent=2)+\u0027\\n\u0027, encoding=\u0027utf-8\u0027)\nprint(json.dumps({k: result[k] for k in (\u0027started_at\u0027,\u0027finished_at\u0027,\u0027all_passed\u0027,\u0027original_materials_restored\u0027)}, ensure_ascii=False))\nfor scenario in scenarios:\n    print(scenario[\u0027id\u0027] + \u0027: \u0027 + scenario[\u0027result\u0027])\n    if scenario[\u0027result\u0027] != \u0027pass\u0027:\n        print(json.dumps(scenario, ensure_ascii=False))\nsys.exit(0 if result[\u0027all_passed\u0027] else 1)\n",
+                            "note":  "脚本正文保存在证据内；仅可在同样隔离的材料副本运行，默认写入约束由脚本ROOT断言保护。"
+                        },
+    "limitations":  [
+                        "独立复核仅覆盖准备工具与两个准备测试文件；不开发或验收Runtime/M0/28条Conformance。",
+                        "复制的是01:06:52–01:06:53的材料快照；主会话允许的文档/状态变动不作为工具源码并发覆盖，且未把副本计数冒称最终共享状态。",
+                        "版本白名单为有界稳定版本格式，合法但未支持的其他格式保守标记unavailable；不认证可执行文件身份、来源或安全性。",
+                        "文件内容读取守卫的动态探针mock了工具定位与子进程；第三方可执行文件、OS及标准库内部行为不在此审计证明范围。",
+                        "check失败不会主动删除此前成功报告；本轮验证其不新建/改写成功报告。消费者应核对当次退出码、时间与来源，不把旧报告当本轮通过。",
+                        "Markdown仅使用既有有界场景；没有扩展为通用Markdown解析器或外部链接/锚点校验。",
+                        "只记录当前准备工具独立结论，不推工作项状态；PREP-006未done的依赖门仍有效。",
+                        "ClaudeLink不可用；通过当前回复向主会话交接，未虚构通信。"
+                    ],
+    "product_acceptance":  false,
+    "bootstrap_verified":  false,
+    "evidence_write":  {
+                           "started_at":  "2026-09-08T01:16:18.717264+08:00",
+                           "method":  "Python stdlib JSON serialization to exclusive permitted path; post-write read/parse/assert performed below"
+                       }
+}

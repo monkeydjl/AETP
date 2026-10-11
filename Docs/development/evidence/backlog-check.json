@@ -1,0 +1,18 @@
+{
+  "schema_version": "aetp-preparation-check-0.1",
+  "checked_at": "2026-10-10T16:58:51+00:00",
+  "command": "python tools/devprep.py check",
+  "exit_code": 0,
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "backlog": {
+    "status": "passed",
+    "work_items": 23,
+    "dependency_cycles": 0,
+    "conformance_registered": 28,
+    "status_counts": {
+      "done": 21,
+      "blocked": 2
+    }
+  }
+}

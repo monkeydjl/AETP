@@ -1,0 +1,18 @@
+﻿started_at: 2026-09-06T22:24:58.2768531+08:00
+command: python -m unittest discover -s tests/preparation -p test_devprep.py -k test_check_reports_markdown_link_validation -v
+exit_code: 1
+test_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... FAIL
+System.Management.Automation.RemoteException
+======================================================================
+FAIL: test_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\Github\AETP\tests\preparation\test_devprep.py", line 37, in test_check_reports_markdown_link_validation
+    self.assertEqual(report["validations"].get("markdown_links"), "passed")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 'passed'
+System.Management.Automation.RemoteException
+----------------------------------------------------------------------
+Ran 1 test in 0.213s
+System.Management.Automation.RemoteException
+FAILED (failures=1)

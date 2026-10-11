@@ -1,0 +1,1581 @@
+﻿{
+    "schema_version":  "aetp-knowledge-graph-0.1",
+    "updated_at":  "2026-09-06",
+    "authority":  "Docs/AETP-设计方案.md",
+    "scope":  "development-index",
+    "nodes":  [
+                  {
+                      "id":  "aetp",
+                      "type":  "project",
+                      "label":  "AETP",
+                      "source":  "§1.1; §19",
+                      "summary":  "用户输入想法，由平等 Agent 直接讨论方案并协作产生成果。"
+                  },
+                  {
+                      "id":  "AETP-001",
+                      "type":  "entity",
+                      "label":  "项目",
+                      "source":  "§4.2; §5.1",
+                      "summary":  "AETP 顶层实体：Project"
+                  },
+                  {
+                      "id":  "AETP-002",
+                      "type":  "entity",
+                      "label":  "任务使命",
+                      "source":  "§4.2; §5.2",
+                      "summary":  "AETP 顶层实体：Mission"
+                  },
+                  {
+                      "id":  "AETP-003",
+                      "type":  "entity",
+                      "label":  "团队",
+                      "source":  "§4.2; §5.10",
+                      "summary":  "AETP 顶层实体：Team"
+                  },
+                  {
+                      "id":  "AETP-004",
+                      "type":  "entity",
+                      "label":  "职责",
+                      "source":  "§4.2; §5.8",
+                      "summary":  "AETP 顶层实体：Role"
+                  },
+                  {
+                      "id":  "AETP-005",
+                      "type":  "entity",
+                      "label":  "Agent",
+                      "source":  "§4.2; §5.3",
+                      "summary":  "AETP 顶层实体：Agent"
+                  },
+                  {
+                      "id":  "AETP-006",
+                      "type":  "entity",
+                      "label":  "蓝图",
+                      "source":  "§4.2; §7.1",
+                      "summary":  "AETP 顶层实体：Blueprint"
+                  },
+                  {
+                      "id":  "AETP-007",
+                      "type":  "entity",
+                      "label":  "Task",
+                      "source":  "§4.2; §7.2",
+                      "summary":  "AETP 顶层实体：Task"
+                  },
+                  {
+                      "id":  "AETP-008",
+                      "type":  "entity",
+                      "label":  "消息",
+                      "source":  "§4.2; §8.2",
+                      "summary":  "AETP 顶层实体：Message"
+                  },
+                  {
+                      "id":  "AETP-009",
+                      "type":  "entity",
+                      "label":  "讨论",
+                      "source":  "§4.2; §8.8",
+                      "summary":  "AETP 顶层实体：Discussion"
+                  },
+                  {
+                      "id":  "AETP-010",
+                      "type":  "entity",
+                      "label":  "会议",
+                      "source":  "§4.2; §8.9",
+                      "summary":  "AETP 顶层实体：Meeting"
+                  },
+                  {
+                      "id":  "AETP-011",
+                      "type":  "entity",
+                      "label":  "决策",
+                      "source":  "§4.2; §9.1",
+                      "summary":  "AETP 顶层实体：Decision"
+                  },
+                  {
+                      "id":  "AETP-012",
+                      "type":  "entity",
+                      "label":  "审批",
+                      "source":  "§4.2; §9.3",
+                      "summary":  "AETP 顶层实体：Approval"
+                  },
+                  {
+                      "id":  "AETP-013",
+                      "type":  "entity",
+                      "label":  "成果物",
+                      "source":  "§4.2; §10.1",
+                      "summary":  "AETP 顶层实体：Artifact"
+                  },
+                  {
+                      "id":  "AETP-014",
+                      "type":  "entity",
+                      "label":  "审查",
+                      "source":  "§4.2; §10.2",
+                      "summary":  "AETP 顶层实体：Review"
+                  },
+                  {
+                      "id":  "AETP-015",
+                      "type":  "entity",
+                      "label":  "事件",
+                      "source":  "§4.2; §10.4",
+                      "summary":  "AETP 顶层实体：Event"
+                  },
+                  {
+                      "id":  "AETP-016",
+                      "type":  "entity",
+                      "label":  "介入",
+                      "source":  "§4.2; §9.7",
+                      "summary":  "AETP 顶层实体：Intervention"
+                  },
+                  {
+                      "id":  "AETP-017",
+                      "type":  "entity",
+                      "label":  "命令",
+                      "source":  "§4.2; §14.1",
+                      "summary":  "AETP 顶层实体：Command"
+                  },
+                  {
+                      "id":  "AETP-018",
+                      "type":  "entity",
+                      "label":  "资源账本",
+                      "source":  "§4.2; §14.5",
+                      "summary":  "AETP 顶层实体：Resource-Ledger"
+                  },
+                  {
+                      "id":  "AETP-019",
+                      "type":  "entity",
+                      "label":  "验证",
+                      "source":  "§4.2; §10.3",
+                      "summary":  "AETP 顶层实体：Verification"
+                  },
+                  {
+                      "id":  "concept-command-event-projection",
+                      "type":  "mechanism",
+                      "label":  "Command → Event Store → Projection",
+                      "source":  "§13.4; §14.1–14.2",
+                      "summary":  "唯一事实写入链；Agent 不直接改 State。"
+                  },
+                  {
+                      "id":  "concept-event-store",
+                      "type":  "mechanism",
+                      "label":  "Event Store",
+                      "source":  "§10.4; §13.4",
+                      "summary":  "不可变事实存储。"
+                  },
+                  {
+                      "id":  "concept-projection",
+                      "type":  "mechanism",
+                      "label":  "State Projection",
+                      "source":  "§13.4; §14.2",
+                      "summary":  "从 Event 重建状态，不是独立事实源。"
+                  },
+                  {
+                      "id":  "concept-orchestrator",
+                      "type":  "infrastructure",
+                      "label":  "Orchestrator",
+                      "source":  "§3 P10; §13.1; §13.10",
+                      "summary":  "确定性基础设施；无 Event Store 外权威状态。"
+                  },
+                  {
+                      "id":  "concept-a2a",
+                      "type":  "transport",
+                      "label":  "A2A Transport Adapter（可选）",
+                      "source":  "§2.4; §15.5",
+                      "summary":  "可选传输，不是 AETP 必需依赖。"
+                  },
+                  {
+                      "id":  "concept-lease",
+                      "type":  "subresource",
+                      "label":  "Task Lease / epoch",
+                      "source":  "§7.6; §14.1",
+                      "summary":  "执行写权凭据，不等于审查资格。"
+                  },
+                  {
+                      "id":  "concept-acceptance",
+                      "type":  "gate",
+                      "label":  "Integration Gate / Mission Acceptance",
+                      "source":  "§5.2; §10.6; §15.5",
+                      "summary":  "成果与 Mission 交付前的质量门。"
+                  },
+                  {
+                      "id":  "concept-basic-setting",
+                      "type":  "constraint",
+                      "label":  "平等 Agent 直接协作",
+                      "source":  "§1.1; §1.5; §8.5",
+                      "summary":  "无上下级、无 Manager 必经路径。"
+                  },
+                  {
+                      "id":  "INV-001",
+                      "type":  "invariant",
+                      "label":  "Agent 不得直接修改 Project State",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-002",
+                      "type":  "invariant",
+                      "label":  "所有重要状态可追溯",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-003",
+                      "type":  "invariant",
+                      "label":  "Agent Claim 不代表 Verification",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-004",
+                      "type":  "invariant",
+                      "label":  "Task 必须经过 Review、Verification 与适用 Integration Gate",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-005",
+                      "type":  "invariant",
+                      "label":  "历史 Event 不得修改",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-006",
+                      "type":  "invariant",
+                      "label":  "高风险 Action 必须经过 Governance Policy",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-007",
+                      "type":  "invariant",
+                      "label":  "Blueprint 变更保留版本历史",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-008",
+                      "type":  "invariant",
+                      "label":  "Agent 与 Model 身份分离且 Agent 平等独立",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-009",
+                      "type":  "invariant",
+                      "label":  "Task Dependency 不得循环",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-010",
+                      "type":  "invariant",
+                      "label":  "Human Override 必须产生 Event",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-011",
+                      "type":  "invariant",
+                      "label":  "Agent 不得直接产生 Event",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-012",
+                      "type":  "invariant",
+                      "label":  "长期凭证只能由 Credential Broker 边界获取",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-013",
+                      "type":  "invariant",
+                      "label":  "外部调用须受真实边界授权并对账 UNKNOWN",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-014",
+                      "type":  "invariant",
+                      "label":  "Event 消费幂等",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-015",
+                      "type":  "invariant",
+                      "label":  "State Store 是 Event Projection",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-016",
+                      "type":  "invariant",
+                      "label":  "Event sequence 只能由 Sequencer 赋值",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-017",
+                      "type":  "invariant",
+                      "label":  "VERIFIED 必须有绑定当前快照的独立 Verification",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-018",
+                      "type":  "invariant",
+                      "label":  "事实状态行为产生 Durable Event",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-019",
+                      "type":  "invariant",
+                      "label":  "Mission 完成须 Acceptance Verification 与 CRITICAL 批准",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-020",
+                      "type":  "invariant",
+                      "label":  "外部数据不得单独授权 Command",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "INV-021",
+                      "type":  "invariant",
+                      "label":  "Orchestrator 从 Event Store + Projection 恢复",
+                      "source":  "§16",
+                      "summary":  "AETP v0.1 核心不变量"
+                  },
+                  {
+                      "id":  "TEST-001",
+                      "type":  "conformance",
+                      "label":  "同幂等键重试不重复领域 Event 批次",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-002",
+                      "type":  "conformance",
+                      "label":  "Agent 不得直接修改 State",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-003",
+                      "type":  "conformance",
+                      "label":  "Task 不得跳过 Review/Verification 进入 VERIFIED",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-004",
+                      "type":  "conformance",
+                      "label":  "高风险 Command 未审批必须拒绝",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-005",
+                      "type":  "conformance",
+                      "label":  "删除 State Store 后 Replay 状态一致",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-006",
+                      "type":  "conformance",
+                      "label":  "Agent 崩溃后 Task 可按 Lease 重分配",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-007",
+                      "type":  "conformance",
+                      "label":  "Untrusted Input 不得直接授权 Command",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-008",
+                      "type":  "conformance",
+                      "label":  "Review 通过但缺 Verification 不得 VERIFIED",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-009",
+                      "type":  "conformance",
+                      "label":  "集成面 Task 须 Integration Gate",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-010",
+                      "type":  "conformance",
+                      "label":  "Mission Acceptance 失败不得 Delivery",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-011",
+                      "type":  "conformance",
+                      "label":  "Approval 过期必须升级",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-012",
+                      "type":  "conformance",
+                      "label":  "Orchestrator 重启调度完整恢复",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-013",
+                      "type":  "conformance",
+                      "label":  "Agent 主动协作与下发走同一 Command 校验",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-014",
+                      "type":  "conformance",
+                      "label":  "工作副本隔离且 Provider 阻止越界",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-015",
+                      "type":  "conformance",
+                      "label":  "无 Manager 的平等 Agent 可直接协作审查",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-016",
+                      "type":  "conformance",
+                      "label":  "伪造 actor/Binding 不得执行",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-017",
+                      "type":  "conformance",
+                      "label":  "响应丢失重试无重复效果",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-018",
+                      "type":  "conformance",
+                      "label":  "同键异内容拒绝，释放后新键可认领",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-019",
+                      "type":  "conformance",
+                      "label":  "并发认领最多一个成功",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-020",
+                      "type":  "conformance",
+                      "label":  "外部 UNKNOWN 查询对账不盲重试",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-021",
+                      "type":  "conformance",
+                      "label":  "Replay 不重新执行副作用",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-022",
+                      "type":  "conformance",
+                      "label":  "旧 epoch 留档但不能推进/合并",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-023",
+                      "type":  "conformance",
+                      "label":  "审批后改变目标/参数被拒绝",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-024",
+                      "type":  "conformance",
+                      "label":  "输入/环境/验收变更使旧验证失效",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-025",
+                      "type":  "conformance",
+                      "label":  "PAUSED 继续记录事实但不派发",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-026",
+                      "type":  "conformance",
+                      "label":  "绕过代理的高风险操作被边界阻止",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-027",
+                      "type":  "conformance",
+                      "label":  "转述保留输入来源，未知来源不可信",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "TEST-028",
+                      "type":  "conformance",
+                      "label":  "两个以上平等 Agent 从想法讨论到交付",
+                      "source":  "§18.3",
+                      "summary":  "待实现与执行的 Conformance 断言；登记不等于通过。"
+                  },
+                  {
+                      "id":  "M0",
+                      "type":  "milestone",
+                      "label":  "Core Kernel：五对象、模拟 Runtime、事务/版本/幂等/重启/Replay",
+                      "source":  "§17.2",
+                      "summary":  "产品里程碑；当前均未完成。"
+                  },
+                  {
+                      "id":  "M1",
+                      "type":  "milestone",
+                      "label":  "双 Agent、Message、Artifact、Review、Verification、Lease、边界",
+                      "source":  "§17.2",
+                      "summary":  "产品里程碑；当前均未完成。"
+                  },
+                  {
+                      "id":  "M2",
+                      "type":  "milestone",
+                      "label":  "Discussion、Meeting、Decision、Approval、Governance",
+                      "source":  "§17.2",
+                      "summary":  "产品里程碑；当前均未完成。"
+                  },
+                  {
+                      "id":  "M3",
+                      "type":  "milestone",
+                      "label":  "Team Formation、Blueprint、DAG、Integration、Mission Acceptance",
+                      "source":  "§17.2",
+                      "summary":  "产品里程碑；当前均未完成。"
+                  },
+                  {
+                      "id":  "PREP-001",
+                      "type":  "preparation",
+                      "label":  "项目入口与协作约定",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-002",
+                      "type":  "preparation",
+                      "label":  "协议导航 Skill",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-003",
+                      "type":  "preparation",
+                      "label":  "执行契约 Skill",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-004",
+                      "type":  "preparation",
+                      "label":  "证据与交接 Skill",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-005",
+                      "type":  "preparation",
+                      "label":  "知识图谱索引",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-006",
+                      "type":  "preparation",
+                      "label":  "M0–M3 工作包",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-007",
+                      "type":  "preparation",
+                      "label":  "开发检查工具",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "PREP-008",
+                      "type":  "preparation",
+                      "label":  "独立复核与交接",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "开发准备工作项；不等于产品功能完成。"
+                  },
+                  {
+                      "id":  "M0-01",
+                      "type":  "work_item",
+                      "label":  "M0-01",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M0-02",
+                      "type":  "work_item",
+                      "label":  "M0-02",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M0-03",
+                      "type":  "work_item",
+                      "label":  "M0-03",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M0-04",
+                      "type":  "work_item",
+                      "label":  "M0-04",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M0-05",
+                      "type":  "work_item",
+                      "label":  "M0-05",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M0-06",
+                      "type":  "work_item",
+                      "label":  "M0-06",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M1-01",
+                      "type":  "work_item",
+                      "label":  "M1-01",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M1-02",
+                      "type":  "work_item",
+                      "label":  "M1-02",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M2-01",
+                      "type":  "work_item",
+                      "label":  "M2-01",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M2-02",
+                      "type":  "work_item",
+                      "label":  "M2-02",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M3-01",
+                      "type":  "work_item",
+                      "label":  "M3-01",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  },
+                  {
+                      "id":  "M3-02",
+                      "type":  "work_item",
+                      "label":  "M3-02",
+                      "source":  "Docs/development/backlog.json",
+                      "summary":  "产品实现工作项；状态以 backlog 为准。"
+                  }
+              ],
+    "edges":  [
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-001",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-002",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-003",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-004",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-005",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-006",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-007",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-008",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-009",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-010",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-011",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-012",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-013",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-014",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-015",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-016",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-017",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-018",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "AETP-019",
+                      "relation":  "defines",
+                      "source_reference":  "§4.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "concept-basic-setting",
+                      "relation":  "defines",
+                      "source_reference":  "§1.1"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "concept-command-event-projection",
+                      "relation":  "uses",
+                      "source_reference":  "§14.1"
+                  },
+                  {
+                      "source":  "concept-command-event-projection",
+                      "target":  "AETP-017",
+                      "relation":  "contains",
+                      "source_reference":  "§14.1"
+                  },
+                  {
+                      "source":  "concept-command-event-projection",
+                      "target":  "AETP-015",
+                      "relation":  "produces",
+                      "source_reference":  "§14.1"
+                  },
+                  {
+                      "source":  "concept-command-event-projection",
+                      "target":  "concept-event-store",
+                      "relation":  "uses",
+                      "source_reference":  "§13.4"
+                  },
+                  {
+                      "source":  "concept-event-store",
+                      "target":  "concept-projection",
+                      "relation":  "feeds",
+                      "source_reference":  "§13.4"
+                  },
+                  {
+                      "source":  "concept-orchestrator",
+                      "target":  "concept-event-store",
+                      "relation":  "reconstructs_from",
+                      "source_reference":  "§13.10"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "concept-a2a",
+                      "relation":  "optionally_uses",
+                      "source_reference":  "§2.4; §15.5"
+                  },
+                  {
+                      "source":  "AETP-007",
+                      "target":  "concept-lease",
+                      "relation":  "has_subresource",
+                      "source_reference":  "§7.6"
+                  },
+                  {
+                      "source":  "AETP-014",
+                      "target":  "AETP-007",
+                      "relation":  "reviews",
+                      "source_reference":  "§10.2–10.3"
+                  },
+                  {
+                      "source":  "AETP-019",
+                      "target":  "AETP-013",
+                      "relation":  "verifies",
+                      "source_reference":  "§10.3"
+                  },
+                  {
+                      "source":  "concept-acceptance",
+                      "target":  "AETP-002",
+                      "relation":  "gates",
+                      "source_reference":  "§5.2; §15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-001",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-002",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-003",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-004",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-005",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-006",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-007",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-008",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-009",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-010",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-011",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-012",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-013",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-014",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-015",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-016",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-017",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-018",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-019",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-020",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "INV-021",
+                      "relation":  "constrains",
+                      "source_reference":  "§16"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-001",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-002",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-003",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-004",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-005",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-006",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-007",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-008",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-009",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-010",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-011",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-012",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-013",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-014",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-015",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-016",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-017",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-018",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-019",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-020",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-021",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-022",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-023",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-024",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-025",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-026",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-027",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "TEST-028",
+                      "relation":  "requires_verification",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "INV-019",
+                      "target":  "TEST-010",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-019",
+                      "target":  "TEST-028",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-006",
+                      "target":  "TEST-004",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-006",
+                      "target":  "TEST-007",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-013",
+                      "target":  "TEST-020",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-013",
+                      "target":  "TEST-026",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-014",
+                      "target":  "TEST-001",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-014",
+                      "target":  "TEST-017",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-014",
+                      "target":  "TEST-018",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-011",
+                      "target":  "TEST-013",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-007",
+                      "target":  "TEST-024",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-017",
+                      "target":  "TEST-003",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-017",
+                      "target":  "TEST-008",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-021",
+                      "target":  "TEST-012",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-021",
+                      "target":  "TEST-021",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-016",
+                      "target":  "TEST-005",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-009",
+                      "target":  "TEST-028",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-004",
+                      "target":  "TEST-003",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-004",
+                      "target":  "TEST-009",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-004",
+                      "target":  "TEST-010",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-012",
+                      "target":  "TEST-026",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-018",
+                      "target":  "TEST-021",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-003",
+                      "target":  "TEST-003",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-003",
+                      "target":  "TEST-008",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-008",
+                      "target":  "TEST-015",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-008",
+                      "target":  "TEST-028",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-005",
+                      "target":  "TEST-005",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-005",
+                      "target":  "TEST-021",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-020",
+                      "target":  "TEST-007",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-020",
+                      "target":  "TEST-027",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-001",
+                      "target":  "TEST-002",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-015",
+                      "target":  "TEST-005",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "INV-010",
+                      "target":  "TEST-025",
+                      "relation":  "verified_by",
+                      "source_reference":  "§16; §18.3"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "M0",
+                      "relation":  "delivers",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "M1",
+                      "relation":  "delivers",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "M2",
+                      "relation":  "delivers",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "M3",
+                      "relation":  "delivers",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-001",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-002",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-003",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-004",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-005",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-006",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-007",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "aetp",
+                      "target":  "PREP-008",
+                      "relation":  "prepares",
+                      "source_reference":  "§15.5"
+                  },
+                  {
+                      "source":  "M0-01",
+                      "target":  "M0-02",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M0-02",
+                      "target":  "M0-03",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M0-03",
+                      "target":  "M0-04",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M0-04",
+                      "target":  "M0-05",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M0-05",
+                      "target":  "M0-06",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M0-06",
+                      "target":  "M1-01",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M1-01",
+                      "target":  "M1-02",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M1-02",
+                      "target":  "M2-01",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M2-01",
+                      "target":  "M2-02",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M2-02",
+                      "target":  "M3-01",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M3-01",
+                      "target":  "M3-02",
+                      "relation":  "depends_on",
+                      "source_reference":  "Docs/development/backlog.json"
+                  },
+                  {
+                      "source":  "M0",
+                      "target":  "M0-01",
+                      "relation":  "contains",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "M0",
+                      "target":  "M0-06",
+                      "relation":  "contains",
+                      "source_reference":  "§18.3"
+                  },
+                  {
+                      "source":  "M1",
+                      "target":  "M1-01",
+                      "relation":  "contains",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "M1",
+                      "target":  "M1-02",
+                      "relation":  "contains",
+                      "source_reference":  "§13.9"
+                  },
+                  {
+                      "source":  "M2",
+                      "target":  "M2-01",
+                      "relation":  "contains",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "M2",
+                      "target":  "M2-02",
+                      "relation":  "contains",
+                      "source_reference":  "§9.3"
+                  },
+                  {
+                      "source":  "M3",
+                      "target":  "M3-01",
+                      "relation":  "contains",
+                      "source_reference":  "§17.2"
+                  },
+                  {
+                      "source":  "M3",
+                      "target":  "M3-02",
+                      "relation":  "contains",
+                      "source_reference":  "§15.5"
+                  }
+              ]
+}

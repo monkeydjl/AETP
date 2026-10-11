@@ -1,0 +1,1839 @@
+{
+  "schema_version": "aetp-development-independent-review-0.1",
+  "work_item": "M0-06",
+  "started_at": "2026-09-11T11:49:22.180100+08:00",
+  "finished_at": "2026-09-11T12:34:07.836773+08:00",
+  "reviewer": {
+    "identity": "Codex independent Reviewer (this thread)",
+    "independent_from": "Codex main agent / implementation thread",
+    "role_is_product_authority": false,
+    "claudelink_available": false,
+    "communication": "Only this user-visible thread; no inbox/send/bulletin calls or fabricated multi-agent communication."
+  },
+  "decision": {
+    "status": "changes_requested",
+    "accepted": false,
+    "candidate_development_acceptance": "not accepted pending R1 fix and independent recheck",
+    "scoped_mapping_supported": true,
+    "scoped_execution_counts": {
+      "passed": 6,
+      "pending": 3,
+      "not_applicable": 19,
+      "failed": 0
+    },
+    "summary": "28条及12条计划映射的 M0-only 边界有执行/规范依据，6/3/19可作为有限执行结果描述；当前固定候选因输出路径导致文件/报告丢失的 P2 缺陷，不授予 M0-06 开发期有限接受。保持 review，不能进入 done。"
+  },
+  "candidate": {
+    "report": {
+      "path": "artifacts/m0-conformance-report.json",
+      "sha256": "7c32f256cbab17a7f96408af1aae73f008eca139ec8461aeaf99fcd727a5710b"
+    },
+    "expected_report_sha256": "7c32f256cbab17a7f96408af1aae73f008eca139ec8461aeaf99fcd727a5710b",
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-snapshot.json",
+      "sha256": "dc31f953f3232827eff0da94e3d0c11806e38aa5364c9bbd8ac7469f88b30f83"
+    },
+    "database": {
+      "path": ".tmp/m0-conformance-2026-09-11.sqlite",
+      "sha256": "cda13309f790513953a12a4c6da9b520a8ad3b89302ea916964915e7ede82769"
+    },
+    "freeze_check": {
+      "source_files": 18,
+      "evidence_files": 37,
+      "protected_baseline_files": 105,
+      "all_match": true,
+      "evidence": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/final-frozen-audit.json",
+        "sha256": "8dbc7fed41c13e996b48ed9a55bdf5097e48f5d671d0b4c5d68089dc42cb82cb"
+      }
+    },
+    "original_report_review_field_left_unchanged": {
+      "status": "pending",
+      "reviewer": null
+    }
+  },
+  "write_scope": {
+    "allowed_prefix": "Docs/development/evidence/2026-09-11-m0-06-review*",
+    "review_directory": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166",
+    "final_review_path": "Docs/development/evidence/2026-09-11-m0-06-review.json",
+    "shared_progress_owner": "main implementation thread",
+    "product_tests_conformance_artifacts_backlog_status_and_history_not_modified": true,
+    "no_git": "No .git metadata observed; user reported git exit 128. No Git initialization/commit/diff claimed.",
+    "m0_05_not_reworked": true
+  },
+  "independent_validation": {
+    "required_results": [
+      {
+        "label": "focused",
+        "test_count": 20,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/focused.command.json",
+          "sha256": "a599281028f0b3ad52bce18fcf55595d0e06a826fe36769f61aa0bde8c0f8315"
+        }
+      },
+      {
+        "label": "full-m0",
+        "test_count": 151,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/full-m0.command.json",
+          "sha256": "1ba3b39b28338d9afcb19439ce3fece88327572e74dad2633855fe2a22d08fea"
+        }
+      },
+      {
+        "label": "preparation",
+        "test_count": 27,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/preparation.command.json",
+          "sha256": "8e947211d052a0e914750ec4440a5d759ad2314f1611264109f9d823fb9e697e"
+        }
+      },
+      {
+        "label": "cli",
+        "test_count": null,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli.command.json",
+          "sha256": "f91c5f80775c1b211d4404208b5932e6d7671562303593c74677d1101d476c6d"
+        }
+      },
+      {
+        "label": "cli-optimized",
+        "test_count": null,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli-optimized.command.json",
+          "sha256": "803e84b8b2303b8773b247bb04243493f90938942ebf970994397d3812f8b010"
+        }
+      }
+    ],
+    "preparation_isolation": {
+      "reason": "Preparation tests execute devprep writers and create ROOT-local temporary directories; running them at shared root would violate reviewer write scope.",
+      "method": "Ran the unchanged preparation suite in a byte/SHA-verified 246-input-file workspace copy under the reviewer directory. focused/full M0/new CLI/-O CLI ran against frozen original root sources.",
+      "input_manifest": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/preparation-input-manifest.json",
+        "sha256": "cddcfedf680c84a69710864220b5e7869fe0bfe639c8b1bd1c4a780f6940142c"
+      }
+    },
+    "artifact_audit": {
+      "result": "passed",
+      "comparisons": 5592,
+      "comparisons_are_not_test_case_count": true,
+      "method": "Raw immutable SQLite reads plus independent small literal reducer; no imports from product/conformance/tests",
+      "evidence": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit-v2.json",
+        "sha256": "f90fe381f10c092ace5e525306bc25afd23a451f59a7d9b23f698b8f00bb39c4"
+      },
+      "reports": [
+        {
+          "label": "fixed-candidate",
+          "report": "artifacts/m0-conformance-report.json",
+          "report_sha256": "7c32f256cbab17a7f96408af1aae73f008eca139ec8461aeaf99fcd727a5710b",
+          "database_sha256": "cda13309f790513953a12a4c6da9b520a8ad3b89302ea916964915e7ede82769",
+          "complete_sql_events": 95,
+          "stored_commands": 48,
+          "idempotency_reservations": 48,
+          "idempotency_results": 47,
+          "comparisons": 1859
+        },
+        {
+          "label": "independent-cli",
+          "report": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/independent-report.json",
+          "report_sha256": "911bb9f37b8f87c1e27e4e1c312d2447e23a230c47124d0cc0ee89794e8a6907",
+          "database_sha256": "b078c4e000f999bb62a98810964391943eb8f955b4dd22c5a8026217c62e0793",
+          "complete_sql_events": 95,
+          "stored_commands": 48,
+          "idempotency_reservations": 48,
+          "idempotency_results": 47,
+          "comparisons": 1859
+        },
+        {
+          "label": "independent-optimized-cli",
+          "report": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/optimized-report.json",
+          "report_sha256": "5550df57a7bb792020679249a5c6ac64387496694d56f196a77df67075c0a7dd",
+          "database_sha256": "fee0b69b27823010c127858ad3ea0ddb521d1d44e57831e76fda51af9ad14200",
+          "complete_sql_events": 95,
+          "stored_commands": 48,
+          "idempotency_reservations": 48,
+          "idempotency_results": 47,
+          "comparisons": 1859
+        }
+      ],
+      "per_database_facts": {
+        "isolated_projects": 9,
+        "events": 95,
+        "commands": 48,
+        "idempotency_reservations": 48,
+        "terminal_cached_results": 47,
+        "receipt_only_null_result_reservations": 1
+      },
+      "checked": [
+        "All 28 scope statuses; all 37 evidence/log SHA256 references per report; capability/acceptance limits.",
+        "Initial facts, persisted input Commands, actual results, faults, all recorded comparisons, final complete SQL event streams and causation/correlation.",
+        "Independent literal reducer over SQL facts (not product Projection) matches initial and final/replayed State; pending derived from receipt/terminal facts, not a dispatch queue or missing cache.",
+        "TEST-017 process death witness; TEST-019 distinct PIDs, shared old head/revision, barrier timestamps, durable winner/loser and retries.",
+        "TEST-021 live tripwire controls versus absent-adapter sentinel labels, normal zero-call Replay."
+      ]
+    },
+    "negative_controls": [
+      {
+        "label": "negative-release-v2",
+        "target": "TEST-018",
+        "expected_exit_code": 1,
+        "actual_exit_code": 1,
+        "actual_scope_status": "failed",
+        "fixture_execution": {
+          "status": "failed",
+          "started_at": "2026-09-11T12:11:05.290825+08:00",
+          "finished_at": "2026-09-11T12:11:06.064332+08:00",
+          "tests_run": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "expected_failures": 0,
+          "unexpected_successes": 0,
+          "fixture_complete": false
+        },
+        "report": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-v2-report.json",
+          "sha256": "4e06af670e85c4bee07c67814de08c8583eeb7a0794140dd5fb4a0c91f949fd8"
+        },
+        "observation": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-v2-report.evidence/TEST-018.json",
+          "sha256": "9b5fdb183fe0643d11d939e1a9d6c276ffc660c95d4dfc55faca68c1e9f1b98d"
+        },
+        "raw_fixture_log": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-v2-report.evidence/TEST-018.txt",
+          "sha256": "e43b76d59b4c743f7938176e8662d6d1e107f9ad4f5a7e3c749952f1591603fe"
+        },
+        "witness": {
+          "independent_negative_control": "fake-release",
+          "optimization": 0,
+          "injections": [
+            {
+              "command": {
+                "id": "m0-test-018-release",
+                "project_id": "m0-test-018",
+                "actor_id": "a-1",
+                "type": "task.release",
+                "target_id": "task",
+                "payload": {},
+                "expected_revision": 1,
+                "idempotency_key": "release",
+                "correlation_id": "m0-test-018-release"
+              },
+              "mutation": "accepted without appending release facts"
+            }
+          ],
+          "actual_runner_exit_code": 1
+        },
+        "failed_comparison_names": [
+          "release really requeues"
+        ],
+        "result": "mutation detected; no false pass and no hiding partial failures in pending"
+      },
+      {
+        "label": "negative-release-optimized-v2",
+        "target": "TEST-018",
+        "expected_exit_code": 1,
+        "actual_exit_code": 1,
+        "actual_scope_status": "failed",
+        "fixture_execution": {
+          "status": "failed",
+          "started_at": "2026-09-11T12:11:18.053987+08:00",
+          "finished_at": "2026-09-11T12:11:18.960664+08:00",
+          "tests_run": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "expected_failures": 0,
+          "unexpected_successes": 0,
+          "fixture_complete": false
+        },
+        "report": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized-v2-report.json",
+          "sha256": "34f89ec362ebd02e395edef287f0da0f73666d91acd7ead1f969acd922e60413"
+        },
+        "observation": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized-v2-report.evidence/TEST-018.json",
+          "sha256": "950e1dca6a1aa56263ce32da96ea871b2ec514ceeb57a76aef679995c5f4df07"
+        },
+        "raw_fixture_log": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized-v2-report.evidence/TEST-018.txt",
+          "sha256": "06b05b0b20d1c810eff3f8375e1049fbc46a99a6911f26c54c4855d0d2d3df17"
+        },
+        "witness": {
+          "independent_negative_control": "fake-release",
+          "optimization": 1,
+          "injections": [
+            {
+              "command": {
+                "id": "m0-test-018-release",
+                "project_id": "m0-test-018",
+                "actor_id": "a-1",
+                "type": "task.release",
+                "target_id": "task",
+                "payload": {},
+                "expected_revision": 1,
+                "idempotency_key": "release",
+                "correlation_id": "m0-test-018-release"
+              },
+              "mutation": "accepted without appending release facts"
+            }
+          ],
+          "actual_runner_exit_code": 1
+        },
+        "failed_comparison_names": [
+          "release really requeues"
+        ],
+        "result": "mutation detected; no false pass and no hiding partial failures in pending"
+      },
+      {
+        "label": "negative-replay-optimized-v2",
+        "target": "TEST-021",
+        "expected_exit_code": 1,
+        "actual_exit_code": 1,
+        "actual_scope_status": "failed",
+        "fixture_execution": {
+          "status": "failed",
+          "started_at": "2026-09-11T12:11:35.281214+08:00",
+          "finished_at": "2026-09-11T12:11:36.189947+08:00",
+          "tests_run": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "expected_failures": 0,
+          "unexpected_successes": 0,
+          "fixture_complete": false
+        },
+        "report": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized-v2-report.json",
+          "sha256": "9785f6ec1fc2a05f774b0169c7c99ce872635f975acbc2efc42b4a352ef26d24"
+        },
+        "observation": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized-v2-report.evidence/TEST-021.json",
+          "sha256": "7a9862a341a22b027b716baf62bb16ff89c24897df8203f680da02b5cf248b8f"
+        },
+        "raw_fixture_log": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized-v2-report.evidence/TEST-021.txt",
+          "sha256": "b5772d2b1492633e1d04340921f6d95c5fd6fe1146b80f1fb67d5a07b0de0bc8"
+        },
+        "witness": {
+          "independent_negative_control": "replay-effect",
+          "optimization": 1,
+          "injections": [
+            {
+              "mutation": "real os.system call inside normal final RuntimeRecovery replay",
+              "safe_invalid_argument": null
+            }
+          ],
+          "actual_runner_exit_code": 1
+        },
+        "failed_comparison_names": [],
+        "result": "mutation detected; no false pass and no hiding partial failures in pending"
+      },
+      {
+        "label": "negative-partial-v2",
+        "target": "TEST-016",
+        "expected_exit_code": 1,
+        "actual_exit_code": 1,
+        "actual_scope_status": "failed",
+        "fixture_execution": {
+          "status": "failed",
+          "started_at": "2026-09-11T12:11:41.182565+08:00",
+          "finished_at": "2026-09-11T12:11:41.946485+08:00",
+          "tests_run": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0,
+          "expected_failures": 0,
+          "unexpected_successes": 0,
+          "fixture_complete": false
+        },
+        "report": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial-v2-report.json",
+          "sha256": "f87f79d406219b1f4b5b26f1d03fcf5f23eda394cdbaac71e45d992acf6cdc3c"
+        },
+        "observation": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial-v2-report.evidence/TEST-016.json",
+          "sha256": "f9127b78caf2192cce4b726bb96c70795fa149dcf9eaf74b6cf67bb8cd2d188f"
+        },
+        "raw_fixture_log": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial-v2-report.evidence/TEST-016.txt",
+          "sha256": "447459b9d86cc13480c67b2fc4d1c919d6e40ebf671950fcc33f83f62f9bc499"
+        },
+        "witness": {
+          "independent_negative_control": "partial-actor",
+          "optimization": 0,
+          "injections": [
+            {
+              "command": {
+                "id": "m0-test-016-forged",
+                "project_id": "m0-test-016",
+                "actor_id": "a-1",
+                "type": "task.create",
+                "target_id": "task",
+                "payload": {
+                  "title": "Conformance task"
+                },
+                "expected_revision": 0,
+                "idempotency_key": "forged",
+                "correlation_id": "m0-test-016-forged"
+              },
+              "mutation": "ignore trusted-entry actor mismatch",
+              "actual_authenticated_actor_id": "a-2"
+            }
+          ],
+          "actual_runner_exit_code": 1
+        },
+        "failed_comparison_names": [
+          "actor mismatch refused"
+        ],
+        "result": "mutation detected; no false pass and no hiding partial failures in pending"
+      }
+    ],
+    "existing_fail_closed_tests": "Independently rerun focused suite covers skip/xfail/unexpected success/no-op/exception/zero-case rejection, original-result mutation, partial failure, CLI exit status and explicit path refusal. They pass but do not cover R1 sidecars.",
+    "all_independent_command_records": [
+      {
+        "label": "additional-orchestrator",
+        "argv": [
+          "python",
+          "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/run_additional_controls.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:06:48.189213+08:00",
+        "finished_at": "2026-09-11T12:07:34.477517+08:00",
+        "elapsed_seconds": 46.28827680001268,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/additional-orchestrator.stdout.txt",
+        "stdout_sha256": "420bdd3de1f4b5e7915bce6a0a09b819968300cfe5a354312d79dc6b23ed7887",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/additional-orchestrator.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/additional-orchestrator.command.json",
+          "sha256": "f88c86a37e5caf81fa4efb2c27b4da382f886f6dc65ed33e449858f6ae4042fb"
+        },
+        "review_interpretation": "logging orchestrator only; not an additional product test"
+      },
+      {
+        "label": "artifact-audit-v2",
+        "argv": [
+          "python",
+          "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact_audit_v2.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:16:10.170260+08:00",
+        "finished_at": "2026-09-11T12:16:10.594238+08:00",
+        "elapsed_seconds": 0.4239506000012625,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit-v2.stdout.txt",
+        "stdout_sha256": "a19e9c14c79f566616207fddabd1d84dd07b28b2112b692388aa14adecd2a663",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit-v2.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit-v2.command.json",
+          "sha256": "417f227ef8f3216a388696e162a3dd6a3c5950be635d858df374957bed22ff75"
+        },
+        "review_interpretation": "successful corrected read-only artifact/SQLite audit"
+      },
+      {
+        "label": "artifact-audit",
+        "argv": [
+          "python",
+          "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact_audit.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:14:21.028566+08:00",
+        "finished_at": "2026-09-11T12:14:21.375963+08:00",
+        "elapsed_seconds": 0.3473941999982344,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit.stdout.txt",
+        "stdout_sha256": "c15c178232e7e8d34057fc20a8900c4e5dc9607f2ccc789a34047750ae8d4b3d",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit.stderr.txt",
+        "stderr_sha256": "8564d0071faf03fcee3391bb71c9367c3783eb47efa4768d890ac38be2ecd090",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit.command.json",
+          "sha256": "b64711f79b5348a2ca9bb8e5269c208c39146a876fa6d7db8d8b8bdc36069980"
+        },
+        "review_interpretation": "superseded reviewer audit assumption error; not a candidate defect"
+      },
+      {
+        "label": "cli-optimized",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\optimized.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\optimized-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T11:56:58.988237+08:00",
+        "finished_at": "2026-09-11T11:57:12.370991+08:00",
+        "elapsed_seconds": 13.382762500012177,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli-optimized.stdout.txt",
+        "stdout_sha256": "095a2a3064c563f064de770a57e82c2dee66e993e9bde28fdc632a42825d273c",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli-optimized.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli-optimized.command.json",
+          "sha256": "803e84b8b2303b8773b247bb04243493f90938942ebf970994397d3812f8b010"
+        },
+        "review_interpretation": "required independent validation; successful"
+      },
+      {
+        "label": "cli",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T11:56:48.032301+08:00",
+        "finished_at": "2026-09-11T11:56:58.977162+08:00",
+        "elapsed_seconds": 10.94487510000181,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli.stdout.txt",
+        "stdout_sha256": "e97bbed2be1dc23fd2ceb8f1d214d296e36a335c0a36362f2d96f1f44e70207e",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli.command.json",
+          "sha256": "f91c5f80775c1b211d4404208b5932e6d7671562303593c74677d1101d476c6d"
+        },
+        "review_interpretation": "required independent validation; successful"
+      },
+      {
+        "label": "final-integrity",
+        "argv": [
+          "python",
+          "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/final_integrity.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:28:12.584821+08:00",
+        "finished_at": "2026-09-11T12:28:12.853175+08:00",
+        "elapsed_seconds": 0.2683260999910999,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/final-integrity.stdout.txt",
+        "stdout_sha256": "5df852249c29da09e1e9ee629c62439f8f6741fafcfb317b4621b89fc601ed47",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/final-integrity.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/final-integrity.command.json",
+          "sha256": "8cf10a7c85554731f4ff71c6838272e512801ba29b411a8c0ef358c00cc84ba3"
+        },
+        "review_interpretation": "successful final frozen-file/log integrity audit"
+      },
+      {
+        "label": "focused",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "tests.m0.test_conformance_subset",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T11:50:12.214378+08:00",
+        "finished_at": "2026-09-11T11:52:05.916615+08:00",
+        "elapsed_seconds": 113.70224159999634,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/focused.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/focused.stderr.txt",
+        "stderr_sha256": "9adfe8af9dbd9c37c56733b0b4ec76934ffbad486ce8ae5b35faf8e64202a61a",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/focused.command.json",
+          "sha256": "a599281028f0b3ad52bce18fcf55595d0e06a826fe36769f61aa0bde8c0f8315"
+        },
+        "review_interpretation": "required independent validation; successful"
+      },
+      {
+        "label": "full-m0",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T11:52:05.930346+08:00",
+        "finished_at": "2026-09-11T11:56:43.362446+08:00",
+        "elapsed_seconds": 277.4322142000019,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/full-m0.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/full-m0.stderr.txt",
+        "stderr_sha256": "7325c35a5a5463baff2caf8a3f27c54eadaf9b89ab9778f8e19cf0f9793ef716",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/full-m0.command.json",
+          "sha256": "1ba3b39b28338d9afcb19439ce3fece88327572e74dad2633855fe2a22d08fea"
+        },
+        "review_interpretation": "required independent validation; successful"
+      },
+      {
+        "label": "mutants-v2-orchestrator",
+        "argv": [
+          "python",
+          "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/run_mutants_v2.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:10:58.138791+08:00",
+        "finished_at": "2026-09-11T12:11:49.205338+08:00",
+        "elapsed_seconds": 51.06650980000268,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/mutants-v2-orchestrator.stdout.txt",
+        "stdout_sha256": "d7132a1945a90f4f346c5f7dd07349f3178ddd094ca5ce58ae6826ffbc379547",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/mutants-v2-orchestrator.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/mutants-v2-orchestrator.command.json",
+          "sha256": "abd58638864ee8d1f246e57a7cbf2de2c941a45c72f46fa0017d4ccb5dbc7d1b"
+        },
+        "review_interpretation": "logging orchestrator only; not an additional product test"
+      },
+      {
+        "label": "negative-partial-v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant_v2.py",
+          "--kind",
+          "partial-actor",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-partial-v2.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-partial-v2-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:11:36.296208+08:00",
+        "finished_at": "2026-09-11T12:11:49.144785+08:00",
+        "elapsed_seconds": 12.848620200005826,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial-v2.stdout.txt",
+        "stdout_sha256": "ce95cf498fd5fbf9a42bc00ee9f976c7983bb33d11116e67041b43c54aa4341d",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial-v2.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial-v2.command.json",
+          "sha256": "3529b9bcb45c0da0b65ff4522fc43188291a8e837960c7a6d870dd723982c448"
+        },
+        "review_interpretation": "valid negative control; exit 1 is the expected detected mutation"
+      },
+      {
+        "label": "negative-partial",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant.py",
+          "--kind",
+          "partial-actor",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-partial.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-partial-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:07:34.005863+08:00",
+        "finished_at": "2026-09-11T12:07:34.461375+08:00",
+        "elapsed_seconds": 0.45552930000121705,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial.stderr.txt",
+        "stderr_sha256": "f6424b184ca0167ed1d0a6d9f689c3d269ab9c006a50b0e99c722792c017cf13",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-partial.command.json",
+          "sha256": "4d353d7999e9cbc8cb88caedfca49a9cba5ba75fd9cdc171d77bd76e5db904fb"
+        },
+        "review_interpretation": "reviewer harness ImportError; excluded from valid negative-control evidence"
+      },
+      {
+        "label": "negative-release-optimized-v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant_v2.py",
+          "--kind",
+          "fake-release",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-optimized-v2.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-optimized-v2-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:11:08.940253+08:00",
+        "finished_at": "2026-09-11T12:11:22.893298+08:00",
+        "elapsed_seconds": 13.95305460000236,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized-v2.stdout.txt",
+        "stdout_sha256": "c3c23a6e4bce707eec7dd80311ae492963856845d9c79fc8d56df38e3621790c",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized-v2.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized-v2.command.json",
+          "sha256": "49a0be004d669f7a037c01974d5046d25d28eea6030b8d5a748373ea76e45b0b"
+        },
+        "review_interpretation": "valid negative control; exit 1 is the expected detected mutation"
+      },
+      {
+        "label": "negative-release-optimized",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant.py",
+          "--kind",
+          "fake-release",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-optimized.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-optimized-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:07:31.116434+08:00",
+        "finished_at": "2026-09-11T12:07:32.561055+08:00",
+        "elapsed_seconds": 1.4446440000028815,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized.stderr.txt",
+        "stderr_sha256": "f6424b184ca0167ed1d0a6d9f689c3d269ab9c006a50b0e99c722792c017cf13",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-optimized.command.json",
+          "sha256": "7e9c840dbcd3aa098a6d45e51876cdbe5c342e0354633e7b5aa9d86a95868c67"
+        },
+        "review_interpretation": "reviewer harness ImportError; excluded from valid negative-control evidence"
+      },
+      {
+        "label": "negative-release-v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant_v2.py",
+          "--kind",
+          "fake-release",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-v2.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-v2-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:10:58.293363+08:00",
+        "finished_at": "2026-09-11T12:11:08.919644+08:00",
+        "elapsed_seconds": 10.626247699998203,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-v2.stdout.txt",
+        "stdout_sha256": "76046107ee063802365b1fed54f6e2f1bae7ba09bbb1e9c63e7f18e6f020bb6e",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-v2.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release-v2.command.json",
+          "sha256": "616722ef486b94f8858f9c87fbd9720d0b6179c69a06c3df43c3d7ede3fb1bdf"
+        },
+        "review_interpretation": "valid negative control; exit 1 is the expected detected mutation"
+      },
+      {
+        "label": "negative-release",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant.py",
+          "--kind",
+          "fake-release",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-release-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:07:30.624214+08:00",
+        "finished_at": "2026-09-11T12:07:31.098834+08:00",
+        "elapsed_seconds": 0.4746279999963008,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release.stderr.txt",
+        "stderr_sha256": "f6424b184ca0167ed1d0a6d9f689c3d269ab9c006a50b0e99c722792c017cf13",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-release.command.json",
+          "sha256": "4d029b7c7fcead484aaa608a58205c6fd8243f073a55883efb4d3f1abccc0320"
+        },
+        "review_interpretation": "reviewer harness ImportError; excluded from valid negative-control evidence"
+      },
+      {
+        "label": "negative-replay-optimized-v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant_v2.py",
+          "--kind",
+          "replay-effect",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-replay-optimized-v2.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-replay-optimized-v2-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:11:22.914690+08:00",
+        "finished_at": "2026-09-11T12:11:36.273215+08:00",
+        "elapsed_seconds": 13.35853379999753,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized-v2.stdout.txt",
+        "stdout_sha256": "bdba480373a22d9bfc4d6e855f6101024db1851f24f6feba3555f49bac4f80c4",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized-v2.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized-v2.command.json",
+          "sha256": "174efc238fd361f7d58d333f6790a4e1648bc62337d3d655b8b2b77662672140"
+        },
+        "review_interpretation": "valid negative control; exit 1 is the expected detected mutation"
+      },
+      {
+        "label": "negative-replay-optimized",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\independent_mutant.py",
+          "--kind",
+          "replay-effect",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-replay-optimized.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\negative-replay-optimized-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:07:32.564276+08:00",
+        "finished_at": "2026-09-11T12:07:34.001935+08:00",
+        "elapsed_seconds": 1.4376740000006976,
+        "exit_code": 1,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized.stderr.txt",
+        "stderr_sha256": "f6424b184ca0167ed1d0a6d9f689c3d269ab9c006a50b0e99c722792c017cf13",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/negative-replay-optimized.command.json",
+          "sha256": "cacbf4f1ec5e5b0f3c02f704291c30ad0a20d616417e4acad72d0b5b292c936c"
+        },
+        "review_interpretation": "reviewer harness ImportError; excluded from valid negative-control evidence"
+      },
+      {
+        "label": "path-existing-journal",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-journal\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-journal\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:06:48.369335+08:00",
+        "finished_at": "2026-09-11T12:06:58.322647+08:00",
+        "elapsed_seconds": 9.95329039999342,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-journal.stdout.txt",
+        "stdout_sha256": "907c8fb6469daef77dac1983c8c4bc745a51de899a9aea4d9da857c8ee1d2648",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-journal.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-journal.command.json",
+          "sha256": "8818abe44397ef80d2178ff324b5d4212f45a96894eda8868429a448908145d6"
+        },
+        "review_interpretation": "path-safety probe; exit 0 is NOT an acceptance result; inspect preserved/deleted observations"
+      },
+      {
+        "label": "path-existing-shm",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-shm\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-shm\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:07:08.610978+08:00",
+        "finished_at": "2026-09-11T12:07:19.461549+08:00",
+        "elapsed_seconds": 10.85057529999176,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-shm.stdout.txt",
+        "stdout_sha256": "7c1021c0801938b6308977fb74742894f9f621211d571d7be355730ea6648b4c",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-shm.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-shm.command.json",
+          "sha256": "8e85f5a3a02efd22dfa501b98ebfb79b544988cacf624900376f6398a26b233b"
+        },
+        "review_interpretation": "path-safety probe; exit 0 is NOT an acceptance result; inspect preserved/deleted observations"
+      },
+      {
+        "label": "path-existing-wal",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-wal\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-wal\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:06:58.354213+08:00",
+        "finished_at": "2026-09-11T12:07:08.581216+08:00",
+        "elapsed_seconds": 10.227012699993793,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-wal.stdout.txt",
+        "stdout_sha256": "de3df5793a12acf083805512807e1fe9a90cca40633571eda72f0e735b02dd39",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-wal.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-wal.command.json",
+          "sha256": "40d2ca2d40519ba9eccb68584721b5ae3b45ea8c2df2dde8bdd8159cc3e437c0"
+        },
+        "review_interpretation": "path-safety probe; exit 0 is NOT an acceptance result; inspect preserved/deleted observations"
+      },
+      {
+        "label": "path-report-is-journal",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\report-is-journal\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\report-is-journal\\fresh.sqlite-journal"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:07:19.482462+08:00",
+        "finished_at": "2026-09-11T12:07:30.572508+08:00",
+        "elapsed_seconds": 11.090069900004892,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-report-is-journal.stdout.txt",
+        "stdout_sha256": "4c4d459e77dd43b24cdff3601313c3e036f2288c09dc93f5b25b52bb8d909fdc",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-report-is-journal.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-report-is-journal.command.json",
+          "sha256": "320afcc51b399e67ad64fb8e0e48d7c3dd920d256888c0e622d2ea3d33435807"
+        },
+        "review_interpretation": "path-safety probe; exit 0 is NOT an acceptance result; inspect preserved/deleted observations"
+      },
+      {
+        "label": "preparation",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\preparation-workspace",
+        "started_at": "2026-09-11T11:56:43.377420+08:00",
+        "finished_at": "2026-09-11T11:56:48.021269+08:00",
+        "elapsed_seconds": 4.643892399995821,
+        "exit_code": 0,
+        "timed_out": false,
+        "launch_error": null,
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\tmp"
+        },
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/preparation.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/preparation.stderr.txt",
+        "stderr_sha256": "97286260039c8aeaaf48289f742e0f7991bbde75b3e720167a5c66ea3ee0d97e",
+        "record_file": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/preparation.command.json",
+          "sha256": "8e947211d052a0e914750ec4440a5d759ad2314f1611264109f9d823fb9e697e"
+        },
+        "review_interpretation": "required independent validation; successful"
+      }
+    ]
+  },
+  "conformance_mapping_review": {
+    "authority": "Original design §§13.4/13.10/14.1/17.2/17.4/18.3; approved Task 6 and current M0-06 backlog/user scope.",
+    "plan_pending_note": "Task 6 interface example lists only passed/failed/not_applicable; current backlog/user explicitly permits partial pending. Candidate documentation makes this conservative distinction; not treated as a defect.",
+    "all_28": [
+      {
+        "test_id": "TEST-001",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3674,
+          "requirement": "同键同内容重试返回原结果，不重复提交领域 Event 批次（INV-014 / 14.1）"
+        },
+        "candidate_scope_status": "passed",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "同内容同键的 accepted/rejected 重投均返回原结果，SQL 全事件流无第二领域批次；只评 M0 内部原子 Command 结果。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-002",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3675,
+          "requirement": "Agent 不得直接修改 State（INV-001）"
+        },
+        "candidate_scope_status": "passed",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "在受信宿主的库内 Command/返回副本接口边界成立：修改读视图不改变 State/Event，不可变 Command 历史、直接 task.complete 被拒。不能解释为隔离特权 Python/SQLite 或真实执行 Provider。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-003",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3676,
+          "requirement": "Task 不得跳过 Review / Verification 进入 VERIFIED（INV-017）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Review/Verification 实体与质量门；M0 拒绝 task.complete 不等于验证完整 VERIFIED 转换。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-004",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3677,
+          "requirement": "未经 Approval 的高风险 Command 必须拒绝（INV-006）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Approval 与真实高风险执行边界；unsupported Command 拒绝不等于 Approval 实现。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-005",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3678,
+          "requirement": "删除 State Store 后重放 Event 得到一致状态（INV-015）"
+        },
+        "candidate_scope_status": "passed",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "实际 DROP projections/projection_meta 后只读 Replay；完整 SQL 事实经独立 reducer 得到字面预期状态，不以 cache 自洽代替事实核对。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-006",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3679,
+          "requirement": "Agent 崩溃后 Task 可按 Lease 重新分配（7.6）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Lease 与崩溃后重新分配；TEST-017 的提交后崩溃不覆盖 Lease reassignment。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-007",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3680,
+          "requirement": "Untrusted Input 不得直接授权 Command（INV-020）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺端到端不可信输入授权链；actor mismatch 防护不能替代输入信任规则。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-008",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3681,
+          "requirement": "Review 通过但 Verification 缺失不得 VERIFIED（16.1 ⑥）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺独立 Review/Verification 质量门，不能用 M0 的 unsupported 转换证明该规范。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-009",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3682,
+          "requirement": "有集成面任务未经 Integration Gate 不得 COMPLETED；豁免必须显式留痕（INV-004）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Integration Gate 与显式豁免记录，不能宣称合规 COMPLETED。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-010",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3683,
+          "requirement": "Mission Acceptance 失败不得 Delivery（INV-019）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Mission Acceptance/Delivery；运行测试成功不是产品验收或交付。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-011",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3684,
+          "requirement": "Approval 过期后必须产生升级路径，不得静默悬挂（9.3）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "Approval 过期/升级路径未实现，按 Task 6 仅登记，保持 M0 not_applicable（M2-02 范围）。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-012",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3685,
+          "requirement": "Orchestrator 重启后调度状态完整恢复（INV-021）"
+        },
+        "candidate_scope_status": "pending",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "两次新只读连接恢复 State 与 receipt-only pending，模拟派发次数为零；这只是有限恢复。完整调度、Lease/epoch、Approval、Session/Binding、预算和 UNKNOWN 对账缺失，整体 pending。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-013",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3686,
+          "requirement": "Agent 主动发起的协作与 Orchestrator 下发走同一条 Command 校验路径（8.7）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "未实现 Agent 协作路由与 Orchestrator 下发路径；两个测试 worker 调用同一 handler 不能证明本条。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-014",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3687,
+          "requirement": "工作副本不相互污染；声称安全隔离的 Provider 还须阻止越界访问（13.9）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Workspace/Provider 的实际隔离边界；独立测试进程或复核工作副本不等于产品隔离。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-015",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3688,
+          "requirement": "无 Manager 的 Agent A / B 可直接发言、回复、质疑与提案；独立审查不要求接管被审 Task，无职级前置（1.1 / 7.6 / 8.5 / 10.3）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺产品 Message/直接讨论与独立 Review 质量门；开发期 Reviewer/worker 分工不是产品等级或通过证据。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-016",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3689,
+          "requirement": "伪造 actor 或冒用他人 Binding 不得取得执行权（13.9 / 14.1）"
+        },
+        "candidate_scope_status": "pending",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "实际 a-2 连接冒称 a-1 被拒，安全审计与协议事实分离，合法 a-1 随后可提交同输入；缺 Binding 防冒用，整体 pending。独立 actor 放行负控验证失败不会仍记 pending。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-017",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3690,
+          "requirement": "提交 Event 后、返回响应前崩溃，恢复重试得到原结果且无重复效果（14.1）"
+        },
+        "candidate_scope_status": "passed",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "真实独立子进程在 commit 后、客户端响应前终止，非零退出；新连接重试返回见证的原结果，完整事实批次仅一次。只覆盖内部 Command，不覆盖外部 exactly-once 或损坏结果索引修复。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-018",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3691,
+          "requirement": "同幂等键异内容被拒绝；释放后用新键可合法再次认领（14.1）"
+        },
+        "candidate_scope_status": "passed",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "真实 claim→release→新 Command ID/key、当前 revision 再 claim；领域序列 created/claimed/requeued/claimed，最终 revision=3，延迟旧 claim/release 保留原结果且不改变新状态。假 release accepted 负控在普通及 -O 下均被检出。Lease/Binding 不在通过范围。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-019",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3692,
+          "requirement": "两个 Agent 基于同一旧版本认领，最多一个成功并保持 Lease / Binding 一致（7.6 / 14.1）"
+        },
+        "candidate_scope_status": "pending",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "真实两个 spawn 进程、独立 SQLite 连接，同见 head=8/revision=0，双方 ready 后同 gate 开始；一胜一 REVISION_CONFLICT，结果持久、重投保留原值。缺 Lease/Binding 一致性与 fencing，整体 pending。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-020",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3693,
+          "requirement": "外部结果 UNKNOWN 时查询 / 对账，不重复创建资源或发布（14.4）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺真实外部 Action/UNKNOWN 查询对账；receipt-only 人工故障不是 UNKNOWN 外部效果。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-021",
+        "in_12_planned_mappings": true,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3694,
+          "requirement": "Replay 不执行模型、Shell、Runtime.start 或已确认的工具动作（13.4 / 13.10）"
+        },
+        "candidate_scope_status": "passed",
+        "execution_status": "passed",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "真实 Replay 路径逐一变异检验 simulator/Popen/os.system/socket/urlopen 五个真实出口；两个缺失适配器 sentinel 明确标注非实际 adapter。正常 Replay 七项计数为零，独立 -O 末段 Replay 注入真实 os.system(None) 被 live tripwire 检出。仅支持 M0 无真实适配器/无已确认外部 Action 历史的通过范围。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-022",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3695,
+          "requirement": "新代次生效后旧执行可留档但不能推进 Task / 合并；已在途效果仍对账（7.6）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Lease epoch、旧代次报告与在途外部效果对账；revision guard 不能替代本条。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-023",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3696,
+          "requirement": "审批后改变目标 / 参数被拒绝；Mission 审批绑定准则与交付快照（9.3）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Approval 与 Mission 的快照绑定；幂等内容冲突不等于审批后参数防篡改。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-024",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3697,
+          "requirement": "更换代码、测试集、环境或验收标准后旧验证不能自动放行；合并基线检查有效（10.3 / 10.6）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺 Verification 新鲜度与合并基线质量门；报告源码 SHA 不能替代产品验证有效性规则。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-025",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3698,
+          "requirement": "PAUSED 继续记录在途事实而不派发；重启保持暂停，不把软暂停显示成彻底停止（13.4）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺操作级暂停、在途事实与调度；保留一个状态值不等于 PAUSED 恢复契约。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-026",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3699,
+          "requirement": "绕过代理执行高风险操作被真实边界阻止；未具备能力不得宣称完整兼容（13.9）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺真实 Provider/高风险执行边界；M0 受信库边界和测试 tripwire 不构成完整兼容或安全隔离。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-027",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3700,
+          "requirement": "输入来源标记跨 Agent 转述保留；来源未知按不可信处理，但普通讨论不要求审批（14.11）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺跨 Agent 来源传播与未知来源信任处理；测试输入的 source 字段不是端到端协议来源链。",
+        "full_protocol_acceptance_granted": false
+      },
+      {
+        "test_id": "TEST-028",
+        "in_12_planned_mappings": false,
+        "normative_source": {
+          "path": "Docs/AETP-设计方案.md",
+          "section": "18.3",
+          "line": 3701,
+          "requirement": "两个以上平等 Agent 从粗糙想法讨论方案并按方案交付，无 Manager 必经路径（1.1 / 15.1）"
+        },
+        "candidate_scope_status": "not_applicable",
+        "execution_status": "not_run",
+        "reviewer_mapping_assessment": "supported only with the stated M0 scope",
+        "reason": "缺从粗糙想法经平等成员讨论、计划、协作交付及适用质量门的端到端运行；两个竞争 worker 不是 TEST-028，Bootstrap 不接受。",
+        "full_protocol_acceptance_granted": false
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "M0-06-R1",
+      "priority": "P2",
+      "severity": "medium",
+      "blocking_for_this_candidate": true,
+      "title": "将 SQLite sidecar 纳入新输出与重叠校验，防止已存文件或报告被删除",
+      "location": {
+        "path": "conformance/m0/runner.py",
+        "start_line": 478,
+        "end_line": 485
+      },
+      "related_locations": [
+        {
+          "path": "conformance/m0/runner.py",
+          "start_line": 137,
+          "end_line": 148
+        },
+        {
+          "path": "conformance/m0/runner.py",
+          "start_line": 528,
+          "end_line": 538
+        },
+        {
+          "path": "conformance/m0/README.md",
+          "start_line": 20,
+          "end_line": 22
+        }
+      ],
+      "cause": "_new_path 与 API/CLI 的相等、嵌套校验只处理显式 database/report/evidence；exclusive 创建 DB 主文件并没有保护 SQLite 会使用的 -journal/-wal/-shm 路径。SQLiteStore.open 初始化可消费或删除这些伴随文件。",
+      "expected": "在任何输出写入前拒绝已存在的 SQLite sidecar 及 report/evidence 与这些隐式路径的冲突；不得删除或覆盖已有文件，也不能生成会被 SQLite 随后删除的报告。",
+      "observed": "三个独立真实 CLI 探针证实问题：预存 fresh.sqlite-journal 被删除；预存 fresh.sqlite-wal 被删除；--json=fresh.sqlite-journal 也返回 exit 0，但普通 sqlite3.connect 后仅 SELECT COUNT(*) FROM sqlite_schema 就删除该报告。各次 runner 均输出 6 passed/3 pending/19 not_applicable。",
+      "reproduction": [
+        {
+          "case": "pre-existing journal or WAL",
+          "steps": [
+            "每次选新的空 review-owned 目录 D；DB=D/fresh.sqlite、JSON=D/report.json 均不存在。",
+            "以 exclusive create 放置 DB-journal 或 DB-wal sentinel，保存原字节/摘要。",
+            "执行 python -m conformance.m0.runner --db <DB> --json <JSON>。",
+            "实测 exit 0，而 sentinel 不再存在；原字节保存在各探针 sentinel-before.bin。"
+          ],
+          "actual_command_record_paths": [
+            "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-journal.command.json",
+            "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-existing-wal.command.json"
+          ]
+        },
+        {
+          "case": "report collides with DB journal",
+          "steps": [
+            "另选新空目录 D，使用 --db D/fresh.sqlite --json D/fresh.sqlite-journal。",
+            "真实 CLI exit 0 并生成报告；记录 SHA。",
+            "用 sqlite3.connect(DB) 执行 SELECT COUNT(*) FROM sqlite_schema 并 close，不写业务数据。",
+            "实测 JSON 路径消失；before/after 摘要见 observation.json。"
+          ],
+          "actual_command_record_paths": [
+            "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-report-is-journal.command.json"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-probes/existing-journal/observation.json",
+          "sha256": "f24d539c27148cc3f662d6177e5ef3ae0f31f9f6c9d592c37ea7b45e5ba4b429"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-probes/existing-wal/observation.json",
+          "sha256": "48d4d996df8ad88908389c8e74ff12c278f802fc941d2a266b850b055d182910"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-probes/existing-shm/observation.json",
+          "sha256": "a2da4d1be8afa4248e9a1701ca56749e58a02bbb1a18a4192a164f2d28b126c2"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-probes/report-is-journal/observation.json",
+          "sha256": "32c3516a98dd7709b4024f662f0760295333cb8406d133b51329f12f1136b94a"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/path-probe-results.json",
+          "sha256": "b711a1bd5c6565606498de6a1099b44db7f762614bbdaf49b2ae139902728d3d"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/run_additional_controls.py",
+          "sha256": "eb99920fea97194ffaa0ffc06a6f38c6e45ceed572f1239b9208730f21ea269d"
+        }
+      ],
+      "observations": [
+        {
+          "probe": "existing-journal",
+          "existing_sidecar": "Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-journal\\fresh.sqlite-journal",
+          "before_sha256": "91d7380900707ad23738f00eb4258cee31562aa33c45477a1f37bbd99a68284c",
+          "after_sha256": null,
+          "preserved": false,
+          "runner_exit_code": 0,
+          "reported_counts": {
+            "passed": 6,
+            "failed": 0,
+            "pending": 3,
+            "not_applicable": 19
+          },
+          "expected": "refuse before initialization and preserve pre-existing file"
+        },
+        {
+          "probe": "existing-wal",
+          "existing_sidecar": "Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-wal\\fresh.sqlite-wal",
+          "before_sha256": "0535cba82807b0cf10c962eb0e9d85ce687b30f895ea241c85c9193c060c900b",
+          "after_sha256": null,
+          "preserved": false,
+          "runner_exit_code": 0,
+          "reported_counts": {
+            "passed": 6,
+            "failed": 0,
+            "pending": 3,
+            "not_applicable": 19
+          },
+          "expected": "refuse before initialization and preserve pre-existing file"
+        },
+        {
+          "probe": "existing-shm",
+          "existing_sidecar": "Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\existing-shm\\fresh.sqlite-shm",
+          "before_sha256": "5f83116151309e64ae9c78d2d3a0f917f056bdbcd7018b8a93bb5c53592ea2f6",
+          "after_sha256": "5f83116151309e64ae9c78d2d3a0f917f056bdbcd7018b8a93bb5c53592ea2f6",
+          "preserved": true,
+          "runner_exit_code": 0,
+          "reported_counts": {
+            "passed": 6,
+            "failed": 0,
+            "pending": 3,
+            "not_applicable": 19
+          },
+          "expected": "refuse before initialization and preserve pre-existing file"
+        },
+        {
+          "probe": "report-is-journal",
+          "report": "Docs\\development\\evidence\\2026-09-11-m0-06-review-114922-111166\\path-probes\\report-is-journal\\fresh.sqlite-journal",
+          "runner_exit_code": 0,
+          "reported_counts": {
+            "passed": 6,
+            "failed": 0,
+            "pending": 3,
+            "not_applicable": 19
+          },
+          "before_sqlite_open_sha256": "6f2e5b96672a3ca5e13553bdc932f18c6fdd268abccb1f6ba16c29cdf3205bef",
+          "after_sqlite_open_sha256": null,
+          "preserved_after_plain_sqlite_schema_read": false,
+          "sqlite_schema_count": 14,
+          "expected": "refuse overlapping SQLite sidecar and report paths"
+        }
+      ],
+      "precision_note": "单独 -shm 探针的字节保持不变；不声称该次 -shm 被删除。但 runner 也未预拒该已有 sidecar。所有探针仅涉及 Reviewer 新建的隔离文件，原产品/候选 DB/报告未动。",
+      "requested_change": "由主线程在候选 runner 的创建前校验中覆盖 DB 的 SQLite sidecar 文件/目录/链接及其与 report/evidence 的相等或嵌套冲突；拒绝而非清理。补对应 API/CLI RED→GREEN。无需修改 M0-05 产品实现或扩写 devprep。",
+      "why_blocks": "违反本轮明确的无现有文件覆盖/输出不重叠契约并导致已存证据丢失；现有20个 focused tests 未覆盖这个隐式路径边界。"
+    }
+  ],
+  "code_quality_assessment": {
+    "strengths": [
+      "Explicit assertions remain effective under -O; runner rejects empty/skipped/incomplete or failed executions rather than deriving pass from names.",
+      "Execution outcome, scope applicability and independent acceptance are separated; failed partial fixtures become failed.",
+      "Actual persisted fixtures, immutable candidate source/evidence hashes, raw unittest logs and traceable negative controls.",
+      "Repository-local test helper dependency is explicitly documented; no production API changes or later protocol claims introduced."
+    ],
+    "required_change_ids": [
+      "M0-06-R1"
+    ],
+    "residual_scope_limits": [
+      "Trusted-host library boundary is not an adversarial Python/SQLite sandbox.",
+      "Only deterministic simulation; no real model/Runtime.start adapters or confirmed external Action history.",
+      "No full scheduler recovery, Lease/Binding consistency, Approval, Review/Verification, integration or Mission Acceptance."
+    ]
+  },
+  "reviewer_harness_incidents": [
+    {
+      "incident": "First four mutant invocations imported CommandResult from aetp.domain.models, causing ImportError before running fixtures.",
+      "excluded_command_labels": [
+        "negative-partial",
+        "negative-release",
+        "negative-release-optimized",
+        "negative-replay-optimized"
+      ],
+      "resolution": "Source inspection located CommandResult in aetp.core.commands; created independent_mutant_v2.py, new DB/report/log names, and reran valid controls. Initial files/logs retained, not counted as successful negative controls.",
+      "corrected_script": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/independent_mutant_v2.py",
+        "sha256": "6d87f7e81bb9f8524fb03c873155c58a94a4dbcfa91494be695ae6f373d69168"
+      }
+    },
+    {
+      "incident": "First independent artifact audit assumed 47 idempotency rows, conflating terminal results with reservations. Actual artificial receipt-only Command correctly leaves one extra NULL-result reservation (48 rows, 47 results).",
+      "resolution": "Inspected actual SQLite rows, append_command and receipt-only fixture. v2 audit separately verifies reservations/results, reads structured error payload, and derives pending from receipt/terminal facts. Original failed audit retained and not classified as candidate defect.",
+      "superseded_evidence": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit.json",
+        "sha256": "98a47e6ce590d5b63e1bf85532cca0215b23bfff3f31bc44ff75abdf7e4d0805"
+      },
+      "corrected_evidence": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit-v2.json",
+        "sha256": "f90fe381f10c092ace5e525306bc25afd23a451f59a7d9b23f698b8f00bb39c4"
+      }
+    }
+  ],
+  "main_thread_evidence_provenance": {
+    "independent_execution": false,
+    "audit": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/final-frozen-audit.json",
+      "sha256": "8dbc7fed41c13e996b48ed9a55bdf5097e48f5d671d0b4c5d68089dc42cb82cb"
+    },
+    "observed_main_runs": 15,
+    "red_green_notes": [
+      "Original 18 RED assertion failures, first GREEN cleanup error, corrected 18 GREEN, two output-path RED failures, and 20 GREEN raw logs preserved.",
+      "First candidate preparation failure and corrected 27/27 preserved; these main-thread results are not substituted for our independent 27/27.",
+      "pre_review_render/pre_review_check files are main-thread logs despite their old labels; byte hashes verified after rename, never counted as independent reviewer evidence.",
+      "Later main closeout 151 tests/new CLI were read only as provenance, not as independent acceptance."
+    ]
+  },
+  "acceptance_boundaries": {
+    "m0_06_development_limited_acceptance": false,
+    "full_aetp_compatible": false,
+    "task_completed": false,
+    "bootstrap_verified": false,
+    "full_protocol_preparation_status_observed": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Conformance requirements are registered; no product test has been accepted as passed."
+    },
+    "do_not_rewrite_original_report_review_pending": true,
+    "handoff_and_status_m0_subset_owner": "main thread, only after a corrected fixed candidate is independently accepted; this review is not such acceptance"
+  },
+  "next_step": {
+    "owner": "main implementation thread",
+    "required": "Keep M0-06 in review; address R1 within approved candidate scope, retain old evidence, provide new fixed candidate SHA and targeted RED→GREEN, then request independent recheck. Reviewer has not modified runner/tests/product/tools/shared status."
+  }
+}

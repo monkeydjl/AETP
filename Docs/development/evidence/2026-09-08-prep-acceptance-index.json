@@ -1,0 +1,295 @@
+{
+  "schema_version": "aetp-preparation-acceptance-index-0.1",
+  "created_at": "2026-09-08T21:42:52.580340+08:00",
+  "author": "Codex main session",
+  "scope": "Frozen integration of PREP-001..007 evidence for independent PREP-008 preparation-only acceptance. This index is not independent evidence itself.",
+  "independent_reviewers": {
+    "Boole": "01a0774a-18a9-7371-87d9-1cb77dd97c0f",
+    "Mill": "01a07535-69d0-7ea3-b87d-5453b341684b",
+    "Kant": "01a07cac-b6db-7393-ae38-bce13d69c67d"
+  },
+  "identity_note": "Kant and earlier Codex alias denote one actual reviewer; distinct from main executor. Zeno earlier changes_required evidence retained, Rawls returned no valid conclusion. Only Kant remains open.",
+  "accepted_items": [
+    {
+      "id": "PREP-001",
+      "status": "done",
+      "acceptance_criteria": [
+        "入口能指向全部开发准备材料",
+        "明确平等 Agent、可选 Manager、确定性 Orchestrator 边界",
+        "声明状态、证据和权限规则"
+      ],
+      "independent_reviewer": "Boole (01a0774a-18a9-7371-87d9-1cb77dd97c0f), 2026-09-07",
+      "acceptance_evidence": "Docs/development/evidence/2026-09-07-prep-001-006-review.json; all three acceptance criteria independently assessed preparation-level pass; reviewed source hashes matched before status update.",
+      "reproduction_command": "python tools/devprep.py check",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/2026-09-07-prep-001-006-review.json": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec"
+      },
+      "attribution_note": "Historical independent conclusion retained, not invented by index author."
+    },
+    {
+      "id": "PREP-002",
+      "status": "done",
+      "acceptance_criteria": [
+        "触发描述可检索且不复述完整流程",
+        "按问题映射章节、INV、TEST",
+        "明确图谱是索引而非运行时事实源"
+      ],
+      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06",
+      "acceptance_evidence": "Docs/development/evidence/skill-protocol-navigation.md; Mill 独立只读复核结论为 preparation-level pass。",
+      "reproduction_command": "python tools/devprep.py check",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/skill-protocol-navigation.md": "6e1f8b00a15a3721efb2a7436b7df242ff3a87b7a921439df752a47336a232bc",
+        "Docs/development/evidence/preparation-log.md": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141"
+      },
+      "attribution_note": "Historical independent conclusion retained, not invented by index author."
+    },
+    {
+      "id": "PREP-003",
+      "status": "done",
+      "acceptance_criteria": [
+        "覆盖 Command→Event Store→Projection",
+        "覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界",
+        "不把建议误写成已实现能力"
+      ],
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias",
+      "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+      "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/2026-09-08-prep-003-004-review.json": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+        "Docs/development/evidence/skill-execution-contracts.md": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc"
+      },
+      "attribution_note": "Current independent report verified before operational metadata changes."
+    },
+    {
+      "id": "PREP-004",
+      "status": "done",
+      "acceptance_criteria": [
+        "能区分 planned/implemented/verified/accepted",
+        "交接含工作项、文件、命令、证据、风险、下一步",
+        "独立复核缺失时保持 review"
+      ],
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias",
+      "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+      "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/2026-09-08-prep-003-004-review.json": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+        "Docs/development/evidence/skill-evidence-handoff.md": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d"
+      },
+      "attribution_note": "Current independent report verified before operational metadata changes."
+    },
+    {
+      "id": "PREP-005",
+      "status": "done",
+      "acceptance_criteria": [
+        "核心实体、约束、验收、里程碑和工作项有稳定 ID",
+        "每条边有来源且无悬挂目标",
+        "A2A 标为可选 Transport Adapter"
+      ],
+      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06",
+      "acceptance_evidence": "Docs/development/evidence/knowledge-graph-check.json; Mill 独立只读复核图谱静态索引结论为 preparation-level pass。",
+      "reproduction_command": "python tools/devprep.py check",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/preparation-log.md": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141"
+      },
+      "attribution_note": "Historical independent conclusion retained, not invented by index author."
+    },
+    {
+      "id": "PREP-006",
+      "status": "done",
+      "acceptance_criteria": [
+        "M0–M3 各有范围、依赖、退出条件",
+        "M0 首批具备独立可测工作项",
+        "不把 JSON 清单当成原子认领服务"
+      ],
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias",
+      "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+      "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/2026-09-07-prep-001-006-review.json": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec",
+        "Docs/development/evidence/2026-09-08-prep-006-review.json": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d"
+      },
+      "attribution_note": "Current independent report verified before operational metadata changes."
+    },
+    {
+      "id": "PREP-007",
+      "status": "done",
+      "acceptance_criteria": [
+        "check 能校验 JSON、关系、依赖和状态",
+        "render 生成可读进度摘要",
+        "environment 只报告可验证工具，不读取或打印密钥"
+      ],
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias",
+      "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-007-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+      "reproduction_command": "python tools/devprep.py check; python -m unittest discover -s tests/preparation -v",
+      "immutable_evidence_sha256": {
+        "Docs/development/evidence/2026-09-08-prep-007-review.json": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf"
+      },
+      "attribution_note": "Current independent report verified before operational metadata changes."
+    }
+  ],
+  "frozen_source_sha256": {
+    "README.md": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+    "AGENTS.md": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+    ".gitignore": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+    ".editorconfig": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+    "Docs/development/README.md": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+    "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+    "Docs/development/knowledge-map.md": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+    "Docs/development/knowledge-graph.json": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+    "Docs/development/roadmap.md": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+    "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+    "skills/aetp-protocol-navigation/SKILL.md": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+    "skills/aetp-execution-contracts/SKILL.md": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+    "skills/aetp-evidence-handoff/SKILL.md": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+    "tools/devprep.py": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+    "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+    "tests/preparation/test_devprep_fail_closed.py": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-red.json": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-green.json": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8"
+  },
+  "stable_backlog_contract": {
+    "path": "Docs/development/backlog.json",
+    "selection": "work_items sorted by id",
+    "fields": [
+      "id",
+      "milestone",
+      "title",
+      "depends_on",
+      "files",
+      "acceptance",
+      "conformance_tests"
+    ],
+    "excluded": [
+      "status",
+      "evidence",
+      "acceptance_evidence",
+      "reproduction_command",
+      "independent_reviewer",
+      "other operational/acceptance metadata"
+    ],
+    "canonicalization": "json.dumps(selected, ensure_ascii=False, sort_keys=True, separators=(\",\",\":\")).encode(\"utf-8\"); work_items sorted by id, field arrays retain source order",
+    "work_item_count": 20,
+    "sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+    "reviewed_acceptance_contracts": {
+      "PREP-003": {
+        "id": "PREP-003",
+        "milestone": "PREP",
+        "title": "建立执行契约 Skill",
+        "depends_on": [
+          "PREP-001"
+        ],
+        "files": [
+          "skills/aetp-execution-contracts/SKILL.md"
+        ],
+        "acceptance": [
+          "覆盖 Command→Event Store→Projection",
+          "覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界",
+          "不把建议误写成已实现能力"
+        ],
+        "conformance_tests": [
+          "TEST-001",
+          "TEST-005",
+          "TEST-016",
+          "TEST-017",
+          "TEST-020",
+          "TEST-021",
+          "TEST-022",
+          "TEST-026"
+        ]
+      },
+      "PREP-004": {
+        "id": "PREP-004",
+        "milestone": "PREP",
+        "title": "建立证据与交接 Skill",
+        "depends_on": [
+          "PREP-001"
+        ],
+        "files": [
+          "skills/aetp-evidence-handoff/SKILL.md"
+        ],
+        "acceptance": [
+          "能区分 planned/implemented/verified/accepted",
+          "交接含工作项、文件、命令、证据、风险、下一步",
+          "独立复核缺失时保持 review"
+        ],
+        "conformance_tests": [
+          "TEST-010",
+          "TEST-012",
+          "TEST-028"
+        ]
+      },
+      "PREP-006": {
+        "id": "PREP-006",
+        "milestone": "PREP",
+        "title": "拆分 M0–M3 工作包与依赖",
+        "depends_on": [
+          "PREP-001",
+          "PREP-005"
+        ],
+        "files": [
+          "Docs/development/roadmap.md",
+          "Docs/development/backlog.json",
+          "Docs/superpowers/plans/2026-09-06-m0-first-slice.md"
+        ],
+        "acceptance": [
+          "M0–M3 各有范围、依赖、退出条件",
+          "M0 首批具备独立可测工作项",
+          "不把 JSON 清单当成原子认领服务"
+        ],
+        "conformance_tests": [
+          "TEST-001",
+          "TEST-005",
+          "TEST-012",
+          "TEST-028"
+        ]
+      }
+    }
+  },
+  "pre_review_state": {
+    "PREP_done": 7,
+    "PREP-008": "review",
+    "M0-01": "todo",
+    "all_product_items": "todo",
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance_registered": 28,
+    "conformance_passed": 0
+  },
+  "evidence_scope_limits": [
+    "Acceptance index is a main-session summary, not a replacement for original independent reports.",
+    "Two historical auxiliary commands in corrections review have one real time boundary and a numeric exit; missing endpoints remain null and explicitly annotated. No fabricated reconstruction.",
+    "Preparation tests/probes are not product tests or Bootstrap Acceptance.",
+    "Old generated reports may remain after check failure: consumers must use current command exit/time/source.",
+    "No Git repository or cross-process atomic claim; ClaudeLink unavailable.",
+    "Environment capability/version formatting is not executable authentication or an external-execution authorization."
+  ],
+  "permitted_post_pass_finalization": {
+    "condition": "Only after an actual PREP-008 independent preparation-level pass whose reviewed payload/source hashes match.",
+    "backlog": [
+      "PREP-008 review -> done with actual acceptance metadata/evidence",
+      "M0-01 todo -> ready only; every other product item remains todo",
+      "No changes to stable contract fields"
+    ],
+    "status": [
+      "Recompute counts/milestones/evidence_paths from backlog; active_work_items empty",
+      "Keep phase preparation, product 0, Bootstrap not_started, Conformance 28 registered/0 passed"
+    ],
+    "documents": [
+      "Append final actual acceptance section after the frozen handoff body; preserve that body exactly",
+      "Update MEMORY current snapshot/next steps and plan checkboxes to actual outcomes; historical records retained",
+      "Append actual transitions/validation/coordination to closeout JSON; no rewriting prior reviewer evidence"
+    ],
+    "generated_reports": "Refresh only standard five reports through required verification commands.",
+    "immutable": [
+      "This acceptance index",
+      "Original independent review reports",
+      "Reviewed Skills, normative documents, graph, roadmap, first-slice plan, tools/tests, correction probe and historical RED/GREEN evidence"
+    ],
+    "final_evidence": "Main records final source/contract checks and actual commands with full start/end/exit/output in 2026-09-08-preparation-final-validation.json; does not call this a new independent review."
+  }
+}

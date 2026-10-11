@@ -1,0 +1,113 @@
+{
+  "schema_version": "aetp-preparation-validation-0.1",
+  "stage": "PREP-008 integrated pre-review GREEN",
+  "executor": "Codex main session",
+  "started_at": "2026-09-08T21:54:07.825176+08:00",
+  "cwd": "D:\\Github\\AETP",
+  "runs": [
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "git status --short",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "started_at": "2026-09-08T21:54:07.825305+08:00",
+      "expected_exit_code": 128,
+      "finished_at": "2026-09-08T21:54:07.871170+08:00",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n"
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "started_at": "2026-09-08T21:54:07.871266+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:08.117673+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.029s\n\nOK\n"
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python tools/devprep.py render",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-08T21:54:08.117753+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:08.329582+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (7/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python tools/devprep.py check",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "started_at": "2026-09-08T21:54:08.329657+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:08.546456+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "started_at": "2026-09-08T21:54:08.546530+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:10.787407+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.937s\n\nOK\n"
+    }
+  ],
+  "scope": "Preparation only; not product or independent review",
+  "product_tests_executed": 0,
+  "prior_failure": "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json",
+  "finished_at": "2026-09-08T21:54:10.787492+08:00",
+  "status": "passed",
+  "frozen_source_sha256_after": {
+    "README.md": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+    "AGENTS.md": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+    ".gitignore": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+    ".editorconfig": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+    "Docs/development/README.md": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+    "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+    "Docs/development/knowledge-map.md": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+    "Docs/development/knowledge-graph.json": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+    "Docs/development/roadmap.md": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+    "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+    "skills/aetp-protocol-navigation/SKILL.md": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+    "skills/aetp-execution-contracts/SKILL.md": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+    "skills/aetp-evidence-handoff/SKILL.md": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+    "tools/devprep.py": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+    "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+    "tests/preparation/test_devprep_fail_closed.py": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-red.json": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-green.json": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8"
+  }
+}

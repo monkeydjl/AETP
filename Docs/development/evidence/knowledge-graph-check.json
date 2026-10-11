@@ -1,0 +1,16 @@
+{
+  "schema_version": "aetp-preparation-check-0.1",
+  "checked_at": "2026-10-10T16:58:51+00:00",
+  "command": "python tools/devprep.py check",
+  "exit_code": 0,
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "graph": {
+    "status": "passed",
+    "nodes": 101,
+    "edges": 144,
+    "dangling_edges": 0,
+    "duplicate_edges": 0,
+    "a2a_relation": "optionally_uses"
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "work_item": "M2-01",
+  "candidate_revision": "v2",
+  "recorded_at": "2026-09-12T20:46:55.361874+08:00",
+  "decision": "record_independent_limited_acceptance",
+  "executor": "Codex main agent consuming acceptance; not another independent reviewer",
+  "review": {
+    "path": "Docs/development/evidence/2026-09-12-m2-01-review-v2.json",
+    "sha256": "45c3673ee6f97e86dde63d4a62d77337033ea2eab6f6e1eb536053f667cf35ec"
+  },
+  "consumer": {
+    "path": "Docs/development/evidence/2026-09-12-m2-01-accept-v2.py",
+    "sha256": "93c60b3196b71cbba05f8e6bc546efce25cb0147e838c0d8c1b63ed53efb5e4a"
+  },
+  "accepted_criteria": [
+    {
+      "criterion": "过程与权威产出分离",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "普通发言与受理账目位于过程表，生命周期、checkpoint 和不可变 proposed Decision 走 Command → Event → Projection。清理后重试正确，所有历史承诺参与来源核验；四个只读示例及事实库只访问 Commands/Events，14 个执行/时钟/meter/cache 守卫零调用。",
+      "evidence_run_labels": [
+        "independent_m2",
+        "original_sixteen",
+        "focused_six",
+        "demo_readonly"
+      ]
+    },
+    {
+      "criterion": "讨论有预算和终止条件",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "固定本地受理额度不随阶段、服务实例或清理重置；稳定 call 去重含真实两进程竞争，缺账目拒绝，最终材料与自动收敛原子回滚可重试。治理暂停冻结计时并接收当前阶段材料，Meeting 专有轮次和终止条件均通过复核。",
+      "evidence_run_labels": [
+        "independent_m2",
+        "original_sixteen",
+        "focused_six",
+        "demo_readonly"
+      ],
+      "scope_limit": "仅 purpose=process_admission。本次没有实际 provider 调用或费用结论；提案命令文字在 Contribution 额度之外。空闲到期需宿主提交 tick，不宣称新增后台调度器。"
+    },
+    {
+      "criterion": "分歧可保留，不强制伪共识",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "固定参与者分母，缺席不算支持，首轮独立读取边界保持；立场变更不抹去历史异议，完整来源在清理后仍由事实重放。新旧示例都是 1/2 支持并保留异议的 proposed Decision；批准/激活仍拒绝。",
+      "evidence_run_labels": [
+        "independent_m2",
+        "original_sixteen",
+        "demo_readonly"
+      ],
+      "scope_limit": "结构化支持/异议统计不等于理解任意自然语言、批准方案或启动执行。"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "M2-01-R1",
+      "prior_severity": "important",
+      "disposition": "closed",
+      "accepted_in": "v2",
+      "title": "清理后原确认与语义冲突",
+      "conclusion": "先核验真实作者、参与权限和持久账目，再从正确绑定的不可变 Decision 来源读取原记录；相同语义返回独立副本，不同语义冲突，新消息仍拒绝。",
+      "source_locations": [
+        {
+          "path": "src/aetp/meetings/service.py",
+          "line": 114,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/meetings/service.py",
+            "sha256": "f455927ac19bdb81d96f2a0422b769c4141a1a9cf990da7c84b02fa62d1fe5f4",
+            "bytes": 10535
+          }
+        },
+        {
+          "path": "src/aetp/meetings/service.py",
+          "line": 142,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/meetings/service.py",
+            "sha256": "f455927ac19bdb81d96f2a0422b769c4141a1a9cf990da7c84b02fa62d1fe5f4",
+            "bytes": 10535
+          }
+        }
+      ],
+      "independent_methods": [
+        "test_compacted_identical_retry_returns_original_confirmation",
+        "test_compacted_changed_semantics_still_identifies_message_conflict",
+        "test_v2_process_restart_confirms_both_namespaces_without_meter_clock",
+        "test_v2_authorization_precedes_compacted_accounting"
+      ],
+      "evidence_run_labels": [
+        "original_sixteen",
+        "focused_six",
+        "independent_m2"
+      ],
+      "additional_observations": "真实新 Python 进程在 meter=None、禁止时钟访问时成功确认 Discussion/Meeting 的相同 object/message ID，各自返回正确来源；返回值修改不改变原记录，Event 和 usage 不变。缺 usage 时真实作者仍被拒绝；作者/成员错误先于账目错误。",
+      "retained_v1_result": "原两条断言 FAIL 与未重复消费的观察保留；不回写 v1 为通过。"
+    },
+    {
+      "id": "M2-01-R2",
+      "prior_severity": "important",
+      "disposition": "closed",
+      "accepted_in": "v2",
+      "title": "历史 checkpoint 与最终完整来源一致性",
+      "conclusion": "每个已提交 checkpoint 从先前 Event 纯派生并按消息前缀核验；最终来源及未清理过程读取均核对历史承诺。该索引不进入 Event/Decision 正文，缺索引旧缓存回退纯重建。",
+      "source_locations": [
+        {
+          "path": "src/aetp/meetings/records.py",
+          "line": 68,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/meetings/records.py",
+            "sha256": "4e78f72eff65ee80f6adf00df4060e1e7c01f07171fb8f30dbab78761b77b4e3",
+            "bytes": 14020
+          }
+        },
+        {
+          "path": "src/aetp/meetings/projection.py",
+          "line": 44,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/meetings/projection.py",
+            "sha256": "a5c749ff181622ae0bac203cacea5e7888a5759d91e1244eddd7366cebd01ae8",
+            "bytes": 3971
+          }
+        },
+        {
+          "path": "src/aetp/meetings/process.py",
+          "line": 65,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/meetings/process.py",
+            "sha256": "aab354d4ad7b846d678ad0641c0bf3230e1b7ef4e3c4b1b0aa63d23b7887bb13",
+            "bytes": 6027
+          }
+        },
+        {
+          "path": "src/aetp/decisions/records.py",
+          "line": 73,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/decisions/records.py",
+            "sha256": "c751efc8985707750050df2073a7e59c0678fbcc07410ee7f2ce8bdf8020f86e",
+            "bytes": 8472
+          }
+        },
+        {
+          "path": "src/aetp/core/projection.py",
+          "line": 79,
+          "reviewed_copy": {
+            "path": ".tmp/m2-01-review-v2/workspace/src/aetp/core/projection.py",
+            "sha256": "60fdea81016a46fc13ccf43f4032229d60690ab6ba4429827253d49b60a56c8a",
+            "bytes": 18648
+          }
+        }
+      ],
+      "independent_methods": [
+        "test_final_source_must_agree_with_prior_reveal_checkpoint",
+        "test_v2_resealed_source_is_rejected_by_committed_prefix_check",
+        "test_v2_history_is_derived_detached_and_not_injectable",
+        "test_v2_partial_legacy_cache_proposal_performs_real_transaction",
+        "test_v2_legacy_cache_does_not_restore_missing_process_material"
+      ],
+      "evidence_run_labels": [
+        "original_sixteen",
+        "focused_six",
+        "demo_readonly",
+        "independent_m2"
+      ],
+      "additional_observations": "保留早期承诺并重写第一答案、受理摘要及完整最终尾部后，正常 Replay/Command 因果检查拒绝；仅绕过新增前缀校验的受控阳性对照能接受该尾部，证实反例命中该边界。索引注入 Event 被拒绝；重复投递和返回 State 修改不影响派生结果。部分旧缓存下真实提案事务成功，缺正文场景拒绝且不补造材料。",
+      "threat_model_limit": "修改被提供的历史验证其内部一致性，不证明普通 Agent 获得 Event Store 写权限，也不声称检测所有完全一致重写的受信数据库。",
+      "retained_v1_result": "原历史摘要反例的失败和持久数据库保留。"
+    },
+    {
+      "id": "M2-01-M1",
+      "prior_severity": "minor",
+      "disposition": "closed",
+      "accepted_in": "v2",
+      "title": "元数据统一采样与旧 MEMORY 差异披露",
+      "conclusion": "v2 metadata_finalized_at 早于统一 source_sampled_at；report.history 六项与独立基线比较完全一致。203 个固定 sources 不含整份 jsonl；三个追加对象按字节前缀固定。",
+      "evidence_run_labels": [
+        "verify_inputs_initial",
+        "final_integrity"
+      ],
+      "metadata_finalized_at": "2026-09-12T20:05:34.924382+08:00",
+      "source_sampled_at": "2026-09-12T20:05:34.930192+08:00",
+      "actual_baseline_changes": [
+        "Docs/development/backlog.json",
+        "Docs/development/status.json",
+        "MEMORY.md",
+        "src/aetp/core/commands.py",
+        "src/aetp/core/projection.py",
+        "src/aetp/domain/models.py"
+      ],
+      "historical_exception": "v1 的 5 项清单先于 MEMORY 顶部导航修改和 section 14 写入；相对 M1 基线不是纯字节追加。原报告、两次 exit 1 审计、全部旧 MEMORY 基线和 v1 冻结前缀保持。关闭表示 v2 已纠正采样并披露，不表示 v1 差异消失。"
+    }
+  ],
+  "candidate_audit": {
+    "work_item": "M2-01",
+    "candidate_revision": "v2",
+    "audited_at": "2026-09-12T20:46:55.360875+08:00",
+    "purpose": "author verification; not independent acceptance",
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-12-m2-01-candidate-v2-snapshot.json",
+      "sha256": "ef11d7ffdcd7fca79a9c57fd99b6189bba7fbf416a8fc014e0c5f2f13c5f7117"
+    },
+    "report": {
+      "path": "artifacts/m2-01-test-report-v2.json",
+      "sha256": "2569f2c26210d4f67370cc4439186fa0f1f6c296a75ba098d8a31a3083451c02"
+    },
+    "source_files_checked": 203,
+    "metadata_snapshots_checked": 3,
+    "append_only_prefixes_checked": 3,
+    "v1_archive": {
+      "work_item": "M2-01",
+      "candidate_revision": "v1",
+      "archive_files_checked": 157,
+      "frozen_sources_checked": 150,
+      "archive_index_sha256": "0b177a95742020c7b568e19e4876d9a6bdcf7cb4b2dfe8e91f2e40e9df6b12b7"
+    },
+    "history": {
+      "archive_files_checked": 99,
+      "accepted_m1_source_count": 90,
+      "fixed_history_files_checked": 5,
+      "intentional_changed_baseline_paths": [
+        "Docs/development/backlog.json",
+        "Docs/development/status.json",
+        "MEMORY.md",
+        "src/aetp/core/commands.py",
+        "src/aetp/core/projection.py",
+        "src/aetp/domain/models.py"
+      ]
+    },
+    "read_only_replay_equal_and_bytes_unchanged": [
+      "artifacts/m2-01-demo-candidate-v2.sqlite",
+      "artifacts/m2-01-demo-candidate-v2-facts.sqlite"
+    ]
+  },
+  "review_evidence_files_checked": 322,
+  "independent_commands_checked": 14,
+  "independent_test_counts": {
+    "original_sixteen": 16,
+    "independent_m2": 69,
+    "independent_m1": 85,
+    "focused_six": 6,
+    "independent_m0": 156,
+    "independent_preparation": 27
+  },
+  "journal_prefix": {
+    "path": "Docs/development/evidence/2026-09-12-m2-01-review-v2-commands.jsonl",
+    "bytes": 10976,
+    "sha256": "e3396248b0fe5e110f515cc17c594620f62b01efb08d2ce39d4165fd051518ba",
+    "records": 14,
+    "through_label": "final_integrity",
+    "note": "仅固定采样命令前缀；报告生成/审计后续追加，避免自引用。"
+  },
+  "metadata_before": [
+    {
+      "path": "Docs/development/backlog.json",
+      "sha256": "42da5df96cfc41afc455616e4da414f8dee0de1930b20e027349b1480db58bfa"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "sha256": "483e179dd2dba8374a883e90b647d268f5645aa1baab05872a4639bd25845744"
+    }
+  ],
+  "metadata_after": [
+    {
+      "path": "Docs/development/backlog.json",
+      "sha256": "c68a3e6c2fffc365d313902ec30a2badb1ca2728b81add49a61196452a839c46"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "sha256": "a4116aa7427c04e6f88e41420cc666cc5f3bb143cf9c083d62ebd905ec542b03"
+    }
+  ],
+  "narrative_prefixes": [
+    {
+      "path": "MEMORY.md",
+      "sha256": "a57a24aaa3e63fa0eb21f9d2a0c414f85fad943857037b9de2d66eb5a9c84876",
+      "bytes": 37395
+    }
+  ],
+  "transitions": [
+    {
+      "id": "M2-01",
+      "from": "review",
+      "to": "done"
+    },
+    {
+      "id": "M2-02",
+      "from": "todo",
+      "to": "ready"
+    }
+  ],
+  "status_counts": {
+    "blocked": 0,
+    "in_progress": 0,
+    "review": 0,
+    "todo": 2,
+    "ready": 1,
+    "done": 17
+  },
+  "unchanged_claims": {
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Full-protocol requirements remain registered; no complete protocol conformance is accepted. Separately accepted M0-only execution is recorded under m0_subset."
+    },
+    "m0_subset": {
+      "work_item": "M0-06",
+      "scope": "m0-core-only",
+      "status": "accepted",
+      "accepted_at": "2026-09-11T13:17:17.286835+08:00",
+      "recorded_at": "2026-09-11T13:31:35.580244+08:00",
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "pending": 3,
+        "not_applicable": 19
+      },
+      "execution_counts": {
+        "passed": 9,
+        "failed": 0,
+        "not_run": 19
+      },
+      "test_ids_by_status": {
+        "passed": [
+          "TEST-001",
+          "TEST-002",
+          "TEST-005",
+          "TEST-017",
+          "TEST-018",
+          "TEST-021"
+        ],
+        "pending": [
+          "TEST-012",
+          "TEST-016",
+          "TEST-019"
+        ],
+        "not_applicable": [
+          "TEST-003",
+          "TEST-004",
+          "TEST-006",
+          "TEST-007",
+          "TEST-008",
+          "TEST-009",
+          "TEST-010",
+          "TEST-011",
+          "TEST-013",
+          "TEST-014",
+          "TEST-015",
+          "TEST-020",
+          "TEST-022",
+          "TEST-023",
+          "TEST-024",
+          "TEST-025",
+          "TEST-026",
+          "TEST-027",
+          "TEST-028"
+        ],
+        "failed": []
+      },
+      "execution_report": {
+        "path": "artifacts/m0-conformance-report-v2.json",
+        "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+      },
+      "candidate_snapshot": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+        "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+      },
+      "independent_review": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+        "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+      },
+      "review_narrative_addendum": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+        "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+      },
+      "reviewer": "Lorentz (01a08e64-7ed1-7db0-846c-82feb095ae71)",
+      "handoff": "artifacts/m0-handoff.json",
+      "claims": {
+        "full_aetp_compatible": false,
+        "protocol_task_completed": false,
+        "bootstrap_verified": false
+      },
+      "note": "Development-time acceptance of this fixed M0 candidate only. Three partial requirements remain pending and 19 later requirements are not run. Not the preparation/full-protocol conformance counter or product completion percentage."
+    },
+    "m1_acceptance": {
+      "status": "not_accepted",
+      "note": "Work-item acceptance is separate from whole M1. Formal Verification, Task quality transitions and explicit integration exemption remain outstanding."
+    }
+  },
+  "review_limits": [
+    "范围仍为当前本地低风险协作切片；可信宿主、数据库、认证 actor 通道、meter 来源和墙钟是前提。",
+    "使用显式 admission fixture，provider 调用数为 0；没有 provider 实际 token/费用核算结论。",
+    "R2 保证所提供材料与早期承诺一致，不提供一般数据库防篡改或对所有一致历史重写的识别。",
+    "并发、重启和回滚证据覆盖实际运行的场景，不宣称穷尽所有调度、设备故障或整机断电。",
+    "三个 backlog 条件被接受，不等于整个 M1/M2、正式 Verification、合规 Task COMPLETED、完整 Conformance 或 Bootstrap 被接受。",
+    "本报告只评价 sampling_cutoff_at 的 v2；之后共享工作区的开发交接不在本次取样范围。"
+  ],
+  "remaining_closeout": "Append accepted MEMORY/handoff, run final preparation commands, then verify frozen/history integrity.",
+  "coordination": "ClaudeLink disabled; one existing reviewer only; no Git/network/dependency/global configuration changes."
+}

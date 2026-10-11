@@ -1,0 +1,161 @@
+{
+  "schema_version": "aetp-development-continuation-0.1",
+  "started_at": "2026-09-10T15:25:28.400591+00:00",
+  "work_items": [
+    "M0-03",
+    "M0-04"
+  ],
+  "executor": "Codex (main)",
+  "user_request": "Continue existing approved M0 plan; finish M0-03 independent review, then M0-04 if dependency is accepted.",
+  "coordination": {
+    "claudelink": "unavailable; no read_inbox/send/post_bulletin tool exposed",
+    "git": "git status --short exit 128: not a repository; no init/commit/push",
+    "reviewer": "Kuhn (01a08bbf-76ba-7020-8d06-1284cafc1c98), resumed after transport error; sole read-only reviewer",
+    "local_scope": "M0-03 review evidence and M0-04 preflight only until M0-03 is independently accepted; subsequent M0-04 canonical files and progress metadata."
+  },
+  "baseline_sha256": {
+    "src/aetp/core/commands.py": "5ec06278597fe7cc32fddc8c055ea4048bc092b1c03adbfcc83da8fc924b2340",
+    "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "tests/m0/test_command_boundary.py": "7bf66b0f0e5e1063b205ae456d951474b4e5902733998835b015048beec97424",
+    "tests/m0/test_event_projection.py": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538",
+    "tests/m0/support.py": "e598d914abb3950def5a8d81069b39538e2982510e64a03db41a53dbff53674e",
+    "artifacts/m0-03-test-report.json": "a9e1534bbb2b71ce2016487a3c6e76c19d56a17bc4760e7dd33eb03cfdabbfd1",
+    "Docs/development/backlog.json": "36b411b04f525dc6c6d787f91745d8336589a717962c12f79d3ba402b9937a6c",
+    "Docs/development/status.json": "c2844c7043f604a2148f117eda8e3ba724bd163d6ce29bb1fbadf70995929778"
+  },
+  "review": {
+    "M0-03": {
+      "status": "accepted",
+      "reviewer": "Kuhn",
+      "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+      "recorded_at": "2026-09-10T15:44:15.643596+00:00",
+      "source": "actual multi_agent_v1 completed notification after resumed review",
+      "verdict": "M0-03 Task 3 accepted; no remaining Critical, Important or Minor findings.",
+      "findings": {
+        "critical": [],
+        "important": [],
+        "minor": []
+      },
+      "reviewer_executed": [
+        {
+          "command": "python -m unittest tests/m0/test_event_projection.py -v",
+          "exit_code": 0,
+          "tests_run": 35
+        },
+        {
+          "command": "python -m unittest discover -s tests/m0 -t . -v",
+          "exit_code": 0,
+          "tests_run": 64
+        },
+        {
+          "command": "PowerShell here-string -> python -; independent in-memory unittest / temporary database probes",
+          "exit_code": 0,
+          "tests_run": 6,
+          "probe_source_persisted": false
+        },
+        {
+          "command": "python -; final frozen SHA-256 verification",
+          "exit_code": 0,
+          "files_verified": 5
+        }
+      ],
+      "strengths": [
+        "Transaction/savepoint boundaries prevent partial Events, Projection, Command or key commits even when outer caller catches failure.",
+        "Final per-project sequence belongs to Store; reducer rejects invalid ordering/revisions/identity/project/type before publishing State.",
+        "Pure replay and write-free detached projection reads fall back from invalid cache; Command authorization still reads latest transactional Events."
+      ],
+      "independent_fixture": {
+        "sequences": "1..14",
+        "task_revisions": [
+          0,
+          1,
+          2
+        ],
+        "retry_event_delta": 0,
+        "cache_deleted_read_sql_change_delta": 0,
+        "incremental_sha256": "13b16346f9abcae9009784e66c7eba3501a19a7d17ae7206b0fa4a2e3a0a1edf",
+        "replay_sha256": "13b16346f9abcae9009784e66c7eba3501a19a7d17ae7206b0fa4a2e3a0a1edf"
+      },
+      "probe_scope": [
+        "mixed-project rejection",
+        "rollback of a valid batch prefix",
+        "release guards",
+        "six cache faults and read-only replay",
+        "nested cache-write failure followed by outer transaction continuation"
+      ],
+      "limitations": [
+        "35 tests are included in 64, not additive. No failures, errors or skips reported.",
+        "Historical RED and 9+4 mutation reports were inspected, not independently rerun.",
+        "No independent preparation suite run claimed. Extra probes exist only in reviewer tool output, not a persisted script.",
+        "No M0-04 concurrency, M0-05 recovery/result-index reconstruction, real Runtime/external effects or arbitrary-DB-tamper defense claim.",
+        "No full Conformance, Bootstrap or quality-gated Task COMPLETED acceptance.",
+        "Read-only review; no workspace writes, subagents, installs or Git operations; ClaudeLink unavailable."
+      ],
+      "reviewed_report_sha256": "a9e1534bbb2b71ce2016487a3c6e76c19d56a17bc4760e7dd33eb03cfdabbfd1"
+    }
+  },
+  "runs": [
+    {
+      "stage": "M0-03 acceptance refresh after actual independent verdict",
+      "command": "python -m unittest tests/m0/test_event_projection.py",
+      "started_at": "2026-09-10T15:42:33.817842+00:00",
+      "finished_at": "2026-09-10T15:42:35.781163+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "...................................\n----------------------------------------------------------------------\nRan 35 tests in 1.626s\n\nOK\n"
+    },
+    {
+      "stage": "M0-03 acceptance refresh after actual independent verdict",
+      "command": "python -m unittest discover -s tests/m0 -t .",
+      "started_at": "2026-09-10T15:42:35.781668+00:00",
+      "finished_at": "2026-09-10T15:42:39.867537+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "................................................................\n----------------------------------------------------------------------\nRan 64 tests in 3.733s\n\nOK\n"
+    }
+  ],
+  "status_transitions": [
+    {
+      "work_item": "M0-03",
+      "from": "review",
+      "to": "done",
+      "recorded_at": "2026-09-10T15:44:15.643596+00:00",
+      "reason": "Actual independent acceptance received; frozen hashes unchanged and fresh 35/35 plus 64/64 verification passed."
+    },
+    {
+      "work_item": "M0-04",
+      "from": "todo",
+      "to": "ready",
+      "recorded_at": "2026-09-10T15:44:15.643596+00:00",
+      "reason": "M0-03 dependency independently accepted."
+    },
+    {
+      "work_item": "M0-04",
+      "from": "ready",
+      "to": "in_progress",
+      "recorded_at": "2026-09-10T15:44:15.643596+00:00",
+      "reason": "User requested continuation of the approved plan. Main owns idempotency.py, commands.py, support.py, new concurrency tests, report and progress metadata; independent review will be read-only."
+    }
+  ],
+  "conformance_passed": 0,
+  "bootstrap_verified": false,
+  "m0_04_preflight": {
+    "normative_source": "Docs/AETP-设计方案.md §14.1 items 2–5; §14.2; TEST-001, TEST-018 and M0-scoped TEST-019",
+    "approved_plan": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md Task 4",
+    "existing_behavior": "M0-02 already persists full canonical immutable-Command digest/result with BEGIN IMMEDIATE. Exact retries and different-content conflicts already pass. Do not invent a baseline RED for these.",
+    "implementation_approach": "Extract canonical_digest and scoped read-only IdempotencyResult lookup, preserving the existing complete M0 immutable-command digest format. Handler uses lookup inside its existing authenticated transaction. Add actual spawn-process competition with independent SQLite connections and a shared start gate.",
+    "scope_limits": [
+      "No normative design/schema/model/storage changes planned.",
+      "No semantic aliasing of a different Command ID/key as the original retry; retries retain the original immutable Command.",
+      "No Lease/Binding implementation or full TEST-019 compatibility claim.",
+      "No Runtime/recovery/real effects; M0-05 remains separate."
+    ],
+    "required_new_evidence": [
+      "Module API RED/GREEN without import-error masking",
+      "Explicit distinction between already-existing passing behavior and new missing capability",
+      "Two real process IDs, same expected_revision, exactly one winner, durable loser REVISION_CONFLICT, replay/hash consistency and no duplicate Events",
+      "Same-key duplicates/conflicts, scoped separation, immutable original results, legal release/new-key reclaim, transactional fault rollback"
+    ]
+  }
+}

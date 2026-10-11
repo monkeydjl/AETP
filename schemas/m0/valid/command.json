@@ -1,0 +1,14 @@
+{
+  "schema_version": "0.1",
+  "id": "c-1",
+  "project_id": "p-1",
+  "actor_id": "a-1",
+  "type": "task.create",
+  "target_id": null,
+  "payload": {
+    "title": "Demo task"
+  },
+  "expected_revision": 0,
+  "idempotency_key": "k-1",
+  "correlation_id": "corr-1"
+}

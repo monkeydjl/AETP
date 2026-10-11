@@ -1,0 +1,16 @@
+{
+  "work_item": "M0-05",
+  "created_at": "2026-09-11T03:00:11.868954+08:00",
+  "kind": "frozen code/test candidate; report metadata and supplemental probes may advance",
+  "source_sha256": {
+    "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+    "src/aetp/core/projection.py": "94dc5d2eb78c31d4ed428c524a65852e621dbb5a91127f8a98e9b83b602bad0b",
+    "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+    "tests/m0/test_replay_recovery.py": "cb8053c183d006d859fb2823aac3c133aaa7d386d5ed13cf0d40d66e51707566",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+  },
+  "report_sha256_at_submission": "c835c3b746837cd77c17a87cfd7d54338174b32b61fa0d91cceb2917a4e5e81d"
+}

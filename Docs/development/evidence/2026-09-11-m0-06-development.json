@@ -1,0 +1,973 @@
+{
+  "schema_version": "aetp-development-evidence-0.1",
+  "work_item": "M0-06",
+  "started_at": "2026-09-11T10:58:40.803579+08:00",
+  "executor": "Codex main agent",
+  "status": "done",
+  "dependency": {
+    "M0-05": "done"
+  },
+  "environment": {
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "git_exit_code": 128,
+    "git_repository": false,
+    "claudelink_available": false,
+    "communication": "multi_agent_v1; no fabricated ClaudeLink inbox/send/bulletin"
+  },
+  "collaboration": {
+    "reviewer": "Lorentz",
+    "reviewer_id": "01a08e64-7ed1-7db0-846c-82feb095ae71",
+    "main_write_scope": [
+      "conformance/__init__.py",
+      "conformance/m0/__init__.py",
+      "conformance/m0/runner.py",
+      "conformance/m0/README.md",
+      "tests/m0/test_conformance_subset.py",
+      "artifacts/m0-conformance-report.json",
+      "artifacts/m0-handoff.json",
+      "Docs/development/evidence/2026-09-11-m0-06-* except review*",
+      "artifacts/m0-conformance-report.evidence/*",
+      "Docs/development/backlog.json",
+      "Docs/development/status.json",
+      "devprep generated evidence summaries",
+      "artifacts/m0-conformance-report-v2.json",
+      "artifacts/m0-conformance-report-v2.evidence/*"
+    ],
+    "reviewer_write_scope": [
+      "Docs/development/evidence/2026-09-11-m0-06-review*"
+    ],
+    "shared_backlog_writer": "main only; not an atomic cross-process claim",
+    "scope_confirmed_at": "2026-09-11T11:04:17.323056+08:00",
+    "scope_confirmation": "Lorentz independently confirmed non-overlapping write sets and provisional 6/3/19 scope. TEST-018 real claim/release/new-key, TEST-021 live tripwires and partial failure precedence are review gates. Reviewer closed after sidecar; resume for candidate.",
+    "review_recovery": {
+      "at": "2026-09-11T12:26:07.346367+08:00",
+      "reason": "model service rate limit",
+      "action": "closed errored session, resumed same reviewer, requested bounded conclusion using its existing independent evidence",
+      "acceptance": "pending"
+    },
+    "closeout_notification": {
+      "tool": "multi_agent_v1.send_input",
+      "target": "01a08e64-7ed1-7db0-846c-82feb095ae71",
+      "submission_id": "01a08ef6-ed21-71d0-bebd-b67dc6b7e89f",
+      "purpose": "Report actual final green commands and limited M0 acceptance; no further review requested.",
+      "claudelink_available": false,
+      "no_inbox_or_bulletin_calls_claimed": true
+    }
+  },
+  "baseline_sha256": {
+    "AGENTS.md": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+    "artifacts/m0-04-test-report.json": "018783d59a22b4d422d88cd58692fc378866ecf0a3845cb023e826734031fdb3",
+    "artifacts/m0-05-test-report.json": "78735628b2b42a605710a8c0635f3704d1e86b7b8d55cadbba838ea44759805b",
+    "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+    "Docs/development/evidence/2026-09-11-m0-04-acceptance-probes.json": "4f54990dfd817de8f79d577170f3d3920069758a7ad7af0cd6b99d9108ef31ee",
+    "Docs/development/evidence/2026-09-11-m0-04-development.json": "833a417cc720bc7276f82f9c3f83164b5cad7a4eb697588961ab83db5a4421a8",
+    "Docs/development/evidence/2026-09-11-m0-04-handoff.md": "0bf564475c62ffa06232d10ed0b7e5e50adbcbcb4443065523295d11e30f8077",
+    "Docs/development/evidence/2026-09-11-m0-04-probes.json": "dff927d57ecdb3acdafd15a1aa14752bc988e6269f7f7cb7b088d64ab7a06e8c",
+    "Docs/development/evidence/2026-09-11-m0-04-probes.py": "d6897aad0b20a5acdb73d4cf36694a263404ac7e2d484487caf9ae261d7ca544",
+    "Docs/development/evidence/2026-09-11-m0-04-review-snapshot.json": "346b2339451386cfb2d7075faa51323084147352a495fb630703f3c6c51fb600",
+    "Docs/development/evidence/2026-09-11-m0-04-review.json": "826445291acc39b9b48d01868f63c267a612abb9fc17f3b7039de64a55cb5fd1",
+    "Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py": "952b3e1c4356829d6f5476a87bbb578f0abe3622328eaf4a64ade504c8378916",
+    "Docs/development/evidence/2026-09-11-m0-04-unicode-review-fix.json": "1d198b95dac7a1aca2b8aa543648270c121d99264ff59140ebdfb7dec1180d45",
+    "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json": "e979d164a17260fdbc394dcd54454f34751fa0f92f843efaa675c9cf0dfa250b",
+    "Docs/development/evidence/2026-09-11-m0-05-acceptance_probes-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-acceptance_probes-stdout.txt": "823f0788a9937bce53a0817bd21542cfd6a704ca4902e0e0e39ca1cd6a091580",
+    "Docs/development/evidence/2026-09-11-m0-05-accepted_focused-stderr.txt": "75077d0c14f3c6a8477609da2f188af6065689921dd3bafeccac9e226c0ff757",
+    "Docs/development/evidence/2026-09-11-m0-05-accepted_focused-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-accepted_m0-stderr.txt": "1833aac6d56496dcecea4664e3465f214c31fc080f9d6a20e53a5cbcecba4bfa",
+    "Docs/development/evidence/2026-09-11-m0-05-accepted_m0-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-baseline_m0-stderr.txt": "962291014d80933007c2d80e3b043e07667d07276b6d22b8b082557ed38c15ce",
+    "Docs/development/evidence/2026-09-11-m0-05-baseline_m0-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-baseline_preparation-stderr.txt": "82d883aa73daf5edee3c39a238dd807153ebeb02a254df523145d986608463a8",
+    "Docs/development/evidence/2026-09-11-m0-05-baseline_preparation-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-development.json": "d2f75e26daf7c4991b6777222a520b9a1b79968471c3ade29de29f9cd9a00dfb",
+    "Docs/development/evidence/2026-09-11-m0-05-final_check-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-final_check-stdout.txt": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07",
+    "Docs/development/evidence/2026-09-11-m0-05-final_focused-stderr.txt": "eac7ceb711fcfc1f7151fe4643e4d90c8feaea1f765acb43c649c142a7195473",
+    "Docs/development/evidence/2026-09-11-m0-05-final_focused-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-final_m0-stderr.txt": "2f9b039fa46f086d9f9e6240002d311d1d6d393b0d7c24759723d901a02eaea4",
+    "Docs/development/evidence/2026-09-11-m0-05-final_m0-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-final_preparation-stderr.txt": "96dc75d8cb3fbea99cfad4a1183e467c3dfd82e5e09f0e7eb1a3a49ec63e9d38",
+    "Docs/development/evidence/2026-09-11-m0-05-final_preparation-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-final_render-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-final_render-stdout.txt": "5b3998cdbb3fcca29be9c7c9d012c226fee486b44c4795df2d97b081e6625a48",
+    "Docs/development/evidence/2026-09-11-m0-05-frozen_candidate_green-stderr.txt": "25678b1595fca4ed5fcde9a4fe645843d08c9ab37292b1ffcd699e85b124b06f",
+    "Docs/development/evidence/2026-09-11-m0-05-frozen_candidate_green-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-git_status-stderr.txt": "d2b35cacadc66b7fad8dedd1be5244e17150a6625978c9330f831bd7a9cd6b1e",
+    "Docs/development/evidence/2026-09-11-m0-05-git_status-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-green_candidate_1-stderr.txt": "6e6909d328e02183f20224fb45c0358282e9f70a1fb6f5ec4cfc37c472bfbcd3",
+    "Docs/development/evidence/2026-09-11-m0-05-green_candidate_1-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-green_candidate_2-stderr.txt": "b2bbe7a47288d84ffa67d7a195643ca676f4ff9f8e8b2758516e3f3182270392",
+    "Docs/development/evidence/2026-09-11-m0-05-green_candidate_2-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-handoff.md": "3a619e62b9907e69b56d4a8d1085421b767aaedcb75a4307f7a5c96a74b73c1c",
+    "Docs/development/evidence/2026-09-11-m0-05-identity-review-fix.json": "7deeab176861647068e45f97aefb31a8f3ea24a6473493aea4a152f9d22f41d9",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_focused-stderr.txt": "f6f4f34ce1f55989d814f3de22d0c66d71540304a64b2751b6b68759dc201516",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_focused-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_green-stderr.txt": "438d718ca30fd18eeca4f73d949f9e549c773efb33aa2b73d29c73ab35994cc3",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_green-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_m0-stderr.txt": "4ec20c597b9ead9bbcac2169c441e3ae2b8bc41c96589887d41e0509d650ad9c",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_m0-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_probes-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_probes-stdout.txt": "a405bd49ab80cd1ce1ca360674c31ab2bfda84d3022094fa796e8cb3a056b08c",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_red-stderr.txt": "1f7f7e62151c50bc8ebcfdb78d7f1cffd8e3895f4f8b76a8c4215f14adf1191c",
+    "Docs/development/evidence/2026-09-11-m0-05-identity_red-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-pre_review_check-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-pre_review_check-stdout.txt": "e10970fc9144fb1db42223b46910fa871c1b68f2f48dc74a2585668d7ea3a6e5",
+    "Docs/development/evidence/2026-09-11-m0-05-pre_review_preparation-stderr.txt": "c1681e770d47c1c2d8ebeefa88b1f20540f85bdd34adea9f16f2f43f1fa1ea30",
+    "Docs/development/evidence/2026-09-11-m0-05-pre_review_preparation-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-pre_review_render-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-pre_review_render-stdout.txt": "974d245f54b40650e21d33e377ca889ada61ee3ffd02a0028468f7eb2ce60553",
+    "Docs/development/evidence/2026-09-11-m0-05-probes.json": "e9cd3c9f3f1376305e957cf5873622bc3e28e043be187a0ca0a556778bb66c56",
+    "Docs/development/evidence/2026-09-11-m0-05-probes.py": "1400d20880f67cfba8ad8a35ffbd3e70cfe36649e08439b3bee6eb20b330c54b",
+    "Docs/development/evidence/2026-09-11-m0-05-red-stderr.txt": "4fb5366dfb4c9456d1441cec1dd5a4be165d6843366eadddcf14e47d7c2c1551",
+    "Docs/development/evidence/2026-09-11-m0-05-red-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-regression_m0-stderr.txt": "2b16ae7c5870616b413f3ee32ef802818bf5566cb24f61e8beda6256f251664d",
+    "Docs/development/evidence/2026-09-11-m0-05-regression_m0-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Docs/development/evidence/2026-09-11-m0-05-review-snapshot.json": "8108ef83bf21b851023b96b1b0aac7b37daeaa3614f283c18b4eaec9cc7be974",
+    "Docs/development/evidence/2026-09-11-m0-05-review.json": "ff9ea2955ad92edc3e0688687ec1ca683851b2a2e590a332ff071bc431fc98b1",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-command-identity.log": "27dcad8ca97a3d722e1a86a15af7855ee69e70c5862435c28643a1732e4aaee2",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-evidence-audit.log": "08351f0099fe40ae4bf4dfb7c11b2881917dff7d29a810aa8c1048f3a6e24978",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-focused.log": "092cd0aad4630c05a4aeee3e021f1969e55f6772f96be30907c22e67de2d06ee",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-evidence-audit.log": "c79e18a83ed3395af59e9f988314556268687a90cb8c30a090159534b43f6c33",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-focused.log": "4d24c7459c93b65b0ee8fed972d1381c7ee21363eba1c319e6855b2f539ea04c",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-full-m0.log": "d6d2317609a39fa14af8a63fdd32e2bda8a21d9cdf8e588f08ad0e740d1322ba",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-delta-hashes.log": "fc2b8ee193b677ff95fb1e4b56f1fc29416e05deea27ee8b92edf04daa758c79",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-negative-control.log": "9d5fae436362bfbac176911c3e4bd9390ed67cecd9a6fa658c3e9000db595095",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-regressions.log": "48e95c8731eb4ac0d9a5f2f6daf81ec017e3daa60976ec8d75ee080b022be32a",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-rerun.log": "5c4490eec18ecf54f456338190fb38727b41e3c4e98945198fd4d7ccae7ee884",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-initial-hashes.log": "99c25d62b1fdfe2214f77faff6a009d951dcaac4deddfc08f9eea6d7b71bd4ec",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-resource-failures.log": "9a5153066b619e96501f9ab4cd9aed032fd4556eb1cbf511b7165266ae05701e",
+    "Docs/development/knowledge-graph.json": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+    "Docs/development/knowledge-map.md": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+    "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+    "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+    "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+    "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+    "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "tests/__init__.py": "3aaa5a025536dc3b5a6f77c2beaa645104d097e1b5c931184397eda5352d272a",
+    "tests/m0/__init__.py": "5b31d33fdf6739ca0dde84d9b8f73196c84b1e8b37d7a89e20a2c2702218d811",
+    "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+    "tests/m0/test_command_boundary.py": "7bf66b0f0e5e1063b205ae456d951474b4e5902733998835b015048beec97424",
+    "tests/m0/test_event_projection.py": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538",
+    "tests/m0/test_idempotency_concurrency.py": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+    "tests/m0/test_models.py": "89799d649d63aab517940fe634f226242f1d627fa7ecb6fd645b0d5b32181b28",
+    "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3",
+    "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+    "tests/preparation/test_devprep_fail_closed.py": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+    "tools/devprep.py": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583"
+  },
+  "shared_baseline_sha256": {
+    "Docs/development/backlog.json": "b989d2ec8f11a14e52d7d0afddcbc26504a4a7c3af35b0b914a413380ab25399",
+    "Docs/development/status.json": "dff5fe006ed34ad9b7d5daed61fd3fd48d1ba8bb5f2bb2558a77668beac6bdee"
+  },
+  "checklist": {
+    "context_and_approved_Task6": "complete",
+    "acceptance_matrix": "confirmed_for_execution_not_passed",
+    "red": "complete",
+    "green": "complete_including_R1",
+    "independent_review": "complete_R1_closed_by_Lorentz",
+    "final_verification": "complete",
+    "handoff": "complete"
+  },
+  "runs": {
+    "baseline_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T10:58:40.829229+08:00",
+      "finished_at": "2026-09-11T10:58:52.318870+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-baseline_m0.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-baseline_m0.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0d32898cbf1dc843b72abf046bc89b8fb7d6198c497534ba2b1ca8ace4ce1eea"
+    },
+    "baseline_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T10:58:52.328035+08:00",
+      "finished_at": "2026-09-11T10:58:54.476190+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-baseline_preparation.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-baseline_preparation.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "74a84fc97d00e076ca36e4440748dfa85b0adfe96968500fbe7e54af945a9dcf"
+    },
+    "red_contract": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_conformance_subset",
+        "-v"
+      ],
+      "started_at": "2026-09-11T11:04:17.325449+08:00",
+      "finished_at": "2026-09-11T11:04:17.678151+08:00",
+      "exit_code": 1,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-red_contract.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-red_contract.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d2f51ab3e4f3cf216b8594265f7c5b44fa45ca256bb40c5092235546d72905b5",
+      "expected": "18 assertion failures for missing M0 runner, not collection/import errors or skips"
+    },
+    "green_attempt_1": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_conformance_subset",
+        "-v"
+      ],
+      "started_at": "2026-09-11T11:17:33.864131+08:00",
+      "finished_at": "2026-09-11T11:17:59.665494+08:00",
+      "exit_code": 1,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-green_attempt_1.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-green_attempt_1.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0e5f5e264cb87b7dde6d92d8532a83fe06ad36973650a9184c6fff8d7b7a0157"
+    },
+    "green_contract": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_conformance_subset",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:26:06.393044+08:00",
+      "finished_at": "2026-09-11T11:26:29.553404+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-green_contract.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-green_contract.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "bb3140857a4c80c6c54eb412b481056ca19f985cf46d72db3fdaad027982b56a"
+    },
+    "red_output_paths": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_nested_database_evidence_paths_are_refused_before_writes",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_rejects_report_evidence_alias_without_writing",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:28:46.857408+08:00",
+      "finished_at": "2026-09-11T11:28:49.474570+08:00",
+      "exit_code": 1,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-red_output_paths.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-red_output_paths.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b58c563170e8e807213d949c9fec30e41870f85fee3d6bce71111c7e31a5b9c4",
+      "expected": "2 assertion failures: alias/nesting validation currently creates output paths before refusal"
+    },
+    "green_output_paths": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_conformance_subset",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:29:39.555429+08:00",
+      "finished_at": "2026-09-11T11:30:02.832118+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-green_output_paths.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-green_output_paths.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "b99a0268b2ccbf5aa77c82ba979e08f57061c75b21f53b4d72fb1a4d4de7ad57"
+    },
+    "candidate_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:30:02.844501+08:00",
+      "finished_at": "2026-09-11T11:30:36.913088+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-candidate_m0.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-candidate_m0.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "d8ae03a24b7cb80de9be57b65fb019b6b6bb077065be710af69939866cca84cb"
+    },
+    "candidate_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:30:36.924235+08:00",
+      "finished_at": "2026-09-11T11:30:39.285751+08:00",
+      "exit_code": 1,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-candidate_preparation.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-candidate_preparation.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "fd3a6ddd57fc862fa623b2c7a881c9f0c4ad134dedd8c32efda270777783f490"
+    },
+    "candidate_preparation_corrected": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:32:29.249447+08:00",
+      "finished_at": "2026-09-11T11:32:31.398196+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-candidate_preparation_corrected.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-candidate_preparation_corrected.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "28622efc0b8e8e2feed139d6125df5bbf58d56634ba398055f5b6ec19c2f2b9f"
+    },
+    "candidate_cli": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "conformance.m0.runner",
+        "--db",
+        ".tmp/m0-conformance-2026-09-11.sqlite",
+        "--json",
+        "artifacts/m0-conformance-report.json"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:33:18.436359+08:00",
+      "finished_at": "2026-09-11T11:33:28.261785+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-candidate_cli.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-candidate_cli.stderr.txt",
+      "stdout_sha256": "e151c1aada27eb57b0c22e0596f6dbd33dec1015670e7ed841232d3a88a325c7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "review_render": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:38:13.332989+08:00",
+      "finished_at": "2026-09-11T11:38:13.555009+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-pre_review_render.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-pre_review_render.stderr.txt",
+      "stdout_sha256": "fbdf3d7ee9eb73b6e521b3380ea80595e2cb044b8e4c7ffde4473a2e7fc309af",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executor": "Codex main agent; not independent-review evidence"
+    },
+    "review_check": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T11:38:13.574793+08:00",
+      "finished_at": "2026-09-11T11:38:13.785798+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-pre_review_check.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-pre_review_check.stderr.txt",
+      "stdout_sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executor": "Codex main agent; not independent-review evidence"
+    },
+    "closeout_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:18:58.510643+08:00",
+      "finished_at": "2026-09-11T12:19:32.022571+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-closeout_m0.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-closeout_m0.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "93597ea9aa846587d538e6aef62abb9fc2fcac9c06da4c8c1186689790839d98",
+      "candidate_source_sha256": {
+        "conformance/__init__.py": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2",
+        "conformance/m0/__init__.py": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df",
+        "conformance/m0/README.md": "1ddb45da795ab13ac729742e42ebd6c41ef7bcd20cce7feea5d8cf1fed6a0ccd",
+        "conformance/m0/runner.py": "ef0d1c44a40d234025567f2050ff0092de0c1c4bce84f356aaa5a9789c5999a4",
+        "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+        "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+        "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+        "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+        "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+        "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+        "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+        "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+        "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+        "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+        "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+        "tests/m0/test_conformance_subset.py": "7b0f4b5831ad8c1df3b1fb374949461cbe41908b2b60999eaf825d5ff9414d4a",
+        "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+      }
+    },
+    "closeout_cli": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "conformance.m0.runner",
+        "--db",
+        ".tmp/m0-conformance-closeout-2026-09-11.sqlite",
+        "--json",
+        "Docs/development/evidence/2026-09-11-m0-06-closeout-execution.json"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:19:32.033248+08:00",
+      "finished_at": "2026-09-11T12:19:42.193860+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-closeout_cli.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-closeout_cli.stderr.txt",
+      "stdout_sha256": "d143cce4c361993522c3a7394aa56607e2227f853b7acaa1975c6caa5cfd12ed",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate_source_sha256": {
+        "conformance/__init__.py": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2",
+        "conformance/m0/__init__.py": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df",
+        "conformance/m0/README.md": "1ddb45da795ab13ac729742e42ebd6c41ef7bcd20cce7feea5d8cf1fed6a0ccd",
+        "conformance/m0/runner.py": "ef0d1c44a40d234025567f2050ff0092de0c1c4bce84f356aaa5a9789c5999a4",
+        "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+        "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+        "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+        "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+        "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+        "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+        "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+        "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+        "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+        "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+        "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+        "tests/m0/test_conformance_subset.py": "7b0f4b5831ad8c1df3b1fb374949461cbe41908b2b60999eaf825d5ff9414d4a",
+        "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+      }
+    },
+    "r1_red": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "-v",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_existing_sqlite_sidecar_files_and_directories",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_existing_sqlite_sidecars_without_touching_owner_data",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_report_equal_to_or_inside_sqlite_sidecar_paths",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_sidecar_dangling_link_predicate_is_checked_by_api_and_cli"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:48:02.758117+08:00",
+      "finished_at": "2026-09-11T12:48:46.146462+08:00",
+      "exit_code": 1,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_red.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_red.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "45ca225838bbe3dcec11902b66703136e3d0ac27ac994f72fe17128b1df8bca2",
+      "source_sha256": {
+        "conformance/m0/runner.py": "ef0d1c44a40d234025567f2050ff0092de0c1c4bce84f356aaa5a9789c5999a4",
+        "tests/m0/test_conformance_subset.py": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6"
+      }
+    },
+    "r1_green_focused": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_conformance_subset",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:53:54.571749+08:00",
+      "finished_at": "2026-09-11T12:54:21.334214+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_green_focused.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_green_focused.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "6e1a35f9130af2a40218ca93165da5415ce6c339781d0424148070c207b95ad9",
+      "source_sha256": {
+        "conformance/__init__.py": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2",
+        "conformance/m0/__init__.py": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df",
+        "conformance/m0/README.md": "6f38e66fa47d709691388b1c00dc8908c20217a94235c765f14476cd3a2105fb",
+        "conformance/m0/runner.py": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e",
+        "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+        "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+        "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+        "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+        "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+        "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+        "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+        "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+        "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+        "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+        "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+        "tests/m0/test_conformance_subset.py": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6",
+        "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+      },
+      "source_unchanged_during_run": true
+    },
+    "r1_green_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:54:21.355489+08:00",
+      "finished_at": "2026-09-11T12:54:59.980793+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_green_m0.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_green_m0.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "50ebf55a28cc6166468b0a24937948cfd5b68ad201b3246bd0b34b61d2df9bbf",
+      "source_sha256": {
+        "conformance/__init__.py": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2",
+        "conformance/m0/__init__.py": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df",
+        "conformance/m0/README.md": "6f38e66fa47d709691388b1c00dc8908c20217a94235c765f14476cd3a2105fb",
+        "conformance/m0/runner.py": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e",
+        "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+        "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+        "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+        "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+        "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+        "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+        "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+        "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+        "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+        "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+        "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+        "tests/m0/test_conformance_subset.py": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6",
+        "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+      },
+      "source_unchanged_during_run": true
+    },
+    "r1_green_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:55:00.000890+08:00",
+      "finished_at": "2026-09-11T12:55:03.416159+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_green_preparation.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_green_preparation.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "0761428560a81f11e399f44f938d08f023e13ef39b98280ea0f43db9bea4f4d8",
+      "source_sha256": {
+        "conformance/__init__.py": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2",
+        "conformance/m0/__init__.py": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df",
+        "conformance/m0/README.md": "6f38e66fa47d709691388b1c00dc8908c20217a94235c765f14476cd3a2105fb",
+        "conformance/m0/runner.py": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e",
+        "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+        "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+        "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+        "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+        "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+        "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+        "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+        "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+        "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+        "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+        "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+        "tests/m0/test_conformance_subset.py": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6",
+        "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+      },
+      "source_unchanged_during_run": true
+    },
+    "r1_candidate_cli": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "conformance.m0.runner",
+        "--db",
+        ".tmp/m0-conformance-2026-09-11-v2.sqlite",
+        "--json",
+        "artifacts/m0-conformance-report-v2.json"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T12:55:54.463471+08:00",
+      "finished_at": "2026-09-11T12:56:03.072150+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_candidate_cli.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_candidate_cli.stderr.txt",
+      "stdout_sha256": "561402bf24098b26956b57d5479fd80ce9c98aab7d6174772de51663fbf17d4b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "r1_handoff_render": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:01:54.588750+08:00",
+      "finished_at": "2026-09-11T13:01:54.790538+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_handoff_render.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_handoff_render.stderr.txt",
+      "stdout_sha256": "fbdf3d7ee9eb73b6e521b3380ea80595e2cb044b8e4c7ffde4473a2e7fc309af",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "r1_handoff_check": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:01:54.810472+08:00",
+      "finished_at": "2026-09-11T13:01:55.023570+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_handoff_check.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_handoff_check.stderr.txt",
+      "stdout_sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "r1_handoff_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:01:55.043513+08:00",
+      "finished_at": "2026-09-11T13:01:57.081266+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_handoff_preparation.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_handoff_preparation.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "51b35f38abb390a31d6f030049967c7f5a40f29d41b6b9719a591120023ceee8"
+    },
+    "final_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:32:20.782377+08:00",
+      "finished_at": "2026-09-11T13:33:00.066853+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-final_m0.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-final_m0.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "df11342ac36930fc44633a1207786f1d18edfbbd46210aaa45db4f0a6ead11cd",
+      "accepted_source_unchanged": true,
+      "accepted_report_sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    },
+    "final_render": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:33:00.099916+08:00",
+      "finished_at": "2026-09-11T13:33:00.312171+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-final_render.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-final_render.stderr.txt",
+      "stdout_sha256": "069ab399c616a1e2191358e8f39aa41733c4fe78ca1c9169052f119bfab07035",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "accepted_source_unchanged": true,
+      "accepted_report_sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    },
+    "final_check": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:33:00.342215+08:00",
+      "finished_at": "2026-09-11T13:33:00.565612+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-final_check.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-final_check.stderr.txt",
+      "stdout_sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "accepted_source_unchanged": true,
+      "accepted_report_sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    },
+    "final_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T13:33:00.586557+08:00",
+      "finished_at": "2026-09-11T13:33:02.891828+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/development/evidence/2026-09-11-m0-06-final_preparation.stdout.txt",
+      "stderr": "Docs/development/evidence/2026-09-11-m0-06-final_preparation.stderr.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "ddbcab61f402c8755d4c562958a2e5d73dd111331cebdb19b82984307532d073",
+      "accepted_source_unchanged": true,
+      "accepted_report_sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    }
+  },
+  "decisions": [
+    {
+      "at": "2026-09-11T11:04:17.325391+08:00",
+      "decision": "Execute approved Task 6 without protocol redesign",
+      "reason": "User requested continuation of confirmed design and current backlog; do not reopen M0-05 or add later protocol entities."
+    },
+    {
+      "at": "2026-09-11T11:04:17.325415+08:00",
+      "decision": "Six M0-scoped candidate passes, three partial/pending and nineteen not_applicable; failed partial fixtures become failed",
+      "reason": "TEST-012/016/019 require capabilities not implemented by M0; raw execution and scope are separate axes."
+    },
+    {
+      "at": "2026-09-11T11:04:17.325425+08:00",
+      "decision": "Keep full-protocol preparation registered/0; record accepted M0-only subset separately in status.m0_subset after independent review",
+      "reason": "tools/devprep preparation summary is not the M0 execution report; no broad tool/schema migration or global compatibility claim."
+    },
+    {
+      "at": "2026-09-11T11:04:17.325434+08:00",
+      "decision": "Use new exclusive DB/evidence paths; record inputs and observed failures from nine executable fixtures",
+      "reason": "No cached JSON/name-based pass or overwrite of existing evidence. Runner output is execution evidence, not self-acceptance."
+    }
+  ],
+  "state_transitions": [
+    {
+      "at": "2026-09-11T11:04:17.323130+08:00",
+      "from": "todo",
+      "to": "ready",
+      "reason": "M0-05 is independently accepted; dependency satisfied"
+    },
+    {
+      "at": "2026-09-11T11:04:17.324372+08:00",
+      "from": "ready",
+      "to": "in_progress",
+      "reason": "Main/reviewer write scopes confirmed via actual multi_agent_v1; 105 protected file hashes recorded"
+    },
+    {
+      "from": "in_progress",
+      "to": "review",
+      "at": "2026-09-11T11:35:18.328089+08:00",
+      "reason": "20 focused / 151 full M0 / 27 corrected preparation tests pass; real 28-entry CLI candidate generated; independent acceptance still pending."
+    },
+    {
+      "from": "review",
+      "to": "done",
+      "at": "2026-09-11T13:31:35.580244+08:00",
+      "reason": "Different Agent Lorentz accepted fixed v2 after R1 targeted recheck; main verified all 265 referenced hashes and 26 independent command records. Finishing metadata validation remains to be recorded, not a full protocol acceptance."
+    }
+  ],
+  "red_test_sha256": "9211c5b55c6e4eeb47fe43523bbd2826ce29dcaaea5eafe9eb45f7c8b3e50d26",
+  "tool_incidents": [
+    {
+      "error": "CreateProcessAsUserW 206",
+      "cause": "single write command exceeded Windows command-line length; process did not start, conformance directory still absent",
+      "resolution": "split same planned implementation into short native PowerShell/Python write calls",
+      "product_red_evidence": false
+    },
+    {
+      "at": "2026-09-11T11:52:58.055118+08:00",
+      "event": "Main preparation-log naming overlapped reserved review* prefix; renamed only four known main-owned stdout/stderr logs to pre_review_* after verifying absolute workspace targets and no destination collision. Raw bytes/hashes unchanged. Reviewer notified; independent review-* directory untouched."
+    },
+    {
+      "at": "2026-09-11T12:26:07.346367+08:00",
+      "event": "Independent reviewer Lorentz errored due model-service rate limit after completing required execution logs and audit-v2 files. Actual tool close_agent confirmed errored status. Same reviewer/context resumed once; no fabricated verdict, no replacement reviewer or extra model selected.",
+      "reviewer_id": "01a08e64-7ed1-7db0-846c-82feb095ae71",
+      "work_item_remains": "review"
+    }
+  ],
+  "test_resource_fix": {
+    "file": "tests/m0/test_conformance_subset.py",
+    "root_cause": "SQLite Connection context manager commits/rolls back but does not close; Windows TemporaryDirectory cleanup failed with WinError 32 after assertions passed.",
+    "change": "Use contextlib.closing for the test-only database inspection; no product change or cleanup error suppression.",
+    "regression_evidence": "runs.green_attempt_1",
+    "previous_result_preserved": true
+  },
+  "output_path_regressions": {
+    "status": "green",
+    "scope": "M0 runner output preflight only; no product interface change",
+    "root_cause": "API omitted evidence-inside-database check; CLI derived evidence directory can equal report with .evidence suffix."
+  },
+  "status_metadata_fix": {
+    "root_cause": "Earlier M0-06 claim update serialized only nonzero status counts; devprep requires all six vocabulary entries including zero counts. All five preparation failures point to the same field.",
+    "change": "Recompute status.work_item_status_counts from backlog and explicitly keep zero-valued states; no tool/test/acceptance weakening.",
+    "red_evidence": "runs.candidate_preparation"
+  },
+  "candidate_snapshot": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+  "review_history": [
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review.json",
+      "sha256": "12686c8c9d6e66369099feef9e2a8633ae724890d88d9f6d9e09a4e9faf08429",
+      "decision": "changes_requested",
+      "required_change": "M0-06-R1"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+      "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462",
+      "decision": "accepted_M0_only",
+      "closed_findings": [
+        "M0-06-R1"
+      ],
+      "narrative_addendum": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+        "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+      }
+    }
+  ],
+  "review_fix": {
+    "id": "M0-06-R1",
+    "started_at": "2026-09-11T12:42:55.842569+08:00",
+    "root_cause": "SQLite initialization/open touches implicit journal/wal/shm paths, but runner only validated explicit db/report/evidence. Exclusive db creation does not protect these paths.",
+    "scope": "Runner preflight and test/README only; old candidate and review evidence immutable; corrected report version v2; no product/helpers/devprep edits.",
+    "tests": "Five API/CLI methods, 30 matrix cases covering sidecar files/directories, output equal/nested overlap, and simulated dangling-link predicate.",
+    "red_observed_at": "2026-09-11T12:53:19.966721+08:00",
+    "red_result": {
+      "run": "r1_red",
+      "exit_code": 1,
+      "test_methods": 5,
+      "subtest_assertion_failures": 30,
+      "additional_cleanup_errors": 1,
+      "cleanup_error": "WinError 32 during TemporaryDirectory cleanup for journal-True/fresh.sqlite after old runner opened overlapping paths. Kept raw log; no suppression, product edit, or owner-data cleanup."
+    },
+    "implementation": "Shared _new_database_paths validates database and all three SQLite sidecars; _distinct_outputs checks equality and nesting in both directions over all explicit and implicit outputs. Both API and CLI preflight before mkdir/open; reject only.",
+    "changed_source_sha256": {
+      "conformance/m0/runner.py": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e",
+      "conformance/m0/README.md": "6f38e66fa47d709691388b1c00dc8908c20217a94235c765f14476cd3a2105fb",
+      "tests/m0/test_conformance_subset.py": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6"
+    },
+    "green_runs": [
+      "r1_green_focused",
+      "r1_green_m0",
+      "r1_green_preparation",
+      "r1_candidate_cli"
+    ],
+    "candidate_report": {
+      "path": "artifacts/m0-conformance-report-v2.json",
+      "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    },
+    "candidate_snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+      "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+    },
+    "status": "closed",
+    "closed_at": "2026-09-11T13:17:17.286835+08:00",
+    "closed_by": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+      "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+    },
+    "review_narrative_addendum": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+      "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+    },
+    "main_integration_audit": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-r1-review-verification.json",
+      "sha256": "9449557ace65bfa218be3c57bcd29e00fd8bce1a3a84131624ef26f665695cbf"
+    }
+  },
+  "candidate_snapshot_history": [
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-snapshot.json",
+      "sha256": "dc31f953f3232827eff0da94e3d0c11806e38aa5364c9bbd8ac7469f88b30f83",
+      "decision": "changes_requested:R1"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+      "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814",
+      "decision": "accepted_M0_only"
+    }
+  ],
+  "finished_at": "2026-09-11T13:37:43.103308+08:00",
+  "final_integrity_audit": "Docs/development/evidence/2026-09-11-m0-06-final-integrity.json",
+  "final_summary": {
+    "tests": {
+      "focused": 25,
+      "full_m0": 156,
+      "preparation": 27
+    },
+    "milestone": "M0 done 6/6",
+    "scope_counts": {
+      "passed": 6,
+      "failed": 0,
+      "pending": 3,
+      "not_applicable": 19
+    },
+    "work_item": "M0-06 done",
+    "next_work_item": "M1-01",
+    "full_protocol": "registered/0 accepted passed",
+    "bootstrap": "not_started"
+  }
+}

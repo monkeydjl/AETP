@@ -1,0 +1,2751 @@
+{
+  "work_item": "M0-04",
+  "started_at": "2026-09-10T16:56:26.972589+00:00",
+  "source_sha256": {
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+    "tests/m0/support.py": "07abc92ca86f22ed8943d35d0c4423a700e3284a8ef018f0be4703debafa29ad",
+    "tests/m0/test_idempotency_concurrency.py": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2"
+  },
+  "races": [
+    {
+      "scenario": "claims",
+      "repetition": 1,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpnrl2e8io\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1"
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 22008,
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26124434110700,
+          "handling_started_ns": 26124434715900,
+          "gate_released_ns": 26124434632800,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-claim-t-1-a-1-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-1-r0:received",
+              "cmd-claim-t-1-a-1-r0:effect"
+            ],
+            "aggregate_revision": 1,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 20408,
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26124434483300,
+          "handling_started_ns": 26124434730100,
+          "gate_released_ns": 26124434632800,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-claim-t-1-a-2-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-2-r0:received",
+              "cmd-claim-t-1-a-2-r0:rejected"
+            ],
+            "aggregate_revision": 1,
+            "error_code": "REVISION_CONFLICT"
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-1-r0:received",
+            "cmd-claim-t-1-a-1-r0:effect"
+          ],
+          "aggregate_revision": 1,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-2-r0:received",
+            "cmd-claim-t-1-a-2-r0:rejected"
+          ],
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after_race": 12,
+      "race_event_delta": 4,
+      "race_events": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0:received",
+          "project_id": "p-1",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "11fd46feaa902aeaadbcafe014e376b7d7e19e07de02b7677427813377ff1dcd"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:effect",
+          "project_id": "p-1",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:received",
+          "project_id": "p-1",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "84ac2414b95de799859e2f46098563a8a406a6366b784384c87e998e8452e996"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:rejected",
+          "project_id": "p-1",
+          "sequence": 12,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "cmd-claim-t-1-a-2-r0",
+                "current_revision": 1,
+                "expected_revision": 0,
+                "target_id": "t-1"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 6,
+        "events": 12,
+        "idempotency": 6
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "5e375b415e6a198bffe5dd23d6896e0521fb4959534089f1f87bb67017b4beaf",
+      "durable_rows_sha256_after_retry": "5e375b415e6a198bffe5dd23d6896e0521fb4959534089f1f87bb67017b4beaf",
+      "incremental_projection_sha256": "f8e9287bba88bd12f9c44811183be6ce519ff0f627994aa8b0ecf9eea0c6ceab",
+      "replay_projection_sha256": "f8e9287bba88bd12f9c44811183be6ce519ff0f627994aa8b0ecf9eea0c6ceab",
+      "cache_deleted_read_sha256": "f8e9287bba88bd12f9c44811183be6ce519ff0f627994aa8b0ecf9eea0c6ceab",
+      "release_new_key_reclaim": {
+        "release_command": {
+          "id": "cmd-release",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.release",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 1,
+          "idempotency_key": "release",
+          "correlation_id": "corr-release"
+        },
+        "release_result": {
+          "status": "accepted",
+          "command_id": "cmd-release",
+          "event_ids": [
+            "cmd-release:received",
+            "cmd-release:effect"
+          ],
+          "aggregate_revision": 2,
+          "error_code": null
+        },
+        "new_claim": {
+          "id": "cmd-reclaim",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 2,
+          "idempotency_key": "new-reclaim-intent",
+          "correlation_id": "corr-new-reclaim-intent"
+        },
+        "reclaim_result": {
+          "status": "accepted",
+          "command_id": "cmd-reclaim",
+          "event_ids": [
+            "cmd-reclaim:received",
+            "cmd-reclaim:effect"
+          ],
+          "aggregate_revision": 3,
+          "error_code": null
+        },
+        "event_count": 16,
+        "task_revisions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "old_intent_retry_event_delta": 0,
+        "original_conflict_revision_after_revision_three": 1,
+        "projection_sha256": "3e7d46c86207b3acf5cedee95f94f021fc70c1dba7fa4df4eef19db8fbc6655e",
+        "replay_sha256": "3e7d46c86207b3acf5cedee95f94f021fc70c1dba7fa4df4eef19db8fbc6655e"
+      }
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 1,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpj_yww03c\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 20640,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26124888580400,
+          "handling_started_ns": 26124895526700,
+          "gate_released_ns": 26124895423800,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 21144,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26124895278700,
+          "handling_started_ns": 26124895543600,
+          "gate_released_ns": 26124895423800,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 1,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpxpyppzor\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "conflicting-command",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "Second"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 23652,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26125302579600,
+          "handling_started_ns": 26125307946500,
+          "gate_released_ns": 26125307854800,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-shared",
+            "event_ids": [],
+            "aggregate_revision": null,
+            "error_code": "IDEMPOTENCY_CONFLICT"
+          }
+        },
+        {
+          "pid": 31252,
+          "command_id": "conflicting-command",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26125307678400,
+          "handling_started_ns": 26125307964500,
+          "gate_released_ns": 26125307854800,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "conflicting-command",
+            "event_ids": [
+              "conflicting-command:received",
+              "conflicting-command:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "command_id": "cmd-shared",
+          "event_ids": [],
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "command_id": "conflicting-command",
+          "event_ids": [
+            "conflicting-command:received",
+            "conflicting-command:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "conflicting-command:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "conflicting-command",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "f1ac9eaae8ce14a11c537591edfe93e62537fb1c25028f0efc24ae33723d7c71"
+          }
+        },
+        {
+          "id": "conflicting-command:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "conflicting-command",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "Second"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "72dd4330b1cd1de69a3e3d97f9011eb91684e70aa471fcaff26bf9675e91c339",
+      "durable_rows_sha256_after_retry": "72dd4330b1cd1de69a3e3d97f9011eb91684e70aa471fcaff26bf9675e91c339",
+      "incremental_projection_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9",
+      "replay_projection_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9",
+      "cache_deleted_read_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9"
+    },
+    {
+      "scenario": "claims",
+      "repetition": 2,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpl7wf3vki\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1"
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 32368,
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26125715047900,
+          "handling_started_ns": 26125718399200,
+          "gate_released_ns": 26125718298500,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-claim-t-1-a-1-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-1-r0:received",
+              "cmd-claim-t-1-a-1-r0:rejected"
+            ],
+            "aggregate_revision": 1,
+            "error_code": "REVISION_CONFLICT"
+          }
+        },
+        {
+          "pid": 31244,
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26125718138300,
+          "handling_started_ns": 26125718381300,
+          "gate_released_ns": 26125718298500,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-claim-t-1-a-2-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-2-r0:received",
+              "cmd-claim-t-1-a-2-r0:effect"
+            ],
+            "aggregate_revision": 1,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-1-r0:received",
+            "cmd-claim-t-1-a-1-r0:rejected"
+          ],
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-2-r0:received",
+            "cmd-claim-t-1-a-2-r0:effect"
+          ],
+          "aggregate_revision": 1,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after_race": 12,
+      "race_event_delta": 4,
+      "race_events": [
+        {
+          "id": "cmd-claim-t-1-a-2-r0:received",
+          "project_id": "p-1",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "84ac2414b95de799859e2f46098563a8a406a6366b784384c87e998e8452e996"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:effect",
+          "project_id": "p-1",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "actor_id": "a-2",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:received",
+          "project_id": "p-1",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "11fd46feaa902aeaadbcafe014e376b7d7e19e07de02b7677427813377ff1dcd"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:rejected",
+          "project_id": "p-1",
+          "sequence": 12,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "cmd-claim-t-1-a-1-r0",
+                "current_revision": 1,
+                "expected_revision": 0,
+                "target_id": "t-1"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 6,
+        "events": 12,
+        "idempotency": 6
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "97eada3597677f3942fd960e0fc7821d9146a127d113e81b1b2c60a363146b61",
+      "durable_rows_sha256_after_retry": "97eada3597677f3942fd960e0fc7821d9146a127d113e81b1b2c60a363146b61",
+      "incremental_projection_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "replay_projection_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "cache_deleted_read_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "release_new_key_reclaim": {
+        "release_command": {
+          "id": "cmd-release",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.release",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 1,
+          "idempotency_key": "release",
+          "correlation_id": "corr-release"
+        },
+        "release_result": {
+          "status": "accepted",
+          "command_id": "cmd-release",
+          "event_ids": [
+            "cmd-release:received",
+            "cmd-release:effect"
+          ],
+          "aggregate_revision": 2,
+          "error_code": null
+        },
+        "new_claim": {
+          "id": "cmd-reclaim",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 2,
+          "idempotency_key": "new-reclaim-intent",
+          "correlation_id": "corr-new-reclaim-intent"
+        },
+        "reclaim_result": {
+          "status": "accepted",
+          "command_id": "cmd-reclaim",
+          "event_ids": [
+            "cmd-reclaim:received",
+            "cmd-reclaim:effect"
+          ],
+          "aggregate_revision": 3,
+          "error_code": null
+        },
+        "event_count": 16,
+        "task_revisions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "old_intent_retry_event_delta": 0,
+        "original_conflict_revision_after_revision_three": 1,
+        "projection_sha256": "653dde4422d147dd487c767e0feaa19d76a2136e4473af8a89320d66e7b239a7",
+        "replay_sha256": "653dde4422d147dd487c767e0feaa19d76a2136e4473af8a89320d66e7b239a7"
+      }
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 2,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmps6rmld4u\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 9588,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26126165633500,
+          "handling_started_ns": 26126170158800,
+          "gate_released_ns": 26126170048000,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 6528,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26126169829300,
+          "handling_started_ns": 26126170137900,
+          "gate_released_ns": 26126170048000,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 2,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpfb6yj7vy\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "conflicting-command",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "Second"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 22688,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26126567165000,
+          "handling_started_ns": 26126599115000,
+          "gate_released_ns": 26126599012900,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-shared",
+            "event_ids": [],
+            "aggregate_revision": null,
+            "error_code": "IDEMPOTENCY_CONFLICT"
+          }
+        },
+        {
+          "pid": 25248,
+          "command_id": "conflicting-command",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26126598743400,
+          "handling_started_ns": 26126599134800,
+          "gate_released_ns": 26126599012900,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "conflicting-command",
+            "event_ids": [
+              "conflicting-command:received",
+              "conflicting-command:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "command_id": "cmd-shared",
+          "event_ids": [],
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "command_id": "conflicting-command",
+          "event_ids": [
+            "conflicting-command:received",
+            "conflicting-command:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "conflicting-command:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "conflicting-command",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "f1ac9eaae8ce14a11c537591edfe93e62537fb1c25028f0efc24ae33723d7c71"
+          }
+        },
+        {
+          "id": "conflicting-command:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "conflicting-command",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "Second"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "72dd4330b1cd1de69a3e3d97f9011eb91684e70aa471fcaff26bf9675e91c339",
+      "durable_rows_sha256_after_retry": "72dd4330b1cd1de69a3e3d97f9011eb91684e70aa471fcaff26bf9675e91c339",
+      "incremental_projection_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9",
+      "replay_projection_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9",
+      "cache_deleted_read_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9"
+    },
+    {
+      "scenario": "claims",
+      "repetition": 3,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmp0t09bg2n\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1"
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 22244,
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26127039381600,
+          "handling_started_ns": 26127057761000,
+          "gate_released_ns": 26127057671700,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-claim-t-1-a-1-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-1-r0:received",
+              "cmd-claim-t-1-a-1-r0:rejected"
+            ],
+            "aggregate_revision": 1,
+            "error_code": "REVISION_CONFLICT"
+          }
+        },
+        {
+          "pid": 9352,
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26127057495000,
+          "handling_started_ns": 26127057776400,
+          "gate_released_ns": 26127057671700,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-claim-t-1-a-2-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-2-r0:received",
+              "cmd-claim-t-1-a-2-r0:effect"
+            ],
+            "aggregate_revision": 1,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-1-r0:received",
+            "cmd-claim-t-1-a-1-r0:rejected"
+          ],
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-2-r0:received",
+            "cmd-claim-t-1-a-2-r0:effect"
+          ],
+          "aggregate_revision": 1,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after_race": 12,
+      "race_event_delta": 4,
+      "race_events": [
+        {
+          "id": "cmd-claim-t-1-a-2-r0:received",
+          "project_id": "p-1",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "84ac2414b95de799859e2f46098563a8a406a6366b784384c87e998e8452e996"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:effect",
+          "project_id": "p-1",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "actor_id": "a-2",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:received",
+          "project_id": "p-1",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "11fd46feaa902aeaadbcafe014e376b7d7e19e07de02b7677427813377ff1dcd"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:rejected",
+          "project_id": "p-1",
+          "sequence": 12,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "cmd-claim-t-1-a-1-r0",
+                "current_revision": 1,
+                "expected_revision": 0,
+                "target_id": "t-1"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 6,
+        "events": 12,
+        "idempotency": 6
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "97eada3597677f3942fd960e0fc7821d9146a127d113e81b1b2c60a363146b61",
+      "durable_rows_sha256_after_retry": "97eada3597677f3942fd960e0fc7821d9146a127d113e81b1b2c60a363146b61",
+      "incremental_projection_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "replay_projection_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "cache_deleted_read_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "release_new_key_reclaim": {
+        "release_command": {
+          "id": "cmd-release",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.release",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 1,
+          "idempotency_key": "release",
+          "correlation_id": "corr-release"
+        },
+        "release_result": {
+          "status": "accepted",
+          "command_id": "cmd-release",
+          "event_ids": [
+            "cmd-release:received",
+            "cmd-release:effect"
+          ],
+          "aggregate_revision": 2,
+          "error_code": null
+        },
+        "new_claim": {
+          "id": "cmd-reclaim",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 2,
+          "idempotency_key": "new-reclaim-intent",
+          "correlation_id": "corr-new-reclaim-intent"
+        },
+        "reclaim_result": {
+          "status": "accepted",
+          "command_id": "cmd-reclaim",
+          "event_ids": [
+            "cmd-reclaim:received",
+            "cmd-reclaim:effect"
+          ],
+          "aggregate_revision": 3,
+          "error_code": null
+        },
+        "event_count": 16,
+        "task_revisions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "old_intent_retry_event_delta": 0,
+        "original_conflict_revision_after_revision_three": 1,
+        "projection_sha256": "653dde4422d147dd487c767e0feaa19d76a2136e4473af8a89320d66e7b239a7",
+        "replay_sha256": "653dde4422d147dd487c767e0feaa19d76a2136e4473af8a89320d66e7b239a7"
+      }
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 3,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpl9t5djhh\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 31256,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26127518424100,
+          "handling_started_ns": 26127521928000,
+          "gate_released_ns": 26127521827700,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 30500,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26127521592100,
+          "handling_started_ns": 26127521943400,
+          "gate_released_ns": 26127521827700,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 3,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpung1pq33\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "conflicting-command",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "Second"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 26416,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26127923315000,
+          "handling_started_ns": 26127926221500,
+          "gate_released_ns": 26127926147900,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-shared",
+            "event_ids": [],
+            "aggregate_revision": null,
+            "error_code": "IDEMPOTENCY_CONFLICT"
+          }
+        },
+        {
+          "pid": 25084,
+          "command_id": "conflicting-command",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26127925979700,
+          "handling_started_ns": 26127926237900,
+          "gate_released_ns": 26127926147900,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "conflicting-command",
+            "event_ids": [
+              "conflicting-command:received",
+              "conflicting-command:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "command_id": "cmd-shared",
+          "event_ids": [],
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "command_id": "conflicting-command",
+          "event_ids": [
+            "conflicting-command:received",
+            "conflicting-command:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "conflicting-command:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "conflicting-command",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "f1ac9eaae8ce14a11c537591edfe93e62537fb1c25028f0efc24ae33723d7c71"
+          }
+        },
+        {
+          "id": "conflicting-command:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "conflicting-command",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "Second"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "72dd4330b1cd1de69a3e3d97f9011eb91684e70aa471fcaff26bf9675e91c339",
+      "durable_rows_sha256_after_retry": "72dd4330b1cd1de69a3e3d97f9011eb91684e70aa471fcaff26bf9675e91c339",
+      "incremental_projection_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9",
+      "replay_projection_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9",
+      "cache_deleted_read_sha256": "3a87c6f0fd826dea6e505dbdf7d27a4156f2a45ba337dcacd684cc5fe8b629d9"
+    },
+    {
+      "scenario": "claims",
+      "repetition": 4,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpm9o0xoef\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1"
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 31856,
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26128330124500,
+          "handling_started_ns": 26128330414100,
+          "gate_released_ns": 26128330332300,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-claim-t-1-a-1-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-1-r0:received",
+              "cmd-claim-t-1-a-1-r0:effect"
+            ],
+            "aggregate_revision": 1,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 23768,
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26128330096300,
+          "handling_started_ns": 26128330430000,
+          "gate_released_ns": 26128330332300,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-claim-t-1-a-2-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-2-r0:received",
+              "cmd-claim-t-1-a-2-r0:rejected"
+            ],
+            "aggregate_revision": 1,
+            "error_code": "REVISION_CONFLICT"
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-1-r0:received",
+            "cmd-claim-t-1-a-1-r0:effect"
+          ],
+          "aggregate_revision": 1,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-2-r0:received",
+            "cmd-claim-t-1-a-2-r0:rejected"
+          ],
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after_race": 12,
+      "race_event_delta": 4,
+      "race_events": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0:received",
+          "project_id": "p-1",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "11fd46feaa902aeaadbcafe014e376b7d7e19e07de02b7677427813377ff1dcd"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:effect",
+          "project_id": "p-1",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:received",
+          "project_id": "p-1",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "84ac2414b95de799859e2f46098563a8a406a6366b784384c87e998e8452e996"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:rejected",
+          "project_id": "p-1",
+          "sequence": 12,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "cmd-claim-t-1-a-2-r0",
+                "current_revision": 1,
+                "expected_revision": 0,
+                "target_id": "t-1"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 6,
+        "events": 12,
+        "idempotency": 6
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "5e375b415e6a198bffe5dd23d6896e0521fb4959534089f1f87bb67017b4beaf",
+      "durable_rows_sha256_after_retry": "5e375b415e6a198bffe5dd23d6896e0521fb4959534089f1f87bb67017b4beaf",
+      "incremental_projection_sha256": "f8e9287bba88bd12f9c44811183be6ce519ff0f627994aa8b0ecf9eea0c6ceab",
+      "replay_projection_sha256": "f8e9287bba88bd12f9c44811183be6ce519ff0f627994aa8b0ecf9eea0c6ceab",
+      "cache_deleted_read_sha256": "f8e9287bba88bd12f9c44811183be6ce519ff0f627994aa8b0ecf9eea0c6ceab",
+      "release_new_key_reclaim": {
+        "release_command": {
+          "id": "cmd-release",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.release",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 1,
+          "idempotency_key": "release",
+          "correlation_id": "corr-release"
+        },
+        "release_result": {
+          "status": "accepted",
+          "command_id": "cmd-release",
+          "event_ids": [
+            "cmd-release:received",
+            "cmd-release:effect"
+          ],
+          "aggregate_revision": 2,
+          "error_code": null
+        },
+        "new_claim": {
+          "id": "cmd-reclaim",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 2,
+          "idempotency_key": "new-reclaim-intent",
+          "correlation_id": "corr-new-reclaim-intent"
+        },
+        "reclaim_result": {
+          "status": "accepted",
+          "command_id": "cmd-reclaim",
+          "event_ids": [
+            "cmd-reclaim:received",
+            "cmd-reclaim:effect"
+          ],
+          "aggregate_revision": 3,
+          "error_code": null
+        },
+        "event_count": 16,
+        "task_revisions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "old_intent_retry_event_delta": 0,
+        "original_conflict_revision_after_revision_three": 1,
+        "projection_sha256": "3e7d46c86207b3acf5cedee95f94f021fc70c1dba7fa4df4eef19db8fbc6655e",
+        "replay_sha256": "3e7d46c86207b3acf5cedee95f94f021fc70c1dba7fa4df4eef19db8fbc6655e"
+      }
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 4,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmp8uzciuh4\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 29056,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26128787529000,
+          "handling_started_ns": 26128793798900,
+          "gate_released_ns": 26128793701300,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 29904,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26128793522600,
+          "handling_started_ns": 26128793819700,
+          "gate_released_ns": 26128793701300,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 4,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpvdggjt_m\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "conflicting-command",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "Second"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 19972,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26129192422400,
+          "handling_started_ns": 26129192722500,
+          "gate_released_ns": 26129192641300,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 5800,
+          "command_id": "conflicting-command",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26129192445800,
+          "handling_started_ns": 26129192739000,
+          "gate_released_ns": 26129192641300,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "conflicting-command",
+            "event_ids": [],
+            "aggregate_revision": null,
+            "error_code": "IDEMPOTENCY_CONFLICT"
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "command_id": "conflicting-command",
+          "event_ids": [],
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    },
+    {
+      "scenario": "claims",
+      "repetition": 5,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmppfweqdlt\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-claim-t-1-a-1-r0",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1"
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 0,
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 19812,
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "idempotency_key": "claim-t-1-a-1-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26129591369500,
+          "handling_started_ns": 26129591702700,
+          "gate_released_ns": 26129591599900,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "cmd-claim-t-1-a-1-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-1-r0:received",
+              "cmd-claim-t-1-a-1-r0:rejected"
+            ],
+            "aggregate_revision": 1,
+            "error_code": "REVISION_CONFLICT"
+          }
+        },
+        {
+          "pid": 28656,
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "idempotency_key": "claim-t-1-a-2-r0",
+          "expected_revision": 0,
+          "observed_head_sequence": 8,
+          "ready_ns": 26129591374200,
+          "handling_started_ns": 26129591685500,
+          "gate_released_ns": 26129591599900,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-claim-t-1-a-2-r0",
+            "event_ids": [
+              "cmd-claim-t-1-a-2-r0:received",
+              "cmd-claim-t-1-a-2-r0:effect"
+            ],
+            "aggregate_revision": 1,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "command_id": "cmd-claim-t-1-a-1-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-1-r0:received",
+            "cmd-claim-t-1-a-1-r0:rejected"
+          ],
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-claim-t-1-a-2-r0",
+          "event_ids": [
+            "cmd-claim-t-1-a-2-r0:received",
+            "cmd-claim-t-1-a-2-r0:effect"
+          ],
+          "aggregate_revision": 1,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after_race": 12,
+      "race_event_delta": 4,
+      "race_events": [
+        {
+          "id": "cmd-claim-t-1-a-2-r0:received",
+          "project_id": "p-1",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "84ac2414b95de799859e2f46098563a8a406a6366b784384c87e998e8452e996"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-2-r0:effect",
+          "project_id": "p-1",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-2-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "actor_id": "a-2",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:received",
+          "project_id": "p-1",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "11fd46feaa902aeaadbcafe014e376b7d7e19e07de02b7677427813377ff1dcd"
+          }
+        },
+        {
+          "id": "cmd-claim-t-1-a-1-r0:rejected",
+          "project_id": "p-1",
+          "sequence": 12,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 1,
+          "causation_id": "cmd-claim-t-1-a-1-r0",
+          "correlation_id": "corr-claim-t-1",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "cmd-claim-t-1-a-1-r0",
+                "current_revision": 1,
+                "expected_revision": 0,
+                "target_id": "t-1"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 6,
+        "events": 12,
+        "idempotency": 6
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "97eada3597677f3942fd960e0fc7821d9146a127d113e81b1b2c60a363146b61",
+      "durable_rows_sha256_after_retry": "97eada3597677f3942fd960e0fc7821d9146a127d113e81b1b2c60a363146b61",
+      "incremental_projection_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "replay_projection_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "cache_deleted_read_sha256": "ff50e34dbf9e9ee20e1035d421c56b6e522e392dfd4780a61dfd1f813fc8d449",
+      "release_new_key_reclaim": {
+        "release_command": {
+          "id": "cmd-release",
+          "project_id": "p-1",
+          "actor_id": "a-2",
+          "type": "task.release",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 1,
+          "idempotency_key": "release",
+          "correlation_id": "corr-release"
+        },
+        "release_result": {
+          "status": "accepted",
+          "command_id": "cmd-release",
+          "event_ids": [
+            "cmd-release:received",
+            "cmd-release:effect"
+          ],
+          "aggregate_revision": 2,
+          "error_code": null
+        },
+        "new_claim": {
+          "id": "cmd-reclaim",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.claim",
+          "target_id": "t-1",
+          "payload": {},
+          "expected_revision": 2,
+          "idempotency_key": "new-reclaim-intent",
+          "correlation_id": "corr-new-reclaim-intent"
+        },
+        "reclaim_result": {
+          "status": "accepted",
+          "command_id": "cmd-reclaim",
+          "event_ids": [
+            "cmd-reclaim:received",
+            "cmd-reclaim:effect"
+          ],
+          "aggregate_revision": 3,
+          "error_code": null
+        },
+        "event_count": 16,
+        "task_revisions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "old_intent_retry_event_delta": 0,
+        "original_conflict_revision_after_revision_three": 1,
+        "projection_sha256": "653dde4422d147dd487c767e0feaa19d76a2136e4473af8a89320d66e7b239a7",
+        "replay_sha256": "653dde4422d147dd487c767e0feaa19d76a2136e4473af8a89320d66e7b239a7"
+      }
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 5,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmp4bpny_g_\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 17156,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26130026383200,
+          "handling_started_ns": 26130033304100,
+          "gate_released_ns": 26130033216300,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 28300,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26130033051300,
+          "handling_started_ns": 26130033318700,
+          "gate_released_ns": 26130033216300,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 5,
+      "parent_pid": 29708,
+      "db_path": "C:\\Users\\Alin\\AppData\\Local\\Temp\\tmpr5tqmnq4\\m0.sqlite",
+      "commands": [
+        {
+          "id": "cmd-shared",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "First"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        },
+        {
+          "id": "conflicting-command",
+          "project_id": "p-1",
+          "actor_id": "a-1",
+          "type": "task.create",
+          "target_id": "t-1",
+          "payload": {
+            "title": "Second"
+          },
+          "expected_revision": 0,
+          "idempotency_key": "shared",
+          "correlation_id": "corr-shared"
+        }
+      ],
+      "processes": [
+        {
+          "pid": 22708,
+          "command_id": "cmd-shared",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26130423548500,
+          "handling_started_ns": 26130429317500,
+          "gate_released_ns": 26130429206600,
+          "exit_code": 0,
+          "result": {
+            "status": "accepted",
+            "command_id": "cmd-shared",
+            "event_ids": [
+              "cmd-shared:received",
+              "cmd-shared:effect"
+            ],
+            "aggregate_revision": 0,
+            "error_code": null
+          }
+        },
+        {
+          "pid": 25184,
+          "command_id": "conflicting-command",
+          "idempotency_key": "shared",
+          "expected_revision": 0,
+          "observed_head_sequence": 6,
+          "ready_ns": 26130428994700,
+          "handling_started_ns": 26130429338700,
+          "gate_released_ns": 26130429206600,
+          "exit_code": 0,
+          "result": {
+            "status": "rejected",
+            "command_id": "conflicting-command",
+            "event_ids": [],
+            "aggregate_revision": null,
+            "error_code": "IDEMPOTENCY_CONFLICT"
+          }
+        }
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-shared",
+          "event_ids": [
+            "cmd-shared:received",
+            "cmd-shared:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "command_id": "conflicting-command",
+          "event_ids": [],
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after_race": 8,
+      "race_event_delta": 2,
+      "race_events": [
+        {
+          "id": "cmd-shared:received",
+          "project_id": "p-1",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "d45a3552a2574aa01f91d4bee333b79947d430f3115563548396e907c7b7a475"
+          }
+        },
+        {
+          "id": "cmd-shared:effect",
+          "project_id": "p-1",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "t-1",
+          "aggregate_revision": 0,
+          "causation_id": "cmd-shared",
+          "correlation_id": "corr-shared",
+          "payload": {
+            "status": "pending",
+            "title": "First"
+          }
+        }
+      ],
+      "row_counts": {
+        "commands": 4,
+        "events": 8,
+        "idempotency": 4
+      },
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "durable_rows_sha256_before_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "durable_rows_sha256_after_retry": "56bafc014ab96fd279c108949cd79de469bc156556a6e2c7e3832e3b6f2d8be1",
+      "incremental_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "replay_projection_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb",
+      "cache_deleted_read_sha256": "a049b8b179ca8878ba1490ba981f42fd36d11aa1211c5c190fac173bc9c1badb"
+    }
+  ],
+  "mutations": [
+    {
+      "name": "foreign_result_identity",
+      "path": "src/aetp/core/idempotency.py",
+      "old": "if result.command_id != record[\"command_id\"]:",
+      "new": "if False:",
+      "test": "DurableIdempotencyTests.test_foreign_durable_result_identity_fails_closed",
+      "command": "python -m unittest tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_foreign_durable_result_identity_fails_closed -v",
+      "started_at": "2026-09-10T16:56:33.457069+00:00",
+      "finished_at": "2026-09-10T16:56:34.014263+00:00",
+      "exit_code": 1,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "killed": true,
+      "stdout": "",
+      "stderr": "test_foreign_durable_result_identity_fails_closed (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_foreign_durable_result_identity_fails_closed) ... FAIL\n\n======================================================================\nFAIL: test_foreign_durable_result_identity_fails_closed (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_foreign_durable_result_identity_fails_closed)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-x0fenqzx\\tests\\m0\\test_idempotency_concurrency.py\", line 319, in test_foreign_durable_result_identity_fails_closed\n    with self.assertRaises(RuntimeError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^\nAssertionError: RuntimeError not raised\n\n----------------------------------------------------------------------\nRan 1 test in 0.111s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "digest_conflict",
+      "path": "src/aetp/core/idempotency.py",
+      "old": "if record[\"request_digest\"] != digest:",
+      "new": "if False:",
+      "test": "DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes",
+      "command": "python -m unittest tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes -v",
+      "started_at": "2026-09-10T16:56:34.039156+00:00",
+      "finished_at": "2026-09-10T16:56:34.552851+00:00",
+      "exit_code": 1,
+      "tests_run": 1,
+      "failures": 6,
+      "errors": 0,
+      "killed": true,
+      "stdout": "",
+      "stderr": "test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) ... \n  test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='id') ... FAIL\n  test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='payload') ... FAIL\n  test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='expected_revision') ... FAIL\n  test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='target_id') ... FAIL\n  test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='type') ... FAIL\n  test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='correlation_id') ... FAIL\n\n======================================================================\nFAIL: test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='id')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-hfg_3r6t\\tests\\m0\\test_idempotency_concurrency.py\", line 225, in test_same_key_changed_content_or_identity_conflicts_without_writes\n    self.assertEqual(self.handle(changed), CommandResult(\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"rejected\", changed.id, (), None, \"IDEMPOTENCY_CONFLICT\",\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-same', event_i[78 chars]None) != CommandResult(status='rejected', command_id='new-command', even[64 chars]ICT')\n\n======================================================================\nFAIL: test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='payload')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-hfg_3r6t\\tests\\m0\\test_idempotency_concurrency.py\", line 225, in test_same_key_changed_content_or_identity_conflicts_without_writes\n    self.assertEqual(self.handle(changed), CommandResult(\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"rejected\", changed.id, (), None, \"IDEMPOTENCY_CONFLICT\",\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-same', event_i[78 chars]None) != CommandResult(status='rejected', command_id='cmd-same', event_i[61 chars]ICT')\n\n======================================================================\nFAIL: test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='expected_revision')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-hfg_3r6t\\tests\\m0\\test_idempotency_concurrency.py\", line 225, in test_same_key_changed_content_or_identity_conflicts_without_writes\n    self.assertEqual(self.handle(changed), CommandResult(\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"rejected\", changed.id, (), None, \"IDEMPOTENCY_CONFLICT\",\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-same', event_i[78 chars]None) != CommandResult(status='rejected', command_id='cmd-same', event_i[61 chars]ICT')\n\n======================================================================\nFAIL: test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='target_id')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-hfg_3r6t\\tests\\m0\\test_idempotency_concurrency.py\", line 225, in test_same_key_changed_content_or_identity_conflicts_without_writes\n    self.assertEqual(self.handle(changed), CommandResult(\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"rejected\", changed.id, (), None, \"IDEMPOTENCY_CONFLICT\",\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-same', event_i[78 chars]None) != CommandResult(status='rejected', command_id='cmd-same', event_i[61 chars]ICT')\n\n======================================================================\nFAIL: test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='type')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-hfg_3r6t\\tests\\m0\\test_idempotency_concurrency.py\", line 225, in test_same_key_changed_content_or_identity_conflicts_without_writes\n    self.assertEqual(self.handle(changed), CommandResult(\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"rejected\", changed.id, (), None, \"IDEMPOTENCY_CONFLICT\",\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-same', event_i[78 chars]None) != CommandResult(status='rejected', command_id='cmd-same', event_i[61 chars]ICT')\n\n======================================================================\nFAIL: test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes) (field='correlation_id')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-hfg_3r6t\\tests\\m0\\test_idempotency_concurrency.py\", line 225, in test_same_key_changed_content_or_identity_conflicts_without_writes\n    self.assertEqual(self.handle(changed), CommandResult(\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        \"rejected\", changed.id, (), None, \"IDEMPOTENCY_CONFLICT\",\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ))\n    ^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-same', event_i[78 chars]None) != CommandResult(status='rejected', command_id='cmd-same', event_i[61 chars]ICT')\n\n----------------------------------------------------------------------\nRan 1 test in 0.104s\n\nFAILED (failures=6)\n"
+    },
+    {
+      "name": "trusted_actor_scope",
+      "path": "src/aetp/core/idempotency.py",
+      "old": "record = self.store.read_idempotency(scope)",
+      "new": "record = self.store.read_idempotency((scope[0], \"a-1\", scope[2]))",
+      "test": "IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key",
+      "command": "python -m unittest tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key -v",
+      "started_at": "2026-09-10T16:56:34.575524+00:00",
+      "finished_at": "2026-09-10T16:56:35.024670+00:00",
+      "exit_code": 1,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "killed": true,
+      "stdout": "",
+      "stderr": "test_lookup_scope_includes_project_trusted_actor_and_key (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key) ... \n  test_lookup_scope_includes_project_trusted_actor_and_key (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key) (scope=('p-1', 'a-2', 'k-1')) ... FAIL\n\n======================================================================\nFAIL: test_lookup_scope_includes_project_trusted_actor_and_key (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key) (scope=('p-1', 'a-2', 'k-1'))\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-dnlgr39t\\tests\\m0\\test_idempotency_concurrency.py\", line 159, in test_lookup_scope_includes_project_trusted_actor_and_key\n    self.assertIsNone(lookup.lookup(scope, api.canonical_digest(command)))\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: CommandResult(status='accepted', command_id='cmd-k-1', event_ids=('cmd-k-1:received', 'cmd-k-1:effect'), aggregate_revision=0, error_code=None) is not None\n\n----------------------------------------------------------------------\nRan 1 test in 0.072s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "canonical_context_binding",
+      "path": "src/aetp/core/idempotency.py",
+      "old": "    return command.digest()",
+      "new": "    from dataclasses import replace\n    return replace(command, correlation_id=\"ignored-context\").digest()",
+      "test": "CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest",
+      "command": "python -m unittest tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest -v",
+      "started_at": "2026-09-10T16:56:35.048150+00:00",
+      "finished_at": "2026-09-10T16:56:35.464128+00:00",
+      "exit_code": 1,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "killed": true,
+      "stdout": "",
+      "stderr": "test_every_immutable_command_field_binds_the_digest (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest) ... \n  test_every_immutable_command_field_binds_the_digest (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest) (field='correlation_id') ... FAIL\n\n======================================================================\nFAIL: test_every_immutable_command_field_binds_the_digest (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest) (field='correlation_id')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-ej2sq8t7\\tests\\m0\\test_idempotency_concurrency.py\", line 107, in test_every_immutable_command_field_binds_the_digest\n    self.assertNotEqual(\n    ~~~~~~~~~~~~~~~~~~~^\n        api.canonical_digest(replace(original, **{field: value})),\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        original_digest,\n        ^^^^^^^^^^^^^^^^\n    )\n    ^\nAssertionError: '583dbcce54686fb63f43f455807e34e0dcc848b2cc4b3196581aed5a2873826c' == '583dbcce54686fb63f43f455807e34e0dcc848b2cc4b3196581aed5a2873826c'\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "durable_revision_guard",
+      "path": "src/aetp/core/commands.py",
+      "old": "if command.expected_revision != snapshot.revision:",
+      "new": "if False:",
+      "test": "ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence",
+      "command": "python -m unittest tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence -v",
+      "started_at": "2026-09-10T16:56:35.512196+00:00",
+      "finished_at": "2026-09-10T16:56:36.338661+00:00",
+      "exit_code": 1,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "killed": true,
+      "stdout": "",
+      "stderr": "test_two_process_claims_have_one_winner_and_durable_version_evidence (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence) ... FAIL\n\n======================================================================\nFAIL: test_two_process_claims_have_one_winner_and_durable_version_evidence (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-yilea361\\tests\\m0\\test_idempotency_concurrency.py\", line 451, in test_two_process_claims_have_one_winner_and_durable_version_evidence\n    self.assertEqual(results[loser].error_code, \"REVISION_CONFLICT\")\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'TASK_NOT_ASSIGNABLE' != 'REVISION_CONFLICT'\n- TASK_NOT_ASSIGNABLE\n+ REVISION_CONFLICT\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.418s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "name": "atomic_batch_boundary",
+      "path": "src/aetp/core/commands.py",
+      "old": "            self.store.append_events(events)",
+      "new": "            self.store._ensure_open().commit()\n            self.store.append_events(events)",
+      "test": "DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry",
+      "command": "python -m unittest tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry -v",
+      "started_at": "2026-09-10T16:56:36.376052+00:00",
+      "finished_at": "2026-09-10T16:56:36.972671+00:00",
+      "exit_code": 1,
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "killed": true,
+      "stdout": "",
+      "stderr": "test_result_failure_rolls_back_key_then_original_command_can_retry (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry) ... FAIL\n\n======================================================================\nFAIL: test_result_failure_rolls_back_key_then_original_command_can_retry (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-wpj5meg8\\tests\\m0\\test_idempotency_concurrency.py\", line 395, in test_result_failure_rolls_back_key_then_original_command_can_retry\n    self.assert_fault_rolls_back_then_allows_retry(\"result\")\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\Alin\\AppData\\Local\\Temp\\aetp-m004-mutant-wpj5meg8\\tests\\m0\\test_idempotency_concurrency.py\", line 378, in assert_fault_rolls_back_then_allows_retry\n    self.assertEqual(durable_rows(self.fixture.store), before)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'commands': [('cmd-fault-result', 'p-1', 'a-1', 'task.claim'[4053 chars]}')]} != {'commands': [('cmd-k-1', 'p-1', 'a-1', 'task.create', 't-1',[3362 chars]}')]}\nDiff is 7192 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 1 test in 0.192s\n\nFAILED (failures=1)\n"
+    }
+  ],
+  "all_killed_by_assertion": true,
+  "canonical_sources_unchanged": true,
+  "finished_at": "2026-09-10T16:56:36.978432+00:00"
+}

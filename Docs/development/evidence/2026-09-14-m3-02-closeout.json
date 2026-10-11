@@ -1,0 +1,710 @@
+{
+  "work_item": "M3-02",
+  "candidate_revision": "v1",
+  "status": "in_progress",
+  "first_batch_status": "accepted",
+  "original_work_item_accepted": false,
+  "recorded_at": "2026-09-15T00:43:29.135928+08:00",
+  "purpose": "Operational evidence readback; not another independent review or whole-work-item acceptance.",
+  "closeout_source": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-closeout.py",
+    "sha256": "bfde846c000cd6770d5bcd72d988f3383ee47e5195e59ba1e316ebae66d548b1"
+  },
+  "candidate_audit": {
+    "work_item": "M3-02",
+    "scope": "first Verification prerequisite only",
+    "purpose": "author verification, not independent acceptance",
+    "audited_at": "2026-09-15T00:43:28.775755+08:00",
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-candidate-snapshot.json",
+      "sha256": "734a5cddbf8893f8615a971e735637304e4b654ab2338478320de934831f5d8b"
+    },
+    "sources_checked": 418,
+    "history": {
+      "archived_files_checked": 235,
+      "accepted_history_pins_checked": 6,
+      "intentional_changed_baseline_paths": [
+        {
+          "path": "Docs/development/backlog.json",
+          "accepted_sha256": "2ac74328256c8de7e5bee68de1996969ba76abdca056b8077fddd6a8ee25fb37",
+          "current_sha256": "7f5362d6b1391ba89e9bbe63305cfc69aebe4698700132aa813481c64b1020d5"
+        },
+        {
+          "path": "Docs/development/evidence/devprep-check.json",
+          "accepted_sha256": "5ff0c9c11738e35ef29dc4f3123b1d7691922c82b69ee902ed22e5e51b1ce626",
+          "current_sha256": "0d3fafac8b8cb3e498182c275dd7bc3cd914539ac3f78bb313fe85828f51659b"
+        },
+        {
+          "path": "Docs/development/evidence/preparation-report.json",
+          "accepted_sha256": "41515ce45bd7a261a0970c36fa2f1513f4414c2815bdd37096f7f0d50b076070",
+          "current_sha256": "f1c038e9e48eb3e3f7df3ba63ee415f5d207402e8e0a13b2f54adeff23f9e284"
+        },
+        {
+          "path": "Docs/development/status.json",
+          "accepted_sha256": "757856ceec8517d3e34077d61da02f7300951aa009c2f35d260cf7f26a83a67c",
+          "current_sha256": "11205eb1a76d343200209545a7725e0b534f35d8a08080d609243f309ee25387"
+        },
+        {
+          "path": "MEMORY.md",
+          "accepted_sha256": "0a38abca47dd375ce40d37679a804d735948cd209831a1954e49a08e1d2bd279",
+          "current_sha256": "074d9d53099a828f47162db9136b4c9a9834dc961ebfe077e37c317a78579510"
+        },
+        {
+          "path": "src/aetp/core/commands.py",
+          "accepted_sha256": "c5d5f9f21deab739cc6bb9a0a8401f4e24f1101209275242f4adaa118d373c70",
+          "current_sha256": "a17e1d9a631470597729a181716da10b6ff814a2c66b05be9728173e9a9665c5"
+        },
+        {
+          "path": "src/aetp/core/projection.py",
+          "accepted_sha256": "886be46e6c2d6a96a26440c953e6b22c28761d91efe9072cbf883305d16481c8",
+          "current_sha256": "d0bf117e101f8328ce0083217b3a315427f0a15feb339376c8d893e41789181a"
+        },
+        {
+          "path": "src/aetp/domain/models.py",
+          "accepted_sha256": "c68c12ac9331bce504f74583779aab6b0badea364d528113755eb97b3218aff3",
+          "current_sha256": "ff5094f07d20c4033b50d078b4ad6ddd4027c3e2417c3bb7057012a898c3244a"
+        },
+        {
+          "path": "src/aetp/governance/contracts.py",
+          "accepted_sha256": "4fd6dd0a857acd1dbd95fa6c681bd0726ba3366da68a11face6685f3f399704d",
+          "current_sha256": "9bfabf4781f0781f9be37d20a4eb99dce1833fc9a3e4fcfcf53ff7dc39a053ad"
+        },
+        {
+          "path": "src/aetp/governance/controls.py",
+          "accepted_sha256": "eef25de9487a10db2e0cc27059a681ce126b7ab8082e59bff5619f2541d14280",
+          "current_sha256": "8787f9f6aa63f91a4efb247f844622144aaa9a9c44056d4d9d82df818746cc92"
+        },
+        {
+          "path": "src/aetp/runtime/service.py",
+          "accepted_sha256": "c5f6a287b958e893217e55dd6cdeaec2096ea535b2d38e87b3eb2407430026a9",
+          "current_sha256": "a2aa99d717774b86d26ed2a5adfbc54efed05da599d1190d83715fff5faa23be"
+        }
+      ]
+    },
+    "replay": [
+      {
+        "path": "artifacts/m3-02-verification-demo-v1.sqlite",
+        "sha256": "27fe66cdc261d0ba79c81608cb4792a5e65448bbb6fbcd8f0fc02bc8e55080ae",
+        "event_count": 85,
+        "command_count": 40,
+        "prefixes_checked": 85,
+        "prefixes_with_pending_commands": 47,
+        "state_digest": "b22239dbd57fc05e5ad3350c888d86e4b23940b45778303345f31b92903b4000",
+        "database_bytes_unchanged": true,
+        "guard_calls": {
+          "aetp.acceptance.runner.FixedJsonRunner.run": 0,
+          "aetp.acceptance.runner.FixedJsonRunner.__init__": 0,
+          "aetp.acceptance.service.AcceptanceService.handle": 0,
+          "aetp.acceptance.service.AcceptanceService.dispatch": 0,
+          "aetp.acceptance.service.AcceptanceService.recover_verifications": 0,
+          "aetp.planning.service.PlanningService.handle": 0,
+          "aetp.planning.service.PlanningService.candidate": 0,
+          "aetp.planning.service.PlanningService.preview": 0,
+          "aetp.governance.service.GovernanceService._followups": 0,
+          "aetp.governance.service.GovernanceService.tick": 0,
+          "aetp.governance.trust.InputAuthority.issue": 0,
+          "aetp.governance.trust.InputAuthority.verify": 0,
+          "aetp.meetings.process.ProcessLog.read": 0,
+          "aetp.runtime.document.DocumentRuntime.register": 0,
+          "aetp.runtime.service.ExecutionService.start_session": 0,
+          "aetp.runtime.service.ExecutionService.dispatch": 0,
+          "aetp.runtime.service.ExecutionService.recover": 0,
+          "aetp.runtime.service.ExecutionService.validation_context": 0,
+          "aetp.workspace.documents.DocumentWorkspace.write": 0,
+          "aetp.workspace.documents.DocumentWorkspace.query": 0,
+          "aetp.core.runtime.SimulatedRuntime.execute": 0,
+          "time.time_ns": 0,
+          "subprocess.Popen": 0,
+          "socket.socket": 0
+        }
+      },
+      {
+        "path": "artifacts/m3-02-verification-demo-v1-facts.sqlite",
+        "sha256": "08ff142a43cbd8304ca3a04d90dc7868a465f5d8d729ab380e0e7652ddb6c3e0",
+        "event_count": 85,
+        "command_count": 40,
+        "prefixes_checked": 85,
+        "prefixes_with_pending_commands": 47,
+        "state_digest": "b22239dbd57fc05e5ad3350c888d86e4b23940b45778303345f31b92903b4000",
+        "database_bytes_unchanged": true,
+        "guard_calls": {
+          "aetp.acceptance.runner.FixedJsonRunner.run": 0,
+          "aetp.acceptance.runner.FixedJsonRunner.__init__": 0,
+          "aetp.acceptance.service.AcceptanceService.handle": 0,
+          "aetp.acceptance.service.AcceptanceService.dispatch": 0,
+          "aetp.acceptance.service.AcceptanceService.recover_verifications": 0,
+          "aetp.planning.service.PlanningService.handle": 0,
+          "aetp.planning.service.PlanningService.candidate": 0,
+          "aetp.planning.service.PlanningService.preview": 0,
+          "aetp.governance.service.GovernanceService._followups": 0,
+          "aetp.governance.service.GovernanceService.tick": 0,
+          "aetp.governance.trust.InputAuthority.issue": 0,
+          "aetp.governance.trust.InputAuthority.verify": 0,
+          "aetp.meetings.process.ProcessLog.read": 0,
+          "aetp.runtime.document.DocumentRuntime.register": 0,
+          "aetp.runtime.service.ExecutionService.start_session": 0,
+          "aetp.runtime.service.ExecutionService.dispatch": 0,
+          "aetp.runtime.service.ExecutionService.recover": 0,
+          "aetp.runtime.service.ExecutionService.validation_context": 0,
+          "aetp.workspace.documents.DocumentWorkspace.write": 0,
+          "aetp.workspace.documents.DocumentWorkspace.query": 0,
+          "aetp.core.runtime.SimulatedRuntime.execute": 0,
+          "time.time_ns": 0,
+          "subprocess.Popen": 0,
+          "socket.socket": 0
+        }
+      }
+    ]
+  },
+  "acceptance_consumption": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-review-consumption.json",
+    "sha256": "bae1298f4be4db81475cd3a89c29499ece36d300c59c2d89180afc536bee1c6d"
+  },
+  "acceptance_command": {
+    "work_item": "M3-02",
+    "label": "accept_first_batch_v2",
+    "argv": [
+      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-B",
+      "Docs/development/evidence/2026-09-14-m3-02-accept.py"
+    ],
+    "cwd": "D:\\Github\\AETP",
+    "started_at": "2026-09-15T00:33:07.964706+08:00",
+    "finished_at": "2026-09-15T00:33:19.536004+08:00",
+    "exit_code": 0,
+    "inputs": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-runs/accept_first_batch_v2/inputs.json",
+      "bytes": 44427,
+      "sha256": "406fc89d91a0e92389b1892d6b888c06405b97a04698a51f98af757b1a6ed261"
+    },
+    "stdout": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-runs/accept_first_batch_v2/stdout.txt",
+      "bytes": 431,
+      "sha256": "6a88821697f01c25002b47f5b3fb79b943db748fc798ccfd9a63d7f595595dbc"
+    },
+    "stderr": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-runs/accept_first_batch_v2/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "independent_acceptance": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-review.json",
+    "sha256": "e10a48530491af94c53e4c473f7dc39004b1ed489d1dbaaf456ca6b360ef5d54"
+  },
+  "independent_post_report_validation": {
+    "record": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/review_validation/result.json",
+      "sha256": "25263c82ee08ce173100a6916190c67d8ff208d6b042a75dcea7098eff580286"
+    },
+    "result": {
+      "validated_at": "2026-09-15T00:18:34.216844+08:00",
+      "decision": "accepted",
+      "original_work_item_accepted": false,
+      "report": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review.json",
+        "bytes": 19708,
+        "sha256": "e10a48530491af94c53e4c473f7dc39004b1ed489d1dbaaf456ca6b360ef5d54"
+      },
+      "markdown": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review.md",
+        "bytes": 4130,
+        "sha256": "6bc3e99a2d182234dba52aa98e98a04ac0089fc7377afa9801fd96648aa34c26"
+      },
+      "completed_commands_checked": 16,
+      "passing_test_methods": 567,
+      "frozen_candidate_unchanged": true,
+      "all_report_references_valid": true,
+      "input_blob_references_checked": 2271
+    }
+  },
+  "receipt_and_review_references_checked": 62,
+  "independent_passing_methods": 567,
+  "independent_test_counts": {
+    "m3_suite": 120,
+    "m2_suite": 167,
+    "m1_suite": 85,
+    "m0_suite": 156,
+    "independent_boundaries": 12,
+    "preparation_suite": 27
+  },
+  "independent_frozen_replay": {
+    "databases": 8,
+    "prefixes": 530,
+    "new_prefixes": 170,
+    "legacy_prefixes": 360,
+    "guards_per_database": 26,
+    "guard_calls": 0
+  },
+  "first_batch_acceptance_mapping": [
+    {
+      "criterion": "Bounded fixed checker, actual outcomes and immutable input snapshots",
+      "decision": "accepted",
+      "assessment": "Strict JSON/path/case limits and fixed Runner provenance are enforced. Real PASSED/FAILED and INCONCLUSIVE observations are persisted against immutable Artifact/criteria/case snapshots. Independent probes cover escaped duplicate keys, Unicode, exact UTF-8 limits and nesting boundaries.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo"
+      ]
+    },
+    {
+      "criterion": "Explicit Quality/Governance/source authority, independent actual execution identity and single use",
+      "decision": "accepted",
+      "assessment": "Quality intersects explicit Governance and inherited InputAuthority source; candidate/manual/marked/unknown paths do not gain auto authority. Execution requires the actual registered Session on an independent QA Task. New capture_origin, reserved report IDs and a nonempty exact digest close the earlier bypasses. Independent probes cover foreign Runtime sessions, actor mismatch, after-commit expiry and after-run Task revision change.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo"
+      ]
+    },
+    {
+      "criterion": "Crash, result rollback and global recovery without rerun",
+      "decision": "accepted",
+      "assessment": "Durable dispatch and ResourceGate serialize actual execution. SQLite failure at report insertion rolls back the entire result batch, leaving in_flight for bounded no-rerun recovery. The full M3 suite includes real process crash (exit 73), process contention and one-use concurrency; embedded Verification actions participate in global recovery.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo"
+      ]
+    },
+    {
+      "criterion": "Receipt/report/terminal integrity, atomic cursor and pure old/new Replay",
+      "decision": "accepted",
+      "assessment": "Reducers bind receipt, Command, capture origin, report and terminal facts; bad events preserve State and cursor. Independent probes reseal origin and change the embedded report Command. All 8 frozen full/facts stores replayed across 530 prefixes with 26 zero-call guards and unchanged bytes; 6 legacy states match their original complete-state digests. The fresh independent demo adds 2 new stores and 170 prefixes with 24 zero-call guards.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo",
+        "independent_audit_v4"
+      ]
+    }
+  ],
+  "original_work_item_criteria": [
+    {
+      "criterion": "集成面任务通过 Integration Gate",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "Mission success criteria 逐条 Acceptance Verification",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "两名以上平等 Agent 从粗糙想法讨论到成果交付，人工不拆任务且无隐藏 Manager",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    }
+  ],
+  "findings": {
+    "Critical": [],
+    "Important": [],
+    "Minor": [
+      {
+        "id": "M3-02-R1",
+        "severity": "Minor",
+        "blocking": false,
+        "path": "src/aetp/collaboration/service.py",
+        "line": 262,
+        "title": "The historical quality-gate comment is stale after adding AcceptanceService",
+        "detail": "The comment says no implemented record can reach the branch and no Verification Runner exists. New trusted PASSED records can reach the intentional ENFORCEMENT_UNAVAILABLE gate; Task success transitions and Integration remain unimplemented.",
+        "recommendation": "Update only the explanation in a later editable source batch. Preserve the closed Task-success gate. No frozen candidate change is required for these four criteria."
+      }
+    ]
+  },
+  "evidence_limitations": [
+    {
+      "kind": "initial_setup",
+      "failure": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/bootstrap_initial/failure.json",
+        "bytes": 669,
+        "sha256": "1d978ddfffb0e5acaec0a035afa6229e78808253de9e33963f2c92857c691474"
+      },
+      "original_control": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/bootstrap_initial/control.py",
+        "bytes": 7921,
+        "sha256": "4b8fb869859014fcc512fedc48d96c0b72a1d43eb9b36aded7267fa34717cabb"
+      },
+      "detail": "Initial v1a setup failed on Windows long paths in unrelated historical nested workspaces before product tests. v1a is retained. Full stderr existed only in truncated tool output; exact start/end timestamps were not captured. They have not been reconstructed. Successful v1b setup and every subsequent verification command have durable logs."
+    },
+    {
+      "kind": "early_schema_manifest",
+      "detail": "Early per-run manifests omit 9 schema JSON entries. Those exact fixtures are pinned by the frozen snapshot and the pre-test successful setup manifest; current copy bytes match. Later manifests include schemas. Earlier manifests were not rewritten.",
+      "integrity_detail": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/evidence-integrity.json",
+        "bytes": 10574,
+        "sha256": "291888ee991053049dc89922b5893e26d65b92a1cb4c4e32baa4c7465d1e1a3c"
+      }
+    }
+  ],
+  "scope_limits": {
+    "task_success_transitions_accepted": false,
+    "integration_accepted": false,
+    "mission_acceptance_accepted": false,
+    "bootstrap_accepted": false,
+    "test_028_passed": false,
+    "full_m1_accepted": false,
+    "full_conformance_passed": 0,
+    "natural_language_criteria_understanding": false,
+    "arbitrary_runner_or_general_os_sandbox": false,
+    "real_model_calls_or_billing_verified": false,
+    "cross_machine_and_performance_verified": false
+  },
+  "author_closeout_diagnostics": [
+    {
+      "run": {
+        "work_item": "M3-02",
+        "label": "accept_first_batch_v1",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "Docs/development/evidence/2026-09-14-m3-02-accept.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-15T00:31:04.683086+08:00",
+        "finished_at": "2026-09-15T00:31:06.841654+08:00",
+        "exit_code": 1,
+        "inputs": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/accept_first_batch_v1/inputs.json",
+          "bytes": 44087,
+          "sha256": "f630e9a86d14cd7cc21d60c92031d9c1f02e2d3faa96e2623dd1440578c4fe99"
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/accept_first_batch_v1/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/accept_first_batch_v1/stderr.txt",
+          "bytes": 611,
+          "sha256": "befc52dae8223c65e9f26ce73007f1a1acfd53ae4e74a6c599706d6f3e39a5b3"
+        }
+      },
+      "source": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-accept-attempt1.py",
+        "sha256": "3418a8ddbc7d4c3da7ec47e44506fa716607d0274dd7d6aa5dc3ae2f0109472d"
+      },
+      "disposition": "Wrong author expectation of create versus the actual reviewer assemble subcommand; failed before metadata or memory writes. Corrected from the preserved invocation and producer source."
+    }
+  ],
+  "final_commands": [
+    {
+      "work_item": "M3-02",
+      "label": "closeout_render_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-15T00:34:46.479322+08:00",
+      "finished_at": "2026-09-15T00:34:46.737825+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_render_v1/inputs.json",
+        "bytes": 44427,
+        "sha256": "406fc89d91a0e92389b1892d6b888c06405b97a04698a51f98af757b1a6ed261"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_render_v1/stdout.txt",
+        "bytes": 337,
+        "sha256": "454154e62d15f887c7295c26ecad9dce14559d96bc75d1214665b09d41be6465"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_render_v1/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "closeout_check_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-15T00:34:47.840112+08:00",
+      "finished_at": "2026-09-15T00:34:48.062836+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_check_v1/inputs.json",
+        "bytes": 44427,
+        "sha256": "406fc89d91a0e92389b1892d6b888c06405b97a04698a51f98af757b1a6ed261"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_check_v1/stdout.txt",
+        "bytes": 127,
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_check_v1/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "closeout_preparation_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-15T00:34:49.235318+08:00",
+      "finished_at": "2026-09-15T00:34:51.726199+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_preparation_v1/inputs.json",
+        "bytes": 44427,
+        "sha256": "406fc89d91a0e92389b1892d6b888c06405b97a04698a51f98af757b1a6ed261"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_preparation_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/closeout_preparation_v1/stderr.txt",
+        "bytes": 4729,
+        "sha256": "44e15c6fe9f8f2b24711b9168aab4dbe8f434eb2c2c47a289e8841341e4878af"
+      }
+    }
+  ],
+  "final_preparation_tests": 27,
+  "journal_before_closeout": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-development.jsonl",
+    "sha256": "70c9db8137062f1c40c395826ff37518ac5fc82f6a0b2a7289c3015775f7e1f7",
+    "bytes": 30406
+  },
+  "status_counts": {
+    "ready": 0,
+    "review": 0,
+    "done": 19,
+    "blocked": 0,
+    "todo": 0,
+    "in_progress": 1
+  },
+  "unchanged_claims": {
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Full-protocol requirements remain registered; no complete protocol conformance is accepted. Separately accepted M0-only execution is recorded under m0_subset."
+    },
+    "m0_subset": {
+      "work_item": "M0-06",
+      "scope": "m0-core-only",
+      "status": "accepted",
+      "accepted_at": "2026-09-11T13:17:17.286835+08:00",
+      "recorded_at": "2026-09-11T13:31:35.580244+08:00",
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "pending": 3,
+        "not_applicable": 19
+      },
+      "execution_counts": {
+        "passed": 9,
+        "failed": 0,
+        "not_run": 19
+      },
+      "test_ids_by_status": {
+        "passed": [
+          "TEST-001",
+          "TEST-002",
+          "TEST-005",
+          "TEST-017",
+          "TEST-018",
+          "TEST-021"
+        ],
+        "pending": [
+          "TEST-012",
+          "TEST-016",
+          "TEST-019"
+        ],
+        "not_applicable": [
+          "TEST-003",
+          "TEST-004",
+          "TEST-006",
+          "TEST-007",
+          "TEST-008",
+          "TEST-009",
+          "TEST-010",
+          "TEST-011",
+          "TEST-013",
+          "TEST-014",
+          "TEST-015",
+          "TEST-020",
+          "TEST-022",
+          "TEST-023",
+          "TEST-024",
+          "TEST-025",
+          "TEST-026",
+          "TEST-027",
+          "TEST-028"
+        ],
+        "failed": []
+      },
+      "execution_report": {
+        "path": "artifacts/m0-conformance-report-v2.json",
+        "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+      },
+      "candidate_snapshot": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+        "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+      },
+      "independent_review": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+        "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+      },
+      "review_narrative_addendum": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+        "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+      },
+      "reviewer": "Lorentz (01a08e64-7ed1-7db0-846c-82feb095ae71)",
+      "handoff": "artifacts/m0-handoff.json",
+      "claims": {
+        "full_aetp_compatible": false,
+        "protocol_task_completed": false,
+        "bootstrap_verified": false
+      },
+      "note": "Development-time acceptance of this fixed M0 candidate only. Three partial requirements remain pending and 19 later requirements are not run. Not the preparation/full-protocol conformance counter or product completion percentage."
+    },
+    "work_item_status_counts": {
+      "ready": 0,
+      "review": 0,
+      "done": 19,
+      "blocked": 0,
+      "todo": 0,
+      "in_progress": 1
+    },
+    "milestones": {
+      "PREP": {
+        "status": "done",
+        "total": 8,
+        "blocked": 0,
+        "done": 8,
+        "in_progress": 0,
+        "ready": 0,
+        "review": 0,
+        "todo": 0
+      },
+      "M0": {
+        "status": "done",
+        "total": 6,
+        "blocked": 0,
+        "done": 6,
+        "in_progress": 0,
+        "ready": 0,
+        "review": 0,
+        "todo": 0
+      },
+      "M1": {
+        "status": "done",
+        "total": 2,
+        "blocked": 0,
+        "done": 2,
+        "in_progress": 0,
+        "ready": 0,
+        "review": 0,
+        "todo": 0
+      },
+      "M2": {
+        "status": "done",
+        "total": 2,
+        "blocked": 0,
+        "done": 2,
+        "in_progress": 0,
+        "ready": 0,
+        "review": 0,
+        "todo": 0
+      },
+      "M3": {
+        "status": "in_progress",
+        "total": 2,
+        "blocked": 0,
+        "done": 1,
+        "in_progress": 1,
+        "ready": 0,
+        "review": 0,
+        "todo": 0
+      }
+    },
+    "active_work_items": [
+      "M3-02"
+    ]
+  },
+  "operational_outputs": [
+    {
+      "path": "Docs/development/backlog.json",
+      "sha256": "7f5362d6b1391ba89e9bbe63305cfc69aebe4698700132aa813481c64b1020d5"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "sha256": "11205eb1a76d343200209545a7725e0b534f35d8a08080d609243f309ee25387"
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-14-m3-02-verification.md",
+      "sha256": "45b2cf45a0ee8bd6685ffe31314456b8b7a76b897cc56d03d51ba5b4caf78163"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-handoff-final.md",
+      "sha256": "470dd8707297d46667f29a3ce39d4ac5088319db135ac22650b836ab6b81e313"
+    },
+    {
+      "path": "Docs/development/evidence/preparation-report.json",
+      "sha256": "f1c038e9e48eb3e3f7df3ba63ee415f5d207402e8e0a13b2f54adeff23f9e284"
+    },
+    {
+      "path": "Docs/development/evidence/devprep-check.json",
+      "sha256": "0d3fafac8b8cb3e498182c275dd7bc3cd914539ac3f78bb313fe85828f51659b"
+    },
+    {
+      "path": "Docs/development/evidence/backlog-check.json",
+      "sha256": "24819958b4848c7a959c5bead243985195b988e1d1fc5a7d394f63e0d5dd43cb"
+    },
+    {
+      "path": "Docs/development/evidence/knowledge-graph-check.json",
+      "sha256": "2c20a9da0c1144de110ed3e1bd394f128697b978cb234e4a71631f331da82c12"
+    }
+  ],
+  "memory_before": {
+    "path": "MEMORY.md",
+    "sha256": "074d9d53099a828f47162db9136b4c9a9834dc961ebfe077e37c317a78579510",
+    "bytes": 55653
+  },
+  "memory_after_prefix": {
+    "path": "MEMORY.md",
+    "sha256": "aa818366360362e60b0b37ac6ef9ee8d92424a56649e884a8e1ba391f8ef2d75",
+    "bytes": 57570
+  },
+  "historical_memory_prefixes_preserved": true,
+  "new_text_utf8_readback": true,
+  "handoff": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-handoff-final.md",
+    "sha256": "470dd8707297d46667f29a3ce39d4ac5088319db135ac22650b836ab6b81e313"
+  },
+  "next_slice_inputs": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-next-slice-inputs.md",
+    "sha256": "b25d2c34909933596f43ea0383b39c9af86492da190d8c13e7c995b605228d83"
+  },
+  "next": "Archive accepted first-batch inputs and acceptance evidence before designing Task quality transitions, content/criteria versions and explicit no-integration-surface exemption.",
+  "next_slice_implemented": false,
+  "environment": "Local Windows; no Git repository, ClaudeLink/new agent, Git mutation, installation, networking or global configuration change."
+}

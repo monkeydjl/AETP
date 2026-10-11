@@ -1,0 +1,2069 @@
+{
+  "schema_version": "aetp-independent-review-0.1",
+  "work_item": "M2-02",
+  "candidate_revision": "v1",
+  "decision": "accepted",
+  "reviewer": "/root/m1_reviewer",
+  "executor": "/root",
+  "report_created_at": "2026-09-12T16:00:56.525841+00:00",
+  "first_recorded_command_at": "2026-09-12T15:27:42.699688+00:00",
+  "sampling_cutoff_at": "2026-09-12T15:55:12.378635+00:00",
+  "summary": "独立接受冻结 M2-02 v1 的三个工作项验收条件。435 个回归方法与 6 个审查者补充方法最终通过；4 个数据库的 248 前缀只读重放、2 份实际文档、全部冻结与旧归档哈希均通过。未发现待修复 Critical/Important/Minor。保留 17 次作者非零运行及 2 次本次审查过程非零运行。",
+  "accepted_scope": "版本化固定 Policy、decision/task Approval、不可变提案的治理生命周期、固定 Windows 文档执行边界、人类 pause/resume/stop 与纯 Replay；仅本工作项。",
+  "independence": {
+    "different_executor_and_reviewer": true,
+    "reviewer_count": 1,
+    "additional_agents_spawned": 0,
+    "product_or_original_tests_modified": false,
+    "backlog_status_memory_modified": false,
+    "parent_journal_modified": false,
+    "frozen_evidence_modified": false,
+    "author_audit_used_as_independent_verification": false,
+    "claudelink_used": false,
+    "communication": "用户禁止 ClaudeLink；仅与既有主线程通过 collaboration 消息协调写集、冻结和发现。",
+    "independent_copy": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+    "copy_source_files": 7041,
+    "preparation_checks_only_in_copy": true,
+    "candidate_write_set_released_after_final_integrity": true,
+    "release_note": "本报告指向已冻结输入；主线程只可消费独立证据并追加收尾，不得重写冻结候选或旧失败。"
+  },
+  "candidate": {
+    "report": {
+      "path": "artifacts/m2-02-test-report.json",
+      "bytes": 59345,
+      "sha256": "547e7a0509fe4ba37a69d4a8094e9c4f683936a3c3d91cfc257002674ef848a4",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/artifacts/m2-02-test-report.json",
+        "bytes": 59345,
+        "sha256": "547e7a0509fe4ba37a69d4a8094e9c4f683936a3c3d91cfc257002674ef848a4"
+      }
+    },
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-candidate-snapshot.json",
+      "bytes": 40472,
+      "sha256": "bd07b57be12dd5c1480fec1e8218200fb2db9d16f598e996f012fb54677b7608",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/2026-09-12-m2-02-candidate-snapshot.json",
+        "bytes": 40472,
+        "sha256": "bd07b57be12dd5c1480fec1e8218200fb2db9d16f598e996f012fb54677b7608"
+      }
+    },
+    "baseline": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-baseline.json",
+      "bytes": 62885,
+      "sha256": "92271010ff216f9c3d8436d4ce39a3b5a6ebbf9b2cf15999ea7516137aee1514",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/2026-09-12-m2-02-baseline.json",
+        "bytes": 62885,
+        "sha256": "92271010ff216f9c3d8436d4ce39a3b5a6ebbf9b2cf15999ea7516137aee1514"
+      }
+    },
+    "spec": {
+      "path": "Docs/superpowers/specs/2026-09-12-m2-02-governance-design.md",
+      "bytes": 10774,
+      "sha256": "c962f15569ca2910c3ca060cceaf49b7a49267447cf1a3e2bd1a7fca7274ecf4",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/Docs/superpowers/specs/2026-09-12-m2-02-governance-design.md",
+        "bytes": 10774,
+        "sha256": "c962f15569ca2910c3ca060cceaf49b7a49267447cf1a3e2bd1a7fca7274ecf4"
+      }
+    },
+    "review_response": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-response.md",
+      "bytes": 3659,
+      "sha256": "a10e38d36b15383c54391fa218a8c74a682f38fabc3d753b39316b0637ea52fe",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/2026-09-12-m2-02-review-response.md",
+        "bytes": 3659,
+        "sha256": "a10e38d36b15383c54391fa218a8c74a682f38fabc3d753b39316b0637ea52fe"
+      }
+    },
+    "demonstration": {
+      "path": "artifacts/m2-02-demo-candidate-v1.json",
+      "bytes": 60985,
+      "sha256": "52ea422cd4c2c96c0698036da4fb053281092673aaa480c295c1d5eb06d09ec2",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/artifacts/m2-02-demo-candidate-v1.json",
+        "bytes": 60985,
+        "sha256": "52ea422cd4c2c96c0698036da4fb053281092673aaa480c295c1d5eb06d09ec2"
+      }
+    },
+    "legacy_compatibility_record": {
+      "path": "artifacts/m2-02-compatibility.json",
+      "bytes": 1442,
+      "sha256": "9bcf8036c80cebba9e079cf2cdd7ba7ad0972c5126a7b9ba853fe9d749ec1020",
+      "reviewed_copy": {
+        "path": ".tmp/m2-02-review-v1/workspace/artifacts/m2-02-compatibility.json",
+        "bytes": 1442,
+        "sha256": "9bcf8036c80cebba9e079cf2cdd7ba7ad0972c5126a7b9ba853fe9d749ec1020"
+      }
+    },
+    "independent_copy": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy-manifest.json",
+      "bytes": 3497532,
+      "sha256": "27d917407f3a3baee521f80b46fb291798eb6cb5d2008b5f60606890e876e849"
+    },
+    "initial_integrity": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity-initial.json",
+      "bytes": 48408,
+      "sha256": "b8829ee408ef10f8b4fa53d4b2b0405aa1da8997957ea84f9a094cdc22833a17"
+    },
+    "final_integrity": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity-final.json",
+      "bytes": 48408,
+      "sha256": "9edc14af6b63ccb7edba670da15a4feb8c5ab2e72be2b053c303ef8c34cd7fc8"
+    },
+    "copy_integrity": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy-integrity.json",
+      "bytes": 4193,
+      "sha256": "9c803a1f94912a86db961060d1b580d20459bf8c4ebb3d1f1de5fd9870395582"
+    },
+    "frozen_source_count": 236,
+    "metadata_archives": 3,
+    "frozen_prefixes": 2,
+    "baseline_archives": 217,
+    "historical_pins": 7
+  },
+  "findings": [],
+  "findings_count": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0
+  },
+  "finding_dispositions": [
+    {
+      "id": "M2-02-R1",
+      "disposition": "closed",
+      "prior_phase": "static review, no independent acceptance",
+      "title": "append/restore 来源清洗",
+      "conclusion": "真实 SQLite 回归覆盖旧 Action/Checkpoint 和 legacy 来源；独立三层追加实际完成，每层新可信回执不能抹去最初 unknown 来源、原摘要与中间来源链。",
+      "source_locations": [
+        "src/aetp/governance/trust.py:93",
+        "src/aetp/governance/approvals.py"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2"
+      ],
+      "author_red_green": [
+        "review_r1_corrected_red",
+        "review_r1_corrected_green"
+      ]
+    },
+    {
+      "id": "M2-02-R2",
+      "disposition": "closed",
+      "prior_phase": "static review, no independent acceptance",
+      "title": "内部因果链和复合命令完整性",
+      "conclusion": "纯 continuations 与游标核对真实因果链。独立重构了单独合法的改时点/参数/关联 child，以及删除/增加/修改 continuations，Replay 均拒绝。嵌套缺失事实保留父 pending，第二个孙操作拒绝完整回滚已有子树与幂等结果。",
+      "source_locations": [
+        "src/aetp/governance/causality.py",
+        "src/aetp/governance/projection.py",
+        "src/aetp/governance/service.py"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "author_red_green": [
+        "replay_corrected_red",
+        "replay_green_attempt2"
+      ]
+    },
+    {
+      "id": "M2-02-R3",
+      "disposition": "closed",
+      "prior_phase": "static review, no independent acceptance",
+      "title": "人类或系统身份与后注册 Agent 混淆",
+      "conclusion": "注册、principal 与 Replay 均拒绝矛盾身份。额外引入人类身份再移出新 Policy，通过另一 SQLite 连接验证历史保留；普通近似名称仍可注册，伪造历史人类 agent.created 仍被拒绝。",
+      "source_locations": [
+        "src/aetp/governance/policy.py:34",
+        "src/aetp/governance/policy.py:46",
+        "src/aetp/core/commands.py",
+        "src/aetp/core/projection.py"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2"
+      ],
+      "author_red_green": [
+        "review_r3_red",
+        "review_r3_green"
+      ]
+    },
+    {
+      "id": "M2-02-R2-AUDIT",
+      "disposition": "closed",
+      "prior_phase": "static follow-up",
+      "title": "带治理 envelope 的 rejected audit 被计作成功 child",
+      "conclusion": "冻结实现先分类 audit 并禁止治理 envelope；独立完整回归实际运行 grant 与 Intervention 两个篡改变体，均拒绝。",
+      "source_locations": [
+        "src/aetp/governance/causality.py:130"
+      ],
+      "evidence_run_labels": [
+        "m2_suite"
+      ],
+      "author_red_green": [
+        "review_r2_audit_red",
+        "review_r2_audit_green"
+      ]
+    },
+    {
+      "id": "M2-02-RESUME-PENDING",
+      "disposition": "closed",
+      "prior_phase": "static follow-up",
+      "title": "无 Runtime 的恢复错误假设 pending 为空",
+      "conclusion": "writer transaction 内读取真实 Commands/Events，仅排除当前尚无 receipt 的 resume。原单条 receipt-only 回归和独立两条 prior receipt 探针均返回 RECOVERY_REQUIRED；另外无 receipt 的损坏历史返回 INVALID_PAYLOAD，屏障都未打开。",
+      "source_locations": [
+        "src/aetp/governance/service.py:149"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2"
+      ],
+      "author_red_green": [
+        "resume_pending_red",
+        "resume_pending_green"
+      ]
+    }
+  ],
+  "criteria_assessment": [
+    {
+      "criterion": "审批绑定版本、参数和主体",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "Decision 绑定不可变 proposal revision/digest，Task 绑定当前执行快照、操作参数、执行者及 Binding/epoch/Session。请求、批准、激活和实际写入点重新检查。自批、伪造身份/回执、旧参数/Policy 和未实现目标均拒绝；三层追加仍保留最初不可信来源及摘要。人类与系统身份的保留跨 Policy 版本和新数据库连接有效。",
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "independent_regression_methods": [
+        "test_critical_auto_and_delegated_policies_are_rejected_before_use (tests.m2.test_approvals.ApprovalTests.test_critical_auto_and_delegated_policies_are_rejected_before_use)",
+        "test_current_target_is_rechecked_when_granting (tests.m2.test_approvals.ApprovalTests.test_current_target_is_rechecked_when_granting)",
+        "test_delegating_to_requester_does_not_self_approve (tests.m2.test_approvals.ApprovalTests.test_delegating_to_requester_does_not_self_approve)",
+        "test_delegation_records_actual_approver_and_cannot_remove_separation (tests.m2.test_approvals.ApprovalTests.test_delegation_records_actual_approver_and_cannot_remove_separation)",
+        "test_forged_authenticated_actor_cannot_reserve_request (tests.m2.test_approvals.ApprovalTests.test_forged_authenticated_actor_cannot_reserve_request)",
+        "test_high_and_critical_approvals_require_human_authority (tests.m2.test_approvals.ApprovalTests.test_high_and_critical_approvals_require_human_authority)",
+        "test_human_identity_remains_reserved_after_policy_removes_its_current_role (tests.m2.test_approvals.ApprovalTests.test_human_identity_remains_reserved_after_policy_removes_its_current_role)",
+        "test_late_agent_registration_cannot_reuse_human_or_system_identity (tests.m2.test_approvals.ApprovalTests.test_late_agent_registration_cannot_reuse_human_or_system_identity)",
+        "test_manual_mode_requires_human_even_if_a_rule_names_an_agent_delegate (tests.m2.test_approvals.ApprovalTests.test_manual_mode_requires_human_even_if_a_rule_names_an_agent_delegate)",
+        "test_no_owner_capability_can_bootstrap_an_unconfigured_project (tests.m2.test_approvals.ApprovalTests.test_no_owner_capability_can_bootstrap_an_unconfigured_project)",
+        "test_policy_admin_cannot_be_inferred_from_actor_name_or_payload (tests.m2.test_approvals.ApprovalTests.test_policy_admin_cannot_be_inferred_from_actor_name_or_payload)",
+        "test_policy_change_invalidates_prior_authorization_with_a_new_fact (tests.m2.test_approvals.ApprovalTests.test_policy_change_invalidates_prior_authorization_with_a_new_fact)",
+        "test_policy_version_cannot_be_rebound_to_new_content (tests.m2.test_approvals.ApprovalTests.test_policy_version_cannot_be_rebound_to_new_content)",
+        "test_principal_fails_closed_on_contradictory_human_agent_state (tests.m2.test_approvals.ApprovalTests.test_principal_fails_closed_on_contradictory_human_agent_state)",
+        "test_rejected_approval_is_final_and_retries_do_not_duplicate_facts (tests.m2.test_approvals.ApprovalTests.test_rejected_approval_is_final_and_retries_do_not_duplicate_facts)",
+        "test_replay_rejects_late_agent_creation_with_reserved_human_identity (tests.m2.test_approvals.ApprovalTests.test_replay_rejects_late_agent_creation_with_reserved_human_identity)",
+        "test_request_cannot_borrow_another_executors_task (tests.m2.test_approvals.ApprovalTests.test_request_cannot_borrow_another_executors_task)",
+        "test_self_reported_roles_and_policy_flags_are_not_authority (tests.m2.test_approvals.ApprovalTests.test_self_reported_roles_and_policy_flags_are_not_authority)",
+        "test_snapshot_digest_version_and_kind_are_validated_at_request (tests.m2.test_approvals.ApprovalTests.test_snapshot_digest_version_and_kind_are_validated_at_request)",
+        "test_unknown_input_requires_independent_peer_and_keeps_attribution (tests.m2.test_approvals.ApprovalTests.test_unknown_input_requires_independent_peer_and_keeps_attribution)",
+        "test_unknown_target_types_and_unimplemented_mission_reject (tests.m2.test_approvals.ApprovalTests.test_unknown_target_types_and_unimplemented_mission_reject)",
+        "test_activation_checks_expiry_even_before_host_tick (tests.m2.test_governance_decisions.GovernedDecisionTests.test_activation_checks_expiry_even_before_host_tick)",
+        "test_activation_rechecks_arguments_executor_and_current_state_revision (tests.m2.test_governance_decisions.GovernedDecisionTests.test_activation_rechecks_arguments_executor_and_current_state_revision)",
+        "test_compact_and_retry_keep_dissent_after_decision_is_active (tests.m2.test_governance_decisions.GovernedDecisionTests.test_compact_and_retry_keep_dissent_after_decision_is_active)",
+        "test_denial_records_rejected_decision_without_rewriting_proposal (tests.m2.test_governance_decisions.GovernedDecisionTests.test_denial_records_rejected_decision_without_rewriting_proposal)",
+        "test_lifecycle_keeps_proposal_digest_and_uses_separate_state_cas (tests.m2.test_governance_decisions.GovernedDecisionTests.test_lifecycle_keeps_proposal_digest_and_uses_separate_state_cas)",
+        "test_new_superseding_proposal_cannot_use_original_approval (tests.m2.test_governance_decisions.GovernedDecisionTests.test_new_superseding_proposal_cannot_use_original_approval)",
+        "test_proposer_cannot_launder_self_approval_through_another_requester (tests.m2.test_governance_decisions.GovernedDecisionTests.test_proposer_cannot_launder_self_approval_through_another_requester)",
+        "test_self_review_and_skipped_stages_do_not_establish_authority (tests.m2.test_governance_decisions.GovernedDecisionTests.test_self_review_and_skipped_stages_do_not_establish_authority)",
+        "test_trusted_ingress_does_not_clear_untrusted_peer_proposal (tests.m2.test_governance_decisions.GovernedDecisionTests.test_trusted_ingress_does_not_clear_untrusted_peer_proposal)",
+        "test_approval_does_not_authorize_changed_document_arguments (tests.m2.test_governance_execution.GovernedExecutionTests.test_approval_does_not_authorize_changed_document_arguments)",
+        "test_approved_document_executes_once_and_keeps_source_and_scope (tests.m2.test_governance_execution.GovernedExecutionTests.test_approved_document_executes_once_and_keeps_source_and_scope)",
+        "test_client_cannot_reuse_lower_risk_approval_for_a_critical_flag (tests.m2.test_governance_execution.GovernedExecutionTests.test_client_cannot_reuse_lower_risk_approval_for_a_critical_flag)",
+        "test_completed_external_result_survives_later_revocation (tests.m2.test_governance_execution.GovernedExecutionTests.test_completed_external_result_survives_later_revocation)",
+        "test_configured_governance_requires_approval_at_tool_request (tests.m2.test_governance_execution.GovernedExecutionTests.test_configured_governance_requires_approval_at_tool_request)",
+        "test_denied_or_other_actors_approval_is_not_a_session_capability (tests.m2.test_governance_execution.GovernedExecutionTests.test_denied_or_other_actors_approval_is_not_a_session_capability)",
+        "test_expired_approval_cannot_dispatch_even_without_a_tick (tests.m2.test_governance_execution.GovernedExecutionTests.test_expired_approval_cannot_dispatch_even_without_a_tick)",
+        "test_owner_approved_critical_label_still_has_only_fixed_document_capability (tests.m2.test_governance_execution.GovernedExecutionTests.test_owner_approved_critical_label_still_has_only_fixed_document_capability)",
+        "test_policy_change_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_policy_change_after_queue_prevents_provider_write)",
+        "test_revocation_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_revocation_after_queue_prevents_provider_write)",
+        "test_task_revision_changed_since_approval_is_rejected (tests.m2.test_governance_execution.GovernedExecutionTests.test_task_revision_changed_since_approval_is_rejected)",
+        "test_write_callback_rechecks_a_revocation_after_in_flight_is_recorded (tests.m2.test_governance_execution.GovernedExecutionTests.test_write_callback_rechecks_a_revocation_after_in_flight_is_recorded)",
+        "test_attested_untrusted_source_cannot_be_cleared_by_top_level_trusted_label (tests.m2.test_governance_trust.GovernanceTrustTests.test_attested_untrusted_source_cannot_be_cleared_by_top_level_trusted_label)",
+        "test_medium_untrusted_input_escalates_to_human_and_review_keeps_source (tests.m2.test_governance_trust.GovernanceTrustTests.test_medium_untrusted_input_escalates_to_human_and_review_keeps_source)",
+        "test_receipt_copy_wrong_authority_and_different_command_are_rejected (tests.m2.test_governance_trust.GovernanceTrustTests.test_receipt_copy_wrong_authority_and_different_command_are_rejected)",
+        "test_restore_preserves_source_action_and_checkpoint_context_provenance (tests.m2.test_governance_trust.GovernanceTrustTests.test_restore_preserves_source_action_and_checkpoint_context_provenance)",
+        "test_restore_with_trusted_document_still_inherits_untrusted_checkpoint_context (tests.m2.test_governance_trust.GovernanceTrustTests.test_restore_with_trusted_document_still_inherits_untrusted_checkpoint_context)",
+        "test_successful_request_retry_does_not_require_new_receipt_or_read_new_clock (tests.m2.test_governance_trust.GovernanceTrustTests.test_successful_request_retry_does_not_require_new_receipt_or_read_new_clock)",
+        "test_trusted_append_of_trusted_document_can_still_use_auto_approval (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_append_of_trusted_document_can_still_use_auto_approval)",
+        "test_trusted_append_receipt_preserves_untrusted_source_action (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_append_receipt_preserves_untrusted_source_action)",
+        "test_trusted_low_risk_uses_a_recorded_deterministic_system_approval (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_low_risk_uses_a_recorded_deterministic_system_approval)",
+        "test_append_of_legacy_document_without_source_is_conservatively_untrusted (tests.m2.test_governance_trust.LegacyDocumentSourceTests.test_append_of_legacy_document_without_source_is_conservatively_untrusted)"
+      ],
+      "additional_probe_methods": [
+        "test_identity_introduced_then_removed_stays_reserved_on_new_connection (__main__.IndependentGovernanceProbes.test_identity_introduced_then_removed_stays_reserved_on_new_connection)",
+        "test_multihop_append_retains_original_source_after_fresh_trusted_receipts (__main__.IndependentGovernanceProbes.test_multihop_append_retains_original_source_after_fresh_trusted_receipts)"
+      ],
+      "scope_limit": "仅 decision/task 目标和固定文档操作；可信宿主身份与 InputAuthority 是前提，不是对任意输入的来源检测。"
+    },
+    {
+      "criterion": "过期/撤销有升级路径",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "过期事实、升级路线、有限新 ID 续期、委托 veto 窗口和人类安全撤销均由持久事实表达。高风险到期阻断 Task，失效授权不能继续派发。已有结果和 active Decision 历史保留，并记录授权失效、影响和重新规划要求。两层政策失效链的第二个孙命令拒绝时，父事实和此前成功子树全部回滚，只留原父请求的拒绝审计。",
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "independent_regression_methods": [
+        "test_agent_cannot_issue_internal_expiry_or_human_revoke (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_agent_cannot_issue_internal_expiry_or_human_revoke)",
+        "test_approved_but_unused_authorization_also_expires (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_approved_but_unused_authorization_also_expires)",
+        "test_delegated_veto_has_a_real_deadline_and_normal_safety_revoke_is_explicit (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_delegated_veto_has_a_real_deadline_and_normal_safety_revoke_is_explicit)",
+        "test_expiration_escalates_once_and_duplicate_ticks_are_noops (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_expiration_escalates_once_and_duplicate_ticks_are_noops)",
+        "test_high_expiration_keeps_human_route_and_blocks_related_task (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_high_expiration_keeps_human_route_and_blocks_related_task)",
+        "test_reject_expiration_returns_unactivated_decision_to_review (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_reject_expiration_returns_unactivated_decision_to_review)",
+        "test_renewal_creates_new_ids_and_stops_at_policy_limit (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_renewal_creates_new_ids_and_stops_at_policy_limit)",
+        "test_revocation_invalidates_active_authority_without_undoing_decision_history (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_revocation_invalidates_active_authority_without_undoing_decision_history)",
+        "test_stale_target_turns_renew_into_visible_escalation (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_stale_target_turns_renew_into_visible_escalation)",
+        "test_windowed_veto_preserves_granted_history_and_records_impact (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_windowed_veto_preserves_granted_history_and_records_impact)",
+        "test_expired_approval_cannot_dispatch_even_without_a_tick (tests.m2.test_governance_execution.GovernedExecutionTests.test_expired_approval_cannot_dispatch_even_without_a_tick)",
+        "test_policy_change_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_policy_change_after_queue_prevents_provider_write)",
+        "test_revocation_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_revocation_after_queue_prevents_provider_write)",
+        "test_cross_process_grant_at_expiry_cannot_revive_the_expired_request (tests.m2.test_governance_replay.GovernanceProcessTests.test_cross_process_grant_at_expiry_cannot_revive_the_expired_request)"
+      ],
+      "additional_probe_methods": [
+        "test_second_policy_grandchild_rejection_rolls_back_prior_subtree (__main__.IndependentGovernanceProbes.test_second_policy_grandchild_rejection_rolls_back_prior_subtree)"
+      ],
+      "scope_limit": "升级为事实中的通知等级和人类路线；不声称发送了外部通知或撤回已有外部效果。"
+    },
+    {
+      "criterion": "暂停屏障和人类 Intervention 可重放",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "暂停关闭新派发，保留在途结果和人类安全操作，治理时钟冻结而 Session 墙钟期限不延长。恢复检查真实持久 Commands，包括无文档 Runtime 的 receipt-only 历史。父/子身份、参数、时间、关联、顺序及 audit 类型受校验，缺少孙事实仍保留根与中间父 pending。4 个示例数据库副本逐前缀重放共 248 次，完整库/仅事实库一致，20 个实时设施 guard 调用均为零，原件与副本字节未变。",
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "independent_regression_methods": [
+        "test_governance_deadline_freezes_through_pause_and_resume (tests.m2.test_governance.GovernanceControlTests.test_governance_deadline_freezes_through_pause_and_resume)",
+        "test_human_stop_cancels_task_and_revokes_binding_without_losing_in_flight_facts (tests.m2.test_governance.GovernanceControlTests.test_human_stop_cancels_task_and_revokes_binding_without_losing_in_flight_facts)",
+        "test_long_pause_does_not_extend_session_and_failed_resume_leaves_no_success_fact (tests.m2.test_governance.GovernanceControlTests.test_long_pause_does_not_extend_session_and_failed_resume_leaves_no_success_fact)",
+        "test_override_cannot_bypass_missing_quality_or_execution_enforcement (tests.m2.test_governance.GovernanceControlTests.test_override_cannot_bypass_missing_quality_or_execution_enforcement)",
+        "test_pause_after_effect_before_report_preserves_queryable_result_without_dispatch (tests.m2.test_governance.GovernanceControlTests.test_pause_after_effect_before_report_preserves_queryable_result_without_dispatch)",
+        "test_pause_and_resume_retries_do_not_duplicate_interventions (tests.m2.test_governance.GovernanceControlTests.test_pause_and_resume_retries_do_not_duplicate_interventions)",
+        "test_pause_has_an_intervention_and_never_claims_full_execution_quiescence (tests.m2.test_governance.GovernanceControlTests.test_pause_has_an_intervention_and_never_claims_full_execution_quiescence)",
+        "test_pause_requires_human_and_legacy_execution_control_cannot_bypass_governance (tests.m2.test_governance.GovernanceControlTests.test_pause_requires_human_and_legacy_execution_control_cannot_bypass_governance)",
+        "test_paused_messages_continue_but_tool_admission_and_grants_stop (tests.m2.test_governance.GovernanceControlTests.test_paused_messages_continue_but_tool_admission_and_grants_stop)",
+        "test_paused_runtime_report_is_retained_without_quality_progress (tests.m2.test_governance.GovernanceControlTests.test_paused_runtime_report_is_retained_without_quality_progress)",
+        "test_restart_retains_pause_and_missing_session_cannot_resume (tests.m2.test_governance.GovernanceControlTests.test_restart_retains_pause_and_missing_session_cannot_resume)",
+        "test_execution_configured_after_governance_pause_preserves_excluded_time (tests.m2.test_governance.GovernanceTests.test_execution_configured_after_governance_pause_preserves_excluded_time)",
+        "test_later_execution_clock_configuration_does_not_reset_deadline (tests.m2.test_governance.GovernanceTests.test_later_execution_clock_configuration_does_not_reset_deadline)",
+        "test_paused_analysis_preserves_blindness_and_blocks_normal_advance (tests.m2.test_governance.GovernanceTests.test_paused_analysis_preserves_blindness_and_blocks_normal_advance)",
+        "test_paused_budget_exhaustion_still_converges (tests.m2.test_governance.GovernanceTests.test_paused_budget_exhaustion_still_converges)",
+        "test_paused_project_accepts_existing_messages_and_freezes_time (tests.m2.test_governance.GovernanceTests.test_paused_project_accepts_existing_messages_and_freezes_time)",
+        "test_prior_m1_cache_without_pause_metadata_rebuilds_before_m2_append (tests.m2.test_governance.GovernanceTests.test_prior_m1_cache_without_pause_metadata_rebuilds_before_m2_append)",
+        "test_resume_without_runtime_rejects_receipt_only_history (tests.m2.test_governance.GovernanceTests.test_resume_without_runtime_rejects_receipt_only_history)",
+        "test_append_failure_after_first_child_rolls_back_whole_compound (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_append_failure_after_first_child_rolls_back_whole_compound)",
+        "test_lost_parent_response_retry_does_not_read_clock_or_repeat_children (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_lost_parent_response_retry_does_not_read_clock_or_repeat_children)",
+        "test_normal_rejected_child_rolls_back_parent_and_keeps_only_rejection_audit (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_normal_rejected_child_rolls_back_parent_and_keeps_only_rejection_audit)",
+        "test_cross_process_grant_at_expiry_cannot_revive_the_expired_request (tests.m2.test_governance_replay.GovernanceProcessTests.test_cross_process_grant_at_expiry_cannot_revive_the_expired_request)",
+        "test_other_process_pause_committed_before_dispatch_prevents_provider_call (tests.m2.test_governance_replay.GovernanceProcessTests.test_other_process_pause_committed_before_dispatch_prevents_provider_call)",
+        "test_other_process_revocation_waits_for_actual_write_to_release_resource_gate (tests.m2.test_governance_replay.GovernanceProcessTests.test_other_process_revocation_waits_for_actual_write_to_release_resource_gate)",
+        "test_two_process_approvers_cannot_both_grant_the_same_revision (tests.m2.test_governance_replay.GovernanceProcessTests.test_two_process_approvers_cannot_both_grant_the_same_revision)",
+        "test_auto_approval_parent_is_pending_until_its_grant_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_auto_approval_parent_is_pending_until_its_grant_fact)",
+        "test_changed_persisted_command_and_receipt_cannot_replace_event_parameters (tests.m2.test_governance_replay.GovernanceReplayTests.test_changed_persisted_command_and_receipt_cannot_replace_event_parameters)",
+        "test_child_identity_does_not_collide_when_parent_and_target_contain_delimiters (tests.m2.test_governance_replay.GovernanceReplayTests.test_child_identity_does_not_collide_when_parent_and_target_contain_delimiters)",
+        "test_every_event_prefix_rebuilds_without_clock_runtime_or_followup_execution (tests.m2.test_governance_replay.GovernanceReplayTests.test_every_event_prefix_rebuilds_without_clock_runtime_or_followup_execution)",
+        "test_expiry_root_requires_deterministic_command_identity (tests.m2.test_governance_replay.GovernanceReplayTests.test_expiry_root_requires_deterministic_command_identity)",
+        "test_expiry_root_requires_host_tick_trigger (tests.m2.test_governance_replay.GovernanceReplayTests.test_expiry_root_requires_host_tick_trigger)",
+        "test_governance_context_does_not_ignore_unknown_authority_fields (tests.m2.test_governance_replay.GovernanceReplayTests.test_governance_context_does_not_ignore_unknown_authority_fields)",
+        "test_governance_event_cannot_fall_back_to_legacy_reducer_without_schema_marker (tests.m2.test_governance_replay.GovernanceReplayTests.test_governance_event_cannot_fall_back_to_legacy_reducer_without_schema_marker)",
+        "test_governed_project_replay_cannot_accept_a_legacy_bootstrap_pause_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_governed_project_replay_cannot_accept_a_legacy_bootstrap_pause_fact)",
+        "test_high_expiry_remains_pending_until_escalation_and_task_impact (tests.m2.test_governance_replay.GovernanceReplayTests.test_high_expiry_remains_pending_until_escalation_and_task_impact)",
+        "test_internal_auto_grant_rejects_nonexistent_or_wrong_parent (tests.m2.test_governance_replay.GovernanceReplayTests.test_internal_auto_grant_rejects_nonexistent_or_wrong_parent)",
+        "test_internal_child_cannot_remove_its_parent_link (tests.m2.test_governance_replay.GovernanceReplayTests.test_internal_child_cannot_remove_its_parent_link)",
+        "test_pause_parent_is_pending_until_intervention_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_pause_parent_is_pending_until_intervention_fact)",
+        "test_rejected_audit_with_governance_envelope_cannot_complete_required_child (tests.m2.test_governance_replay.GovernanceReplayTests.test_rejected_audit_with_governance_envelope_cannot_complete_required_child)",
+        "test_required_children_cannot_be_reordered (tests.m2.test_governance_replay.GovernanceReplayTests.test_required_children_cannot_be_reordered)",
+        "test_unrelated_root_cannot_hide_an_omitted_required_child (tests.m2.test_governance_replay.GovernanceReplayTests.test_unrelated_root_cannot_hide_an_omitted_required_child)"
+      ],
+      "additional_probe_methods": [
+        "test_individually_valid_child_mutations_and_continuation_edits_are_rejected (__main__.IndependentGovernanceProbes.test_individually_valid_child_mutations_and_continuation_edits_are_rejected)",
+        "test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending (__main__.IndependentGovernanceProbes.test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending)",
+        "test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history (__main__.IndependentNoRuntimeProbe.test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history)"
+      ],
+      "scope_limit": "Binding pause_status=unsupported，不能据此声称所有执行已静止；未实现的 override/目标不能绕过质量门。"
+    }
+  ],
+  "verification": {
+    "regression": {
+      "total_methods": 435,
+      "passed": 435,
+      "suites": [
+        {
+          "label": "m2_suite",
+          "methods": 167,
+          "exit_code": 0,
+          "actual_cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace"
+        },
+        {
+          "label": "m1_suite",
+          "methods": 85,
+          "exit_code": 0,
+          "actual_cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace"
+        },
+        {
+          "label": "m0_suite",
+          "methods": 156,
+          "exit_code": 0,
+          "actual_cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace"
+        },
+        {
+          "label": "preparation_suite",
+          "methods": 27,
+          "exit_code": 0,
+          "actual_cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace"
+        }
+      ],
+      "new_m2_methods_over_m2_01": 98
+    },
+    "independent_probes": {
+      "methods": 6,
+      "passed": 6,
+      "accepted_run_label": "independent_probes_v2",
+      "method_names": [
+        "test_identity_introduced_then_removed_stays_reserved_on_new_connection (__main__.IndependentGovernanceProbes.test_identity_introduced_then_removed_stays_reserved_on_new_connection)",
+        "test_individually_valid_child_mutations_and_continuation_edits_are_rejected (__main__.IndependentGovernanceProbes.test_individually_valid_child_mutations_and_continuation_edits_are_rejected)",
+        "test_multihop_append_retains_original_source_after_fresh_trusted_receipts (__main__.IndependentGovernanceProbes.test_multihop_append_retains_original_source_after_fresh_trusted_receipts)",
+        "test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending (__main__.IndependentGovernanceProbes.test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending)",
+        "test_second_policy_grandchild_rejection_rolls_back_prior_subtree (__main__.IndependentGovernanceProbes.test_second_policy_grandchild_rejection_rolls_back_prior_subtree)",
+        "test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history (__main__.IndependentNoRuntimeProbe.test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history)"
+      ],
+      "initial_attempt_retained": "independent_probes",
+      "initial_attempt_reported_methods": 6,
+      "initial_attempt_ok_methods": 5,
+      "counting_rule": "首轮五个成功方法不重复累计；只计最终整体 OK 的六个独立方法。"
+    },
+    "demo_readonly": {
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly-demo.json",
+        "bytes": 71078,
+        "sha256": "2894f96a99bc726cae6bffa03367636dcda23ca585331e1d8458c6dcdd620989"
+      },
+      "databases": 4,
+      "prefixes_checked": 248,
+      "new_m2_prefixes_per_database": 100,
+      "legacy_prefixes_per_database": 24,
+      "document_outputs": 2,
+      "all_guard_calls_zero": true,
+      "original_and_copy_bytes_unchanged": true
+    },
+    "preparation": {
+      "labels": [
+        "preparation_render",
+        "preparation_check",
+        "preparation_suite"
+      ],
+      "all_exit_codes_zero": true,
+      "actual_cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+      "outputs": [
+        {
+          "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/backlog-check.json",
+          "bytes": 453,
+          "sha256": "1601149697206dc2092f5d9d76c23edbf33917579f1f3a5732b7ba3a4d008bad"
+        },
+        {
+          "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/devprep-check.json",
+          "bytes": 587,
+          "sha256": "1b4e687c4106eadfa926fe75fcba9b399c2b71081086da66fcaa02d41fbabea4"
+        },
+        {
+          "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/environment.json",
+          "bytes": 1086,
+          "sha256": "bc58fbdff4426368c155bac3caf6d9cb3c610aa890dbd21fe37a97eba656135f"
+        },
+        {
+          "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/knowledge-graph-check.json",
+          "bytes": 407,
+          "sha256": "f43c559eaea95cd6557cfe96297b03e202bfa6471c7e5af4838dcb5c3d2b025a"
+        },
+        {
+          "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/preparation-report.json",
+          "bytes": 8694,
+          "sha256": "5e49790284df95ab8a687cc3136b546766e4b8f76b82c735fd5b762fa28b9840"
+        }
+      ],
+      "root_preparation_refreshed": false
+    },
+    "commands": [
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "integrity_initial",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "integrity",
+          "integrity-initial"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:27:42.699688+00:00",
+        "finished_at": "2026-09-12T15:27:43.473442+00:00",
+        "elapsed_seconds": 0.7737512000021525,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity_initial.stdout.txt",
+          "bytes": 985,
+          "sha256": "e673a62a576b6063026717a321580780bf1a96c3972210d9a55e94ce0049c93c"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity_initial.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "copy_workspace",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "copy"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:27:57.569690+00:00",
+        "finished_at": "2026-09-12T15:29:07.653885+00:00",
+        "elapsed_seconds": 70.08418909998727,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy_workspace.stdout.txt",
+          "bytes": 124,
+          "sha256": "7170a6b9d9dc09be0a66a161b2418c756e2b515376a6ef2dc6cc4721b4289496"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy_workspace.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m2_suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m2",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:33:12.168707+00:00",
+        "finished_at": "2026-09-12T15:34:01.636409+00:00",
+        "elapsed_seconds": 49.46771660001832,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m2_suite.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m2_suite.stderr.txt",
+          "bytes": 30977,
+          "sha256": "fb02569c20f162eb6aacb4e3fb3380b2bf5e9e7300695139dc8c02db60e233e4"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 167,
+          "ok_method_count": 167,
+          "ok_methods": [
+            "test_agent_cannot_issue_internal_expiry_or_human_revoke (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_agent_cannot_issue_internal_expiry_or_human_revoke)",
+            "test_approved_but_unused_authorization_also_expires (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_approved_but_unused_authorization_also_expires)",
+            "test_delegated_veto_has_a_real_deadline_and_normal_safety_revoke_is_explicit (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_delegated_veto_has_a_real_deadline_and_normal_safety_revoke_is_explicit)",
+            "test_expiration_escalates_once_and_duplicate_ticks_are_noops (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_expiration_escalates_once_and_duplicate_ticks_are_noops)",
+            "test_high_expiration_keeps_human_route_and_blocks_related_task (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_high_expiration_keeps_human_route_and_blocks_related_task)",
+            "test_reject_expiration_returns_unactivated_decision_to_review (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_reject_expiration_returns_unactivated_decision_to_review)",
+            "test_renewal_creates_new_ids_and_stops_at_policy_limit (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_renewal_creates_new_ids_and_stops_at_policy_limit)",
+            "test_revocation_invalidates_active_authority_without_undoing_decision_history (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_revocation_invalidates_active_authority_without_undoing_decision_history)",
+            "test_stale_target_turns_renew_into_visible_escalation (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_stale_target_turns_renew_into_visible_escalation)",
+            "test_windowed_veto_preserves_granted_history_and_records_impact (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_windowed_veto_preserves_granted_history_and_records_impact)",
+            "test_critical_auto_and_delegated_policies_are_rejected_before_use (tests.m2.test_approvals.ApprovalTests.test_critical_auto_and_delegated_policies_are_rejected_before_use)",
+            "test_current_target_is_rechecked_when_granting (tests.m2.test_approvals.ApprovalTests.test_current_target_is_rechecked_when_granting)",
+            "test_delegating_to_requester_does_not_self_approve (tests.m2.test_approvals.ApprovalTests.test_delegating_to_requester_does_not_self_approve)",
+            "test_delegation_records_actual_approver_and_cannot_remove_separation (tests.m2.test_approvals.ApprovalTests.test_delegation_records_actual_approver_and_cannot_remove_separation)",
+            "test_forged_authenticated_actor_cannot_reserve_request (tests.m2.test_approvals.ApprovalTests.test_forged_authenticated_actor_cannot_reserve_request)",
+            "test_high_and_critical_approvals_require_human_authority (tests.m2.test_approvals.ApprovalTests.test_high_and_critical_approvals_require_human_authority)",
+            "test_human_identity_remains_reserved_after_policy_removes_its_current_role (tests.m2.test_approvals.ApprovalTests.test_human_identity_remains_reserved_after_policy_removes_its_current_role)",
+            "test_late_agent_registration_cannot_reuse_human_or_system_identity (tests.m2.test_approvals.ApprovalTests.test_late_agent_registration_cannot_reuse_human_or_system_identity)",
+            "test_manual_mode_requires_human_even_if_a_rule_names_an_agent_delegate (tests.m2.test_approvals.ApprovalTests.test_manual_mode_requires_human_even_if_a_rule_names_an_agent_delegate)",
+            "test_no_owner_capability_can_bootstrap_an_unconfigured_project (tests.m2.test_approvals.ApprovalTests.test_no_owner_capability_can_bootstrap_an_unconfigured_project)",
+            "test_policy_admin_cannot_be_inferred_from_actor_name_or_payload (tests.m2.test_approvals.ApprovalTests.test_policy_admin_cannot_be_inferred_from_actor_name_or_payload)",
+            "test_policy_change_invalidates_prior_authorization_with_a_new_fact (tests.m2.test_approvals.ApprovalTests.test_policy_change_invalidates_prior_authorization_with_a_new_fact)",
+            "test_policy_version_cannot_be_rebound_to_new_content (tests.m2.test_approvals.ApprovalTests.test_policy_version_cannot_be_rebound_to_new_content)",
+            "test_principal_fails_closed_on_contradictory_human_agent_state (tests.m2.test_approvals.ApprovalTests.test_principal_fails_closed_on_contradictory_human_agent_state)",
+            "test_rejected_approval_is_final_and_retries_do_not_duplicate_facts (tests.m2.test_approvals.ApprovalTests.test_rejected_approval_is_final_and_retries_do_not_duplicate_facts)",
+            "test_replay_rejects_late_agent_creation_with_reserved_human_identity (tests.m2.test_approvals.ApprovalTests.test_replay_rejects_late_agent_creation_with_reserved_human_identity)",
+            "test_request_cannot_borrow_another_executors_task (tests.m2.test_approvals.ApprovalTests.test_request_cannot_borrow_another_executors_task)",
+            "test_self_reported_roles_and_policy_flags_are_not_authority (tests.m2.test_approvals.ApprovalTests.test_self_reported_roles_and_policy_flags_are_not_authority)",
+            "test_snapshot_digest_version_and_kind_are_validated_at_request (tests.m2.test_approvals.ApprovalTests.test_snapshot_digest_version_and_kind_are_validated_at_request)",
+            "test_unknown_input_requires_independent_peer_and_keeps_attribution (tests.m2.test_approvals.ApprovalTests.test_unknown_input_requires_independent_peer_and_keeps_attribution)",
+            "test_unknown_target_types_and_unimplemented_mission_reject (tests.m2.test_approvals.ApprovalTests.test_unknown_target_types_and_unimplemented_mission_reject)",
+            "test_budget_transition_failure_rolls_back_local_admission_and_receipt (tests.m2.test_budgets.BudgetTests.test_budget_transition_failure_rolls_back_local_admission_and_receipt)",
+            "test_call_cannot_be_reminted_after_service_restart (tests.m2.test_budgets.BudgetTests.test_call_cannot_be_reminted_after_service_restart)",
+            "test_deadline_blocks_new_speech_and_commits_synthesis (tests.m2.test_budgets.BudgetTests.test_deadline_blocks_new_speech_and_commits_synthesis)",
+            "test_discussion_rejects_inapplicable_round_budgets (tests.m2.test_budgets.BudgetTests.test_discussion_rejects_inapplicable_round_budgets)",
+            "test_exact_budget_closes_atomically_and_retries_do_not_consume_twice (tests.m2.test_budgets.BudgetTests.test_exact_budget_closes_atomically_and_retries_do_not_consume_twice)",
+            "test_idle_tick_uses_host_clock_and_rejects_client_time (tests.m2.test_budgets.BudgetTests.test_idle_tick_uses_host_clock_and_rejects_client_time)",
+            "test_invalid_budget_and_usage_types_fail_closed (tests.m2.test_budgets.BudgetTests.test_invalid_budget_and_usage_types_fail_closed)",
+            "test_later_wall_clock_cannot_move_back_before_uncheckpointed_material (tests.m2.test_budgets.BudgetTests.test_later_wall_clock_cannot_move_back_before_uncheckpointed_material)",
+            "test_missing_or_copied_meter_receipt_cannot_grant_usage (tests.m2.test_budgets.BudgetTests.test_missing_or_copied_meter_receipt_cannot_grant_usage)",
+            "test_missing_process_material_cannot_reset_consumption (tests.m2.test_budgets.BudgetTests.test_missing_process_material_cannot_reset_consumption)",
+            "test_oversized_admission_is_rejected_without_claiming_provider_refund (tests.m2.test_budgets.BudgetTests.test_oversized_admission_is_rejected_without_claiming_provider_refund)",
+            "test_process_marker_and_consumption_loss_cannot_reopen_allowance (tests.m2.test_budgets.BudgetTests.test_process_marker_and_consumption_loss_cannot_reopen_allowance)",
+            "test_receipt_binds_context_references_and_complete_message_identity (tests.m2.test_budgets.BudgetTests.test_receipt_binds_context_references_and_complete_message_identity)",
+            "test_receipt_call_remains_consumed_after_process_compaction (tests.m2.test_budgets.BudgetTests.test_receipt_call_remains_consumed_after_process_compaction)",
+            "test_restart_preserves_remaining_budget (tests.m2.test_budgets.BudgetTests.test_restart_preserves_remaining_budget)",
+            "test_source_namespace_cannot_change_to_obtain_fresh_allowance (tests.m2.test_budgets.BudgetTests.test_source_namespace_cannot_change_to_obtain_fresh_allowance)",
+            "test_synthesis_is_not_an_unmetered_chat_phase (tests.m2.test_budgets.BudgetTests.test_synthesis_is_not_an_unmetered_chat_phase)",
+            "test_two_processes_cannot_both_take_the_last_allowance (tests.m2.test_budgets.BudgetTests.test_two_processes_cannot_both_take_the_last_allowance)",
+            "test_consensus_in_independent_answers_converges_when_the_phase_reveals_them (tests.m2.test_checkpoints.CheckpointTests.test_consensus_in_independent_answers_converges_when_the_phase_reveals_them)",
+            "test_distinct_evidence_across_messages_does_not_make_process_unfinishable (tests.m2.test_checkpoints.CheckpointTests.test_distinct_evidence_across_messages_does_not_make_process_unfinishable)",
+            "test_forged_phase_checkpoint_cannot_raise_the_fixed_budget (tests.m2.test_checkpoints.CheckpointTests.test_forged_phase_checkpoint_cannot_raise_the_fixed_budget)",
+            "test_snapshot_cannot_launder_a_historical_disagreement (tests.m2.test_checkpoints.CheckpointTests.test_snapshot_cannot_launder_a_historical_disagreement)",
+            "test_changed_position_does_not_erase_old_dissent (tests.m2.test_decisions.DecisionTests.test_changed_position_does_not_erase_old_dissent)",
+            "test_compaction_cannot_erase_unsettled_process_material (tests.m2.test_decisions.DecisionTests.test_compaction_cannot_erase_unsettled_process_material)",
+            "test_direct_peer_proposal_needs_no_meeting_or_task_and_never_approves_itself (tests.m2.test_decisions.DecisionTests.test_direct_peer_proposal_needs_no_meeting_or_task_and_never_approves_itself)",
+            "test_dissent_survives_finalization_and_process_compaction (tests.m2.test_decisions.DecisionTests.test_dissent_survives_finalization_and_process_compaction)",
+            "test_missing_members_stay_in_the_consensus_denominator (tests.m2.test_decisions.DecisionTests.test_missing_members_stay_in_the_consensus_denominator)",
+            "test_proposer_cannot_supply_other_agents_support_or_clear_input_trust (tests.m2.test_decisions.DecisionTests.test_proposer_cannot_supply_other_agents_support_or_clear_input_trust)",
+            "test_source_revision_and_proposal_close_link_cannot_be_substituted (tests.m2.test_decisions.DecisionTests.test_source_revision_and_proposal_close_link_cannot_be_substituted)",
+            "test_supersession_creates_a_new_immutable_proposal_and_keeps_the_old_one (tests.m2.test_decisions.DecisionTests.test_supersession_creates_a_new_immutable_proposal_and_keeps_the_old_one)",
+            "test_command_actor_mismatch_cannot_reserve_identity (tests.m2.test_discussions.DiscussionTests.test_command_actor_mismatch_cannot_reserve_identity)",
+            "test_existing_process_id_and_duplicate_message_content_are_immutable (tests.m2.test_discussions.DiscussionTests.test_existing_process_id_and_duplicate_message_content_are_immutable)",
+            "test_missing_or_wrong_digest_artifact_is_not_accepted_as_evidence (tests.m2.test_discussions.DiscussionTests.test_missing_or_wrong_digest_artifact_is_not_accepted_as_evidence)",
+            "test_moderator_can_end_agenda_but_peer_cannot_impersonate_it (tests.m2.test_discussions.DiscussionTests.test_moderator_can_end_agenda_but_peer_cannot_impersonate_it)",
+            "test_no_consensus_does_not_prevent_a_peer_proposal (tests.m2.test_discussions.DiscussionTests.test_no_consensus_does_not_prevent_a_peer_proposal)",
+            "test_nonmember_and_cross_project_participant_cannot_open (tests.m2.test_discussions.DiscussionTests.test_nonmember_and_cross_project_participant_cannot_open)",
+            "test_nonparticipant_cannot_read_accounting_or_material (tests.m2.test_discussions.DiscussionTests.test_nonparticipant_cannot_read_accounting_or_material)",
+            "test_old_revision_cannot_close_or_reopen_a_process (tests.m2.test_discussions.DiscussionTests.test_old_revision_cannot_close_or_reopen_a_process)",
+            "test_peer_without_a_task_can_open_and_speak_without_creating_events (tests.m2.test_discussions.DiscussionTests.test_peer_without_a_task_can_open_and_speak_without_creating_events)",
+            "test_governance_deadline_freezes_through_pause_and_resume (tests.m2.test_governance.GovernanceControlTests.test_governance_deadline_freezes_through_pause_and_resume)",
+            "test_human_stop_cancels_task_and_revokes_binding_without_losing_in_flight_facts (tests.m2.test_governance.GovernanceControlTests.test_human_stop_cancels_task_and_revokes_binding_without_losing_in_flight_facts)",
+            "test_long_pause_does_not_extend_session_and_failed_resume_leaves_no_success_fact (tests.m2.test_governance.GovernanceControlTests.test_long_pause_does_not_extend_session_and_failed_resume_leaves_no_success_fact)",
+            "test_override_cannot_bypass_missing_quality_or_execution_enforcement (tests.m2.test_governance.GovernanceControlTests.test_override_cannot_bypass_missing_quality_or_execution_enforcement)",
+            "test_pause_after_effect_before_report_preserves_queryable_result_without_dispatch (tests.m2.test_governance.GovernanceControlTests.test_pause_after_effect_before_report_preserves_queryable_result_without_dispatch)",
+            "test_pause_and_resume_retries_do_not_duplicate_interventions (tests.m2.test_governance.GovernanceControlTests.test_pause_and_resume_retries_do_not_duplicate_interventions)",
+            "test_pause_has_an_intervention_and_never_claims_full_execution_quiescence (tests.m2.test_governance.GovernanceControlTests.test_pause_has_an_intervention_and_never_claims_full_execution_quiescence)",
+            "test_pause_requires_human_and_legacy_execution_control_cannot_bypass_governance (tests.m2.test_governance.GovernanceControlTests.test_pause_requires_human_and_legacy_execution_control_cannot_bypass_governance)",
+            "test_paused_messages_continue_but_tool_admission_and_grants_stop (tests.m2.test_governance.GovernanceControlTests.test_paused_messages_continue_but_tool_admission_and_grants_stop)",
+            "test_paused_runtime_report_is_retained_without_quality_progress (tests.m2.test_governance.GovernanceControlTests.test_paused_runtime_report_is_retained_without_quality_progress)",
+            "test_restart_retains_pause_and_missing_session_cannot_resume (tests.m2.test_governance.GovernanceControlTests.test_restart_retains_pause_and_missing_session_cannot_resume)",
+            "test_execution_configured_after_governance_pause_preserves_excluded_time (tests.m2.test_governance.GovernanceTests.test_execution_configured_after_governance_pause_preserves_excluded_time)",
+            "test_later_execution_clock_configuration_does_not_reset_deadline (tests.m2.test_governance.GovernanceTests.test_later_execution_clock_configuration_does_not_reset_deadline)",
+            "test_paused_analysis_preserves_blindness_and_blocks_normal_advance (tests.m2.test_governance.GovernanceTests.test_paused_analysis_preserves_blindness_and_blocks_normal_advance)",
+            "test_paused_budget_exhaustion_still_converges (tests.m2.test_governance.GovernanceTests.test_paused_budget_exhaustion_still_converges)",
+            "test_paused_project_accepts_existing_messages_and_freezes_time (tests.m2.test_governance.GovernanceTests.test_paused_project_accepts_existing_messages_and_freezes_time)",
+            "test_prior_m1_cache_without_pause_metadata_rebuilds_before_m2_append (tests.m2.test_governance.GovernanceTests.test_prior_m1_cache_without_pause_metadata_rebuilds_before_m2_append)",
+            "test_resume_without_runtime_rejects_receipt_only_history (tests.m2.test_governance.GovernanceTests.test_resume_without_runtime_rejects_receipt_only_history)",
+            "test_activation_checks_expiry_even_before_host_tick (tests.m2.test_governance_decisions.GovernedDecisionTests.test_activation_checks_expiry_even_before_host_tick)",
+            "test_activation_rechecks_arguments_executor_and_current_state_revision (tests.m2.test_governance_decisions.GovernedDecisionTests.test_activation_rechecks_arguments_executor_and_current_state_revision)",
+            "test_compact_and_retry_keep_dissent_after_decision_is_active (tests.m2.test_governance_decisions.GovernedDecisionTests.test_compact_and_retry_keep_dissent_after_decision_is_active)",
+            "test_denial_records_rejected_decision_without_rewriting_proposal (tests.m2.test_governance_decisions.GovernedDecisionTests.test_denial_records_rejected_decision_without_rewriting_proposal)",
+            "test_lifecycle_keeps_proposal_digest_and_uses_separate_state_cas (tests.m2.test_governance_decisions.GovernedDecisionTests.test_lifecycle_keeps_proposal_digest_and_uses_separate_state_cas)",
+            "test_new_superseding_proposal_cannot_use_original_approval (tests.m2.test_governance_decisions.GovernedDecisionTests.test_new_superseding_proposal_cannot_use_original_approval)",
+            "test_proposer_cannot_launder_self_approval_through_another_requester (tests.m2.test_governance_decisions.GovernedDecisionTests.test_proposer_cannot_launder_self_approval_through_another_requester)",
+            "test_self_review_and_skipped_stages_do_not_establish_authority (tests.m2.test_governance_decisions.GovernedDecisionTests.test_self_review_and_skipped_stages_do_not_establish_authority)",
+            "test_trusted_ingress_does_not_clear_untrusted_peer_proposal (tests.m2.test_governance_decisions.GovernedDecisionTests.test_trusted_ingress_does_not_clear_untrusted_peer_proposal)",
+            "test_approval_does_not_authorize_changed_document_arguments (tests.m2.test_governance_execution.GovernedExecutionTests.test_approval_does_not_authorize_changed_document_arguments)",
+            "test_approved_document_executes_once_and_keeps_source_and_scope (tests.m2.test_governance_execution.GovernedExecutionTests.test_approved_document_executes_once_and_keeps_source_and_scope)",
+            "test_client_cannot_reuse_lower_risk_approval_for_a_critical_flag (tests.m2.test_governance_execution.GovernedExecutionTests.test_client_cannot_reuse_lower_risk_approval_for_a_critical_flag)",
+            "test_completed_external_result_survives_later_revocation (tests.m2.test_governance_execution.GovernedExecutionTests.test_completed_external_result_survives_later_revocation)",
+            "test_configured_governance_requires_approval_at_tool_request (tests.m2.test_governance_execution.GovernedExecutionTests.test_configured_governance_requires_approval_at_tool_request)",
+            "test_denied_or_other_actors_approval_is_not_a_session_capability (tests.m2.test_governance_execution.GovernedExecutionTests.test_denied_or_other_actors_approval_is_not_a_session_capability)",
+            "test_expired_approval_cannot_dispatch_even_without_a_tick (tests.m2.test_governance_execution.GovernedExecutionTests.test_expired_approval_cannot_dispatch_even_without_a_tick)",
+            "test_owner_approved_critical_label_still_has_only_fixed_document_capability (tests.m2.test_governance_execution.GovernedExecutionTests.test_owner_approved_critical_label_still_has_only_fixed_document_capability)",
+            "test_policy_change_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_policy_change_after_queue_prevents_provider_write)",
+            "test_revocation_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_revocation_after_queue_prevents_provider_write)",
+            "test_task_revision_changed_since_approval_is_rejected (tests.m2.test_governance_execution.GovernedExecutionTests.test_task_revision_changed_since_approval_is_rejected)",
+            "test_write_callback_rechecks_a_revocation_after_in_flight_is_recorded (tests.m2.test_governance_execution.GovernedExecutionTests.test_write_callback_rechecks_a_revocation_after_in_flight_is_recorded)",
+            "test_append_failure_after_first_child_rolls_back_whole_compound (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_append_failure_after_first_child_rolls_back_whole_compound)",
+            "test_lost_parent_response_retry_does_not_read_clock_or_repeat_children (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_lost_parent_response_retry_does_not_read_clock_or_repeat_children)",
+            "test_normal_rejected_child_rolls_back_parent_and_keeps_only_rejection_audit (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_normal_rejected_child_rolls_back_parent_and_keeps_only_rejection_audit)",
+            "test_cross_process_grant_at_expiry_cannot_revive_the_expired_request (tests.m2.test_governance_replay.GovernanceProcessTests.test_cross_process_grant_at_expiry_cannot_revive_the_expired_request)",
+            "test_other_process_pause_committed_before_dispatch_prevents_provider_call (tests.m2.test_governance_replay.GovernanceProcessTests.test_other_process_pause_committed_before_dispatch_prevents_provider_call)",
+            "test_other_process_revocation_waits_for_actual_write_to_release_resource_gate (tests.m2.test_governance_replay.GovernanceProcessTests.test_other_process_revocation_waits_for_actual_write_to_release_resource_gate)",
+            "test_two_process_approvers_cannot_both_grant_the_same_revision (tests.m2.test_governance_replay.GovernanceProcessTests.test_two_process_approvers_cannot_both_grant_the_same_revision)",
+            "test_auto_approval_parent_is_pending_until_its_grant_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_auto_approval_parent_is_pending_until_its_grant_fact)",
+            "test_changed_persisted_command_and_receipt_cannot_replace_event_parameters (tests.m2.test_governance_replay.GovernanceReplayTests.test_changed_persisted_command_and_receipt_cannot_replace_event_parameters)",
+            "test_child_identity_does_not_collide_when_parent_and_target_contain_delimiters (tests.m2.test_governance_replay.GovernanceReplayTests.test_child_identity_does_not_collide_when_parent_and_target_contain_delimiters)",
+            "test_every_event_prefix_rebuilds_without_clock_runtime_or_followup_execution (tests.m2.test_governance_replay.GovernanceReplayTests.test_every_event_prefix_rebuilds_without_clock_runtime_or_followup_execution)",
+            "test_expiry_root_requires_deterministic_command_identity (tests.m2.test_governance_replay.GovernanceReplayTests.test_expiry_root_requires_deterministic_command_identity)",
+            "test_expiry_root_requires_host_tick_trigger (tests.m2.test_governance_replay.GovernanceReplayTests.test_expiry_root_requires_host_tick_trigger)",
+            "test_governance_context_does_not_ignore_unknown_authority_fields (tests.m2.test_governance_replay.GovernanceReplayTests.test_governance_context_does_not_ignore_unknown_authority_fields)",
+            "test_governance_event_cannot_fall_back_to_legacy_reducer_without_schema_marker (tests.m2.test_governance_replay.GovernanceReplayTests.test_governance_event_cannot_fall_back_to_legacy_reducer_without_schema_marker)",
+            "test_governed_project_replay_cannot_accept_a_legacy_bootstrap_pause_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_governed_project_replay_cannot_accept_a_legacy_bootstrap_pause_fact)",
+            "test_high_expiry_remains_pending_until_escalation_and_task_impact (tests.m2.test_governance_replay.GovernanceReplayTests.test_high_expiry_remains_pending_until_escalation_and_task_impact)",
+            "test_internal_auto_grant_rejects_nonexistent_or_wrong_parent (tests.m2.test_governance_replay.GovernanceReplayTests.test_internal_auto_grant_rejects_nonexistent_or_wrong_parent)",
+            "test_internal_child_cannot_remove_its_parent_link (tests.m2.test_governance_replay.GovernanceReplayTests.test_internal_child_cannot_remove_its_parent_link)",
+            "test_pause_parent_is_pending_until_intervention_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_pause_parent_is_pending_until_intervention_fact)",
+            "test_rejected_audit_with_governance_envelope_cannot_complete_required_child (tests.m2.test_governance_replay.GovernanceReplayTests.test_rejected_audit_with_governance_envelope_cannot_complete_required_child)",
+            "test_required_children_cannot_be_reordered (tests.m2.test_governance_replay.GovernanceReplayTests.test_required_children_cannot_be_reordered)",
+            "test_unrelated_root_cannot_hide_an_omitted_required_child (tests.m2.test_governance_replay.GovernanceReplayTests.test_unrelated_root_cannot_hide_an_omitted_required_child)",
+            "test_attested_untrusted_source_cannot_be_cleared_by_top_level_trusted_label (tests.m2.test_governance_trust.GovernanceTrustTests.test_attested_untrusted_source_cannot_be_cleared_by_top_level_trusted_label)",
+            "test_medium_untrusted_input_escalates_to_human_and_review_keeps_source (tests.m2.test_governance_trust.GovernanceTrustTests.test_medium_untrusted_input_escalates_to_human_and_review_keeps_source)",
+            "test_receipt_copy_wrong_authority_and_different_command_are_rejected (tests.m2.test_governance_trust.GovernanceTrustTests.test_receipt_copy_wrong_authority_and_different_command_are_rejected)",
+            "test_restore_preserves_source_action_and_checkpoint_context_provenance (tests.m2.test_governance_trust.GovernanceTrustTests.test_restore_preserves_source_action_and_checkpoint_context_provenance)",
+            "test_restore_with_trusted_document_still_inherits_untrusted_checkpoint_context (tests.m2.test_governance_trust.GovernanceTrustTests.test_restore_with_trusted_document_still_inherits_untrusted_checkpoint_context)",
+            "test_successful_request_retry_does_not_require_new_receipt_or_read_new_clock (tests.m2.test_governance_trust.GovernanceTrustTests.test_successful_request_retry_does_not_require_new_receipt_or_read_new_clock)",
+            "test_trusted_append_of_trusted_document_can_still_use_auto_approval (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_append_of_trusted_document_can_still_use_auto_approval)",
+            "test_trusted_append_receipt_preserves_untrusted_source_action (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_append_receipt_preserves_untrusted_source_action)",
+            "test_trusted_low_risk_uses_a_recorded_deterministic_system_approval (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_low_risk_uses_a_recorded_deterministic_system_approval)",
+            "test_append_of_legacy_document_without_source_is_conservatively_untrusted (tests.m2.test_governance_trust.LegacyDocumentSourceTests.test_append_of_legacy_document_without_source_is_conservatively_untrusted)",
+            "test_analysis_requires_one_answer_from_each_participant_before_debate (tests.m2.test_meetings.MeetingTests.test_analysis_requires_one_answer_from_each_participant_before_debate)",
+            "test_budget_during_analysis_reveals_existing_answers_without_inventing_missing_ones (tests.m2.test_meetings.MeetingTests.test_budget_during_analysis_reveals_existing_answers_without_inventing_missing_ones)",
+            "test_first_round_cannot_be_bypassed_by_reference_or_early_proposal (tests.m2.test_meetings.MeetingTests.test_first_round_cannot_be_bypassed_by_reference_or_early_proposal)",
+            "test_first_round_is_blind_on_both_participant_read_paths (tests.m2.test_meetings.MeetingTests.test_first_round_is_blind_on_both_participant_read_paths)",
+            "test_forged_actor_and_private_id_retry_do_not_reveal_another_answer (tests.m2.test_meetings.MeetingTests.test_forged_actor_and_private_id_retry_do_not_reveal_another_answer)",
+            "test_full_meeting_lifecycle_binds_its_own_proposal (tests.m2.test_meetings.MeetingTests.test_full_meeting_lifecycle_binds_its_own_proposal)",
+            "test_max_rounds_and_no_new_evidence_are_real_termination_conditions (tests.m2.test_meetings.MeetingTests.test_max_rounds_and_no_new_evidence_are_real_termination_conditions)",
+            "test_only_new_valid_artifacts_reset_the_no_evidence_round_counter (tests.m2.test_meetings.MeetingTests.test_only_new_valid_artifacts_reset_the_no_evidence_round_counter)",
+            "test_repeated_opinions_do_not_count_as_new_evidence (tests.m2.test_meetings.MeetingTests.test_repeated_opinions_do_not_count_as_new_evidence)",
+            "test_unanimity_only_converges_it_does_not_activate_a_decision (tests.m2.test_meetings.MeetingTests.test_unanimity_only_converges_it_does_not_activate_a_decision)",
+            "test_forged_decision_support_is_not_accepted_as_a_fact (tests.m2.test_replay.ReplayTests.test_forged_decision_support_is_not_accepted_as_a_fact)",
+            "test_m0_handler_audits_unsupported_m2_commands_at_correct_address (tests.m2.test_replay.ReplayTests.test_m0_handler_audits_unsupported_m2_commands_at_correct_address)",
+            "test_replay_uses_only_facts_after_all_process_tables_are_removed (tests.m2.test_replay.ReplayTests.test_replay_uses_only_facts_after_all_process_tables_are_removed)",
+            "test_replay_validates_each_prefix_and_terminal_command_causality (tests.m2.test_replay.ReplayTests.test_replay_validates_each_prefix_and_terminal_command_causality)",
+            "test_compacted_id_conflicts_cover_the_complete_contribution_semantics (tests.m2.test_review_regressions.CompactedRetryTests.test_compacted_id_conflicts_cover_the_complete_contribution_semantics)",
+            "test_compacted_retry_still_checks_authenticated_author_and_participation (tests.m2.test_review_regressions.CompactedRetryTests.test_compacted_retry_still_checks_authenticated_author_and_participation)",
+            "test_identical_retry_after_compaction_returns_the_original_for_both_process_kinds (tests.m2.test_review_regressions.CompactedRetryTests.test_identical_retry_after_compaction_returns_the_original_for_both_process_kinds)",
+            "test_missing_consumption_evidence_is_not_bypassed_by_a_compacted_retry (tests.m2.test_review_regressions.CompactedRetryTests.test_missing_consumption_evidence_is_not_bypassed_by_a_compacted_retry)",
+            "test_new_or_cross_process_messages_cannot_reopen_a_compacted_process (tests.m2.test_review_regressions.CompactedRetryTests.test_new_or_cross_process_messages_cannot_reopen_a_compacted_process)",
+            "test_restart_can_confirm_a_compacted_message_without_meter_or_clock_access (tests.m2.test_review_regressions.CompactedRetryTests.test_restart_can_confirm_a_compacted_message_without_meter_or_clock_access)",
+            "test_compacted_meeting_history_replays_from_facts_at_every_prefix_without_process_io (tests.m2.test_review_regressions.HistoricalCheckpointTests.test_compacted_meeting_history_replays_from_facts_at_every_prefix_without_process_io)",
+            "test_legacy_m2_cache_rebuilds_and_allows_a_real_proposal_transaction (tests.m2.test_review_regressions.HistoricalCheckpointTests.test_legacy_m2_cache_rebuilds_and_allows_a_real_proposal_transaction)",
+            "test_process_reconciliation_checks_revealed_answers_after_more_material_arrives (tests.m2.test_review_regressions.HistoricalCheckpointTests.test_process_reconciliation_checks_revealed_answers_after_more_material_arrives)",
+            "test_replay_rejects_each_prior_checkpoint_when_the_final_source_is_unchanged (tests.m2.test_review_regressions.HistoricalCheckpointTests.test_replay_rejects_each_prior_checkpoint_when_the_final_source_is_unchanged)",
+            "test_resealed_final_summary_cannot_hide_a_changed_independent_answer (tests.m2.test_review_regressions.HistoricalCheckpointTests.test_resealed_final_summary_cannot_hide_a_changed_independent_answer)"
+          ],
+          "overall_ok": true
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m1_suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m1",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:34:40.195053+00:00",
+        "finished_at": "2026-09-12T15:35:00.703413+00:00",
+        "elapsed_seconds": 20.508357000013348,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m1_suite.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m1_suite.stderr.txt",
+          "bytes": 17244,
+          "sha256": "e2f68a148664d06390e11add217fe73b1b54432a3e19550ea667db0978f94f23"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 85,
+          "ok_method_count": 85,
+          "ok_methods": [
+            "test_artifact_identity_is_immutable_and_replacement_preserves_provenance (tests.m1.test_evidence_chain.EvidenceChainTests.test_artifact_identity_is_immutable_and_replacement_preserves_provenance)",
+            "test_fixed_policy_criteria_and_readable_artifact_are_bound_to_task_snapshot (tests.m1.test_evidence_chain.EvidenceChainTests.test_fixed_policy_criteria_and_readable_artifact_are_bound_to_task_snapshot)",
+            "test_independent_peer_reviews_without_claiming_author_task (tests.m1.test_evidence_chain.EvidenceChainTests.test_independent_peer_reviews_without_claiming_author_task)",
+            "test_nonowner_candidate_does_not_acquire_task_or_advance_status (tests.m1.test_evidence_chain.EvidenceChainTests.test_nonowner_candidate_does_not_acquire_task_or_advance_status)",
+            "test_pinned_conversation_remains_readable_after_message_bus_is_replaced (tests.m1.test_evidence_chain.EvidenceChainTests.test_pinned_conversation_remains_readable_after_message_bus_is_replaced)",
+            "test_policy_does_not_accept_client_approval_claims_or_unsupported_content (tests.m1.test_evidence_chain.EvidenceChainTests.test_policy_does_not_accept_client_approval_claims_or_unsupported_content)",
+            "test_review_binds_expected_digest_and_rejects_stale_task_revision (tests.m1.test_evidence_chain.EvidenceChainTests.test_review_binds_expected_digest_and_rejects_stale_task_revision)",
+            "test_review_can_request_changes_but_terminal_result_cannot_be_rewritten (tests.m1.test_evidence_chain.EvidenceChainTests.test_review_can_request_changes_but_terminal_result_cannot_be_rewritten)",
+            "test_same_command_retry_has_no_second_artifact_or_review (tests.m1.test_evidence_chain.EvidenceChainTests.test_same_command_retry_has_no_second_artifact_or_review)",
+            "test_self_review_forged_reviewer_and_nonmembers_cannot_approve (tests.m1.test_evidence_chain.EvidenceChainTests.test_self_review_forged_reviewer_and_nonmembers_cannot_approve)",
+            "test_spoofed_actor_cannot_reserve_candidate_command_identity (tests.m1.test_evidence_chain.EvidenceChainTests.test_spoofed_actor_cannot_reserve_candidate_command_identity)",
+            "test_task_criteria_are_required_and_legacy_task_has_no_implicit_policy (tests.m1.test_evidence_chain.EvidenceChainTests.test_task_criteria_are_required_and_legacy_task_has_no_implicit_policy)",
+            "test_checkpoint_cannot_freeze_an_unreconciled_result_as_a_confirmed_document (tests.m1.test_execution_boundary.CheckpointBoundaryTests.test_checkpoint_cannot_freeze_an_unreconciled_result_as_a_confirmed_document)",
+            "test_checkpoint_captures_task_agent_context_remaining_work_and_confirmed_document (tests.m1.test_execution_boundary.CheckpointBoundaryTests.test_checkpoint_captures_task_agent_context_remaining_work_and_confirmed_document)",
+            "test_restore_rechecks_actual_source_instead_of_trusting_checkpoint_metadata (tests.m1.test_execution_boundary.CheckpointBoundaryTests.test_restore_rechecks_actual_source_instead_of_trusting_checkpoint_metadata)",
+            "test_second_agent_restores_checkpoint_and_appends_real_output_in_new_epoch (tests.m1.test_execution_boundary.CheckpointBoundaryTests.test_second_agent_restores_checkpoint_and_appends_real_output_in_new_epoch)",
+            "test_failed_dispatch_transaction_never_touches_the_file_and_original_intent_can_dispatch (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_failed_dispatch_transaction_never_touches_the_file_and_original_intent_can_dispatch)",
+            "test_failed_flush_does_not_publish_a_partial_document_or_allow_retry (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_failed_flush_does_not_publish_a_partial_document_or_allow_retry)",
+            "test_fixed_policy_rejects_approval_operations_even_if_client_labels_them_low (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_fixed_policy_rejects_approval_operations_even_if_client_labels_them_low)",
+            "test_hardlinked_final_object_cannot_be_written_or_treated_as_confirmed_output (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_hardlinked_final_object_cannot_be_written_or_treated_as_confirmed_output)",
+            "test_junction_in_binding_path_cannot_redirect_the_actual_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_junction_in_binding_path_cannot_redirect_the_actual_write)",
+            "test_link_inserted_during_creation_is_rejected_before_any_content_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_link_inserted_during_creation_is_rejected_before_any_content_write)",
+            "test_missing_pinned_root_is_not_recreated_under_an_old_workspace_identity (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_missing_pinned_root_is_not_recreated_under_an_old_workspace_identity)",
+            "test_new_binding_writes_an_independent_copy_and_preserves_the_old_document (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_new_binding_writes_an_independent_copy_and_preserves_the_old_document)",
+            "test_no_external_effect_can_run_inside_a_caller_database_transaction (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_no_external_effect_can_run_inside_a_caller_database_transaction)",
+            "test_path_arguments_absolute_traversal_ads_and_other_workspace_are_all_refused (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_path_arguments_absolute_traversal_ads_and_other_workspace_are_all_refused)",
+            "test_paused_or_revoked_execution_cannot_dispatch_an_already_queued_action (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_paused_or_revoked_execution_cannot_dispatch_an_already_queued_action)",
+            "test_pending_and_in_flight_commit_before_real_document_effect_and_retry_does_not_rewrite (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_pending_and_in_flight_commit_before_real_document_effect_and_retry_does_not_rewrite)",
+            "test_pinned_parent_cannot_be_renamed_between_validation_and_file_open (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_pinned_parent_cannot_be_renamed_between_validation_and_file_open)",
+            "test_tool_completion_claim_from_an_agent_cannot_forge_a_runtime_result (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_tool_completion_claim_from_an_agent_cannot_forge_a_runtime_result)",
+            "test_unavailable_unpublished_file_enforcement_prevents_content_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_unavailable_unpublished_file_enforcement_prevents_content_write)",
+            "test_unpublished_object_blocks_new_hardlink_before_content_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_unpublished_object_blocks_new_hardlink_before_content_write)",
+            "test_advancing_wall_clock_uses_one_observation_for_each_atomic_event_batch (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_advancing_wall_clock_uses_one_observation_for_each_atomic_event_batch)",
+            "test_claim_atomically_binds_owner_lease_and_monotonic_epoch (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_claim_atomically_binds_owner_lease_and_monotonic_epoch)",
+            "test_claim_retry_returns_original_binding_without_starting_runtime (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_claim_retry_returns_original_binding_without_starting_runtime)",
+            "test_expired_lease_cannot_renew_or_start_and_requeue_allocates_new_epoch (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_expired_lease_cannot_renew_or_start_and_requeue_allocates_new_epoch)",
+            "test_legacy_handlers_cannot_change_an_execution_tasks_ownership (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_legacy_handlers_cannot_change_an_execution_tasks_ownership)",
+            "test_pause_freezes_lease_clock_but_does_not_extend_session_credentials (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_pause_freezes_lease_clock_but_does_not_extend_session_credentials)",
+            "test_renewal_keeps_epoch_and_binding_but_extends_expiry (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_renewal_keeps_epoch_and_binding_but_extends_expiry)",
+            "test_sqlite_failure_rolls_back_claim_owner_lease_receipt_and_idempotency (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_sqlite_failure_rolls_back_claim_owner_lease_receipt_and_idempotency)",
+            "test_stale_epoch_reports_and_renewals_are_archived_without_advancing_task (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_stale_epoch_reports_and_renewals_are_archived_without_advancing_task)",
+            "test_start_requires_runtime_channel_and_unforgeable_registered_session (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_start_requires_runtime_channel_and_unforgeable_registered_session)",
+            "test_two_processes_cannot_claim_the_same_revision_or_allocate_two_epochs (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_two_processes_cannot_claim_the_same_revision_or_allocate_two_epochs)",
+            "test_process_death_after_dispatch_marker_is_unknown_and_never_retried (tests.m1.test_execution_boundary.ProcessBoundaryTests.test_process_death_after_dispatch_marker_is_unknown_and_never_retried)",
+            "test_process_death_after_file_effect_is_reconciled_without_restarting_session (tests.m1.test_execution_boundary.ProcessBoundaryTests.test_process_death_after_file_effect_is_reconciled_without_restarting_session)",
+            "test_process_death_before_publication_discards_bytes_and_remains_unknown (tests.m1.test_execution_boundary.ProcessBoundaryTests.test_process_death_before_publication_discards_bytes_and_remains_unknown)",
+            "test_separate_process_revocation_cannot_pass_an_active_resource_access (tests.m1.test_execution_boundary.ProcessBoundaryTests.test_separate_process_revocation_cannot_pass_an_active_resource_access)",
+            "test_action_receipt_cannot_hide_a_different_persisted_request_body (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_action_receipt_cannot_hide_a_different_persisted_request_body)",
+            "test_crash_after_dispatch_marker_without_file_remains_unknown_and_blocks_fresh_intents (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_crash_after_dispatch_marker_without_file_remains_unknown_and_blocks_fresh_intents)",
+            "test_existing_file_with_wrong_action_target_content_or_digest_never_confirms_unknown (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_existing_file_with_wrong_action_target_content_or_digest_never_confirms_unknown)",
+            "test_lost_completion_commit_leaves_inflight_and_is_reconciled_from_the_real_file (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_lost_completion_commit_leaves_inflight_and_is_reconciled_from_the_real_file)",
+            "test_pure_replay_does_not_query_write_activate_or_treat_action_as_pending_command (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_pure_replay_does_not_query_write_activate_or_treat_action_as_pending_command)",
+            "test_receipt_only_command_keeps_recovery_barrier_closed_without_dispatch (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_receipt_only_command_keeps_recovery_barrier_closed_without_dispatch)",
+            "test_restart_keeps_missing_session_blocked_and_cannot_remint_it_by_retrying_start (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_restart_keeps_missing_session_blocked_and_cannot_remint_it_by_retrying_start)",
+            "test_revocation_at_provider_entry_blocks_directory_creation_as_well_as_final_file (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_revocation_at_provider_entry_blocks_directory_creation_as_well_as_final_file)",
+            "test_revoked_unknown_is_reconciled_as_history_before_requeue_and_new_epoch (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_revoked_unknown_is_reconciled_as_history_before_requeue_and_new_epoch)",
+            "test_success_with_lost_response_queries_original_identity_without_a_second_effect (tests.m1.test_execution_boundary.RecoveryBoundaryTests.test_success_with_lost_response_queries_original_identity_without_a_second_effect)",
+            "test_actor_spoofing_and_nonmember_sending_or_receiving_are_rejected (tests.m1.test_messages.MessageTests.test_actor_spoofing_and_nonmember_sending_or_receiving_are_rejected)",
+            "test_invalid_message_shape_is_not_silently_normalized (tests.m1.test_messages.MessageTests.test_invalid_message_shape_is_not_silently_normalized)",
+            "test_message_claim_cannot_create_or_complete_a_task (tests.m1.test_messages.MessageTests.test_message_claim_cannot_create_or_complete_a_task)",
+            "test_reference_must_exist_and_be_visible_to_sender (tests.m1.test_messages.MessageTests.test_reference_must_exist_and_be_visible_to_sender)",
+            "test_reference_propagates_untrusted_origin_and_snapshots_are_detached (tests.m1.test_messages.MessageTests.test_reference_propagates_untrusted_origin_and_snapshots_are_detached)",
+            "test_reply_requires_referenced_target_and_cannot_cross_projects (tests.m1.test_messages.MessageTests.test_reply_requires_referenced_target_and_cannot_cross_projects)",
+            "test_same_message_id_is_idempotent_but_cannot_replace_content (tests.m1.test_messages.MessageTests.test_same_message_id_is_idempotent_but_cannot_replace_content)",
+            "test_two_peers_reply_challenge_and_propose_without_task_or_manager (tests.m1.test_messages.MessageTests.test_two_peers_reply_challenge_and_propose_without_task_or_manager)",
+            "test_claim_and_release_cannot_bypass_fixed_policy_or_unknown_fields (tests.m1.test_review_regressions.InheritedBoundaryTests.test_claim_and_release_cannot_bypass_fixed_policy_or_unknown_fields)",
+            "test_eligible_member_with_fixed_policy_can_claim_release_and_recover (tests.m1.test_review_regressions.InheritedBoundaryTests.test_eligible_member_with_fixed_policy_can_claim_release_and_recover)",
+            "test_ineligible_members_cannot_claim_or_release_through_inherited_paths (tests.m1.test_review_regressions.InheritedBoundaryTests.test_ineligible_members_cannot_claim_or_release_through_inherited_paths)",
+            "test_legacy_task_has_no_implicit_m1_execution_policy (tests.m1.test_review_regressions.InheritedBoundaryTests.test_legacy_task_has_no_implicit_m1_execution_policy)",
+            "test_json_roundtrip_preserves_origin_references_and_detaches_collections (tests.m1.test_review_regressions.MessageWireTests.test_json_roundtrip_preserves_origin_references_and_detaches_collections)",
+            "test_wire_decoder_rejects_malformed_arrays_and_reply_links (tests.m1.test_review_regressions.MessageWireTests.test_wire_decoder_rejects_malformed_arrays_and_reply_links)",
+            "test_wire_decoder_retains_schema_version_and_unknown_field_checks (tests.m1.test_review_regressions.MessageWireTests.test_wire_decoder_retains_schema_version_and_unknown_field_checks)",
+            "test_actual_passing_precheck_is_evidence_but_formal_result_is_inconclusive (tests.m1.test_verification.VerificationTests.test_actual_passing_precheck_is_evidence_but_formal_result_is_inconclusive)",
+            "test_base_handler_rejection_of_m1_command_has_recoverable_causal_address (tests.m1.test_verification.VerificationTests.test_base_handler_rejection_of_m1_command_has_recoverable_causal_address)",
+            "test_client_cannot_submit_passed_or_inject_runner_result_or_authorization (tests.m1.test_verification.VerificationTests.test_client_cannot_submit_passed_or_inject_runner_result_or_authorization)",
+            "test_evidence_identifier_collision_is_rejected_without_replacing_existing_content (tests.m1.test_verification.VerificationTests.test_evidence_identifier_collision_is_rejected_without_replacing_existing_content)",
+            "test_failed_content_check_is_preserved_without_claiming_a_formal_pass (tests.m1.test_verification.VerificationTests.test_failed_content_check_is_preserved_without_claiming_a_formal_pass)",
+            "test_non_string_classification_and_review_status_are_typed_rejections (tests.m1.test_verification.VerificationTests.test_non_string_classification_and_review_status_are_typed_rejections)",
+            "test_precheck_uses_current_task_facts_and_rejects_stale_artifact (tests.m1.test_verification.VerificationTests.test_precheck_uses_current_task_facts_and_rejects_stale_artifact)",
+            "test_pure_readonly_recovery_rebuilds_mixed_history_without_checker_or_cache (tests.m1.test_verification.VerificationTests.test_pure_readonly_recovery_rebuilds_mixed_history_without_checker_or_cache)",
+            "test_retry_returns_original_batch_without_reexecuting_precheck (tests.m1.test_verification.VerificationTests.test_retry_returns_original_batch_without_reexecuting_precheck)",
+            "test_review_alone_precheck_alone_and_inconclusive_cannot_pass_task_gates (tests.m1.test_verification.VerificationTests.test_review_alone_precheck_alone_and_inconclusive_cannot_pass_task_gates)",
+            "test_two_processes_cannot_both_finalize_the_same_review_revision (tests.m1.test_verification.VerificationTests.test_two_processes_cannot_both_finalize_the_same_review_revision)",
+            "test_unclassified_inline_content_cannot_be_labelled_trusted (tests.m1.test_verification.VerificationTests.test_unclassified_inline_content_cannot_be_labelled_trusted)",
+            "test_verification_and_report_rollback_together_on_real_sqlite_failure (tests.m1.test_verification.VerificationTests.test_verification_and_report_rollback_together_on_real_sqlite_failure)"
+          ],
+          "overall_ok": true
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m0_suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:35:39.410480+00:00",
+        "finished_at": "2026-09-12T15:36:21.928797+00:00",
+        "elapsed_seconds": 42.5183022999845,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m0_suite.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m0_suite.stderr.txt",
+          "bytes": 28892,
+          "sha256": "4c13cc2055779925f543f320d19c76a094c0e030b5d58d1fbf33df584b9327e5"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 156,
+          "ok_method_count": 156,
+          "ok_methods": [
+            "test_actor_mismatch_cannot_reserve_legitimate_command_id (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_cannot_reserve_legitimate_command_id)",
+            "test_actor_mismatch_is_rejected_without_domain_event (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event)",
+            "test_agent_cannot_create_project_without_bootstrap_permission (tests.m0.test_command_boundary.CommandBoundaryTests.test_agent_cannot_create_project_without_bootstrap_permission)",
+            "test_authenticated_rejection_is_event_audited_and_retry_is_idempotent (tests.m0.test_command_boundary.CommandBoundaryTests.test_authenticated_rejection_is_event_audited_and_retry_is_idempotent)",
+            "test_expected_revision_conflict_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_expected_revision_conflict_is_rejected_without_domain_effect)",
+            "test_invalid_target_is_rejected_and_audited (tests.m0.test_command_boundary.CommandBoundaryTests.test_invalid_target_is_rejected_and_audited)",
+            "test_missing_expected_revision_cannot_claim_after_intervening_changes (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_claim_after_intervening_changes)",
+            "test_missing_expected_revision_cannot_release_an_owned_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_release_an_owned_task)",
+            "test_nested_handler_failure_rolls_back_its_entire_batch (tests.m0.test_command_boundary.CommandBoundaryTests.test_nested_handler_failure_rolls_back_its_entire_batch)",
+            "test_non_owner_cannot_release_current_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_non_owner_cannot_release_current_task)",
+            "test_rejection_audit_does_not_create_target_or_advance_its_revision (tests.m0.test_command_boundary.CommandBoundaryTests.test_rejection_audit_does_not_create_target_or_advance_its_revision)",
+            "test_result_index_failure_rolls_back_command_and_both_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_result_index_failure_rolls_back_command_and_both_events)",
+            "test_same_command_retry_returns_original_result_without_duplicate_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_command_retry_returns_original_result_without_duplicate_events)",
+            "test_same_idempotency_key_with_different_content_is_rejected (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_idempotency_key_with_different_content_is_rejected)",
+            "test_task_create_commits_received_and_domain_events_atomically (tests.m0.test_command_boundary.CommandBoundaryTests.test_task_create_commits_received_and_domain_events_atomically)",
+            "test_top_level_event_failure_rolls_back_command_and_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_top_level_event_failure_rolls_back_command_and_events)",
+            "test_unregistered_actor_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_unregistered_actor_is_rejected_without_domain_effect)",
+            "test_unsupported_command_cannot_bypass_missing_quality_gates (tests.m0.test_command_boundary.CommandBoundaryTests.test_unsupported_command_cannot_bypass_missing_quality_gates)",
+            "test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths)",
+            "test_api_refuses_existing_sqlite_sidecar_files_and_directories (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_existing_sqlite_sidecar_files_and_directories)",
+            "test_cli_failure_keeps_evidence_and_exits_nonzero (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_failure_keeps_evidence_and_exits_nonzero)",
+            "test_cli_refuses_existing_report_before_creating_database (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_existing_report_before_creating_database)",
+            "test_cli_refuses_existing_sqlite_sidecars_without_touching_owner_data (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_existing_sqlite_sidecars_without_touching_owner_data)",
+            "test_cli_refuses_report_equal_to_or_inside_sqlite_sidecar_paths (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_report_equal_to_or_inside_sqlite_sidecar_paths)",
+            "test_cli_rejects_database_report_alias_without_writing (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_rejects_database_report_alias_without_writing)",
+            "test_cli_rejects_report_evidence_alias_without_writing (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_rejects_report_evidence_alias_without_writing)",
+            "test_cli_runs_real_fixtures_and_never_claims_independent_or_full_acceptance (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_runs_real_fixtures_and_never_claims_independent_or_full_acceptance)",
+            "test_default_evidence_directory_preserves_repeat_run_without_reusing_results (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_default_evidence_directory_preserves_repeat_run_without_reusing_results)",
+            "test_executed_evidence_has_real_inputs_faults_observations_and_raw_output (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_executed_evidence_has_real_inputs_faults_observations_and_raw_output)",
+            "test_executes_kernel_requirements_without_promoting_partial_or_future_work (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_executes_kernel_requirements_without_promoting_partial_or_future_work)",
+            "test_existing_database_is_never_opened_or_overwritten (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_existing_database_is_never_opened_or_overwritten)",
+            "test_existing_evidence_is_never_overwritten_or_reused_as_a_result (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_existing_evidence_is_never_overwritten_or_reused_as_a_result)",
+            "test_expected_failure_cannot_be_reported_as_passed (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_expected_failure_cannot_be_reported_as_passed)",
+            "test_fixture_error_is_recorded_and_other_cases_still_run (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_fixture_error_is_recorded_and_other_cases_still_run)",
+            "test_fixture_failure_is_derived_from_a_real_product_regression (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_fixture_failure_is_derived_from_a_real_product_regression)",
+            "test_invalid_or_memory_database_is_rejected_before_writes (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_invalid_or_memory_database_is_rejected_before_writes)",
+            "test_nested_database_evidence_paths_are_refused_before_writes (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_nested_database_evidence_paths_are_refused_before_writes)",
+            "test_noop_fixture_cannot_turn_test_presence_into_evidence (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_noop_fixture_cannot_turn_test_presence_into_evidence)",
+            "test_partial_fixture_failure_is_not_hidden_behind_pending (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_partial_fixture_failure_is_not_hidden_behind_pending)",
+            "test_sidecar_dangling_link_predicate_is_checked_by_api_and_cli (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_sidecar_dangling_link_predicate_is_checked_by_api_and_cli)",
+            "test_skip_cannot_be_reported_as_passed (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_skip_cannot_be_reported_as_passed)",
+            "test_unexpected_success_cannot_be_reported_as_passed (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_unexpected_success_cannot_be_reported_as_passed)",
+            "test_zero_test_execution_cannot_be_reported_as_passed (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_zero_test_execution_cannot_be_reported_as_passed)",
+            "test_caught_duplicate_id_batch_leaves_no_partial_events_or_projection (tests.m0.test_event_projection.EventProjectionStoreTests.test_caught_duplicate_id_batch_leaves_no_partial_events_or_projection)",
+            "test_caught_revision_gap_rolls_back_the_whole_append_batch (tests.m0.test_event_projection.EventProjectionStoreTests.test_caught_revision_gap_rolls_back_the_whole_append_batch)",
+            "test_claim_release_and_rejection_audits_project_exact_current_state (tests.m0.test_event_projection.EventProjectionStoreTests.test_claim_release_and_rejection_audits_project_exact_current_state)",
+            "test_corrupt_or_lagging_cache_cannot_authorize_or_change_commands (tests.m0.test_event_projection.EventProjectionStoreTests.test_corrupt_or_lagging_cache_cannot_authorize_or_change_commands)",
+            "test_deleted_cache_is_rebuilt_from_facts_before_the_next_append (tests.m0.test_event_projection.EventProjectionStoreTests.test_deleted_cache_is_rebuilt_from_facts_before_the_next_append)",
+            "test_event_insert_failure_keeps_cache_and_facts_at_the_same_boundary (tests.m0.test_event_projection.EventProjectionStoreTests.test_event_insert_failure_keeps_cache_and_facts_at_the_same_boundary)",
+            "test_event_insert_precedes_any_persisted_projection_change (tests.m0.test_event_projection.EventProjectionStoreTests.test_event_insert_precedes_any_persisted_projection_change)",
+            "test_fresh_connection_continues_durable_sequence_and_cache (tests.m0.test_event_projection.EventProjectionStoreTests.test_fresh_connection_continues_durable_sequence_and_cache)",
+            "test_numbering_and_cache_are_project_scoped (tests.m0.test_event_projection.EventProjectionStoreTests.test_numbering_and_cache_are_project_scoped)",
+            "test_outer_rollback_discards_projection_updates_and_reuses_sequence (tests.m0.test_event_projection.EventProjectionStoreTests.test_outer_rollback_discards_projection_updates_and_reuses_sequence)",
+            "test_positive_sequence_hint_cannot_skip_the_store_cursor (tests.m0.test_event_projection.EventProjectionStoreTests.test_positive_sequence_hint_cannot_skip_the_store_cursor)",
+            "test_projection_write_failure_rolls_back_command_event_and_result_batch (tests.m0.test_event_projection.EventProjectionStoreTests.test_projection_write_failure_rolls_back_command_event_and_result_batch)",
+            "test_read_projection_is_detached_and_performs_no_sql_writes (tests.m0.test_event_projection.EventProjectionStoreTests.test_read_projection_is_detached_and_performs_no_sql_writes)",
+            "test_rebuild_from_events_equals_incremental_projection (tests.m0.test_event_projection.EventProjectionStoreTests.test_rebuild_from_events_equals_incremental_projection)",
+            "test_sequence_allocation_requires_an_active_transaction (tests.m0.test_event_projection.EventProjectionStoreTests.test_sequence_allocation_requires_an_active_transaction)",
+            "test_store_assigns_final_sequence_to_drafts_without_mutating_them (tests.m0.test_event_projection.EventProjectionStoreTests.test_store_assigns_final_sequence_to_drafts_without_mutating_them)",
+            "test_aggregate_revision_gap_is_rejected_without_consuming_sequence (tests.m0.test_event_projection.ProjectionReducerTests.test_aggregate_revision_gap_is_rejected_without_consuming_sequence)",
+            "test_command_audits_do_not_create_aggregates_or_advance_domain_revision (tests.m0.test_event_projection.ProjectionReducerTests.test_command_audits_do_not_create_aggregates_or_advance_domain_revision)",
+            "test_conflicting_event_identity_is_rejected_without_mutation (tests.m0.test_event_projection.ProjectionReducerTests.test_conflicting_event_identity_is_rejected_without_mutation)",
+            "test_domain_event_type_must_match_aggregate_address (tests.m0.test_event_projection.ProjectionReducerTests.test_domain_event_type_must_match_aggregate_address)",
+            "test_duplicate_sequence_for_a_different_event_is_rejected (tests.m0.test_event_projection.ProjectionReducerTests.test_duplicate_sequence_for_a_different_event_is_rejected)",
+            "test_exact_redelivery_has_no_second_effect_even_after_newer_events (tests.m0.test_event_projection.ProjectionReducerTests.test_exact_redelivery_has_no_second_effect_even_after_newer_events)",
+            "test_future_event_types_cannot_implicitly_complete_a_task (tests.m0.test_event_projection.ProjectionReducerTests.test_future_event_types_cannot_implicitly_complete_a_task)",
+            "test_incremental_claim_and_release_preserve_metadata_and_revision (tests.m0.test_event_projection.ProjectionReducerTests.test_incremental_claim_and_release_preserve_metadata_and_revision)",
+            "test_malformed_claim_and_unqualified_created_completion_fail_closed (tests.m0.test_event_projection.ProjectionReducerTests.test_malformed_claim_and_unqualified_created_completion_fail_closed)",
+            "test_missing_aggregate_does_not_bind_or_partially_change_projection (tests.m0.test_event_projection.ProjectionReducerTests.test_missing_aggregate_does_not_bind_or_partially_change_projection)",
+            "test_missing_sequence_is_not_silently_skipped (tests.m0.test_event_projection.ProjectionReducerTests.test_missing_sequence_is_not_silently_skipped)",
+            "test_nonzero_creation_revision_is_rejected (tests.m0.test_event_projection.ProjectionReducerTests.test_nonzero_creation_revision_is_rejected)",
+            "test_other_project_cannot_enter_the_same_projection (tests.m0.test_event_projection.ProjectionReducerTests.test_other_project_cannot_enter_the_same_projection)",
+            "test_payload_cannot_override_identity_revision_or_claim_ownership (tests.m0.test_event_projection.ProjectionReducerTests.test_payload_cannot_override_identity_revision_or_claim_ownership)",
+            "test_rebuild_orders_a_generator_by_sequence_not_id_or_payload_timestamp (tests.m0.test_event_projection.ProjectionReducerTests.test_rebuild_orders_a_generator_by_sequence_not_id_or_payload_timestamp)",
+            "test_replay_computes_literal_state_with_external_effect_paths_denied (tests.m0.test_event_projection.ProjectionReducerTests.test_replay_computes_literal_state_with_external_effect_paths_denied)",
+            "test_second_creation_cannot_overwrite_existing_aggregate (tests.m0.test_event_projection.ProjectionReducerTests.test_second_creation_cannot_overwrite_existing_aggregate)",
+            "test_typed_keys_separate_same_named_entities (tests.m0.test_event_projection.ProjectionReducerTests.test_typed_keys_separate_same_named_entities)",
+            "test_unassigned_sequence_is_not_a_replayable_fact (tests.m0.test_event_projection.ProjectionReducerTests.test_unassigned_sequence_is_not_a_replayable_fact)",
+            "test_digest_matches_hand_written_canonical_immutable_command (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_digest_matches_hand_written_canonical_immutable_command)",
+            "test_every_immutable_command_field_binds_the_digest (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest)",
+            "test_nested_key_order_is_normalized_but_unicode_is_preserved (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_nested_key_order_is_normalized_but_unicode_is_preserved)",
+            "test_unvalidated_non_command_input_cannot_be_digested (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_unvalidated_non_command_input_cannot_be_digested)",
+            "test_actor_mismatch_precedes_lookup_and_only_enters_security_audit (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_actor_mismatch_precedes_lookup_and_only_enters_security_audit)",
+            "test_event_failure_rolls_back_key_then_original_command_can_retry (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_event_failure_rolls_back_key_then_original_command_can_retry)",
+            "test_exact_retry_returns_original_result_and_no_duplicate_batch (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_exact_retry_returns_original_result_and_no_duplicate_batch)",
+            "test_foreign_durable_result_identity_fails_closed (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_foreign_durable_result_identity_fails_closed)",
+            "test_malformed_durable_result_is_not_treated_as_an_absent_key (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_malformed_durable_result_is_not_treated_as_an_absent_key)",
+            "test_missing_durable_result_fails_closed_without_resubmission (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_missing_durable_result_fails_closed_without_resubmission)",
+            "test_project_actor_and_key_scopes_accept_distinct_intents (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_project_actor_and_key_scopes_accept_distinct_intents)",
+            "test_rejected_result_stays_original_even_when_precondition_later_changes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_rejected_result_stays_original_even_when_precondition_later_changes)",
+            "test_release_then_new_key_reclaim_does_not_reexecute_old_intents (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_release_then_new_key_reclaim_does_not_reexecute_old_intents)",
+            "test_reopen_and_deleted_cache_do_not_lose_original_result (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_reopen_and_deleted_cache_do_not_lose_original_result)",
+            "test_result_failure_rolls_back_key_then_original_command_can_retry (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry)",
+            "test_same_key_changed_content_or_identity_conflicts_without_writes (tests.m0.test_idempotency_concurrency.DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes)",
+            "test_digest_conflict_cannot_overwrite_original_result (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_digest_conflict_cannot_overwrite_original_result)",
+            "test_lookup_rejects_invalid_digest_at_boundary (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_rejects_invalid_digest_at_boundary)",
+            "test_lookup_rejects_invalid_scope_instead_of_broadening_it (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_rejects_invalid_scope_instead_of_broadening_it)",
+            "test_lookup_returns_detached_original_result_without_writes (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_returns_detached_original_result_without_writes)",
+            "test_lookup_scope_includes_project_trusted_actor_and_key (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key)",
+            "test_missing_scope_does_not_reserve_or_write_anything (tests.m0.test_idempotency_concurrency.IdempotencyLookupTests.test_missing_scope_does_not_reserve_or_write_anything)",
+            "test_claim_fixture_uses_distinct_actors_ids_keys_and_same_precondition (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_claim_fixture_uses_distinct_actors_ids_keys_and_same_precondition)",
+            "test_runner_requires_two_valid_commands_shared_file_and_finite_deadline (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_runner_requires_two_valid_commands_shared_file_and_finite_deadline)",
+            "test_timeout_reaps_blocked_writers_without_altering_database (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_timeout_reaps_blocked_writers_without_altering_database)",
+            "test_two_process_claims_have_one_winner_and_durable_version_evidence (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence)",
+            "test_two_process_identical_retry_returns_one_original_batch (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_two_process_identical_retry_returns_one_original_batch)",
+            "test_two_process_same_key_different_content_preserves_winner (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_two_process_same_key_different_content_preserves_winner)",
+            "test_worker_open_failure_is_reported_and_owned_children_are_reaped (tests.m0.test_idempotency_concurrency.ProcessCompetitionTests.test_worker_open_failure_is_reported_and_owned_children_are_reaped)",
+            "test_command_and_event_payloads_are_deeply_immutable (tests.m0.test_models.ModelTests.test_command_and_event_payloads_are_deeply_immutable)",
+            "test_command_serializes_with_stable_required_fields (tests.m0.test_models.ModelTests.test_command_serializes_with_stable_required_fields)",
+            "test_enum_values_must_use_canonical_lowercase_spelling (tests.m0.test_models.ModelTests.test_enum_values_must_use_canonical_lowercase_spelling)",
+            "test_invalid_fixtures_are_rejected (tests.m0.test_models.ModelTests.test_invalid_fixtures_are_rejected)",
+            "test_models_are_frozen_and_expose_object_schema_version (tests.m0.test_models.ModelTests.test_models_are_frozen_and_expose_object_schema_version)",
+            "test_package_exports_core_contracts (tests.m0.test_models.ModelTests.test_package_exports_core_contracts)",
+            "test_valid_fixtures_round_trip_through_models (tests.m0.test_models.ModelTests.test_valid_fixtures_round_trip_through_models)",
+            "test_close_is_idempotent (tests.m0.test_models.SQLiteStoreTests.test_close_is_idempotent)",
+            "test_event_sequences_are_unique_per_project (tests.m0.test_models.SQLiteStoreTests.test_event_sequences_are_unique_per_project)",
+            "test_schema_persists_commands_events_and_idempotency (tests.m0.test_models.SQLiteStoreTests.test_schema_persists_commands_events_and_idempotency)",
+            "test_transaction_rolls_back_both_command_and_events (tests.m0.test_models.SQLiteStoreTests.test_transaction_rolls_back_both_command_and_events)",
+            "test_contradictory_or_unlinked_command_histories_fail_closed (tests.m0.test_replay_recovery.PendingProjectionTests.test_contradictory_or_unlinked_command_histories_fail_closed)",
+            "test_duplicate_command_boolean_and_integer_payloads_conflict (tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict)",
+            "test_duplicate_command_canonical_content_is_harmless (tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless)",
+            "test_duplicate_command_integer_and_float_payloads_conflict (tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict)",
+            "test_pending_projection_is_pure_ordered_idempotent_and_rejects_gaps (tests.m0.test_replay_recovery.PendingProjectionTests.test_pending_projection_is_pure_ordered_idempotent_and_rejects_gaps)",
+            "test_wrong_terminal_type_for_the_same_target_cannot_clear_pending (tests.m0.test_replay_recovery.PendingProjectionTests.test_wrong_terminal_type_for_the_same_target_cannot_clear_pending)",
+            "test_a_forged_self_consistent_cache_is_not_an_authoritative_fact (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_a_forged_self_consistent_cache_is_not_an_authoritative_fact)",
+            "test_close_is_idempotent_and_closed_reads_fail (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_close_is_idempotent_and_closed_reads_fail)",
+            "test_deleted_projection_rows_are_rebuilt_only_from_events (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_deleted_projection_rows_are_rebuilt_only_from_events)",
+            "test_every_call_uses_current_facts_and_returns_detached_data (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_every_call_uses_current_facts_and_returns_detached_data)",
+            "test_forbidden_call_tripwires_have_positive_controls_then_remain_zero (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_forbidden_call_tripwires_have_positive_controls_then_remain_zero)",
+            "test_harness_reopen_never_reseeds_or_runs_simulation (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_harness_reopen_never_reseeds_or_runs_simulation)",
+            "test_invalid_schema_open_closes_connection_and_does_not_initialize_tables (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_invalid_schema_open_closes_connection_and_does_not_initialize_tables)",
+            "test_missing_database_is_not_created_and_memory_is_not_a_recovery_source (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_missing_database_is_not_created_and_memory_is_not_a_recovery_source)",
+            "test_missing_event_in_durable_history_fails_closed_even_with_valid_cache (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_missing_event_in_durable_history_fails_closed_even_with_valid_cache)",
+            "test_non_database_file_fails_without_repair (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_non_database_file_fails_without_repair)",
+            "test_open_replay_and_reconciliation_attempt_no_sql_writes (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_open_replay_and_reconciliation_attempt_no_sql_writes)",
+            "test_orphaned_receipt_or_mismatched_command_digest_fails_closed (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_orphaned_receipt_or_mismatched_command_digest_fails_closed)",
+            "test_pending_ids_do_not_trust_a_forged_terminal_result_index (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_ids_do_not_trust_a_forged_terminal_result_index)",
+            "test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status)",
+            "test_pending_uses_one_read_snapshot_during_a_concurrent_commit (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_uses_one_read_snapshot_during_a_concurrent_commit)",
+            "test_projection_and_result_cache_tables_are_not_required_or_recreated (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_projection_and_result_cache_tables_are_not_required_or_recreated)",
+            "test_projects_are_isolated_and_paused_creation_fact_remains_paused (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_projects_are_isolated_and_paused_creation_fact_remains_paused)",
+            "test_real_process_death_after_commit_preserves_original_result_and_single_effect (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_real_process_death_after_commit_preserves_original_result_and_single_effect)",
+            "test_receipt_identity_type_digest_correlation_and_target_are_verified (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_receipt_identity_type_digest_correlation_and_target_are_verified)",
+            "test_recovery_connection_is_enforced_read_only_by_sqlite (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_recovery_connection_is_enforced_read_only_by_sqlite)",
+            "test_recovery_counter_reports_actual_simulator_calls_not_a_constant (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_recovery_counter_reports_actual_simulator_calls_not_a_constant)",
+            "test_restart_rebuilds_same_state_and_does_not_invoke_runtime (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_restart_rebuilds_same_state_and_does_not_invoke_runtime)",
+            "test_retry_after_response_loss_on_fresh_connection_returns_original_result (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_retry_after_response_loss_on_fresh_connection_returns_original_result)",
+            "test_special_characters_in_file_name_are_not_uri_options (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_special_characters_in_file_name_are_not_uri_options)",
+            "test_successful_terminal_must_match_the_command_not_just_causation (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_successful_terminal_must_match_the_command_not_just_causation)",
+            "test_terminal_facts_resolve_pending_without_needing_result_index (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_terminal_facts_resolve_pending_without_needing_result_index)",
+            "test_unknown_project_is_empty_and_invalid_project_is_rejected (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_unknown_project_is_empty_and_invalid_project_is_rejected)",
+            "test_unsupported_command_rejection_is_terminal_without_simulation (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_unsupported_command_rejection_is_terminal_without_simulation)",
+            "test_unsupported_history_fails_closed_instead_of_starting_runtime (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_unsupported_history_fails_closed_instead_of_starting_runtime)",
+            "test_simulation_has_no_persistence_or_external_effects (tests.m0.test_replay_recovery.SimulatedRuntimeTests.test_simulation_has_no_persistence_or_external_effects)",
+            "test_simulation_is_deterministic_and_counts_actual_calls (tests.m0.test_replay_recovery.SimulatedRuntimeTests.test_simulation_is_deterministic_and_counts_actual_calls)",
+            "test_simulation_rejects_non_command_without_counting_an_invocation (tests.m0.test_replay_recovery.SimulatedRuntimeTests.test_simulation_rejects_non_command_without_counting_an_invocation)"
+          ],
+          "overall_ok": true
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation_render",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "tools/devprep.py",
+          "render"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:37:42.700777+00:00",
+        "finished_at": "2026-09-12T15:37:42.935514+00:00",
+        "elapsed_seconds": 0.23474440001882613,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_render.stdout.txt",
+          "bytes": 337,
+          "sha256": "6f459ab9a40af23c1c9feff98319dcbc2d77acebcf1891006fb3d44cd5b00483"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_render.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation_check",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "tools/devprep.py",
+          "check"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:37:54.175409+00:00",
+        "finished_at": "2026-09-12T15:37:54.389809+00:00",
+        "elapsed_seconds": 0.21439969999482855,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_check.stdout.txt",
+          "bytes": 127,
+          "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_check.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation_suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:38:05.189966+00:00",
+        "finished_at": "2026-09-12T15:38:07.696759+00:00",
+        "elapsed_seconds": 2.5068063999933656,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_suite.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_suite.stderr.txt",
+          "bytes": 4729,
+          "sha256": "7e2036b09353c9e9e26a132d036072b31628bf365947af11beb95148c15a488b"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 27,
+          "ok_method_count": 27,
+          "ok_methods": [
+            "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material)",
+            "test_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports)",
+            "test_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation)",
+            "test_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports)",
+            "test_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names)",
+            "test_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked)",
+            "test_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target)",
+            "test_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target)",
+            "test_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links)",
+            "test_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links)",
+            "test_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim)",
+            "test_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers)",
+            "test_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker)",
+            "test_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids)",
+            "test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values)",
+            "test_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output)",
+            "test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them)",
+            "test_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports)",
+            "test_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets)",
+            "test_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets)",
+            "test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax)",
+            "test_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies)",
+            "test_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies)",
+            "test_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields)",
+            "test_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output)",
+            "test_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output)",
+            "test_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions)"
+          ],
+          "overall_ok": true
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "independent_probes",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:42:36.320356+00:00",
+        "finished_at": "2026-09-12T15:42:42.240067+00:00",
+        "elapsed_seconds": 5.9197030999930575,
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.stderr.txt",
+          "bytes": 2023,
+          "sha256": "f3e862df4cf2777199b751ed564b06afac8dee25e795eceee7f1adcc602ccc23"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 6,
+          "ok_method_count": 5,
+          "ok_methods": [
+            "test_identity_introduced_then_removed_stays_reserved_on_new_connection (__main__.IndependentGovernanceProbes.test_identity_introduced_then_removed_stays_reserved_on_new_connection)",
+            "test_individually_valid_child_mutations_and_continuation_edits_are_rejected (__main__.IndependentGovernanceProbes.test_individually_valid_child_mutations_and_continuation_edits_are_rejected)",
+            "test_multihop_append_retains_original_source_after_fresh_trusted_receipts (__main__.IndependentGovernanceProbes.test_multihop_append_retains_original_source_after_fresh_trusted_receipts)",
+            "test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending (__main__.IndependentGovernanceProbes.test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending)",
+            "test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history (__main__.IndependentNoRuntimeProbe.test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history)"
+          ],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "prepare_probe_v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-c",
+          "from pathlib import Path\nimport hashlib, json\np = Path('Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py')\ndata = p.read_text(encoding='utf-8')\nold = '            self.assertNotEqual(self.state()[decision:review-decision- + suffix][status], active)'\nnew = '''            decision = self.state()['decision:review-decision-' + suffix]\n            self.assertEqual(decision['status'], 'active')\n            self.assertEqual(decision['authorization_status'], 'invalidated')\n            self.assertTrue(decision['authorization_impact']['replanning_required'])\n            self.assertEqual(decision['authorization_impact']['reason'], 'policy_changed')'''\nassert data.count(old) == 1\nresult = data.replace(old, new).encode('utf-8')\ntarget = p.with_name('independent_probes_v2.py')\nwith target.open('xb') as stream:\n    stream.write(result)\nprint(json.dumps({'original': str(p), 'original_sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'v2': str(target), 'v2_sha256': hashlib.sha256(result).hexdigest()}))"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:45:07.928896+00:00",
+        "finished_at": "2026-09-12T15:45:08.090990+00:00",
+        "elapsed_seconds": 0.1620736000186298,
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2.stderr.txt",
+          "bytes": 159,
+          "sha256": "754802a0321527858535a87286665d6e7646e3a397c467625834a0f10f956557"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "prepare_probe_v2_retry",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-c",
+          "from pathlib import Path\nimport hashlib, json\np = Path('Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py')\ndata = p.read_text(encoding='utf-8')\nmatches = [line for line in data.splitlines() if 'self.assertNotEqual(self.state()[' in line]\nassert len(matches) == 1\nold = matches[0]\nnew = '''            decision = self.state()['decision:review-decision-' + suffix]\n            self.assertEqual(decision['status'], 'active')\n            self.assertEqual(decision['authorization_status'], 'invalidated')\n            self.assertTrue(decision['authorization_impact']['replanning_required'])\n            self.assertEqual(decision['authorization_impact']['reason'], 'policy_changed')'''\nassert data.count(old) == 1\nresult = data.replace(old, new).encode('utf-8')\ntarget = p.with_name('independent_probes_v2.py')\nwith target.open('xb') as stream:\n    stream.write(result)\nprint(json.dumps({'original': str(p), 'original_sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'v2': str(target), 'v2_sha256': hashlib.sha256(result).hexdigest()}))"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:45:42.327043+00:00",
+        "finished_at": "2026-09-12T15:45:42.448020+00:00",
+        "elapsed_seconds": 0.12097150000045076,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2_retry.stdout.txt",
+          "bytes": 359,
+          "sha256": "92bd86e52eb8356b6b1b412731757e81e25e70cf081c4948250d24b702374026"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2_retry.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "independent_probes_v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:45:55.321204+00:00",
+        "finished_at": "2026-09-12T15:46:01.373316+00:00",
+        "elapsed_seconds": 6.052115300000878,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.stderr.txt",
+          "bytes": 1233,
+          "sha256": "05d3820eb2bf025560e388ade6a1ac0dd03167e3a7325c8da5c3bee4983bad0f"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 6,
+          "ok_method_count": 6,
+          "ok_methods": [
+            "test_identity_introduced_then_removed_stays_reserved_on_new_connection (__main__.IndependentGovernanceProbes.test_identity_introduced_then_removed_stays_reserved_on_new_connection)",
+            "test_individually_valid_child_mutations_and_continuation_edits_are_rejected (__main__.IndependentGovernanceProbes.test_individually_valid_child_mutations_and_continuation_edits_are_rejected)",
+            "test_multihop_append_retains_original_source_after_fresh_trusted_receipts (__main__.IndependentGovernanceProbes.test_multihop_append_retains_original_source_after_fresh_trusted_receipts)",
+            "test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending (__main__.IndependentGovernanceProbes.test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending)",
+            "test_second_policy_grandchild_rejection_rolls_back_prior_subtree (__main__.IndependentGovernanceProbes.test_second_policy_grandchild_rejection_rolls_back_prior_subtree)",
+            "test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history (__main__.IndependentNoRuntimeProbe.test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history)"
+          ],
+          "overall_ok": true
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "readonly_demo",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:49:16.484290+00:00",
+        "finished_at": "2026-09-12T15:49:22.326113+00:00",
+        "elapsed_seconds": 5.841836099978536,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.stdout.txt",
+          "bytes": 1037,
+          "sha256": "0e11326876bc221accdca0ed48da050568f48950698d2614c2198d161e856b9d"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "final_evidence_checks",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:55:04.788758+00:00",
+        "finished_at": "2026-09-12T15:55:12.378635+00:00",
+        "elapsed_seconds": 7.5898701999976765,
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.stdout.txt",
+          "bytes": 1583,
+          "sha256": "7e8b5189e3c09e98d39d7a4b803a69eac9e5beb792389c111e78d6966557a93f"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      }
+    ],
+    "recorded_command_count": 14,
+    "all_recorded_commands_passed": false,
+    "all_required_final_checks_passed": true,
+    "journal_prefix": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review-journal.jsonl",
+      "bytes": 101647,
+      "sha256": "f2c8468a80b36581f4543c4d2beb88c0ae4ab354bc272c1926cac0ec0e5975bb",
+      "records": 14,
+      "through_label": "final_evidence_checks",
+      "note": "固定验证命令前缀；报告生成/发布校验随后追加，避免自引用。"
+    },
+    "reviewer_scripts": [
+      {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.py",
+        "bytes": 9423,
+        "sha256": "b183d96a281be749544f9c4fe5dd0425d834f120ec9443618180695035bb6c76"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py",
+        "bytes": 15796,
+        "sha256": "c63d751bef08838ffa15c35e1e18b917b4f1c8d7997072aae609fa051f6d71f4"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.py",
+        "bytes": 16079,
+        "sha256": "e8b72ed0a66a43118a6807370ac9824cfcb1fe588ac2706de81e4c88dbf6ff63"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.py",
+        "bytes": 9245,
+        "sha256": "80dd013bf4962019c953f716040c9eff31b9415e751b5564c37d0ed009f91d00"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+        "bytes": 13424,
+        "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/write_review_report.py",
+        "bytes": 21686,
+        "sha256": "85435d71c61d575ba8fabaa1e5ae207868667a17071b87ba330e3a05c2374272"
+      }
+    ],
+    "author_red_green_consumed": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/author-evidence-review.json",
+      "bytes": 105959,
+      "sha256": "82d064a066b31a5ae178051f2360f4c4b6816407fd230cbe50b25d50d5fc8155"
+    },
+    "author_nonzero_runs_preserved": 17,
+    "reviewer_nonzero_runs": [
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "independent_probes",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\.tmp\\m2-02-review-v1\\workspace\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:42:36.320356+00:00",
+        "finished_at": "2026-09-12T15:42:42.240067+00:00",
+        "elapsed_seconds": 5.9197030999930575,
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.stderr.txt",
+          "bytes": 2023,
+          "sha256": "f3e862df4cf2777199b751ed564b06afac8dee25e795eceee7f1adcc602ccc23"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": 6,
+          "ok_method_count": 5,
+          "ok_methods": [
+            "test_identity_introduced_then_removed_stays_reserved_on_new_connection (__main__.IndependentGovernanceProbes.test_identity_introduced_then_removed_stays_reserved_on_new_connection)",
+            "test_individually_valid_child_mutations_and_continuation_edits_are_rejected (__main__.IndependentGovernanceProbes.test_individually_valid_child_mutations_and_continuation_edits_are_rejected)",
+            "test_multihop_append_retains_original_source_after_fresh_trusted_receipts (__main__.IndependentGovernanceProbes.test_multihop_append_retains_original_source_after_fresh_trusted_receipts)",
+            "test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending (__main__.IndependentGovernanceProbes.test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending)",
+            "test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history (__main__.IndependentNoRuntimeProbe.test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history)"
+          ],
+          "overall_ok": false
+        }
+      },
+      {
+        "work_item": "M2-02",
+        "candidate_revision": "v1",
+        "reviewer": "/root/m1_reviewer",
+        "label": "prepare_probe_v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-c",
+          "from pathlib import Path\nimport hashlib, json\np = Path('Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py')\ndata = p.read_text(encoding='utf-8')\nold = '            self.assertNotEqual(self.state()[decision:review-decision- + suffix][status], active)'\nnew = '''            decision = self.state()['decision:review-decision-' + suffix]\n            self.assertEqual(decision['status'], 'active')\n            self.assertEqual(decision['authorization_status'], 'invalidated')\n            self.assertTrue(decision['authorization_impact']['replanning_required'])\n            self.assertEqual(decision['authorization_impact']['reason'], 'policy_changed')'''\nassert data.count(old) == 1\nresult = data.replace(old, new).encode('utf-8')\ntarget = p.with_name('independent_probes_v2.py')\nwith target.open('xb') as stream:\n    stream.write(result)\nprint(json.dumps({'original': str(p), 'original_sha256': hashlib.sha256(p.read_bytes()).hexdigest(), 'v2': str(target), 'v2_sha256': hashlib.sha256(result).hexdigest()}))"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment_overrides": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T15:45:07.928896+00:00",
+        "finished_at": "2026-09-12T15:45:08.090990+00:00",
+        "elapsed_seconds": 0.1620736000186298,
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2.stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2.stderr.txt",
+          "bytes": 159,
+          "sha256": "754802a0321527858535a87286665d6e7646e3a397c467625834a0f10f956557"
+        },
+        "recorder": {
+          "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+          "bytes": 13424,
+          "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+        },
+        "unittest": {
+          "reported_methods": null,
+          "ok_method_count": 0,
+          "ok_methods": [],
+          "overall_ok": false
+        }
+      }
+    ],
+    "reviewer_nonzero_dispositions": {
+      "independent_probes": "Reviewer assertion incorrectly expected active Decision history to be reversed by policy invalidation; all rollback assertions passed. Frozen design line 45 and normative history/impact rules require preserved active history plus invalidated authority. Original script and logs retained; v2 checks invalidation and replanning.",
+      "prepare_probe_v2": "PowerShell native argument processing removed double quotes in the exact-match string. Count assertion prevented any output file write. Unique retry label successfully generated a new v2 script without modifying the original."
+    },
+    "python_executable": "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "python_version": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "compiled_frozen_python_files": 101,
+    "historical_unexecuted_m1_02_reviewer_methods_counted": 0
+  },
+  "source_review": {
+    "basis": [
+      "Docs/AETP-设计方案.md §§5.1, 9.1–9.7, 13.4, 13.9–13.10, 14.1–14.4, 14.11, 18.3",
+      "Docs/superpowers/specs/2026-09-12-m2-02-governance-design.md"
+    ],
+    "changed_old_inputs": [
+      {
+        "path": "Docs/development/backlog.json",
+        "old_sha256": "c68a3e6c2fffc365d313902ec30a2badb1ca2728b81add49a61196452a839c46",
+        "current_sha256": "b4c6c6df9e59df034c8e97828c7a3b78a7f833d3e457374cb2028477634971b3"
+      },
+      {
+        "path": "Docs/development/status.json",
+        "old_sha256": "a4116aa7427c04e6f88e41420cc666cc5f3bb143cf9c083d62ebd905ec542b03",
+        "current_sha256": "10f58637242580deba0e2351f100043580e224a4953f065195109aa223acdf77"
+      },
+      {
+        "path": "MEMORY.md",
+        "old_sha256": "4334ee21722cde14265ea730b7d5c2e0fd71ca5d0cf26a3887f6801bd9449edd",
+        "current_sha256": "28f86b9c590d5c2fc6c0b4b9d1de851c4228900271e1fe466af9dc3964d58955"
+      },
+      {
+        "path": "src/aetp/core/commands.py",
+        "old_sha256": "21948b719f401ba8967b0564f00591d08e178c1fa78a9f788945e37684a65713",
+        "current_sha256": "cb6bc95a715def0011d331b2f60d76f30954f089b8fa5d50f715fc5255825a92"
+      },
+      {
+        "path": "src/aetp/core/projection.py",
+        "old_sha256": "60fdea81016a46fc13ccf43f4032229d60690ab6ba4429827253d49b60a56c8a",
+        "current_sha256": "76d73d3c72858fca5dcc844acd4f8ab808242070bf8577055da589c9d42ebc24"
+      },
+      {
+        "path": "src/aetp/domain/models.py",
+        "old_sha256": "72abcb2bf92390b8b5cff766aea30cec41f4268d2828ab2dd11f24c99f07636b",
+        "current_sha256": "23b7a2371ca94fe366bce41102a6e0b43f424e52f6bdc46698e170b4d0bf739a"
+      },
+      {
+        "path": "src/aetp/meetings/records.py",
+        "old_sha256": "4e78f72eff65ee80f6adf00df4060e1e7c01f07171fb8f30dbab78761b77b4e3",
+        "current_sha256": "52a1d356a0fd4ca598e96492f6f8e571b87b8b8b9a52a2427b8cb14ad652bdd9"
+      },
+      {
+        "path": "src/aetp/meetings/service.py",
+        "old_sha256": "f455927ac19bdb81d96f2a0422b769c4141a1a9cf990da7c84b02fa62d1fe5f4",
+        "current_sha256": "dda186725be80831c164df01b785aa47dfe210417560c4e3f9f5e937c290211b"
+      },
+      {
+        "path": "src/aetp/runtime/README.md",
+        "old_sha256": "b29c1eae0633b9314f4f8de25e15e7f7ed880f0acef7f28816cf4361be1e43ca",
+        "current_sha256": "b7d90692c5b62c1c5558415afa72b508b2f92066408d2f954df053fff1ab28b2"
+      },
+      {
+        "path": "src/aetp/runtime/actions.py",
+        "old_sha256": "4e96a77eed3cad71d7fd300fbedf30dac5fa6c85e413870968f5d9dd9e96c1aa",
+        "current_sha256": "f6e38376eea3004c115b26cebf6be8f34888a8f697eb05f55886ae09044c49f9"
+      },
+      {
+        "path": "src/aetp/runtime/policy.py",
+        "old_sha256": "924f4ca3da619fa8021aacab991d52c9b515a7671fa7a8e600ee02607e5c9d0d",
+        "current_sha256": "c459b3322192a3c34f6de479203f4cf5c9db451673a0143f2646137e78f4bacf"
+      },
+      {
+        "path": "src/aetp/runtime/projection.py",
+        "old_sha256": "5a2797f6293d7e4d464d73f8e795d530da0bff273074a5699cc1c1cf254b02f9",
+        "current_sha256": "787816e75b995d1e0b2c689eb4482faf8786b602466e2c50538ce8e90e3a0b31"
+      },
+      {
+        "path": "src/aetp/runtime/records.py",
+        "old_sha256": "6aa88f93fcfe3a1e520ffda142e401561b6a9d5201c7b5f9aa026f2c29ffadea",
+        "current_sha256": "21de39dd7f2c25aba5d6c2e3b8d695cbf8728449e9dbc2be4f41066fc84886ea"
+      },
+      {
+        "path": "src/aetp/runtime/service.py",
+        "old_sha256": "34f31bc7634e4ae3742ebfdedb4222e88c277927764e97aafcae7f5a7d3d2b40",
+        "current_sha256": "c5f6a287b958e893217e55dd6cdeaec2096ea535b2d38e87b3eb2407430026a9"
+      },
+      {
+        "path": "tests/m2/test_governance.py",
+        "old_sha256": "07be675afe308023ffe7f8d2e120cf3cfd17b23aeff79d82adc62f0d917306b0",
+        "current_sha256": "d775e7483e87c703fe5560dcd66b428f71c7125d3b461412da115a162aae0f3f"
+      }
+    ],
+    "assessment": "检查治理纯转换、可信宿主入口、命令/事实绑定、Runtime 写入检查和旧流程兼容。开发中临时职责不形成 Agent 等级，独立审批不获取作者 Task Lease。没有 SQLite schema 或主规范的静默更改。",
+    "preliminary_review_was_acceptance": false
+  },
+  "limits": [
+    "只有 decision/task 两个目标适配器；其余合法类型、任意 Shell/网络/凭证/发布未实现且拒绝。",
+    "身份与 InputAuthority 依赖可信宿主，来源传播不能代替任意自然语言或外部内容的检测。",
+    "固定 Windows 文档 Provider 不是通用操作系统沙箱；没有多主机执行、真实模型调用或费用账本认证。",
+    "暂停只证明派发屏障，Binding 的实际执行静止证明为 unsupported。没有自动外部通知发送。",
+    "治理缓存回退全部事实，未作规模或吞吐保证。旧完整 M1 的接受边界没有扩展。",
+    "M1-02 历史五个未执行额外 reviewer 方法仍不计数。正式 Verification、产品完成、完整 Conformance 和 Bootstrap 均未获接受。"
+  ],
+  "claims": {
+    "current_candidate_accepted": true,
+    "backlog_three_criteria_accepted": true,
+    "formal_verification_passed": false,
+    "formal_verification": "INCONCLUSIVE",
+    "task_completed": false,
+    "product_completion_percent": 0,
+    "whole_m1_accepted": false,
+    "full_m1_acceptance": "not_accepted",
+    "whole_m2_accepted": false,
+    "full_conformance_accepted": false,
+    "conformance_registered": 28,
+    "conformance_passed": 0,
+    "bootstrap_accepted": false,
+    "bootstrap_status": "not_started",
+    "provider_usage_or_billing_certified": false
+  },
+  "handoff": {
+    "recipient": "/root",
+    "work_item": "M2-02",
+    "work_item_status_at_cutoff": "review",
+    "recommendation": "主线程核验并消费本报告后可将 M2-02 置 done、依赖满足的 M3-01 置 ready；随后在根工作区运行准备收尾并保存另名 closeout。",
+    "report": "Docs/development/evidence/2026-09-12-m2-02-review.json",
+    "new_review_file_scope": [
+      "Docs/development/evidence/2026-09-12-m2-02-review.json",
+      "Docs/development/evidence/2026-09-12-m2-02-review-runs/",
+      ".tmp/m2-02-review-v1/workspace/"
+    ],
+    "product_or_original_test_edits": [],
+    "backlog_status_memory_main_journal_edited": false,
+    "existing_candidate_or_failure_evidence_rewritten": false,
+    "git": "未初始化、commit 或 push；交接记录报告原工作区无 Git repository。",
+    "remaining_findings": 0,
+    "next_step": "消费独立 accepted 证据和单独收尾；不扩大阶段/产品级声明。"
+  },
+  "evidence_files": [
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/author-evidence-review.json",
+      "bytes": 105959,
+      "sha256": "82d064a066b31a5ae178051f2360f4c4b6816407fd230cbe50b25d50d5fc8155"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy-integrity.json",
+      "bytes": 4193,
+      "sha256": "9c803a1f94912a86db961060d1b580d20459bf8c4ebb3d1f1de5fd9870395582"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy-manifest.json",
+      "bytes": 3497532,
+      "sha256": "27d917407f3a3baee521f80b46fb291798eb6cb5d2008b5f60606890e876e849"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy_workspace.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/copy_workspace.stdout.txt",
+      "bytes": 124,
+      "sha256": "7170a6b9d9dc09be0a66a161b2418c756e2b515376a6ef2dc6cc4721b4289496"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.py",
+      "bytes": 9423,
+      "sha256": "b183d96a281be749544f9c4fe5dd0425d834f120ec9443618180695035bb6c76"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/final_evidence_checks.stdout.txt",
+      "bytes": 1583,
+      "sha256": "7e8b5189e3c09e98d39d7a4b803a69eac9e5beb792389c111e78d6966557a93f"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.py",
+      "bytes": 15796,
+      "sha256": "c63d751bef08838ffa15c35e1e18b917b4f1c8d7997072aae609fa051f6d71f4"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.stderr.txt",
+      "bytes": 2023,
+      "sha256": "f3e862df4cf2777199b751ed564b06afac8dee25e795eceee7f1adcc602ccc23"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.py",
+      "bytes": 16079,
+      "sha256": "e8b72ed0a66a43118a6807370ac9824cfcb1fe588ac2706de81e4c88dbf6ff63"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.stderr.txt",
+      "bytes": 1233,
+      "sha256": "05d3820eb2bf025560e388ade6a1ac0dd03167e3a7325c8da5c3bee4983bad0f"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/independent_probes_v2.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/inspection-notes.json",
+      "bytes": 1086,
+      "sha256": "eabe572199a3fc3d932a7e813a33a066ec8b114e8e6c960ccf2fc34fe216b9ec"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity-final.json",
+      "bytes": 48408,
+      "sha256": "9edc14af6b63ccb7edba670da15a4feb8c5ab2e72be2b053c303ef8c34cd7fc8"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity-initial.json",
+      "bytes": 48408,
+      "sha256": "b8829ee408ef10f8b4fa53d4b2b0405aa1da8997957ea84f9a094cdc22833a17"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity_initial.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/integrity_initial.stdout.txt",
+      "bytes": 985,
+      "sha256": "e673a62a576b6063026717a321580780bf1a96c3972210d9a55e94ce0049c93c"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m0_suite.stderr.txt",
+      "bytes": 28892,
+      "sha256": "4c13cc2055779925f543f320d19c76a094c0e030b5d58d1fbf33df584b9327e5"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m0_suite.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m1_suite.stderr.txt",
+      "bytes": 17244,
+      "sha256": "e2f68a148664d06390e11add217fe73b1b54432a3e19550ea667db0978f94f23"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m1_suite.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m2_suite.stderr.txt",
+      "bytes": 30977,
+      "sha256": "fb02569c20f162eb6aacb4e3fb3380b2bf5e9e7300695139dc8c02db60e233e4"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/m2_suite.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_check.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_check.stdout.txt",
+      "bytes": 127,
+      "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_render.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_render.stdout.txt",
+      "bytes": 337,
+      "sha256": "6f459ab9a40af23c1c9feff98319dcbc2d77acebcf1891006fb3d44cd5b00483"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_suite.stderr.txt",
+      "bytes": 4729,
+      "sha256": "7e2036b09353c9e9e26a132d036072b31628bf365947af11beb95148c15a488b"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/preparation_suite.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2.stderr.txt",
+      "bytes": 159,
+      "sha256": "754802a0321527858535a87286665d6e7646e3a397c467625834a0f10f956557"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2_retry.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/prepare_probe_v2_retry.stdout.txt",
+      "bytes": 359,
+      "sha256": "92bd86e52eb8356b6b1b412731757e81e25e70cf081c4948250d24b702374026"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly-demo.json",
+      "bytes": 71078,
+      "sha256": "2894f96a99bc726cae6bffa03367636dcda23ca585331e1d8458c6dcdd620989"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.py",
+      "bytes": 9245,
+      "sha256": "80dd013bf4962019c953f716040c9eff31b9415e751b5564c37d0ed009f91d00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/readonly_demo.stdout.txt",
+      "bytes": 1037,
+      "sha256": "0e11326876bc221accdca0ed48da050568f48950698d2614c2198d161e856b9d"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review_driver.py",
+      "bytes": 13424,
+      "sha256": "b56546c5047345fc2ffc95c0918cc009c9eb20c18f92f61768eb52df9b226965"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/verification-log-integrity.json",
+      "bytes": 1503,
+      "sha256": "8b9f018b279f28af21695f71ac6b52652bddc6a93cdad71bb53526ef702ca9af"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/write_review_report.py",
+      "bytes": 21686,
+      "sha256": "85435d71c61d575ba8fabaa1e5ae207868667a17071b87ba330e3a05c2374272"
+    },
+    {
+      "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/backlog-check.json",
+      "bytes": 453,
+      "sha256": "1601149697206dc2092f5d9d76c23edbf33917579f1f3a5732b7ba3a4d008bad"
+    },
+    {
+      "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/devprep-check.json",
+      "bytes": 587,
+      "sha256": "1b4e687c4106eadfa926fe75fcba9b399c2b71081086da66fcaa02d41fbabea4"
+    },
+    {
+      "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/environment.json",
+      "bytes": 1086,
+      "sha256": "bc58fbdff4426368c155bac3caf6d9cb3c610aa890dbd21fe37a97eba656135f"
+    },
+    {
+      "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/knowledge-graph-check.json",
+      "bytes": 407,
+      "sha256": "f43c559eaea95cd6557cfe96297b03e202bfa6471c7e5af4838dcb5c3d2b025a"
+    },
+    {
+      "path": ".tmp/m2-02-review-v1/workspace/Docs/development/evidence/preparation-report.json",
+      "bytes": 8694,
+      "sha256": "5e49790284df95ab8a687cc3136b546766e4b8f76b82c735fd5b762fa28b9840"
+    }
+  ]
+}

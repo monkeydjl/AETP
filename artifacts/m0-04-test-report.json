@@ -1,0 +1,819 @@
+{
+  "schema_version": "aetp-m0-test-report-0.1",
+  "work_item": "M0-04",
+  "generated_at": "2026-09-10T17:02:57.934114+00:00",
+  "status": "done",
+  "executor": "Codex main agent",
+  "scope": [
+    "src/aetp/core/idempotency.py",
+    "src/aetp/core/commands.py",
+    "tests/m0/test_idempotency_concurrency.py",
+    "tests/m0/support.py",
+    "artifacts/m0-04-test-report.json"
+  ],
+  "inputs": [
+    "Docs/superpowers/plans/2026-09-06-m0-first-slice.md Task 4",
+    "Docs/AETP-设计方案.md sections 14.1-14.2; M0 subset of TEST-001, TEST-018, TEST-019",
+    "M0-03 independently accepted in Docs/development/evidence/2026-09-10-m0-next-slice.json"
+  ],
+  "environment": {
+    "python": "3.14.6",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "git_repository": false,
+    "git_status_exit_code": 128,
+    "claudelink_available": false
+  },
+  "implemented": [
+    "Canonical digest API preserves the complete immutable M0-02 Command serialization; no schema/digest migration.",
+    "Read-only scoped IdempotencyResult lookup, typed conflict, missing/malformed/foreign-result fail-closed handling.",
+    "Handler integration stays after actor binding and inside its existing BEGIN IMMEDIATE transaction.",
+    "Two spawn workers, independent SQLite connections, both ready before shared start gate, request-order results and bounded owned-child cleanup.",
+    "Original accepted/rejected results survive state changes, cache deletion and connection reopening; legal release/reclaim uses a new Command ID/key."
+  ],
+  "red": {
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+    "run_label": "m0_04_corrected_red",
+    "exit_code": 1,
+    "tests_run": 28,
+    "failures": 17,
+    "errors": 0,
+    "already_passing_existing_behavior_cases": 11,
+    "failure_breakdown": {
+      "missing_api": 10,
+      "missing_process_fixture": 6,
+      "foreign_result_identity": 1
+    },
+    "initial_test_defect": "Event append intentionally wraps sqlite3.IntegrityError in ValueError (sqlite_store.py:325-326); initial fault test expected the unwrapped error and caused a dependent subtest failure. No product defect inferred from it. Corrected before production edits and split the two fault cases.",
+    "later_fixture_boundary_red": {
+      "run_label": "m0_04_process_fixture_red",
+      "tests_run": 7,
+      "failures": 7,
+      "errors": 0
+    },
+    "note": "The later seventh process test covers invalid fixture inputs. Plan expectation of duplicate side effects was already solved in M0-02; no baseline defect was invented."
+  },
+  "green": {
+    "command": "python -m unittest tests/m0/test_idempotency_concurrency.py -v",
+    "exit_code": 0,
+    "tests_run": 29,
+    "started_at": "2026-09-10T17:34:47.918471+00:00",
+    "finished_at": "2026-09-10T17:34:52.197924+00:00",
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+    "run_label": "m0_04_unicode_fix_acceptance_refresh"
+  },
+  "regression": {
+    "command": "python -m unittest discover -s tests/m0 -t . -v",
+    "exit_code": 0,
+    "tests_run": 93,
+    "started_at": "2026-09-10T17:34:52.200810+00:00",
+    "finished_at": "2026-09-10T17:35:00.147344+00:00",
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+    "run_label": "m0_full_unicode_fix_acceptance_refresh",
+    "note": "Includes all 29 M0-04 tests, not additive. Preparation is run separately."
+  },
+  "acceptance_matrix": [
+    {
+      "requirement": "Same scoped key/content returns original, no duplicate accepted/rejected Event batch",
+      "tests": [
+        "DurableIdempotencyTests.test_exact_retry_returns_original_result_and_no_duplicate_batch",
+        "DurableIdempotencyTests.test_rejected_result_stays_original_even_when_precondition_later_changes",
+        "ProcessCompetitionTests.test_two_process_identical_retry_returns_one_original_batch"
+      ],
+      "evidence": "29-case suite plus five duplicate races"
+    },
+    {
+      "requirement": "Different immutable Command content with old scoped key rejects and preserves original",
+      "tests": [
+        "DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes",
+        "ProcessCompetitionTests.test_two_process_same_key_different_content_preserves_winner"
+      ],
+      "evidence": "six changed-field subcases and five conflicting-content races"
+    },
+    {
+      "requirement": "Exactly one cross-process claim succeeds; loser retains expected/current version evidence",
+      "tests": [
+        "ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence"
+      ],
+      "evidence": "five real claim races; winners observed for both actor positions; total Events 12, claim delta 4, retries delta 0"
+    },
+    {
+      "requirement": "Release followed by new intent, not reexecution of old claim/release",
+      "tests": [
+        "DurableIdempotencyTests.test_release_then_new_key_reclaim_does_not_reexecute_old_intents"
+      ],
+      "evidence": "five race probes also advance Task revisions 0,1,2,3 and preserve original loser revision 1 after revision 3"
+    },
+    {
+      "requirement": "Transaction faults leave no key/Command/Event partial state",
+      "tests": [
+        "DurableIdempotencyTests.test_event_failure_rolls_back_key_then_original_command_can_retry",
+        "DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry"
+      ],
+      "evidence": "real SQLite abort triggers and killed premature-commit mutant"
+    }
+  ],
+  "probe_source": "Docs/development/evidence/2026-09-11-m0-04-probes.py",
+  "probe_evidence": "Docs/development/evidence/2026-09-11-m0-04-probes.json",
+  "probe_command": "python Docs/development/evidence/2026-09-11-m0-04-probes.py --mode all --repetitions 5",
+  "probe_exit_code": 0,
+  "process_run_count": 15,
+  "process_runs": [
+    {
+      "scenario": "claims",
+      "repetition": 1,
+      "pids": [
+        22008,
+        20408
+      ],
+      "command_ids": [
+        "cmd-claim-t-1-a-1-r0",
+        "cmd-claim-t-1-a-2-r0"
+      ],
+      "idempotency_keys": [
+        "claim-t-1-a-1-r0",
+        "claim-t-1-a-2-r0"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 1,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after": 12,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 1,
+      "pids": [
+        20640,
+        21144
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "cmd-shared"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 1,
+      "pids": [
+        23652,
+        31252
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "conflicting-command"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "claims",
+      "repetition": 2,
+      "pids": [
+        32368,
+        31244
+      ],
+      "command_ids": [
+        "cmd-claim-t-1-a-1-r0",
+        "cmd-claim-t-1-a-2-r0"
+      ],
+      "idempotency_keys": [
+        "claim-t-1-a-1-r0",
+        "claim-t-1-a-2-r0"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 1,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after": 12,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 2,
+      "pids": [
+        9588,
+        6528
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "cmd-shared"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 2,
+      "pids": [
+        22688,
+        25248
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "conflicting-command"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "claims",
+      "repetition": 3,
+      "pids": [
+        22244,
+        9352
+      ],
+      "command_ids": [
+        "cmd-claim-t-1-a-1-r0",
+        "cmd-claim-t-1-a-2-r0"
+      ],
+      "idempotency_keys": [
+        "claim-t-1-a-1-r0",
+        "claim-t-1-a-2-r0"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 1,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after": 12,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 3,
+      "pids": [
+        31256,
+        30500
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "cmd-shared"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 3,
+      "pids": [
+        26416,
+        25084
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "conflicting-command"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "claims",
+      "repetition": 4,
+      "pids": [
+        31856,
+        23768
+      ],
+      "command_ids": [
+        "cmd-claim-t-1-a-1-r0",
+        "cmd-claim-t-1-a-2-r0"
+      ],
+      "idempotency_keys": [
+        "claim-t-1-a-1-r0",
+        "claim-t-1-a-2-r0"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 1,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after": 12,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 4,
+      "pids": [
+        29056,
+        29904
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "cmd-shared"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 4,
+      "pids": [
+        19972,
+        5800
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "conflicting-command"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "claims",
+      "repetition": 5,
+      "pids": [
+        19812,
+        28656
+      ],
+      "command_ids": [
+        "cmd-claim-t-1-a-1-r0",
+        "cmd-claim-t-1-a-2-r0"
+      ],
+      "idempotency_keys": [
+        "claim-t-1-a-1-r0",
+        "claim-t-1-a-2-r0"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "rejected",
+          "aggregate_revision": 1,
+          "error_code": "REVISION_CONFLICT"
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 1,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 8,
+      "event_count_after": 12,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "duplicate",
+      "repetition": 5,
+      "pids": [
+        17156,
+        28300
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "cmd-shared"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    },
+    {
+      "scenario": "conflict",
+      "repetition": 5,
+      "pids": [
+        22708,
+        25184
+      ],
+      "command_ids": [
+        "cmd-shared",
+        "conflicting-command"
+      ],
+      "idempotency_keys": [
+        "shared",
+        "shared"
+      ],
+      "expected_revisions": [
+        0,
+        0
+      ],
+      "results": [
+        {
+          "status": "accepted",
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "rejected",
+          "aggregate_revision": null,
+          "error_code": "IDEMPOTENCY_CONFLICT"
+        }
+      ],
+      "event_count_before": 6,
+      "event_count_after": 8,
+      "retry_event_delta": 0,
+      "reopened_retry_sql_write_delta": 0,
+      "projection_hashes_match": true
+    }
+  ],
+  "mutation_verification": {
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-probes.json",
+    "count": 6,
+    "killed": 6,
+    "errors": 0,
+    "method": "Each changed implementation copied into a fresh checked temporary tree; canonical sources unchanged. A mutant counts as killed only with an assertion failure in its one selected real test, not import/runtime test errors.",
+    "mutations": [
+      {
+        "name": "foreign_result_identity",
+        "target_test": "DurableIdempotencyTests.test_foreign_durable_result_identity_fails_closed",
+        "failures": 1,
+        "errors": 0,
+        "killed": true
+      },
+      {
+        "name": "digest_conflict",
+        "target_test": "DurableIdempotencyTests.test_same_key_changed_content_or_identity_conflicts_without_writes",
+        "failures": 6,
+        "errors": 0,
+        "killed": true
+      },
+      {
+        "name": "trusted_actor_scope",
+        "target_test": "IdempotencyLookupTests.test_lookup_scope_includes_project_trusted_actor_and_key",
+        "failures": 1,
+        "errors": 0,
+        "killed": true
+      },
+      {
+        "name": "canonical_context_binding",
+        "target_test": "CanonicalDigestTests.test_every_immutable_command_field_binds_the_digest",
+        "failures": 1,
+        "errors": 0,
+        "killed": true
+      },
+      {
+        "name": "durable_revision_guard",
+        "target_test": "ProcessCompetitionTests.test_two_process_claims_have_one_winner_and_durable_version_evidence",
+        "failures": 1,
+        "errors": 0,
+        "killed": true
+      },
+      {
+        "name": "atomic_batch_boundary",
+        "target_test": "DurableIdempotencyTests.test_result_failure_rolls_back_key_then_original_command_can_retry",
+        "failures": 1,
+        "errors": 0,
+        "killed": true
+      }
+    ]
+  },
+  "source_sha256": {
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "tests/m0/support.py": "07abc92ca86f22ed8943d35d0c4423a700e3284a8ef018f0be4703debafa29ad",
+    "tests/m0/test_idempotency_concurrency.py": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600"
+  },
+  "review": {
+    "reviewer": "Kuhn (01a08bbf-76ba-7020-8d06-1284cafc1c98)",
+    "independent_review_complete": true,
+    "verification_complete": true,
+    "acceptance_complete": true,
+    "initial_candidate_accepted": true,
+    "delta_review_pending": false,
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-review.json",
+    "summary": "Kuhn independently accepted the original candidate, then independently accepted the bounded Unicode test correction and closed the non-blocking Minor. Current code/test hashes verified; main refreshed 29/93 tests and 15 races plus six mutants.",
+    "remaining_findings": 0
+  },
+  "claims": {
+    "conformance_passed": 0,
+    "bootstrap_verified": false,
+    "task_completed_quality_gate": false
+  },
+  "uncovered_risks": [
+    "M0 only: no Lease/Binding/epoch fencing, full TEST-019, approvals or governed Task completion.",
+    "No Runtime, external effects, replay dispatch or full restart/recovery implementation; connection-reopen retry tests are not M0-05 acceptance.",
+    "Missing/corrupt result indexes fail closed; no automatic reconstruction or general database corruption repair is implemented.",
+    "Local SQLite multi-process tests do not establish multi-machine/storage-failure guarantees.",
+    "No Git repository or ClaudeLink tools; no commit/push or fabricated communication."
+  ],
+  "reproduction_command": "Set child-process PYTHONPATH to repository src; python -m unittest tests/m0/test_idempotency_concurrency.py -v; python -m unittest discover -s tests/m0 -t . -v; python Docs/development/evidence/2026-09-11-m0-04-probes.py --mode all --repetitions 5",
+  "handoff_evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+  "unicode_review_fix": {
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-unicode-review-fix.json",
+    "probe_source": "Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py",
+    "test_changed": true,
+    "production_changed": false,
+    "escaped_mutant_exit_code": 1,
+    "escaped_mutant_assertion_failures": 1,
+    "escaped_mutant_errors": 0,
+    "production_test_exit_code": 0
+  },
+  "historical_candidate_snapshot": "Docs/development/evidence/2026-09-11-m0-04-review-snapshot.json",
+  "updated_at": "2026-09-10T17:44:42.347974+00:00",
+  "initial_verification": {
+    "green": {
+      "evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+      "run_label": "m0_04_first_full_green_attempt",
+      "command": "python -m unittest tests/m0/test_idempotency_concurrency.py -v",
+      "exit_code": 0,
+      "tests_run": 29
+    },
+    "regression": {
+      "evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+      "run_label": "m0_full_regression_after_m0_04",
+      "command": "python -m unittest discover -s tests/m0 -t . -v",
+      "exit_code": 0,
+      "tests_run": 93,
+      "note": "The 29 M0-04 cases are included in 93, not additive. Preparation is run separately."
+    }
+  },
+  "acceptance_probe_refresh": {
+    "command": "python Docs/development/evidence/2026-09-11-m0-04-probes.py --mode all --repetitions 5",
+    "exit_code": 0,
+    "started_at": "2026-09-10T17:37:33.018692+00:00",
+    "finished_at": "2026-09-10T17:37:43.068282+00:00",
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-acceptance-probes.json",
+    "run_label": "m0_04_unicode_fix_acceptance_probes",
+    "real_races": 15,
+    "assertion_killed_mutants": 6,
+    "mutation_test_errors": 0,
+    "canonical_sources_unchanged": true
+  },
+  "handoff_document": "Docs/development/evidence/2026-09-11-m0-04-handoff.md",
+  "preparation_verification": {
+    "evidence": "Docs/development/evidence/2026-09-11-m0-04-development.json",
+    "run_labels": [
+      "acceptance_preparation_render",
+      "acceptance_preparation_check",
+      "acceptance_preparation_tests"
+    ],
+    "exit_codes": [
+      0,
+      0,
+      0
+    ],
+    "tests_run": 27,
+    "note": "Static development-material validation, not product Conformance; final_preparation_* repeats the same commands after final handoff metadata."
+  }
+}

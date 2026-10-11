@@ -1,0 +1,30 @@
+{
+  "schema_version": "aetp-preparation-regression-0.1",
+  "scope": "PREP-007 static Skill marker validator regression; not Skill behavioral or product acceptance",
+  "phase": "GREEN",
+  "red_evidence": "Docs/development/evidence/2026-09-07-skill-coverage-red-rerun.json",
+  "runs": [
+    {
+      "command": "python -X utf8 -m unittest discover -s tests/preparation -p test_devprep.py -k skill -v",
+      "started_at": "2026-09-07T22:10:41+08:00",
+      "finished_at": "2026-09-07T22:10:41+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.066s\n\nOK\n"
+    },
+    {
+      "command": "python -X utf8 -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-07T22:10:41+08:00",
+      "finished_at": "2026-09-07T22:10:45+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 3.807s\n\nOK\n"
+    }
+  ],
+  "source_sha256": {
+    "tools/devprep.py": "f572937e2cc3796f997d5961f6e99d8a5617b58042689026fab09131c3563a86",
+    "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a"
+  },
+  "product_acceptance": false,
+  "bootstrap_verified": false
+}

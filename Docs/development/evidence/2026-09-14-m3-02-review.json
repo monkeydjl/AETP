@@ -1,0 +1,459 @@
+{
+  "work_item": "M3-02",
+  "candidate_revision": "v1",
+  "review_version": 1,
+  "reviewed_at": "2026-09-15T00:17:24.992863+08:00",
+  "reviewer": "/root/m1_reviewer",
+  "executor": "/root",
+  "decision": "accepted",
+  "scope": "Only the four first_batch_acceptance_mapping criteria for fixed document Verification v1",
+  "original_work_item_accepted": false,
+  "work_item_status": "in_progress",
+  "candidate_snapshot": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-candidate-snapshot.json",
+    "bytes": 80545,
+    "sha256": "734a5cddbf8893f8615a971e735637304e4b654ab2338478320de934831f5d8b"
+  },
+  "candidate_report": {
+    "path": "artifacts/m3-02-verification-test-report.json",
+    "sha256": "a70e906877147ca9687b49cd288bd9bea2e2ce17888c703b419543bc384f4867"
+  },
+  "frozen_author_review": {
+    "status": "pending",
+    "independent_reviewer": "/root/m1_reviewer"
+  },
+  "first_batch_acceptance_mapping": [
+    {
+      "criterion": "Bounded fixed checker, actual outcomes and immutable input snapshots",
+      "decision": "accepted",
+      "assessment": "Strict JSON/path/case limits and fixed Runner provenance are enforced. Real PASSED/FAILED and INCONCLUSIVE observations are persisted against immutable Artifact/criteria/case snapshots. Independent probes cover escaped duplicate keys, Unicode, exact UTF-8 limits and nesting boundaries.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo"
+      ]
+    },
+    {
+      "criterion": "Explicit Quality/Governance/source authority, independent actual execution identity and single use",
+      "decision": "accepted",
+      "assessment": "Quality intersects explicit Governance and inherited InputAuthority source; candidate/manual/marked/unknown paths do not gain auto authority. Execution requires the actual registered Session on an independent QA Task. New capture_origin, reserved report IDs and a nonempty exact digest close the earlier bypasses. Independent probes cover foreign Runtime sessions, actor mismatch, after-commit expiry and after-run Task revision change.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo"
+      ]
+    },
+    {
+      "criterion": "Crash, result rollback and global recovery without rerun",
+      "decision": "accepted",
+      "assessment": "Durable dispatch and ResourceGate serialize actual execution. SQLite failure at report insertion rolls back the entire result batch, leaving in_flight for bounded no-rerun recovery. The full M3 suite includes real process crash (exit 73), process contention and one-use concurrency; embedded Verification actions participate in global recovery.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo"
+      ]
+    },
+    {
+      "criterion": "Receipt/report/terminal integrity, atomic cursor and pure old/new Replay",
+      "decision": "accepted",
+      "assessment": "Reducers bind receipt, Command, capture origin, report and terminal facts; bad events preserve State and cursor. Independent probes reseal origin and change the embedded report Command. All 8 frozen full/facts stores replayed across 530 prefixes with 26 zero-call guards and unchanged bytes; 6 legacy states match their original complete-state digests. The fresh independent demo adds 2 new stores and 170 prefixes with 24 zero-call guards.",
+      "suite_run": "m3_suite",
+      "additional_runs": [
+        "independent_boundaries",
+        "fresh_demo",
+        "independent_audit_v4"
+      ]
+    }
+  ],
+  "original_work_item_criteria": [
+    {
+      "criterion": "集成面任务通过 Integration Gate",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "Mission success criteria 逐条 Acceptance Verification",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "两名以上平等 Agent 从粗糙想法讨论到成果交付，人工不拆任务且无隐藏 Manager",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    }
+  ],
+  "findings": {
+    "Critical": [],
+    "Important": [],
+    "Minor": [
+      {
+        "id": "M3-02-R1",
+        "severity": "Minor",
+        "blocking": false,
+        "path": "src/aetp/collaboration/service.py",
+        "line": 262,
+        "title": "The historical quality-gate comment is stale after adding AcceptanceService",
+        "detail": "The comment says no implemented record can reach the branch and no Verification Runner exists. New trusted PASSED records can reach the intentional ENFORCEMENT_UNAVAILABLE gate; Task success transitions and Integration remain unimplemented.",
+        "recommendation": "Update only the explanation in a later editable source batch. Preserve the closed Task-success gate. No frozen candidate change is required for these four criteria."
+      }
+    ]
+  },
+  "verification": {
+    "independent_root": "D:\\Github\\AETP\\.tmp\\m3-02-review-v1b",
+    "environment": {
+      "python": "3.14.6",
+      "implementation": "CPython",
+      "executable": "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "os": "nt"
+    },
+    "test_counts": {
+      "m3_suite": 120,
+      "m2_suite": 167,
+      "m1_suite": 85,
+      "m0_suite": 156,
+      "preparation_suite": 27,
+      "independent_boundaries": 12
+    },
+    "product_regression_methods": 528,
+    "independent_probe_methods": 12,
+    "preparation_methods": 27,
+    "total_passing_test_methods": 567,
+    "independent_probes": [
+      "test_escaped_duplicate_keys_and_encoded_unicode_boundaries",
+      "test_exact_utf8_and_nesting_limits",
+      "test_clean_source_with_unknown_capture_context_stays_marked",
+      "test_registered_session_from_another_runtime_is_not_a_capability",
+      "test_actor_mismatch_does_not_reserve_real_request_or_capability",
+      "test_policy_intersection_and_invalid_explicit_fields_never_create_grant",
+      "test_expiry_after_dispatch_commit_stops_actual_runner",
+      "test_exec_task_revision_change_after_actual_run_preserves_only_observation",
+      "test_report_insert_failure_rolls_back_all_result_facts_then_recovers",
+      "test_live_report_id_reservation_cannot_be_bypassed_after_request",
+      "test_capture_origin_tampering_is_rejected_without_poisoning_cursor",
+      "test_receipt_command_body_change_is_rejected_with_original_cursor_intact"
+    ],
+    "commands": [
+      {
+        "label": "setup_v1b",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/setup_v1b/result.json",
+          "bytes": 1049,
+          "sha256": "1aa30ca4396d0c5572e71b51b7a85385f35d666d5df909c8c56aa020081265a8"
+        }
+      },
+      {
+        "label": "m3_suite",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/m3_suite/result.json",
+          "bytes": 1267,
+          "sha256": "0dd13d21c7cc8732e704c641f9f198294d9b355ff8617ff569b2d8265b92b35c"
+        }
+      },
+      {
+        "label": "m2_suite",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/m2_suite/result.json",
+          "bytes": 1267,
+          "sha256": "f08a42f061d12fc5c86e42c1761159aa10aa478b70dbcec76fa10c92d13992a2"
+        }
+      },
+      {
+        "label": "m1_suite",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/m1_suite/result.json",
+          "bytes": 1267,
+          "sha256": "99a21c0ac5d6335dc5a0bfb37e5890867cef64e33e59d334a297acd7c11ba043"
+        }
+      },
+      {
+        "label": "m0_suite",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/m0_suite/result.json",
+          "bytes": 1267,
+          "sha256": "9b7ebb4448a95e58f38516a3565a9744c26e613e30ba2e524706dab4b30c1744"
+        }
+      },
+      {
+        "label": "independent_boundaries",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_boundaries/result.json",
+          "bytes": 1317,
+          "sha256": "cd3476b67169fdd81ff4ee79e62daf1e2f652e561caae0a351cedb2dca1f2afb"
+        }
+      },
+      {
+        "label": "preparation_render",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/preparation_render/result.json",
+          "bytes": 1246,
+          "sha256": "ca286f75e93ae04214b7b9f253c931bdc589b40a325b0e0dfcf0926d9e74214c"
+        }
+      },
+      {
+        "label": "preparation_check",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/preparation_check/result.json",
+          "bytes": 1241,
+          "sha256": "b410485815d03a4381f4e0a535fd6c8c270de07a75d4b8ae7dbce5e4c8b83ff8"
+        }
+      },
+      {
+        "label": "preparation_suite",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/preparation_suite/result.json",
+          "bytes": 1292,
+          "sha256": "ee96c9adbb5124e8a397f10b38079a0d11d63e2afbeea42d55da7ea29af73066"
+        }
+      },
+      {
+        "label": "compile",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/compile/result.json",
+          "bytes": 1256,
+          "sha256": "69e944dc376c7073052c221bfc4a5efa15bf991b9b4261a9f7a27bd1599106cf"
+        }
+      },
+      {
+        "label": "fresh_demo",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/fresh_demo/result.json",
+          "bytes": 1262,
+          "sha256": "c8d6a49226e2c495415dedccad0a4cb20f63ea8339dfba7fc95738baaa94ec66"
+        }
+      },
+      {
+        "label": "independent_audit",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit/result.json",
+          "bytes": 1471,
+          "sha256": "e5ce186f3fba8d960daa7072e17ea93863207be916a7559a54869efd71a494a5"
+        }
+      },
+      {
+        "label": "independent_audit_v2",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit_v2/result.json",
+          "bytes": 1486,
+          "sha256": "c356c306163c2cb33ac80c442356526c15c0d16a097db7e7e5592ce8334fbf17"
+        }
+      },
+      {
+        "label": "independent_audit_v3",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit_v3/result.json",
+          "bytes": 1486,
+          "sha256": "325586500ec3e27d2b2180545a8135b0b66b7f21f2498b0dd3964a25db8c1dd5"
+        }
+      },
+      {
+        "label": "independent_audit_v4",
+        "result": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit_v4/result.json",
+          "bytes": 1486,
+          "sha256": "aa16fac98ec27966a9c70ffe63c322adde1d9b72ffbc0397bc403414dd37de6d"
+        }
+      }
+    ],
+    "commands_journal_prefix": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-review-commands.jsonl",
+      "bytes": 17870,
+      "sha256": "78a44e07756d36f0f60ad852b5ef9fc856234ee2e3970331e864160277005af8",
+      "prefix": true
+    },
+    "setup_manifest": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/setup.json",
+      "bytes": 331994,
+      "sha256": "6806b5b7e67c8f2ea2d2d19ecd121780fb165d47c7e7ab138a71e00ec4d31ad6"
+    },
+    "input_integrity": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/evidence-integrity.json",
+      "bytes": 10574,
+      "sha256": "291888ee991053049dc89922b5893e26d65b92a1cb4c4e32baa4c7465d1e1a3c"
+    },
+    "frozen_audit": {
+      "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent-audit-details.json",
+      "bytes": 25965,
+      "sha256": "0eb463d903854fc2bef291474f87f45e6f24b48605f86caf324e195e64a4597b"
+    },
+    "frozen_replay": {
+      "databases": 8,
+      "prefixes": 530,
+      "new_prefixes": 170,
+      "legacy_prefixes": 360,
+      "guards_per_database": 26,
+      "guard_calls": 0
+    },
+    "fresh_demo": {
+      "archives": [
+        {
+          "executed_output": {
+            "path": ".tmp/m3-02-review-v1b/artifacts/m3-02-review-demo-v1.json",
+            "bytes": 186642,
+            "sha256": "fa75956bfacff86b4bcbeae0a0cfbca7395c1c7136f4380eea909bce6d50f587"
+          },
+          "archive": {
+            "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/fresh_demo/outputs/m3-02-review-demo-v1.json",
+            "bytes": 186642,
+            "sha256": "fa75956bfacff86b4bcbeae0a0cfbca7395c1c7136f4380eea909bce6d50f587"
+          }
+        },
+        {
+          "executed_output": {
+            "path": ".tmp/m3-02-review-v1b/artifacts/m3-02-review-demo-v1.sqlite",
+            "bytes": 540672,
+            "sha256": "2c41bc72f0e4746f3d057e24c4bc3d6299f225731178ccba16e4fa0280009c74"
+          },
+          "archive": {
+            "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/fresh_demo/outputs/m3-02-review-demo-v1.sqlite",
+            "bytes": 540672,
+            "sha256": "2c41bc72f0e4746f3d057e24c4bc3d6299f225731178ccba16e4fa0280009c74"
+          }
+        },
+        {
+          "executed_output": {
+            "path": ".tmp/m3-02-review-v1b/artifacts/m3-02-review-demo-v1-facts.sqlite",
+            "bytes": 282624,
+            "sha256": "bf603314927b972ac79259db191b031990858b09a5f458d0ebbbbd0cd99deb1d"
+          },
+          "archive": {
+            "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/fresh_demo/outputs/m3-02-review-demo-v1-facts.sqlite",
+            "bytes": 282624,
+            "sha256": "bf603314927b972ac79259db191b031990858b09a5f458d0ebbbbd0cd99deb1d"
+          }
+        },
+        {
+          "executed_output": {
+            "path": ".tmp/m3-02-review-v1b/artifacts/m3-02-review-demo-v1.md",
+            "bytes": 838,
+            "sha256": "97cc0c3d36574bfb1b8a78f0505bea453994d5e6cd9d27b436cf70dce65c86d4"
+          },
+          "archive": {
+            "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/fresh_demo/outputs/m3-02-review-demo-v1.md",
+            "bytes": 838,
+            "sha256": "97cc0c3d36574bfb1b8a78f0505bea453994d5e6cd9d27b436cf70dce65c86d4"
+          }
+        }
+      ],
+      "events": 85,
+      "commands": 40,
+      "databases": 2,
+      "prefixes": 170,
+      "guards_per_database": 24,
+      "guard_calls": 0,
+      "outcomes": {
+        "pass": {
+          "result": "PASSED",
+          "reason": "ALL_CHECKS_MATCHED",
+          "dispatch_count": 1
+        },
+        "fail": {
+          "result": "FAILED",
+          "reason": "CHECKS_FAILED",
+          "dispatch_count": 1
+        },
+        "revoked": {
+          "result": "INCONCLUSIVE",
+          "reason": "GRANT_REVOKED",
+          "dispatch_count": 0
+        },
+        "lost": {
+          "result": "INCONCLUSIVE",
+          "reason": "RESULT_LOST_RECOVERY_NO_RERUN",
+          "dispatch_count": 1
+        }
+      }
+    },
+    "report_validation": {
+      "label": "review_validation",
+      "result_path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/review_validation/result.json",
+      "note": "Recorded after these immutable report files are written; its result is delivered separately."
+    }
+  },
+  "retained_failures": [
+    {
+      "label": "independent_audit",
+      "exit_code": 1,
+      "category": "reviewer_harness_error",
+      "explanation": "Reviewer counted 123 src/tests Python files; the frozen declaration also includes 4 conformance/tools files (127 total). Corrected in v2.",
+      "result": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit/result.json",
+        "bytes": 1471,
+        "sha256": "e5ce186f3fba8d960daa7072e17ea93863207be916a7559a54869efd71a494a5"
+      }
+    },
+    {
+      "label": "independent_audit_v2",
+      "exit_code": 1,
+      "category": "reviewer_harness_error",
+      "explanation": "Reviewer assumed legacy M2 reports contained final_state. They instead pin the full state digest; historical project ID and serializer were checked before v3.",
+      "result": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit_v2/result.json",
+        "bytes": 1486,
+        "sha256": "c356c306163c2cb33ac80c442356526c15c0d16a097db7e7e5592ce8334fbf17"
+      }
+    },
+    {
+      "label": "independent_audit_v3",
+      "exit_code": 1,
+      "category": "reviewer_harness_error",
+      "explanation": "Reviewer equated M2-01 commands_sent with durable Command count. That list omits a host internal command (11 submitted versus 12 durable); v4 checks actual store counts and original full state digests.",
+      "result": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/independent_audit_v3/result.json",
+        "bytes": 1486,
+        "sha256": "325586500ec3e27d2b2180545a8135b0b66b7f21f2498b0dd3964a25db8c1dd5"
+      }
+    }
+  ],
+  "evidence_limitations": [
+    {
+      "kind": "initial_setup",
+      "failure": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/bootstrap_initial/failure.json",
+        "bytes": 669,
+        "sha256": "1d978ddfffb0e5acaec0a035afa6229e78808253de9e33963f2c92857c691474"
+      },
+      "original_control": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/bootstrap_initial/control.py",
+        "bytes": 7921,
+        "sha256": "4b8fb869859014fcc512fedc48d96c0b72a1d43eb9b36aded7267fa34717cabb"
+      },
+      "detail": "Initial v1a setup failed on Windows long paths in unrelated historical nested workspaces before product tests. v1a is retained. Full stderr existed only in truncated tool output; exact start/end timestamps were not captured. They have not been reconstructed. Successful v1b setup and every subsequent verification command have durable logs."
+    },
+    {
+      "kind": "early_schema_manifest",
+      "detail": "Early per-run manifests omit 9 schema JSON entries. Those exact fixtures are pinned by the frozen snapshot and the pre-test successful setup manifest; current copy bytes match. Later manifests include schemas. Earlier manifests were not rewritten.",
+      "integrity_detail": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-review-runs/evidence-integrity.json",
+        "bytes": 10574,
+        "sha256": "291888ee991053049dc89922b5893e26d65b92a1cb4c4e32baa4c7465d1e1a3c"
+      }
+    }
+  ],
+  "scope_limits": {
+    "task_success_transitions_accepted": false,
+    "integration_accepted": false,
+    "mission_acceptance_accepted": false,
+    "bootstrap_accepted": false,
+    "test_028_passed": false,
+    "full_m1_accepted": false,
+    "full_conformance_passed": 0,
+    "natural_language_criteria_understanding": false,
+    "arbitrary_runner_or_general_os_sandbox": false,
+    "real_model_calls_or_billing_verified": false,
+    "cross_machine_and_performance_verified": false
+  },
+  "coordination": {
+    "existing_reviewer_reused": true,
+    "new_agents": 0,
+    "claudelink": "Not available/used; coordination used the existing parent-reviewer channel.",
+    "git_operations": "none",
+    "author_recorder_invoked": false,
+    "writes": [
+      ".tmp/m3-02-review-v1a/",
+      ".tmp/m3-02-review-v1b/",
+      "Docs/development/evidence/2026-09-14-m3-02-review*"
+    ],
+    "main_product_backlog_status_memory_or_frozen_candidate_modified": false
+  },
+  "next_step": "Parent may consume this scoped independent review in new evidence. Keep M3-02 in_progress and preserve the frozen v1 candidate. Task quality applicability/lifecycle revision and subsequent integration require their own design, implementation and review."
+}

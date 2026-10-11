@@ -1,0 +1,32 @@
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+.claude/settings.local.json
+# Python and tooling caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+# Node / build / runtime output
+node_modules/
+dist/
+build/
+*.egg-info/
+.tmp/
+var/
+# Generated local skill discovery copies; canonical sources are skills/
+.agents/skills/aetp-protocol-navigation/
+.agents/skills/aetp-execution-contracts/
+.agents/skills/aetp-evidence-handoff/
+# Reasonix local runtime artefacts (session traces + local-only skills)
+.reasonix/
+# Historical review scratch directories under evidence/ (temp/tmp* scratch,
+# not formal evidence); some are OS permission-locked and unreadable, which
+# would otherwise abort `git add`.
+Docs/development/evidence/**/temp/
+Docs/development/evidence/**/tmp/

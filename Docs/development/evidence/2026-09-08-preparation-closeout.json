@@ -1,0 +1,2070 @@
+{
+  "schema_version": "aetp-preparation-closeout-0.1",
+  "started_at": "2026-09-08T00:20:47+08:00",
+  "executor": "Codex main session",
+  "work_items": [
+    "PREP-003",
+    "PREP-004",
+    "PREP-006",
+    "PREP-007",
+    "PREP-008"
+  ],
+  "scope": "preparation acceptance only; no M0 implementation",
+  "coordination": {
+    "claudelink_available": false,
+    "mcp_resources": [],
+    "git_repository": false,
+    "git_status_exit_code": 128,
+    "main_is_only_shared_state_writer": true,
+    "cross_terminal_atomic_claim": false,
+    "single_subagent_constraint": {
+      "recorded_at": "2026-09-08T01:07:18.455835+08:00",
+      "user_instruction": "继续，但是只能开1个子代理",
+      "retained": {
+        "name": "Kant",
+        "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d"
+      },
+      "closed": [
+        {
+          "name": "Zeno",
+          "agent_id": "01a07cad-2ebc-71f3-a3f9-8e64975104ae",
+          "outcome": "completed; PREP-006 changes_required report preserved"
+        },
+        {
+          "name": "Rawls",
+          "agent_id": "01a07cae-0e8b-7482-8dd8-06e88b5bb42b",
+          "outcome": "errored: Concurrency limit exceeded for user; closed without review conclusion"
+        }
+      ],
+      "rule": "No additional child agent; reuse Kant serially. Main writes sources/state; Kant writes only assigned evidence."
+    },
+    "resumed_at": "2026-09-08T21:13:24.051678+08:00",
+    "mcp_completion_inventory": "resources/templates empty on resumed task; no ClaudeLink inbox APIs",
+    "corrections_review_frozen_confirmation": {
+      "at": "2026-09-08T21:37:58.506029+08:00",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "received_via": "multi_agent_v1.wait_agent",
+      "result": "completed; report frozen; no shared-state writes"
+    },
+    "latest_mcp_inventory": {
+      "at": "2026-09-08T21:55:52.136278+08:00",
+      "resources": [],
+      "templates": [],
+      "claudelink_inbox_available": false
+    },
+    "resume_events": [
+      {
+        "at": "2026-09-09T18:58:57.074231+08:00",
+        "user_request": "Continue after intentional interruption; local date 2026-09-09.",
+        "claudelink_available": false,
+        "mcp_resources": [],
+        "mcp_resource_templates": [],
+        "agent_lookup": "send_input returned agent not found; resume_agent on original Kant ID returned pending_init; same ID then accepted send_input.",
+        "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+        "new_agents_spawned": 0,
+        "payload_hashes_unchanged": true,
+        "report_observed": "PREP-008 independent report absent; private material directory exists.",
+        "state_action": "None; PREP-008 review and all product items todo."
+      }
+    ]
+  },
+  "initial_sha256": {
+    "AGENTS.md": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+    "Docs/development/backlog.json": "fba44615d5f1df01475864d12485417ad9cc5c84bee4853a81d8ab8fd1a8b1ee",
+    "Docs/development/status.json": "beba384860027f509621f58731180d6eec4d9258e11dae93bba90f694e4b621f",
+    "Docs/development/knowledge-graph.json": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+    "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+    "skills/aetp-execution-contracts/SKILL.md": "79874feea3a9b4aaeb704eb0a02afa63e83ebac63698e8003a8b4007b4620ccb",
+    "skills/aetp-evidence-handoff/SKILL.md": "cb3de7c0bcecc7cbe6fe4a646d67b5376e944b68c316e51546d1baaf52d56d53",
+    "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "bb838d6c5cb44fb3377bcd1727f02beaf060a3c0dcc167cba66a89e9499d4dad",
+    "tools/devprep.py": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+    "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+    "tests/preparation/test_devprep_fail_closed.py": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215"
+  },
+  "reviewers": {
+    "PREP-003/004": {
+      "name": "Kant",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "write_set": [
+        "Docs/development/evidence/2026-09-08-prep-003-004-review.json"
+      ]
+    },
+    "PREP-006": {
+      "name": "Zeno",
+      "agent_id": "01a07cad-2ebc-71f3-a3f9-8e64975104ae",
+      "write_set": [
+        "Docs/development/evidence/2026-09-08-prep-006-review.json"
+      ]
+    },
+    "PREP-007": {
+      "name": "Rawls",
+      "agent_id": "01a07cae-0e8b-7482-8dd8-06e88b5bb42b",
+      "write_set": [
+        "Docs/development/evidence/2026-09-08-prep-007-review.json"
+      ],
+      "attempt_status": "errored_and_closed; no acceptance"
+    },
+    "PREP-007-reassigned": {
+      "name": "Kant",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "write_set": [
+        "Docs/development/evidence/2026-09-08-prep-007-review.json"
+      ]
+    },
+    "PREP-corrections": {
+      "name": "Kant",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "write_set": [
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json"
+      ]
+    },
+    "PREP-008": {
+      "name": "Kant",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "write_set": [
+        "Docs/development/evidence/2026-09-08-prep-008-review.json"
+      ],
+      "executor": "Codex main session",
+      "status": "prepared for sole reviewer assignment; source payload frozen"
+    }
+  },
+  "transitions": [
+    {
+      "work_item": "PREP-003",
+      "from": "ready",
+      "to": "in_progress",
+      "at": "2026-09-08T00:25:39+08:00",
+      "actor": "Codex main session",
+      "reason": "User-authorized closeout; existing source handed to Kant for independent preparation scenario review."
+    },
+    {
+      "work_item": "PREP-004",
+      "from": "ready",
+      "to": "in_progress",
+      "at": "2026-09-08T00:25:39+08:00",
+      "actor": "Codex main session",
+      "reason": "User-authorized closeout; existing source handed to Kant for independent preparation scenario review."
+    },
+    {
+      "work_item": "PREP-003",
+      "from": "in_progress",
+      "to": "review",
+      "at": "2026-09-08T00:25:39+08:00",
+      "actor": "Codex main session",
+      "reason": "User-authorized closeout; existing source handed to Kant for independent preparation scenario review."
+    },
+    {
+      "work_item": "PREP-004",
+      "from": "in_progress",
+      "to": "review",
+      "at": "2026-09-08T00:25:39+08:00",
+      "actor": "Codex main session",
+      "reason": "User-authorized closeout; existing source handed to Kant for independent preparation scenario review."
+    },
+    {
+      "work_item": "PREP-003",
+      "from": "review",
+      "to": "done",
+      "at": "2026-09-08T21:37:58.510929+08:00",
+      "actor": "Codex main session",
+      "reason": "Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance."
+    },
+    {
+      "work_item": "PREP-004",
+      "from": "review",
+      "to": "done",
+      "at": "2026-09-08T21:37:58.529006+08:00",
+      "actor": "Codex main session",
+      "reason": "Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance."
+    },
+    {
+      "work_item": "PREP-006",
+      "from": "review",
+      "to": "done",
+      "at": "2026-09-08T21:37:58.547535+08:00",
+      "actor": "Codex main session",
+      "reason": "Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance."
+    },
+    {
+      "work_item": "PREP-007",
+      "from": "review",
+      "to": "done",
+      "at": "2026-09-08T21:37:58.565543+08:00",
+      "actor": "Codex main session",
+      "reason": "Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance."
+    },
+    {
+      "work_item": "PREP-008",
+      "from": "todo",
+      "to": "ready",
+      "at": "2026-09-08T21:37:58.582690+08:00",
+      "actor": "Codex main session",
+      "reason": "All PREP-002..007 dependencies independently accepted."
+    },
+    {
+      "work_item": "PREP-008",
+      "from": "ready",
+      "to": "in_progress",
+      "at": "2026-09-08T21:37:58.606928+08:00",
+      "actor": "Codex main session",
+      "reason": "Main session prepares integrated handoff for sole Kant independent audit; no product implementation."
+    },
+    {
+      "work_item": "PREP-008",
+      "from": "in_progress",
+      "to": "review",
+      "at": "2026-09-08T21:42:52.619068+08:00",
+      "actor": "Codex main session",
+      "reason": "Integrated handoff and immutable acceptance index prepared; pending sole Kant independent review. Required verification runs follow before payload freeze."
+    },
+    {
+      "work_item": "PREP-008",
+      "from": "review",
+      "to": "done",
+      "at": "2026-09-09T19:12:01.971633+08:00",
+      "actor": "Codex main session",
+      "reason": "Frozen independent integrated preparation-level pass accepted; all dependencies done; hashes and limited finalization verified."
+    },
+    {
+      "work_item": "M0-01",
+      "from": "todo",
+      "to": "ready",
+      "at": "2026-09-09T19:12:02.000264+08:00",
+      "actor": "Codex main session",
+      "reason": "PREP-008 is genuinely done. Only readiness for later scoped handoff, not implementation/environment/Git/dependency authorization."
+    },
+    {
+      "work_item": "M0-01",
+      "from": "ready",
+      "to": "todo",
+      "at": "2026-09-09T19:19:06.027183+08:00",
+      "actor": "Codex main session",
+      "reason": "Final regression failed; withdraw pending M0 readiness before reopening preparation gate."
+    },
+    {
+      "work_item": "PREP-008",
+      "from": "done",
+      "to": "review",
+      "at": "2026-09-09T19:19:06.040681+08:00",
+      "actor": "Codex main session",
+      "reason": "Reopen integrated acceptance for test-source supplemental review; historical pass preserved."
+    },
+    {
+      "work_item": "PREP-007",
+      "from": "done",
+      "to": "review",
+      "at": "2026-09-09T19:19:06.076457+08:00",
+      "actor": "Codex main session",
+      "reason": "Reopen bounded preparation test-fixture defect; main owns repair and sole Kant supplemental review."
+    }
+  ],
+  "runs": [
+    {
+      "stage": "baseline-after-review-handoff",
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-08T00:25:39+08:00",
+      "finished_at": "2026-09-08T00:25:39+08:00",
+      "exit_code": 0,
+      "output": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (3/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n"
+    },
+    {
+      "stage": "baseline-after-review-handoff",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-08T00:25:39+08:00",
+      "finished_at": "2026-09-08T00:25:39+08:00",
+      "exit_code": 0,
+      "output": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n"
+    },
+    {
+      "stage": "baseline-after-review-handoff",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-08T00:25:39+08:00",
+      "finished_at": "2026-09-08T00:25:42+08:00",
+      "exit_code": 0,
+      "output": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.881s\n\nOK\n"
+    },
+    {
+      "stage": "preparation_correction_RED",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "started_at": "2026-09-08T01:07:45.475982+08:00",
+      "finished_at": "2026-09-08T01:07:45.686406+08:00",
+      "exit_code": 1,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... FAIL\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... FAIL\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... FAIL\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... FAIL\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... FAIL\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... FAIL\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... FAIL\n\n======================================================================\nFAIL: test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 99, in test_approval_expiry_is_m2_not_m0_execution\n    self.assertNotIn(\"TEST-011\", items[item_id][\"conformance_tests\"])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'TEST-011' unexpectedly found in ['TEST-002', 'TEST-003', 'TEST-004', 'TEST-007', 'TEST-009', 'TEST-010', 'TEST-011', 'TEST-013', 'TEST-023', 'TEST-024', 'TEST-025', 'TEST-027']\n\n======================================================================\nFAIL: test_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 59, in test_create_accepts_receipt_and_domain_event\n    exercise(CREATE, [\"command.received\", \"task.created\"])\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 54, in exercise\n    MethodType(planned_method(name), case)()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"D:\\Github\\AETP\\Docs\\superpowers\\plans\\2026-09-06-m0-first-slice.md\", line 14, in test_task_create_commits_event_before_projection_is_read\nAssertionError: Lists differ: ['command.received', 'task.created'] != ['task.created']\n\nFirst differing element 0:\n'command.received'\n'task.created'\n\nFirst list contains 1 additional elements.\nFirst extra element 1:\n'task.created'\n\n- ['command.received', 'task.created']\n+ ['task.created']\n\n======================================================================\nFAIL: test_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 65, in test_create_rejects_missing_receipt\n    with self.assertRaises(AssertionError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\nAssertionError: AssertionError not raised\n\n======================================================================\nFAIL: test_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 92, in test_prep_statistics_name_the_prep_milestone\n    self.assertIn(\"milestones.PREP\", text)\n    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'milestones.PREP' not found in '\\ufeff---\\nname: aetp-evidence-handoff\\ndescription: Use when splitting AETP work, taking over a backlog item, reporting progress, reviewing acceptance evidence, or handing a change from one Agent to another.\\n---\\n\\n# AETP 证据、进度与交接参考\\n\\n本 Skill 约束报告形状，不能把计划、静态检查或 Agent 自述变成产品验收。规范入口是 `AGENTS.md`、`Docs/development/backlog.json` 和 `Docs/development/knowledge-map.md`。\\n\\n## 状态与证据\\n\\n| 状态 | 意义 |\\n| --- | --- |\\n| `todo` | 已登记，当前不可直接开始或尚未排队 |\\n| `ready` | 依赖满足，可协商接手；不保证环境/权限 |\\n| `in_progress` | 执行者、范围与输入已确认 |\\n| `review` | 产物已有，等待不同 Agent 独立复核 |\\n| `done` | 验收证据、复现命令、退出码和独立复核齐全 |\\n| `blocked` | 有明确阻塞事实和解除条件；不等于成功 |\\n\\n`planned`、`implemented`、`verified`、`accepted` 是证据层级，不可互换：实现完成不等于验证通过，验证通过不等于人类/任务验收。\\n\\n\\n## 开发准备字段来源与规范定位\\n\\n开发准备报告中的状态字段必须能回到单一来源，不能凭口头进度推断：\\n\\n| 字段/判断 | 来源 | 约束 |\\n| --- | --- | --- |\\n| 工作项状态、依赖、文件写集、验收条件 | `Docs/development/backlog.json` | `todo → ready → in_progress → review → done`；`done` 必须有验收证据、复现命令、退出码和不同 Agent 复核 |\\n| 里程碑统计与准备摘要 | `Docs/development/status.json`、`tools/devprep.py render` 生成的 `preparation-report.json` | 只统计准备工作项；不计作产品完成度 |\\n| `product_completion_percent` | `Docs/development/status.json` | 准备阶段保持 `0` |\\n| `bootstrap_status` | `Docs/development/status.json` | 准备阶段保持 `not_started`；没有 Bootstrap Acceptance 不得写 `BOOTSTRAP_VERIFIED` |\\n| Conformance | `Docs/AETP-设计方案.md` 的 TEST 登记与产品执行报告 | 只有登记是 `registered`；没有真实执行证据不能写 `passed` |\\n\\n原始规范的验收入口：§§15.5（Bootstrap Mission/Acceptance）、17.2（M0 五对象与模拟 Runtime 边界）、17.4（v0.1 兼容范围）、18.2（故障注入）、18.3（TEST 是待执行验收要求）。对应压力场景至少覆盖 `TEST-010`、`TEST-012`、`TEST-028`，并明确静态资料检查不替代产品行为证据。\\n## 交接卡片（必须完整）\\n\\n```text\\n工作项：<ID>；状态：<状态>\\n目标/范围：<不做什么也写出>\\n修改文件：<路径>\\n输入与依赖：<ID、规范章节、决策>\\n已运行：<命令>；退出码：<n>；时间：<ISO-8601>\\n证据：<报告、日志、fixture、commit；没有就写 none>\\n未覆盖：<失败场景、权限、环境、外部效果>\\n独立复核：<不同 Agent/未完成则写 pending>\\n下一步：<一个可执行动作>\\n```\\n\\n只按已完成工作项计算进度；Conformance 另行统计。28 条 TEST 写入文档只表示 `registered`，没有执行报告不能写 `passed`。五对象 M0 模拟通过也不能写 `BOOTSTRAP_VERIFIED` 或完整成果验收。\\n\\n## 接手前检查\\n\\n先确认依赖状态、文件写集、未提交改动、规范来源和验收命令；与其他 Agent 协商后再改共享清单。`backlog.json` 是计划文件，不是跨进程原子 Lease 服务。若无法获得不同 Agent 的复核，保持 `review`，不要自评为 `done`。\\n\\n## 常见误报\\n\\n- “测试条目存在” ≠ “测试通过”。\\n- “脚本 exit 0” ≠ “产品行为符合协议”。\\n- “实现好了” ≠ “有 Artifact/Review/Verification/Acceptance”。\\n- “Manager 汇总过” ≠ “平等 Agent 直接协作已验证”。\\n- “本机进程锁” ≠ “跨进程认领安全”。\\n\\n'\n\n======================================================================\nFAIL: test_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 62, in test_retry_accepts_receipt_and_single_domain_effect\n    exercise(RETRY, [\"command.received\", \"task.created\"])\n    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 54, in exercise\n    MethodType(planned_method(name), case)()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"D:\\Github\\AETP\\Docs\\superpowers\\plans\\2026-09-06-m0-first-slice.md\", line 19, in test_same_key_same_content_returns_original_result_without_new_event\n    - 从第一天遵守 `Command → Event Store → Projection`；Agent 不直接写 State，Agent 不直接产生 Event。\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 2 != 1\n\n======================================================================\nFAIL: test_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 69, in test_retry_rejects_missing_receipt\n    with self.assertRaises(AssertionError):\n         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^\nAssertionError: AssertionError not raised\n\n======================================================================\nFAIL: test_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-08-preparation-corrections-probe.py\", line 86, in test_skill_separates_pure_replay_from_recovery\n    self.assertNotIn(\"| Replay 或恢复 |\", text)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '| Replay 或恢复 |' unexpectedly found in '\\ufeff---\\nname: aetp-execution-contracts\\ndescription: Use when implementing or reviewing AETP Command handling, Event Store transactions, projections, Replay, idempotency, leases, external effects, Runtime adapters, or Workspace boundaries.\\n---\\n\\n# AETP 执行契约参考\\n\\n本 Skill 只帮助定位和应用已批准的执行边界；它不是安全能力、权限授予或已通过 Conformance 的证明。改动前读 `Docs/AETP-设计方案.md` 的规范原文，并将适用测试写成可执行夹具。\\n\\n## 不可跳过的事实链\\n\\n```text\\n受信 Agent/Human/System → Command\\n  → actor / permission / expected_revision / idempotency 校验\\n  → 原子 Event Store 提交\\n  → State Projection\\n```\\n\\nAgent 不直接写 State 或制造 Event。Event 历史不可变；`sequence` 由 Sequencer 赋值；Projection 可删除并由 Event 重建。Orchestrator 不得保存 Event Store 外的权威调度状态。\\n\\n## 幂等与冲突\\n\\n同一作用域 `(project_id, authenticated_actor_id, idempotency_key)` 的同键同内容返回原结果；同键不同规范化内容拒绝为 `IDEMPOTENCY_CONFLICT`。超时后的重试沿用原 Command，不用新 key 假装新业务意图。`expected_revision` 在最终提交处检查，冲突时新建表达修订意图的 Command，不改旧 Command。\\n\\n## 外部效果与恢复\\n\\n数据库事务只持久化待执行意图，不能包住不可回滚的外部调用。外部结果为 UNKNOWN 时查询/对账，禁止盲目新建 key 重试；纯 Replay 不调用模型、Shell、Runtime.start 或工具。旧 Lease epoch 的迟到报告只能留档，不能推进任务或合并成果。\\n\\n\\n## 跨进程认领的强制边界\\n\\n本机进程锁最多只能作为性能优化或减少无效竞争的提示，不能替代 Event Store/数据库事务中的持久化版本检查、Lease fencing 或提交时条件写入。多个进程必须在共享持久化事实源上竞争；锁丢失、进程崩溃或锁实现不可用时，仍必须由提交边界拒绝旧版本或旧 epoch，不能把“本机锁成功”当作安全证明。\\n\\n## 压力场景到验收映射\\n\\n| 子场景 | 必查原则 | 对应定位 |\\n| --- | --- | --- |\\n| 外部调用超时为 `UNKNOWN` | 先查询/对账，沿用原 Command 与幂等键，禁止盲目新 key 创建 | §14.4；`TEST-020`、`TEST-026` |\\n| Replay 或恢复 | 只消费 Event，不调用模型、Shell、`Runtime.start` 或工具 | §§13.4、13.10；`TEST-005`、`TEST-021` |\\n| 提交后内部响应丢失 | 原 Command 重试得到原结果，不制造第二个业务意图 | §§14.1、14.2；`TEST-017` |\\n| 两进程并发认领 | 共享持久化提交处做版本/Lease 条件检查，本机锁不能替代 | §§7.6、14.1；`TEST-006`、`TEST-019` |\\n| 旧 Lease epoch 迟到报告 | 只留档，不推进 Task、不合并成果 | §7.6；`TEST-022` |\\n## Lease、审查与边界\\n\\nLease/Binding 限制执行写入，不等于审查资格；Reviewer 不必接管作者 Task。Runtime Adapter 必须验证可信 actor、当前 Binding、Workspace 范围、暂停屏障和能力；越界或缺少 Enforcement 时拒绝，不以“本地测试通过”代替真实边界。\\n\\n## 快速定位\\n\\n| 场景 | 原文 | 验收 |\\n| --- | --- | --- |\\n| Command、事务、幂等 | §§14.1–14.2 | TEST-001、016–019 |\\n| 外部副作用、UNKNOWN | §§13.9、14.4 | TEST-020、026 |\\n| Replay、恢复 | §§13.4、13.10 | TEST-005、012、017、021、025 |\\n| Lease / epoch | §§7.6、7.10 | TEST-006、019、022 |\\n| Review / Verification | §§10.2–10.3 | TEST-003、008、015 |\\n| Workspace / Adapter | §13.9 | TEST-014、016、026 |\\n\\n## 交付前问题\\n\\n1. 这次写入是否有 Command、受信 actor 和 expected revision？\\n2. Event 批次是否原子、不可变、幂等，并能重放？\\n3. 是否存在外部 UNKNOWN、旧 epoch、暂停或跨进程竞争？\\n4. 运行时和 Workspace 边界是否真实执行，而非仅在提示词中声明？\\n5. 没有对应的失败夹具时，不称为兼容或完成。\\n\\n'\n\n----------------------------------------------------------------------\nRan 10 tests in 0.031s\n\nFAILED (failures=7)\n",
+      "source_sha256": {
+        "skills/aetp-execution-contracts/SKILL.md": "79874feea3a9b4aaeb704eb0a02afa63e83ebac63698e8003a8b4007b4620ccb",
+        "skills/aetp-evidence-handoff/SKILL.md": "cb3de7c0bcecc7cbe6fe4a646d67b5376e944b68c316e51546d1baaf52d56d53",
+        "Docs/development/roadmap.md": "b227114e1d902757d629bb9bb38fc7ee643a3705b97eb99cb5c92cb843ce4277",
+        "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "bb838d6c5cb44fb3377bcd1727f02beaf060a3c0dcc167cba66a89e9499d4dad",
+        "Docs/development/backlog.json": "f77b4ec4387805ebbaf0042025894f45c6259b381317ff3127092d93095c823b",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc"
+      },
+      "qualification": "Preparation document assertion/countermodel failures only; no M0 implementation or product test execution.",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-corrections-red.json"
+    },
+    {
+      "stage": "post_correction_verification",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "started_at": "2026-09-08T01:09:38.479459+08:00",
+      "finished_at": "2026-09-08T01:09:38.680815+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.028s\n\nOK\n",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-corrections-green.json"
+    },
+    {
+      "stage": "post_correction_verification",
+      "command": "python tools/devprep.py render",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-08T01:09:38.680885+08:00",
+      "finished_at": "2026-09-08T01:09:38.882908+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (3/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": "",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-corrections-green.json"
+    },
+    {
+      "stage": "post_correction_verification",
+      "command": "python tools/devprep.py check",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "started_at": "2026-09-08T01:09:38.882965+08:00",
+      "finished_at": "2026-09-08T01:09:39.099830+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": "",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-corrections-green.json"
+    },
+    {
+      "stage": "post_correction_verification",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "started_at": "2026-09-08T01:09:39.099885+08:00",
+      "finished_at": "2026-09-08T01:09:41.234241+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.828s\n\nOK\n",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-corrections-green.json"
+    },
+    {
+      "stage": "resumed_pre_acceptance_verification",
+      "command": "git status --short",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "started_at": "2026-09-08T21:13:18.438012+08:00",
+      "finished_at": "2026-09-08T21:13:18.473389+08:00",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-resume-validation.json"
+    },
+    {
+      "stage": "resumed_pre_acceptance_verification",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "started_at": "2026-09-08T21:13:18.473440+08:00",
+      "finished_at": "2026-09-08T21:13:18.781869+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.033s\n\nOK\n",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-resume-validation.json"
+    },
+    {
+      "stage": "resumed_pre_acceptance_verification",
+      "command": "python tools/devprep.py render",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-08T21:13:18.781924+08:00",
+      "finished_at": "2026-09-08T21:13:19.044868+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (3/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": "",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-resume-validation.json"
+    },
+    {
+      "stage": "resumed_pre_acceptance_verification",
+      "command": "python tools/devprep.py check",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "started_at": "2026-09-08T21:13:19.044961+08:00",
+      "finished_at": "2026-09-08T21:13:19.264808+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": "",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-resume-validation.json"
+    },
+    {
+      "stage": "resumed_pre_acceptance_verification",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "started_at": "2026-09-08T21:13:19.264898+08:00",
+      "finished_at": "2026-09-08T21:13:24.050362+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 4.249s\n\nOK\n",
+      "evidence_path": "Docs/development/evidence/2026-09-08-preparation-resume-validation.json"
+    },
+    {
+      "stage": "integrated_pre_review_verification",
+      "command": "git status --short",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "started_at": "2026-09-08T21:49:20.688283+08:00",
+      "expected_exit_code": 128,
+      "finished_at": "2026-09-08T21:49:20.731857+08:00",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n"
+    },
+    {
+      "stage": "integrated_pre_review_verification",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "started_at": "2026-09-08T21:49:20.731946+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:49:20.962123+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.030s\n\nOK\n"
+    },
+    {
+      "stage": "integrated_pre_review_verification",
+      "command": "python tools/devprep.py render",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-08T21:49:20.962259+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:49:21.175116+08:00",
+      "exit_code": 1,
+      "stdout": "ERROR status.work_item_status_counts does not match backlog: expected={'done': 7, 'review': 1, 'todo': 12, 'in_progress': 0, 'blocked': 0, 'ready': 0}, actual={'done': 7, 'review': 1, 'todo': 12}\n",
+      "stderr": ""
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "git status --short",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "started_at": "2026-09-08T21:54:07.825305+08:00",
+      "expected_exit_code": 128,
+      "finished_at": "2026-09-08T21:54:07.871170+08:00",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n"
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "started_at": "2026-09-08T21:54:07.871266+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:08.117673+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.029s\n\nOK\n"
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python tools/devprep.py render",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-08T21:54:08.117753+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:08.329582+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (7/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python tools/devprep.py check",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "started_at": "2026-09-08T21:54:08.329657+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:08.546456+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "integrated_pre_review_green",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "started_at": "2026-09-08T21:54:08.546530+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-08T21:54:10.787407+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.937s\n\nOK\n"
+    },
+    {
+      "stage": "2026-09-09-post-acceptance-verification",
+      "command": "git status --short",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:15:46.627806+08:00",
+      "expected_exit_code": 128,
+      "finished_at": "2026-09-09T19:15:46.665772+08:00",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n"
+    },
+    {
+      "stage": "2026-09-09-post-acceptance-verification",
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:15:46.665856+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:15:46.873168+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.028s\n\nOK\n"
+    },
+    {
+      "stage": "2026-09-09-post-acceptance-verification",
+      "command": "python tools/devprep.py render",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:15:46.873245+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:15:47.074221+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: done (8/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "2026-09-09-post-acceptance-verification",
+      "command": "python tools/devprep.py check",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:15:47.074292+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:15:47.309396+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "2026-09-09-post-acceptance-verification",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:15:47.309470+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:15:49.658392+08:00",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... FAIL\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n======================================================================\nFAIL: test_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep_fail_closed.py\", line 117, in test_ready_accepts_fulfilled_dependencies\n    self.assertEqual(devprep.validate_backlog(backlog), [])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: ['PREP-008: done requires dependency PREP-003 to be done'] != []\n\nFirst list contains 1 additional elements.\nFirst extra element 0:\n'PREP-008: done requires dependency PREP-003 to be done'\n\n- ['PREP-008: done requires dependency PREP-003 to be done']\n+ []\n\n----------------------------------------------------------------------\nRan 27 tests in 2.008s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "stage": "shared-review-state",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-09-ready-fixture-probe.py"
+      ],
+      "command": "python Docs/development/evidence/2026-09-09-ready-fixture-probe.py",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:35:01.026559+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:01.379910+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_completed_downstream_still_rejects_incomplete_dependency (__main__.ReadyFixtureRegressionTests.test_completed_downstream_still_rejects_incomplete_dependency) ... ok\ntest_positive_fixture_after_preparation_closeout (__main__.ReadyFixtureRegressionTests.test_positive_fixture_after_preparation_closeout) ... ok\ntest_positive_fixture_before_preparation_closeout (__main__.ReadyFixtureRegressionTests.test_positive_fixture_before_preparation_closeout) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.038s\n\nOK\n"
+    },
+    {
+      "stage": "shared-review-state",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:35:01.380445+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:01.583912+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.029s\n\nOK\n"
+    },
+    {
+      "stage": "shared-review-state",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "command": "python tools/devprep.py render",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:35:01.584837+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:01.789339+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (6/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "shared-review-state",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "command": "python tools/devprep.py check",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:35:01.789883+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:01.994211+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "shared-review-state",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:35:01.994709+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:04.168065+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.869s\n\nOK\n"
+    },
+    {
+      "stage": "synthetic-completed-PREP-private-state",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "render"
+      ],
+      "command": "python tools/devprep.py render",
+      "cwd": "D:\\Github\\AETP\\.prep-regression-main-v9l4c06z",
+      "started_at": "2026-09-09T19:35:04.455229+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:04.759013+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: done (8/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "synthetic-completed-PREP-private-state",
+      "argv": [
+        "python",
+        "tools/devprep.py",
+        "check"
+      ],
+      "command": "python tools/devprep.py check",
+      "cwd": "D:\\Github\\AETP\\.prep-regression-main-v9l4c06z",
+      "started_at": "2026-09-09T19:35:04.759963+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:04.952054+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "synthetic-completed-PREP-private-state",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "cwd": "D:\\Github\\AETP\\.prep-regression-main-v9l4c06z",
+      "started_at": "2026-09-09T19:35:04.953087+08:00",
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-09T19:35:07.118139+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.832s\n\nOK\n"
+    }
+  ],
+  "source_changes": [
+    {
+      "at": "2026-09-08T00:29:55+08:00",
+      "files": [
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md"
+      ],
+      "description": "Prepared factual draft handoff with pending independent conclusions; no completion claim."
+    },
+    {
+      "at": "2026-09-08T01:07:18.455835+08:00",
+      "stage": "scope_agreement_before_edit",
+      "files": [
+        "skills/aetp-execution-contracts/SKILL.md",
+        "skills/aetp-evidence-handoff/SKILL.md",
+        "Docs/development/roadmap.md",
+        "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+        "Docs/development/backlog.json"
+      ],
+      "description": "Verified F-001/F-002 and R4/R5 against normative §§13.4,13.10,14.1,17.2,18.3. Main will make narrow preparation corrections; sole reviewer informed; no normative source or tool/test source changes."
+    },
+    {
+      "at": "2026-09-08T01:09:04.719332+08:00",
+      "stage": "narrow_preparation_corrections",
+      "findings": [
+        "F-001",
+        "F-002",
+        "R4",
+        "R5"
+      ],
+      "changes": [
+        {
+          "file": "skills/aetp-execution-contracts/SKILL.md",
+          "before_sha256": "79874feea3a9b4aaeb704eb0a02afa63e83ebac63698e8003a8b4007b4620ccb",
+          "after_sha256": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4"
+        },
+        {
+          "file": "skills/aetp-evidence-handoff/SKILL.md",
+          "before_sha256": "cb3de7c0bcecc7cbe6fe4a646d67b5376e944b68c316e51546d1baaf52d56d53",
+          "after_sha256": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292"
+        },
+        {
+          "file": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+          "before_sha256": "bb838d6c5cb44fb3377bcd1727f02beaf060a3c0dcc167cba66a89e9499d4dad",
+          "after_sha256": "4e28ae2e8b8485ca2a628be1d25eae79efd434b11f510fe967814665b9849503"
+        },
+        {
+          "file": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+          "before_sha256": "4e28ae2e8b8485ca2a628be1d25eae79efd434b11f510fe967814665b9849503",
+          "after_sha256": "e36f3ebdf70cfb852b57043d505bae42464804b68a91ab21b78ecfc7f9fb9be6"
+        },
+        {
+          "file": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+          "before_sha256": "e36f3ebdf70cfb852b57043d505bae42464804b68a91ab21b78ecfc7f9fb9be6",
+          "after_sha256": "48c380fac541a143b680aeb1e8d957cc272523b4c64ead08cd981fb92671ce24"
+        },
+        {
+          "file": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+          "before_sha256": "48c380fac541a143b680aeb1e8d957cc272523b4c64ead08cd981fb92671ce24",
+          "after_sha256": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156"
+        },
+        {
+          "file": "Docs/development/roadmap.md",
+          "before_sha256": "b227114e1d902757d629bb9bb38fc7ee643a3705b97eb99cb5c92cb843ce4277",
+          "after_sha256": "003c46b64aae5e805cf399fd214581f32c3e53c2ca2d8ad1505904fa2a949df9"
+        },
+        {
+          "file": "Docs/development/roadmap.md",
+          "before_sha256": "003c46b64aae5e805cf399fd214581f32c3e53c2ca2d8ad1505904fa2a949df9",
+          "after_sha256": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59"
+        },
+        {
+          "file": "Docs/development/backlog.json",
+          "before_sha256": "f77b4ec4387805ebbaf0042025894f45c6259b381317ff3127092d93095c823b",
+          "after_sha256": "858890a2403ed25d2e66d0765354bf66b1c5463fe3d5958b04469058bc884ac4"
+        }
+      ],
+      "description": "No normative change. TEST-011 removed from M0-01 and M0-03 execution mapping; M0-06 keeps explicit non-applicable registration and M2-02 owns execution. Work-item statuses unchanged pending independent review."
+    },
+    {
+      "at": "2026-09-08T01:13:42.783637+08:00",
+      "files": [
+        "MEMORY.md",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md"
+      ],
+      "description": "Updated truthful in-progress snapshot, one-subagent constraint, correction evidence and pending independent acceptance. Preserved Sept 7 memory-write history."
+    },
+    {
+      "at": "2026-09-09T19:31:24.046571+08:00",
+      "path": "tests/preparation/test_devprep_fail_closed.py",
+      "old_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "new_sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+      "before_function": "    def test_ready_accepts_fulfilled_dependencies(self):\r\n        backlog = material(\"backlog.json\")\r\n        items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n        items[\"PREP-003\"][\"status\"] = \"ready\"\r\n        self.assertEqual(items[\"PREP-001\"][\"status\"], \"done\")\r\n        self.assertEqual(devprep.validate_backlog(backlog), [])\r\n",
+      "after_function": "    def test_ready_accepts_fulfilled_dependencies(self):\r\n        backlog = material(\"backlog.json\")\r\n        # Keep plan structure, but isolate this positive case from live statuses.\r\n        # A completed downstream item must not depend on our synthetic ready item.\r\n        for item in backlog[\"work_items\"]:\r\n            item[\"status\"] = \"todo\"\r\n        items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n        items[\"PREP-001\"].update(\r\n            status=\"done\",\r\n            acceptance_evidence=\"synthetic evidence, not product acceptance\",\r\n            reproduction_command=\"synthetic command\",\r\n            independent_reviewer=\"synthetic reviewer\",\r\n        )\r\n        items[\"PREP-003\"][\"status\"] = \"ready\"\r\n        self.assertEqual(devprep.validate_backlog(backlog), [])\r\n",
+      "unified_diff": "--- before/tests/preparation/test_devprep_fail_closed.py\n+++ after/tests/preparation/test_devprep_fail_closed.py\n@@ -111,9 +111,18 @@\n \r\n     def test_ready_accepts_fulfilled_dependencies(self):\r\n         backlog = material(\"backlog.json\")\r\n+        # Keep plan structure, but isolate this positive case from live statuses.\r\n+        # A completed downstream item must not depend on our synthetic ready item.\r\n+        for item in backlog[\"work_items\"]:\r\n+            item[\"status\"] = \"todo\"\r\n         items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n+        items[\"PREP-001\"].update(\r\n+            status=\"done\",\r\n+            acceptance_evidence=\"synthetic evidence, not product acceptance\",\r\n+            reproduction_command=\"synthetic command\",\r\n+            independent_reviewer=\"synthetic reviewer\",\r\n+        )\r\n         items[\"PREP-003\"][\"status\"] = \"ready\"\r\n-        self.assertEqual(items[\"PREP-001\"][\"status\"], \"done\")\r\n         self.assertEqual(devprep.validate_backlog(backlog), [])\r\n \r\n     def test_malformed_materials_fail_check_without_creating_success_reports(self):\r\n",
+      "scope": "Only positive preparation-test fixture setup; validator, negative tests and contracts unchanged; original CRLF line endings preserved."
+    }
+  ],
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "state_snapshot_sha256": {
+    "Docs/development/backlog.json": "55620150b9da6424de2974cc7eba0e6feaa376df843985d0cf4116925fdc3df3",
+    "Docs/development/status.json": "1353a1cc4fcf2c0a173e853cc1519ade30522fe94d022acc36b433469fa3b599"
+  },
+  "carried_forward_acceptance": [
+    {
+      "work_item": "PREP-001",
+      "independent_reviewer": "Boole (01a0774a-18a9-7371-87d9-1cb77dd97c0f), 2026-09-07",
+      "evidence_paths_exist": true,
+      "acceptance_evidence": "Docs/development/evidence/2026-09-07-prep-001-006-review.json; all three acceptance criteria independently assessed preparation-level pass; reviewed source hashes matched before status update.",
+      "note": "Existing attribution retained, not a new independent conclusion by the main session."
+    },
+    {
+      "work_item": "PREP-002",
+      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06",
+      "evidence_paths_exist": true,
+      "acceptance_evidence": "Docs/development/evidence/skill-protocol-navigation.md; Mill 独立只读复核结论为 preparation-level pass。",
+      "note": "Existing attribution retained, not a new independent conclusion by the main session."
+    },
+    {
+      "work_item": "PREP-005",
+      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06",
+      "evidence_paths_exist": true,
+      "acceptance_evidence": "Docs/development/evidence/knowledge-graph-check.json; Mill 独立只读复核图谱静态索引结论为 preparation-level pass。",
+      "note": "Existing attribution retained, not a new independent conclusion by the main session."
+    }
+  ],
+  "main_document_write_set": [
+    "Docs/superpowers/plans/2026-09-08-preparation-closeout.md",
+    "Docs/development/evidence/2026-09-08-preparation-closeout.json",
+    "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+    "Docs/development/backlog.json",
+    "Docs/development/status.json",
+    "Docs/development/evidence/skill-execution-contracts.md",
+    "Docs/development/evidence/skill-evidence-handoff.md",
+    "MEMORY.md",
+    "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+    "skills/aetp-execution-contracts/SKILL.md",
+    "skills/aetp-evidence-handoff/SKILL.md",
+    "Docs/development/roadmap.md",
+    "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+    "Docs/development/evidence/2026-09-08-prep-acceptance-index.json",
+    "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json",
+    "Docs/development/evidence/2026-09-08-preparation-final-validation.json",
+    "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json"
+  ],
+  "generated_report_write_set": [
+    "Docs/development/evidence/preparation-report.json",
+    "Docs/development/evidence/devprep-check.json",
+    "Docs/development/evidence/knowledge-graph-check.json",
+    "Docs/development/evidence/backlog-check.json",
+    "Docs/development/evidence/environment.json"
+  ],
+  "inspection_notes": [
+    "Read-only introspection initially used items instead of work_items (KeyError), an oversized line range (IndexError), and utf-8 instead of utf-8-sig for a BOM JSON (JSONDecodeError). Corrected reads succeeded; these are controller inspection mistakes, not material failures or acceptance tests. Original per-command wall clocks were not captured and are not backfilled.",
+    "Local timestamps use +08:00; dated artifact names are preserved from the ongoing local-date closeout.",
+    {
+      "at": "2026-09-08T21:37:58.506109+08:00",
+      "event": "Main acceptance precheck exited 1 before writes because it required both command time boundaries; two honestly annotated auxiliary historical commands have only one.",
+      "resolution": "Preserve missing endpoints, require actual numeric exit and at least one actual timestamp; PREP-008 reviewer will independently assess. No reconstruction of missing times.",
+      "partial_command_times": [
+        {
+          "report": "2026-09-08-prep-corrections-review.json",
+          "command_id": "structural-inspector-attempt1",
+          "started_at": "2026-09-08T21:16:31.7674373+08:00",
+          "finished_at": null,
+          "exit_code": 1,
+          "note": "Wrapper exited on Python failure before printing end timestamp; not reconstructed."
+        },
+        {
+          "report": "2026-09-08-prep-corrections-review.json",
+          "command_id": "read-old-scenario-ids-and-fixture-contract",
+          "started_at": null,
+          "finished_at": "2026-09-08T21:18:04.2576887+08:00",
+          "exit_code": 0,
+          "note": "Immediately after 10-material-probes; exact separate start was not captured."
+        }
+      ]
+    },
+    {
+      "at": "2026-09-08T21:50:34.104955+08:00",
+      "event": "Integrated verification RED: render exit 1 because main-session Counter conversion omitted explicit zero-valued statuses.",
+      "root_cause": "validate_status requires every STATUS_VOCABULARY key; _counts_by_status is a Counter of present values only.",
+      "fix": "Recompute all six status counts, including zeros, in status.json only. No tool/test or backlog contract change.",
+      "before": {
+        "done": 7,
+        "review": 1,
+        "todo": 12
+      },
+      "after": {
+        "blocked": 0,
+        "done": 7,
+        "in_progress": 0,
+        "ready": 0,
+        "review": 1,
+        "todo": 12
+      },
+      "red_evidence": "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json",
+      "green_evidence": "Full verification rerun required; not yet claimed."
+    },
+    {
+      "at": "2026-09-08T21:55:52.136354+08:00",
+      "event": "Integrated pre-review GREEN after explicit zero-count metadata correction.",
+      "evidence": "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json",
+      "test_count": 27,
+      "material_probe_count": 10,
+      "product_tests": 0
+    }
+  ],
+  "service_failures": [
+    {
+      "observed_at": "2026-09-08T01:23:31.887288+08:00",
+      "agent_name": "Kant",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "error": "exceeded retry limit, last status: 429 Too Many Requests",
+      "request_id": "b322f508-cf31-45ab-b93f-d819fa4239bf",
+      "reported_by": "multi_agent_v1.wait_agent",
+      "effect": "Reports on disk need validation; no acceptance inferred from failed reviewer request."
+    },
+    {
+      "at": "2026-09-08T22:03:04.316833+08:00",
+      "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+      "work_item": "PREP-008",
+      "error": "exceeded retry limit, last status: 429 Too Many Requests",
+      "request_id": "4d69eb03-681d-4ed6-bf30-49dc0be1df85",
+      "status_effect": "None; PREP-008 review/M0-01 todo; no accepted integrated review yet.",
+      "recovery": "One retry of the same sole Kant; no new reviewer identity."
+    }
+  ],
+  "evidence_integration": [
+    {
+      "at": "2026-09-08T21:13:18.437285+08:00",
+      "work_item": "PREP-007",
+      "report": "Docs/development/evidence/2026-09-08-prep-007-review.json",
+      "report_sha256": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+      "verification": "Parsed report; all 3 reviewed tool/test source hashes still match; 56 commands carry numeric exits and start/end times; private workspace absent; 3 criteria pass.",
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), same identity as earlier Codex report",
+      "status_action": "None; PREP-006 dependency still review.",
+      "review_counts": {
+        "preparation_unit_tests": 27,
+        "unit_exit_code": 0,
+        "independent_scenarios": 25,
+        "final_independent_harness_exit_code": 0,
+        "product_tests_run": 0
+      }
+    },
+    {
+      "at": "2026-09-08T21:37:58.506126+08:00",
+      "work_items": [
+        "PREP-003",
+        "PREP-004",
+        "PREP-006"
+      ],
+      "report": "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+      "report_sha256": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+      "verified_source_count": 16,
+      "command_count": 16,
+      "command_time_check": "Every command has numeric exit and at least one captured time; partial endpoints explicitly preserved in inspection_notes.",
+      "source_sha256_before_operational_updates": {
+        "skills/aetp-execution-contracts/SKILL.md": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+        "skills/aetp-evidence-handoff/SKILL.md": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+        "Docs/development/roadmap.md": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+        "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+        "Docs/development/backlog.json": "858890a2403ed25d2e66d0765354bf66b1c5463fe3d5958b04469058bc884ac4",
+        "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+        "Docs/development/knowledge-map.md": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+        "AGENTS.md": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+        "Docs/development/README.md": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+        "Docs/development/status.json": "2fd0775b234b27a1ba4b2a43a9c6c2d1e74a056f941c464e34ef4e73af3a4345",
+        "Docs/development/evidence/preparation-report.json": "90ea9d1fda30d8082ef2b9d62b54ea0ea589daae6034f79af1540542a5f88047",
+        "Docs/development/evidence/2026-09-08-prep-003-004-review.json": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+        "Docs/development/evidence/2026-09-08-prep-006-review.json": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-red.json": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-green.json": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8"
+      },
+      "stable_backlog_contract_sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), prior alias Codex, distinct from executor",
+      "applicability_note": "Reviewed non-operational source/contract unchanged; subsequent backlog/status/generated-report changes are only documented operational metadata."
+    },
+    {
+      "at": "2026-09-08T21:37:58.509752+08:00",
+      "work_items": [
+        "PREP-007"
+      ],
+      "report": "Docs/development/evidence/2026-09-08-prep-007-review.json",
+      "report_sha256": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+      "verified_source_count": 3,
+      "command_count": 56,
+      "command_time_check": "Every command has numeric exit and at least one captured time; partial endpoints explicitly preserved in inspection_notes.",
+      "source_sha256_before_operational_updates": {
+        "tools/devprep.py": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+        "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+        "tests/preparation/test_devprep_fail_closed.py": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215"
+      },
+      "stable_backlog_contract_sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), prior alias Codex, distinct from executor",
+      "applicability_note": "Reviewed non-operational source/contract unchanged; subsequent backlog/status/generated-report changes are only documented operational metadata."
+    },
+    {
+      "at": "2026-09-09T19:12:01.970888+08:00",
+      "work_items": [
+        "PREP-008"
+      ],
+      "report": "Docs/development/evidence/2026-09-08-prep-008-review.json",
+      "report_sha256": "e987af3ae6b1fb361a33771edbb86fc509eba58ddbe8bcc8945c9212592136e6",
+      "verification": "3 exact criteria pass; 42 reviewed source hashes match; stable backlog contract matches; 31 recorded commands have numeric exits; private copy absent; approved bounded post-pass finalization.",
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), actual completion 2026-09-09; filename retains prior session date.",
+      "historical_timestamp_limit": "2 corrections auxiliary commands retain honest single endpoints; reviewer explicitly accepted under actual criterion wording.",
+      "product_tests": 0,
+      "bootstrap_verified": false
+    }
+  ],
+  "document_updates": [
+    {
+      "path": "Docs/development/evidence/skill-execution-contracts.md",
+      "at": "2026-09-08T21:39:28.471724+08:00",
+      "before_sha256": "9ec6be2344efcc99bc0f2a13147375e39ddc172e548e97c595c94676c713d90e",
+      "after_sha256": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc",
+      "reason": "Append dated superseding preparation acceptance; history preserved."
+    },
+    {
+      "path": "Docs/development/evidence/skill-evidence-handoff.md",
+      "at": "2026-09-08T21:39:28.487604+08:00",
+      "before_sha256": "c26e22cf6f59e1767a94383750a5f3d08833f33a4f3c39f81e25ce394378bf52",
+      "after_sha256": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d",
+      "reason": "Append dated superseding preparation acceptance; history preserved."
+    },
+    {
+      "path": "MEMORY.md",
+      "at": "2026-09-09T19:13:32.714966+08:00",
+      "before_sha256": "cd0a84abc0e08b8f4fd304af8d476f026b43854d2cc0c7b06df718bb4d255af4",
+      "after_sha256": "1fffa10a68755c6078adf5946a087cc37f8f6e8d03a66b61abcf060f5a05bc37",
+      "reason": "Approved final current snapshot and next-step update; historical evidence preserved."
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-08-preparation-closeout.md",
+      "at": "2026-09-09T19:13:32.725750+08:00",
+      "before_sha256": "d98fbfbbe3abfd12a684e19781ef9bc869f386462f79b99a9072f836afed82b2",
+      "after_sha256": "f33c635a94f54decb2671bfb13831584913b81d2f55d543b94ca9a2b081ef7d3",
+      "reason": "Check only actually completed independent acceptance/readiness steps; final verification checkbox still pending."
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+      "at": "2026-09-09T19:13:32.745577+08:00",
+      "before_sha256": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60",
+      "after_sha256": "ca0955d52d1ae05612bd6cdb1dd8d606b89e572f7d822683bc659b9648dcb276",
+      "reason": "Append final actual acceptance while preserving frozen 7606-byte prefix exactly."
+    }
+  ],
+  "prep_008_review_payload": {
+    "prepared_at": "2026-09-08T21:55:52.136369+08:00",
+    "writer": "Codex main session",
+    "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d)",
+    "sha256": {
+      "Docs/development/evidence/2026-09-08-prep-acceptance-index.json": "12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba",
+      "Docs/development/evidence/2026-09-08-preparation-handoff.md": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60",
+      "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json": "98e23b8e9fc9d4e8dd89c7b839637ee3ec824dd58da7436fb73f8632c4daee74",
+      "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json": "e312f4788ebfcfccaedbd410c54c10b4ff962ad31f1cb21a6a5a2954d02a72e4",
+      "Docs/development/backlog.json": "e7d062ce99f6ed04a15aeb029ccb7a885595536aefd0ec17d352ce1fc4eac543",
+      "Docs/development/status.json": "46a760a52eef1deba1b72e57b211421e8581913a59eae43ad559509f93c79baf",
+      "MEMORY.md": "cd0a84abc0e08b8f4fd304af8d476f026b43854d2cc0c7b06df718bb4d255af4",
+      "Docs/superpowers/plans/2026-09-08-preparation-closeout.md": "d98fbfbbe3abfd12a684e19781ef9bc869f386462f79b99a9072f836afed82b2"
+    },
+    "freeze_rule": "No shared source/state/document/report writes while Kant reviews; only its assigned independent report may change.",
+    "post_pass_rule": "Only documented operational finalization in immutable acceptance index; handoff frozen body preserved."
+  },
+  "finalization": {
+    "started_at": "2026-09-09T19:12:01.961618+08:00",
+    "condition": "Received frozen Kant independent PREP-008 pass and verified all 42 reviewed hashes before any operational write.",
+    "review_report": "Docs/development/evidence/2026-09-08-prep-008-review.json",
+    "review_report_sha256": "e987af3ae6b1fb361a33771edbb86fc509eba58ddbe8bcc8945c9212592136e6",
+    "reviewer_completed_at": "2026-09-09T19:07:57.143853+08:00",
+    "reviewer_final_self_check": {
+      "at": "2026-09-09T19:08:33.4065374+08:00",
+      "exit_code": 0,
+      "source": "Actual reviewer completion message"
+    },
+    "accepted_post_pass_rule": {
+      "decision": "accepted",
+      "requires_actual_pass_and_hash_check": true,
+      "reason": "PREP008依赖全部done且M0-01仅依赖PREP008；限定更新是运营接纳，不改变受审材料契约或启动产品。",
+      "accepted_rules_verbatim": {
+        "condition": "Only after an actual PREP-008 independent preparation-level pass whose reviewed payload/source hashes match.",
+        "backlog": [
+          "PREP-008 review -> done with actual acceptance metadata/evidence",
+          "M0-01 todo -> ready only; every other product item remains todo",
+          "No changes to stable contract fields"
+        ],
+        "status": [
+          "Recompute counts/milestones/evidence_paths from backlog; active_work_items empty",
+          "Keep phase preparation, product 0, Bootstrap not_started, Conformance 28 registered/0 passed"
+        ],
+        "documents": [
+          "Append final actual acceptance section after the frozen handoff body; preserve that body exactly",
+          "Update MEMORY current snapshot/next steps and plan checkboxes to actual outcomes; historical records retained",
+          "Append actual transitions/validation/coordination to closeout JSON; no rewriting prior reviewer evidence"
+        ],
+        "generated_reports": "Refresh only standard five reports through required verification commands.",
+        "immutable": [
+          "This acceptance index",
+          "Original independent review reports",
+          "Reviewed Skills, normative documents, graph, roadmap, first-slice plan, tools/tests, correction probe and historical RED/GREEN evidence"
+        ],
+        "final_evidence": "Main records final source/contract checks and actual commands with full start/end/exit/output in 2026-09-08-preparation-final-validation.json; does not call this a new independent review."
+      },
+      "expected_final_counts_if_main_executes": {
+        "PREP_done": 8,
+        "PREP_review": 0,
+        "product_done": 0,
+        "product_ready": 1,
+        "product_todo": 11,
+        "all_plan_done": 8,
+        "all_plan_ready": 1,
+        "all_plan_todo": 11
+      },
+      "additional_clarifications": [
+        "仅PREP008 review→done并附真实本报告；随后M0-01 todo→ready；本reviewer不执行任何状态转移。",
+        "M0-01 ready只表示可排队协商，不是本轮M0实施、环境/依赖安装、Git初始化或权限放行。",
+        "可更新2026-09-08-preparation-closeout.md的收尾checkbox；不可改2026-09-06-m0-first-slice.md或roadmap等静态源。",
+        "handoff整份冻结字节作为前缀保留，只能在末尾追加真实记录；其整文件hash可因授权追加变化，但旧正文前缀必须仍匹配本次hash。",
+        "index、旧独立报告、规范/Skill/graph/roadmap/M0 plan、工具/测试和材料RED/GREEN/probe不变。",
+        "允许标准五报告刷新、backlog运营元数据/status/MEMORY/收尾日志的限定更新；稳定契约hash必须保持。",
+        "最终实际命令起止/exit/output和摘要另存preparation-final-validation.json；不是新独立复核；任何越界更改须再次审查。"
+      ],
+      "frozen_handoff_prefix": {
+        "bytes": 7606,
+        "sha256": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60"
+      }
+    },
+    "backlog_before": {
+      "schema_version": "aetp-development-backlog-0.1",
+      "updated_at": "2026-09-08",
+      "status_vocabulary": [
+        "todo",
+        "ready",
+        "in_progress",
+        "review",
+        "done",
+        "blocked"
+      ],
+      "truth_rules": {
+        "completion_requires": [
+          "acceptance_evidence",
+          "reproduction_command",
+          "independent_reviewer"
+        ],
+        "conformance_is_separate": true,
+        "not_a_lease_service": true,
+        "product_completion_percent_excludes_preparation": true
+      },
+      "work_items": [
+        {
+          "id": "PREP-001",
+          "milestone": "PREP",
+          "title": "建立项目入口与协作约定",
+          "status": "done",
+          "depends_on": [],
+          "files": [
+            "README.md",
+            "AGENTS.md",
+            ".gitignore",
+            ".editorconfig"
+          ],
+          "acceptance": [
+            "入口能指向全部开发准备材料",
+            "明确平等 Agent、可选 Manager、确定性 Orchestrator 边界",
+            "声明状态、证据和权限规则"
+          ],
+          "conformance_tests": [],
+          "evidence": [
+            "Docs/development/evidence/preparation-log.md",
+            "Docs/development/evidence/2026-09-07-prep-001-006-review.json"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/2026-09-07-prep-001-006-review.json; all three acceptance criteria independently assessed preparation-level pass; reviewed source hashes matched before status update.",
+          "reproduction_command": "python tools/devprep.py check",
+          "independent_reviewer": "Boole (01a0774a-18a9-7371-87d9-1cb77dd97c0f), 2026-09-07"
+        },
+        {
+          "id": "PREP-002",
+          "milestone": "PREP",
+          "title": "建立协议导航 Skill",
+          "status": "done",
+          "depends_on": [
+            "PREP-001"
+          ],
+          "files": [
+            "skills/aetp-protocol-navigation/SKILL.md"
+          ],
+          "acceptance": [
+            "触发描述可检索且不复述完整流程",
+            "按问题映射章节、INV、TEST",
+            "明确图谱是索引而非运行时事实源"
+          ],
+          "conformance_tests": [
+            "TEST-015",
+            "TEST-028"
+          ],
+          "evidence": [
+            "Docs/development/evidence/skill-protocol-navigation.md"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/skill-protocol-navigation.md; Mill 独立只读复核结论为 preparation-level pass。",
+          "reproduction_command": "python tools/devprep.py check",
+          "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06"
+        },
+        {
+          "id": "PREP-003",
+          "milestone": "PREP",
+          "title": "建立执行契约 Skill",
+          "status": "done",
+          "depends_on": [
+            "PREP-001"
+          ],
+          "files": [
+            "skills/aetp-execution-contracts/SKILL.md"
+          ],
+          "acceptance": [
+            "覆盖 Command→Event Store→Projection",
+            "覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界",
+            "不把建议误写成已实现能力"
+          ],
+          "conformance_tests": [
+            "TEST-001",
+            "TEST-005",
+            "TEST-016",
+            "TEST-017",
+            "TEST-020",
+            "TEST-021",
+            "TEST-022",
+            "TEST-026"
+          ],
+          "evidence": [
+            "Docs/development/evidence/skill-execution-contracts.md",
+            "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+            "Docs/development/evidence/2026-09-08-preparation-closeout.json"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+          "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
+          "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias"
+        },
+        {
+          "id": "PREP-004",
+          "milestone": "PREP",
+          "title": "建立证据与交接 Skill",
+          "status": "done",
+          "depends_on": [
+            "PREP-001"
+          ],
+          "files": [
+            "skills/aetp-evidence-handoff/SKILL.md"
+          ],
+          "acceptance": [
+            "能区分 planned/implemented/verified/accepted",
+            "交接含工作项、文件、命令、证据、风险、下一步",
+            "独立复核缺失时保持 review"
+          ],
+          "conformance_tests": [
+            "TEST-010",
+            "TEST-012",
+            "TEST-028"
+          ],
+          "evidence": [
+            "Docs/development/evidence/skill-evidence-handoff.md",
+            "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+            "Docs/development/evidence/2026-09-08-preparation-closeout.json"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+          "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
+          "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias"
+        },
+        {
+          "id": "PREP-005",
+          "milestone": "PREP",
+          "title": "构建可追溯知识图谱索引",
+          "status": "done",
+          "depends_on": [
+            "PREP-001",
+            "PREP-002"
+          ],
+          "files": [
+            "Docs/development/knowledge-map.md",
+            "Docs/development/knowledge-graph.json"
+          ],
+          "acceptance": [
+            "核心实体、约束、验收、里程碑和工作项有稳定 ID",
+            "每条边有来源且无悬挂目标",
+            "A2A 标为可选 Transport Adapter"
+          ],
+          "conformance_tests": [
+            "TEST-001",
+            "TEST-015",
+            "TEST-028"
+          ],
+          "evidence": [
+            "Docs/development/evidence/knowledge-graph-check.json"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/knowledge-graph-check.json; Mill 独立只读复核图谱静态索引结论为 preparation-level pass。",
+          "reproduction_command": "python tools/devprep.py check",
+          "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06"
+        },
+        {
+          "id": "PREP-006",
+          "milestone": "PREP",
+          "title": "拆分 M0–M3 工作包与依赖",
+          "status": "done",
+          "depends_on": [
+            "PREP-001",
+            "PREP-005"
+          ],
+          "files": [
+            "Docs/development/roadmap.md",
+            "Docs/development/backlog.json",
+            "Docs/superpowers/plans/2026-09-06-m0-first-slice.md"
+          ],
+          "acceptance": [
+            "M0–M3 各有范围、依赖、退出条件",
+            "M0 首批具备独立可测工作项",
+            "不把 JSON 清单当成原子认领服务"
+          ],
+          "conformance_tests": [
+            "TEST-001",
+            "TEST-005",
+            "TEST-012",
+            "TEST-028"
+          ],
+          "evidence": [
+            "Docs/development/evidence/backlog-check.json",
+            "Docs/development/evidence/2026-09-07-prep-001-006-review.json",
+            "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+            "Docs/development/evidence/2026-09-08-preparation-closeout.json"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+          "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
+          "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias"
+        },
+        {
+          "id": "PREP-007",
+          "milestone": "PREP",
+          "title": "建立开发环境与资料检查入口",
+          "status": "done",
+          "depends_on": [
+            "PREP-001",
+            "PREP-005",
+            "PREP-006"
+          ],
+          "files": [
+            "tools/devprep.py",
+            "tests/preparation/test_devprep.py"
+          ],
+          "acceptance": [
+            "check 能校验 JSON、关系、依赖和状态",
+            "render 生成可读进度摘要",
+            "environment 只报告可验证工具，不读取或打印密钥"
+          ],
+          "conformance_tests": [],
+          "evidence": [
+            "Docs/development/evidence/devprep-check.json",
+            "Docs/development/evidence/prep-007-markdown-red.txt",
+            "Docs/development/evidence/prep-007-markdown-green.json",
+            "Docs/development/evidence/prep-007-final-validation.json",
+            "Docs/development/evidence/2026-09-07-skill-markers-red.json",
+            "Docs/development/evidence/2026-09-07-skill-coverage-red-rerun.json",
+            "Docs/development/evidence/2026-09-07-skill-coverage-green.json",
+            "Docs/development/evidence/2026-09-08-prep-007-review.json",
+            "Docs/development/evidence/2026-09-08-preparation-closeout.json"
+          ],
+          "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-007-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
+          "reproduction_command": "python tools/devprep.py check; python -m unittest discover -s tests/preparation -v",
+          "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias"
+        },
+        {
+          "id": "PREP-008",
+          "milestone": "PREP",
+          "title": "独立复核并交接开发准备",
+          "status": "review",
+          "depends_on": [
+            "PREP-002",
+            "PREP-003",
+            "PREP-004",
+            "PREP-005",
+            "PREP-006",
+            "PREP-007"
+          ],
+          "files": [
+            "Docs/development/evidence/preparation-report.json"
+          ],
+          "acceptance": [
+            "不同 Agent 复核准备材料",
+            "所有命令有退出码和时间",
+            "明确产品实现与 Bootstrap Acceptance 尚未完成"
+          ],
+          "conformance_tests": [],
+          "evidence": [
+            "Docs/development/evidence/preparation-report.json",
+            "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+            "Docs/development/evidence/2026-09-08-prep-acceptance-index.json",
+            "Docs/development/evidence/2026-09-08-preparation-closeout.json"
+          ]
+        },
+        {
+          "id": "M0-01",
+          "milestone": "M0",
+          "title": "创建 Core Kernel 包边界与测试夹具",
+          "status": "todo",
+          "depends_on": [
+            "PREP-008"
+          ],
+          "files": [
+            "src/aetp/__init__.py",
+            "src/aetp/domain/__init__.py",
+            "src/aetp/domain/models.py",
+            "src/aetp/storage/__init__.py",
+            "src/aetp/storage/sqlite_store.py",
+            "src/aetp/core/__init__.py",
+            "tests/__init__.py",
+            "tests/m0/__init__.py",
+            "tests/m0/support.py",
+            "tests/m0/test_models.py",
+            "schemas/m0/valid/*.json",
+            "schemas/m0/invalid/*.json",
+            "artifacts/m0-01-test-report.json"
+          ],
+          "acceptance": [
+            "五核心对象有版本化模型",
+            "valid/invalid fixture 成对存在",
+            "无真实外部效果"
+          ],
+          "conformance_tests": [
+            "TEST-002",
+            "TEST-003",
+            "TEST-004",
+            "TEST-007",
+            "TEST-009",
+            "TEST-010",
+            "TEST-013",
+            "TEST-023",
+            "TEST-024",
+            "TEST-025",
+            "TEST-027"
+          ],
+          "evidence": [
+            "artifacts/m0-01-test-report.json"
+          ]
+        },
+        {
+          "id": "M0-02",
+          "milestone": "M0",
+          "title": "实现 Command 受理与事务提交边界",
+          "status": "todo",
+          "depends_on": [
+            "M0-01"
+          ],
+          "files": [
+            "src/aetp/core/commands.py",
+            "tests/m0/test_command_boundary.py",
+            "src/aetp/storage/sqlite_store.py",
+            "tests/m0/support.py",
+            "artifacts/m0-02-test-report.json"
+          ],
+          "acceptance": [
+            "认证、版本、权限和 expected_revision 在事务内校验",
+            "Command 不可变且只经统一写入口",
+            "失败结果可审计"
+          ],
+          "conformance_tests": [
+            "TEST-002",
+            "TEST-004",
+            "TEST-007",
+            "TEST-013",
+            "TEST-016"
+          ],
+          "evidence": [
+            "artifacts/m0-02-test-report.json"
+          ]
+        },
+        {
+          "id": "M0-03",
+          "milestone": "M0",
+          "title": "实现 Event Store、Sequencer 与 Projection",
+          "status": "todo",
+          "depends_on": [
+            "M0-02"
+          ],
+          "files": [
+            "src/aetp/core/projection.py",
+            "tests/m0/test_event_projection.py",
+            "src/aetp/storage/sqlite_store.py",
+            "tests/m0/support.py",
+            "artifacts/m0-03-test-report.json"
+          ],
+          "acceptance": [
+            "原子提交领域 Event 批次",
+            "sequence 由 Sequencer 赋值",
+            "State 只能由 Event Projection 重建"
+          ],
+          "conformance_tests": [
+            "TEST-005",
+            "TEST-021"
+          ],
+          "evidence": [
+            "artifacts/m0-03-test-report.json"
+          ]
+        },
+        {
+          "id": "M0-04",
+          "milestone": "M0",
+          "title": "实现幂等、版本冲突与并发认领",
+          "status": "todo",
+          "depends_on": [
+            "M0-03"
+          ],
+          "files": [
+            "src/aetp/core/idempotency.py",
+            "tests/m0/test_idempotency_concurrency.py",
+            "src/aetp/core/commands.py",
+            "tests/m0/support.py",
+            "artifacts/m0-04-test-report.json"
+          ],
+          "acceptance": [
+            "同键同内容返回原结果",
+            "同键异内容拒绝",
+            "跨进程竞争最多一个成功且保留版本证据"
+          ],
+          "conformance_tests": [
+            "TEST-001",
+            "TEST-018",
+            "TEST-019"
+          ],
+          "evidence": [
+            "artifacts/m0-04-test-report.json"
+          ]
+        },
+        {
+          "id": "M0-05",
+          "milestone": "M0",
+          "title": "实现重启恢复与纯 Replay",
+          "status": "todo",
+          "depends_on": [
+            "M0-03",
+            "M0-04"
+          ],
+          "files": [
+            "src/aetp/core/runtime.py",
+            "tests/m0/test_replay_recovery.py",
+            "src/aetp/core/projection.py",
+            "tests/m0/support.py",
+            "artifacts/m0-05-test-report.json"
+          ],
+          "acceptance": [
+            "删除 Projection 后由 Event Store 得到同一状态",
+            "重启不执行模型、Shell、Runtime.start 或历史工具动作",
+            "Orchestrator 不保留 Event Store 外权威状态"
+          ],
+          "conformance_tests": [
+            "TEST-005",
+            "TEST-012",
+            "TEST-017",
+            "TEST-021",
+            "TEST-025"
+          ],
+          "evidence": [
+            "artifacts/m0-05-test-report.json"
+          ]
+        },
+        {
+          "id": "M0-06",
+          "milestone": "M0",
+          "title": "运行 M0 Conformance 子集并独立复核",
+          "status": "todo",
+          "depends_on": [
+            "M0-05"
+          ],
+          "files": [
+            "conformance/__init__.py",
+            "conformance/m0/__init__.py",
+            "conformance/m0/runner.py",
+            "conformance/m0/README.md",
+            "tests/m0/test_conformance_subset.py",
+            "artifacts/m0-conformance-report.json",
+            "artifacts/m0-handoff.json"
+          ],
+          "acceptance": [
+            "适用 TEST 有可执行夹具、原始输出和失败注入记录",
+            "M0 未通过的后续 TEST 明确标为 not_applicable 或 pending",
+            "不宣称完整 Bootstrap"
+          ],
+          "conformance_tests": [
+            "TEST-001",
+            "TEST-002",
+            "TEST-005",
+            "TEST-011",
+            "TEST-012",
+            "TEST-014",
+            "TEST-015",
+            "TEST-016",
+            "TEST-017",
+            "TEST-018",
+            "TEST-019",
+            "TEST-021"
+          ],
+          "evidence": [
+            "artifacts/m0-conformance-report.json",
+            "artifacts/m0-handoff.json"
+          ]
+        },
+        {
+          "id": "M1-01",
+          "milestone": "M1",
+          "title": "接入双 Agent 直接消息与最小交付链",
+          "status": "todo",
+          "depends_on": [
+            "M0-06"
+          ],
+          "files": [
+            "src/aetp/collaboration/",
+            "tests/m1/"
+          ],
+          "acceptance": [
+            "至少两个平等 Agent 可直接消息、回复、质疑",
+            "没有 Manager 必经路径",
+            "低风险小成果具有 Artifact/Review/Verification 证据"
+          ],
+          "conformance_tests": [
+            "TEST-003",
+            "TEST-008",
+            "TEST-015",
+            "TEST-028"
+          ],
+          "evidence": [
+            "artifacts/m1-01-test-report.json"
+          ]
+        },
+        {
+          "id": "M1-02",
+          "milestone": "M1",
+          "title": "接入 Lease、Checkpoint 与执行边界",
+          "status": "todo",
+          "depends_on": [
+            "M1-01"
+          ],
+          "files": [
+            "src/aetp/runtime/",
+            "src/aetp/workspace/",
+            "tests/m1/test_execution_boundary.py"
+          ],
+          "acceptance": [
+            "旧 epoch 不能推进任务",
+            "工作副本隔离且越界访问被阻止",
+            "外部 UNKNOWN 进入对账而不盲重试",
+            "需 Approval 的操作拒绝"
+          ],
+          "conformance_tests": [
+            "TEST-006",
+            "TEST-014",
+            "TEST-020",
+            "TEST-022",
+            "TEST-026"
+          ],
+          "evidence": [
+            "artifacts/m1-02-test-report.json"
+          ]
+        },
+        {
+          "id": "M2-01",
+          "milestone": "M2",
+          "title": "结构化 Discussion/Meeting/Decision",
+          "status": "todo",
+          "depends_on": [
+            "M1-02"
+          ],
+          "files": [
+            "src/aetp/meetings/",
+            "src/aetp/decisions/",
+            "tests/m2/"
+          ],
+          "acceptance": [
+            "过程与权威产出分离",
+            "讨论有预算和终止条件",
+            "分歧可保留，不强制伪共识"
+          ],
+          "conformance_tests": [
+            "TEST-013",
+            "TEST-015",
+            "TEST-028"
+          ],
+          "evidence": [
+            "artifacts/m2-01-test-report.json"
+          ]
+        },
+        {
+          "id": "M2-02",
+          "milestone": "M2",
+          "title": "Approval/Governance/暂停恢复",
+          "status": "todo",
+          "depends_on": [
+            "M2-01"
+          ],
+          "files": [
+            "src/aetp/governance/",
+            "tests/m2/test_governance.py"
+          ],
+          "acceptance": [
+            "审批绑定版本、参数和主体",
+            "过期/撤销有升级路径",
+            "暂停屏障和人类 Intervention 可重放"
+          ],
+          "conformance_tests": [
+            "TEST-004",
+            "TEST-007",
+            "TEST-011",
+            "TEST-023",
+            "TEST-025",
+            "TEST-027"
+          ],
+          "evidence": [
+            "artifacts/m2-02-test-report.json"
+          ]
+        },
+        {
+          "id": "M3-01",
+          "milestone": "M3",
+          "title": "Team Formation、Blueprint 与 Task DAG",
+          "status": "todo",
+          "depends_on": [
+            "M2-02"
+          ],
+          "files": [
+            "src/aetp/planning/",
+            "tests/m3/test_planning.py"
+          ],
+          "acceptance": [
+            "动态组队不生成层级特权",
+            "Blueprint 和 DAG 有版本与循环校验",
+            "提案不要求 Manager 许可"
+          ],
+          "conformance_tests": [
+            "TEST-007",
+            "TEST-009",
+            "TEST-015",
+            "TEST-028"
+          ],
+          "evidence": [
+            "artifacts/m3-01-test-report.json"
+          ]
+        },
+        {
+          "id": "M3-02",
+          "milestone": "M3",
+          "title": "Integration、Mission Acceptance 与 TEST-028",
+          "status": "todo",
+          "depends_on": [
+            "M3-01"
+          ],
+          "files": [
+            "src/aetp/acceptance/",
+            "conformance/m3/test_028.py",
+            "tests/m3/"
+          ],
+          "acceptance": [
+            "集成面任务通过 Integration Gate",
+            "Mission success criteria 逐条 Acceptance Verification",
+            "两名以上平等 Agent 从粗糙想法讨论到成果交付，人工不拆任务且无隐藏 Manager"
+          ],
+          "conformance_tests": [
+            "TEST-009",
+            "TEST-010",
+            "TEST-024",
+            "TEST-028"
+          ],
+          "evidence": [
+            "artifacts/m3-test-028-report.json"
+          ]
+        }
+      ]
+    },
+    "status_before": {
+      "schema_version": "aetp-development-status-0.1",
+      "updated_at": "2026-09-08",
+      "phase": "preparation",
+      "product_completion_percent": 0,
+      "bootstrap_status": "not_started",
+      "conformance": {
+        "status": "registered",
+        "registered_tests": 28,
+        "passed_tests": 0,
+        "failed_tests": 0,
+        "not_applicable_tests": 0,
+        "evidence": null,
+        "note": "Conformance requirements are registered; no product test has been accepted as passed."
+      },
+      "milestones": {
+        "PREP": {
+          "status": "in_progress",
+          "total": 8,
+          "blocked": 0,
+          "done": 7,
+          "in_progress": 0,
+          "ready": 0,
+          "review": 1,
+          "todo": 0
+        },
+        "M0": {
+          "status": "todo",
+          "total": 6,
+          "blocked": 0,
+          "done": 0,
+          "in_progress": 0,
+          "ready": 0,
+          "review": 0,
+          "todo": 6
+        },
+        "M1": {
+          "status": "todo",
+          "total": 2,
+          "blocked": 0,
+          "done": 0,
+          "in_progress": 0,
+          "ready": 0,
+          "review": 0,
+          "todo": 2
+        },
+        "M2": {
+          "status": "todo",
+          "total": 2,
+          "blocked": 0,
+          "done": 0,
+          "in_progress": 0,
+          "ready": 0,
+          "review": 0,
+          "todo": 2
+        },
+        "M3": {
+          "status": "todo",
+          "total": 2,
+          "blocked": 0,
+          "done": 0,
+          "in_progress": 0,
+          "ready": 0,
+          "review": 0,
+          "todo": 2
+        }
+      },
+      "work_item_status_counts": {
+        "blocked": 0,
+        "done": 7,
+        "in_progress": 0,
+        "ready": 0,
+        "review": 1,
+        "todo": 12
+      },
+      "active_work_items": [],
+      "evidence_paths": [
+        "Docs/development/evidence/preparation-log.md",
+        "Docs/development/evidence/preparation-report.json",
+        "Docs/development/evidence/environment.json",
+        "Docs/development/evidence/devprep-check.json",
+        "Docs/development/evidence/knowledge-graph-check.json",
+        "Docs/development/evidence/backlog-check.json",
+        "Docs/development/evidence/skill-protocol-navigation.md",
+        "Docs/development/evidence/skill-execution-contracts.md",
+        "Docs/development/evidence/skill-evidence-handoff.md",
+        "Docs/development/evidence/m0-plan-review.md",
+        "Docs/development/evidence/prep-007-markdown-red.txt",
+        "Docs/development/evidence/prep-007-markdown-green.json",
+        "Docs/development/evidence/prep-007-final-validation.json",
+        "Docs/development/evidence/2026-09-07-prep-001-006-review.json",
+        "Docs/development/evidence/2026-09-07-skill-markers-red.json",
+        "Docs/development/evidence/2026-09-07-skill-coverage-red-rerun.json",
+        "Docs/development/evidence/2026-09-07-skill-coverage-green.json",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+        "Docs/development/evidence/2026-09-08-preparation-closeout.json",
+        "Docs/development/evidence/2026-09-08-prep-007-review.json",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+        "Docs/development/evidence/2026-09-08-prep-acceptance-index.json"
+      ],
+      "limitations": [
+        "工作区没有 Git repository，未创建 commit、branch 或 push。",
+        "ClaudeLink inbox/resource 接口不可用，未虚构跨 Agent 通信。",
+        "产品源码、依赖锁定、Runtime 与 28 条 Conformance 执行证据尚未建立。"
+      ]
+    },
+    "reviewed_hashes_before_updates": {
+      ".editorconfig": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+      ".gitignore": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+      "AGENTS.md": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+      "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+      "Docs/development/README.md": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+      "Docs/development/backlog.json": "e7d062ce99f6ed04a15aeb029ccb7a885595536aefd0ec17d352ce1fc4eac543",
+      "Docs/development/evidence/2026-09-07-prep-001-006-review.json": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec",
+      "Docs/development/evidence/2026-09-08-prep-003-004-review.json": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+      "Docs/development/evidence/2026-09-08-prep-006-review.json": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+      "Docs/development/evidence/2026-09-08-prep-007-review.json": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+      "Docs/development/evidence/2026-09-08-prep-acceptance-index.json": "12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba",
+      "Docs/development/evidence/2026-09-08-prep-corrections-review.json": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+      "Docs/development/evidence/2026-09-08-preparation-closeout.json": "d5aa526c400260cd152cf4194113893a5b06a2588f4af030248913d0ca43dcbc",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-green.json": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-red.json": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+      "Docs/development/evidence/2026-09-08-preparation-handoff.md": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60",
+      "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json": "e312f4788ebfcfccaedbd410c54c10b4ff962ad31f1cb21a6a5a2954d02a72e4",
+      "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json": "98e23b8e9fc9d4e8dd89c7b839637ee3ec824dd58da7436fb73f8632c4daee74",
+      "Docs/development/evidence/backlog-check.json": "140a9100f2f2ffb83996eccfe69459aae853664a5631e333bcec4ae7915959be",
+      "Docs/development/evidence/devprep-check.json": "be95c628b0d23cc2cadf53498a0093848f375f716557d6e5cf0a5b94c47e0645",
+      "Docs/development/evidence/environment.json": "b8425ee076932f4fe8dcde748d59202b6a93b688dbee2c823a259554b27695dd",
+      "Docs/development/evidence/knowledge-graph-check.json": "ce989af0f463e1c1a49e2fbdb0041a3afdd4ad33690bcafb5f76052f911ada25",
+      "Docs/development/evidence/preparation-log.md": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141",
+      "Docs/development/evidence/preparation-report.json": "dcd7b18b79c8387452fd4d782f1c05d90af654047b5194076045615594c34fcd",
+      "Docs/development/evidence/skill-evidence-handoff.md": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d",
+      "Docs/development/evidence/skill-execution-contracts.md": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc",
+      "Docs/development/evidence/skill-protocol-navigation.md": "6e1f8b00a15a3721efb2a7436b7df242ff3a87b7a921439df752a47336a232bc",
+      "Docs/development/knowledge-graph.json": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+      "Docs/development/knowledge-map.md": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+      "Docs/development/roadmap.md": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+      "Docs/development/status.json": "46a760a52eef1deba1b72e57b211421e8581913a59eae43ad559509f93c79baf",
+      "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+      "Docs/superpowers/plans/2026-09-08-preparation-closeout.md": "d98fbfbbe3abfd12a684e19781ef9bc869f386462f79b99a9072f836afed82b2",
+      "MEMORY.md": "cd0a84abc0e08b8f4fd304af8d476f026b43854d2cc0c7b06df718bb4d255af4",
+      "README.md": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+      "skills/aetp-evidence-handoff/SKILL.md": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+      "skills/aetp-execution-contracts/SKILL.md": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+      "skills/aetp-protocol-navigation/SKILL.md": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+      "tests/preparation/test_devprep.py": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+      "tests/preparation/test_devprep_fail_closed.py": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "tools/devprep.py": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583"
+    },
+    "stable_contract_sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+    "independent_review_is_not_product_acceptance": true,
+    "first_fresh_verification": {
+      "evidence": "Docs/development/evidence/2026-09-08-preparation-final-validation.json",
+      "finished_at": "2026-09-09T19:15:49.658448+08:00",
+      "status": "failed"
+    }
+  },
+  "regression_rework": {
+    "opened_at": "2026-09-09T19:19:06.026864+08:00",
+    "root_cause": "Positive dependency fixture mutates PREP-003 to ready in a live plan snapshot while accepted PREP-008 remains done; validator correctly rejects the unrelated downstream edge.",
+    "classification": "Preparation test-fixture operational-state coupling; no validator or product defect.",
+    "red_evidence": "Docs/development/evidence/2026-09-09-preparation-regression-red.json",
+    "source_write_set": [
+      "tests/preparation/test_devprep_fail_closed.py"
+    ],
+    "support_write_set": [
+      "Docs/development/evidence/2026-09-09-ready-fixture-probe.py",
+      "Docs/development/evidence/2026-09-09-ready-fixture-probe-red.json",
+      "Docs/development/evidence/2026-09-09-preparation-regression-green.json",
+      "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json",
+      "Docs/development/evidence/2026-09-09-preparation-final-validation.json"
+    ],
+    "exclusive_review_report": "Docs/development/evidence/2026-09-09-preparation-regression-review.json",
+    "reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d)",
+    "old_test_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+    "rule": "Old immutable acceptance index and reports remain historical; only fresh independent supplemental pass may accept changed test source and re-close PREP-007/008. No product or tool/contract edit.",
+    "known_failed_finalization_does_not_count_as_complete": true,
+    "resumed_at": "2026-09-09T19:29:14.139137+08:00",
+    "hypothesis": "The unchanged validator correctly rejects PREP-008 done -> PREP-003 ready. A positive fixture must normalize copied statuses and create its own prerequisite acceptance labels instead of depending on the live plan.",
+    "probe_scope": "Actual positive test under two synthetic material roots plus real validator rejection of the original contradictory end-state. No shared backlog writes.",
+    "coordination_note": "ClaudeLink resources/templates remain empty; sole retained Kant notified via send_input; main owns narrow patch and metadata.",
+    "source_change": {
+      "at": "2026-09-09T19:31:24.046571+08:00",
+      "path": "tests/preparation/test_devprep_fail_closed.py",
+      "old_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "new_sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+      "before_function": "    def test_ready_accepts_fulfilled_dependencies(self):\r\n        backlog = material(\"backlog.json\")\r\n        items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n        items[\"PREP-003\"][\"status\"] = \"ready\"\r\n        self.assertEqual(items[\"PREP-001\"][\"status\"], \"done\")\r\n        self.assertEqual(devprep.validate_backlog(backlog), [])\r\n",
+      "after_function": "    def test_ready_accepts_fulfilled_dependencies(self):\r\n        backlog = material(\"backlog.json\")\r\n        # Keep plan structure, but isolate this positive case from live statuses.\r\n        # A completed downstream item must not depend on our synthetic ready item.\r\n        for item in backlog[\"work_items\"]:\r\n            item[\"status\"] = \"todo\"\r\n        items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n        items[\"PREP-001\"].update(\r\n            status=\"done\",\r\n            acceptance_evidence=\"synthetic evidence, not product acceptance\",\r\n            reproduction_command=\"synthetic command\",\r\n            independent_reviewer=\"synthetic reviewer\",\r\n        )\r\n        items[\"PREP-003\"][\"status\"] = \"ready\"\r\n        self.assertEqual(devprep.validate_backlog(backlog), [])\r\n",
+      "unified_diff": "--- before/tests/preparation/test_devprep_fail_closed.py\n+++ after/tests/preparation/test_devprep_fail_closed.py\n@@ -111,9 +111,18 @@\n \r\n     def test_ready_accepts_fulfilled_dependencies(self):\r\n         backlog = material(\"backlog.json\")\r\n+        # Keep plan structure, but isolate this positive case from live statuses.\r\n+        # A completed downstream item must not depend on our synthetic ready item.\r\n+        for item in backlog[\"work_items\"]:\r\n+            item[\"status\"] = \"todo\"\r\n         items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n+        items[\"PREP-001\"].update(\r\n+            status=\"done\",\r\n+            acceptance_evidence=\"synthetic evidence, not product acceptance\",\r\n+            reproduction_command=\"synthetic command\",\r\n+            independent_reviewer=\"synthetic reviewer\",\r\n+        )\r\n         items[\"PREP-003\"][\"status\"] = \"ready\"\r\n-        self.assertEqual(items[\"PREP-001\"][\"status\"], \"done\")\r\n         self.assertEqual(devprep.validate_backlog(backlog), [])\r\n \r\n     def test_malformed_materials_fail_check_without_creating_success_reports(self):\r\n",
+      "scope": "Only positive preparation-test fixture setup; validator, negative tests and contracts unchanged; original CRLF line endings preserved."
+    },
+    "patch_attempt_note": {
+      "recorded_at": "2026-09-09T19:31:24.056266+08:00",
+      "observed_exit_code": 1,
+      "cause": "First exact-match patch guard expected LF but source is CRLF. Guard failed before any source write; old hash rechecked unchanged. Rerun preserves CRLF.",
+      "missing_time_boundaries": "The earlier patch attempt was not instrumented; do not reconstruct start/end."
+    },
+    "handoff": {
+      "path": "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json",
+      "sha256": "cd9835235f2cd6902a1714f4ff1e6cb6c8d12224043db905f7529e41c099bdb2",
+      "frozen_at": "2026-09-09T19:40:09.339599+08:00"
+    },
+    "green_evidence": "Docs/development/evidence/2026-09-09-preparation-regression-green.json",
+    "status": "awaiting independent supplemental review"
+  }
+}

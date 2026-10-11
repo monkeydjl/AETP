@@ -1,0 +1,1064 @@
+{
+  "work_item": "M1-01",
+  "fixture": "two trusted actor identities; deterministic local scenario",
+  "claims": {
+    "real_model_autonomy": false,
+    "task_completed": false,
+    "bootstrap_verified": false,
+    "full_test_028_passed": false
+  },
+  "commands": [
+    {
+      "id": "m1-demo-001",
+      "project_id": "m1-demo",
+      "actor_id": "bootstrap",
+      "type": "project.create",
+      "target_id": null,
+      "payload": {
+        "status": "active"
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-001",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-002",
+      "project_id": "m1-demo",
+      "actor_id": "bootstrap",
+      "type": "agent.register",
+      "target_id": "agent-a",
+      "payload": {
+        "model_id": "fixture-agent-a"
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-002",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-003",
+      "project_id": "m1-demo",
+      "actor_id": "bootstrap",
+      "type": "agent.register",
+      "target_id": "agent-b",
+      "payload": {
+        "model_id": "fixture-agent-b"
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-003",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-004",
+      "project_id": "m1-demo",
+      "actor_id": "agent-a",
+      "type": "task.create",
+      "target_id": "guide",
+      "payload": {
+        "title": "平等 Agent 协作说明",
+        "acceptance_criteria": [
+          "直接对话",
+          "独立审查",
+          "证据与权限"
+        ]
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-004",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-005",
+      "project_id": "m1-demo",
+      "actor_id": "agent-a",
+      "type": "task.claim",
+      "target_id": "guide",
+      "payload": {},
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-005",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-006",
+      "project_id": "m1-demo",
+      "actor_id": "agent-a",
+      "type": "artifact.submit",
+      "target_id": "guide-v1",
+      "payload": {
+        "task_id": "guide",
+        "type": "document",
+        "content": "# 平等 Agent 协作说明\n\n## 直接对话\n\n成员可以直接提出方案、回复和质疑，无须 Manager 中转。\n\n## 独立审查\n\n成果由另一位成员审查；审查不要求取得作者 Task 的归属。\n\n## 证据与权限\n\n候选文档固定内容摘要，审查与验证绑定同一版本。\n预检查输出是证据；缺少 Runner 授权时正式 Verification 为 INCONCLUSIVE。\nReview 通过不会自动完成任务，审批及执行权限仍由对应质量门校验。\n",
+        "message_ids": [
+          "proposal",
+          "challenge",
+          "response"
+        ]
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-006",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-007",
+      "project_id": "m1-demo",
+      "actor_id": "agent-b",
+      "type": "review.request",
+      "target_id": "peer-review",
+      "payload": {
+        "artifact_id": "guide-v1",
+        "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+        "reviewer_id": "agent-b"
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-007",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-008",
+      "project_id": "m1-demo",
+      "actor_id": "agent-b",
+      "type": "review.submit",
+      "target_id": "peer-review",
+      "payload": {
+        "status": "approved",
+        "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+        "feedback": "已检查固定文档三部分，包含独立审查与质量门限制。"
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-008",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-009",
+      "project_id": "m1-demo",
+      "actor_id": "agent-b",
+      "type": "verification.run",
+      "target_id": "document-check",
+      "payload": {
+        "artifact_id": "guide-v1",
+        "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5"
+      },
+      "expected_revision": 0,
+      "idempotency_key": "m1-demo-009",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-010",
+      "project_id": "m1-demo",
+      "actor_id": "agent-a",
+      "type": "task.verify",
+      "target_id": "guide",
+      "payload": {
+        "artifact_id": "guide-v1",
+        "review_id": "peer-review",
+        "verification_id": "document-check"
+      },
+      "expected_revision": 1,
+      "idempotency_key": "m1-demo-010",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-011",
+      "project_id": "m1-demo",
+      "actor_id": "agent-a",
+      "type": "task.complete",
+      "target_id": "guide",
+      "payload": {
+        "artifact_id": "guide-v1",
+        "review_id": "peer-review",
+        "verification_id": "document-check"
+      },
+      "expected_revision": 1,
+      "idempotency_key": "m1-demo-011",
+      "correlation_id": "peer-document-example",
+      "schema_version": "0.1"
+    }
+  ],
+  "results": [
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-001",
+      "event_ids": [
+        "m1-demo-001:received",
+        "m1-demo-001:effect"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-002",
+      "event_ids": [
+        "m1-demo-002:received",
+        "m1-demo-002:effect"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-003",
+      "event_ids": [
+        "m1-demo-003:received",
+        "m1-demo-003:effect"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-004",
+      "event_ids": [
+        "m1-demo-004:received",
+        "m1-demo-004:effect"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-005",
+      "event_ids": [
+        "m1-demo-005:received",
+        "m1-demo-005:effect"
+      ],
+      "aggregate_revision": 1,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-006",
+      "event_ids": [
+        "m1-demo-006:received",
+        "m1-demo-006:effect:1"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-007",
+      "event_ids": [
+        "m1-demo-007:received",
+        "m1-demo-007:effect:1"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-008",
+      "event_ids": [
+        "m1-demo-008:received",
+        "m1-demo-008:effect:1"
+      ],
+      "aggregate_revision": 1,
+      "error_code": null
+    },
+    {
+      "status": "accepted",
+      "command_id": "m1-demo-009",
+      "event_ids": [
+        "m1-demo-009:received",
+        "m1-demo-009:effect:1",
+        "m1-demo-009:effect:2"
+      ],
+      "aggregate_revision": 0,
+      "error_code": null
+    },
+    {
+      "status": "rejected",
+      "command_id": "m1-demo-010",
+      "event_ids": [
+        "m1-demo-010:received",
+        "m1-demo-010:rejected"
+      ],
+      "aggregate_revision": 1,
+      "error_code": "QUALITY_GATE_NOT_MET"
+    },
+    {
+      "status": "rejected",
+      "command_id": "m1-demo-011",
+      "event_ids": [
+        "m1-demo-011:received",
+        "m1-demo-011:rejected"
+      ],
+      "aggregate_revision": 1,
+      "error_code": "QUALITY_GATE_NOT_MET"
+    }
+  ],
+  "events": [
+    {
+      "id": "m1-demo-001:received",
+      "project_id": "m1-demo",
+      "sequence": 1,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "m1-demo",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-001",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "project.create",
+        "request_digest": "f0e35c3696ae8b6affab08bb374f19e6224dbe0d9fc8da73fc1bda5912306739"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-001:effect",
+      "project_id": "m1-demo",
+      "sequence": 2,
+      "type": "project.created",
+      "aggregate_type": "project",
+      "aggregate_id": "m1-demo",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-001",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "status": "active"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-002:received",
+      "project_id": "m1-demo",
+      "sequence": 3,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "agent-a",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-002",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "5b1f6ead2fee4d9855267cc674db1ea11d774ae034a849b6df6af8052ffdc8bc"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-002:effect",
+      "project_id": "m1-demo",
+      "sequence": 4,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "agent-a",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-002",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "model_id": "fixture-agent-a",
+        "status": "available"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-003:received",
+      "project_id": "m1-demo",
+      "sequence": 5,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "agent-b",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-003",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "387d08680f528c7c6e81c56723e34ad4e089004cee9cefa5b05c566c1cb3e233"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-003:effect",
+      "project_id": "m1-demo",
+      "sequence": 6,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "agent-b",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-003",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "model_id": "fixture-agent-b",
+        "status": "available"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-004:received",
+      "project_id": "m1-demo",
+      "sequence": 7,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-004",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "task.create",
+        "request_digest": "064a8ffacbb519554890b5958300a084b6cbefa60629e81569d70aee89d369f1"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-004:effect",
+      "project_id": "m1-demo",
+      "sequence": 8,
+      "type": "task.created",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-004",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "acceptance_criteria": [
+          "直接对话",
+          "独立审查",
+          "证据与权限"
+        ],
+        "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+        "policy_version": "m1-document-candidate-v1",
+        "status": "pending",
+        "title": "平等 Agent 协作说明"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-005:received",
+      "project_id": "m1-demo",
+      "sequence": 9,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-005",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "task.claim",
+        "request_digest": "fb35ae7bb03772436e7d088101bb9cc954539d85ef870131d5a0fb6563f4643c"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-005:effect",
+      "project_id": "m1-demo",
+      "sequence": 10,
+      "type": "task.claimed",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-demo-005",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "actor_id": "agent-a",
+        "status": "assigned"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-006:received",
+      "project_id": "m1-demo",
+      "sequence": 11,
+      "type": "command.received",
+      "aggregate_type": "artifact",
+      "aggregate_id": "guide-v1",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-006",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "artifact.submit",
+        "request_digest": "203e104d3a3ee0dcd050b3ea3080bccb57a35da5a5478376d5807e37a2004346"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-006:effect:1",
+      "project_id": "m1-demo",
+      "sequence": 12,
+      "type": "artifact.created",
+      "aggregate_type": "artifact",
+      "aggregate_id": "guide-v1",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-006",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "content": "# 平等 Agent 协作说明\n\n## 直接对话\n\n成员可以直接提出方案、回复和质疑，无须 Manager 中转。\n\n## 独立审查\n\n成果由另一位成员审查；审查不要求取得作者 Task 的归属。\n\n## 证据与权限\n\n候选文档固定内容摘要，审查与验证绑定同一版本。\n预检查输出是证据；缺少 Runner 授权时正式 Verification 为 INCONCLUSIVE。\nReview 通过不会自动完成任务，审批及执行权限仍由对应质量门校验。\n",
+        "content_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+        "created_by": "agent-a",
+        "criteria": [
+          "直接对话",
+          "独立审查",
+          "证据与权限"
+        ],
+        "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+        "data_classification": "internal",
+        "derived_from": [],
+        "id": "guide-v1",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "m1-demo",
+        "revision": 0,
+        "source": {
+          "command_id": "m1-demo-006",
+          "execution_authority": "candidate_only",
+          "external_input_exposure": "unknown",
+          "input_origin": "authenticated_agent_claim",
+          "kind": "inline_candidate",
+          "messages": [
+            {
+              "content_digest": "sha256:73c95cb2f0063408ad665fd5a506279e91c564d7ef9c3f12f2d8ca23c802994e",
+              "message": {
+                "content": "写一页说明，介绍平等 Agent 的直接对话和独立审查。",
+                "id": "proposal",
+                "project_id": "m1-demo",
+                "recipients": [
+                  "agent-b"
+                ],
+                "references": [],
+                "schema_version": "0.1",
+                "sender_id": "agent-a",
+                "target_message": null,
+                "type": "proposal",
+                "untrusted_input": true
+              }
+            },
+            {
+              "content_digest": "sha256:96ba0164b5b5910246c5e3fc9fdf2de394bd90796f5c622589f9f20234273ef1",
+              "message": {
+                "content": "补充证据与权限，明确 Review 通过不等于任务完成。",
+                "id": "challenge",
+                "project_id": "m1-demo",
+                "recipients": [
+                  "agent-a"
+                ],
+                "references": [
+                  "proposal"
+                ],
+                "schema_version": "0.1",
+                "sender_id": "agent-b",
+                "target_message": "proposal",
+                "type": "challenge",
+                "untrusted_input": true
+              }
+            },
+            {
+              "content_digest": "sha256:90523529d4f97719ad4570eb9ada05349d69effa584f9b02641aa69e0f9ae3b5",
+              "message": {
+                "content": "采用这个修订；文档包括直接对话、独立审查、证据与权限三部分。",
+                "id": "response",
+                "project_id": "m1-demo",
+                "recipients": [
+                  "agent-b"
+                ],
+                "references": [
+                  "challenge"
+                ],
+                "schema_version": "0.1",
+                "sender_id": "agent-a",
+                "target_message": "challenge",
+                "type": "response",
+                "untrusted_input": true
+              }
+            }
+          ],
+          "untrusted_input": true
+        },
+        "supersedes": null,
+        "task_id": "guide",
+        "task_revision": 1,
+        "type": "document"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-007:received",
+      "project_id": "m1-demo",
+      "sequence": 13,
+      "type": "command.received",
+      "aggregate_type": "review",
+      "aggregate_id": "peer-review",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-007",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "review.request",
+        "request_digest": "eff7ac4b170f224124f5883a68fa37502b4ddcb1e6914619614c9b881f9f7eb7"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-007:effect:1",
+      "project_id": "m1-demo",
+      "sequence": 14,
+      "type": "review.requested",
+      "aggregate_type": "review",
+      "aggregate_id": "peer-review",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-007",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+        "artifact_id": "guide-v1",
+        "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+        "feedback": null,
+        "id": "peer-review",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "m1-demo",
+        "requested_by": "agent-b",
+        "reviewer_id": "agent-b",
+        "revision": 0,
+        "status": "pending",
+        "task_id": "guide",
+        "task_revision": 1
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-008:received",
+      "project_id": "m1-demo",
+      "sequence": 15,
+      "type": "command.received",
+      "aggregate_type": "review",
+      "aggregate_id": "peer-review",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-008",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "review.submit",
+        "request_digest": "827146e120a3c80ce94d5b81b27b1ae44bfceca986538b61e4c1fbf19c92e5b3"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-008:effect:1",
+      "project_id": "m1-demo",
+      "sequence": 16,
+      "type": "review.approved",
+      "aggregate_type": "review",
+      "aggregate_id": "peer-review",
+      "aggregate_revision": 1,
+      "causation_id": "m1-demo-008",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "feedback": "已检查固定文档三部分，包含独立审查与质量门限制。",
+        "reviewer_id": "agent-b",
+        "status": "approved"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-009:received",
+      "project_id": "m1-demo",
+      "sequence": 17,
+      "type": "command.received",
+      "aggregate_type": "verification",
+      "aggregate_id": "document-check",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-009",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "verification.run",
+        "request_digest": "9dafd1ce36727aec77f05e52c18249eff708f7f8ebfade6bdc115fa48251c55c"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-009:effect:1",
+      "project_id": "m1-demo",
+      "sequence": 18,
+      "type": "artifact.created",
+      "aggregate_type": "artifact",
+      "aggregate_id": "document-check:evidence",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-009",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "content": "{\"artifact_digest\":\"sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5\",\"artifact_id\":\"guide-v1\",\"checks\":[{\"criterion\":\"直接对话\",\"matched\":true},{\"criterion\":\"独立审查\",\"matched\":true},{\"criterion\":\"证据与权限\",\"matched\":true}],\"command\":\"aetp.document.contains_all/v1\",\"criteria_ref\":{\"content_digest\":\"sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99\",\"revision\":1,\"task_id\":\"guide\"},\"environment\":{\"implementation\":\"cpython\",\"platform\":\"win32\",\"python\":\"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\",\"scope\":\"in_process_text_precheck\"},\"environment_digest\":\"sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6\",\"limitation\":\"Internal precheck only; Runner action authorization is unavailable.\",\"method\":\"literal_text_contains_all\",\"observed_at\":\"2026-09-11T16:40:21.392254+00:00\",\"observed_result\":\"PASSED\",\"schema_version\":\"0.1\",\"test_suite_digest\":\"sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c\"}",
+        "content_digest": "sha256:1f707fd056e09eac4a2a769887af2473c00ad5d83adf32e400401c0506bd75f6",
+        "created_by": "system:document-precheck",
+        "criteria": [
+          "直接对话",
+          "独立审查",
+          "证据与权限"
+        ],
+        "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+        "data_classification": "internal",
+        "derived_from": [
+          "guide-v1"
+        ],
+        "id": "document-check:evidence",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "m1-demo",
+        "revision": 0,
+        "source": {
+          "artifact_id": "guide-v1",
+          "command_id": "m1-demo-009",
+          "execution_authority": "unavailable",
+          "kind": "trusted_precheck",
+          "untrusted_input": true
+        },
+        "supersedes": null,
+        "task_id": "guide",
+        "task_revision": 1,
+        "type": "report"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-009:effect:2",
+      "project_id": "m1-demo",
+      "sequence": 19,
+      "type": "verification.completed",
+      "aggregate_type": "verification",
+      "aggregate_id": "document-check",
+      "aggregate_revision": 0,
+      "causation_id": "m1-demo-009",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+        "artifact_id": "guide-v1",
+        "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+        "evidence_digest": "sha256:1f707fd056e09eac4a2a769887af2473c00ad5d83adf32e400401c0506bd75f6",
+        "evidence_id": "document-check:evidence",
+        "execution": {
+          "action_id": null,
+          "authorization": "unavailable",
+          "binding_id": null,
+          "kind": "internal_precheck",
+          "request_command_id": "m1-demo-009",
+          "runner_id": "aetp.document.precheck/v1"
+        },
+        "id": "document-check",
+        "inputs": {
+          "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+          "command": "aetp.document.contains_all/v1",
+          "criteria_ref": {
+            "content_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+            "revision": 1,
+            "task_id": "guide"
+          },
+          "environment_digest": "sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6",
+          "test_suite_digest": "sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+        },
+        "method": {
+          "name": "literal_text_contains_all",
+          "type": "runtime_check"
+        },
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "m1-demo",
+        "reason": "ENFORCEMENT_UNAVAILABLE",
+        "result": "INCONCLUSIVE",
+        "revision": 0,
+        "task_id": "guide",
+        "task_revision": 1,
+        "verifier_id": "agent-b"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-010:received",
+      "project_id": "m1-demo",
+      "sequence": 20,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-demo-010",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "task.verify",
+        "request_digest": "6a1c17090bb6a3300911ab0042eeab154182c0090b698c0098e7a903d0745c15"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-010:rejected",
+      "project_id": "m1-demo",
+      "sequence": 21,
+      "type": "command.rejected",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-demo-010",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "error": {
+          "code": "QUALITY_GATE_NOT_MET",
+          "context": {
+            "command_id": "m1-demo-010",
+            "current_revision": 1,
+            "expected_revision": 1,
+            "target_id": "guide"
+          },
+          "message": "Command rejected: QUALITY_GATE_NOT_MET",
+          "retryable": false,
+          "severity": "medium"
+        }
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-011:received",
+      "project_id": "m1-demo",
+      "sequence": 22,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-demo-011",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "command_type": "task.complete",
+        "request_digest": "5a117a8b5371439cf5bf180115173045050e6a12a804376ccfafd375f16c9bf9"
+      },
+      "schema_version": "0.1"
+    },
+    {
+      "id": "m1-demo-011:rejected",
+      "project_id": "m1-demo",
+      "sequence": 23,
+      "type": "command.rejected",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-demo-011",
+      "correlation_id": "peer-document-example",
+      "payload": {
+        "error": {
+          "code": "QUALITY_GATE_NOT_MET",
+          "context": {
+            "command_id": "m1-demo-011",
+            "current_revision": 1,
+            "expected_revision": 1,
+            "target_id": "guide"
+          },
+          "message": "Command rejected: QUALITY_GATE_NOT_MET",
+          "retryable": false,
+          "severity": "medium"
+        }
+      },
+      "schema_version": "0.1"
+    }
+  ],
+  "projection": {
+    "agent:agent-a": {
+      "id": "agent-a",
+      "model_id": "fixture-agent-a",
+      "project_id": "m1-demo",
+      "revision": 0,
+      "status": "available"
+    },
+    "agent:agent-b": {
+      "id": "agent-b",
+      "model_id": "fixture-agent-b",
+      "project_id": "m1-demo",
+      "revision": 0,
+      "status": "available"
+    },
+    "artifact:document-check:evidence": {
+      "content": "{\"artifact_digest\":\"sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5\",\"artifact_id\":\"guide-v1\",\"checks\":[{\"criterion\":\"直接对话\",\"matched\":true},{\"criterion\":\"独立审查\",\"matched\":true},{\"criterion\":\"证据与权限\",\"matched\":true}],\"command\":\"aetp.document.contains_all/v1\",\"criteria_ref\":{\"content_digest\":\"sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99\",\"revision\":1,\"task_id\":\"guide\"},\"environment\":{\"implementation\":\"cpython\",\"platform\":\"win32\",\"python\":\"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\",\"scope\":\"in_process_text_precheck\"},\"environment_digest\":\"sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6\",\"limitation\":\"Internal precheck only; Runner action authorization is unavailable.\",\"method\":\"literal_text_contains_all\",\"observed_at\":\"2026-09-11T16:40:21.392254+00:00\",\"observed_result\":\"PASSED\",\"schema_version\":\"0.1\",\"test_suite_digest\":\"sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c\"}",
+      "content_digest": "sha256:1f707fd056e09eac4a2a769887af2473c00ad5d83adf32e400401c0506bd75f6",
+      "created_by": "system:document-precheck",
+      "criteria": [
+        "直接对话",
+        "独立审查",
+        "证据与权限"
+      ],
+      "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+      "data_classification": "internal",
+      "derived_from": [
+        "guide-v1"
+      ],
+      "id": "document-check:evidence",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "m1-demo",
+      "revision": 0,
+      "source": {
+        "artifact_id": "guide-v1",
+        "command_id": "m1-demo-009",
+        "execution_authority": "unavailable",
+        "kind": "trusted_precheck",
+        "untrusted_input": true
+      },
+      "supersedes": null,
+      "task_id": "guide",
+      "task_revision": 1,
+      "type": "report"
+    },
+    "artifact:guide-v1": {
+      "content": "# 平等 Agent 协作说明\n\n## 直接对话\n\n成员可以直接提出方案、回复和质疑，无须 Manager 中转。\n\n## 独立审查\n\n成果由另一位成员审查；审查不要求取得作者 Task 的归属。\n\n## 证据与权限\n\n候选文档固定内容摘要，审查与验证绑定同一版本。\n预检查输出是证据；缺少 Runner 授权时正式 Verification 为 INCONCLUSIVE。\nReview 通过不会自动完成任务，审批及执行权限仍由对应质量门校验。\n",
+      "content_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+      "created_by": "agent-a",
+      "criteria": [
+        "直接对话",
+        "独立审查",
+        "证据与权限"
+      ],
+      "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+      "data_classification": "internal",
+      "derived_from": [],
+      "id": "guide-v1",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "m1-demo",
+      "revision": 0,
+      "source": {
+        "command_id": "m1-demo-006",
+        "execution_authority": "candidate_only",
+        "external_input_exposure": "unknown",
+        "input_origin": "authenticated_agent_claim",
+        "kind": "inline_candidate",
+        "messages": [
+          {
+            "content_digest": "sha256:73c95cb2f0063408ad665fd5a506279e91c564d7ef9c3f12f2d8ca23c802994e",
+            "message": {
+              "content": "写一页说明，介绍平等 Agent 的直接对话和独立审查。",
+              "id": "proposal",
+              "project_id": "m1-demo",
+              "recipients": [
+                "agent-b"
+              ],
+              "references": [],
+              "schema_version": "0.1",
+              "sender_id": "agent-a",
+              "target_message": null,
+              "type": "proposal",
+              "untrusted_input": true
+            }
+          },
+          {
+            "content_digest": "sha256:96ba0164b5b5910246c5e3fc9fdf2de394bd90796f5c622589f9f20234273ef1",
+            "message": {
+              "content": "补充证据与权限，明确 Review 通过不等于任务完成。",
+              "id": "challenge",
+              "project_id": "m1-demo",
+              "recipients": [
+                "agent-a"
+              ],
+              "references": [
+                "proposal"
+              ],
+              "schema_version": "0.1",
+              "sender_id": "agent-b",
+              "target_message": "proposal",
+              "type": "challenge",
+              "untrusted_input": true
+            }
+          },
+          {
+            "content_digest": "sha256:90523529d4f97719ad4570eb9ada05349d69effa584f9b02641aa69e0f9ae3b5",
+            "message": {
+              "content": "采用这个修订；文档包括直接对话、独立审查、证据与权限三部分。",
+              "id": "response",
+              "project_id": "m1-demo",
+              "recipients": [
+                "agent-b"
+              ],
+              "references": [
+                "challenge"
+              ],
+              "schema_version": "0.1",
+              "sender_id": "agent-a",
+              "target_message": "challenge",
+              "type": "response",
+              "untrusted_input": true
+            }
+          }
+        ],
+        "untrusted_input": true
+      },
+      "supersedes": null,
+      "task_id": "guide",
+      "task_revision": 1,
+      "type": "document"
+    },
+    "project:m1-demo": {
+      "id": "m1-demo",
+      "project_id": "m1-demo",
+      "revision": 0,
+      "status": "active"
+    },
+    "review:peer-review": {
+      "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+      "artifact_id": "guide-v1",
+      "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+      "feedback": "已检查固定文档三部分，包含独立审查与质量门限制。",
+      "id": "peer-review",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "m1-demo",
+      "requested_by": "agent-b",
+      "reviewer_id": "agent-b",
+      "revision": 1,
+      "status": "approved",
+      "task_id": "guide",
+      "task_revision": 1
+    },
+    "task:guide": {
+      "acceptance_criteria": [
+        "直接对话",
+        "独立审查",
+        "证据与权限"
+      ],
+      "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+      "id": "guide",
+      "owner_id": "agent-a",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "m1-demo",
+      "revision": 1,
+      "status": "assigned",
+      "title": "平等 Agent 协作说明"
+    },
+    "verification:document-check": {
+      "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+      "artifact_id": "guide-v1",
+      "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+      "evidence_digest": "sha256:1f707fd056e09eac4a2a769887af2473c00ad5d83adf32e400401c0506bd75f6",
+      "evidence_id": "document-check:evidence",
+      "execution": {
+        "action_id": null,
+        "authorization": "unavailable",
+        "binding_id": null,
+        "kind": "internal_precheck",
+        "request_command_id": "m1-demo-009",
+        "runner_id": "aetp.document.precheck/v1"
+      },
+      "id": "document-check",
+      "inputs": {
+        "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+        "command": "aetp.document.contains_all/v1",
+        "criteria_ref": {
+          "content_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+          "revision": 1,
+          "task_id": "guide"
+        },
+        "environment_digest": "sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6",
+        "test_suite_digest": "sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+      },
+      "method": {
+        "name": "literal_text_contains_all",
+        "type": "runtime_check"
+      },
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "m1-demo",
+      "reason": "ENFORCEMENT_UNAVAILABLE",
+      "result": "INCONCLUSIVE",
+      "revision": 0,
+      "task_id": "guide",
+      "task_revision": 1,
+      "verifier_id": "agent-b"
+    }
+  },
+  "summary": {
+    "review": "approved",
+    "precheck_observation": "PASSED",
+    "formal_verification": "INCONCLUSIVE",
+    "task_status": "assigned",
+    "task_owner": "agent-a",
+    "replay_equal": true
+  }
+}

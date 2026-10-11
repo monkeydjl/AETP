@@ -1,0 +1,133 @@
+{
+  "work_item": "M0-04",
+  "status": "independently_accepted",
+  "reviewer": "Kuhn (01a08bbf-76ba-7020-8d06-1284cafc1c98)",
+  "finding_severity": "Minor, non-blocking for originally reviewed candidate",
+  "finding": "Unicode oracle contained ASCII question marks and failed to detect ensure_ascii=True digest mutation.",
+  "root_cause": {
+    "observed_powershell_pipeline_encoding": "us-ascii",
+    "actual_sample_code_points": [
+      "0x3f",
+      "0x3f"
+    ],
+    "expected_unicode_code_points": [
+      "0x4efb",
+      "0x52a1"
+    ],
+    "command": "PowerShell: $OutputEncoding.WebName; literal Unicode sample piped to Python sys.stdin code-point inspection",
+    "finding": "Default PowerShell native-process stdin encoding replaced non-ASCII here-string content before Python wrote it.",
+    "correction_strategy": "Use explicit Python Unicode escapes in the test and UTF-8 pipeline encoding for human-language documents. No global/user configuration change."
+  },
+  "scope": [
+    "tests/m0/test_idempotency_concurrency.py",
+    "artifacts/m0-04-test-report.json input-path metadata",
+    "Docs/development/evidence/2026-09-11-m0-04-handoff.md",
+    "Docs/development/evidence/"
+  ],
+  "production_bug": false,
+  "baseline_test_sha256": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2",
+  "original_test_method_source": "    def test_nested_key_order_is_normalized_but_unicode_is_preserved(self):\n        api = require_idempotency(self)\n        first = replace(make_task_create_command(), payload={\n            \"z\": [1, {\"b\": 2, \"a\": 1}], \"title\": \"??\", \"a\": True,\n        })\n        second = replace(first, payload={\n            \"a\": True, \"title\": \"??\", \"z\": [1, {\"a\": 1, \"b\": 2}],\n        })\n        canonical = (\n            '{\"actor_id\":\"a-1\",\"correlation_id\":\"corr-k-1\",'\n            '\"expected_revision\":0,\"id\":\"cmd-k-1\",\"idempotency_key\":\"k-1\",'\n            '\"payload\":{\"a\":true,\"title\":\"??\",\"z\":[1,{\"a\":1,\"b\":2}]},'\n            '\"project_id\":\"p-1\",\"target_id\":\"t-1\",\"type\":\"task.create\"}'\n        )\n        expected = hashlib.sha256(canonical.encode(\"utf-8\")).hexdigest()\n        self.assertEqual(api.canonical_digest(first), expected)\n        self.assertEqual(api.canonical_digest(second), expected)\n\n",
+  "probe_source": "Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py",
+  "runs": [
+    {
+      "label": "before_fix_production",
+      "command": "python Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py --mode production",
+      "started_at": "2026-09-10T17:30:47.317449+00:00",
+      "finished_at": "2026-09-10T17:30:47.623893+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"mode\": \"production\",\n  \"tests_run\": 1,\n  \"failures\": 0,\n  \"errors\": 0,\n  \"source_sha256\": {\n    \"tests/m0/test_idempotency_concurrency.py\": \"9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2\",\n    \"src/aetp/core/idempotency.py\": \"7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c\",\n    \"src/aetp/core/commands.py\": \"3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff\",\n    \"src/aetp/domain/models.py\": \"134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600\"\n  },\n  \"canonical_files_modified\": false\n}\n",
+      "stderr": "test_nested_key_order_is_normalized_but_unicode_is_preserved (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_nested_key_order_is_normalized_but_unicode_is_preserved) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n",
+      "observation": {
+        "mode": "production",
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0,
+        "source_sha256": {
+          "tests/m0/test_idempotency_concurrency.py": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2",
+          "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+          "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+          "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600"
+        },
+        "canonical_files_modified": false
+      }
+    },
+    {
+      "label": "before_fix_escaped-mutant",
+      "command": "python Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py --mode escaped-mutant",
+      "started_at": "2026-09-10T17:30:47.624670+00:00",
+      "finished_at": "2026-09-10T17:30:47.914625+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"mode\": \"escaped-mutant\",\n  \"tests_run\": 1,\n  \"failures\": 0,\n  \"errors\": 0,\n  \"source_sha256\": {\n    \"tests/m0/test_idempotency_concurrency.py\": \"9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2\",\n    \"src/aetp/core/idempotency.py\": \"7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c\",\n    \"src/aetp/core/commands.py\": \"3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff\",\n    \"src/aetp/domain/models.py\": \"134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600\"\n  },\n  \"canonical_files_modified\": false\n}\n",
+      "stderr": "test_nested_key_order_is_normalized_but_unicode_is_preserved (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_nested_key_order_is_normalized_but_unicode_is_preserved) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n",
+      "observation": {
+        "mode": "escaped-mutant",
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0,
+        "source_sha256": {
+          "tests/m0/test_idempotency_concurrency.py": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2",
+          "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+          "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+          "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600"
+        },
+        "canonical_files_modified": false
+      }
+    },
+    {
+      "label": "after_fix_escaped-mutant",
+      "command": "python Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py --mode escaped-mutant",
+      "started_at": "2026-09-10T17:32:16.866545+00:00",
+      "finished_at": "2026-09-10T17:32:17.147705+00:00",
+      "exit_code": 1,
+      "stdout": "{\n  \"mode\": \"escaped-mutant\",\n  \"tests_run\": 1,\n  \"failures\": 1,\n  \"errors\": 0,\n  \"source_sha256\": {\n    \"tests/m0/test_idempotency_concurrency.py\": \"1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d\",\n    \"src/aetp/core/idempotency.py\": \"7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c\",\n    \"src/aetp/core/commands.py\": \"3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff\",\n    \"src/aetp/domain/models.py\": \"134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600\"\n  },\n  \"canonical_files_modified\": false\n}\n",
+      "stderr": "test_nested_key_order_is_normalized_but_unicode_is_preserved (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_nested_key_order_is_normalized_but_unicode_is_preserved) ... FAIL\n\n======================================================================\nFAIL: test_nested_key_order_is_normalized_but_unicode_is_preserved (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_nested_key_order_is_normalized_but_unicode_is_preserved)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_idempotency_concurrency.py\", line 97, in test_nested_key_order_is_normalized_but_unicode_is_preserved\n    self.assertEqual(api.canonical_digest(first), expected)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'e6560f83c3f0816521a6efe34b0df64ab2173e75576617df528be210db970e17' != '1a3ae4dc05642b6ac934677c2e952b8117c197ee58d1cc6058273f72b12b5e9a'\n- e6560f83c3f0816521a6efe34b0df64ab2173e75576617df528be210db970e17\n+ 1a3ae4dc05642b6ac934677c2e952b8117c197ee58d1cc6058273f72b12b5e9a\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nFAILED (failures=1)\n",
+      "observation": {
+        "mode": "escaped-mutant",
+        "tests_run": 1,
+        "failures": 1,
+        "errors": 0,
+        "source_sha256": {
+          "tests/m0/test_idempotency_concurrency.py": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+          "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+          "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+          "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600"
+        },
+        "canonical_files_modified": false
+      }
+    },
+    {
+      "label": "after_fix_production",
+      "command": "python Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py --mode production",
+      "started_at": "2026-09-10T17:32:17.148430+00:00",
+      "finished_at": "2026-09-10T17:32:17.423391+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"mode\": \"production\",\n  \"tests_run\": 1,\n  \"failures\": 0,\n  \"errors\": 0,\n  \"source_sha256\": {\n    \"tests/m0/test_idempotency_concurrency.py\": \"1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d\",\n    \"src/aetp/core/idempotency.py\": \"7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c\",\n    \"src/aetp/core/commands.py\": \"3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff\",\n    \"src/aetp/domain/models.py\": \"134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600\"\n  },\n  \"canonical_files_modified\": false\n}\n",
+      "stderr": "test_nested_key_order_is_normalized_but_unicode_is_preserved (tests.m0.test_idempotency_concurrency.CanonicalDigestTests.test_nested_key_order_is_normalized_but_unicode_is_preserved) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nOK\n",
+      "observation": {
+        "mode": "production",
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0,
+        "source_sha256": {
+          "tests/m0/test_idempotency_concurrency.py": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+          "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+          "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+          "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600"
+        },
+        "canonical_files_modified": false
+      }
+    }
+  ],
+  "corrected_test_sha256": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+  "test_method_diff": "--- candidate Unicode test\n+++ corrected Unicode test\n@@ -1,18 +1,23 @@\n     def test_nested_key_order_is_normalized_but_unicode_is_preserved(self):\n         api = require_idempotency(self)\n+        # Explicit escapes preserve the real Unicode fixture across shell encodings.\n         first = replace(make_task_create_command(), payload={\n-            \"z\": [1, {\"b\": 2, \"a\": 1}], \"title\": \"??\", \"a\": True,\n+            \"z\": [1, {\"b\": 2, \"a\": 1}], \"title\": \"\\u4efb\\u52a1\", \"a\": True,\n         })\n         second = replace(first, payload={\n-            \"a\": True, \"title\": \"??\", \"z\": [1, {\"a\": 1, \"b\": 2}],\n+            \"a\": True, \"title\": \"\\u4efb\\u52a1\", \"z\": [1, {\"a\": 1, \"b\": 2}],\n         })\n         canonical = (\n             '{\"actor_id\":\"a-1\",\"correlation_id\":\"corr-k-1\",'\n             '\"expected_revision\":0,\"id\":\"cmd-k-1\",\"idempotency_key\":\"k-1\",'\n-            '\"payload\":{\"a\":true,\"title\":\"??\",\"z\":[1,{\"a\":1,\"b\":2}]},'\n+            '\"payload\":{\"a\":true,\"title\":\"\\u4efb\\u52a1\",\"z\":[1,{\"a\":1,\"b\":2}]},'\n             '\"project_id\":\"p-1\",\"target_id\":\"t-1\",\"type\":\"task.create\"}'\n         )\n         expected = hashlib.sha256(canonical.encode(\"utf-8\")).hexdigest()\n+        escaped_canonical = canonical.replace(\"\\u4efb\\u52a1\", \"\\\\u4efb\\\\u52a1\")\n+        escaped_digest = hashlib.sha256(escaped_canonical.encode(\"utf-8\")).hexdigest()\n+        self.assertFalse(first.payload[\"title\"].isascii())\n+        self.assertNotEqual(expected, escaped_digest)\n         self.assertEqual(api.canonical_digest(first), expected)\n         self.assertEqual(api.canonical_digest(second), expected)\n \n",
+  "production_and_fixture_unchanged": {
+    "src/aetp/core/idempotency.py": true,
+    "src/aetp/core/commands.py": true,
+    "tests/m0/support.py": true,
+    "src/aetp/storage/sqlite_store.py": true,
+    "src/aetp/core/projection.py": true,
+    "src/aetp/domain/models.py": true
+  },
+  "independent_review_evidence": "Docs/development/evidence/2026-09-11-m0-04-review.json",
+  "minor_closed": true
+}

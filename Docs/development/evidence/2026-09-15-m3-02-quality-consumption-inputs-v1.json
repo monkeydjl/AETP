@@ -1,0 +1,27 @@
+{
+  "work_item": "M3-02",
+  "slice": "task_quality",
+  "candidate_revision": "v1",
+  "review": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review.json",
+    "bytes": 19792,
+    "sha256": "5130b221b88627219069a906f16ce27eba7d30fbf85cc782b7779b88a8ba8c11"
+  },
+  "report_generation_record": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/report_generate_v1/result.json",
+    "bytes": 2003,
+    "sha256": "9feabadd535d60c8aaafafd6271c616283dc994a792ec9f71ca0612cf76607d8"
+  },
+  "post_report_validation_record": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/report_selfcheck_v1/result.json",
+    "bytes": 2010,
+    "sha256": "ab5f48c5765b6162f4aa0b101bb0cc2b833fce6a821a70a7f0793b1237f5642c"
+  },
+  "selfcheck_report": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-selfcheck-v1.json",
+    "bytes": 2332,
+    "sha256": "a8ba6a9a2aa2baffb3ba5b0a505b457abbd35e628d63da1caf3ca7059808bcdc"
+  },
+  "reviewer_write_set_released": true,
+  "release_evidence": "Original /root/m1_reviewer sent the following release through the collaboration channel after its final selfcheck: 正式独立复核已完成并停止写入，现明确释放复核写集（reviewer evidence namespace、.tmp/m3qr1、.tmp/m3qr2、artifacts/m3-02-quality-review-*）。最终报告及所有既有运行记录保持不可变，候选源码/报告/元数据未改。仅接受 frozen Task quality v1 的四条 batch criteria；M3-02 仍 in_progress，original_work_item_accepted=false，原三项 criterion 均 not_accepted。 The same message supplied the exact artifact sizes and SHA256 values pinned above. This record consumes that existing review; it is not a new independent review."
+}

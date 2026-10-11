@@ -1,0 +1,1490 @@
+{
+  "schema_version": "aetp-development-independent-review-0.1",
+  "work_item": "M0-06",
+  "review_type": "M0-06-R1 targeted revision recheck",
+  "started_at": "2026-09-11T13:06:08.294372+08:00",
+  "finished_at": "2026-09-11T13:17:17.286835+08:00",
+  "reviewer": {
+    "identity": "Codex independent Reviewer (this thread)",
+    "independent_from": "Codex main agent / implementation thread",
+    "role_is_product_authority": false,
+    "claudelink_available": false,
+    "communication": "Only this user-visible thread; no inbox/send/bulletin calls or fabricated multi-agent communication."
+  },
+  "decision": {
+    "status": "accepted",
+    "accepted": true,
+    "candidate_development_acceptance": "M0-06 development-time M0-only limited acceptance of the fixed v2 report; not a full protocol acceptance",
+    "scoped_mapping_supported": true,
+    "scoped_execution_counts": {
+      "passed": 6,
+      "failed": 0,
+      "pending": 3,
+      "not_applicable": 19
+    },
+    "executed_fixture_counts": {
+      "passed": 9,
+      "failed": 0,
+      "not_run": 19
+    },
+    "closed_findings": [
+      "M0-06-R1"
+    ],
+    "open_blocking_findings": [],
+    "summary": "R1 ???????????????/????? CLI ???????????????????????? v2 ?? SHA ? 6 M0 scoped passed / 3 partial pending / 19 later not_applicable?"
+  },
+  "candidate": {
+    "report": {
+      "path": "artifacts/m0-conformance-report-v2.json",
+      "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+    },
+    "expected_report_sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75",
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+      "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+    },
+    "expected_snapshot_sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814",
+    "database": {
+      "path": ".tmp/m0-conformance-2026-09-11-v2.sqlite",
+      "sha256": "c6d8eee673f04ee4b8296742319b0f82c29be784b520841ed380043f465cc9ef"
+    },
+    "source_sha256": {
+      "conformance/__init__.py": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2",
+      "conformance/m0/__init__.py": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df",
+      "conformance/m0/README.md": "6f38e66fa47d709691388b1c00dc8908c20217a94235c765f14476cd3a2105fb",
+      "conformance/m0/runner.py": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e",
+      "Docs/AETP-设计方案.md": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+      "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+      "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+      "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+      "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+      "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+      "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+      "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+      "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+      "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+      "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+      "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+      "tests/m0/test_conformance_subset.py": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6",
+      "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+    },
+    "raw_report_review_field_unchanged": {
+      "status": "pending",
+      "reviewer": null
+    },
+    "raw_report_claims_unchanged": {
+      "full_aetp_compatible": false,
+      "work_item_accepted": false,
+      "task_completed": false
+    }
+  },
+  "inherited_first_review": {
+    "review": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review.json",
+      "sha256": "12686c8c9d6e66369099feef9e2a8633ae724890d88d9f6d9e09a4e9faf08429"
+    },
+    "review_status_remains": "changes_requested for original v1 candidate; not rewritten",
+    "original_report": {
+      "path": "artifacts/m0-conformance-report.json",
+      "sha256": "7c32f256cbab17a7f96408af1aae73f008eca139ec8461aeaf99fcd727a5710b"
+    },
+    "original_snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-snapshot.json",
+      "sha256": "dc31f953f3232827eff0da94e3d0c11806e38aa5364c9bbd8ac7469f88b30f83"
+    },
+    "mapping_reference": "conformance_mapping_review: all 28 design TEST requirements and the 12 Task 6 mappings",
+    "independent_required_runs": [
+      {
+        "label": "focused",
+        "test_count": 20,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/focused.command.json",
+          "sha256": "a599281028f0b3ad52bce18fcf55595d0e06a826fe36769f61aa0bde8c0f8315"
+        }
+      },
+      {
+        "label": "full-m0",
+        "test_count": 151,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/full-m0.command.json",
+          "sha256": "1ba3b39b28338d9afcb19439ce3fece88327572e74dad2633855fe2a22d08fea"
+        }
+      },
+      {
+        "label": "preparation",
+        "test_count": 27,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/preparation.command.json",
+          "sha256": "8e947211d052a0e914750ec4440a5d759ad2314f1611264109f9d823fb9e697e"
+        }
+      },
+      {
+        "label": "cli",
+        "test_count": null,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli.command.json",
+          "sha256": "f91c5f80775c1b211d4404208b5932e6d7671562303593c74677d1101d476c6d"
+        }
+      },
+      {
+        "label": "cli-optimized",
+        "test_count": null,
+        "exit_code": 0,
+        "command_record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/cli-optimized.command.json",
+          "sha256": "803e84b8b2303b8773b247bb04243493f90938942ebf970994397d3812f8b010"
+        }
+      }
+    ],
+    "artifact_audit": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-114922-111166/artifact-audit-v2.json",
+      "sha256": "f90fe381f10c092ace5e525306bc25afd23a451f59a7d9b23f698b8f00bb39c4"
+    },
+    "artifact_audit_note": "This inherited artifact-audit-v2.json is the first-round reviewer script revision, NOT an audit newly executed against product candidate v2.",
+    "inherited_other_checks": "Original full-stream/literal-reducer audit and effective TEST-016/018/021 mutants remain first-round independent evidence; fixture/product code is unchanged. No repetition of full M0/preparation or broad 28-requirement audit in this R1 recheck."
+  },
+  "write_scope": {
+    "allowed_prefix": "Docs/development/evidence/2026-09-11-m0-06-review*",
+    "review_directory": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99",
+    "final_review_path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+    "exclusive_new_files": true,
+    "first_review_and_history_not_overwritten": true,
+    "source_tests_conformance_artifacts_and_shared_progress_not_modified": true,
+    "temporary_outputs_retained": true,
+    "shared_progress_and_handoff_owner": "main implementation thread",
+    "claudelink_available": false,
+    "git_metadata_present": false,
+    "m0_05_reworked": false
+  },
+  "integrity": {
+    "before": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-before.json",
+      "sha256": "4f94704b7b0efa3133b1b450b77e5cbfd65ed843e4c9c5c6d6c38529386d16ac"
+    },
+    "after": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-after.json",
+      "sha256": "7db4fe632a0d1b032b18d8f4397e10001e661d23a0aff558045cda941576d99a"
+    },
+    "hash_comparisons_per_check": 204,
+    "comparisons_are_not_test_cases": true,
+    "v2_sources": 18,
+    "protected_baseline_files": 105,
+    "original_evidence_files": 37,
+    "v2_evidence_files": 37,
+    "all_matched": true,
+    "only_changed_sources": [
+      "conformance/m0/README.md",
+      "conformance/m0/runner.py",
+      "tests/m0/test_conformance_subset.py"
+    ],
+    "old_sources_compared_from_sha_verified_first_review_copy": true,
+    "diffs": [
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/runner.py.diff.txt",
+        "sha256": "6513235cb393b581e8d69ad011a8fc767230b3a9023100a4b1bd8ef70693dfdf"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/README.md.diff.txt",
+        "sha256": "77a72df4adc016e4fe046b5d0d0d367667042135926b5fd2db092badc7734e3b"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/test_conformance_subset.py.diff.txt",
+        "sha256": "73f908f9eefaf2cd0cfdaed98b458adab6f7bb5e47ecebe7a15ae90b7eff34db"
+      }
+    ],
+    "mutable_backlog_status_handoff_excluded_from_freeze": true
+  },
+  "independent_validation": {
+    "execution_environment": {
+      "PYTHONPATH": "D:\\Github\\AETP\\src",
+      "PYTHONIOENCODING": "utf-8",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+      "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+      "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+    },
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "selected_tests": {
+      "result": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/selected-tests-result.json",
+        "sha256": "86a7b1b308eb6e2507275b9f76c81aa317977b0da95084402aa37defff7cb500"
+      },
+      "method_count": 5,
+      "subcase_count": 30,
+      "skipped": 0,
+      "expected_failures": 0,
+      "unexpected_successes": 0,
+      "exit_code": 0,
+      "methods": [
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_existing_sqlite_sidecar_files_and_directories",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_existing_sqlite_sidecars_without_touching_owner_data",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_report_equal_to_or_inside_sqlite_sidecar_paths",
+        "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_sidecar_dangling_link_predicate_is_checked_by_api_and_cli"
+      ],
+      "retention_adjustment": "Only tempfile.TemporaryDirectory lifetime/cleanup is patched to retain this review's scratch; original test methods and production/runner behavior are not replaced. Real link creation is not tested."
+    },
+    "path_probes": {
+      "result": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/path-probes-result.json",
+        "sha256": "12b6532ff148dd8a279721907a4180800009d15e76ec816360fedfbff6a39319"
+      },
+      "case_count": 35,
+      "api_cases": 15,
+      "real_cli_subprocess_cases": 20,
+      "optimized_cli_cases": 2,
+      "all_passed": true,
+      "cli_exit_code": 2,
+      "api_exception_types": [
+        "FileExistsError",
+        "ValueError"
+      ],
+      "entire_probe_trees_and_sentinels_unchanged": true,
+      "no_new_database_report_or_evidence_on_refusal": true,
+      "coverage": "Three sidecar names; existing files/directories; API evidence and CLI report equality, descendants and ancestors; generated CLI evidence ancestor; -O pre-existing WAL and report=journal. Ancestor cases necessarily also contain the main DB, and are not claimed as isolated sidecar-only failures."
+    },
+    "normal_cli": {
+      "command_record": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/normal-cli.command.json",
+        "sha256": "95ce428ec1bfbf6313085cb041e8f22153309ece946804de2005c5303197ae87"
+      },
+      "exit_code": 0,
+      "report": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/normal-report.json",
+        "sha256": "83adc30bddab8d76829b25d07194de5743a427792f3e1ba52aca350b01a86044"
+      },
+      "database": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/normal.sqlite",
+        "sha256": "f7e3a24fcf884c27661a25296efe7793346522e5f629e619c7a867bda18b2634"
+      },
+      "scope_counts": {
+        "passed": 6,
+        "failed": 0,
+        "pending": 3,
+        "not_applicable": 19
+      },
+      "execution_counts": {
+        "passed": 9,
+        "failed": 0,
+        "not_run": 19
+      },
+      "normal_sqlite_reopen": {
+        "query": "SELECT COUNT(*) FROM sqlite_schema",
+        "row": 14,
+        "report_preserved": true,
+        "database_sha256_unchanged": true
+      }
+    },
+    "v2_and_independent_report_envelope_check": {
+      "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/reports-check.json",
+      "sha256": "b2f1b32b1b9fcf54bbb6343056ff28d4acfb55f793d904dc2a3eff5f149f0f6c"
+    },
+    "all_independent_command_records": [
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-after.command.json",
+          "sha256": "7baf5e451419d95763a7635ba3a65f5a83c5a0ffaf16088d392d239ef253c824"
+        },
+        "label": "integrity-after",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\integrity.py",
+          "after"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:15:00.597624+08:00",
+        "expected_exit_code": 0,
+        "exit_code": 0,
+        "finished_at": "2026-09-11T13:15:00.785806+08:00",
+        "duration_seconds": 0.18818589999864344,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-after.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-after.stderr.txt",
+        "stdout_sha256": "a5c483dd494115d389d99fe02aac998f0c3d060cea8def13de52d1d4ea8ffb84",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-before.command.json",
+          "sha256": "5a5aa9c82d021d408e0116472d792e4a9e70ded16a92913af7c3e63968f054e5"
+        },
+        "label": "integrity-before",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\integrity.py",
+          "before"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:08:36.615807+08:00",
+        "expected_exit_code": 0,
+        "exit_code": 0,
+        "finished_at": "2026-09-11T13:08:36.823755+08:00",
+        "duration_seconds": 0.20792300000903197,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-before.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity-before.stderr.txt",
+        "stdout_sha256": "dc9ef42d06b62ad790bb31d2de20da298c987fbd6a8a72499e22964338c2f7fa",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/normal-cli.command.json",
+          "sha256": "95ce428ec1bfbf6313085cb041e8f22153309ece946804de2005c5303197ae87"
+        },
+        "label": "normal-cli",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\normal.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\normal-report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:42.805231+08:00",
+        "expected_exit_code": 0,
+        "exit_code": 0,
+        "finished_at": "2026-09-11T13:11:52.273705+08:00",
+        "duration_seconds": 9.468477399990661,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/normal-cli.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/normal-cli.stderr.txt",
+        "stdout_sha256": "ab0bfce3519e21e600af7b092ff0a74ffb87c0369db00db574837438dade0aa7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-evidence_ancestor.command.json",
+          "sha256": "14ea43c4f5acc101c78fe3fee57d8e73f5dca96d30cf49708f3a02c02249e964"
+        },
+        "label": "probe-cli-journal-evidence_ancestor",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-evidence_ancestor\\parent.evidence\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-evidence_ancestor\\parent.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:34.535064+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:34.944231+08:00",
+        "duration_seconds": 0.40919239999493584,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-evidence_ancestor.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-evidence_ancestor.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "97fa696b01d44d8c420769bbb3fcea716a69efaea955d6cab7efd9ac9bd86586",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-existing_directory.command.json",
+          "sha256": "bbe48ad22abcf447d3537d8a52a31341b521ef2ca4ceadb1c2d04074544b4813"
+        },
+        "label": "probe-cli-journal-existing_directory",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-existing_directory\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-existing_directory\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:32.826279+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:33.230240+08:00",
+        "duration_seconds": 0.40402840000751894,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-existing_directory.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-existing_directory.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "f6bcfb0fab5a11860656ba92c43f1c7c02788bb59644958687b7b800af73fecb",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-existing_file.command.json",
+          "sha256": "f8dbc738bf47346eeb943615221464cad62d7b03911b4dda5b0162e00504971f"
+        },
+        "label": "probe-cli-journal-existing_file",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-existing_file\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-existing_file\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:32.404589+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:32.791626+08:00",
+        "duration_seconds": 0.38705550000304356,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-existing_file.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-existing_file.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "012747563b1916190f420c535612b302bf0d1f7a5113a8ea227f5567b383a9a9",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_ancestor.command.json",
+          "sha256": "fcd023456269c02dfd6ed2dc506b51930b946e4d5d16f768b5a7221627eb3b61"
+        },
+        "label": "probe-cli-journal-report_ancestor",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_ancestor\\parent\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_ancestor\\parent"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:34.109260+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:34.514449+08:00",
+        "duration_seconds": 0.4052136999962386,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_ancestor.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_ancestor.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "f0d721147b5225dd2f9001be76bb08f7865d5e3aa457292eb740a33ee6618d3a",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_equal-optimized.command.json",
+          "sha256": "044d61589528d681bf19f4652ded9891c5612ec411aa1719d4314b229c7e8ee7"
+        },
+        "label": "probe-cli-journal-report_equal-optimized",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_equal-optimized\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_equal-optimized\\fresh.sqlite-journal"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:41.384878+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:42.721799+08:00",
+        "duration_seconds": 1.336950099997921,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_equal-optimized.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_equal-optimized.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "a512658371166b1066e0d055b146e18246e64d634da7bc1fbaeec4f70db5205a",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_equal.command.json",
+          "sha256": "2fd219ab39f4e20953f2025695b0dc63c82f6e469d218bfe16567696c0cf48f0"
+        },
+        "label": "probe-cli-journal-report_equal",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_equal\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_equal\\fresh.sqlite-journal"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:33.259946+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:33.684731+08:00",
+        "duration_seconds": 0.42480790000990964,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_equal.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_equal.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "88453525a596f66e141b5087c0ede92849679697154b0fe9dcbd3f76282df02f",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_inside.command.json",
+          "sha256": "b358f4e90002fd22e9f5d2f7cfdb109fabeb3551a4a60fbde45ca9196e8c808a"
+        },
+        "label": "probe-cli-journal-report_inside",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_inside\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-journal-report_inside\\fresh.sqlite-journal\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:33.702846+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:34.097520+08:00",
+        "duration_seconds": 0.39469880000979174,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_inside.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-journal-report_inside.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "a42b367dfb46b549fc8529d450dd778bc2e1728b7fa6e22cd974ba300078b82a",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-evidence_ancestor.command.json",
+          "sha256": "74f791cfc08a1b2b21346f665067201f24754e67c127fe03d20ad8bddfce9002"
+        },
+        "label": "probe-cli-shm-evidence_ancestor",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-evidence_ancestor\\parent.evidence\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-evidence_ancestor\\parent.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:39.685517+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:40.101834+08:00",
+        "duration_seconds": 0.4163431000051787,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-evidence_ancestor.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-evidence_ancestor.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "67c63df004ec48e3e48d31d7d8c83215614808b3da84e312f542eeb329ce6e80",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-existing_directory.command.json",
+          "sha256": "f157e3f2ab4d17b49b080ee773e609f7138c683198896f2decfc64a8813093d1"
+        },
+        "label": "probe-cli-shm-existing_directory",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-existing_directory\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-existing_directory\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:38.017527+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:38.419470+08:00",
+        "duration_seconds": 0.4019927000044845,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-existing_directory.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-existing_directory.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "359c30382d2aa4f18ed3299651dd443a4b16f35496ab14ca94395b381661e098",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-existing_file.command.json",
+          "sha256": "e5908dc8b0de6f26b21526759ba7434a4a9dd9cfb92002996a33d8fdc2bae3c1"
+        },
+        "label": "probe-cli-shm-existing_file",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-existing_file\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-existing_file\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:37.582659+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:37.988331+08:00",
+        "duration_seconds": 0.4057256999949459,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-existing_file.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-existing_file.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "9656a19a1283e4c5e3e6c8e92a5644bed35754f6435a7fef8c02d42fb346d8bb",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_ancestor.command.json",
+          "sha256": "1076b7b033597387e4e51791b989d3cede52d670b54f14d2d7df13db4d3ac0f9"
+        },
+        "label": "probe-cli-shm-report_ancestor",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-report_ancestor\\parent\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-report_ancestor\\parent"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:39.256398+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:39.668154+08:00",
+        "duration_seconds": 0.41176839999388903,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_ancestor.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_ancestor.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "fe357c8cbc6c522206ea65b79f09fe10f35272366a7ce9d90d4a49cfc4777bac",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_equal.command.json",
+          "sha256": "75291577db7621375dd50af7e38b351ba67cd534e9786f7d3392f0ce593149e3"
+        },
+        "label": "probe-cli-shm-report_equal",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-report_equal\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-report_equal\\fresh.sqlite-shm"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:38.445484+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:38.836594+08:00",
+        "duration_seconds": 0.3911345000087749,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_equal.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_equal.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "3c18a00aaa82fc9bdd5427459badd701542c4ba07133a88959e491f3bac52a7f",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_inside.command.json",
+          "sha256": "ba704d17aeebe601eddd880a4ade1832d028fecd8621e0ada3b0e71a650293fc"
+        },
+        "label": "probe-cli-shm-report_inside",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-report_inside\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-shm-report_inside\\fresh.sqlite-shm\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:38.848489+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:39.238427+08:00",
+        "duration_seconds": 0.3899617999995826,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_inside.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-shm-report_inside.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "9d293af5e0fe1fd26d0a814f76eeeec2b8dfc089f6f8a0800cd10a3195ad16b6",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-evidence_ancestor.command.json",
+          "sha256": "6e6cd2aec431234a8dffba9171c3289d1085bb3b95e720a03e7c876992dc4a4b"
+        },
+        "label": "probe-cli-wal-evidence_ancestor",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-evidence_ancestor\\parent.evidence\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-evidence_ancestor\\parent.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:37.121813+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:37.527009+08:00",
+        "duration_seconds": 0.4052503999992041,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-evidence_ancestor.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-evidence_ancestor.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "99526aa6821e3ee41bab7f51e65a348af708bfcaec92281dc191a3e80811b3ab",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_directory.command.json",
+          "sha256": "e5d4cff7d691662162ac0e43737b8afc272c66503eb6455f1934c3e64473a468"
+        },
+        "label": "probe-cli-wal-existing_directory",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-existing_directory\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-existing_directory\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:35.436149+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:35.838153+08:00",
+        "duration_seconds": 0.4020320999989053,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_directory.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_directory.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "429a36633e0fe54c741c5399c3aa2db9947c2988c5f5650af18ea7298cf5286d",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_file-optimized.command.json",
+          "sha256": "1f01faa4d2ff51a4a3ea33f4d790f1bc037d2dc4dcb58080e4baba5e8b8e0ea0"
+        },
+        "label": "probe-cli-wal-existing_file-optimized",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-O",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-existing_file-optimized\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-existing_file-optimized\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:40.128631+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:41.370611+08:00",
+        "duration_seconds": 1.2420057999988785,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_file-optimized.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_file-optimized.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "d697d4f60b412ff7684fe44e253076ed79929b6c4833b74a0b5f74c9d7a42511",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_file.command.json",
+          "sha256": "f46dffc35e4a6a784db0cc9ac1fc36be789c68756921d74d25a0a8215be66dac"
+        },
+        "label": "probe-cli-wal-existing_file",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-existing_file\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-existing_file\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:35.005565+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:35.399820+08:00",
+        "duration_seconds": 0.39428330000373535,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_file.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-existing_file.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "b95a96a7d241df143c7f3034b249e3ede2d18cd39d80fb30b5c1dfe3d06f6d3b",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_ancestor.command.json",
+          "sha256": "286cd0543fe306f1ef8a4074da2482736b769a3f955abcf35628fe35960dffb0"
+        },
+        "label": "probe-cli-wal-report_ancestor",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-report_ancestor\\parent\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-report_ancestor\\parent"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:36.706448+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:37.110964+08:00",
+        "duration_seconds": 0.40454249999311287,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_ancestor.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_ancestor.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "10d8660ee731f5a8bf16969fc2d73f702bcea91df2b165f425427eae985d4824",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_equal.command.json",
+          "sha256": "fea381e2e9dcdb834f4ed1dd4d2f5ec1bc346c8babe00b01cfbf51d9f31af495"
+        },
+        "label": "probe-cli-wal-report_equal",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-report_equal\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-report_equal\\fresh.sqlite-wal"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:35.862012+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:36.263873+08:00",
+        "duration_seconds": 0.4018882999953348,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_equal.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_equal.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "b1ec2cc6668cd5e54f1d51f38ccc62c09ece488e9831a1eee66ad9204a73de46",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_inside.command.json",
+          "sha256": "db92b9e63f355197f2c30249264451ac1efaa1bdad2fdfdcf3746de6eb81cad7"
+        },
+        "label": "probe-cli-wal-report_inside",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-report_inside\\fresh.sqlite",
+          "--json",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\probes\\probe-cli-wal-report_inside\\fresh.sqlite-wal\\report.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:36.284866+08:00",
+        "expected_exit_code": 2,
+        "exit_code": 2,
+        "finished_at": "2026-09-11T13:11:36.689153+08:00",
+        "duration_seconds": 0.40430949999426957,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_inside.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/probe-cli-wal-report_inside.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "0b395cf103dd0427342ae853cb30abe3dbaabfd3f4975b479f6bdf53673baada",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1-five-tests.command.json",
+          "sha256": "194728328bf4f8d8afe4fd2476692a1e5065699877a8450cc6c8ae47c942e174"
+        },
+        "label": "r1-five-tests",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\selected_tests.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:08:36.837618+08:00",
+        "expected_exit_code": 0,
+        "exit_code": 0,
+        "finished_at": "2026-09-11T13:08:42.261235+08:00",
+        "duration_seconds": 5.423625199997332,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1-five-tests.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1-five-tests.stderr.txt",
+        "stdout_sha256": "ffb30130b9d099a62e42d634d0aec09d0aa2b45886a702e81377bc1a91b5f7aa",
+        "stderr_sha256": "1d67de8b7327f386b953cd1c1526076232b36ab60d270425a55dfa2bdf155758",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1-path-probes.command.json",
+          "sha256": "b72c2c01af55767a259f5dbc3902bbbf9d3b7904bea3aa79d395bc3df1f69d9d"
+        },
+        "label": "r1-path-probes",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\path_probes.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:31.949052+08:00",
+        "expected_exit_code": 0,
+        "exit_code": 0,
+        "finished_at": "2026-09-11T13:11:42.793042+08:00",
+        "duration_seconds": 10.843965200008824,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1-path-probes.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1-path-probes.stderr.txt",
+        "stdout_sha256": "035bae8b2845df6d57e268935ced4515e540b45aca46fa7728113b0cd97d6669",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit_observed": true
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/reports-check.command.json",
+          "sha256": "c8e4842353eb57b662a60ca189fe55c37b6bea698120de11630617075069df38"
+        },
+        "label": "reports-check",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\check_reports.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "TEMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMP": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp",
+          "TMPDIR": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-06-review-r1-130608-72bc99\\temp"
+        },
+        "started_at": "2026-09-11T13:11:52.284072+08:00",
+        "expected_exit_code": 0,
+        "exit_code": 0,
+        "finished_at": "2026-09-11T13:11:52.468826+08:00",
+        "duration_seconds": 0.18477290000009816,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/reports-check.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/reports-check.stderr.txt",
+        "stdout_sha256": "73340520fb9910fec8571904309596e333033e2c24f375802b289360efcc6e98",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "expected_exit_observed": true
+      }
+    ],
+    "command_record_count": 26,
+    "review_scripts": [
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/check_reports.py",
+        "sha256": "417619da75e06b592f59c85c43d41e1f73a7b90d9c1404b0d748bce8cbffbb1d"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/finalize_review.py",
+        "sha256": "7fe5d9dd02395fa1e52bd3a64140216100af34933a68f223dd4a0268a6e19f4e"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/integrity.py",
+        "sha256": "15b42a81bbdd431a9309df3e9590f820fdf767a5f7adc50baf86f4faa7a4b9de"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/path_probes.py",
+        "sha256": "64650a14ddbc21a23091a9ea7a15f8ba6718ddb7bb168595bd69e48d676c95da"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/r1_support.py",
+        "sha256": "c1d7b2d16ad9309bcf4abaaab128849e380002419ccfe3032fe98023d72b2d28"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/selected_tests.py",
+        "sha256": "b0919889ea1500b1b6522154ec815d31a31992060b246399499d38b1fb2796b7"
+      }
+    ],
+    "reviewer_harness_incidents": []
+  },
+  "finding_resolution": [
+    {
+      "id": "M0-06-R1",
+      "original_priority": "P2",
+      "original_severity": "medium",
+      "status": "closed_for_v2",
+      "blocking_for_v2": false,
+      "original_finding": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review.json",
+        "sha256": "12686c8c9d6e66369099feef9e2a8633ae724890d88d9f6d9e09a4e9faf08429"
+      },
+      "locations": [
+        {
+          "path": "conformance/m0/runner.py",
+          "start_line": 151,
+          "end_line": 165
+        },
+        {
+          "path": "conformance/m0/runner.py",
+          "start_line": 495,
+          "end_line": 502
+        },
+        {
+          "path": "conformance/m0/runner.py",
+          "start_line": 545,
+          "end_line": 552
+        },
+        {
+          "path": "conformance/m0/README.md",
+          "start_line": 20,
+          "end_line": 20
+        },
+        {
+          "path": "tests/m0/test_conformance_subset.py",
+          "start_line": 220,
+          "end_line": 303
+        }
+      ],
+      "assessment": "?? _new_database_paths ??? DB ? -journal/-wal/-shm??? exists/is_symlink ???????_distinct_outputs ?????????????????????API/CLI ????? mkdir?exclusive DB create ? SQLiteStore.open????????????????????",
+      "reproductions_now_rejected": [
+        "?? journal ???CLI exit2???????????????????",
+        "?? WAL ???CLI exit2???????????????????",
+        "?? SHM ???CLI exit2??????????? SHM ??????????",
+        "report=SQLite sidecar ? report/evidence ????????????????????????"
+      ],
+      "evidence": [
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/selected-tests-result.json",
+          "sha256": "86a7b1b308eb6e2507275b9f76c81aa317977b0da95084402aa37defff7cb500"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/path-probes-result.json",
+          "sha256": "12b6532ff148dd8a279721907a4180800009d15e76ec816360fedfbff6a39319"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-130608-72bc99/reports-check.json",
+          "sha256": "b2f1b32b1b9fcf54bbb6343056ff28d4acfb55f793d904dc2a3eff5f149f0f6c"
+        }
+      ],
+      "not_claimed": [
+        "?? Windows symlink ??/????",
+        "???? TOCTOU ??"
+      ]
+    }
+  ],
+  "findings": [],
+  "code_quality_assessment": {
+    "result": "no new blocking issue in the R1 diff",
+    "notes": [
+      "Small shared helpers remove duplicated API/CLI overlap rules and include all implicit SQLite sidecars.",
+      "Path comparisons operate on resolved Path objects and are symmetric, not string-prefix checks.",
+      "Validation is explicit if/raise rather than assert; the independent -O rejection probes remain effective.",
+      "README accurately limits preflight to stable-path misuse prevention, not hostile-host isolation.",
+      "Existing fixture semantics and pass/pending/fail precedence are unchanged, so the prior independent semantic audit remains applicable within its stated scope."
+    ]
+  },
+  "main_thread_evidence_observed_not_independent": {
+    "development_path": "Docs/development/evidence/2026-09-11-m0-06-development.json",
+    "observed_at": "2026-09-11T13:17:17.299051+08:00",
+    "runs": [
+      {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "-v",
+          "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_existing_sqlite_sidecar_files_and_directories",
+          "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_existing_sqlite_sidecars_without_touching_owner_data",
+          "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths",
+          "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_cli_refuses_report_equal_to_or_inside_sqlite_sidecar_paths",
+          "tests.m0.test_conformance_subset.ConformanceSubsetTests.test_sidecar_dangling_link_predicate_is_checked_by_api_and_cli"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:48:02.758117+08:00",
+        "finished_at": "2026-09-11T12:48:46.146462+08:00",
+        "exit_code": 1,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_red.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_red.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "45ca225838bbe3dcec11902b66703136e3d0ac27ac994f72fe17128b1df8bca2",
+        "label": "r1_red",
+        "executed_by_this_recheck": false,
+        "raw_log_hashes_match": true,
+        "summary_lines": [
+          "ERROR: test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths (tests.m0.test_conformance_subset.ConformanceSubsetTests.test_api_refuses_evidence_equal_to_or_inside_sqlite_sidecar_paths)",
+          "Ran 5 tests in 42.939s",
+          "FAILED (failures=30, errors=1)"
+        ]
+      },
+      {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "tests.m0.test_conformance_subset",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:53:54.571749+08:00",
+        "finished_at": "2026-09-11T12:54:21.334214+08:00",
+        "exit_code": 0,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_green_focused.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_green_focused.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "6e1a35f9130af2a40218ca93165da5415ce6c339781d0424148070c207b95ad9",
+        "label": "r1_green_focused",
+        "executed_by_this_recheck": false,
+        "raw_log_hashes_match": true,
+        "summary_lines": [
+          "Ran 25 tests in 26.351s",
+          "OK"
+        ]
+      },
+      {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:54:21.355489+08:00",
+        "finished_at": "2026-09-11T12:54:59.980793+08:00",
+        "exit_code": 0,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_green_m0.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_green_m0.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "50ebf55a28cc6166468b0a24937948cfd5b68ad201b3246bd0b34b61d2df9bbf",
+        "label": "r1_green_m0",
+        "executed_by_this_recheck": false,
+        "raw_log_hashes_match": true,
+        "summary_lines": [
+          "Ran 156 tests in 38.152s",
+          "OK"
+        ]
+      },
+      {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:55:00.000890+08:00",
+        "finished_at": "2026-09-11T12:55:03.416159+08:00",
+        "exit_code": 0,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_green_preparation.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_green_preparation.stderr.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "0761428560a81f11e399f44f938d08f023e13ef39b98280ea0f43db9bea4f4d8",
+        "label": "r1_green_preparation",
+        "executed_by_this_recheck": false,
+        "raw_log_hashes_match": true,
+        "summary_lines": [
+          "Ran 27 tests in 3.066s",
+          "OK"
+        ]
+      },
+      {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "conformance.m0.runner",
+          "--db",
+          ".tmp/m0-conformance-2026-09-11-v2.sqlite",
+          "--json",
+          "artifacts/m0-conformance-report-v2.json"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-11T12:55:54.463471+08:00",
+        "finished_at": "2026-09-11T12:56:03.072150+08:00",
+        "exit_code": 0,
+        "stdout": "Docs/development/evidence/2026-09-11-m0-06-r1_candidate_cli.stdout.txt",
+        "stderr": "Docs/development/evidence/2026-09-11-m0-06-r1_candidate_cli.stderr.txt",
+        "stdout_sha256": "561402bf24098b26956b57d5479fd80ce9c98aab7d6174772de51663fbf17d4b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "label": "r1_candidate_cli",
+        "executed_by_this_recheck": false,
+        "raw_log_hashes_match": true,
+        "summary_lines": [
+          "M0-only execution: {'passed': 6, 'failed': 0, 'pending': 3, 'not_applicable': 19}; independent acceptance pending; full compatibility and Bootstrap unclaimed."
+        ]
+      }
+    ],
+    "red_source_binding_verified": true,
+    "red_note": "5 new methods, 30 failing subcases plus one Win32 cleanup ERROR under the old runner; the cleanup error is retained and not called a clean RED run. GREEN 25/156/27 and candidate CLI belong to the main thread and do not replace this recheck.",
+    "pre_review_render_check_logs_not_counted_as_independent": true
+  },
+  "acceptance_boundaries": {
+    "m0_06_development_limited_acceptance": true,
+    "full_aetp_compatible": false,
+    "full_conformance_accepted": false,
+    "task_completed": false,
+    "bootstrap_verified": false,
+    "scoped_passed": [
+      "TEST-001",
+      "TEST-002",
+      "TEST-005",
+      "TEST-017",
+      "TEST-018",
+      "TEST-021"
+    ],
+    "partial_pending": {
+      "TEST-012": "?????????",
+      "TEST-016": "Binding ??????",
+      "TEST-019": "Lease/Binding ???? fencing ???"
+    },
+    "later_not_applicable": [
+      "TEST-003",
+      "TEST-004",
+      "TEST-006",
+      "TEST-007",
+      "TEST-008",
+      "TEST-009",
+      "TEST-010",
+      "TEST-011",
+      "TEST-013",
+      "TEST-014",
+      "TEST-015",
+      "TEST-020",
+      "TEST-022",
+      "TEST-023",
+      "TEST-024",
+      "TEST-025",
+      "TEST-026",
+      "TEST-027",
+      "TEST-028"
+    ],
+    "full_protocol_preparation_status_observed": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Conformance requirements are registered; no product test has been accepted as passed."
+    },
+    "raw_report_must_remain_review_pending_and_not_self_accepted": true,
+    "other_limits": [
+      "TEST-002 only covers the trusted-host library interface, not privileged Python/SQL isolation.",
+      "TEST-021 absent-adapter sentinels remain explicit placeholders, not actual model/Runtime adapter certification.",
+      "No real Windows symlink privilege verification and no TOCTOU namespace isolation.",
+      "No broader audit rerun for unchanged behavior; this is a targeted R1 recheck supported by the first independent review."
+    ],
+    "handoff_status_owner": "main thread alone; separately bind status.m0_subset and artifacts/m0-handoff.json to this review and the fixed v2 SHA, without changing preparation/full-conformance registered/0 or rewriting original report review fields."
+  },
+  "next_step": {
+    "owner": "main implementation thread",
+    "required": "Use this v2-only limited acceptance for the M0-06 development handoff/progress decision. Retain original report/evidence/snapshot/review as superseded history; do not promote full compatibility, product Task COMPLETED or Bootstrap."
+  }
+}

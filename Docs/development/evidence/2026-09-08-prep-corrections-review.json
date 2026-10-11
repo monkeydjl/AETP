@@ -1,0 +1,1009 @@
+﻿{
+    "schema_version":  "aetp-preparation-corrections-review-1.0",
+    "reviewer":  "Kant",
+    "reviewer_identity":  {
+                              "previous_alias":  "Codex",
+                              "same_reviewer_as_2026_09_08_prep_003_004_review":  true,
+                              "session_id":  "01a07cac-b6db-7393-ae38-bce13d69c67d",
+                              "source":  "主会话用户消息给出的实际工具映射；不构造第二名独立复核人。Zeno报告原字段也写Codex，其Zeno映射来自主会话，而非本报告自称该作者。"
+                          },
+    "started_at":  "2026-09-08T21:11:49.4736962+08:00",
+    "finished_at":  "2026-09-08T21:24:47.1952052+08:00",
+    "clock":  "local process clock; Asia/Shanghai (+08:00)",
+    "workspace":  "D:\\Github\\AETP",
+    "write_set":  [
+                      "Docs/development/evidence/2026-09-08-prep-corrections-review.json"
+                  ],
+    "source_write_set":  [
+
+                         ],
+    "scope":  {
+                  "work_items":  [
+                                     "PREP-003",
+                                     "PREP-004",
+                                     "PREP-006"
+                                 ],
+                  "frozen_sources":  [
+                                         "skills/aetp-execution-contracts/SKILL.md",
+                                         "skills/aetp-evidence-handoff/SKILL.md",
+                                         "Docs/development/roadmap.md",
+                                         "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+                                         "Docs/development/backlog.json"
+                                     ],
+                  "purpose":  "F-001/F-002与R4/R5窄复测，核验R1/R2/R3仍成立和三项原验收；不重做PREP-007，不开发M0。"
+              },
+    "conclusions":  {
+                        "PREP-003":  {
+                                         "assessment":  "preparation-level pass",
+                                         "acceptance":  [
+                                                            {
+                                                                "index":  1,
+                                                                "criterion":  "覆盖 Command→Event Store→Projection",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "Skill 12–19 的 Command→原子 Event Store→Projection 与规范 §13.4/§14.1 一致，禁止直接写 State/伪造 Event。",
+                                                                "references":  [
+                                                                                   "skills/aetp-execution-contracts/SKILL.md:12-19",
+                                                                                   "Docs/AETP-设计方案.md:2550-2575",
+                                                                                   "Docs/AETP-设计方案.md:2866-2873"
+                                                                               ]
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "criterion":  "覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "Skill 23、27、32、38–46 分别覆盖原键重试/冲突、UNKNOWN 对账、纯 Replay 与恢复分离、持久化提交边界和旧 epoch fencing；两个真实请求的当前导航答复见 C003-1/2。",
+                                                                "references":  [
+                                                                                   "skills/aetp-execution-contracts/SKILL.md:23-46",
+                                                                                   "Docs/AETP-设计方案.md:1368-1377",
+                                                                                   "Docs/AETP-设计方案.md:2760-2778",
+                                                                                   "Docs/AETP-设计方案.md:3021-3034"
+                                                                               ]
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "criterion":  "不把建议误写成已实现能力",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "Skill 8、46、61–65 将材料定位与实际边界/失败夹具证据分开；本次只验收准备导航，没有把 Runtime、M0 或 Conformance 写成已实现/通过。",
+                                                                "references":  [
+                                                                                   "skills/aetp-execution-contracts/SKILL.md:8",
+                                                                                   "skills/aetp-execution-contracts/SKILL.md:46-65"
+                                                                               ]
+                                                            }
+                                                        ],
+                                         "operational_status_observed":  "review",
+                                         "status_changed":  false
+                                     },
+                        "PREP-004":  {
+                                         "assessment":  "preparation-level pass",
+                                         "acceptance":  [
+                                                            {
+                                                                "index":  1,
+                                                                "criterion":  "能区分 planned/implemented/verified/accepted",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "Skill 21 明确四个证据层级不可互换；当前场景 C004-2 逐层给出真实来源和不能跨级的结论。",
+                                                                "references":  [
+                                                                                   "skills/aetp-evidence-handoff/SKILL.md:10-36"
+                                                                               ]
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "criterion":  "交接含工作项、文件、命令、证据、风险、下一步",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "Skill 39–48 的交接卡含 ID/范围/文件/依赖/命令-退出码-时间/证据/风险/独立复核/下一步；本报告 handoff 为实际应用。",
+                                                                "references":  [
+                                                                                   "skills/aetp-evidence-handoff/SKILL.md:37-48"
+                                                                               ]
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "criterion":  "独立复核缺失时保持 review",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "Skill 17–18、55 要求不同 Agent 独立复核，缺失时留 review；主会话核验本报告后决定状态，本 reviewer 未推进任何状态。",
+                                                                "references":  [
+                                                                                   "skills/aetp-evidence-handoff/SKILL.md:17-18",
+                                                                                   "skills/aetp-evidence-handoff/SKILL.md:55"
+                                                                               ]
+                                                            }
+                                                        ],
+                                         "operational_status_observed":  "review",
+                                         "status_changed":  false
+                                     },
+                        "PREP-006":  {
+                                         "assessment":  "preparation-level pass",
+                                         "acceptance":  [
+                                                            {
+                                                                "index":  1,
+                                                                "criterion":  "M0–M3 各有范围、依赖、退出条件",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "roadmap 7–12 明列 M0–M3 的范围、前置和退出要求；24 行及 plan 406–408 将 TEST-011/014/015 分期，R3/R5 对当前材料闭合。",
+                                                                "references":  [
+                                                                                   "Docs/development/roadmap.md:7-24",
+                                                                                   "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:406-408",
+                                                                                   "Docs/AETP-设计方案.md:3471-3475",
+                                                                                   "Docs/AETP-设计方案.md:3684-3688"
+                                                                               ]
+                                                            },
+                                                            {
+                                                                "index":  2,
+                                                                "criterion":  "M0 首批具备独立可测工作项",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "六项 M0 骨架为 unittest.TestCase 的 9 个方法，具备命名 fixture/清理/调用/最小失败条件；6/6 Files 和 artifacts evidence 与 backlog 一致。R4 现保留 command.received 并单独计领域效果，同键重试比较完整流；10 个材料探针实际 exit0。",
+                                                                "references":  [
+                                                                                   "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:59-82",
+                                                                                   "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:163-178",
+                                                                                   "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:282-296"
+                                                                               ]
+                                                            },
+                                                            {
+                                                                "index":  3,
+                                                                "criterion":  "不把 JSON 清单当成原子认领服务",
+                                                                "assessment":  "preparation-level pass",
+                                                                "conclusion":  "backlog 仅单份开发计划，协商和依赖顺序管理共享写集，不承诺跨进程原子认领；plan 73、76、80 及 Skill 32 要求共享持久化提交/版本/Lease 边界。",
+                                                                "references":  [
+                                                                                   "AGENTS.md",
+                                                                                   "skills/aetp-evidence-handoff/SKILL.md:55",
+                                                                                   "skills/aetp-execution-contracts/SKILL.md:30-32",
+                                                                                   "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:73-80"
+                                                                               ]
+                                                            }
+                                                        ],
+                                         "operational_status_observed":  "review",
+                                         "status_changed":  false
+                                     }
+                    },
+    "scenario_results":  [
+                             {
+                                 "id":  "C003-1",
+                                 "work_item":  "PREP-003",
+                                 "request":  "纯 Projection 重建遇到历史 tool.requested 如何处理？",
+                                 "navigation":  [
+                                                    "Skill:39 → 规范 §13.4:2559-2575",
+                                                    "§13.10:2765-2768",
+                                                    "§14.4:3030-3034"
+                                                ],
+                                 "answer":  "只消费历史 Event 重建 Projection、Action 状态和待派发意图，不调用模型、Shell、Runtime.start 或工具，也不重新派发历史 tool.requested。重建完成不自动代表外部效果已确认；后续 Dispatcher 与恢复流程另行处理。",
+                                 "prohibited_claims":  [
+                                                           "看到 tool.requested 就逐条补执行",
+                                                           "纯 Replay 已证明外部恰好一次或可直接开放派发"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C003-2",
+                                 "work_item":  "PREP-003",
+                                 "request":  "Projection 重建后尚有未确认 Session/UNKNOWN 操作，恢复流程如何继续、何时开放派发？",
+                                 "navigation":  [
+                                                    "Skill:40 → 规范 §13.10:2762-2778",
+                                                    "§14.4:3021-3034",
+                                                    "§7.6:1371-1377"
+                                                ],
+                                 "answer":  "继续保持派发屏障；恢复治理时间下的暂停、Lease/epoch、Approval、受理 Command/终态索引与待派发条件。用 Runtime.get_status/受信执行记录对齐 Session/Binding，再以 provider_operation_id、唯一资源标识或可验证摘要查询/对账 UNKNOWN。不能安全确认则保持 UNKNOWN、阻塞相关任务并通知人类，不能直接改成 FAILED/重做/Mission 完成。旧 epoch 报告留档，不恢复旧执行权。复查当前权限、凭证、审批版本和预算；仅 Project 非 PAUSED 且相关恢复条件满足时开放派发，Dispatcher 只处理确认可派发的 PENDING。查询/对账不是纯 Replay 的副作用重放；自动重发须先证明无副作用/可安全重试并沿用稳定键。",
+                                 "prohibited_claims":  [
+                                                           "把整个恢复流程误写成绝不能查询 Runtime/工具",
+                                                           "未确认就换 key 重试",
+                                                           "重启即解除 PAUSED 或恢复旧 epoch"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C004-1",
+                                 "work_item":  "PREP-004",
+                                 "request":  "当前全计划与 PREP 如何统计，字段从哪里来？",
+                                 "navigation":  [
+                                                    "Skill:26-34",
+                                                    "backlog.work_items",
+                                                    "status.work_item_status_counts / milestones.PREP",
+                                                    "preparation-report.json"
+                                                ],
+                                 "answer":  "当前快照全计划20项：done3/review4/todo13；PREP8项：done3/review4/todo1，其余状态均0。全计划按已完成工作项为3/20，PREP取milestones.PREP为3/8；不是工时比例或产品完成度。backlog为状态/依赖/范围/验收原始来源，status与render产物为派生摘要；本轮只读比对两份JSON，未运行render。",
+                                 "prohibited_claims":  [
+                                                           "把全计划20项称为PREP8项",
+                                                           "以3/8替换产品完成度0%"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C004-2",
+                                 "work_item":  "PREP-004",
+                                 "request":  "如何区分 planned/implemented/verified/accepted，缺独立复核时是什么状态？",
+                                 "navigation":  [
+                                                    "Skill:17-21,30,39-48,55"
+                                                ],
+                                 "answer":  "planned是计划/登记；implemented要有真实实现或产物，不能由计划推定；verified要有对应对象和版本的真实验证结果；accepted还需适用验收主体/门禁确认，不能用自述或exit0代替。材料可在准备层级接受，但不成为产品验收。缺不同Agent复核时保持review；命令、证据、来源或复核缺失则如实写none/pending。",
+                                 "prohibited_claims":  [
+                                                           "以同一reviewer的Codex/Kant两个名字制造两次独立复核",
+                                                           "测试名登记即verified/accepted",
+                                                           "自评后改done"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C004-3",
+                                 "work_item":  "PREP-004",
+                                 "request":  "为何这次材料探针通过仍不能写产品或Bootstrap通过？",
+                                 "navigation":  [
+                                                    "Skill:32-36,51",
+                                                    "规范 §15.5:3382",
+                                                    "§17.2:3471-3475",
+                                                    "§18.3:3674-3694"
+                                                ],
+                                 "answer":  "10项探针只解析材料并对两段计划断言应用内存反例，没有运行产品。当前来源明确 product_completion_percent=0、bootstrap_status=not_started，Conformance registered28/passed0；完整Bootstrap需固定版本证据、Bootstrap Acceptance和CRITICAL人类验收。M0五对象模拟及M0–M2有限演示也不代替完整验收，但产品未实现不阻止本轮准备级pass。",
+                                 "prohibited_claims":  [
+                                                           "材料GREEN等于M0/28条Conformance通过",
+                                                           "静态清单或有限模拟等于BOOTSTRAP_VERIFIED"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C006-1",
+                                 "work_item":  "PREP-006",
+                                 "request":  "合规 create 产生 command.received + task.created；同键重试应怎样断言？",
+                                 "navigation":  [
+                                                    "plan:15,167-173,286-296",
+                                                    "规范 §14.1:2868-2873",
+                                                    "corrections-probe.py"
+                                                ],
+                                 "answer":  "读取种子基线后的完整Event流，明确要求包含command.received，并筛选领域类型断言恰好一个task.created；重试返回原结果且完整流等于重试前的first_events，不能删除受理事件或把总Event数固定为1。实测材料反例覆盖合法双事件、缺受理、重复领域事件和重试新增事件。",
+                                 "prohibited_claims":  [
+                                                           "合规Command最多只能有一条Event",
+                                                           "探针执行等于CommandHandler已实现"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C006-2",
+                                 "work_item":  "PREP-006",
+                                 "request":  "TEST-011/014/015 在当前阶段如何归属？",
+                                 "navigation":  [
+                                                    "roadmap:9-12,24",
+                                                    "plan:406-408",
+                                                    "backlog M0-01/M0-03/M0-06/M1-01/M1-02/M2-02",
+                                                    "规范 §17.2:3471-3475, §18.3:3684-3688"
+                                                ],
+                                 "answer":  "TEST-011的Approval过期升级实际执行计划归M2-02，已从M0-01/M0-03映射及M0可执行退出列表移除；M0-06保留登记，执行前pending，M0报告中not_applicable而非passed。TEST-014归M1-02，M0-03不再含014；TEST-015归M1-01。M0-06对这三项只作后续阶段登记，不能据此要求M0先实现Approval/真实隔离/双Agent完整审查。",
+                                 "prohibited_claims":  [
+                                                           "M0-06保留登记即阶段归属错误",
+                                                           "M2-02计划已等同Approval测试执行通过"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             },
+                             {
+                                 "id":  "C006-3",
+                                 "work_item":  "PREP-006",
+                                 "request":  "Zeno已闭合的R1/R2/R3在当前修订中是否仍成立？",
+                                 "navigation":  [
+                                                    "plan:59-82及六段Python骨架",
+                                                    "backlog M0-01..06",
+                                                    "旧Zeno报告 prior_findings_resolution"
+                                                ],
+                                 "answer":  "当前AST复核六个TestCase共9个目标方法（1/2/1/2/2/1），无顶层test_函数；Task2–6有setUp，Task1直接构造Command。fixture/受信种子/清理/双进程同一SQLite文件的前置契约仍在。六项Files（含Record产物）及所有artifacts证据路径逐项与backlog相等，共享文件按依赖串行。M0-03不含014且M1-02承接，R1/R2/R3未复发。旧实际收集证据仅作为既有证据引用，本次未运行不存在的产品helper。",
+                                 "prohibited_claims":  [
+                                                           "AST方法计数等于9项产品测试实际执行",
+                                                           "排除Record产物后误报Files不一致",
+                                                           "缺M0代码就是准备材料未通过"
+                                                       ],
+                                 "assessment":  "preparation-level pass"
+                             }
+                         ],
+    "findings":  [
+
+                 ],
+    "prior_findings_resolution":  [
+                                      {
+                                          "id":  "F-001",
+                                          "work_item":  "PREP-003",
+                                          "original_severity":  "medium",
+                                          "resolution":  "closed at preparation level",
+                                          "references":  [
+                                                             "skills/aetp-execution-contracts/SKILL.md:39-40"
+                                                         ],
+                                          "evidence":  [
+                                                           "C003-1",
+                                                           "C003-2",
+                                                           "10-material-probes"
+                                                       ]
+                                      },
+                                      {
+                                          "id":  "F-002",
+                                          "work_item":  "PREP-004",
+                                          "original_severity":  "low; previously nonblocking",
+                                          "resolution":  "closed at preparation level",
+                                          "references":  [
+                                                             "skills/aetp-evidence-handoff/SKILL.md:31"
+                                                         ],
+                                          "evidence":  [
+                                                           "C004-1",
+                                                           "10-material-probes"
+                                                       ]
+                                      },
+                                      {
+                                          "id":  "R1",
+                                          "work_item":  "PREP-006",
+                                          "resolution":  "previous closure remains applicable",
+                                          "evidence":  [
+                                                           "C006-3",
+                                                           "current AST counts 1/2/1/2/2/1; 9 planned methods"
+                                                       ]
+                                      },
+                                      {
+                                          "id":  "R2",
+                                          "work_item":  "PREP-006",
+                                          "resolution":  "previous closure remains applicable",
+                                          "evidence":  [
+                                                           "C006-3",
+                                                           "6/6 Files and evidence path sets match"
+                                                       ]
+                                      },
+                                      {
+                                          "id":  "R3",
+                                          "work_item":  "PREP-006",
+                                          "resolution":  "previous closure remains applicable",
+                                          "evidence":  [
+                                                           "C006-2",
+                                                           "M0-03 lacks TEST-014; M1-02 retains it"
+                                                       ]
+                                      },
+                                      {
+                                          "id":  "R4",
+                                          "work_item":  "PREP-006",
+                                          "original_severity":  "important",
+                                          "resolution":  "closed at preparation level",
+                                          "references":  [
+                                                             "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:167-173",
+                                                             "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:286-296"
+                                                         ],
+                                          "evidence":  [
+                                                           "C006-1",
+                                                           "10-material-probes"
+                                                       ]
+                                      },
+                                      {
+                                          "id":  "R5",
+                                          "work_item":  "PREP-006",
+                                          "original_severity":  "minor",
+                                          "resolution":  "closed at preparation level",
+                                          "references":  [
+                                                             "Docs/development/roadmap.md:9,24",
+                                                             "Docs/superpowers/plans/2026-09-06-m0-first-slice.md:406-408"
+                                                         ],
+                                          "evidence":  [
+                                                           "C006-2",
+                                                           "10-material-probes"
+                                                       ]
+                                      }
+                                  ],
+    "plan_structure":  [
+                           {
+                               "work_item":  "M0-01",
+                               "files_match":  true,
+                               "evidence_match":  true,
+                               "test_case_count":  1,
+                               "test_ids":  [
+                                                "ModelTests.test_command_serializes_with_stable_required_fields"
+                                            ],
+                               "depends_on":  [
+                                                  "PREP-008"
+                                              ]
+                           },
+                           {
+                               "work_item":  "M0-02",
+                               "files_match":  true,
+                               "evidence_match":  true,
+                               "test_case_count":  2,
+                               "test_ids":  [
+                                                "CommandBoundaryTests.test_task_create_commits_event_before_projection_is_read",
+                                                "CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event"
+                                            ],
+                               "depends_on":  [
+                                                  "M0-01"
+                                              ]
+                           },
+                           {
+                               "work_item":  "M0-03",
+                               "files_match":  true,
+                               "evidence_match":  true,
+                               "test_case_count":  1,
+                               "test_ids":  [
+                                                "EventProjectionTests.test_rebuild_from_events_equals_incremental_projection"
+                                            ],
+                               "depends_on":  [
+                                                  "M0-02"
+                                              ]
+                           },
+                           {
+                               "work_item":  "M0-04",
+                               "files_match":  true,
+                               "evidence_match":  true,
+                               "test_case_count":  2,
+                               "test_ids":  [
+                                                "IdempotencyConcurrencyTests.test_same_key_same_content_returns_original_result_without_new_event",
+                                                "IdempotencyConcurrencyTests.test_two_processes_claiming_one_task_have_exactly_one_success"
+                                            ],
+                               "depends_on":  [
+                                                  "M0-03"
+                                              ]
+                           },
+                           {
+                               "work_item":  "M0-05",
+                               "files_match":  true,
+                               "evidence_match":  true,
+                               "test_case_count":  2,
+                               "test_ids":  [
+                                                "ReplayRecoveryTests.test_restart_rebuilds_same_state_and_does_not_invoke_runtime",
+                                                "ReplayRecoveryTests.test_retry_after_response_loss_returns_original_result"
+                                            ],
+                               "depends_on":  [
+                                                  "M0-03",
+                                                  "M0-04"
+                                              ]
+                           },
+                           {
+                               "work_item":  "M0-06",
+                               "files_match":  true,
+                               "evidence_match":  true,
+                               "test_case_count":  1,
+                               "test_ids":  [
+                                                "ConformanceSubsetTests.test_m0_report_never_claims_unimplemented_quality_gates"
+                                            ],
+                               "depends_on":  [
+                                                  "M0-05"
+                                              ]
+                           }
+                       ],
+    "commands":  [
+                     {
+                         "id":  "read-entry-materials",
+                         "started_at":  "2026-09-08T21:11:49.4736962+08:00",
+                         "finished_at":  "2026-09-08T21:11:49.7939343+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath AGENTS.md -Encoding UTF8; Get-Content -LiteralPath Docs/development/README.md -Encoding UTF8; Get-Content -LiteralPath skills/aetp-evidence-handoff/SKILL.md -Encoding UTF8",
+                         "exit_code":  0,
+                         "additional_operations":  "Read using-superpowers/verification-before-completion; ConvertFrom-Json selected PREP-003/004/006; Get-ChildItem evidence; Test-Path target=False"
+                     },
+                     {
+                         "id":  "read-prior-reviews",
+                         "started_at":  "2026-09-08T21:12:34.7243991+08:00",
+                         "finished_at":  "2026-09-08T21:12:35.0661920+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "python -B -",
+                         "exit_code":  0,
+                         "stdin_description":  "Read-only JSON selection of prior Skill/Zeno reviews and corrections RED/GREEN; Get-Content writing-skills. Large output partly truncated; relevant fields reread in later bounded commands."
+                     },
+                     {
+                         "id":  "read-skills-map-and-hash",
+                         "started_at":  "2026-09-08T21:12:51.7866297+08:00",
+                         "finished_at":  "2026-09-08T21:12:52.1231173+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "foreach ($path in @(\u0027skills/aetp-execution-contracts/SKILL.md\u0027,\u0027skills/aetp-evidence-handoff/SKILL.md\u0027,\u0027Docs/development/roadmap.md\u0027,\u0027Docs/superpowers/plans/2026-09-06-m0-first-slice.md\u0027,\u0027Docs/development/backlog.json\u0027,\u0027Docs/AETP-设计方案.md\u0027,\u0027Docs/development/evidence/2026-09-08-preparation-corrections-probe.py\u0027)) { \"${path}:$((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant())\" }",
+                         "exit_code":  0,
+                         "paths":  [
+                                       "skills/aetp-execution-contracts/SKILL.md",
+                                       "skills/aetp-evidence-handoff/SKILL.md",
+                                       "Docs/development/roadmap.md",
+                                       "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+                                       "Docs/development/backlog.json",
+                                       "Docs/AETP-设计方案.md",
+                                       "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+                                   ],
+                         "operation":  "Read two Skills and knowledge-map with line numbers; capture initial hashes of seven sources. Missing middle of truncated output reread."
+                     },
+                     {
+                         "id":  "read-corrected-rows-roadmap",
+                         "started_at":  "2026-09-08T21:13:06.6630792+08:00",
+                         "finished_at":  "2026-09-08T21:13:06.7725659+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath skills/aetp-execution-contracts/SKILL.md -Encoding UTF8; Get-Content -LiteralPath skills/aetp-evidence-handoff/SKILL.md -Encoding UTF8; Get-Content -LiteralPath Docs/development/roadmap.md -Encoding UTF8",
+                         "exit_code":  0,
+                         "operation":  "execution lines40-end, handoff and roadmap; handoff21-49 reread next"
+                     },
+                     {
+                         "id":  "read-handoff-prior-summary-spec-index",
+                         "started_at":  "2026-09-08T21:13:38.1561021+08:00",
+                         "finished_at":  "2026-09-08T21:13:38.3710757+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "python -B -",
+                         "exit_code":  0,
+                         "stdin_description":  "Print prior finding IDs, 13 scenario assessments and historical RED/GREEN command summaries; PowerShell reads handoff21-49 and Select-String normative section headings."
+                     },
+                     {
+                         "id":  "read-normative-replay-transaction",
+                         "started_at":  "2026-09-08T21:13:57.8559510+08:00",
+                         "finished_at":  "2026-09-08T21:13:58.0635663+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath Docs/AETP-设计方案.md -Encoding UTF8",
+                         "exit_code":  0,
+                         "selected_line_ranges":  [
+                                                      [
+                                                          2550,
+                                                          2576
+                                                      ],
+                                                      [
+                                                          2760,
+                                                          2785
+                                                      ],
+                                                      [
+                                                          2790,
+                                                          2816
+                                                      ],
+                                                      [
+                                                          2878,
+                                                          2936
+                                                      ]
+                                                  ]
+                     },
+                     {
+                         "id":  "read-normative-idempotency-unknown-fencing",
+                         "started_at":  "2026-09-08T21:14:12.0928133+08:00",
+                         "finished_at":  "2026-09-08T21:14:12.2890848+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath Docs/AETP-设计方案.md -Encoding UTF8",
+                         "exit_code":  0,
+                         "selected_line_ranges":  [
+                                                      [
+                                                          2845,
+                                                          2876
+                                                      ],
+                                                      [
+                                                          2994,
+                                                          3078
+                                                      ],
+                                                      [
+                                                          1368,
+                                                          1393
+                                                      ]
+                                                  ],
+                         "note":  "UNKNOWN middle reread in normative-stage command"
+                     },
+                     {
+                         "id":  "inspect-readonly-probe-plan-index",
+                         "started_at":  "2026-09-08T21:14:44.3643852+08:00",
+                         "finished_at":  "2026-09-08T21:14:44.4441213+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath Docs/development/evidence/2026-09-08-preparation-corrections-probe.py -Encoding UTF8",
+                         "exit_code":  0,
+                         "additional_operations":  "Select-String plan headings/assertions/fixtures/stage mappings; probe inspected before execution: local reads and in-memory assertions, no report writes/product imports."
+                     },
+                     {
+                         "id":  "read-current-plan-targets",
+                         "started_at":  "2026-09-08T21:15:16.3380088+08:00",
+                         "finished_at":  "2026-09-08T21:15:16.4160222+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath Docs/superpowers/plans/2026-09-06-m0-first-slice.md -Encoding UTF8",
+                         "exit_code":  0,
+                         "selected_line_ranges":  [
+                                                      [
+                                                          1,
+                                                          17
+                                                      ],
+                                                      [
+                                                          49,
+                                                          82
+                                                      ],
+                                                      [
+                                                          150,
+                                                          178
+                                                      ],
+                                                      [
+                                                          270,
+                                                          300
+                                                      ]
+                                                  ]
+                     },
+                     {
+                         "id":  "read-normative-stage-and-tests",
+                         "started_at":  "2026-09-08T21:15:47.4957040+08:00",
+                         "finished_at":  "2026-09-08T21:15:47.5835322+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "Get-Content -LiteralPath Docs/AETP-设计方案.md -Encoding UTF8",
+                         "exit_code":  0,
+                         "selected_line_ranges":  [
+                                                      [
+                                                          3021,
+                                                          3034
+                                                      ],
+                                                      [
+                                                          3355,
+                                                          3371
+                                                      ],
+                                                      [
+                                                          3456,
+                                                          3476
+                                                      ],
+                                                      [
+                                                          3673,
+                                                          3694
+                                                      ]
+                                                  ]
+                     },
+                     {
+                         "id":  "structural-inspector-attempt1",
+                         "started_at":  "2026-09-08T21:16:31.7674373+08:00",
+                         "finished_at":  null,
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "python -B -",
+                         "exit_code":  1,
+                         "stdin_description":  "Read-only AST, Files/evidence comparison and counters.",
+                         "wall_time_seconds_from_tool":  0.3391,
+                         "finished_at_note":  "Wrapper exited on Python failure before printing end timestamp; not reconstructed.",
+                         "result":  "Reviewer inspector mistakenly excluded Record paths from Files; M0-01 backlog correctly includes artifacts/m0-01-test-report.json. Not a material defect."
+                     },
+                     {
+                         "id":  "structural-inspector-corrected",
+                         "started_at":  "2026-09-08T21:17:23.1790557+08:00",
+                         "finished_at":  "2026-09-08T21:17:23.4379866+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "python -B -",
+                         "exit_code":  0,
+                         "stdin_description":  "Count TestCase methods, compare all Create/Modify/Record paths and evidence sets for six tasks, verify TEST-011/014 mappings, derive counts and canonical contract SHA; then read specification3382-3402.",
+                         "result":  "6/6 file/evidence matches; 9 planned methods; mappings correct; no product imports or execution."
+                     },
+                     {
+                         "id":  "10-material-probes",
+                         "started_at":  "2026-09-08T21:18:03.8688938+08:00",
+                         "finished_at":  "2026-09-08T21:18:04.1252941+08:00",
+                         "cwd":  "D:\\Github\\AETP",
+                         "command":  "python -B Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+                         "exit_code":  0,
+                         "stdout":  "Preparation assertion countermodels only; product tests executed: 0",
+                         "stderr_summary":  "Ran 10 tests in 0.033s; all 10 ok; OK",
+                         "test_names":  [
+                                            "test_create_accepts_receipt_and_domain_event",
+                                            "test_retry_accepts_receipt_and_single_domain_effect",
+                                            "test_create_rejects_missing_receipt",
+                                            "test_retry_rejects_missing_receipt",
+                                            "test_create_rejects_duplicate_domain_effect",
+                                            "test_retry_rejects_duplicate_domain_effect",
+                                            "test_retry_rejects_an_additional_event",
+                                            "test_skill_separates_pure_replay_from_recovery",
+                                            "test_prep_statistics_name_the_prep_milestone",
+                                            "test_approval_expiry_is_m2_not_m0_execution"
+                                        ]
+                     },
+                     {
+                         "id":  "read-old-scenario-ids-and-fixture-contract",
+                         "command":  "python -B -",
+                         "cwd":  "D:\\Github\\AETP",
+                         "started_at":  null,
+                         "started_at_note":  "Immediately after 10-material-probes; exact separate start was not captured.",
+                         "finished_at":  "2026-09-08T21:18:04.2576887+08:00",
+                         "exit_code":  0,
+                         "stdin_description":  "Read prior scenario IDs/assessment and Zeno identity; plan18-25,71-74,111-126."
+                     },
+                     {
+                         "id":  "assemble-evidence-and-final-readonly-checks",
+                         "command":  "python -B -",
+                         "cwd":  "D:\\Github\\AETP",
+                         "started_at":  "2026-09-08T21:23:05.824135+08:00",
+                         "finished_at":  "2026-09-08T21:23:05.876389+08:00",
+                         "exit_code":  0,
+                         "exit_code_note":  "Actual functions.exec_command tool returned exit0; JSON written and parsed at recorded end.",
+                         "stdin_description":  "Reparse six plan skeletons/Files/evidence, compare backlog/status/generated counts, canonicalize contract, validate final source hashes; write only assigned JSON."
+                     },
+                     {
+                         "id":  "verify-final-evidence",
+                         "command":  "python -B -",
+                         "stdin":  "import hashlib,json,pathlib\nroot=pathlib.Path(r\u0027D:\\Github\\AETP\u0027)\np=root/\u0027Docs/development/evidence/2026-09-08-prep-corrections-review.json\u0027\nr=json.loads(p.read_text(encoding=\u0027utf-8-sig\u0027))\nassert r[\u0027write_set\u0027]==[\u0027Docs/development/evidence/2026-09-08-prep-corrections-review.json\u0027]\nassert r[\u0027source_write_set\u0027]==[] and r[\u0027findings\u0027]==[]\nassert r[\u0027product_acceptance\u0027] is False and r[\u0027bootstrap_verified\u0027] is False\nassert all(c[\u0027assessment\u0027]==\u0027preparation-level pass\u0027 and len(c[\u0027acceptance\u0027])==3 for c in r[\u0027conclusions\u0027].values())\nassert len(r[\u0027prior_findings_resolution\u0027])==7\nfor s in r[\u0027source_sha256\u0027]:\n    assert hashlib.sha256((root/s[\u0027path\u0027]).read_bytes()).hexdigest()==s[\u0027sha256\u0027],s[\u0027path\u0027]\nb=json.loads((root/\u0027Docs/development/backlog.json\u0027).read_text(encoding=\u0027utf-8-sig\u0027))\nfields=r[\u0027stable_contract\u0027][\u0027fields\u0027]\nselected=[{k:i[k] for k in fields} for i in sorted(b[\u0027work_items\u0027],key=lambda i:i[\u0027id\u0027])]\nassert hashlib.sha256(json.dumps(selected,ensure_ascii=False,sort_keys=True,separators=(\u0027,\u0027,\u0027:\u0027)).encode(\u0027utf-8\u0027)).hexdigest()==r[\u0027stable_contract\u0027][\u0027sha256\u0027]\nprint(\u0027PASS: JSON, 9 acceptance conclusions, 7 closed/retained findings, source hashes and stable contract; no product claims\u0027)",
+                         "cwd":  "D:\\Github\\AETP",
+                         "started_at":  "2026-09-08T21:24:03.8311860+08:00",
+                         "finished_at":  "2026-09-08T21:24:03.9589009+08:00",
+                         "exit_code":  0
+                     }
+                 ],
+    "commands_note":  "实际命令/工具返回退出码与本地时间。长只读包装命令保留实际命令入口和读取范围，不重复整个脚本/旧报告；未捕获的独立时间明确null，不估算。",
+    "source_sha256":  [
+                          {
+                              "path":  "skills/aetp-execution-contracts/SKILL.md",
+                              "before_sha256":  "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "skills/aetp-evidence-handoff/SKILL.md",
+                              "before_sha256":  "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "Docs/development/roadmap.md",
+                              "before_sha256":  "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+                              "before_sha256":  "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "Docs/development/backlog.json",
+                              "before_sha256":  "858890a2403ed25d2e66d0765354bf66b1c5463fe3d5958b04469058bc884ac4",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "858890a2403ed25d2e66d0765354bf66b1c5463fe3d5958b04469058bc884ac4",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "Docs/AETP-设计方案.md",
+                              "before_sha256":  "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+                              "before_sha256":  "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+                              "before_observed_at":  "2026-09-08T21:12:51.7866297+08:00",
+                              "sha256":  "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "unchanged_during_resumed_review":  true
+                          },
+                          {
+                              "path":  "Docs/development/knowledge-map.md",
+                              "sha256":  "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "AGENTS.md",
+                              "sha256":  "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/README.md",
+                              "sha256":  "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/status.json",
+                              "sha256":  "2fd0775b234b27a1ba4b2a43a9c6c2d1e74a056f941c464e34ef4e73af3a4345",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/evidence/preparation-report.json",
+                              "sha256":  "90ea9d1fda30d8082ef2b9d62b54ea0ea589daae6034f79af1540542a5f88047",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/evidence/2026-09-08-prep-003-004-review.json",
+                              "sha256":  "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/evidence/2026-09-08-prep-006-review.json",
+                              "sha256":  "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/evidence/2026-09-08-preparation-corrections-red.json",
+                              "sha256":  "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          },
+                          {
+                              "path":  "Docs/development/evidence/2026-09-08-preparation-corrections-green.json",
+                              "sha256":  "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8",
+                              "final_observed_at":  "2026-09-08T21:23:05.844372+08:00",
+                              "role":  "context or historical evidence; read-only"
+                          }
+                      ],
+    "stable_contract":  {
+                            "path":  "Docs/development/backlog.json",
+                            "selection":  "work_items sorted by id",
+                            "fields":  [
+                                           "id",
+                                           "milestone",
+                                           "title",
+                                           "depends_on",
+                                           "files",
+                                           "acceptance",
+                                           "conformance_tests"
+                                       ],
+                            "excluded":  [
+                                             "status",
+                                             "evidence",
+                                             "acceptance_evidence",
+                                             "reproduction_command",
+                                             "independent_reviewer",
+                                             "other operational/acceptance metadata"
+                                         ],
+                            "canonicalization":  "json.dumps(selected, ensure_ascii=False, sort_keys=True, separators=(\",\",\":\")).encode(\"utf-8\"); work_items sorted by id, field arrays retain source order",
+                            "work_item_count":  20,
+                            "sha256":  "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+                            "reviewed_acceptance_contracts":  {
+                                                                  "PREP-003":  {
+                                                                                   "id":  "PREP-003",
+                                                                                   "milestone":  "PREP",
+                                                                                   "title":  "建立执行契约 Skill",
+                                                                                   "depends_on":  [
+                                                                                                      "PREP-001"
+                                                                                                  ],
+                                                                                   "files":  [
+                                                                                                 "skills/aetp-execution-contracts/SKILL.md"
+                                                                                             ],
+                                                                                   "acceptance":  [
+                                                                                                      "覆盖 Command→Event Store→Projection",
+                                                                                                      "覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界",
+                                                                                                      "不把建议误写成已实现能力"
+                                                                                                  ],
+                                                                                   "conformance_tests":  [
+                                                                                                             "TEST-001",
+                                                                                                             "TEST-005",
+                                                                                                             "TEST-016",
+                                                                                                             "TEST-017",
+                                                                                                             "TEST-020",
+                                                                                                             "TEST-021",
+                                                                                                             "TEST-022",
+                                                                                                             "TEST-026"
+                                                                                                         ]
+                                                                               },
+                                                                  "PREP-004":  {
+                                                                                   "id":  "PREP-004",
+                                                                                   "milestone":  "PREP",
+                                                                                   "title":  "建立证据与交接 Skill",
+                                                                                   "depends_on":  [
+                                                                                                      "PREP-001"
+                                                                                                  ],
+                                                                                   "files":  [
+                                                                                                 "skills/aetp-evidence-handoff/SKILL.md"
+                                                                                             ],
+                                                                                   "acceptance":  [
+                                                                                                      "能区分 planned/implemented/verified/accepted",
+                                                                                                      "交接含工作项、文件、命令、证据、风险、下一步",
+                                                                                                      "独立复核缺失时保持 review"
+                                                                                                  ],
+                                                                                   "conformance_tests":  [
+                                                                                                             "TEST-010",
+                                                                                                             "TEST-012",
+                                                                                                             "TEST-028"
+                                                                                                         ]
+                                                                               },
+                                                                  "PREP-006":  {
+                                                                                   "id":  "PREP-006",
+                                                                                   "milestone":  "PREP",
+                                                                                   "title":  "拆分 M0–M3 工作包与依赖",
+                                                                                   "depends_on":  [
+                                                                                                      "PREP-001",
+                                                                                                      "PREP-005"
+                                                                                                  ],
+                                                                                   "files":  [
+                                                                                                 "Docs/development/roadmap.md",
+                                                                                                 "Docs/development/backlog.json",
+                                                                                                 "Docs/superpowers/plans/2026-09-06-m0-first-slice.md"
+                                                                                             ],
+                                                                                   "acceptance":  [
+                                                                                                      "M0–M3 各有范围、依赖、退出条件",
+                                                                                                      "M0 首批具备独立可测工作项",
+                                                                                                      "不把 JSON 清单当成原子认领服务"
+                                                                                                  ],
+                                                                                   "conformance_tests":  [
+                                                                                                             "TEST-001",
+                                                                                                             "TEST-005",
+                                                                                                             "TEST-012",
+                                                                                                             "TEST-028"
+                                                                                                         ]
+                                                                               }
+                                                              }
+                        },
+    "current_field_provenance":  {
+                                     "backlog":  "raw status/dependencies/files/acceptance",
+                                     "status_and_preparation_report":  "derived summary; read and compared, not regenerated",
+                                     "all_plan":  {
+                                                      "total":  20,
+                                                      "counts":  {
+                                                                     "done":  3,
+                                                                     "review":  4,
+                                                                     "todo":  13
+                                                                 },
+                                                      "done_fraction":  "3/20"
+                                                  },
+                                     "PREP":  {
+                                                  "total":  8,
+                                                  "counts":  {
+                                                                 "done":  3,
+                                                                 "review":  4,
+                                                                 "todo":  1
+                                                             },
+                                                  "done_fraction":  "3/8",
+                                                  "source_field":  "milestones.PREP"
+                                              },
+                                     "product_completion_percent":  0,
+                                     "bootstrap_status":  "not_started",
+                                     "conformance":  {
+                                                         "registered":  28,
+                                                         "passed":  0
+                                                     }
+                                 },
+    "historical_evidence":  {
+                                "previous_skill_report":  {
+                                                              "path":  "Docs/development/evidence/2026-09-08-prep-003-004-review.json",
+                                                              "scenario_count":  13,
+                                                              "policy":  "13个旧场景作为基线引用，不伪称本轮重跑；旧EX-05/F-001的changes_required由C003-1/2当前独立应用替代，旧pending/过载不转换成pass。"
+                                                          },
+                                "zeno_report":  "Docs/development/evidence/2026-09-08-prep-006-review.json",
+                                "main_session_red":  {
+                                                         "path":  "Docs/development/evidence/2026-09-08-preparation-corrections-red.json",
+                                                         "started_at":  "2026-09-08T01:07:45.475982+08:00",
+                                                         "finished_at":  "2026-09-08T01:07:45.686406+08:00",
+                                                         "exit_code":  1,
+                                                         "reexecuted_here":  false
+                                                     },
+                                "main_session_green":  {
+                                                           "path":  "Docs/development/evidence/2026-09-08-preparation-corrections-green.json",
+                                                           "recorded_exit_codes":  [
+                                                                                       0,
+                                                                                       0,
+                                                                                       0,
+                                                                                       0
+                                                                                   ],
+                                                           "reliance":  "仅作修订历史；本轮另有当前源导航、AST/关系解析和10项材料探针。未重跑其27项准备测试/render/check。"
+                                                       }
+                            },
+    "tool_availability":  {
+                              "exec_command":  "available; PowerShell/Python local only",
+                              "ClaudeLink":  "unavailable; no inbox/send or communication fabricated",
+                              "subagents_created":  0,
+                              "network_used":  false,
+                              "temporary_copy_created":  false,
+                              "shared_render_check_unittest_run":  false,
+                              "readonly_material_probe_run":  true
+                          },
+    "limitations":  [
+                        "只证明准备材料导航、交接与未来测试计划一致性；Runtime/M0/helper未实现或未在此执行，产品测试数0、产品验收false，但不循环阻止preparation-level pass。",
+                        "10项探针仅材料/内存反例，不是产品RED→GREEN；AST9方法计数不是9项产品测试执行。",
+                        "R1既有收集证据引用Zeno历史记录，本轮只读检查当前骨架/fixture契约与路径一致性，未再次运行产品收集。",
+                        "本轮首次自写Files检查错误排除Record路径导致exit1；纠正审查器后exit0，未修改受审来源，不误报为新材料缺陷。",
+                        "429/retry-limit失败由主会话先前消息报告，只作为恢复背景；本轮不把服务错误当评审结果。",
+                        "backlog/status运营更新及最终验收由主会话负责；源最终哈希和排除运营字段的稳定契约摘要均已记录。",
+                        "ClaudeLink无可用工具；通过当前会话回复主会话，没有虚构跨Agent通信。"
+                    ],
+    "product_acceptance":  false,
+    "bootstrap_verified":  false,
+    "product_tests_executed":  0,
+    "handoff":  {
+                    "to":  "main session",
+                    "work_items":  [
+                                       "PREP-003",
+                                       "PREP-004",
+                                       "PREP-006"
+                                   ],
+                    "modified_files":  [
+                                           "Docs/development/evidence/2026-09-08-prep-corrections-review.json"
+                                       ],
+                    "evidence":  "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+                    "commands":  "10项只读材料probe exit0；只读结构检查纠正审查器误判后exit0；无devprep/产品测试执行。",
+                    "risk":  "准备级结论不提供产品/Bootstrap通过；后续实现仍需目标失败夹具和真实验收。",
+                    "independent_reviewer":  "Kant (same prior Codex reviewer), not source author",
+                    "next_step":  "主会话核验报告与稳定契约后按依赖决定PREP-003/004/006状态；本报告不更新任何状态。"
+                },
+    "report_validation":  {
+                              "status":  "passed",
+                              "verified_at":  "2026-09-08T21:24:03.9589009+08:00",
+                              "command_id":  "verify-final-evidence",
+                              "exit_code":  0,
+                              "checks":  [
+                                             "JSON parsed",
+                                             "9 individual acceptance conclusions",
+                                             "7 prior findings closed/retained",
+                                             "all recorded source hashes unchanged",
+                                             "stable backlog contract hash matches",
+                                             "exclusive write set",
+                                             "no product/Bootstrap claims"
+                                         ]
+                          }
+}

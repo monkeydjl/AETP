@@ -1,0 +1,41 @@
+{
+  "work_item": "M2-01",
+  "candidate_revision": "v2",
+  "audited_at": "2026-09-12T20:05:50.541677+08:00",
+  "purpose": "author verification; not independent acceptance",
+  "snapshot": {
+    "path": "Docs/development/evidence/2026-09-12-m2-01-candidate-v2-snapshot.json",
+    "sha256": "ef11d7ffdcd7fca79a9c57fd99b6189bba7fbf416a8fc014e0c5f2f13c5f7117"
+  },
+  "report": {
+    "path": "artifacts/m2-01-test-report-v2.json",
+    "sha256": "2569f2c26210d4f67370cc4439186fa0f1f6c296a75ba098d8a31a3083451c02"
+  },
+  "source_files_checked": 203,
+  "metadata_snapshots_checked": 3,
+  "append_only_prefixes_checked": 3,
+  "v1_archive": {
+    "work_item": "M2-01",
+    "candidate_revision": "v1",
+    "archive_files_checked": 157,
+    "frozen_sources_checked": 150,
+    "archive_index_sha256": "0b177a95742020c7b568e19e4876d9a6bdcf7cb4b2dfe8e91f2e40e9df6b12b7"
+  },
+  "history": {
+    "archive_files_checked": 99,
+    "accepted_m1_source_count": 90,
+    "fixed_history_files_checked": 5,
+    "intentional_changed_baseline_paths": [
+      "Docs/development/backlog.json",
+      "Docs/development/status.json",
+      "MEMORY.md",
+      "src/aetp/core/commands.py",
+      "src/aetp/core/projection.py",
+      "src/aetp/domain/models.py"
+    ]
+  },
+  "read_only_replay_equal_and_bytes_unchanged": [
+    "artifacts/m2-01-demo-candidate-v2.sqlite",
+    "artifacts/m2-01-demo-candidate-v2-facts.sqlite"
+  ]
+}

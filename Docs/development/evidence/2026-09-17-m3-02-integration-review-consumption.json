@@ -1,0 +1,35 @@
+{
+  "work_item": "M3-02",
+  "slice": "integration_contract",
+  "candidate_revision": "v1",
+  "consumed_at": "2026-09-17T01:30:00+08:00",
+  "decision": "record_independent_integration_contract_acceptance",
+  "work_item_status": "in_progress",
+  "original_work_item_accepted": false,
+  "independent_review": {
+    "path": "Docs/development/evidence/2026-09-17-m3-02-integration-review-v1.json",
+    "bytes": 2867,
+    "sha256": "4c91823cba2e866aae1a81bb27f5d61dfaf547de05a65ce243cdcc0ffd2a06fe",
+    "reviewer": "/root/m1_reviewer",
+    "decision": "accepted",
+    "decision_scope": "Only the four integration contract batch criteria in the frozen Integration review inputs v1 candidate",
+    "findings": {
+      "Critical": 0,
+      "Important": 0,
+      "Minor": 0
+    }
+  },
+  "candidate_report": {
+    "path": "Docs/development/evidence/2026-09-17-m3-02-integration-review-inputs-report-v1.json",
+    "sha256": "758362259377de5a88b054a79934c66e5cd1caeb7ae544fb03b75316f613fbdd"
+  },
+  "candidate_snapshot": {
+    "path": "Docs/development/evidence/2026-09-17-m3-02-integration-review-inputs-candidate-v1.json",
+    "sha256": "ed5cf13f3bf64046d1fac0d0ea3e59d51d445bcca986227db0108253aa45f316"
+  },
+  "demo": {
+    "path": "artifacts/m3-02-integration-demo-v1.json",
+    "sha256": "705413aa2084c2980899bdb4a995eb9e7977a4633207beb72507126415da34b0"
+  },
+  "consumer_note": "Author thread (/root) verified independent review report and accepted the four integration contract criteria. The original three M3-02 acceptance criteria remain unaccepted; M3-02 stays in_progress."
+}

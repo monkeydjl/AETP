@@ -1,0 +1,547 @@
+{
+  "work_item": "M2-02",
+  "candidate_revision": "v1",
+  "recorded_at": "2026-09-13T00:06:10.851363+08:00",
+  "decision": "record_independent_limited_acceptance",
+  "executor": "Codex /root consuming evidence; not an independent reviewer",
+  "review": {
+    "path": "Docs/development/evidence/2026-09-12-m2-02-review.json",
+    "sha256": "1b107a3cbf6ed7c59e1c629a9e87648583c69170706ee629ae3770adeb8b8b12"
+  },
+  "consumer": {
+    "path": "Docs/development/evidence/2026-09-12-m2-02-accept.py",
+    "sha256": "53e32498bfc5fb21ffe5b3d72c2d7a9fd5004b00bc90a4508a02869047f1f2d8"
+  },
+  "accepted_criteria": [
+    {
+      "criterion": "审批绑定版本、参数和主体",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "Decision 绑定不可变 proposal revision/digest，Task 绑定当前执行快照、操作参数、执行者及 Binding/epoch/Session。请求、批准、激活和实际写入点重新检查。自批、伪造身份/回执、旧参数/Policy 和未实现目标均拒绝；三层追加仍保留最初不可信来源及摘要。人类与系统身份的保留跨 Policy 版本和新数据库连接有效。",
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "independent_regression_methods": [
+        "test_critical_auto_and_delegated_policies_are_rejected_before_use (tests.m2.test_approvals.ApprovalTests.test_critical_auto_and_delegated_policies_are_rejected_before_use)",
+        "test_current_target_is_rechecked_when_granting (tests.m2.test_approvals.ApprovalTests.test_current_target_is_rechecked_when_granting)",
+        "test_delegating_to_requester_does_not_self_approve (tests.m2.test_approvals.ApprovalTests.test_delegating_to_requester_does_not_self_approve)",
+        "test_delegation_records_actual_approver_and_cannot_remove_separation (tests.m2.test_approvals.ApprovalTests.test_delegation_records_actual_approver_and_cannot_remove_separation)",
+        "test_forged_authenticated_actor_cannot_reserve_request (tests.m2.test_approvals.ApprovalTests.test_forged_authenticated_actor_cannot_reserve_request)",
+        "test_high_and_critical_approvals_require_human_authority (tests.m2.test_approvals.ApprovalTests.test_high_and_critical_approvals_require_human_authority)",
+        "test_human_identity_remains_reserved_after_policy_removes_its_current_role (tests.m2.test_approvals.ApprovalTests.test_human_identity_remains_reserved_after_policy_removes_its_current_role)",
+        "test_late_agent_registration_cannot_reuse_human_or_system_identity (tests.m2.test_approvals.ApprovalTests.test_late_agent_registration_cannot_reuse_human_or_system_identity)",
+        "test_manual_mode_requires_human_even_if_a_rule_names_an_agent_delegate (tests.m2.test_approvals.ApprovalTests.test_manual_mode_requires_human_even_if_a_rule_names_an_agent_delegate)",
+        "test_no_owner_capability_can_bootstrap_an_unconfigured_project (tests.m2.test_approvals.ApprovalTests.test_no_owner_capability_can_bootstrap_an_unconfigured_project)",
+        "test_policy_admin_cannot_be_inferred_from_actor_name_or_payload (tests.m2.test_approvals.ApprovalTests.test_policy_admin_cannot_be_inferred_from_actor_name_or_payload)",
+        "test_policy_change_invalidates_prior_authorization_with_a_new_fact (tests.m2.test_approvals.ApprovalTests.test_policy_change_invalidates_prior_authorization_with_a_new_fact)",
+        "test_policy_version_cannot_be_rebound_to_new_content (tests.m2.test_approvals.ApprovalTests.test_policy_version_cannot_be_rebound_to_new_content)",
+        "test_principal_fails_closed_on_contradictory_human_agent_state (tests.m2.test_approvals.ApprovalTests.test_principal_fails_closed_on_contradictory_human_agent_state)",
+        "test_rejected_approval_is_final_and_retries_do_not_duplicate_facts (tests.m2.test_approvals.ApprovalTests.test_rejected_approval_is_final_and_retries_do_not_duplicate_facts)",
+        "test_replay_rejects_late_agent_creation_with_reserved_human_identity (tests.m2.test_approvals.ApprovalTests.test_replay_rejects_late_agent_creation_with_reserved_human_identity)",
+        "test_request_cannot_borrow_another_executors_task (tests.m2.test_approvals.ApprovalTests.test_request_cannot_borrow_another_executors_task)",
+        "test_self_reported_roles_and_policy_flags_are_not_authority (tests.m2.test_approvals.ApprovalTests.test_self_reported_roles_and_policy_flags_are_not_authority)",
+        "test_snapshot_digest_version_and_kind_are_validated_at_request (tests.m2.test_approvals.ApprovalTests.test_snapshot_digest_version_and_kind_are_validated_at_request)",
+        "test_unknown_input_requires_independent_peer_and_keeps_attribution (tests.m2.test_approvals.ApprovalTests.test_unknown_input_requires_independent_peer_and_keeps_attribution)",
+        "test_unknown_target_types_and_unimplemented_mission_reject (tests.m2.test_approvals.ApprovalTests.test_unknown_target_types_and_unimplemented_mission_reject)",
+        "test_activation_checks_expiry_even_before_host_tick (tests.m2.test_governance_decisions.GovernedDecisionTests.test_activation_checks_expiry_even_before_host_tick)",
+        "test_activation_rechecks_arguments_executor_and_current_state_revision (tests.m2.test_governance_decisions.GovernedDecisionTests.test_activation_rechecks_arguments_executor_and_current_state_revision)",
+        "test_compact_and_retry_keep_dissent_after_decision_is_active (tests.m2.test_governance_decisions.GovernedDecisionTests.test_compact_and_retry_keep_dissent_after_decision_is_active)",
+        "test_denial_records_rejected_decision_without_rewriting_proposal (tests.m2.test_governance_decisions.GovernedDecisionTests.test_denial_records_rejected_decision_without_rewriting_proposal)",
+        "test_lifecycle_keeps_proposal_digest_and_uses_separate_state_cas (tests.m2.test_governance_decisions.GovernedDecisionTests.test_lifecycle_keeps_proposal_digest_and_uses_separate_state_cas)",
+        "test_new_superseding_proposal_cannot_use_original_approval (tests.m2.test_governance_decisions.GovernedDecisionTests.test_new_superseding_proposal_cannot_use_original_approval)",
+        "test_proposer_cannot_launder_self_approval_through_another_requester (tests.m2.test_governance_decisions.GovernedDecisionTests.test_proposer_cannot_launder_self_approval_through_another_requester)",
+        "test_self_review_and_skipped_stages_do_not_establish_authority (tests.m2.test_governance_decisions.GovernedDecisionTests.test_self_review_and_skipped_stages_do_not_establish_authority)",
+        "test_trusted_ingress_does_not_clear_untrusted_peer_proposal (tests.m2.test_governance_decisions.GovernedDecisionTests.test_trusted_ingress_does_not_clear_untrusted_peer_proposal)",
+        "test_approval_does_not_authorize_changed_document_arguments (tests.m2.test_governance_execution.GovernedExecutionTests.test_approval_does_not_authorize_changed_document_arguments)",
+        "test_approved_document_executes_once_and_keeps_source_and_scope (tests.m2.test_governance_execution.GovernedExecutionTests.test_approved_document_executes_once_and_keeps_source_and_scope)",
+        "test_client_cannot_reuse_lower_risk_approval_for_a_critical_flag (tests.m2.test_governance_execution.GovernedExecutionTests.test_client_cannot_reuse_lower_risk_approval_for_a_critical_flag)",
+        "test_completed_external_result_survives_later_revocation (tests.m2.test_governance_execution.GovernedExecutionTests.test_completed_external_result_survives_later_revocation)",
+        "test_configured_governance_requires_approval_at_tool_request (tests.m2.test_governance_execution.GovernedExecutionTests.test_configured_governance_requires_approval_at_tool_request)",
+        "test_denied_or_other_actors_approval_is_not_a_session_capability (tests.m2.test_governance_execution.GovernedExecutionTests.test_denied_or_other_actors_approval_is_not_a_session_capability)",
+        "test_expired_approval_cannot_dispatch_even_without_a_tick (tests.m2.test_governance_execution.GovernedExecutionTests.test_expired_approval_cannot_dispatch_even_without_a_tick)",
+        "test_owner_approved_critical_label_still_has_only_fixed_document_capability (tests.m2.test_governance_execution.GovernedExecutionTests.test_owner_approved_critical_label_still_has_only_fixed_document_capability)",
+        "test_policy_change_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_policy_change_after_queue_prevents_provider_write)",
+        "test_revocation_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_revocation_after_queue_prevents_provider_write)",
+        "test_task_revision_changed_since_approval_is_rejected (tests.m2.test_governance_execution.GovernedExecutionTests.test_task_revision_changed_since_approval_is_rejected)",
+        "test_write_callback_rechecks_a_revocation_after_in_flight_is_recorded (tests.m2.test_governance_execution.GovernedExecutionTests.test_write_callback_rechecks_a_revocation_after_in_flight_is_recorded)",
+        "test_attested_untrusted_source_cannot_be_cleared_by_top_level_trusted_label (tests.m2.test_governance_trust.GovernanceTrustTests.test_attested_untrusted_source_cannot_be_cleared_by_top_level_trusted_label)",
+        "test_medium_untrusted_input_escalates_to_human_and_review_keeps_source (tests.m2.test_governance_trust.GovernanceTrustTests.test_medium_untrusted_input_escalates_to_human_and_review_keeps_source)",
+        "test_receipt_copy_wrong_authority_and_different_command_are_rejected (tests.m2.test_governance_trust.GovernanceTrustTests.test_receipt_copy_wrong_authority_and_different_command_are_rejected)",
+        "test_restore_preserves_source_action_and_checkpoint_context_provenance (tests.m2.test_governance_trust.GovernanceTrustTests.test_restore_preserves_source_action_and_checkpoint_context_provenance)",
+        "test_restore_with_trusted_document_still_inherits_untrusted_checkpoint_context (tests.m2.test_governance_trust.GovernanceTrustTests.test_restore_with_trusted_document_still_inherits_untrusted_checkpoint_context)",
+        "test_successful_request_retry_does_not_require_new_receipt_or_read_new_clock (tests.m2.test_governance_trust.GovernanceTrustTests.test_successful_request_retry_does_not_require_new_receipt_or_read_new_clock)",
+        "test_trusted_append_of_trusted_document_can_still_use_auto_approval (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_append_of_trusted_document_can_still_use_auto_approval)",
+        "test_trusted_append_receipt_preserves_untrusted_source_action (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_append_receipt_preserves_untrusted_source_action)",
+        "test_trusted_low_risk_uses_a_recorded_deterministic_system_approval (tests.m2.test_governance_trust.GovernanceTrustTests.test_trusted_low_risk_uses_a_recorded_deterministic_system_approval)",
+        "test_append_of_legacy_document_without_source_is_conservatively_untrusted (tests.m2.test_governance_trust.LegacyDocumentSourceTests.test_append_of_legacy_document_without_source_is_conservatively_untrusted)"
+      ],
+      "additional_probe_methods": [
+        "test_identity_introduced_then_removed_stays_reserved_on_new_connection (__main__.IndependentGovernanceProbes.test_identity_introduced_then_removed_stays_reserved_on_new_connection)",
+        "test_multihop_append_retains_original_source_after_fresh_trusted_receipts (__main__.IndependentGovernanceProbes.test_multihop_append_retains_original_source_after_fresh_trusted_receipts)"
+      ],
+      "scope_limit": "仅 decision/task 目标和固定文档操作；可信宿主身份与 InputAuthority 是前提，不是对任意输入的来源检测。"
+    },
+    {
+      "criterion": "过期/撤销有升级路径",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "过期事实、升级路线、有限新 ID 续期、委托 veto 窗口和人类安全撤销均由持久事实表达。高风险到期阻断 Task，失效授权不能继续派发。已有结果和 active Decision 历史保留，并记录授权失效、影响和重新规划要求。两层政策失效链的第二个孙命令拒绝时，父事实和此前成功子树全部回滚，只留原父请求的拒绝审计。",
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "independent_regression_methods": [
+        "test_agent_cannot_issue_internal_expiry_or_human_revoke (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_agent_cannot_issue_internal_expiry_or_human_revoke)",
+        "test_approved_but_unused_authorization_also_expires (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_approved_but_unused_authorization_also_expires)",
+        "test_delegated_veto_has_a_real_deadline_and_normal_safety_revoke_is_explicit (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_delegated_veto_has_a_real_deadline_and_normal_safety_revoke_is_explicit)",
+        "test_expiration_escalates_once_and_duplicate_ticks_are_noops (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_expiration_escalates_once_and_duplicate_ticks_are_noops)",
+        "test_high_expiration_keeps_human_route_and_blocks_related_task (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_high_expiration_keeps_human_route_and_blocks_related_task)",
+        "test_reject_expiration_returns_unactivated_decision_to_review (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_reject_expiration_returns_unactivated_decision_to_review)",
+        "test_renewal_creates_new_ids_and_stops_at_policy_limit (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_renewal_creates_new_ids_and_stops_at_policy_limit)",
+        "test_revocation_invalidates_active_authority_without_undoing_decision_history (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_revocation_invalidates_active_authority_without_undoing_decision_history)",
+        "test_stale_target_turns_renew_into_visible_escalation (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_stale_target_turns_renew_into_visible_escalation)",
+        "test_windowed_veto_preserves_granted_history_and_records_impact (tests.m2.test_approval_expiration.ApprovalExpirationTests.test_windowed_veto_preserves_granted_history_and_records_impact)",
+        "test_expired_approval_cannot_dispatch_even_without_a_tick (tests.m2.test_governance_execution.GovernedExecutionTests.test_expired_approval_cannot_dispatch_even_without_a_tick)",
+        "test_policy_change_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_policy_change_after_queue_prevents_provider_write)",
+        "test_revocation_after_queue_prevents_provider_write (tests.m2.test_governance_execution.GovernedExecutionTests.test_revocation_after_queue_prevents_provider_write)",
+        "test_cross_process_grant_at_expiry_cannot_revive_the_expired_request (tests.m2.test_governance_replay.GovernanceProcessTests.test_cross_process_grant_at_expiry_cannot_revive_the_expired_request)"
+      ],
+      "additional_probe_methods": [
+        "test_second_policy_grandchild_rejection_rolls_back_prior_subtree (__main__.IndependentGovernanceProbes.test_second_policy_grandchild_rejection_rolls_back_prior_subtree)"
+      ],
+      "scope_limit": "升级为事实中的通知等级和人类路线；不声称发送了外部通知或撤回已有外部效果。"
+    },
+    {
+      "criterion": "暂停屏障和人类 Intervention 可重放",
+      "assessment": "accepted",
+      "independently_accepted": true,
+      "reason": "暂停关闭新派发，保留在途结果和人类安全操作，治理时钟冻结而 Session 墙钟期限不延长。恢复检查真实持久 Commands，包括无文档 Runtime 的 receipt-only 历史。父/子身份、参数、时间、关联、顺序及 audit 类型受校验，缺少孙事实仍保留根与中间父 pending。4 个示例数据库副本逐前缀重放共 248 次，完整库/仅事实库一致，20 个实时设施 guard 调用均为零，原件与副本字节未变。",
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "independent_regression_methods": [
+        "test_governance_deadline_freezes_through_pause_and_resume (tests.m2.test_governance.GovernanceControlTests.test_governance_deadline_freezes_through_pause_and_resume)",
+        "test_human_stop_cancels_task_and_revokes_binding_without_losing_in_flight_facts (tests.m2.test_governance.GovernanceControlTests.test_human_stop_cancels_task_and_revokes_binding_without_losing_in_flight_facts)",
+        "test_long_pause_does_not_extend_session_and_failed_resume_leaves_no_success_fact (tests.m2.test_governance.GovernanceControlTests.test_long_pause_does_not_extend_session_and_failed_resume_leaves_no_success_fact)",
+        "test_override_cannot_bypass_missing_quality_or_execution_enforcement (tests.m2.test_governance.GovernanceControlTests.test_override_cannot_bypass_missing_quality_or_execution_enforcement)",
+        "test_pause_after_effect_before_report_preserves_queryable_result_without_dispatch (tests.m2.test_governance.GovernanceControlTests.test_pause_after_effect_before_report_preserves_queryable_result_without_dispatch)",
+        "test_pause_and_resume_retries_do_not_duplicate_interventions (tests.m2.test_governance.GovernanceControlTests.test_pause_and_resume_retries_do_not_duplicate_interventions)",
+        "test_pause_has_an_intervention_and_never_claims_full_execution_quiescence (tests.m2.test_governance.GovernanceControlTests.test_pause_has_an_intervention_and_never_claims_full_execution_quiescence)",
+        "test_pause_requires_human_and_legacy_execution_control_cannot_bypass_governance (tests.m2.test_governance.GovernanceControlTests.test_pause_requires_human_and_legacy_execution_control_cannot_bypass_governance)",
+        "test_paused_messages_continue_but_tool_admission_and_grants_stop (tests.m2.test_governance.GovernanceControlTests.test_paused_messages_continue_but_tool_admission_and_grants_stop)",
+        "test_paused_runtime_report_is_retained_without_quality_progress (tests.m2.test_governance.GovernanceControlTests.test_paused_runtime_report_is_retained_without_quality_progress)",
+        "test_restart_retains_pause_and_missing_session_cannot_resume (tests.m2.test_governance.GovernanceControlTests.test_restart_retains_pause_and_missing_session_cannot_resume)",
+        "test_execution_configured_after_governance_pause_preserves_excluded_time (tests.m2.test_governance.GovernanceTests.test_execution_configured_after_governance_pause_preserves_excluded_time)",
+        "test_later_execution_clock_configuration_does_not_reset_deadline (tests.m2.test_governance.GovernanceTests.test_later_execution_clock_configuration_does_not_reset_deadline)",
+        "test_paused_analysis_preserves_blindness_and_blocks_normal_advance (tests.m2.test_governance.GovernanceTests.test_paused_analysis_preserves_blindness_and_blocks_normal_advance)",
+        "test_paused_budget_exhaustion_still_converges (tests.m2.test_governance.GovernanceTests.test_paused_budget_exhaustion_still_converges)",
+        "test_paused_project_accepts_existing_messages_and_freezes_time (tests.m2.test_governance.GovernanceTests.test_paused_project_accepts_existing_messages_and_freezes_time)",
+        "test_prior_m1_cache_without_pause_metadata_rebuilds_before_m2_append (tests.m2.test_governance.GovernanceTests.test_prior_m1_cache_without_pause_metadata_rebuilds_before_m2_append)",
+        "test_resume_without_runtime_rejects_receipt_only_history (tests.m2.test_governance.GovernanceTests.test_resume_without_runtime_rejects_receipt_only_history)",
+        "test_append_failure_after_first_child_rolls_back_whole_compound (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_append_failure_after_first_child_rolls_back_whole_compound)",
+        "test_lost_parent_response_retry_does_not_read_clock_or_repeat_children (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_lost_parent_response_retry_does_not_read_clock_or_repeat_children)",
+        "test_normal_rejected_child_rolls_back_parent_and_keeps_only_rejection_audit (tests.m2.test_governance_replay.GovernanceAtomicityTests.test_normal_rejected_child_rolls_back_parent_and_keeps_only_rejection_audit)",
+        "test_cross_process_grant_at_expiry_cannot_revive_the_expired_request (tests.m2.test_governance_replay.GovernanceProcessTests.test_cross_process_grant_at_expiry_cannot_revive_the_expired_request)",
+        "test_other_process_pause_committed_before_dispatch_prevents_provider_call (tests.m2.test_governance_replay.GovernanceProcessTests.test_other_process_pause_committed_before_dispatch_prevents_provider_call)",
+        "test_other_process_revocation_waits_for_actual_write_to_release_resource_gate (tests.m2.test_governance_replay.GovernanceProcessTests.test_other_process_revocation_waits_for_actual_write_to_release_resource_gate)",
+        "test_two_process_approvers_cannot_both_grant_the_same_revision (tests.m2.test_governance_replay.GovernanceProcessTests.test_two_process_approvers_cannot_both_grant_the_same_revision)",
+        "test_auto_approval_parent_is_pending_until_its_grant_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_auto_approval_parent_is_pending_until_its_grant_fact)",
+        "test_changed_persisted_command_and_receipt_cannot_replace_event_parameters (tests.m2.test_governance_replay.GovernanceReplayTests.test_changed_persisted_command_and_receipt_cannot_replace_event_parameters)",
+        "test_child_identity_does_not_collide_when_parent_and_target_contain_delimiters (tests.m2.test_governance_replay.GovernanceReplayTests.test_child_identity_does_not_collide_when_parent_and_target_contain_delimiters)",
+        "test_every_event_prefix_rebuilds_without_clock_runtime_or_followup_execution (tests.m2.test_governance_replay.GovernanceReplayTests.test_every_event_prefix_rebuilds_without_clock_runtime_or_followup_execution)",
+        "test_expiry_root_requires_deterministic_command_identity (tests.m2.test_governance_replay.GovernanceReplayTests.test_expiry_root_requires_deterministic_command_identity)",
+        "test_expiry_root_requires_host_tick_trigger (tests.m2.test_governance_replay.GovernanceReplayTests.test_expiry_root_requires_host_tick_trigger)",
+        "test_governance_context_does_not_ignore_unknown_authority_fields (tests.m2.test_governance_replay.GovernanceReplayTests.test_governance_context_does_not_ignore_unknown_authority_fields)",
+        "test_governance_event_cannot_fall_back_to_legacy_reducer_without_schema_marker (tests.m2.test_governance_replay.GovernanceReplayTests.test_governance_event_cannot_fall_back_to_legacy_reducer_without_schema_marker)",
+        "test_governed_project_replay_cannot_accept_a_legacy_bootstrap_pause_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_governed_project_replay_cannot_accept_a_legacy_bootstrap_pause_fact)",
+        "test_high_expiry_remains_pending_until_escalation_and_task_impact (tests.m2.test_governance_replay.GovernanceReplayTests.test_high_expiry_remains_pending_until_escalation_and_task_impact)",
+        "test_internal_auto_grant_rejects_nonexistent_or_wrong_parent (tests.m2.test_governance_replay.GovernanceReplayTests.test_internal_auto_grant_rejects_nonexistent_or_wrong_parent)",
+        "test_internal_child_cannot_remove_its_parent_link (tests.m2.test_governance_replay.GovernanceReplayTests.test_internal_child_cannot_remove_its_parent_link)",
+        "test_pause_parent_is_pending_until_intervention_fact (tests.m2.test_governance_replay.GovernanceReplayTests.test_pause_parent_is_pending_until_intervention_fact)",
+        "test_rejected_audit_with_governance_envelope_cannot_complete_required_child (tests.m2.test_governance_replay.GovernanceReplayTests.test_rejected_audit_with_governance_envelope_cannot_complete_required_child)",
+        "test_required_children_cannot_be_reordered (tests.m2.test_governance_replay.GovernanceReplayTests.test_required_children_cannot_be_reordered)",
+        "test_unrelated_root_cannot_hide_an_omitted_required_child (tests.m2.test_governance_replay.GovernanceReplayTests.test_unrelated_root_cannot_hide_an_omitted_required_child)"
+      ],
+      "additional_probe_methods": [
+        "test_individually_valid_child_mutations_and_continuation_edits_are_rejected (__main__.IndependentGovernanceProbes.test_individually_valid_child_mutations_and_continuation_edits_are_rejected)",
+        "test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending (__main__.IndependentGovernanceProbes.test_nested_policy_prefix_keeps_root_and_intermediate_parent_pending)",
+        "test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history (__main__.IndependentNoRuntimeProbe.test_no_runtime_resume_blocks_receipts_and_rejects_unreceived_history)"
+      ],
+      "scope_limit": "Binding pause_status=unsupported，不能据此声称所有执行已静止；未实现的 override/目标不能绕过质量门。"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "M2-02-R1",
+      "disposition": "closed",
+      "prior_phase": "static review, no independent acceptance",
+      "title": "append/restore 来源清洗",
+      "conclusion": "真实 SQLite 回归覆盖旧 Action/Checkpoint 和 legacy 来源；独立三层追加实际完成，每层新可信回执不能抹去最初 unknown 来源、原摘要与中间来源链。",
+      "source_locations": [
+        "src/aetp/governance/trust.py:93",
+        "src/aetp/governance/approvals.py"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2"
+      ],
+      "author_red_green": [
+        "review_r1_corrected_red",
+        "review_r1_corrected_green"
+      ]
+    },
+    {
+      "id": "M2-02-R2",
+      "disposition": "closed",
+      "prior_phase": "static review, no independent acceptance",
+      "title": "内部因果链和复合命令完整性",
+      "conclusion": "纯 continuations 与游标核对真实因果链。独立重构了单独合法的改时点/参数/关联 child，以及删除/增加/修改 continuations，Replay 均拒绝。嵌套缺失事实保留父 pending，第二个孙操作拒绝完整回滚已有子树与幂等结果。",
+      "source_locations": [
+        "src/aetp/governance/causality.py",
+        "src/aetp/governance/projection.py",
+        "src/aetp/governance/service.py"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2",
+        "readonly_demo"
+      ],
+      "author_red_green": [
+        "replay_corrected_red",
+        "replay_green_attempt2"
+      ]
+    },
+    {
+      "id": "M2-02-R3",
+      "disposition": "closed",
+      "prior_phase": "static review, no independent acceptance",
+      "title": "人类或系统身份与后注册 Agent 混淆",
+      "conclusion": "注册、principal 与 Replay 均拒绝矛盾身份。额外引入人类身份再移出新 Policy，通过另一 SQLite 连接验证历史保留；普通近似名称仍可注册，伪造历史人类 agent.created 仍被拒绝。",
+      "source_locations": [
+        "src/aetp/governance/policy.py:34",
+        "src/aetp/governance/policy.py:46",
+        "src/aetp/core/commands.py",
+        "src/aetp/core/projection.py"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2"
+      ],
+      "author_red_green": [
+        "review_r3_red",
+        "review_r3_green"
+      ]
+    },
+    {
+      "id": "M2-02-R2-AUDIT",
+      "disposition": "closed",
+      "prior_phase": "static follow-up",
+      "title": "带治理 envelope 的 rejected audit 被计作成功 child",
+      "conclusion": "冻结实现先分类 audit 并禁止治理 envelope；独立完整回归实际运行 grant 与 Intervention 两个篡改变体，均拒绝。",
+      "source_locations": [
+        "src/aetp/governance/causality.py:130"
+      ],
+      "evidence_run_labels": [
+        "m2_suite"
+      ],
+      "author_red_green": [
+        "review_r2_audit_red",
+        "review_r2_audit_green"
+      ]
+    },
+    {
+      "id": "M2-02-RESUME-PENDING",
+      "disposition": "closed",
+      "prior_phase": "static follow-up",
+      "title": "无 Runtime 的恢复错误假设 pending 为空",
+      "conclusion": "writer transaction 内读取真实 Commands/Events，仅排除当前尚无 receipt 的 resume。原单条 receipt-only 回归和独立两条 prior receipt 探针均返回 RECOVERY_REQUIRED；另外无 receipt 的损坏历史返回 INVALID_PAYLOAD，屏障都未打开。",
+      "source_locations": [
+        "src/aetp/governance/service.py:149"
+      ],
+      "evidence_run_labels": [
+        "m2_suite",
+        "independent_probes_v2"
+      ],
+      "author_red_green": [
+        "resume_pending_red",
+        "resume_pending_green"
+      ]
+    }
+  ],
+  "candidate_audit": {
+    "work_item": "M2-02",
+    "audited_at": "2026-09-13T00:06:10.850245+08:00",
+    "purpose": "author verification, not independent review",
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-12-m2-02-candidate-snapshot.json",
+      "sha256": "bd07b57be12dd5c1480fec1e8218200fb2db9d16f598e996f012fb54677b7608"
+    },
+    "report": {
+      "path": "artifacts/m2-02-test-report.json",
+      "sha256": "547e7a0509fe4ba37a69d4a8094e9c4f683936a3c3d91cfc257002674ef848a4"
+    },
+    "sources_checked": 236,
+    "metadata_checked": 3,
+    "prefixes_checked": 2,
+    "history": {
+      "archived_files_checked": 217,
+      "accepted_history_pins_checked": 7,
+      "intentional_changed_baseline_paths": [
+        {
+          "path": "Docs/development/backlog.json",
+          "accepted_sha256": "c68a3e6c2fffc365d313902ec30a2badb1ca2728b81add49a61196452a839c46",
+          "current_sha256": "b4c6c6df9e59df034c8e97828c7a3b78a7f833d3e457374cb2028477634971b3"
+        },
+        {
+          "path": "Docs/development/status.json",
+          "accepted_sha256": "a4116aa7427c04e6f88e41420cc666cc5f3bb143cf9c083d62ebd905ec542b03",
+          "current_sha256": "10f58637242580deba0e2351f100043580e224a4953f065195109aa223acdf77"
+        },
+        {
+          "path": "MEMORY.md",
+          "accepted_sha256": "4334ee21722cde14265ea730b7d5c2e0fd71ca5d0cf26a3887f6801bd9449edd",
+          "current_sha256": "28f86b9c590d5c2fc6c0b4b9d1de851c4228900271e1fe466af9dc3964d58955"
+        },
+        {
+          "path": "src/aetp/core/commands.py",
+          "accepted_sha256": "21948b719f401ba8967b0564f00591d08e178c1fa78a9f788945e37684a65713",
+          "current_sha256": "cb6bc95a715def0011d331b2f60d76f30954f089b8fa5d50f715fc5255825a92"
+        },
+        {
+          "path": "src/aetp/core/projection.py",
+          "accepted_sha256": "60fdea81016a46fc13ccf43f4032229d60690ab6ba4429827253d49b60a56c8a",
+          "current_sha256": "76d73d3c72858fca5dcc844acd4f8ab808242070bf8577055da589c9d42ebc24"
+        },
+        {
+          "path": "src/aetp/domain/models.py",
+          "accepted_sha256": "72abcb2bf92390b8b5cff766aea30cec41f4268d2828ab2dd11f24c99f07636b",
+          "current_sha256": "23b7a2371ca94fe366bce41102a6e0b43f424e52f6bdc46698e170b4d0bf739a"
+        },
+        {
+          "path": "src/aetp/meetings/records.py",
+          "accepted_sha256": "4e78f72eff65ee80f6adf00df4060e1e7c01f07171fb8f30dbab78761b77b4e3",
+          "current_sha256": "52a1d356a0fd4ca598e96492f6f8e571b87b8b8b9a52a2427b8cb14ad652bdd9"
+        },
+        {
+          "path": "src/aetp/meetings/service.py",
+          "accepted_sha256": "f455927ac19bdb81d96f2a0422b769c4141a1a9cf990da7c84b02fa62d1fe5f4",
+          "current_sha256": "dda186725be80831c164df01b785aa47dfe210417560c4e3f9f5e937c290211b"
+        },
+        {
+          "path": "src/aetp/runtime/README.md",
+          "accepted_sha256": "b29c1eae0633b9314f4f8de25e15e7f7ed880f0acef7f28816cf4361be1e43ca",
+          "current_sha256": "b7d90692c5b62c1c5558415afa72b508b2f92066408d2f954df053fff1ab28b2"
+        },
+        {
+          "path": "src/aetp/runtime/actions.py",
+          "accepted_sha256": "4e96a77eed3cad71d7fd300fbedf30dac5fa6c85e413870968f5d9dd9e96c1aa",
+          "current_sha256": "f6e38376eea3004c115b26cebf6be8f34888a8f697eb05f55886ae09044c49f9"
+        },
+        {
+          "path": "src/aetp/runtime/policy.py",
+          "accepted_sha256": "924f4ca3da619fa8021aacab991d52c9b515a7671fa7a8e600ee02607e5c9d0d",
+          "current_sha256": "c459b3322192a3c34f6de479203f4cf5c9db451673a0143f2646137e78f4bacf"
+        },
+        {
+          "path": "src/aetp/runtime/projection.py",
+          "accepted_sha256": "5a2797f6293d7e4d464d73f8e795d530da0bff273074a5699cc1c1cf254b02f9",
+          "current_sha256": "787816e75b995d1e0b2c689eb4482faf8786b602466e2c50538ce8e90e3a0b31"
+        },
+        {
+          "path": "src/aetp/runtime/records.py",
+          "accepted_sha256": "6aa88f93fcfe3a1e520ffda142e401561b6a9d5201c7b5f9aa026f2c29ffadea",
+          "current_sha256": "21de39dd7f2c25aba5d6c2e3b8d695cbf8728449e9dbc2be4f41066fc84886ea"
+        },
+        {
+          "path": "src/aetp/runtime/service.py",
+          "accepted_sha256": "34f31bc7634e4ae3742ebfdedb4222e88c277927764e97aafcae7f5a7d3d2b40",
+          "current_sha256": "c5f6a287b958e893217e55dd6cdeaec2096ea535b2d38e87b3eb2407430026a9"
+        },
+        {
+          "path": "tests/m2/test_governance.py",
+          "accepted_sha256": "07be675afe308023ffe7f8d2e120cf3cfd17b23aeff79d82adc62f0d917306b0",
+          "current_sha256": "d775e7483e87c703fe5560dcd66b428f71c7125d3b461412da115a162aae0f3f"
+        }
+      ]
+    },
+    "read_only_replay_equal": [
+      "artifacts/m2-02-demo-candidate-v1.sqlite",
+      "artifacts/m2-02-demo-candidate-v1-facts.sqlite"
+    ]
+  },
+  "review_evidence_files_checked": 47,
+  "independent_commands_checked": 14,
+  "independent_test_counts": {
+    "m2_suite": 167,
+    "m1_suite": 85,
+    "m0_suite": 156,
+    "preparation_suite": 27,
+    "independent_probes_v2": 6
+  },
+  "review_copy_sources_checked": 236,
+  "review_copy_metadata_checked": 3,
+  "review_copy_prefixes_checked": 2,
+  "retained_nonzero_independent_runs": [
+    "independent_probes",
+    "prepare_probe_v2"
+  ],
+  "journal_prefix": {
+    "path": "Docs/development/evidence/2026-09-12-m2-02-review-runs/review-journal.jsonl",
+    "bytes": 101647,
+    "sha256": "f2c8468a80b36581f4543c4d2beb88c0ae4ab354bc272c1926cac0ec0e5975bb",
+    "records": 14,
+    "through_label": "final_evidence_checks",
+    "note": "固定验证命令前缀；报告生成/发布校验随后追加，避免自引用。"
+  },
+  "metadata_before": [
+    {
+      "path": "Docs/development/backlog.json",
+      "sha256": "b4c6c6df9e59df034c8e97828c7a3b78a7f833d3e457374cb2028477634971b3"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "sha256": "10f58637242580deba0e2351f100043580e224a4953f065195109aa223acdf77"
+    }
+  ],
+  "metadata_after": [
+    {
+      "path": "Docs/development/backlog.json",
+      "sha256": "e13a8a3fb9b07294fb14a747ddde33e57e79df9dbbe6ff29326574cb5bd06cc2"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "sha256": "f98289622b6445702f86fe3eb1682ee9c17914ed47fb869fb0547f5c2fc91ac5"
+    }
+  ],
+  "narrative_prefixes": [
+    {
+      "path": "MEMORY.md",
+      "sha256": "28f86b9c590d5c2fc6c0b4b9d1de851c4228900271e1fe466af9dc3964d58955",
+      "bytes": 41908
+    }
+  ],
+  "transitions": [
+    {
+      "id": "M2-02",
+      "from": "review",
+      "to": "done"
+    },
+    {
+      "id": "M3-01",
+      "from": "todo",
+      "to": "ready"
+    }
+  ],
+  "status_counts": {
+    "todo": 1,
+    "blocked": 0,
+    "ready": 1,
+    "done": 18,
+    "review": 0,
+    "in_progress": 0
+  },
+  "unchanged_claims": {
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Full-protocol requirements remain registered; no complete protocol conformance is accepted. Separately accepted M0-only execution is recorded under m0_subset."
+    },
+    "m0_subset": {
+      "work_item": "M0-06",
+      "scope": "m0-core-only",
+      "status": "accepted",
+      "accepted_at": "2026-09-11T13:17:17.286835+08:00",
+      "recorded_at": "2026-09-11T13:31:35.580244+08:00",
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "pending": 3,
+        "not_applicable": 19
+      },
+      "execution_counts": {
+        "passed": 9,
+        "failed": 0,
+        "not_run": 19
+      },
+      "test_ids_by_status": {
+        "passed": [
+          "TEST-001",
+          "TEST-002",
+          "TEST-005",
+          "TEST-017",
+          "TEST-018",
+          "TEST-021"
+        ],
+        "pending": [
+          "TEST-012",
+          "TEST-016",
+          "TEST-019"
+        ],
+        "not_applicable": [
+          "TEST-003",
+          "TEST-004",
+          "TEST-006",
+          "TEST-007",
+          "TEST-008",
+          "TEST-009",
+          "TEST-010",
+          "TEST-011",
+          "TEST-013",
+          "TEST-014",
+          "TEST-015",
+          "TEST-020",
+          "TEST-022",
+          "TEST-023",
+          "TEST-024",
+          "TEST-025",
+          "TEST-026",
+          "TEST-027",
+          "TEST-028"
+        ],
+        "failed": []
+      },
+      "execution_report": {
+        "path": "artifacts/m0-conformance-report-v2.json",
+        "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+      },
+      "candidate_snapshot": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+        "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+      },
+      "independent_review": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+        "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+      },
+      "review_narrative_addendum": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+        "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+      },
+      "reviewer": "Lorentz (01a08e64-7ed1-7db0-846c-82feb095ae71)",
+      "handoff": "artifacts/m0-handoff.json",
+      "claims": {
+        "full_aetp_compatible": false,
+        "protocol_task_completed": false,
+        "bootstrap_verified": false
+      },
+      "note": "Development-time acceptance of this fixed M0 candidate only. Three partial requirements remain pending and 19 later requirements are not run. Not the preparation/full-protocol conformance counter or product completion percentage."
+    },
+    "m1_acceptance": {
+      "status": "not_accepted",
+      "note": "Work-item acceptance is separate from whole M1. Formal Verification, Task quality transitions and explicit integration exemption remain outstanding."
+    }
+  },
+  "remaining_closeout": "Append accepted notes, run final preparation commands, then read back all frozen evidence.",
+  "coordination": "No ClaudeLink, additional agent, Git operation, dependency installation, network or global configuration change."
+}

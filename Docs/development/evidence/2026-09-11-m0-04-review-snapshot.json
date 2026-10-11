@@ -1,0 +1,17 @@
+{
+  "work_item": "M0-04",
+  "frozen_at": "2026-09-10T17:02:57.934114+00:00",
+  "sha256": {
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "tests/m0/support.py": "07abc92ca86f22ed8943d35d0c4423a700e3284a8ef018f0be4703debafa29ad",
+    "tests/m0/test_idempotency_concurrency.py": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "artifacts/m0-04-test-report.json": "f95bc0cfcf71bb8c307390354bc029c65b7b8a619780c5c2684993fa89be3345",
+    "Docs/development/evidence/2026-09-11-m0-04-probes.py": "d6897aad0b20a5acdb73d4cf36694a263404ac7e2d484487caf9ae261d7ca544",
+    "Docs/development/evidence/2026-09-11-m0-04-probes.json": "dff927d57ecdb3acdafd15a1aa14752bc988e6269f7f7cb7b088d64ab7a06e8c"
+  },
+  "note": "Source/tests/report/probes frozen for independent review; development/preparation status evidence may gain new verification runs. No Git repository."
+}

@@ -1,0 +1,756 @@
+{
+  "schema_version": "0.1",
+  "work_item": "M0-05",
+  "generated_at": "2026-09-11T03:00:11.868302+08:00",
+  "status": "done",
+  "executor": "Codex main agent",
+  "scope": "M0 Core Kernel only: read-only recovery, pure Replay, simulated runtime and internal Command response-loss; not full Orchestrator or external Action recovery.",
+  "inputs": {
+    "plan": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md Task 5",
+    "normative_sections": [
+      "13.4",
+      "13.10",
+      "14.1",
+      "14.2",
+      "14.4",
+      "17.2",
+      "18.3"
+    ],
+    "dependencies": [
+      "M0-03 done",
+      "M0-04 done"
+    ]
+  },
+  "environment": {
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+    "cwd": "D:\\Github\\AETP",
+    "claudelink": "unavailable; no inbox/send/bulletin claimed",
+    "git": "not a repository; no worktree/branch/commit/push"
+  },
+  "implemented": [
+    "Recovery opens only existing SQLite files mode=ro; missing/corrupt facts fail, no creation/migration/cache repair.",
+    "rebuild_project forces full Event replay; no cached State authority.",
+    "reconcile_pending takes one read snapshot of Command/Event, validates receipt linkage/digest/type/correlation/target and current M0 terminal mapping. Returns Command IDs by receipt sequence; never executes/repairs.",
+    "Receipt-only histories are deliberate storage fault fixtures, NOT a real half-commit window in the atomic M0 handler, not Action/UNKNOWN support.",
+    "Simulation uses an explicitly simulation-only compatible CommandResult subtype and actual call counter; never stores results/events or authorizes State.",
+    "No real model/Runtime.start adapters exist in M0. Tests label their forward sentinels separately from real simulator/stdlib effect spies.",
+    "Paused coverage preserves a persisted project.created paused value only; full pause/resume/Binding barriers and TEST-025 acceptance remain later scope."
+  ],
+  "red": {
+    "argv": [
+      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-m",
+      "unittest",
+      "tests/m0/test_replay_recovery.py",
+      "-v"
+    ],
+    "started_at": "2026-09-11T02:45:29.777391+08:00",
+    "finished_at": "2026-09-11T02:45:30.177005+08:00",
+    "exit_code": 1,
+    "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-red-stdout.txt",
+    "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-red-stderr.txt",
+    "environment_override": {
+      "PYTHONPATH": "D:\\Github\\AETP\\src",
+      "PYTHONIOENCODING": "utf-8",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "tests_run": 32,
+    "failures": 32,
+    "errors": 0,
+    "reason": "Explicit absent API assertions; not import errors"
+  },
+  "green": {
+    "argv": [
+      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-m",
+      "unittest",
+      "tests/m0/test_replay_recovery.py",
+      "-v"
+    ],
+    "started_at": "2026-09-11T10:34:29.887216+08:00",
+    "finished_at": "2026-09-11T10:34:33.819239+08:00",
+    "exit_code": 0,
+    "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_focused-stdout.txt",
+    "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_focused-stderr.txt",
+    "environment_override": {
+      "PYTHONPATH": "D:\\Github\\AETP\\src",
+      "PYTHONIOENCODING": "utf-8",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "tests_run": 38,
+    "passed": 38,
+    "supplementary_coverage_tests": 3,
+    "review_regression_tests": 3
+  },
+  "regression": {
+    "argv": [
+      "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/m0",
+      "-t",
+      ".",
+      "-v"
+    ],
+    "started_at": "2026-09-11T10:34:33.831575+08:00",
+    "finished_at": "2026-09-11T10:34:45.537517+08:00",
+    "exit_code": 0,
+    "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_m0-stdout.txt",
+    "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_m0-stderr.txt",
+    "environment_override": {
+      "PYTHONPATH": "D:\\Github\\AETP\\src",
+      "PYTHONIOENCODING": "utf-8",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "tests_run": 131,
+    "passed": 131
+  },
+  "preparation_verification": {
+    "pre_review_render": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-11T02:54:42.303687+08:00",
+      "finished_at": "2026-09-11T02:54:42.513842+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-pre_review_render-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-pre_review_render-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    "pre_review_check": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "started_at": "2026-09-11T02:54:42.514448+08:00",
+      "finished_at": "2026-09-11T02:54:42.723975+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-pre_review_check-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-pre_review_check-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    "pre_review_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "started_at": "2026-09-11T02:54:42.724950+08:00",
+      "finished_at": "2026-09-11T02:54:45.003573+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-pre_review_preparation-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-pre_review_preparation-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    "final_render": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "started_at": "2026-09-11T10:40:09.984804+08:00",
+      "finished_at": "2026-09-11T10:40:10.217340+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_render-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_render-stderr.txt",
+      "environment_override": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    "final_check": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "started_at": "2026-09-11T10:40:10.227286+08:00",
+      "finished_at": "2026-09-11T10:40:10.477231+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_check-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_check-stderr.txt",
+      "environment_override": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    "final_preparation": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "started_at": "2026-09-11T10:40:10.486550+08:00",
+      "finished_at": "2026-09-11T10:40:12.770964+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_preparation-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_preparation-stderr.txt",
+      "environment_override": {
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 27,
+      "passed": 27
+    }
+  },
+  "acceptance_matrix": [
+    {
+      "criterion": "Delete Projection and rebuild the same State from Event Store",
+      "tests": [
+        "test_deleted_projection_rows_are_rebuilt_only_from_events",
+        "test_projection_and_result_cache_tables_are_not_required_or_recreated",
+        "test_a_forged_self_consistent_cache_is_not_an_authoritative_fact"
+      ],
+      "evidence_level": "independently accepted within the explicitly bounded M0 scope",
+      "independent_review": "Docs/development/evidence/2026-09-11-m0-05-review.json"
+    },
+    {
+      "criterion": "Restart never invokes model, Shell, Runtime.start or historical tool actions",
+      "tests": [
+        "test_forbidden_call_tripwires_have_positive_controls_then_remain_zero",
+        "test_recovery_counter_reports_actual_simulator_calls_not_a_constant",
+        "test_open_replay_and_reconciliation_attempt_no_sql_writes"
+      ],
+      "boundary": "Real simulator/stdlib effect spies; explicit forward sentinels for absent model/Runtime.start adapters. No real external tool adapter or historical tool events implemented.",
+      "evidence_level": "independently accepted within the explicitly bounded M0 scope",
+      "independent_review": "Docs/development/evidence/2026-09-11-m0-05-review.json"
+    },
+    {
+      "criterion": "No authoritative recovery State or queue outside durable facts",
+      "tests": [
+        "test_every_call_uses_current_facts_and_returns_detached_data",
+        "test_pending_uses_one_read_snapshot_during_a_concurrent_commit",
+        "test_pending_ids_do_not_trust_a_forged_terminal_result_index",
+        "PendingProjectionTests",
+        "test_duplicate_command_boolean_and_integer_payloads_conflict",
+        "test_duplicate_command_integer_and_float_payloads_conflict",
+        "test_duplicate_command_canonical_content_is_harmless"
+      ],
+      "boundary": "Read-only Command/Event snapshot; receipt-only IDs are investigation data, not dispatch permission.",
+      "evidence_level": "independently accepted within the explicitly bounded M0 scope",
+      "independent_review": "Docs/development/evidence/2026-09-11-m0-05-review.json"
+    },
+    {
+      "criterion": "Original Command retry after post-commit process death returns original result without duplicate effects",
+      "tests": [
+        "test_real_process_death_after_commit_preserves_original_result_and_single_effect",
+        "test_retry_after_response_loss_on_fresh_connection_returns_original_result"
+      ],
+      "boundary": "Real spawned child terminated after durable commit and before a client response; out-of-band test witness only.",
+      "evidence_level": "independently accepted within the explicitly bounded M0 scope",
+      "independent_review": "Docs/development/evidence/2026-09-11-m0-05-review.json"
+    }
+  ],
+  "source_sha256": {
+    "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+    "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+    "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+    "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+  },
+  "review": {
+    "status": "accepted",
+    "decision": "accepted_in_scope",
+    "reviewer": "Kuhn",
+    "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+    "evidence": "Docs/development/evidence/2026-09-11-m0-05-review.json",
+    "evidence_sha256": "ff9ea2955ad92edc3e0688687ec1ca683851b2a2e590a332ff071bc431fc98b1",
+    "review_completed_at": "2026-09-11T04:14:51.112061+08:00",
+    "recorded_at": "2026-09-11T10:38:35.162013+08:00",
+    "open_findings": 0,
+    "resolved_important": [
+      "M0-05-R1"
+    ],
+    "scope_note": "Independent acceptance of the corrected M0-05 implementation only; dynamic closeout metadata verified by executor."
+  },
+  "claims": {
+    "work_item_accepted": true,
+    "full_orchestrator_recovery": false,
+    "external_action_reconciliation": false,
+    "conformance_status": "registered",
+    "conformance_passed_tests": 0,
+    "bootstrap_status": "not_started",
+    "protocol_task_completed": false
+  },
+  "uncovered_risks": [
+    "M0 is synchronous internal Command handling; artificial receipt-only histories are not a real partial-commit crash window.",
+    "No model/provider/Shell adapter, Action/outbox, Dispatcher, Lease/Binding/Approval/budget restoration or external UNKNOWN reconciliation.",
+    "Paused coverage only preserves a persisted project.created paused value; real pause/resume and in-flight barriers / TEST-025 remain unaccepted.",
+    "Recovery does not repair missing/corrupt durable idempotency results. Internal response-loss retries reuse intact atomic result records.",
+    "M0-06 accepted Conformance runner/report is still todo. Listed TEST mappings are not Conformance passed results.",
+    "No Git repository or ClaudeLink service in this environment. No commit/push or fabricated communication."
+  ],
+  "reproduction_command": "Set child-process PYTHONPATH to repository src; python -m unittest tests/m0/test_replay_recovery.py -v; python -m unittest discover -s tests/m0 -t . -v; python Docs/development/evidence/2026-09-11-m0-05-probes.py --repetitions 5 --output artifacts/m0-05-probes-rerun.json",
+  "handoff_evidence": "Docs/development/evidence/2026-09-11-m0-05-development.json",
+  "supplementary_probes": {
+    "status": "verified",
+    "evidence": "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json",
+    "source": "Docs/development/evidence/2026-09-11-m0-05-probes.py",
+    "command": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "Docs/development/evidence/2026-09-11-m0-05-probes.py",
+        "--repetitions",
+        "5",
+        "--output",
+        "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json"
+      ],
+      "started_at": "2026-09-11T03:37:42.054711+08:00",
+      "finished_at": "2026-09-11T03:37:49.479025+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_probes-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_probes-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      }
+    },
+    "recovery_runs": 5,
+    "post_commit_process_deaths": 5,
+    "mutations_detected": 8,
+    "mutations_total": 8,
+    "detection_rule": "Every isolated mutant child: exit 1, exactly one assertion failure, zero errors; source files not edited."
+  },
+  "updated_at": "2026-09-11T10:40:12.793136+08:00",
+  "projection_digests": {
+    "before": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+    "after_each_restart": [
+      "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+      "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+      "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+      "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+      "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0"
+    ]
+  },
+  "no_dispatch_evidence": {
+    "live_simulator_invocations_before_restart": 3,
+    "sql_write_attempts": [],
+    "effect_positive_control_counts": {
+      "simulation.execute": 1,
+      "shell.Popen": 1,
+      "shell.system": 1,
+      "network.socket": 1,
+      "network.urlopen": 1,
+      "runtime.start_sentinel": 1,
+      "model.invoke_sentinel": 1
+    },
+    "effect_counts_during_recovery": {
+      "simulation.execute": 0,
+      "shell.Popen": 0,
+      "shell.system": 0,
+      "network.socket": 0,
+      "network.urlopen": 0,
+      "runtime.start_sentinel": 0,
+      "model.invoke_sentinel": 0
+    },
+    "adapter_scope": "simulation.execute/stdlib exits are real spies; model.invoke and runtime.start are explicitly labelled sentinels for adapters absent in M0"
+  },
+  "pending_evidence": {
+    "pending_scope": "artificial receipt-only Command fault fixtures; not a normal M0 partial commit or external Action/UNKNOWN state",
+    "paused_scope": "preserves persisted project.created paused value only; no operational pause/resume verification",
+    "runs": [
+      {
+        "repetition": 1,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 2,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 3,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 4,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 5,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      }
+    ]
+  },
+  "historical_candidate_snapshot": {
+    "path": "Docs/development/evidence/2026-09-11-m0-05-review-snapshot.json",
+    "note": "Initial pre-review-fix code/test hashes and historical report hash only. Current accepted-candidate hashes are in source_sha256 and the identity-review-fix delta; no historical snapshot was overwritten."
+  },
+  "handoff_document": "Docs/development/evidence/2026-09-11-m0-05-handoff.md",
+  "candidate_verification": {
+    "green": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests/m0/test_replay_recovery.py",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:00:08.008031+08:00",
+      "finished_at": "2026-09-11T03:00:11.866608+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-frozen_candidate_green-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-frozen_candidate_green-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 35,
+      "passed": 35,
+      "supplementary_coverage_tests": 3
+    },
+    "regression": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "started_at": "2026-09-11T02:54:30.492847+08:00",
+      "finished_at": "2026-09-11T02:54:42.303011+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-regression_m0-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-regression_m0-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 128,
+      "passed": 128,
+      "note": "Latest full suite before assertion-message strengthening in concurrent-snapshot test; final full rerun will follow."
+    },
+    "note": "Historical pre-final-run evidence; original logs remain unchanged."
+  },
+  "pre_delta_verification": {
+    "green": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests/m0/test_replay_recovery.py",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:19:01.352446+08:00",
+      "finished_at": "2026-09-11T03:19:05.125005+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_focused-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_focused-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 35,
+      "passed": 35,
+      "supplementary_coverage_tests": 3
+    },
+    "regression": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:19:05.136849+08:00",
+      "finished_at": "2026-09-11T03:19:16.690138+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_m0-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_m0-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 128,
+      "passed": 128
+    },
+    "supplementary_probes": {
+      "status": "verified",
+      "evidence": "Docs/development/evidence/2026-09-11-m0-05-probes.json",
+      "source": "Docs/development/evidence/2026-09-11-m0-05-probes.py",
+      "command": {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-11-m0-05-probes.py",
+          "--repetitions",
+          "5"
+        ],
+        "started_at": "2026-09-11T03:07:08.680712+08:00",
+        "finished_at": "2026-09-11T03:07:15.887568+08:00",
+        "exit_code": 0,
+        "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-acceptance_probes-stdout.txt",
+        "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-acceptance_probes-stderr.txt",
+        "environment_override": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        }
+      },
+      "recovery_runs": 5,
+      "post_commit_process_deaths": 5,
+      "mutations_detected": 8,
+      "mutations_total": 8,
+      "detection_rule": "Every isolated mutant child: exit 1, exactly one assertion failure, zero errors; source files not edited."
+    },
+    "note": "Historical measurements of the original 35-test candidate, before JSON identity review correction; retained, not attributed to the current source."
+  },
+  "review_delta": {
+    "evidence": "Docs/development/evidence/2026-09-11-m0-05-identity-review-fix.json",
+    "status": "accepted",
+    "root_cause": "Command payload dict/list equality considers bool/int and int/float equal; the last duplicate replaces the first. A receipt matching the second then passes its digest validation.",
+    "changed_files": [
+      "src/aetp/core/projection.py",
+      "tests/m0/test_replay_recovery.py"
+    ],
+    "red": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:35:45.776621+08:00",
+      "finished_at": "2026-09-11T03:35:46.173714+08:00",
+      "exit_code": 1,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_red-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_red-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 3,
+      "failures": 2,
+      "errors": 0,
+      "expected_red": true
+    },
+    "green": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:37:24.744559+08:00",
+      "finished_at": "2026-09-11T03:37:25.116388+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-identity_green-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-identity_green-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 3,
+      "passed": 3
+    },
+    "scope": "Canonical JSON equality for duplicate Command identity only; no protocol/model normalization changes."
+  },
+  "final_verification": {
+    "focused": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests/m0/test_replay_recovery.py",
+        "-v"
+      ],
+      "started_at": "2026-09-11T10:34:29.887216+08:00",
+      "finished_at": "2026-09-11T10:34:33.819239+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_focused-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_focused-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 38,
+      "passed": 38
+    },
+    "full_m0": {
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "started_at": "2026-09-11T10:34:33.831575+08:00",
+      "finished_at": "2026-09-11T10:34:45.537517+08:00",
+      "exit_code": 0,
+      "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_m0-stdout.txt",
+      "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-accepted_m0-stderr.txt",
+      "environment_override": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "tests_run": 131,
+      "passed": 131
+    },
+    "source_sha256": {
+      "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+      "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+      "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+      "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3",
+      "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+      "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+      "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+      "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+    },
+    "preparation": {
+      "final_render": {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "tools/devprep.py",
+          "render"
+        ],
+        "started_at": "2026-09-11T10:40:09.984804+08:00",
+        "finished_at": "2026-09-11T10:40:10.217340+08:00",
+        "exit_code": 0,
+        "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_render-stdout.txt",
+        "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_render-stderr.txt",
+        "environment_override": {
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        }
+      },
+      "final_check": {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "tools/devprep.py",
+          "check"
+        ],
+        "started_at": "2026-09-11T10:40:10.227286+08:00",
+        "finished_at": "2026-09-11T10:40:10.477231+08:00",
+        "exit_code": 0,
+        "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_check-stdout.txt",
+        "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_check-stderr.txt",
+        "environment_override": {
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        }
+      },
+      "final_preparation": {
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "started_at": "2026-09-11T10:40:10.486550+08:00",
+        "finished_at": "2026-09-11T10:40:12.770964+08:00",
+        "exit_code": 0,
+        "stdout_path": "Docs/development/evidence/2026-09-11-m0-05-final_preparation-stdout.txt",
+        "stderr_path": "Docs/development/evidence/2026-09-11-m0-05-final_preparation-stderr.txt",
+        "environment_override": {
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "tests_run": 27,
+        "passed": 27
+      }
+    }
+  },
+  "review_log_hashes_verified": 12
+}

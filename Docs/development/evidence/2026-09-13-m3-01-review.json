@@ -1,0 +1,1275 @@
+{
+  "schema_version": "aetp-independent-review-0.1",
+  "work_item": "M3-01",
+  "candidate_revision": "v1",
+  "decision": "accepted",
+  "reviewer": "/root/m1_reviewer",
+  "executor": "/root",
+  "report_created_at": "2026-09-14T20:39:11.589540+08:00",
+  "first_recorded_command_at": "2026-09-14T01:04:54.661884+08:00",
+  "sampling_cutoff_at": "2026-09-14T20:29:24.576284+08:00",
+  "summary": "独立接受冻结 v1 的三个候选规划级标准；没有未解决的产品阻断发现。此结论不扩展为正式 Planning/Bootstrap 或完整 M3 验收。",
+  "accepted_scope": [
+    "当前 authenticated human_owner 在最终 writer transaction 中配置不可降级的 candidate_only Project；已有 Task 阻止配置，配置后公共执行入口受持久范围约束。",
+    "Mission/Team/Blueprint 仅保存提案；Team 调整保留成员身份、直接通信和独立提案权，Role/Contract 不生成等级或人类权限。",
+    "不可变候选版本、显式同 Project 来源与基线引用、完整 DAG 校验、循环/过期拒绝及提案级 Change Request/Impact；Preview 始终不授予执行资格。"
+  ],
+  "candidate": {
+    "report": {
+      "path": "artifacts/m3-01-test-report.json",
+      "bytes": 36409,
+      "sha256": "20c6538d2836d51ece938d32c8e2b1125cc42038e492daf85cc1d1d5e0a20c3d"
+    },
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-candidate-snapshot.json",
+      "bytes": 36834,
+      "sha256": "1cf84b0c54ec6936fbee3b915231daa49b313f6aeaaa60254267f7c0814e0532"
+    },
+    "baseline": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-baseline.json",
+      "bytes": 78447,
+      "sha256": "f3b1a9dc4b80c416d03abba2b972c049597a07bbfb1447815a2a63b4a537d8e1"
+    },
+    "design": {
+      "path": "Docs/superpowers/specs/2026-09-13-m3-01-planning-design.md",
+      "bytes": 10765,
+      "sha256": "a9292dead6e48ba9dda2d1aa15041dd9999c7f53c98b6a6e632c68fdd6d9416d"
+    },
+    "plan": {
+      "path": "Docs/superpowers/plans/2026-09-13-m3-01-planning.md",
+      "bytes": 3530,
+      "sha256": "a83bb4b02396a043cca7306e8cdf7184c6bff1170161f193e39b4cb73e7a268a"
+    },
+    "review_response": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-response.md",
+      "bytes": 3178,
+      "sha256": "0d80fd20abeba4447ffbed4c43dc30ab97b3fef9b0e147c39999681c30fe2c97"
+    },
+    "demonstration": {
+      "path": "artifacts/m3-01-demo-candidate-v1.json",
+      "bytes": 137223,
+      "sha256": "7e271fbde5c8557655408d8c4dbc6854a28a599770ed802b9e33e57a8630f4d6"
+    },
+    "frozen_author_review_status": "pending",
+    "frozen_sources": 221,
+    "metadata_archives": 3,
+    "immutable_prefixes": 2,
+    "baseline_archives": 252,
+    "historical_pins": 6,
+    "active_python_source_and_test_files_frozen": 108
+  },
+  "independence": {
+    "different_executor_and_reviewer": true,
+    "reviewer_count": 1,
+    "additional_agents_spawned": 0,
+    "product_or_original_tests_modified": false,
+    "backlog_status_memory_modified": false,
+    "author_journal_or_frozen_evidence_modified": false,
+    "author_audit_used_as_independent_verification": false,
+    "claudelink_used": false,
+    "communication": "Existing parent/reviewer collaboration only; ClaudeLink disabled.",
+    "independent_copy": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+    "copied_files": 7291,
+    "copy_manifest": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_workspace-01/copy-manifest.json",
+      "bytes": 2253093,
+      "sha256": "dee23074c5de75c5e466eaf2500e3c207540eae18fc509de296d05d57b1d2650"
+    },
+    "copy_final_check": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/evidence_integrity-01/copy-and-records.json",
+      "bytes": 140654,
+      "sha256": "1dbdcb2f7198be45da7f29f44bca4a02dd3758674a18b75b5677f92cff79b2cf"
+    },
+    "copied_python_files_including_tools_unchanged": 109,
+    "only_copied_inputs_changed": [
+      "Docs/development/evidence/backlog-check.json",
+      "Docs/development/evidence/devprep-check.json",
+      "Docs/development/evidence/environment.json",
+      "Docs/development/evidence/knowledge-graph-check.json",
+      "Docs/development/evidence/preparation-report.json"
+    ],
+    "preparation_checks_only_in_copy": true,
+    "unfrozen_acceptance_script_read_or_executed": false,
+    "network_install_git_or_global_changes": false
+  },
+  "findings": [],
+  "findings_count": 0,
+  "finding_dispositions": [
+    {
+      "id": "MID-001",
+      "disposition": "closed",
+      "issue": "Huge JSON amount/confidence formerly raised OverflowError before durable rejection.",
+      "verification": "Frozen input tests and independent 10**1000 probe confirm typed INVALID_PAYLOAD/INVALID_TEAM with durable Command, receipt and rejection.",
+      "evidence_labels": [
+        "m3_suite",
+        "independent_probes_v2"
+      ]
+    },
+    {
+      "id": "MID-002",
+      "disposition": "closed",
+      "issue": "Creation previously accepted identifiers that later references could not use.",
+      "verification": "Independent Mission/Team/Blueprint probes accept and reuse exactly 512 UTF-8 bytes and reject 513 bytes.",
+      "evidence_labels": [
+        "m3_suite",
+        "independent_probes_v2"
+      ]
+    },
+    {
+      "id": "author-replay-receipt-gap",
+      "disposition": "closed; author discovery, not counted as new reviewer finding",
+      "verification": "Missing receipts, resealed actors/sources and contradictory terminal facts are rejected by pure and Command+Event replay; failed incremental apply preserves state/cursor.",
+      "evidence_labels": [
+        "m3_suite",
+        "independent_probes_v2",
+        "readonly_demo_v2"
+      ]
+    }
+  ],
+  "criteria_assessment": [
+    {
+      "criterion": "动态组队不生成层级特权",
+      "decision": "accepted",
+      "scope": "candidate planning only",
+      "reason": "Team 1→2→3 versions add then remove a peer without changing Agent identity or Governance Policy. Removed and Policy-unlisted registered peers still propose and exchange messages; Manager text does not confer human power.",
+      "evidence_labels": [
+        "m3_suite",
+        "independent_probes_v2",
+        "readonly_demo_v2"
+      ]
+    },
+    {
+      "criterion": "Blueprint 和 DAG 有版本与循环校验",
+      "decision": "accepted",
+      "scope": "candidate planning only",
+      "reason": "All nine demo candidate digests/supersedes chains and old versions survive every prefix. Blueprint DAG versions 1–5 have deterministic edges/layers; cycle, stale-base, reference and source tampering are rejected. Two-process tests cover the final writer boundary.",
+      "evidence_labels": [
+        "m3_suite",
+        "independent_probes_v2",
+        "readonly_demo_v2"
+      ]
+    },
+    {
+      "criterion": "提案不要求 Manager 许可",
+      "decision": "accepted",
+      "scope": "candidate planning only",
+      "reason": "Two peers independently propose without Manager permission or an author Task Lease. Peer proposes recovery, retains Change Request access after Team removal, and gains no execution authority from a proposal.",
+      "evidence_labels": [
+        "m3_suite",
+        "independent_probes_v2",
+        "readonly_demo_v2"
+      ]
+    }
+  ],
+  "verification": {
+    "regression": {
+      "suites": [
+        {
+          "label": "m3_suite",
+          "methods": 63,
+          "exit_code": 0,
+          "record": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m3_suite-01/command.json",
+            "bytes": 1587,
+            "sha256": "7c931954742aee78e6b969c95a00a64a5b3704677d6d13f035ff943502a74568"
+          }
+        },
+        {
+          "label": "m2_suite",
+          "methods": 167,
+          "exit_code": 0,
+          "record": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m2_suite-01/command.json",
+            "bytes": 1587,
+            "sha256": "e7df8733d3edb0bfe41b54506f4b8e3ddb963b2a0bb7e4bc804e0bb88e5081f3"
+          }
+        },
+        {
+          "label": "m1_suite",
+          "methods": 85,
+          "exit_code": 0,
+          "record": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m1_suite-01/command.json",
+            "bytes": 1587,
+            "sha256": "d026ad955d2554e47b31e9c06266d4d5d4b6a6042fa907ffdd3778b80fbce841"
+          }
+        },
+        {
+          "label": "m0_suite",
+          "methods": 156,
+          "exit_code": 0,
+          "record": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m0_suite-01/command.json",
+            "bytes": 1587,
+            "sha256": "5e12dcbf7b5eca149307f40488ab8e5790979b96944e7fec81655ad6088ee074"
+          }
+        },
+        {
+          "label": "preparation_suite",
+          "methods": 27,
+          "exit_code": 0,
+          "record": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_suite-01/command.json",
+            "bytes": 1610,
+            "sha256": "099093f41b89ba5b7f06af20b6a231e2d6e83264701e5d19d38eda34483c1d8d"
+          }
+        }
+      ],
+      "product_test_methods": 471,
+      "preparation_methods": 27,
+      "total_methods": 498,
+      "passed": 498
+    },
+    "independent_probes": {
+      "methods": 7,
+      "passed": 7,
+      "record": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes_v2-01/probe-observations.json",
+        "bytes": 7675,
+        "sha256": "c2b74d1cd42c7e906338b9035abf69266027cd5514fb82215adb7b8c61aeec42"
+      },
+      "coverage": [
+        "25 execution Command entry checks across five hosts plus start_session; late legacy execution configuration retains candidate scope",
+        "removed/unlisted peer proposal and reciprocal messages; source/history retention and resealed removal refusal",
+        "UTF-8 512/513-byte continuity and huge numeric durable rejections",
+        "receipt/actor/terminal replay and atomic cursor failure",
+        "two real processes in each forced writer order: configure-first and legacy-task-create-first; uncommitted state hidden"
+      ],
+      "initial_attempt": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes-01/command.json",
+        "bytes": 1965,
+        "sha256": "be958a103491c8d1790734d81989ea6a03f6f83b7f052fe31619742580071aac"
+      },
+      "initial_passes_not_double_counted": true
+    },
+    "final_passing_methods": 505,
+    "demo_readonly": {
+      "record": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo_v2-01/readonly-demo.json",
+        "bytes": 142569,
+        "sha256": "25d67a0dc9db562d8ec2d2d98b343782cbef1a4801fa23b8dafabd068e9c8528"
+      },
+      "execution_root": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+      "databases": 6,
+      "prefixes_checked": 360,
+      "new_m3_prefixes": 112,
+      "legacy_m2_prefixes": 248,
+      "per_database": [
+        {
+          "generation": "M3-01",
+          "database_kind": "database",
+          "event_count": 56,
+          "command_count": 28,
+          "state_sha256": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+          "prefixes_checked": 56,
+          "prefixes_with_pending_commands": 30
+        },
+        {
+          "generation": "M3-01",
+          "database_kind": "facts_only_database",
+          "event_count": 56,
+          "command_count": 28,
+          "state_sha256": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+          "prefixes_checked": 56,
+          "prefixes_with_pending_commands": 30
+        },
+        {
+          "generation": "M2-01",
+          "database_kind": "database",
+          "event_count": 24,
+          "command_count": 12,
+          "state_sha256": "e1d331a196848c40de17705b7a349f34f7f7dd4458d1027e46d57021b3b5f09e",
+          "prefixes_checked": 24,
+          "prefixes_with_pending_commands": 12
+        },
+        {
+          "generation": "M2-01",
+          "database_kind": "facts_only_database",
+          "event_count": 24,
+          "command_count": 12,
+          "state_sha256": "e1d331a196848c40de17705b7a349f34f7f7dd4458d1027e46d57021b3b5f09e",
+          "prefixes_checked": 24,
+          "prefixes_with_pending_commands": 12
+        },
+        {
+          "generation": "M2-02",
+          "database_kind": "database",
+          "event_count": 100,
+          "command_count": 50,
+          "state_sha256": "9f00acc983167615aa631f8ea4773945219ba00d8a21403587e78e4ce09d4d9a",
+          "prefixes_checked": 100,
+          "prefixes_with_pending_commands": 56
+        },
+        {
+          "generation": "M2-02",
+          "database_kind": "facts_only_database",
+          "event_count": 100,
+          "command_count": 50,
+          "state_sha256": "9f00acc983167615aa631f8ea4773945219ba00d8a21403587e78e4ce09d4d9a",
+          "prefixes_checked": 100,
+          "prefixes_with_pending_commands": 56
+        }
+      ],
+      "guard_count": 25,
+      "all_guard_calls_zero": true,
+      "all_sqlite_total_changes_zero": true,
+      "final_pending_commands": [],
+      "full_and_facts_states_equal": true,
+      "original_and_copy_bytes_and_sidecars_unchanged": true,
+      "legacy_output_files_checked": 2,
+      "distinct_output_bindings": 2,
+      "legacy_comparison": "Actual recovered Decision/Meeting or Decision/Task/Approval/Intervention records and final hashes match demos pinned by accepted M2-01 v2 and M2-02 v1 reviews.",
+      "new_demo": "Mission 1, Team 3, Blueprint 5 proposed versions; 26 explicit submissions plus two deterministic intervention.record Commands. Four previews remain unavailable; runtime Tasks=0.",
+      "direct_messages": "Two saved process-local snapshots inspected; not claimed as durable Event facts or real model calls."
+    },
+    "preparation": {
+      "labels": [
+        "preparation_render",
+        "preparation_check",
+        "preparation_suite"
+      ],
+      "all_exit_codes_zero": true,
+      "actual_cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+      "outputs": [
+        {
+          "path": ".tmp/m3-01-review-v1/workspace/Docs/development/evidence/backlog-check.json",
+          "bytes": 453,
+          "sha256": "2229aa3f6977ae728eda198db8db0477edf7745ff669e2310293dc4a83d63311"
+        },
+        {
+          "path": ".tmp/m3-01-review-v1/workspace/Docs/development/evidence/devprep-check.json",
+          "bytes": 587,
+          "sha256": "5f104df635e8328212aeb0d97a8709a2701d7309b5267a76d6a92acd04fc6410"
+        },
+        {
+          "path": ".tmp/m3-01-review-v1/workspace/Docs/development/evidence/environment.json",
+          "bytes": 1086,
+          "sha256": "e49764ce3fd587b530ca50f5d10e20d46b10d44a2947c256476ca5e74d2aec8b"
+        },
+        {
+          "path": ".tmp/m3-01-review-v1/workspace/Docs/development/evidence/knowledge-graph-check.json",
+          "bytes": 407,
+          "sha256": "fa2cd328eb54e8bff471113207a33d6c7f54a98171528ec8ca4b6cfe68959e37"
+        },
+        {
+          "path": ".tmp/m3-01-review-v1/workspace/Docs/development/evidence/preparation-report.json",
+          "bytes": 9324,
+          "sha256": "ace985c4e56754954cc8cdaa265e14a7e84c61cac02c143c9dfec482c1649389"
+        }
+      ],
+      "root_preparation_refreshed": false
+    },
+    "compile": {
+      "label": "compile",
+      "exit_code": 0,
+      "actual_cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace"
+    },
+    "final_integrity": {
+      "original": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/integrity.json",
+        "bytes": 47175,
+        "sha256": "3ae83ca112ff07f3ec33cd0ed8afeb7a03e5d751b26c0c41cf45f42219fe27fb"
+      },
+      "copy": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_integrity-01/command.json",
+        "bytes": 1857,
+        "sha256": "70786dc1dfca1dc74e252a05cd36106c5d2e53291a0776447e5d63587d01ed23"
+      },
+      "copy_and_records": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/evidence_integrity-01/copy-and-records.json",
+        "bytes": 140654,
+        "sha256": "1dbdcb2f7198be45da7f29f44bca4a02dd3758674a18b75b5677f92cff79b2cf"
+      },
+      "initial_and_final_equal": true
+    },
+    "commands": [
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "integrity_initial",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "Docs/development/evidence/2026-09-13-m3-01-review-audit.py",
+          "audit"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:04:54.661884+08:00",
+        "finished_at": "2026-09-14T01:04:55.456871+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_initial-01/stdout.txt",
+          "bytes": 172,
+          "sha256": "25f071fc1814d63bad71e93e66b5f79723bc49fd26cb23d1615250e09d625627"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_initial-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_initial-01/command.json",
+          "bytes": 1853,
+          "sha256": "850b3b3923b3afd2aca46772e155df8c57be34bc492b7059c7f86bbbaee9a206"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "copy_workspace",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "Docs/development/evidence/2026-09-13-m3-01-review-audit.py",
+          "copy"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:05:19.804633+08:00",
+        "finished_at": "2026-09-14T01:06:47.136407+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_workspace-01/stdout.txt",
+          "bytes": 91,
+          "sha256": "641cd9a084d635c372cd8d86bce6603af0eaf9f0e7ebfabf5353bc10bd74e9cf"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_workspace-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_workspace-01/command.json",
+          "bytes": 1836,
+          "sha256": "76b3a5fd4f2d9a9b911cbc453f29f54f0f276f335d892920217f706b73befc7b"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m1_suite",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m1",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:09:02.423716+08:00",
+        "finished_at": "2026-09-14T01:09:30.878993+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m1_suite-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m1_suite-01/stderr.txt",
+          "bytes": 17244,
+          "sha256": "2a04bf05cc85a0132334e616fcf48053349e6f96e3feb718464608bbdea8cc73"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m1_suite-01/command.json",
+          "bytes": 1587,
+          "sha256": "d026ad955d2554e47b31e9c06266d4d5d4b6a6042fa907ffdd3778b80fbce841"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m3_suite",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m3",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:09:02.429353+08:00",
+        "finished_at": "2026-09-14T01:09:29.902620+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m3_suite-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m3_suite-01/stderr.txt",
+          "bytes": 11166,
+          "sha256": "7596790f307c21b04c7c1f5ba514c45269c6fe341a1b77929fa5f0e293f80da4"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m3_suite-01/command.json",
+          "bytes": 1587,
+          "sha256": "7c931954742aee78e6b969c95a00a64a5b3704677d6d13f035ff943502a74568"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m2_suite",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m2",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:09:02.429995+08:00",
+        "finished_at": "2026-09-14T01:10:02.085232+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m2_suite-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m2_suite-01/stderr.txt",
+          "bytes": 30977,
+          "sha256": "28df81ba8279f2630c4a6a7a8df14636365cd2c7a6c41efe1afc774747199813"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m2_suite-01/command.json",
+          "bytes": 1587,
+          "sha256": "e7df8733d3edb0bfe41b54506f4b8e3ddb963b2a0bb7e4bc804e0bb88e5081f3"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "m0_suite",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:09:02.644002+08:00",
+        "finished_at": "2026-09-14T01:09:52.535258+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m0_suite-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m0_suite-01/stderr.txt",
+          "bytes": 28892,
+          "sha256": "392871e1ec215c8adae0b7c08ca7908809cf98ddf905bf5208a34e5ae9df6ce0"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/m0_suite-01/command.json",
+          "bytes": 1587,
+          "sha256": "5e12dcbf7b5eca149307f40488ab8e5790979b96944e7fec81655ad6088ee074"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "independent_probes",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-probes.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:16:35.220002+08:00",
+        "finished_at": "2026-09-14T01:17:00.074122+08:00",
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes-01/stderr.txt",
+          "bytes": 3338,
+          "sha256": "099cab9aa2b1fb25302fae25ae75688f6e1cfc2b99a793fa7d42f5610e15ac9a"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes-01/command.json",
+          "bytes": 1965,
+          "sha256": "be958a103491c8d1790734d81989ea6a03f6f83b7f052fe31619742580071aac"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation_render",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "tools/devprep.py",
+          "render"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:16:35.473057+08:00",
+        "finished_at": "2026-09-14T01:16:35.672672+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_render-01/stdout.txt",
+          "bytes": 337,
+          "sha256": "335956d003c9e78557d5ee2eff3e7b454fc2690bfc786d586e660893bb3e783f"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_render-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_render-01/command.json",
+          "bytes": 1887,
+          "sha256": "827ed17785e94208a49fe2e3a6fb01d2860885777ce14d892ddbbd96b925c1f2"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "compile",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "compileall",
+          "-q",
+          "src",
+          "tests",
+          "tools"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:16:35.703561+08:00",
+        "finished_at": "2026-09-14T01:16:36.272722+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/compile-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/compile-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/compile-01/command.json",
+          "bytes": 1555,
+          "sha256": "c251a0942ff6d2c9f2d4780e3934a1e6ab89d995f20b56fdf0b460a39404d210"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation_check",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "tools/devprep.py",
+          "check"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:18:16.071899+08:00",
+        "finished_at": "2026-09-14T01:18:16.286271+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_check-01/stdout.txt",
+          "bytes": 127,
+          "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_check-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_check-01/command.json",
+          "bytes": 1881,
+          "sha256": "33dd613d2021cee7b3770aba6192bbe16e88fb2e6f707012fa66b8150b210e94"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation_suite",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:18:16.346098+08:00",
+        "finished_at": "2026-09-14T01:18:18.657888+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_suite-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_suite-01/stderr.txt",
+          "bytes": 4729,
+          "sha256": "e400823803a345cf563a360caa4ea7decf7988e910eee18298e7034e4b3470fc"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/preparation_suite-01/command.json",
+          "bytes": 1610,
+          "sha256": "099093f41b89ba5b7f06af20b6a231e2d6e83264701e5d19d38eda34483c1d8d"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "independent_probes_v2",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-probes-v2.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T01:22:19.999329+08:00",
+        "finished_at": "2026-09-14T01:22:25.371023+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes_v2-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes_v2-01/stderr.txt",
+          "bytes": 1120,
+          "sha256": "e4744f8421a06019250201226788225ec01e065c5591b7ed417172070a043099"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes_v2-01/command.json",
+          "bytes": 1989,
+          "sha256": "03cc7d2511a12353a8708087ac6c3ef35c8cc72744ebdbe37676b3bc4f33f389"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "readonly_demo",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-readonly.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T20:26:32.823685+08:00",
+        "finished_at": "2026-09-14T20:26:33.385243+08:00",
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo-01/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo-01/stderr.txt",
+          "bytes": 395,
+          "sha256": "7624ee64b496f1f40e0fc0aead93d5dc1e8bf4aeb49ad66603667d5568306e32"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo-01/command.json",
+          "bytes": 1945,
+          "sha256": "0c5fcd4463f7ec534389cb914b3a515c7078eaf9e7929f5212be3ab0f6a73360"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "readonly_demo_v2",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-readonly-v2.py"
+        ],
+        "cwd": "D:\\Github\\AETP\\.tmp\\m3-01-review-v1\\workspace",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T20:28:41.009681+08:00",
+        "finished_at": "2026-09-14T20:28:50.687849+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo_v2-01/stdout.txt",
+          "bytes": 210,
+          "sha256": "27aefda02e0d3a222bf3bb7ed7ea00e2ecec10a42f7a623c98d44e98da098c35"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo_v2-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo_v2-01/command.json",
+          "bytes": 1969,
+          "sha256": "8d9520dfbc7c09b7f566b76c73a1a22945bbb2fab49150b52f0a991ce693ccc0"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "copy_integrity",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-audit.py",
+          "check_copy"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T20:29:23.648819+08:00",
+        "finished_at": "2026-09-14T20:29:27.299127+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_integrity-01/stdout.txt",
+          "bytes": 95,
+          "sha256": "824064b60a61e38fd0115f6aaa6152787812ed00201b69954e0af288ad2b700b"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_integrity-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_integrity-01/command.json",
+          "bytes": 1857,
+          "sha256": "70786dc1dfca1dc74e252a05cd36106c5d2e53291a0776447e5d63587d01ed23"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "integrity_final",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-audit.py",
+          "audit"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T20:29:23.662846+08:00",
+        "finished_at": "2026-09-14T20:29:24.591475+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/stdout.txt",
+          "bytes": 172,
+          "sha256": "25f071fc1814d63bad71e93e66b5f79723bc49fd26cb23d1615250e09d625627"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/command.json",
+          "bytes": 1858,
+          "sha256": "0d45783c7a2173fd21c1507e10c733275b19d732173127d894bd33b1172c3d94"
+        }
+      },
+      {
+        "work_item": "M3-01",
+        "reviewer": "/root/m1_reviewer",
+        "label": "evidence_integrity",
+        "attempt": 1,
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "D:/Github/AETP/Docs/development/evidence/2026-09-13-m3-01-review-evidence-check.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "timezone": "Asia/Shanghai",
+        "started_at": "2026-09-14T20:33:41.395990+08:00",
+        "finished_at": "2026-09-14T20:34:16.655887+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/evidence_integrity-01/stdout.txt",
+          "bytes": 252,
+          "sha256": "2ff33f344828549a792a602cbc5611abc9fb2b4cb1ff467f8e15340d6486b0ba"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/evidence_integrity-01/stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/evidence_integrity-01/command.json",
+          "bytes": 1885,
+          "sha256": "34cd216674eca7ffcdf796e24ddb44eadb5e4fab6d5a444abed1a2c59040e129"
+        }
+      }
+    ],
+    "command_records_in_report": 17,
+    "command_cutoff_at": "2026-09-14T20:34:16.655887+08:00",
+    "command_recording_scope": "Actual completed per-attempt command.json records before report assembly. Assembly and post-write validation are separate run records, avoiding a self-referencing report hash. No journal was fabricated.",
+    "reviewer_nonzero_dispositions": [
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes-01/command.json",
+          "bytes": 1965,
+          "sha256": "be958a103491c8d1790734d81989ea6a03f6f83b7f052fe31619742580071aac"
+        },
+        "exit_code": 1,
+        "disposition": "Reviewer fixture errors: Provider parent was a restricted user temp directory; second race worker was awaited during SQLite schema initialization while the first held a writer transaction. Original seven-method run had five passes/two errors. v2 uses the authorized workspace Provider path and initializes both services before transaction gates; product and assertions unchanged."
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo-01/command.json",
+          "bytes": 1945,
+          "sha256": "0c5fcd4463f7ec534389cb914b3a515c7078eaf9e7929f5212be3ab0f6a73360"
+        },
+        "exit_code": 1,
+        "disposition": "Reviewer provenance lookup assumed the accepted M2-01 review was directly archived by M3. It is pinned by the archived M2-02 baseline. Failure occurred before any database open; v2 follows that verified hash chain without changing replay assertions."
+      }
+    ],
+    "all_formal_attempt_scripts_and_input_snapshots_preserved": true,
+    "author_evidence": {
+      "record": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/integrity.json",
+        "bytes": 47175,
+        "sha256": "3ae83ca112ff07f3ec33cd0ed8afeb7a03e5d751b26c0c41cf45f42219fe27fb"
+      },
+      "records_verified": 23,
+      "nonzero_runs": [
+        {
+          "label": "scope_team_red",
+          "exit_code": 1,
+          "started_at": "2026-09-13T23:57:58.968802+08:00",
+          "finished_at": "2026-09-13T23:57:59.349042+08:00",
+          "stdout": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-scope_team_red.stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-scope_team_red.stderr.txt",
+            "sha256": "1c059b4b72bfaef9a346083347797c9ef3f02649d99ec26c1e84e022ca9e0d41"
+          }
+        },
+        {
+          "label": "blueprints_red",
+          "exit_code": 1,
+          "started_at": "2026-09-14T00:08:08.194572+08:00",
+          "finished_at": "2026-09-14T00:08:14.957804+08:00",
+          "stdout": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-blueprints_red.stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-blueprints_red.stderr.txt",
+            "sha256": "ed0042c29addc76495b494172e2a245787710a26da1230b475e291fa3648971f"
+          }
+        },
+        {
+          "label": "replay_concurrency_red",
+          "exit_code": 1,
+          "started_at": "2026-09-14T00:19:49.499076+08:00",
+          "finished_at": "2026-09-14T00:19:55.782974+08:00",
+          "stdout": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-replay_concurrency_red.stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-replay_concurrency_red.stderr.txt",
+            "sha256": "d8c391ad2d267f403c974877cf292fdf92d1c5850e1a043874f13eeded026ef0"
+          }
+        },
+        {
+          "label": "midreview_inputs_red",
+          "exit_code": 1,
+          "started_at": "2026-09-14T00:25:21.058732+08:00",
+          "finished_at": "2026-09-14T00:25:22.583861+08:00",
+          "stdout": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-midreview_inputs_red.stdout.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "stderr": {
+            "path": "Docs/development/evidence/2026-09-13-m3-01-midreview_inputs_red.stderr.txt",
+            "sha256": "dff8e15f4175cc1304efc2abf1f2fc0cda8f9cdea1dac878348f8a5016a87be1"
+          }
+        }
+      ],
+      "failure_notes": [
+        "scope_team_red: 20 missing-feature assertion failures; blueprints_red: 23 missing-feature assertion failures.",
+        "replay_concurrency_red: 15 methods, two genuine receipt/effect assertion failures; fixed with PlanningCursor, GREEN 15/15.",
+        "midreview_inputs_red: five methods, three genuine numeric/identifier assertions; final GREEN 5/5.",
+        "All author raw RED/GREEN outputs are retained. Reviewer v3/v5 reports retain fixture/expectation failures, but the first fixture source was changed before archival; that limitation remains explicit.",
+        "Reviewer v5 independently verified nine bounded scenarios, not formal acceptance and not added to author unittest totals."
+      ],
+      "used_as_independent_test_results": false
+    },
+    "historical_midreview": {
+      "review_response": {
+        "path": "Docs/development/evidence/2026-09-13-m3-01-review-response.md",
+        "bytes": 3178,
+        "sha256": "0d80fd20abeba4447ffbed4c43dc30ab97b3fef9b0e147c39999681c30fe2c97"
+      },
+      "results": [
+        {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-midreview-results-v3.json",
+          "bytes": 4787,
+          "sha256": "41256e3ff81530a20fdcef19d3abda6633ab2b06a8a6b3ad6acb10e8b3c3ac81"
+        },
+        {
+          "path": "Docs/development/evidence/2026-09-13-m3-01-midreview-results-v5.json",
+          "bytes": 6447,
+          "sha256": "2c94b669977a1dd82e3121c225451df7112120d989611e4dc3c2e01b0014d56d"
+        }
+      ],
+      "nonzero_attempts": 3,
+      "disposition": "ResourceGate refused in-memory SQLite; project.create fixture target was incorrect; v4 incorrectly expected INVALID_PAYLOAD for confidence instead of INVALID_TEAM.",
+      "preservation_limit": "The first midreview fixture was edited before archival; a complete original source/stdout/stderr archive is unavailable. Frozen response/results and session outputs disclose this. Do not conflate with fully captured formal review attempts.",
+      "midreview_scenarios_added_to_formal_test_total": 0
+    },
+    "supplemental_discovery_diagnostics": {
+      "source": "Session tool outputs; outside the command recorder, no timestamps reconstructed.",
+      "entries": [
+        {
+          "tool_chunk": "f3c1a0",
+          "exit_code": 1,
+          "reason": "Read/discovery ended on expected absence of not-yet-created workspace/report paths."
+        },
+        {
+          "tool_chunk": "f1f633",
+          "exit_code": 1,
+          "reason": "PowerShell native quoting damaged Python -c JSON introspection; switched to structured reads/scripts."
+        },
+        {
+          "tool_chunk": "e52dc0",
+          "exit_code": 1,
+          "reason": "Read/discovery rg pattern had no matches; old reviewer script was under its review-runs directory."
+        },
+        {
+          "tool_chunk": "036b11",
+          "exit_code": 1,
+          "reason": "Demo Markdown lookup used evidence directory; corrected path is artifacts/m3-01-demo-candidate-v1.md."
+        },
+        {
+          "tool_chunk": "595022",
+          "exit_code": 0,
+          "reason": "PowerShell default decoding made ConvertFrom-Json emit a nonterminating error; explicit UTF-8 read succeeded."
+        },
+        {
+          "tool_chunk": "933af0",
+          "exit_code": 1,
+          "reason": "Attempted to read reviewer output paths from copied cwd; corrected to original evidence cwd."
+        }
+      ],
+      "product_mutations": false,
+      "counted_as_tests": false
+    }
+  },
+  "source_review": {
+    "shared_source_diff": {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/shared-source-diff.txt",
+      "bytes": 10795,
+      "sha256": "335657c9d0cfd3cefd8560088c9efa85885e6169fa8bb900a65eff427d0dbe65"
+    },
+    "changed_shared_source_paths": [
+      "src/aetp/core/commands.py",
+      "src/aetp/core/projection.py",
+      "src/aetp/domain/models.py"
+    ],
+    "reviewed_areas": [
+      "planning records/references/graphs/blueprints/preview/service/causality",
+      "core Command final transaction execution gate",
+      "Projection planning replay cursor and cache fallback",
+      "domain Command schema routing"
+    ],
+    "normative_references": {
+      "source": "Docs/AETP-设计方案.md",
+      "equality": [
+        "§5.8 L914",
+        "§5.11 L982",
+        "§8.5 L1593"
+      ],
+      "version_history_dag": [
+        "§7.1 L1203",
+        "§7.4 L1319",
+        "§11.1 L2313",
+        "§11.5 L2389"
+      ],
+      "transaction_and_proposal_permission": "§14.1 L2790",
+      "formal_scope_boundary": [
+        "§6.1 L1071",
+        "§15.5 L3328",
+        "§17.2 L3456",
+        "TEST-028 L3701"
+      ]
+    }
+  },
+  "limits": [
+    "Formal Bootstrap, Team/Blueprint target Approval, active Team, applied executable graph and accepted formal Blueprint vNext are absent; activate/apply remains unavailable.",
+    "No trusted positive Verification/Integration/Mission Acceptance quality gate or TEST-028 success; full M1/M2/M3 and full protocol Conformance are not accepted.",
+    "Role/Contract capabilities, qualification and Impact cost/delay/risk are proposals/declarations, not evaluated authority, model routing or certified billing.",
+    "Local deterministic identities and process snapshots do not certify autonomous models; general OS isolation, multi-host scale and cross-Blueprint Task edges are not certified.",
+    "Five historical extra M1-02 reviewer methods remain uncounted against accepted M1-02 v2; this review does not retroactively execute them."
+  ],
+  "claims": {
+    "current_candidate_accepted": true,
+    "backlog_three_criteria_accepted": true,
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "formal_verification": "INCONCLUSIVE",
+    "formal_verification_passed": false,
+    "task_completed": false,
+    "bootstrap_status": "not_started",
+    "bootstrap_accepted": false,
+    "full_m1_acceptance": "not_accepted",
+    "whole_m1_accepted": false,
+    "whole_m2_accepted": false,
+    "whole_m3_accepted": false,
+    "test_028_passed": false,
+    "conformance_registered": 28,
+    "conformance_passed": 0,
+    "full_conformance_accepted": false
+  },
+  "handoff": {
+    "to": "/root",
+    "next_step": "Consume this independent frozen-candidate report and separate successful report validation; append closeout evidence within the already agreed scope.",
+    "reviewer_write_set": [
+      "new Docs/development/evidence/2026-09-13-m3-01-review* except frozen review-response",
+      ".tmp/m3-01-review-v1/"
+    ],
+    "release": "Reviewer releases this write set with the successful validation handoff; no product, original tests, backlog/status/MEMORY, author journal or frozen inputs were edited.",
+    "author_pending_report_preserved": true,
+    "git_commit_or_push": false
+  },
+  "evidence_files": [
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_workspace-01/copy-manifest.json",
+      "bytes": 2253093,
+      "sha256": "dee23074c5de75c5e466eaf2500e3c207540eae18fc509de296d05d57b1d2650"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_initial-01/integrity.json",
+      "bytes": 47175,
+      "sha256": "0c9e059b2eb76eb7f1f99144ff439b6f927d78663e5211717fa6fbd0d4c561c5"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/integrity.json",
+      "bytes": 47175,
+      "sha256": "3ae83ca112ff07f3ec33cd0ed8afeb7a03e5d751b26c0c41cf45f42219fe27fb"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/integrity_final-01/shared-source-diff.txt",
+      "bytes": 10795,
+      "sha256": "335657c9d0cfd3cefd8560088c9efa85885e6169fa8bb900a65eff427d0dbe65"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/copy_integrity-01/stdout.txt",
+      "bytes": 95,
+      "sha256": "824064b60a61e38fd0115f6aaa6152787812ed00201b69954e0af288ad2b700b"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/evidence_integrity-01/copy-and-records.json",
+      "bytes": 140654,
+      "sha256": "1dbdcb2f7198be45da7f29f44bca4a02dd3758674a18b75b5677f92cff79b2cf"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/independent_probes_v2-01/probe-observations.json",
+      "bytes": 7675,
+      "sha256": "c2b74d1cd42c7e906338b9035abf69266027cd5514fb82215adb7b8c61aeec42"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runs/readonly_demo_v2-01/readonly-demo.json",
+      "bytes": 142569,
+      "sha256": "25d67a0dc9db562d8ec2d2d98b343782cbef1a4801fa23b8dafabd068e9c8528"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-audit.py",
+      "bytes": 10465,
+      "sha256": "8e41728c3411f2291536bdaedfd64007c12f3c96e48b4cdd561be52bba7bc2dd"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-evidence-check.py",
+      "bytes": 7845,
+      "sha256": "3a23f99dad4c346c435ee6f3a8a6f2e52d410420e2f24eaaa9d619956a3e514c"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-probes-v2.py",
+      "bytes": 17982,
+      "sha256": "ccce39ba83c7dd3fb7cbe225278ff580d9b30cc37d47c49a4e858138881746fb"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-probes.py",
+      "bytes": 17587,
+      "sha256": "5c8c145c0b22fcdf6a149f2814ffe86ac9165c991212dfa047e09af4695dad28"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-readonly-v2.py",
+      "bytes": 27751,
+      "sha256": "6eb414498df943a5d5ad2bbc66189eabfd4b23cf4103ca8400f04a872de1a1aa"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-readonly.py",
+      "bytes": 26995,
+      "sha256": "66e7aaa7738d4df70d20325876b8042e6c5c884fda72f056373e73a24be594db"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-report.py",
+      "bytes": 22213,
+      "sha256": "942440153c586fb776091d5a37d09fa342349cd097448056a5172a21ffa5b0f1"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-13-m3-01-review-runner.py",
+      "bytes": 3250,
+      "sha256": "9c9893c08e9037b88a01720f108fdaf163ee02c451b57d4f205b46215d6477e1"
+    }
+  ]
+}

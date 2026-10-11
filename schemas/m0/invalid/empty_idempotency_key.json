@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "id": "c-invalid-key",
+  "project_id": "p-1",
+  "actor_id": "a-1",
+  "type": "task.create",
+  "target_id": null,
+  "payload": {},
+  "expected_revision": 0,
+  "idempotency_key": "",
+  "correlation_id": "corr-invalid-key"
+}

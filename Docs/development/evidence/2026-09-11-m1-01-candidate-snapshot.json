@@ -1,0 +1,175 @@
+{
+  "work_item": "M1-01",
+  "created_at": "2026-09-12T00:17:34.290002+08:00",
+  "test_report": {
+    "path": "artifacts/m1-01-test-report.json",
+    "sha256": "7b4995e8d3495fcbed7d3fbd4047197e2928ae24980c8e7369f9a696509dfa99"
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787"
+    },
+    {
+      "path": "conformance/__init__.py",
+      "sha256": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2"
+    },
+    {
+      "path": "conformance/m0/__init__.py",
+      "sha256": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df"
+    },
+    {
+      "path": "conformance/m0/runner.py",
+      "sha256": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e"
+    },
+    {
+      "path": "Docs/AETP-设计方案.md",
+      "sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-demo.py",
+      "sha256": "62c29552d9ff0dbc372bcdc6e5fe289e806ee2959746f2758d83f9f7a07f3349"
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-11-m1-01-collaboration.md",
+      "sha256": "22e8a9252df21d8619b4c3f479e1568feb2fa6b494078a79caf21c9b225637ed"
+    },
+    {
+      "path": "Docs/superpowers/specs/2026-09-11-m1-01-collaboration-design.md",
+      "sha256": "e81fb4c323507411a008cf1d168200ce5af93aa0c2d82a0d3b6d5138c1609567"
+    },
+    {
+      "path": "src/aetp/__init__.py",
+      "sha256": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0"
+    },
+    {
+      "path": "src/aetp/collaboration/__init__.py",
+      "sha256": "9faba390803eeadae48c7b1601c48e52f80a316974fa3a74d1c024b6895ceebe"
+    },
+    {
+      "path": "src/aetp/collaboration/checks.py",
+      "sha256": "ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+    },
+    {
+      "path": "src/aetp/collaboration/contracts.py",
+      "sha256": "0550573059e0c0ed60f1d2d53010e54c87c60749d224b114f99609bbd5787e2b"
+    },
+    {
+      "path": "src/aetp/collaboration/messages.py",
+      "sha256": "705c1d470dafec4fa4f7c5b451cb957fe3d45d680dd11cb539ec17f176f2acb1"
+    },
+    {
+      "path": "src/aetp/collaboration/policy.py",
+      "sha256": "999372d708efcd6a0f725e8f16eb206ad36258f928a13609a5fd7615ec55e007"
+    },
+    {
+      "path": "src/aetp/collaboration/projection.py",
+      "sha256": "6e171baa224b327adb22ff8e58ffc93a64d2654653b9b75e3cf152b7dec32cc2"
+    },
+    {
+      "path": "src/aetp/collaboration/README.md",
+      "sha256": "b301a3264482496f7ed13ba66fa1ada1048c3bafa83a02b06b939c0348fb70c1"
+    },
+    {
+      "path": "src/aetp/collaboration/records.py",
+      "sha256": "c6f4973b08b515ed97a989107ec0f01cb302abc5a5864db4786965dc6bdda9a4"
+    },
+    {
+      "path": "src/aetp/collaboration/service.py",
+      "sha256": "b24d5f1f5a394079b2c2a2fd32301176b077a289ba1aa662f4869cbf3446cd07"
+    },
+    {
+      "path": "src/aetp/core/__init__.py",
+      "sha256": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2"
+    },
+    {
+      "path": "src/aetp/core/commands.py",
+      "sha256": "1a8e3a113fd9ea52c7bb139a76b4b96cf145b4a3b1c03d73e3da9aaec0e5e4e6"
+    },
+    {
+      "path": "src/aetp/core/idempotency.py",
+      "sha256": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c"
+    },
+    {
+      "path": "src/aetp/core/projection.py",
+      "sha256": "f05e42ca4d89efe40ea0ddeaf9faab12bcd1d03afc0b06c34dde962bc79053bf"
+    },
+    {
+      "path": "src/aetp/core/runtime.py",
+      "sha256": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7"
+    },
+    {
+      "path": "src/aetp/domain/__init__.py",
+      "sha256": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5"
+    },
+    {
+      "path": "src/aetp/domain/models.py",
+      "sha256": "a9a2e0dfb4c6eab105d1ffe168102a52d346146684008c6993aba387c4e13b62"
+    },
+    {
+      "path": "src/aetp/storage/__init__.py",
+      "sha256": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a"
+    },
+    {
+      "path": "src/aetp/storage/sqlite_store.py",
+      "sha256": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+    },
+    {
+      "path": "tests/m0/__init__.py",
+      "sha256": "5b31d33fdf6739ca0dde84d9b8f73196c84b1e8b37d7a89e20a2c2702218d811"
+    },
+    {
+      "path": "tests/m0/support.py",
+      "sha256": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497"
+    },
+    {
+      "path": "tests/m0/test_command_boundary.py",
+      "sha256": "7bf66b0f0e5e1063b205ae456d951474b4e5902733998835b015048beec97424"
+    },
+    {
+      "path": "tests/m0/test_conformance_subset.py",
+      "sha256": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6"
+    },
+    {
+      "path": "tests/m0/test_event_projection.py",
+      "sha256": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538"
+    },
+    {
+      "path": "tests/m0/test_idempotency_concurrency.py",
+      "sha256": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d"
+    },
+    {
+      "path": "tests/m0/test_models.py",
+      "sha256": "89799d649d63aab517940fe634f226242f1d627fa7ecb6fd645b0d5b32181b28"
+    },
+    {
+      "path": "tests/m0/test_replay_recovery.py",
+      "sha256": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+    },
+    {
+      "path": "tests/m1/__init__.py",
+      "sha256": "9a7f25e1f836cf0773f8dd8f55708e95d508bbd9f707fbcacafb4bf9a5d8fe37"
+    },
+    {
+      "path": "tests/m1/support.py",
+      "sha256": "3f742276788ce097aa939126be26e0e3a17d587f27f69343ec5a837611ec6482"
+    },
+    {
+      "path": "tests/m1/test_evidence_chain.py",
+      "sha256": "34d3e839594907f11fe9f5e6ec0b283246e8a115f8f929dfcb25e9a9bfbd8762"
+    },
+    {
+      "path": "tests/m1/test_messages.py",
+      "sha256": "75820ee89bd91143e84eb95b0a498e45f1340b894630e06d34253ec1b34f0097"
+    },
+    {
+      "path": "tests/m1/test_verification.py",
+      "sha256": "7421bf7bede5da6e7828e90df7b80177caf4b4570a9b64527546548e1df240b9"
+    }
+  ],
+  "database": {
+    "path": ".tmp/m1-01-demo-20260911.sqlite",
+    "sha256": "af43c223a9979b8b2931477e28467d9af70816e91aa45f4683ccbd93b8fa7439"
+  },
+  "note": "Immutable candidate inputs. The development journal remains append-only operational evidence; fixed run records are embedded in the test report."
+}

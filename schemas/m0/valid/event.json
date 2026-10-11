@@ -1,0 +1,15 @@
+{
+  "schema_version": "0.1",
+  "id": "e-1",
+  "project_id": "p-1",
+  "sequence": 1,
+  "type": "task.created",
+  "aggregate_type": "task",
+  "aggregate_id": "t-1",
+  "aggregate_revision": 0,
+  "causation_id": "c-1",
+  "correlation_id": "corr-1",
+  "payload": {
+    "title": "Demo task"
+  }
+}

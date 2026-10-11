@@ -1,0 +1,655 @@
+{
+  "work_item": "M0-05",
+  "started_at": "2026-09-11T03:07:09.047994+08:00",
+  "finished_at": "2026-09-11T03:07:15.851082+08:00",
+  "status": "passed",
+  "repetitions": 5,
+  "source_sha256": {
+    "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+    "src/aetp/core/projection.py": "94dc5d2eb78c31d4ed428c524a65852e621dbb5a91127f8a98e9b83b602bad0b",
+    "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+    "tests/m0/test_replay_recovery.py": "cb8053c183d006d859fb2823aac3c133aaa7d386d5ed13cf0d40d66e51707566",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+  },
+  "probe_source_sha256": "1400d20880f67cfba8ad8a35ffbd3e70cfe36649e08439b3bee6eb20b330c54b",
+  "recovery": {
+    "projection_digest_before": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+    "event_digest_before": "c5024462f82e18df1eb8b26700d30fd2808e272935db940b7a52c94e84fda959",
+    "event_head_sequence": 14,
+    "database_digest_before": "b9d00621028a4791f5da323744f882ef551d56c3e979c93a0a31d17b6c92614c",
+    "database_digest_after": "b9d00621028a4791f5da323744f882ef551d56c3e979c93a0a31d17b6c92614c",
+    "live_simulator_invocations_before_restart": 3,
+    "simulation_source_example": {
+      "status": "accepted",
+      "command_id": "cmd-k-1",
+      "event_ids": [],
+      "aggregate_revision": null,
+      "error_code": null,
+      "source": "simulation-only"
+    },
+    "read_only_connections_opened_and_closed": 5,
+    "sql_write_attempts": [],
+    "effect_positive_control_counts": {
+      "simulation.execute": 1,
+      "shell.Popen": 1,
+      "shell.system": 1,
+      "network.socket": 1,
+      "network.urlopen": 1,
+      "runtime.start_sentinel": 1,
+      "model.invoke_sentinel": 1
+    },
+    "effect_counts_during_recovery": {
+      "simulation.execute": 0,
+      "shell.Popen": 0,
+      "shell.system": 0,
+      "network.socket": 0,
+      "network.urlopen": 0,
+      "runtime.start_sentinel": 0,
+      "model.invoke_sentinel": 0
+    },
+    "adapter_scope": "simulation.execute/stdlib exits are real spies; model.invoke and runtime.start are explicitly labelled sentinels for adapters absent in M0",
+    "pending_scope": "artificial receipt-only Command fault fixtures; not a normal M0 partial commit or external Action/UNKNOWN state",
+    "paused_scope": "preserves persisted project.created paused value only; no operational pause/resume verification",
+    "runs": [
+      {
+        "repetition": 1,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 2,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 3,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 4,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      },
+      {
+        "repetition": 5,
+        "projection_digest": "2c6ec49ff28cbc6c80815f591a11351225a0ff34fdfa0470ac69ac31bd8da6c0",
+        "pending_command_ids": [
+          "z-received-first",
+          "a-received-second"
+        ],
+        "other_project_pending_ids": [
+          "p2-only"
+        ],
+        "other_project_status": "paused",
+        "runtime_invocation_count": 0
+      }
+    ]
+  },
+  "process_crashes": [
+    {
+      "repetition": 1,
+      "command": {
+        "id": "cmd-k-1",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "t-1",
+        "payload": {
+          "title": "任务恢复"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "k-1",
+        "correlation_id": "corr-k-1"
+      },
+      "commit_witness": {
+        "pid": 34208,
+        "exit_code": -15,
+        "boundary": "committed_before_client_response",
+        "result": {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      },
+      "retry_results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "domain_count_before": 3,
+      "domain_count_after": 4,
+      "domain_effect_increment": 1,
+      "event_count_before_retry": 8,
+      "event_count_after_retry": 8,
+      "event_digest_before_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "event_digest_after_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "recovered_projection_digest": "77234ab61c742adc1f49b7ce45acd5304b8f3a8484090030c6ed7ffe0171e3df",
+      "runtime_invocation_count": 0
+    },
+    {
+      "repetition": 2,
+      "command": {
+        "id": "cmd-k-1",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "t-1",
+        "payload": {
+          "title": "任务恢复"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "k-1",
+        "correlation_id": "corr-k-1"
+      },
+      "commit_witness": {
+        "pid": 32120,
+        "exit_code": -15,
+        "boundary": "committed_before_client_response",
+        "result": {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      },
+      "retry_results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "domain_count_before": 3,
+      "domain_count_after": 4,
+      "domain_effect_increment": 1,
+      "event_count_before_retry": 8,
+      "event_count_after_retry": 8,
+      "event_digest_before_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "event_digest_after_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "recovered_projection_digest": "77234ab61c742adc1f49b7ce45acd5304b8f3a8484090030c6ed7ffe0171e3df",
+      "runtime_invocation_count": 0
+    },
+    {
+      "repetition": 3,
+      "command": {
+        "id": "cmd-k-1",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "t-1",
+        "payload": {
+          "title": "任务恢复"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "k-1",
+        "correlation_id": "corr-k-1"
+      },
+      "commit_witness": {
+        "pid": 24492,
+        "exit_code": -15,
+        "boundary": "committed_before_client_response",
+        "result": {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      },
+      "retry_results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "domain_count_before": 3,
+      "domain_count_after": 4,
+      "domain_effect_increment": 1,
+      "event_count_before_retry": 8,
+      "event_count_after_retry": 8,
+      "event_digest_before_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "event_digest_after_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "recovered_projection_digest": "77234ab61c742adc1f49b7ce45acd5304b8f3a8484090030c6ed7ffe0171e3df",
+      "runtime_invocation_count": 0
+    },
+    {
+      "repetition": 4,
+      "command": {
+        "id": "cmd-k-1",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "t-1",
+        "payload": {
+          "title": "任务恢复"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "k-1",
+        "correlation_id": "corr-k-1"
+      },
+      "commit_witness": {
+        "pid": 28248,
+        "exit_code": -15,
+        "boundary": "committed_before_client_response",
+        "result": {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      },
+      "retry_results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "domain_count_before": 3,
+      "domain_count_after": 4,
+      "domain_effect_increment": 1,
+      "event_count_before_retry": 8,
+      "event_count_after_retry": 8,
+      "event_digest_before_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "event_digest_after_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "recovered_projection_digest": "77234ab61c742adc1f49b7ce45acd5304b8f3a8484090030c6ed7ffe0171e3df",
+      "runtime_invocation_count": 0
+    },
+    {
+      "repetition": 5,
+      "command": {
+        "id": "cmd-k-1",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "t-1",
+        "payload": {
+          "title": "任务恢复"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "k-1",
+        "correlation_id": "corr-k-1"
+      },
+      "commit_witness": {
+        "pid": 25636,
+        "exit_code": -15,
+        "boundary": "committed_before_client_response",
+        "result": {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      },
+      "retry_results": [
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        },
+        {
+          "status": "accepted",
+          "command_id": "cmd-k-1",
+          "event_ids": [
+            "cmd-k-1:received",
+            "cmd-k-1:effect"
+          ],
+          "aggregate_revision": 0,
+          "error_code": null
+        }
+      ],
+      "domain_count_before": 3,
+      "domain_count_after": 4,
+      "domain_effect_increment": 1,
+      "event_count_before_retry": 8,
+      "event_count_after_retry": 8,
+      "event_digest_before_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "event_digest_after_retry": "1ccddd5489834785f952f490d5276e8253c6e7265960bbb62d7e9109aa006734",
+      "recovered_projection_digest": "77234ab61c742adc1f49b7ce45acd5304b8f3a8484090030c6ed7ffe0171e3df",
+      "runtime_invocation_count": 0
+    }
+  ],
+  "mutations": [
+    {
+      "mutant": "cache_instead_of_events",
+      "description": "Replace forced Replay with ordinary cache read",
+      "test": "ReplayRecoveryTests.test_a_forged_self_consistent_cache_is_not_an_authoritative_fact",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_a_forged_self_consistent_cache_is_not_an_authoritative_fact (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_a_forged_self_consistent_cache_is_not_an_authoritative_fact) ... FAIL\n\n======================================================================\nFAIL: test_a_forged_self_consistent_cache_is_not_an_authoritative_fact (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_a_forged_self_consistent_cache_is_not_an_authoritative_fact)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 223, in test_a_forged_self_consistent_cache_is_not_an_authoritative_fact\n    self.assertEqual(self.recover().rebuild_project(\"p-1\"), before)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: {'task:ghost': {'status': 'completed', 'own[15 chars]er'}} != {'agent:a-1': {'id': 'a-1', 'model_id': 'mo[396 chars]sk'}}\nDiff is 825 characters long. Set self.maxDiff to None to see it.\n\n----------------------------------------------------------------------\nRan 1 test in 0.162s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "cache_instead_of_events"
+      ],
+      "started_at": "2026-09-11T03:07:11.666320+08:00",
+      "finished_at": "2026-09-11T03:07:12.219574+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "dispatch_during_replay",
+      "description": "Execute simulation from rebuild_project",
+      "test": "ReplayRecoveryTests.test_forbidden_call_tripwires_have_positive_controls_then_remain_zero",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_forbidden_call_tripwires_have_positive_controls_then_remain_zero (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_forbidden_call_tripwires_have_positive_controls_then_remain_zero) ... FAIL\n\n======================================================================\nFAIL: test_forbidden_call_tripwires_have_positive_controls_then_remain_zero (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_forbidden_call_tripwires_have_positive_controls_then_remain_zero)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 267, in test_forbidden_call_tripwires_have_positive_controls_then_remain_zero\n    self.assertTrue(recovery.rebuild_project(\"p-1\"))\n                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^\n  File \"D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py\", line 229, in dispatch\n    self._runtime.execute(make_task_create_command())\n    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\unittest\\mock.py\", line 1176, in __call__\n    return self._mock_call(*args, **kwargs)\n           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\unittest\\mock.py\", line 1180, in _mock_call\n    return self._execute_mock_call(*args, **kwargs)\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\unittest\\mock.py\", line 1241, in _execute_mock_call\n    raise effect\nAssertionError: forbidden recovery effect: simulation.execute\n\n----------------------------------------------------------------------\nRan 1 test in 0.185s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "dispatch_during_replay"
+      ],
+      "started_at": "2026-09-11T03:07:12.219945+08:00",
+      "finished_at": "2026-09-11T03:07:12.804119+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "constant_runtime_counter",
+      "description": "Return zero rather than actual counter",
+      "test": "ReplayRecoveryTests.test_recovery_counter_reports_actual_simulator_calls_not_a_constant",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_recovery_counter_reports_actual_simulator_calls_not_a_constant (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_recovery_counter_reports_actual_simulator_calls_not_a_constant) ... FAIL\n\n======================================================================\nFAIL: test_recovery_counter_reports_actual_simulator_calls_not_a_constant (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_recovery_counter_reports_actual_simulator_calls_not_a_constant)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 183, in test_recovery_counter_reports_actual_simulator_calls_not_a_constant\n    self.assertEqual(recovery.runtime_invocation_count, 1)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 0 != 1\n\n----------------------------------------------------------------------\nRan 1 test in 0.122s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "constant_runtime_counter"
+      ],
+      "started_at": "2026-09-11T03:07:12.804485+08:00",
+      "finished_at": "2026-09-11T03:07:13.291903+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "pending_always_empty",
+      "description": "Discard every unresolved durable receipt",
+      "test": "ReplayRecoveryTests.test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status) ... FAIL\n\n======================================================================\nFAIL: test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 282, in test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status\n    self.assertEqual(recovery.reconcile_pending(\"p-1\"), [\"z-first\", \"a-second\"])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [] != ['z-first', 'a-second']\n\nSecond list contains 2 additional elements.\nFirst extra element 0:\n'z-first'\n\n- []\n+ ['z-first', 'a-second']\n\n----------------------------------------------------------------------\nRan 1 test in 0.176s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "pending_always_empty"
+      ],
+      "started_at": "2026-09-11T03:07:13.292249+08:00",
+      "finished_at": "2026-09-11T03:07:13.835099+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "ignore_terminal_type",
+      "description": "Skip M0 Command-to-terminal type validation",
+      "test": "PendingProjectionTests.test_wrong_terminal_type_for_the_same_target_cannot_clear_pending",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_wrong_terminal_type_for_the_same_target_cannot_clear_pending (tests.m0.test_replay_recovery.PendingProjectionTests.test_wrong_terminal_type_for_the_same_target_cannot_clear_pending) ... FAIL\n\n======================================================================\nFAIL: test_wrong_terminal_type_for_the_same_target_cannot_clear_pending (tests.m0.test_replay_recovery.PendingProjectionTests.test_wrong_terminal_type_for_the_same_target_cannot_clear_pending)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 582, in test_wrong_terminal_type_for_the_same_target_cannot_clear_pending\n    with self.assertRaisesRegex(ModelValidationError, \"terminal Event type\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ModelValidationError not raised\n\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "ignore_terminal_type"
+      ],
+      "started_at": "2026-09-11T03:07:13.835661+08:00",
+      "finished_at": "2026-09-11T03:07:14.230663+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "writable_recovery",
+      "description": "Change SQLite recovery mode=ro to mode=rw",
+      "test": "ReplayRecoveryTests.test_recovery_connection_is_enforced_read_only_by_sqlite",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_recovery_connection_is_enforced_read_only_by_sqlite (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_recovery_connection_is_enforced_read_only_by_sqlite) ... FAIL\n\n======================================================================\nFAIL: test_recovery_connection_is_enforced_read_only_by_sqlite (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_recovery_connection_is_enforced_read_only_by_sqlite)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 252, in test_recovery_connection_is_enforced_read_only_by_sqlite\n    with self.assertRaisesRegex(sqlite3.OperationalError, \"readonly\"):\n         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: OperationalError not raised\n\n----------------------------------------------------------------------\nRan 1 test in 0.139s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "writable_recovery"
+      ],
+      "started_at": "2026-09-11T03:07:14.230999+08:00",
+      "finished_at": "2026-09-11T03:07:14.742347+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "trust_result_index",
+      "description": "Treat a forged result index as completion instead of Event facts",
+      "test": "ReplayRecoveryTests.test_pending_ids_do_not_trust_a_forged_terminal_result_index",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_pending_ids_do_not_trust_a_forged_terminal_result_index (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_ids_do_not_trust_a_forged_terminal_result_index) ... FAIL\n\n======================================================================\nFAIL: test_pending_ids_do_not_trust_a_forged_terminal_result_index (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_ids_do_not_trust_a_forged_terminal_result_index)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 290, in test_pending_ids_do_not_trust_a_forged_terminal_result_index\n    self.assertEqual(self.recover().reconcile_pending(\"p-1\"), [command.id])\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Lists differ: [] != ['still-unresolved']\n\nSecond list contains 1 additional elements.\nFirst extra element 0:\n'still-unresolved'\n\n- []\n+ ['still-unresolved']\n\n----------------------------------------------------------------------\nRan 1 test in 0.155s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "trust_result_index"
+      ],
+      "started_at": "2026-09-11T03:07:14.742693+08:00",
+      "finished_at": "2026-09-11T03:07:15.283035+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    },
+    {
+      "mutant": "no_read_snapshot",
+      "description": "Remove the read transaction around Command/Event SELECTs",
+      "test": "ReplayRecoveryTests.test_pending_uses_one_read_snapshot_during_a_concurrent_commit",
+      "tests_run": 1,
+      "failures": 1,
+      "errors": 0,
+      "detected_by_assertion": true,
+      "test_output": "test_pending_uses_one_read_snapshot_during_a_concurrent_commit (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_uses_one_read_snapshot_during_a_concurrent_commit) ... FAIL\n\n======================================================================\nFAIL: test_pending_uses_one_read_snapshot_during_a_concurrent_commit (tests.m0.test_replay_recovery.ReplayRecoveryTests.test_pending_uses_one_read_snapshot_during_a_concurrent_commit)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 459, in test_pending_uses_one_read_snapshot_during_a_concurrent_commit\n    pending = recovery.reconcile_pending(\"p-1\")\n  File \"<M0-05 isolated source mutation>\", line 20, in reconcile_pending\n  File \"D:\\Github\\AETP\\src\\aetp\\core\\projection.py\", line 256, in pending_command_ids\n    raise ModelValidationError(\"persisted Command has no receipt Event\")\naetp.domain.models.ModelValidationError: persisted Command has no receipt Event\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\m0\\test_replay_recovery.py\", line 461, in test_pending_uses_one_read_snapshot_during_a_concurrent_commit\n    self.fail(f\"valid concurrent commit produced a mixed recovery snapshot: {exc}\")\n    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: valid concurrent commit produced a mixed recovery snapshot: persisted Command has no receipt Event\n\n----------------------------------------------------------------------\nRan 1 test in 0.163s\n\nFAILED (failures=1)\n",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-11-m0-05-probes.py",
+        "--mutation-worker",
+        "no_read_snapshot"
+      ],
+      "started_at": "2026-09-11T03:07:15.283418+08:00",
+      "finished_at": "2026-09-11T03:07:15.849489+08:00",
+      "exit_code": 1,
+      "stderr": ""
+    }
+  ],
+  "mutations_detected": 8,
+  "mutations_total": 8,
+  "claims": {
+    "conformance_accepted": false,
+    "bootstrap_verified": false,
+    "external_tools_implemented": false
+  }
+}

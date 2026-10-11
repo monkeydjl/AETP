@@ -1,0 +1,816 @@
+{
+  "schema_version": "aetp-development-evidence-0.1",
+  "work_item": "M1-01",
+  "created_at": "2026-09-12T00:42:07.003500+08:00",
+  "status": "verified_candidate_pending_review",
+  "scope": "peer communication and candidate evidence only; no authorized execution or successful Task quality gate",
+  "executor": "Codex main agent",
+  "review": {
+    "status": "pending",
+    "reviewer": "/root/m1_reviewer",
+    "initial_decision": "changes_requested",
+    "blocking_findings": [
+      "R1",
+      "R2"
+    ]
+  },
+  "validation": {
+    "m1_tests": 40,
+    "m0_tests": 156,
+    "preparation_tests": 27,
+    "candidate_render_exit": 0,
+    "candidate_check_exit": 0,
+    "candidate_demo_exit": 0,
+    "required_run_labels": [
+      "r1_green_boundary",
+      "r2_green_wire",
+      "r2_green_m1",
+      "r2_regression_m0",
+      "r2_preparation",
+      "r2_demo",
+      "r2_render",
+      "r2_check"
+    ]
+  },
+  "acceptance": [
+    {
+      "criterion": "Two equal admitted agents can directly message, reply and challenge",
+      "candidate_result": "implemented and tested for two trusted in-process actors",
+      "evidence": [
+        "tests/m1/test_messages.py",
+        "artifacts/m1-01-demo-v2.json"
+      ]
+    },
+    {
+      "criterion": "No mandatory Manager path",
+      "candidate_result": "message and independent review require membership, not rank or ownership",
+      "evidence": [
+        "tests/m1/test_messages.py",
+        "tests/m1/test_evidence_chain.py"
+      ]
+    },
+    {
+      "criterion": "Low-risk candidate has Artifact/Review/Verification evidence",
+      "candidate_result": "immutable document, independent approved Review, real precheck report and formal INCONCLUSIVE Verification",
+      "limitation": "Successful formal Verification/Task gates await M1-02 execution authorization",
+      "evidence": [
+        "tests/m1/test_verification.py",
+        "artifacts/m1-01-demo-v2.json"
+      ]
+    }
+  ],
+  "conformance_mapping": {
+    "TEST-003": "negative quality-gate paths only",
+    "TEST-008": "negative quality-gate paths only",
+    "TEST-015": "in-process peer communication and independent review; Runtime qualification pending",
+    "TEST-028": "not accepted; deterministic scenario is not autonomous idea-to-delivery acceptance"
+  },
+  "red_green": [
+    {
+      "red": "red_messages",
+      "failed": 8,
+      "green": "green_messages",
+      "passed": 8
+    },
+    {
+      "red": "red_evidence_chain",
+      "failed": 12,
+      "green": "green_evidence_chain",
+      "passed": 20
+    },
+    {
+      "red": "red_verification",
+      "failed": 11,
+      "already_passed": 1,
+      "green": "green_verification_corrected",
+      "passed": 33
+    },
+    {
+      "red": "r1_red",
+      "test_methods": 7,
+      "assertion_failures": 21,
+      "green": [
+        "r1_green_boundary",
+        "r2_green_wire",
+        "r2_green_m1"
+      ],
+      "passed_regressions": 7,
+      "passed_m1_suite": 40
+    }
+  ],
+  "retained_failure": {
+    "label": "green_verification",
+    "exit_code": 1,
+    "errors": 2,
+    "cause": "test-owned sqlite3 context managers committed transactions but did not close handles on Windows",
+    "correction": "explicit contextlib.closing in test fixtures; production behavior unchanged by this correction"
+  },
+  "utility_failure": {
+    "label": "candidate_freeze",
+    "exit_code": 1,
+    "cause": "task-local helper imported tools before adding the repository root to its Python path",
+    "correction": "helper adds its resolved repository root; no product source changed"
+  },
+  "runs": [
+    {
+      "label": "baseline_m0",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T23:49:46.911749+08:00",
+      "finished_at": "2026-09-11T23:50:29.336932+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-baseline_m0.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-baseline_m0.stderr.txt",
+        "sha256": "5b6fa04c26f2f7ee1ccaf66baac81db86e363f885ed97a72a2af400945e1c803"
+      }
+    },
+    {
+      "label": "red_messages",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_messages",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T23:51:34.309764+08:00",
+      "finished_at": "2026-09-11T23:51:34.579878+08:00",
+      "exit_code": 1,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-red_messages.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-red_messages.stderr.txt",
+        "sha256": "a08c9ee48058283546457b77bf36591102573086afa73fb20f21e9773ef58f5e"
+      }
+    },
+    {
+      "label": "green_messages",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_messages",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T23:52:58.882547+08:00",
+      "finished_at": "2026-09-11T23:52:59.811633+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_messages.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_messages.stderr.txt",
+        "sha256": "18e57cbe5dd763471e2ee446e6be9d1e86012ad8802176dfd52600f3051efddf"
+      }
+    },
+    {
+      "label": "red_evidence_chain",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_evidence_chain",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T23:54:58.513396+08:00",
+      "finished_at": "2026-09-11T23:54:58.805758+08:00",
+      "exit_code": 1,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-red_evidence_chain.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-red_evidence_chain.stderr.txt",
+        "sha256": "a6c336c5b9633ce7c1fe7289bcd4ced5e36208636eb684e2d17293e67589a50e"
+      }
+    },
+    {
+      "label": "green_evidence_chain",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_evidence_chain",
+        "tests.m1.test_messages",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-11T23:59:03.908344+08:00",
+      "finished_at": "2026-09-11T23:59:06.612448+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_evidence_chain.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_evidence_chain.stderr.txt",
+        "sha256": "0b5d1bce43f925a0de49ce32b1783e9072f7085bdc90025791741340221bbeff"
+      }
+    },
+    {
+      "label": "red_verification",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_verification",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:03:28.468573+08:00",
+      "finished_at": "2026-09-12T00:03:30.787419+08:00",
+      "exit_code": 1,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-red_verification.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-red_verification.stderr.txt",
+        "sha256": "9375cb4af0c4b9243f4b53b9b070f1f4e362f30a014b8e314f32ad3653155a12"
+      }
+    },
+    {
+      "label": "green_payload_types",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_verification.VerificationTests.test_non_string_classification_and_review_status_are_typed_rejections",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:04:38.631919+08:00",
+      "finished_at": "2026-09-12T00:04:39.200474+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_payload_types.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_payload_types.stderr.txt",
+        "sha256": "250088b74e9c2278b24e5c33be587b9b57f2577644878c76adca1cf792730a82"
+      }
+    },
+    {
+      "label": "green_input_origin",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_verification.VerificationTests.test_unclassified_inline_content_cannot_be_labelled_trusted",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:04:42.337391+08:00",
+      "finished_at": "2026-09-12T00:04:42.828336+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_input_origin.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_input_origin.stderr.txt",
+        "sha256": "950e012014d0eb4b3056162ff17d707e9050200c6e3abab6dec76743aa1b7c6d"
+      }
+    },
+    {
+      "label": "green_verification",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m1",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:08:20.574444+08:00",
+      "finished_at": "2026-09-12T00:08:25.971497+08:00",
+      "exit_code": 1,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_verification.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_verification.stderr.txt",
+        "sha256": "fb241032bd9f4921bd28972800e102c45a8bc115a1b0cd3b5128a2c82feadaee"
+      }
+    },
+    {
+      "label": "green_verification_corrected",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m1",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:09:33.055618+08:00",
+      "finished_at": "2026-09-12T00:09:38.222207+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_verification_corrected.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-green_verification_corrected.stderr.txt",
+        "sha256": "5e67110d9f8f73c6e3d770e6083d74fc2576bbf6ad6c71e8a61e3886db7b4280"
+      }
+    },
+    {
+      "label": "regression_m0",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:09:39.955515+08:00",
+      "finished_at": "2026-09-12T00:10:20.264361+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-regression_m0.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-regression_m0.stderr.txt",
+        "sha256": "c9657e7b50a59f2f1d84ddf677f7ad400be9a700877d0e37d938bd561d8bc2d8"
+      }
+    },
+    {
+      "label": "candidate_demo",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "Docs/development/evidence/2026-09-11-m1-01-demo.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:12:56.961740+08:00",
+      "finished_at": "2026-09-12T00:12:59.227241+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_demo.stdout.txt",
+        "sha256": "042154f498e36ec1ee3e44232b106c8f7d417c0885ab73dec48a694e7d79c51c"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_demo.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "candidate_render",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:14:30.395791+08:00",
+      "finished_at": "2026-09-12T00:14:30.645516+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_render.stdout.txt",
+        "sha256": "3710251549acd9be7882c6ccf20136a31781932fc2ef07f2aac0cb4aa32520f0"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_render.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "candidate_check",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:14:31.532880+08:00",
+      "finished_at": "2026-09-12T00:14:31.747214+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_check.stdout.txt",
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_check.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "candidate_preparation",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:14:32.592534+08:00",
+      "finished_at": "2026-09-12T00:14:34.844339+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_preparation.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_preparation.stderr.txt",
+        "sha256": "5dddda67bcac026df844642e6b01eee362537fd6b7c2ea63099980f0bbc10357"
+      }
+    },
+    {
+      "label": "candidate_freeze",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "Docs/development/evidence/2026-09-11-m1-01-freeze.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:16:49.802322+08:00",
+      "finished_at": "2026-09-12T00:16:49.952610+08:00",
+      "exit_code": 1,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_freeze.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_freeze.stderr.txt",
+        "sha256": "f8c1c61e08e305e55564e43cb402f17f6077e7accaaeac278d2489ead709c5c5"
+      }
+    },
+    {
+      "label": "candidate_freeze_corrected",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "Docs/development/evidence/2026-09-11-m1-01-freeze.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:17:33.999760+08:00",
+      "finished_at": "2026-09-12T00:17:34.356317+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_freeze_corrected.stdout.txt",
+        "sha256": "db409fcbe555a4694b7c07a62b2118613acc1ab4dc654d8af9364c1db4c3accf"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-candidate_freeze_corrected.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "review_render",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:22:47.039852+08:00",
+      "finished_at": "2026-09-12T00:22:47.251359+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-review_render.stdout.txt",
+        "sha256": "3710251549acd9be7882c6ccf20136a31781932fc2ef07f2aac0cb4aa32520f0"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-review_render.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "review_check",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:22:48.153362+08:00",
+      "finished_at": "2026-09-12T00:22:48.387948+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-review_check.stdout.txt",
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-review_check.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "r1_red",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_review_regressions",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:32:42.891148+08:00",
+      "finished_at": "2026-09-12T00:32:44.281116+08:00",
+      "exit_code": 1,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r1_red.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r1_red.stderr.txt",
+        "sha256": "fcd64b28e11c9d2203d6c0b9acfc768bdc7affd8512fd51fb4c8568338263ae1"
+      }
+    },
+    {
+      "label": "r1_green_boundary",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_review_regressions.InheritedBoundaryTests",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:37:34.914654+08:00",
+      "finished_at": "2026-09-12T00:37:36.370877+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r1_green_boundary.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r1_green_boundary.stderr.txt",
+        "sha256": "004d52b3e22d19d97a1cdbfe7da3ac9a046df57bd2ce444a7956350e158fe9cb"
+      }
+    },
+    {
+      "label": "r2_green_wire",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m1.test_review_regressions.MessageWireTests",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:37:58.614446+08:00",
+      "finished_at": "2026-09-12T00:37:58.896786+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_green_wire.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_green_wire.stderr.txt",
+        "sha256": "b084fd18ee0190c4cfc5af46c49727b6c19e1185cbcaa3f4cc2f58a37bf3a3e8"
+      }
+    },
+    {
+      "label": "r2_green_m1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m1",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:38:11.042101+08:00",
+      "finished_at": "2026-09-12T00:38:17.580868+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_green_m1.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_green_m1.stderr.txt",
+        "sha256": "8c7fbf4893af6e35883368a2ef60a68ca7f9d448fb79cffa37775671b3a3e6cc"
+      }
+    },
+    {
+      "label": "r2_regression_m0",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:38:37.753210+08:00",
+      "finished_at": "2026-09-12T00:39:17.274976+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_regression_m0.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_regression_m0.stderr.txt",
+        "sha256": "80f029669fc7d84bbe2a0e393a4e596c243bd9f79a0adb10146b5dcd90407877"
+      }
+    },
+    {
+      "label": "r2_demo",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "Docs/development/evidence/2026-09-11-m1-01-demo-v2.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:40:19.330507+08:00",
+      "finished_at": "2026-09-12T00:40:21.937919+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_demo.stdout.txt",
+        "sha256": "5bf17f9a50d15540e207623f58b30a199ddacd3294e0f2992f666ccf6761e621"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_demo.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "r2_render",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:40:22.807267+08:00",
+      "finished_at": "2026-09-12T00:40:23.018913+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_render.stdout.txt",
+        "sha256": "3710251549acd9be7882c6ccf20136a31781932fc2ef07f2aac0cb4aa32520f0"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_render.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "r2_check",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:40:23.874289+08:00",
+      "finished_at": "2026-09-12T00:40:24.089606+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_check.stdout.txt",
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_check.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "r2_preparation",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-12T00:40:24.994724+08:00",
+      "finished_at": "2026-09-12T00:40:27.420433+08:00",
+      "exit_code": 0,
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_preparation.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-r2_preparation.stderr.txt",
+        "sha256": "92f87c822210057b3cfddf7d265a1bff9522037d54a8efe37a5a1c62b4870d74"
+      }
+    }
+  ],
+  "baseline": {
+    "path": "Docs/development/evidence/2026-09-11-m1-01-baseline.json",
+    "sha256": "52884d7584ed621fcfb059970fb4a79512003d8ddcac7be12f8687d77502486b"
+  },
+  "changed_baseline_files": [
+    "Docs/development/backlog.json",
+    "Docs/development/status.json",
+    "src/aetp/core/commands.py",
+    "src/aetp/core/projection.py",
+    "src/aetp/domain/models.py"
+  ],
+  "demonstration": [
+    {
+      "path": "artifacts/m1-01-demo-v2.json",
+      "sha256": "57f527a9ccc0896189e6a8ae6b4e89ea17523f3d8689176f9c841b80ced21f8e"
+    },
+    {
+      "path": "artifacts/m1-01-candidate-v2.md",
+      "sha256": "d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5"
+    },
+    {
+      "path": "artifacts/m1-01-precheck-report-v2.json",
+      "sha256": "b4b487ae0f7f19c016446142c0d5d6d11e370a235b04e8d62c13d622caa99a33"
+    }
+  ],
+  "claims": {
+    "work_item_accepted": false,
+    "formal_verification_passed": false,
+    "protocol_task_completed": false,
+    "full_aetp_compatible": false,
+    "real_model_autonomy": false,
+    "bootstrap_verified": false
+  },
+  "limitations": [
+    "User disabled ClaudeLink; one independent reviewer is reused.",
+    "No Git repository; no init, commit, push, dependencies or global configuration changes.",
+    "MessageBus is ephemeral; only explicitly pinned conversation survives in authoritative candidate evidence.",
+    "M1-02 Runner/Lease/Binding/Workspace and positive quality-gate acceptance remain unimplemented.",
+    "Full-protocol conformance remains registered/0; product percentage and Bootstrap remain unchanged."
+  ],
+  "candidate_revision": "v2",
+  "previous_candidate": {
+    "report": {
+      "path": "artifacts/m1-01-test-report.json",
+      "sha256": "7b4995e8d3495fcbed7d3fbd4047197e2928ae24980c8e7369f9a696509dfa99"
+    },
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-candidate-snapshot.json",
+      "sha256": "93a2f483d2433cc673e87d9ddbec1492b02276fa2f7693d58c1232baa9577d06"
+    },
+    "independent_review": {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-review.json",
+      "sha256": "81c07c895145826126f61bdd8917026f0c38d64923cf35efdf635b0cde5f977b"
+    },
+    "archive": {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-candidate-v1-archive.json",
+      "sha256": "6a9c99fa27ade4876a223921459541ac721be2683824befefa2ee4e4f473aab8"
+    }
+  },
+  "review_fixes": [
+    {
+      "id": "R1",
+      "change": "Guard inherited claim/release with current membership, Project, fixed Policy and fields; require explicit M1 Task Policy before delegating to unchanged M0 handler.",
+      "tests": "tests/m1/test_review_regressions.py:InheritedBoundaryTests",
+      "independent_closure": "pending"
+    },
+    {
+      "id": "R2",
+      "change": "Decode JSON recipient/reference arrays into immutable tuples through Message.from_dict while retaining inherited schema/field and constructor validation.",
+      "tests": "tests/m1/test_review_regressions.py:MessageWireTests",
+      "independent_closure": "pending"
+    }
+  ],
+  "changed_v1_sources": [
+    "Docs/superpowers/plans/2026-09-11-m1-01-collaboration.md",
+    "src/aetp/collaboration/messages.py",
+    "src/aetp/collaboration/README.md",
+    "src/aetp/collaboration/service.py"
+  ]
+}

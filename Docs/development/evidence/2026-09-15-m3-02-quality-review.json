@@ -1,0 +1,429 @@
+{
+  "schema": "aetp-task-quality-independent-review-v1",
+  "work_item": "M3-02",
+  "slice": "task_quality",
+  "candidate_revision": "v1",
+  "reviewed_at": "2026-09-15T04:39:57.606078+08:00",
+  "executor": "/root",
+  "reviewer": "/root/m1_reviewer",
+  "decision": "accepted",
+  "decision_scope": "Only the four batch_acceptance_mapping criteria in the frozen Task quality v1 candidate",
+  "work_item_status": "in_progress",
+  "original_work_item_accepted": false,
+  "candidate_report": {
+    "path": "artifacts/m3-02-quality-test-report-v1.json",
+    "bytes": 57714,
+    "sha256": "ddcdf45ed482724396707d1a4ea95787930b98be232b42192da4bd294117bbd0"
+  },
+  "candidate_snapshot": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-candidate-v1-snapshot.json",
+    "bytes": 33102,
+    "sha256": "dfc77b9079e3da44d1cdea952310be0e9a4feb7c738733d36e52b069ba6b25c6"
+  },
+  "baseline": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-baseline.json",
+    "bytes": 170394,
+    "sha256": "688d765e9cd656a10bd9c8e73207e7590ab858ad51adf1a28c19fd27114f357d"
+  },
+  "frozen_candidate_review_status": "pending",
+  "independent_root": "D:\\Github\\AETP\\.tmp\\m3qr2",
+  "independent_root_relative": ".tmp/m3qr2",
+  "copy_manifest": {
+    "path": ".tmp/m3qr2/.review-copy-manifest.json",
+    "bytes": 287907,
+    "sha256": "257c5536cd6eda712823b516e6d1b62ddbc109395e33be98d9b404f73284258a"
+  },
+  "batch_acceptance_mapping": [
+    {
+      "criterion": "Explicit enrollment/submission and independent quality stages",
+      "tests": [
+        "test_task_quality_submission.py",
+        "test_task_quality_review.py"
+      ],
+      "decision": "accepted",
+      "assessment": "The Task opts in to task-quality-1 explicitly. Submission binds every official output of the current round; captures of the same Action cannot inflate the output set. Independent Review is an explicit quality stage, and unrelated legacy Review does not promote a Task.",
+      "run_labels": [
+        "suite_m3_v1",
+        "probes_v1",
+        "fresh_demo_v1"
+      ]
+    },
+    {
+      "criterion": "Versioned evidence applicability without legacy promotion",
+      "tests": [
+        "test_task_quality_evidence.py",
+        "test_task_quality_boundaries.py"
+      ],
+      "decision": "accepted",
+      "assessment": "Evidence use binds the versioned cycle and complete Artifact set before applicability is evaluated. Expired or invalid records cannot be hidden by fresher results. PASSED plus pending/lost/error INCONCLUSIVE remains IN_REVIEW. Valid historical results remain usable after the actual QA Task ends, its Session disappears, and dispatch TTL expires, subject to current evidence-use policy and age limits.",
+      "run_labels": [
+        "suite_m3_v1",
+        "probes_v1",
+        "fresh_demo_v1"
+      ]
+    },
+    {
+      "criterion": "Explicit Task-specific exemption and terminal execution retirement",
+      "tests": [
+        "test_task_quality_lifecycle.py"
+      ],
+      "decision": "accepted",
+      "assessment": "COMPLETED is demonstrated only for the specific human_owner declaration for t-1 as standalone_fixed_json_document. Completion retires the author execution and Lease, while both COMPLETED and CANCELLED reject old-entry resurrection. Copying a Session object does not create an author capability. Withdrawal or relevant revision changes prevent stale completion.",
+      "run_labels": [
+        "suite_m3_v1",
+        "probes_v1",
+        "fresh_demo_v1"
+      ]
+    },
+    {
+      "criterion": "Atomic/retry/race integrity and pure old/new Replay",
+      "tests": [
+        "test_task_quality_replay.py",
+        "test_task_quality_concurrency.py"
+      ],
+      "decision": "accepted",
+      "assessment": "SQLite rollback, retries, response loss, separate-connection races, strict causal receipt/cursor validation, and both completion effects were checked. The independent first-effect failure leaves no partial receipt or pending Command and can retry. Every prefix of ten frozen old/new databases plus two new independent databases rebuilds without guarded execution or I/O and without changing database bytes.",
+      "run_labels": [
+        "suite_m3_v1",
+        "suite_m2_v1",
+        "suite_m1_v1",
+        "suite_m0_v1",
+        "probes_v1",
+        "frozen_replay_v2",
+        "fresh_demo_v1"
+      ]
+    }
+  ],
+  "original_work_item_criteria": [
+    {
+      "criterion": "集成面任务通过 Integration Gate",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "Mission success criteria 逐条 Acceptance Verification",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "两名以上平等 Agent 从粗糙想法讨论到成果交付，人工不拆任务且无隐藏 Manager",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    }
+  ],
+  "findings": {
+    "Critical": [],
+    "Important": [],
+    "Minor": []
+  },
+  "prior_finding": {
+    "id": "M3-02-R1",
+    "scope": "stale legacy quality-gate comment",
+    "disposition": "verified_corrected_in_candidate; legacy gate remains closed"
+  },
+  "test_counts": {
+    "m3": 209,
+    "m2": 167,
+    "m1": 85,
+    "m0": 156,
+    "preparation": 27
+  },
+  "test_total": 644,
+  "suite_durations_seconds": {
+    "m3": 1615.584,
+    "m2": 1106.686,
+    "m1": 668.286,
+    "m0": 869.15,
+    "preparation": 2.086
+  },
+  "independent_probe_count": 13,
+  "independent_probe_duration_seconds": 328.745,
+  "verification_journal_prefix": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-journal.jsonl",
+    "bytes": 69464,
+    "sha256": "9d67617992e5cc0fdf443fc9efd4958a3c5c7b881e8b4d482c8b6c9478165dc2",
+    "prefix": true
+  },
+  "run_results": {
+    "bootstrap_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/bootstrap_v1/result.json",
+      "bytes": 9840,
+      "sha256": "d8e47597be26949d6d063df14f3a1d619d331b592c64cdd667ef7867cb04ae51"
+    },
+    "inspect_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/inspect_v1/result.json",
+      "bytes": 1763,
+      "sha256": "7469d18b286e202065adf10e756d3272655eea58dc351b3995d718140154966e"
+    },
+    "source_review_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/source_review_v1/result.json",
+      "bytes": 2271,
+      "sha256": "edde5fa866044f788f7ad5ae22780502c448486a57d66e00f93461b853eafb70"
+    },
+    "setup_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/setup_v1/result.json",
+      "bytes": 1765,
+      "sha256": "e1c27cc7417a816e1a0c3366320dd4d61d50df9190ccb528dd7d29dc64a5641c"
+    },
+    "setup_diagnosis_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/setup_diagnosis_v1/result.json",
+      "bytes": 2203,
+      "sha256": "e2ba8df878fd880d797a974ad6b956c5d0e362c0855dcee35bc4c794d61986e9"
+    },
+    "setup_inventory_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/setup_inventory_v1/result.json",
+      "bytes": 3005,
+      "sha256": "fc85ce6bf95a8c38891a22099f4e585183767231d9ead58251a34ba527563e7b"
+    },
+    "setup_v2": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/setup_v2/result.json",
+      "bytes": 1765,
+      "sha256": "d846db0afe2ff43ebef8d1fb8e626979524eb4280ace458a6a3d8cd650047fe0"
+    },
+    "probe_design_reads_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/probe_design_reads_v1/result.json",
+      "bytes": 2573,
+      "sha256": "9828c3f467e11a173b51b94e3c718b3773747e45bf462451fc9a619d268b9a30"
+    },
+    "render_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/render_v1/result.json",
+      "bytes": 1795,
+      "sha256": "260f206448266fc8e1c178af6439e3fe03944c58e43a9c0aee222c55361d65a8"
+    },
+    "compile_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/compile_v1/result.json",
+      "bytes": 1910,
+      "sha256": "a1749adc45b919de7550c35b4e6bec9c037b0b550374da90df0982a72514ec62"
+    },
+    "audit_helper_reads_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/audit_helper_reads_v1/result.json",
+      "bytes": 2263,
+      "sha256": "05bf5e08885f0012525c221b7d7fba1d4b3e051013b288db06d710af51e5050c"
+    },
+    "check_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/check_v1/result.json",
+      "bytes": 1788,
+      "sha256": "fe5597fca4bd00f911f5a0bf71c0a132d46fad82ddef2f824ce0f80885e3ed20"
+    },
+    "probes_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/probes_v1/result.json",
+      "bytes": 1900,
+      "sha256": "6e052202c9ad4584603150431249a761fc08855a71187d1f88b196bdaa4fc48f"
+    },
+    "suite_m1_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/suite_m1_v1/result.json",
+      "bytes": 1925,
+      "sha256": "d79e4caac91161d1e8ca0149dec60b446b4f0d4e0aa0662541ba7b56719f4514"
+    },
+    "resume_design_reads_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/resume_design_reads_v1/result.json",
+      "bytes": 2458,
+      "sha256": "2c151873304114a9f7852e5f967963c0489709fa65ea7289eb341386d4e20219"
+    },
+    "suite_m0_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/suite_m0_v1/result.json",
+      "bytes": 1925,
+      "sha256": "83a86a573875d872e9bf7f69867a97d32ef649abb2ffa65356c642648f81a3fa"
+    },
+    "report_design_inspect_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/report_design_inspect_v1/result.json",
+      "bytes": 2024,
+      "sha256": "519466d3cc40109d46c7b28300047647a63bd87e9387230f5bc7d5888f7508e5"
+    },
+    "report_design_reads_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/report_design_reads_v1/result.json",
+      "bytes": 2438,
+      "sha256": "9a3dc99fe3a50865795df12efeda610f9f52d7743709111c056a92eaf9091e77"
+    },
+    "suite_m2_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/suite_m2_v1/result.json",
+      "bytes": 1925,
+      "sha256": "be2e9381fcd20aef6085f8c32cd080dbee4bf49e902a78237dbc5664e4b183c3"
+    },
+    "harness_temp_design_reads_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/harness_temp_design_reads_v1/result.json",
+      "bytes": 2251,
+      "sha256": "264589653f7c133bfa66b74b14c480840ee49c4b7ba5a24665b8e9640c936d22"
+    },
+    "suite_m3_progress_read_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/suite_m3_progress_read_v1/result.json",
+      "bytes": 2270,
+      "sha256": "4677fdc46f65800641e41f0558667ecc7ccda3632349221bb080acd044ea0a76"
+    },
+    "harness_syntax_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/harness_syntax_v1/result.json",
+      "bytes": 2483,
+      "sha256": "8c9268c50d30a8f86547a99cd3bcfc2be43452bcf5ee946984480362c1a6ccf0"
+    },
+    "integrity_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/integrity_v1/result.json",
+      "bytes": 1965,
+      "sha256": "56745ca8a22c2e65084cb8182dc435ee871406c0b59b73a5fedab2fc608efb82"
+    },
+    "suite_m3_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/suite_m3_v1/result.json",
+      "bytes": 1925,
+      "sha256": "f078fb45af703911b2fb27997064bd0009262935852724f316041e018416b480"
+    },
+    "frozen_replay_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/frozen_replay_v1/result.json",
+      "bytes": 1978,
+      "sha256": "53f30092f11d14100fc281641c1bc643efdf79baa12d5c409c7620e91d0269a0"
+    },
+    "replay_digest_diagnosis_reads_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/replay_digest_diagnosis_reads_v1/result.json",
+      "bytes": 2354,
+      "sha256": "f031da693db5d65767475883599b3c5e879a7e4b2fba50c0b0b63df1d74e999d"
+    },
+    "replay_project_diagnosis_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/replay_project_diagnosis_v1/result.json",
+      "bytes": 2053,
+      "sha256": "e32fb117b62011ab7b382b2db857781e9b90bffcf652e56ba0c01f1b2a29cea4"
+    },
+    "frozen_replay_v2": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/frozen_replay_v2/result.json",
+      "bytes": 1978,
+      "sha256": "bb8a243405d8fa7aa58460a85cd39a63a280b583552efbe35a242d3a095839db"
+    },
+    "suite_preparation_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/suite_preparation_v1/result.json",
+      "bytes": 1976,
+      "sha256": "ff2a6fa88c62f9fd8bddf2b4672f5a00b7f2ea0e7c709d4c4dce746d9da05eb6"
+    },
+    "fresh_demo_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/fresh_demo_v1/result.json",
+      "bytes": 1970,
+      "sha256": "e54b6fae3c0103c8643c383668a0e9dae97acc2ee59346758ad010c919acca6d"
+    },
+    "report_preflight_v1": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/report_preflight_v1/result.json",
+      "bytes": 2010,
+      "sha256": "7e71871bd10ffa5f6e7542b1e91ce871efb2a4f346642c20196e0eee5bc8c31d"
+    }
+  },
+  "reviewer_input_integrity": {
+    "run_count": 31,
+    "distinct_input_blobs_checked": 258,
+    "mandatory_files_per_run": 169,
+    "schemas_per_run": 9,
+    "executing_script_archives_checked": 21,
+    "all_results_logs_and_inputs_hash_valid": true
+  },
+  "candidate_and_history_integrity": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-integrity-v1.json",
+    "bytes": 2801,
+    "sha256": "16159796cc3aef9f4ecf7967bd5c2c9572c82d8522dd43c52a0f5324da5a3c57"
+  },
+  "frozen_replay": {
+    "report": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-frozen-replay-v1.json",
+      "bytes": 29277,
+      "sha256": "2c770e13637bdbd757028decc7d03ade3abe93f10780f2012d38f12ff6c81a65"
+    },
+    "database_count": 10,
+    "prefixes_checked": 780,
+    "historical_prefixes": 530,
+    "new_prefixes": 250,
+    "guard_target_count": 35,
+    "guard_call_count": 0,
+    "all_database_bytes_unchanged": true
+  },
+  "fresh_demonstration": {
+    "report": {
+      "path": "artifacts/m3-02-quality-review-demo-v1.json",
+      "bytes": 286818,
+      "sha256": "f69ef786d43fecb07d53cc53a89a3108c4bdad6e02b0b5a0d874cb8affb535be"
+    },
+    "export_receipt": {
+      "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-fresh-demo-v1.json",
+      "bytes": 3801,
+      "sha256": "218732590423479c87aa533856ae349226fc4caee8b0edded11420bbcfcce85a"
+    },
+    "database_count": 2,
+    "event_count": 125,
+    "command_count": 59,
+    "prefixes_checked": 250,
+    "guard_target_count": 35,
+    "guard_call_count": 0,
+    "explicitly_exempted_task_completed": true
+  },
+  "retained_failures": [
+    {
+      "label": "setup_v1",
+      "classification": "review_harness_setup",
+      "result": {
+        "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/setup_v1/result.json",
+        "bytes": 1765,
+        "sha256": "e1c27cc7417a816e1a0c3366320dd4d61d50df9190ccb528dd7d29dc64a5641c"
+      },
+      "exit_code": 1,
+      "cause": "Recursive historical input references reached the 8000-file guard (109800856 bytes), not the 384 MiB byte guard. No product test had run in that failed copy.",
+      "resolution": "Retained .tmp/m3qr1 unchanged. setup_v2 copied the required frozen sources, pinned history, and flat preparation surfaces to .tmp/m3qr2 (1364 files; 28885408 bytes)."
+    },
+    {
+      "label": "frozen_replay_v1",
+      "classification": "review_harness_project_selection",
+      "result": {
+        "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-runs/frozen_replay_v1/result.json",
+        "bytes": 1978,
+        "sha256": "53f30092f11d14100fc281641c1bc643efdf79baa12d5c409c7620e91d0269a0"
+      },
+      "exit_code": 1,
+      "cause": "The independent caller used the pure helper's default p-1 for the first historical database, whose project is demo-project. It returned an empty state and zero prefixes, so the pinned digest assertion failed.",
+      "diagnosis": {
+        "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-replay-diagnosis-v1.json",
+        "bytes": 5258,
+        "sha256": "0bc9f19d53995e43f538bdc88440c6ff7d977e6c04ba22e7a554fe104cb822b9"
+      },
+      "resolution": "replay_project_diagnosis_v1 proved the incorrect project selects 0 prefixes, while demo-project rebuilds the pinned 24 prefixes and original meeting/decision. frozen_replay_v2 uses each explicit project and asserts positive matching event, prefix, command counts, and state digest. Candidate code and frozen evidence were unchanged."
+    }
+  ],
+  "evidence_limitations": [
+    "Deterministic independent-review/author/QA fixtures exercise real SQLite and the fixed document Runtime; they are not autonomous model participants.",
+    "No original Integration Gate, Mission criterion acceptance, or autonomous equal-agent end-to-end delivery is accepted by this review.",
+    "The explicit human_owner Task-specific standalone_fixed_json_document declaration permits this limited completion; no automatic detection of integration needs is claimed.",
+    "Pure Replay checks cover the recorded finite histories and 35 fail-on-call guard targets; this is not a claim of full Conformance or arbitrary-history completeness.",
+    "The original concurrent M0-M3/probe runs retained their isolated TEMP/TMP and were much slower than the author's serial environment. They were not restarted. Later runs record their actual TEMP/TMP choices.",
+    "bootstrap_v1 archived all 169 mandatory inputs and its inline script in actual argv, but predates explicit reviewer/environment fields; this provenance exception was disclosed to and accepted by the parent."
+  ],
+  "coordination": {
+    "parent": "/root",
+    "claudelink": "unavailable and explicitly excluded from this assignment",
+    "new_agents": false,
+    "git_commands": false,
+    "network_or_installation": false,
+    "candidate_or_metadata_mutations": false,
+    "report_generation_run_label": "report_generate_v1",
+    "post_generation_selfcheck_run_label": "report_selfcheck_v1",
+    "post_generation_result_is_separate_to_avoid_self_reference": true,
+    "write_set_release": "Parent is notified after the separate self-check result is recorded"
+  },
+  "claims": {
+    "first_batch_status": "accepted",
+    "done_work_items": 19,
+    "in_progress_work_items": 1,
+    "full_m1_acceptance": "not_accepted",
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "full_conformance_registered": 28,
+    "full_conformance_passed": 0,
+    "explicit_task_exemption_completion": true,
+    "automatic_integration_need_detection": false,
+    "real_integration_gate": false,
+    "mission_acceptance": false,
+    "autonomous_equal_agent_delivery": false,
+    "test_028_passed": false
+  },
+  "report_generator": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review-report.py",
+    "bytes": 31910,
+    "sha256": "9a341e77911eb9e02149f477822d8d9b23f54b50e48771b901a05051f1d82bfb"
+  },
+  "next_step": "Parent may consume this batch-only independent decision in closeout; keep M3-02 in_progress and the original three work-item criteria not_accepted.",
+  "markdown": {
+    "path": "Docs/development/evidence/2026-09-15-m3-02-quality-review.md",
+    "bytes": 6587,
+    "sha256": "1722e9d7882070e795dc7b8c35261f5c110d16888a7db1a8b6d99cf74439dcb3"
+  }
+}

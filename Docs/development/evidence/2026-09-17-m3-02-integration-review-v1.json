@@ -1,0 +1,76 @@
+{
+  "schema": "aetp-integration-contract-independent-review-v1",
+  "work_item": "M3-02",
+  "slice": "integration_contract",
+  "candidate_revision": "v1",
+  "reviewed_at": "2026-09-17T01:10:00+08:00",
+  "reviewer": "/root/m1_reviewer",
+  "executor": "/root",
+  "decision": "accepted",
+  "decision_scope": "Only the four integration contract batch criteria in the frozen Integration review inputs v1 candidate",
+  "work_item_status": "in_progress",
+  "original_work_item_accepted": false,
+  "candidate_report": {
+    "path": "Docs/development/evidence/2026-09-17-m3-02-integration-review-inputs-report-v1.json",
+    "sha256": "758362259377de5a88b054a79934c66e5cd1caeb7ae544fb03b75316f613fbdd"
+  },
+  "candidate_snapshot": {
+    "path": "Docs/development/evidence/2026-09-17-m3-02-integration-review-inputs-candidate-v1.json",
+    "sha256": "ed5cf13f3bf64046d1fac0d0ea3e59d51d445bcca986227db0108253aa45f316"
+  },
+  "demo": {
+    "path": "artifacts/m3-02-integration-demo-v1.json",
+    "sha256": "705413aa2084c2980899bdb4a995eb9e7977a4633207beb72507126415da34b0"
+  },
+  "batch_acceptance_mapping": [
+    {
+      "criterion": "Input syntax and boundary validation",
+      "decision": "accepted",
+      "assessment": "Strict parameter and boundary checks in validation.py; pure functions without side effects."
+    },
+    {
+      "criterion": "Deterministic declaration records evaluation",
+      "decision": "accepted",
+      "assessment": "records.evaluate generates projection copy without direct state modification, preserving append-only semantics."
+    },
+    {
+      "criterion": "Shared bypass guards and causality cursors",
+      "decision": "accepted",
+      "assessment": "Shared guards enforce causal ordering and block uncommitted/unauthorized state mutation."
+    },
+    {
+      "criterion": "Live receipt, double revision transaction and merge rejection",
+      "decision": "accepted",
+      "assessment": "Live contract transactions enforce double CAS on Project and Task revisions. git.merge remains registered but fail-closed rejected."
+    }
+  ],
+  "original_work_item_criteria": [
+    {
+      "criterion": "集成面任务通过 Integration Gate",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "Mission success criteria 逐条 Acceptance Verification",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "两名以上平等 Agent 从粗糙想法讨论到成果交付，人工不拆任务且无隐藏 Manager",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    }
+  ],
+  "findings": {
+    "Critical": [],
+    "Important": [],
+    "Minor": []
+  },
+  "replay_verification": {
+    "event_count": 62,
+    "command_count": 31,
+    "prefixes_checked": 124,
+    "guards_zero_calls": 20,
+    "forged_digest_rejected": true
+  }
+}

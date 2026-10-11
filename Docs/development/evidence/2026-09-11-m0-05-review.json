@@ -1,0 +1,826 @@
+{
+  "schema_version": 1,
+  "work_item": "M0-05",
+  "reviewer": {
+    "role": "Independent Codex reviewer; continuation of the same review session",
+    "executor": "Codex main (different agent)",
+    "independent": true,
+    "subagents_created": 0,
+    "communication": "Direct conversation only. ClaudeLink read_inbox/send tools are unavailable; no tool communication is claimed."
+  },
+  "review_started_at": "2026-09-11T03:08:35.723054+08:00",
+  "review_completed_at": "2026-09-11T04:14:51.112061+08:00",
+  "decision": {
+    "status": "accepted_in_scope",
+    "accepted": true,
+    "ready_for_executor_done_transition": true,
+    "initial_candidate_accepted": false,
+    "corrected_candidate_accepted": true,
+    "open_critical": 0,
+    "open_important": 0,
+    "open_minor": 0,
+    "resolved_important": 1,
+    "statement": "Accept the corrected delta.after candidate for the approved M0-05 Task 5 subset. R1 is independently reproduced, fixed, and closed. No remaining in-scope findings. This is not a merge, full Runtime/Orchestrator compatibility, external recovery, Conformance, Bootstrap, or protocol Task COMPLETED certification.",
+    "backlog_status_observed": "review",
+    "backlog_or_status_modified_by_reviewer": false
+  },
+  "scope": {
+    "workspace": "D:\\Github\\AETP",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "allowed_write_set": [
+      "Docs/development/evidence/2026-09-11-m0-05-review.json",
+      "Docs/development/evidence/2026-09-11-m0-05-reviewer-*"
+    ],
+    "read_only_product_files": [
+      "src/aetp/core/runtime.py",
+      "src/aetp/core/projection.py",
+      "tests/m0/support.py",
+      "tests/m0/test_replay_recovery.py",
+      "src/aetp/core/commands.py",
+      "src/aetp/core/idempotency.py",
+      "src/aetp/domain/models.py",
+      "src/aetp/storage/sqlite_store.py"
+    ],
+    "basis": [
+      "AGENTS.md",
+      "Docs/development/README.md",
+      "Docs/development/backlog.json M0-05",
+      "Docs/development/knowledge-map.md",
+      "Docs/superpowers/plans/2026-09-06-m0-first-slice.md Task 5",
+      "Docs/AETP-设计方案.md sections 13.4, 13.10, 14.1, 14.2, 14.4, 17.2"
+    ],
+    "skills_used": [
+      "using-superpowers",
+      "aetp-execution-contracts",
+      "aetp-protocol-navigation",
+      "aetp-evidence-handoff",
+      "systematic-debugging",
+      "verification-before-completion"
+    ],
+    "read_extent": [
+      "Initial review: complete runtime.py; pending_command_ids and Projection integration; RuntimeHarness, receipt-only fixture and spawn/termination support; entire original test_replay_recovery.py.",
+      "Dependency inspection only: Command immutability/serialization, existing Handler transaction and audit/terminal mapping, SQLite open/read/transaction/close APIs, existing idempotency interface. M0-04 was not re-audited.",
+      "Original report/development selected fields, raw RED/GREEN/full outputs, complete supplemental probes source and selected raw probes evidence.",
+      "Re-review: exact projection guard change and three new tests, two-file reverse-delta reconstruction, eight current source hashes, corrected executor delta/probes/report claims selected fields. No repeated broad audit."
+    ],
+    "not_performed": [
+      "No Git operations, dependency installation, network communication, subagents, source/test/shared-metadata writes, or global environment modification.",
+      "No preparation render/check/test commands by this reviewer; those remain executor-owned."
+    ]
+  },
+  "hash_verification": {
+    "baseline": "Docs/development/evidence/2026-09-11-m0-05-development.json baseline_sha256 (initial observed version)",
+    "original_snapshot": "Docs/development/evidence/2026-09-11-m0-05-review-snapshot.json",
+    "original_snapshot_sha256": "8108ef83bf21b851023b96b1b0aac7b37daeaa3614f283c18b4eaec9cc7be974",
+    "initial_observed_source_sha256": {
+      "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+      "src/aetp/core/projection.py": "94dc5d2eb78c31d4ed428c524a65852e621dbb5a91127f8a98e9b83b602bad0b",
+      "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+      "tests/m0/test_replay_recovery.py": "cb8053c183d006d859fb2823aac3c133aaa7d386d5ed13cf0d40d66e51707566",
+      "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+      "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+      "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+      "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+    },
+    "initial_matching_source_count": 8,
+    "initial_unchanged_baseline_file_count": 15,
+    "initial_report_observation": {
+      "path": "artifacts/m0-05-test-report.json",
+      "submission_sha256": "c835c3b746837cd77c17a87cfd7d54338174b32b61fa0d91cceb2917a4e5e81d",
+      "observed_sha256": "c835c3b746837cd77c17a87cfd7d54338174b32b61fa0d91cceb2917a4e5e81d"
+    },
+    "corrected_delta": "Docs/development/evidence/2026-09-11-m0-05-identity-review-fix.json",
+    "delta_sha256_at_re_review": "dfd1c63f3a03df286847c1ac074b2c7a1ab6201dcd1cea52a86bb62fe3450a49",
+    "accepted_source_sha256": {
+      "src/aetp/core/runtime.py": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7",
+      "src/aetp/core/projection.py": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2",
+      "tests/m0/support.py": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497",
+      "tests/m0/test_replay_recovery.py": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3",
+      "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+      "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+      "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+      "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+    },
+    "matching_delta_after_count": 8,
+    "unchanged_from_initial_count": 6,
+    "changed_files": [
+      "src/aetp/core/projection.py",
+      "tests/m0/test_replay_recovery.py"
+    ],
+    "exact_delta_validation": "Reverse only the equality guard change and three added methods in memory; normalize current CRLF back to original LF; both reconstructed byte hashes equal the original frozen snapshot. The only additional byte-level change is LF to CRLF in these two files.",
+    "source_sha256_checked_after_independent_tests": true,
+    "dynamic_metadata_note": "The original report hash is a historical candidate observation, not a requirement for current metadata to remain unchanged. Corrected metadata claims are limited to the timestamp/hashes in reviewer-corrected-evidence-audit.log."
+  },
+  "findings": [
+    {
+      "id": "M0-05-R1",
+      "severity": "Important",
+      "status": "closed_after_independent_re_review",
+      "title": "Duplicate Command identity used Python equality rather than canonical JSON content",
+      "initial_location": {
+        "file": "src/aetp/core/projection.py",
+        "lines": "192-194",
+        "snapshot_sha256": "94dc5d2eb78c31d4ed428c524a65852e621dbb5a91127f8a98e9b83b602bad0b"
+      },
+      "fixed_location": {
+        "file": "src/aetp/core/projection.py",
+        "lines": "192-199",
+        "sha256": "c760fdf2b445f3c34d53f4d61af45bca9d2a883cdd94b111d26f4f85b5518ac2"
+      },
+      "regression_locations": [
+        {
+          "file": "tests/m0/test_replay_recovery.py",
+          "lines": "585-597"
+        },
+        {
+          "file": "tests/m0/test_replay_recovery.py",
+          "lines": "599-609"
+        },
+        {
+          "file": "tests/m0/test_replay_recovery.py",
+          "lines": "611-622"
+        }
+      ],
+      "reproduction": [
+        "Construct two immutable Commands with the same ID and metadata, with payload values True versus 1, or 1 versus 1.0. Assert their Command.digest() values differ.",
+        "Supply both Commands to Projection.pending_command_ids with one valid command.received Event whose request_digest matches the LAST Command.",
+        "Original dataclass equality treats the Commands as equal, silently overwrites the earlier identity and returns its pending ID rather than failing closed. Original four-test reviewer probe produced two assertion failures, no errors, exit 1."
+      ],
+      "impact": "Breaks the new pure pending projection fail-closed identity contract for conflicting canonical contents. SQLite primary-key reads do not themselves generate duplicate rows, so this is not evidence of an existing M0-04 store/idempotency regression or normal partial Handler commit.",
+      "normative_basis": [
+        "Design section 14.1: immutable Command and same-scope canonical idempotency content; section 13.10: recovery is based on durable facts.",
+        "M0-05 approved boundary: contradictory persisted Command/receipt identity must fail closed. Existing Command.to_json()/digest() and Projection Event duplicate handling already use canonical serialization."
+      ],
+      "correction": "Use existing Command.to_json() for duplicate comparison. No digest format migration, input-ID omission, new command/schema or Handler change.",
+      "closure_evidence": [
+        "reviewer-identity-delta-hashes.log",
+        "reviewer-identity-rerun.log",
+        "reviewer-identity-regressions.log",
+        "reviewer-identity-negative-control.log",
+        "reviewer-corrected-focused.log"
+      ],
+      "closure_reason": "Same four independent probes now pass. Both new typed regressions and canonical-content positive control pass. Restoring old comparison solely in a disposable child process yields the two intended assertion failures with zero errors; positive control still passes. Current focused 38/38 and all eight hashes verified."
+    }
+  ],
+  "strengths": [
+    {
+      "area": "Read-only Event authority",
+      "locations": [
+        "src/aetp/core/runtime.py:82-105",
+        "src/aetp/core/runtime.py:118-126"
+      ],
+      "detail": "Opens an existing quoted file URI with mode=ro; avoids writable schema initialization; rebuilds from full Events rather than cache. Missing/invalid files and unsupported history fail closed."
+    },
+    {
+      "area": "Consistent recovery view and cleanup",
+      "locations": [
+        "src/aetp/core/runtime.py:128-147",
+        "tests/m0/test_replay_recovery.py:443"
+      ],
+      "detail": "Command and Event reads share one explicit read transaction with rollback on completion/failure, guarded on the shared connection. Concurrent-commit test distinguishes mixed snapshots. Independent failure probe verified transaction release and reuse."
+    },
+    {
+      "area": "Bounded pending-intent semantics",
+      "locations": [
+        "src/aetp/core/projection.py:175-265"
+      ],
+      "detail": "Returns receipt-backed Command IDs in Event order, not pending Task IDs; validates digest/type/cause/correlation/target/terminal mapping; distrusts result index; never dispatches or writes. Receipt-only fixture is explicitly artificial storage-fault evidence."
+    },
+    {
+      "area": "Simulation versus durable ACK",
+      "locations": [
+        "src/aetp/core/runtime.py:24-65",
+        "tests/m0/support.py:326-418"
+      ],
+      "detail": "SimulationResult preserves simulation-only provenance through serialization, with no Event IDs or aggregate revision, a real invocation counter, and no persistence. Harness separates simulation diagnostics from durable Handler results."
+    },
+    {
+      "area": "Real process death and no-effect evidence",
+      "locations": [
+        "tests/m0/support.py:441-500",
+        "tests/m0/test_replay_recovery.py:47-100",
+        "tests/m0/test_replay_recovery.py:424-442"
+      ],
+      "detail": "Spawned child holds after committed Handler result; parent verifies witness, terminates and reaps actual process, then retries the original Command. Witness is not misrepresented as a delivered client response. Effect spies have positive controls; absent adapters are honestly labelled sentinels. Independent spawn-error probe verified cleanup."
+    },
+    {
+      "area": "Focused correction and discriminating tests",
+      "locations": [
+        "src/aetp/core/projection.py:192-199",
+        "tests/m0/test_replay_recovery.py:585-622"
+      ],
+      "detail": "Fix reuses canonical serialization. Tests make the receipt agree with the last Command so an incidental digest mismatch cannot mask duplicate validation, assert the intended error, and preserve a key-order-independent canonical-content positive control."
+    },
+    {
+      "area": "Evidence scope honesty",
+      "locations": [
+        "artifacts/m0-05-test-report.json",
+        "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json"
+      ],
+      "detail": "Historical RED, later coverage, executor runs and reviewer runs remain distinct. Paused coverage is only an initial persisted creation value; no full TEST-025, external UNKNOWN/Action recovery, Conformance pass or Bootstrap claim."
+    }
+  ],
+  "acceptance_checks": [
+    {
+      "criterion": "删除 Projection 后由 Event Store 得到同一状态",
+      "result": "accepted_in_M0_scope",
+      "basis": "Independent initial 35-suite and corrected 38-suite test cache removal/corruption/missing tables and same rebuilt state from Events; source inspection confirms no cache authority."
+    },
+    {
+      "criterion": "重启不执行模型、Shell、Runtime.start 或历史工具动作",
+      "result": "accepted_in_M0_scope",
+      "basis": "Independent focused tests include real effect tripwires, positive controls, runtime invocation observations and actual spawn death/retry. Model/Runtime.start absent adapters remain labelled sentinels, not implemented external tool coverage."
+    },
+    {
+      "criterion": "Orchestrator 不保留 Event Store 外权威状态",
+      "result": "accepted_in_M0_scope",
+      "basis": "Recovery reads authoritative Events/Commands each time, uses a consistent snapshot, returns detached state/pending diagnostics and has no private authoritative Orchestrator state. Existing Handler remains fully atomic."
+    }
+  ],
+  "independent_executions": [
+    {
+      "stage": "initial",
+      "classification": "independent production test execution",
+      "command": "python -m unittest tests/m0/test_replay_recovery.py -v",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests/m0/test_replay_recovery.py",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:10:31.567011+08:00",
+      "finished_at": "2026-09-11T03:10:35.439450+08:00",
+      "elapsed_seconds": 3.872935,
+      "exit_code": 0,
+      "counts": {
+        "tests_run": 35,
+        "failures": 0,
+        "errors": 0,
+        "reported_seconds": 3.515
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-focused.log",
+      "log_sha256": "4d24c7459c93b65b0ee8fed972d1381c7ee21363eba1c319e6855b2f539ea04c",
+      "reproducible_python_source_in_log": false
+    },
+    {
+      "stage": "initial",
+      "classification": "independent production test execution",
+      "command": "python -m unittest discover -s tests/m0 -t . -v",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:10:35.441044+08:00",
+      "finished_at": "2026-09-11T03:10:46.744970+08:00",
+      "elapsed_seconds": 11.304378,
+      "exit_code": 0,
+      "counts": {
+        "tests_run": 128,
+        "failures": 0,
+        "errors": 0,
+        "reported_seconds": 10.919
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-full-m0.log",
+      "log_sha256": "d6d2317609a39fa14af8a63fdd32e2bda8a21d9cdf8e588f08ad0e740d1322ba",
+      "reproducible_python_source_in_log": false
+    },
+    {
+      "stage": "initial",
+      "classification": "independent reproducer; two assertion failures established R1",
+      "command": "python -c <source retained in this log>",
+      "argv": null,
+      "started_at": "2026-09-11T03:28:23.510596+08:00",
+      "finished_at": "2026-09-11T03:28:23.747480+08:00",
+      "elapsed_seconds": 0.236843,
+      "exit_code": 1,
+      "counts": {
+        "tests_run": 4,
+        "failures": 2,
+        "errors": 0,
+        "reported_seconds": 0.002
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-command-identity.log",
+      "log_sha256": "27dcad8ca97a3d722e1a86a15af7855ee69e70c5862435c28643a1732e4aaee2",
+      "reproducible_python_source_in_log": true
+    },
+    {
+      "stage": "initial",
+      "classification": "independent temporary-directory failure-path probes",
+      "command": "python -c <source retained in this log>",
+      "argv": null,
+      "started_at": "2026-09-11T03:31:48.638634+08:00",
+      "finished_at": "2026-09-11T03:31:49.376240+08:00",
+      "elapsed_seconds": 0.737512,
+      "exit_code": 0,
+      "counts": {
+        "tests_run": 2,
+        "failures": 0,
+        "errors": 0,
+        "reported_seconds": 0.435
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-resource-failures.log",
+      "log_sha256": "9a5153066b619e96501f9ab4cd9aed032fd4556eb1cbf511b7165266ae05701e",
+      "reproducible_python_source_in_log": true
+    },
+    {
+      "stage": "re_review",
+      "classification": "same four independent reproducer tests against corrected production",
+      "command": "python -c <source retained below>",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-c",
+        "<source>"
+      ],
+      "started_at": "2026-09-11T03:56:13.127312+08:00",
+      "finished_at": "2026-09-11T03:56:13.360929+08:00",
+      "elapsed_seconds": 0.23412350000580773,
+      "exit_code": 0,
+      "counts": {
+        "tests_run": 4,
+        "failures": 0,
+        "errors": 0,
+        "reported_seconds": 0.001
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-rerun.log",
+      "log_sha256": "5c4490eec18ecf54f456338190fb38727b41e3c4e98945198fd4d7ccae7ee884",
+      "reproducible_python_source_in_log": true
+    },
+    {
+      "stage": "re_review",
+      "classification": "three newly added canonical regression tests against corrected production",
+      "command": "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m unittest tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless -v",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+        "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:56:13.363849+08:00",
+      "finished_at": "2026-09-11T03:56:13.745019+08:00",
+      "elapsed_seconds": 0.38131880000582896,
+      "exit_code": 0,
+      "counts": {
+        "tests_run": 3,
+        "failures": 0,
+        "errors": 0,
+        "reported_seconds": 0.001
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-regressions.log",
+      "log_sha256": "48e95c8731eb4ac0d9a5f2f6daf81ec017e3daa60976ec8d75ee080b022be32a",
+      "reproducible_python_source_in_log": false
+    },
+    {
+      "stage": "re_review",
+      "classification": "child-only in-memory equality mutation; exit 1 with two assertion failures is the expected detection",
+      "command": "python -c <source retained below>",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-c",
+        "<source>"
+      ],
+      "started_at": "2026-09-11T03:56:13.747360+08:00",
+      "finished_at": "2026-09-11T03:56:14.093851+08:00",
+      "elapsed_seconds": 0.346600099997886,
+      "exit_code": 1,
+      "counts": {
+        "tests_run": 3,
+        "failures": 2,
+        "errors": 0,
+        "reported_seconds": 0.003
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-negative-control.log",
+      "log_sha256": "9d5fae436362bfbac176911c3e4bd9390ed67cecd9a6fa658c3e9000db595095",
+      "reproducible_python_source_in_log": true
+    },
+    {
+      "stage": "re_review",
+      "classification": "independent corrected focused suite",
+      "command": "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m unittest tests/m0/test_replay_recovery.py -v",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "tests/m0/test_replay_recovery.py",
+        "-v"
+      ],
+      "started_at": "2026-09-11T03:56:14.115571+08:00",
+      "finished_at": "2026-09-11T03:56:18.104005+08:00",
+      "elapsed_seconds": 3.9887056999941706,
+      "exit_code": 0,
+      "counts": {
+        "tests_run": 38,
+        "failures": 0,
+        "errors": 0,
+        "reported_seconds": 3.635
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "log": "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-focused.log",
+      "log_sha256": "092cd0aad4630c05a4aeee3e021f1969e55f6772f96be30907c22e67de2d06ee",
+      "reproducible_python_source_in_log": false
+    }
+  ],
+  "execution_count_note": "Counts are per run, not additive coverage: focused 35 is part of initial full 128; the three added regressions are included in corrected focused 38. Corrected full 131 is executor evidence reviewed, not an independent reviewer execution.",
+  "reviewer_utility_note": {
+    "exit_code": 1,
+    "failed_check": "assert raw.count(new) == 1",
+    "cause": "The reviewer byte-pattern assumed LF but both corrected files use CRLF. No product assertion was run in this utility. Corrected verification normalizes newline sequences in memory and reconstructs exact original file hashes.",
+    "product_finding": false
+  },
+  "historical_evidence_reviewed_not_rerun": {
+    "initial_red": {
+      "tests_run": 32,
+      "assertion_failures": 32,
+      "errors": 0,
+      "recorded_exit_code": 1,
+      "log_evidence": "Docs/development/evidence/2026-09-11-m0-05-reviewer-evidence-audit.log",
+      "note": "Reviewed raw historical API assertion output; not rerun on a restored implementation baseline. Three later coverage tests are explicitly distinguished."
+    },
+    "identity_delta_runs": {
+      "identity_red": {
+        "classification": "executor history read and parsed; not rerun by reviewer in this audit",
+        "command": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+          "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+          "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+          "-v"
+        ],
+        "started_at": "2026-09-11T03:35:45.776621+08:00",
+        "finished_at": "2026-09-11T03:35:46.173714+08:00",
+        "recorded_exit_code": 1,
+        "parsed_counts": {
+          "tests_run": 3,
+          "failures": 2,
+          "errors": 0
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_red-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_red-stderr.txt",
+          "sha256": "1f7f7e62151c50bc8ebcfdb78d7f1cffd8e3895f4f8b76a8c4215f14adf1191c"
+        }
+      },
+      "identity_green": {
+        "classification": "executor history read and parsed; not rerun by reviewer in this audit",
+        "command": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_boolean_and_integer_payloads_conflict",
+          "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_integer_and_float_payloads_conflict",
+          "tests.m0.test_replay_recovery.PendingProjectionTests.test_duplicate_command_canonical_content_is_harmless",
+          "-v"
+        ],
+        "started_at": "2026-09-11T03:37:24.744559+08:00",
+        "finished_at": "2026-09-11T03:37:25.116388+08:00",
+        "recorded_exit_code": 0,
+        "parsed_counts": {
+          "tests_run": 3,
+          "failures": 0,
+          "errors": 0
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_green-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_green-stderr.txt",
+          "sha256": "438d718ca30fd18eeca4f73d949f9e549c773efb33aa2b73d29c73ab35994cc3"
+        }
+      },
+      "identity_focused": {
+        "classification": "executor history read and parsed; not rerun by reviewer in this audit",
+        "command": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "tests/m0/test_replay_recovery.py",
+          "-v"
+        ],
+        "started_at": "2026-09-11T03:37:25.126262+08:00",
+        "finished_at": "2026-09-11T03:37:29.196099+08:00",
+        "recorded_exit_code": 0,
+        "parsed_counts": {
+          "tests_run": 38,
+          "failures": 0,
+          "errors": 0
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_focused-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_focused-stderr.txt",
+          "sha256": "f6f4f34ce1f55989d814f3de22d0c66d71540304a64b2751b6b68759dc201516"
+        }
+      },
+      "identity_m0": {
+        "classification": "executor history read and parsed; not rerun by reviewer in this audit",
+        "command": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "started_at": "2026-09-11T03:37:29.206998+08:00",
+        "finished_at": "2026-09-11T03:37:42.045103+08:00",
+        "recorded_exit_code": 0,
+        "parsed_counts": {
+          "tests_run": 131,
+          "failures": 0,
+          "errors": 0
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_m0-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-11-m0-05-identity_m0-stderr.txt",
+          "sha256": "4ec20c597b9ead9bbcac2169c441e3ae2b8bc41c96589887d41e0509d650ad9c"
+        }
+      }
+    },
+    "executor_supplemental_probes": {
+      "initial": "Docs/development/evidence/2026-09-11-m0-05-probes.json",
+      "corrected": "Docs/development/evidence/2026-09-11-m0-05-acceptance-probes.json",
+      "corrected_observations": {
+        "classification": "executor five-round run parsed; not independently rerun",
+        "recovery_runs": 5,
+        "sql_write_attempts": 0,
+        "effect_positive_control_counts": {
+          "simulation.execute": 1,
+          "shell.Popen": 1,
+          "shell.system": 1,
+          "network.socket": 1,
+          "network.urlopen": 1,
+          "runtime.start_sentinel": 1,
+          "model.invoke_sentinel": 1
+        },
+        "effect_counts_during_recovery": {
+          "simulation.execute": 0,
+          "shell.Popen": 0,
+          "shell.system": 0,
+          "network.socket": 0,
+          "network.urlopen": 0,
+          "runtime.start_sentinel": 0,
+          "model.invoke_sentinel": 0
+        },
+        "process_crashes": [
+          {
+            "pid": 34104,
+            "recorded_exit_code": -15,
+            "domain_effect_increment": 1,
+            "retry_event_delta": 0
+          },
+          {
+            "pid": 23572,
+            "recorded_exit_code": -15,
+            "domain_effect_increment": 1,
+            "retry_event_delta": 0
+          },
+          {
+            "pid": 32328,
+            "recorded_exit_code": -15,
+            "domain_effect_increment": 1,
+            "retry_event_delta": 0
+          },
+          {
+            "pid": 9808,
+            "recorded_exit_code": -15,
+            "domain_effect_increment": 1,
+            "retry_event_delta": 0
+          },
+          {
+            "pid": 20876,
+            "recorded_exit_code": -15,
+            "domain_effect_increment": 1,
+            "retry_event_delta": 0
+          }
+        ],
+        "mutations": [
+          {
+            "mutant": "cache_instead_of_events",
+            "test": "ReplayRecoveryTests.test_a_forged_self_consistent_cache_is_not_an_authoritative_fact",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "dispatch_during_replay",
+            "test": "ReplayRecoveryTests.test_forbidden_call_tripwires_have_positive_controls_then_remain_zero",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "constant_runtime_counter",
+            "test": "ReplayRecoveryTests.test_recovery_counter_reports_actual_simulator_calls_not_a_constant",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "pending_always_empty",
+            "test": "ReplayRecoveryTests.test_pending_ids_follow_receipt_sequence_not_lexical_order_or_task_status",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "ignore_terminal_type",
+            "test": "PendingProjectionTests.test_wrong_terminal_type_for_the_same_target_cannot_clear_pending",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "writable_recovery",
+            "test": "ReplayRecoveryTests.test_recovery_connection_is_enforced_read_only_by_sqlite",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "trust_result_index",
+            "test": "ReplayRecoveryTests.test_pending_ids_do_not_trust_a_forged_terminal_result_index",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          },
+          {
+            "mutant": "no_read_snapshot",
+            "test": "ReplayRecoveryTests.test_pending_uses_one_read_snapshot_during_a_concurrent_commit",
+            "tests_run": 1,
+            "failures": 1,
+            "errors": 0,
+            "exit_code": 1,
+            "detected_by_assertion": true
+          }
+        ],
+        "claims": {
+          "conformance_accepted": false,
+          "bootstrap_verified": false,
+          "external_tools_implemented": false
+        }
+      },
+      "classification": "Read/parsed main-agent evidence, not independently rerun as a five-round probe campaign."
+    },
+    "preparation": "Executor-owned preparation verification is not counted as reviewer execution."
+  },
+  "limitations": [
+    "No full Runtime/Orchestrator restart ordering, operational pause/resume, Lease/Binding, Action/outbox, external UNKNOWN reconciliation or exactly-once external effect implementation is certified.",
+    "Receipt-only histories are artificial stored fault fixtures, not a claim that normal synchronous M0 CommandHandler commits expose that intermediate state.",
+    "Simulation accepted status is simulation-only diagnostic provenance; it is not durable Command receipt or result authority.",
+    "The full 128-case suite was independently executed against the initial candidate. For the authorized two-file correction, reviewer reran original four probes, three regressions, child-only negative control and focused 38, not full 131 or the five-round supplemental campaign.",
+    "Main historical RED/probes and corrected 131 are audited logs, not reviewer-owned executions. Runtime/model sentinels do not verify adapters that do not exist.",
+    "Dynamic report/development/handoff/preparation documents may change after the recorded observations; final shared metadata consistency is owned by the executor and has not been broadly recertified here."
+  ],
+  "claims_not_made": {
+    "merge_approval": false,
+    "full_runtime_compatibility": false,
+    "full_orchestrator_recovery": false,
+    "external_action_recovery": false,
+    "conformance_passed": false,
+    "bootstrap_verified": false,
+    "protocol_task_completed": false
+  },
+  "evidence_files": [
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-command-identity.log",
+      "sha256": "27dcad8ca97a3d722e1a86a15af7855ee69e70c5862435c28643a1732e4aaee2"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-evidence-audit.log",
+      "sha256": "08351f0099fe40ae4bf4dfb7c11b2881917dff7d29a810aa8c1048f3a6e24978"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-focused.log",
+      "sha256": "092cd0aad4630c05a4aeee3e021f1969e55f6772f96be30907c22e67de2d06ee"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-evidence-audit.log",
+      "sha256": "c79e18a83ed3395af59e9f988314556268687a90cb8c30a090159534b43f6c33"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-focused.log",
+      "sha256": "4d24c7459c93b65b0ee8fed972d1381c7ee21363eba1c319e6855b2f539ea04c"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-full-m0.log",
+      "sha256": "d6d2317609a39fa14af8a63fdd32e2bda8a21d9cdf8e588f08ad0e740d1322ba"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-delta-hashes.log",
+      "sha256": "fc2b8ee193b677ff95fb1e4b56f1fc29416e05deea27ee8b92edf04daa758c79"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-negative-control.log",
+      "sha256": "9d5fae436362bfbac176911c3e4bd9390ed67cecd9a6fa658c3e9000db595095"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-regressions.log",
+      "sha256": "48e95c8731eb4ac0d9a5f2f6daf81ec017e3daa60976ec8d75ee080b022be32a"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-rerun.log",
+      "sha256": "5c4490eec18ecf54f456338190fb38727b41e3c4e98945198fd4d7ccae7ee884"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-initial-hashes.log",
+      "sha256": "99c25d62b1fdfe2214f77faff6a009d951dcaac4deddfc08f9eea6d7b71bd4ec"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-11-m0-05-reviewer-resource-failures.log",
+      "sha256": "9a5153066b619e96501f9ab4cd9aed032fd4556eb1cbf511b7165266ae05701e"
+    }
+  ],
+  "modified_files": [
+    "Docs/development/evidence/2026-09-11-m0-05-review.json",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-command-identity.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-evidence-audit.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-corrected-focused.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-evidence-audit.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-focused.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-full-m0.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-delta-hashes.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-negative-control.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-regressions.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-identity-rerun.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-initial-hashes.log",
+    "Docs/development/evidence/2026-09-11-m0-05-reviewer-resource-failures.log"
+  ],
+  "next_step": "Executor may record the independent corrected-candidate acceptance, finish its preparation/handoff consistency checks, and transition M0-05 to done. Reviewer has not modified shared progress files."
+}

@@ -1,0 +1,372 @@
+{
+  "work_item": "M1-02",
+  "candidate_revision": "v2",
+  "created_at": "2026-09-12T03:21:07.923977+08:00",
+  "test_report": {
+    "path": "artifacts/m1-02-test-report-v2.json",
+    "sha256": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c"
+  },
+  "sources": [
+    {
+      "path": ".tmp/m1-02-file-diagnostic.py",
+      "sha256": "0c4e916eb453050c81719f527b276817de56aa455d07b1f9777fa27459521d5e"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787"
+    },
+    {
+      "path": "conformance/__init__.py",
+      "sha256": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2"
+    },
+    {
+      "path": "conformance/m0/__init__.py",
+      "sha256": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df"
+    },
+    {
+      "path": "conformance/m0/README.md",
+      "sha256": "6f38e66fa47d709691388b1c00dc8908c20217a94235c765f14476cd3a2105fb"
+    },
+    {
+      "path": "conformance/m0/runner.py",
+      "sha256": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e"
+    },
+    {
+      "path": "Docs/AETP-设计方案-补充建议.md",
+      "sha256": "3a6c665ea3f65f426c6bad68db5c35793ee56643cd23b54d8032f01709e885c1"
+    },
+    {
+      "path": "Docs/AETP-设计方案.md",
+      "sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-archive-v1.py",
+      "sha256": "39bf63b4a505208376740f7dd17232c5471dae4c21df61a247cdb519057e169a"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-audit-v2.py",
+      "sha256": "b27368cd59cc2eb940ac2431ce189ad9273fbfb173d602ccf06009ea04814820"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-audit.py",
+      "sha256": "d7358a54b48f4dc2f9653ed27d0bc5c5b72a34c04f18f9bbb948d3c8c93e39e5"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-baseline.py",
+      "sha256": "fd419fbf22ec00114229cba1e380bdff98217cc8d3d85bff4280e400a0b94032"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-demo-v2.py",
+      "sha256": "7c801d6f106bf3e8270c828269e5c3d5ab6a5bd687f0c3835a4b73b8c761cd07"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-demo.py",
+      "sha256": "6c2d1d53f08f846c4132f21353142cf461b89d2cb2e2f14c26349b533be57cca"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-freeze-v2.py",
+      "sha256": "85e6f4798ac7cbe8fa6e96d3b62c64d45d378bc0140c2a0b2fb494a763215a0f"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-freeze.py",
+      "sha256": "cd8cbe03a272d97462adfc8801a75bdd93c34148e57f9ed6f813ec23570de929"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-publication-diagnostic.py",
+      "sha256": "0648ee8888f4fe63b30a31e207b2a29b5e7222324ecf2e932244e05b6343e2e8"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-publication-red-v1.py",
+      "sha256": "f0694d33a7a00e8750d21acb5e5b9da52e9734093104bea5974d47b7fd02520d"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-record.py",
+      "sha256": "a819094243686c3dfe0009b64af357af7869099007601211e31b64a3b932e142"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-sharing-diagnostic.py",
+      "sha256": "e7835428ac0095e8bcd50710473710d8a680624baf5da45ae063cd3f8e1dca3b"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-start.py",
+      "sha256": "b1bbcef1eabd73918fea1754606fa26e105c8331f0d32ee4cd4a6e90559f52fd"
+    },
+    {
+      "path": "Docs/development/knowledge-graph.json",
+      "sha256": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3"
+    },
+    {
+      "path": "Docs/development/knowledge-map.md",
+      "sha256": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f"
+    },
+    {
+      "path": "Docs/development/README.md",
+      "sha256": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872"
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-12-m1-02-execution.md",
+      "sha256": "8ab48236b233c3db59aee63b5f5edcdd225aa6d6b77e6e325539ef13aa94aaa1"
+    },
+    {
+      "path": "Docs/superpowers/specs/2026-09-12-m1-02-execution-design.md",
+      "sha256": "5a89b79afd6045ceef8d58929af99eb510a6a598e481dac3c345a4441439fcee"
+    },
+    {
+      "path": "schemas/m0/invalid/empty_idempotency_key.json",
+      "sha256": "92692a4270f8dca8c699b45dda788c97f51d0d4e1f7279007267a8039d3abf44"
+    },
+    {
+      "path": "schemas/m0/invalid/missing_id.json",
+      "sha256": "d8d2f73f3b5388a761bb4b9d7aff27dd0541f91b3167274454957f9da147c7ac"
+    },
+    {
+      "path": "schemas/m0/invalid/negative_revision.json",
+      "sha256": "4d6fdb03eade0308ed2cc6ee2eca2c70f4bfcf4bcefb6f94aa539f924ffca14b"
+    },
+    {
+      "path": "schemas/m0/invalid/unsupported_type.json",
+      "sha256": "a2cad14252592f1a6e7ba13f364be25eb4426ed20d2eba563cb0f39cbbacce15"
+    },
+    {
+      "path": "schemas/m0/valid/agent.json",
+      "sha256": "69276f88b8f1cbb12687eb9d7848e42900e8c5b1a3721b2a50df8e6fd8608c5c"
+    },
+    {
+      "path": "schemas/m0/valid/command.json",
+      "sha256": "85e0b5cb1694078595de4f8e7da0472fb46503622d67bad6c23e66f234bab3e5"
+    },
+    {
+      "path": "schemas/m0/valid/event.json",
+      "sha256": "a7acca7c870675876f16eeb1c9ad5574a07b70b0d098c08420f205acb2aeb320"
+    },
+    {
+      "path": "schemas/m0/valid/project.json",
+      "sha256": "f361c3501b2d16572dfa779d31b66fefc7fe24d7821ca9ce9eb4a08b49fd3bb1"
+    },
+    {
+      "path": "schemas/m0/valid/task.json",
+      "sha256": "6822648c8e313ccf400387f21abadb7bd44cd3d19aa1aa52061bfa2b84a48ac3"
+    },
+    {
+      "path": "skills/aetp-evidence-handoff/SKILL.md",
+      "sha256": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292"
+    },
+    {
+      "path": "skills/aetp-execution-contracts/SKILL.md",
+      "sha256": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4"
+    },
+    {
+      "path": "skills/aetp-protocol-navigation/SKILL.md",
+      "sha256": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa"
+    },
+    {
+      "path": "src/aetp/__init__.py",
+      "sha256": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0"
+    },
+    {
+      "path": "src/aetp/collaboration/__init__.py",
+      "sha256": "9faba390803eeadae48c7b1601c48e52f80a316974fa3a74d1c024b6895ceebe"
+    },
+    {
+      "path": "src/aetp/collaboration/checks.py",
+      "sha256": "ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+    },
+    {
+      "path": "src/aetp/collaboration/contracts.py",
+      "sha256": "0550573059e0c0ed60f1d2d53010e54c87c60749d224b114f99609bbd5787e2b"
+    },
+    {
+      "path": "src/aetp/collaboration/messages.py",
+      "sha256": "34122f4055f6fafcff9fffe1cc415025e8c985f7de809b6940b4fc3b38bbb89f"
+    },
+    {
+      "path": "src/aetp/collaboration/policy.py",
+      "sha256": "999372d708efcd6a0f725e8f16eb206ad36258f928a13609a5fd7615ec55e007"
+    },
+    {
+      "path": "src/aetp/collaboration/projection.py",
+      "sha256": "6e171baa224b327adb22ff8e58ffc93a64d2654653b9b75e3cf152b7dec32cc2"
+    },
+    {
+      "path": "src/aetp/collaboration/README.md",
+      "sha256": "800d44c8b59f4733fbaf78c8174107baccbbeaf22d29a5fcde01f4a854e0436b"
+    },
+    {
+      "path": "src/aetp/collaboration/records.py",
+      "sha256": "c6f4973b08b515ed97a989107ec0f01cb302abc5a5864db4786965dc6bdda9a4"
+    },
+    {
+      "path": "src/aetp/collaboration/service.py",
+      "sha256": "efbdef8ff15518681668f55cb5c12600bc1d50cfdf698dc4f060165a90f1330d"
+    },
+    {
+      "path": "src/aetp/core/__init__.py",
+      "sha256": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2"
+    },
+    {
+      "path": "src/aetp/core/commands.py",
+      "sha256": "3151a157880a73336fe167c3baae569c62f99785125f9b2dadb2b95f9034a2fd"
+    },
+    {
+      "path": "src/aetp/core/idempotency.py",
+      "sha256": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c"
+    },
+    {
+      "path": "src/aetp/core/projection.py",
+      "sha256": "5ba7b3fd06149d18da64ab8059700e473631f19e1cbef68d3c87917689313807"
+    },
+    {
+      "path": "src/aetp/core/runtime.py",
+      "sha256": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7"
+    },
+    {
+      "path": "src/aetp/domain/__init__.py",
+      "sha256": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5"
+    },
+    {
+      "path": "src/aetp/domain/models.py",
+      "sha256": "3f9d8d90f0e39627d1dfe4ef63aa2cb4243eb5077cfbb35b8fd7d9fa943b79ee"
+    },
+    {
+      "path": "src/aetp/runtime/__init__.py",
+      "sha256": "eff08c08f84800d6f8918ef38236ecdbc69dfd0bf71f0b85910becb41aecb074"
+    },
+    {
+      "path": "src/aetp/runtime/actions.py",
+      "sha256": "4e96a77eed3cad71d7fd300fbedf30dac5fa6c85e413870968f5d9dd9e96c1aa"
+    },
+    {
+      "path": "src/aetp/runtime/contracts.py",
+      "sha256": "bae05c84980ea85bb20e1001e209ea7ae3c91106c8f41706d4138557d1124f01"
+    },
+    {
+      "path": "src/aetp/runtime/document.py",
+      "sha256": "cd2063394cf809d1fea9a6928b01c3cdee5971a11c2543974f52bf7b297f0c16"
+    },
+    {
+      "path": "src/aetp/runtime/policy.py",
+      "sha256": "924f4ca3da619fa8021aacab991d52c9b515a7671fa7a8e600ee02607e5c9d0d"
+    },
+    {
+      "path": "src/aetp/runtime/projection.py",
+      "sha256": "5a2797f6293d7e4d464d73f8e795d530da0bff273074a5699cc1c1cf254b02f9"
+    },
+    {
+      "path": "src/aetp/runtime/README.md",
+      "sha256": "b29c1eae0633b9314f4f8de25e15e7f7ed880f0acef7f28816cf4361be1e43ca"
+    },
+    {
+      "path": "src/aetp/runtime/records.py",
+      "sha256": "6aa88f93fcfe3a1e520ffda142e401561b6a9d5201c7b5f9aa026f2c29ffadea"
+    },
+    {
+      "path": "src/aetp/runtime/service.py",
+      "sha256": "34f31bc7634e4ae3742ebfdedb4222e88c277927764e97aafcae7f5a7d3d2b40"
+    },
+    {
+      "path": "src/aetp/storage/__init__.py",
+      "sha256": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a"
+    },
+    {
+      "path": "src/aetp/storage/sqlite_store.py",
+      "sha256": "1886b4d887420db2b22f29a98187ed37e125f19deb469b1efd63c3f7e831f79a"
+    },
+    {
+      "path": "src/aetp/workspace/__init__.py",
+      "sha256": "fd8f48b5b86618c9938ddf022ba876d29b4d9dd0a88d17f1a9bdabf86f90989d"
+    },
+    {
+      "path": "src/aetp/workspace/documents.py",
+      "sha256": "469b9690c7fb12a51bc8a8921ef8d32d6d152f544e1134224958136822cbbd22"
+    },
+    {
+      "path": "src/aetp/workspace/gate.py",
+      "sha256": "884e0a80f5b2d5f3c3f4abdc84c0adf61e4ef506ee803c83777e52086443b010"
+    },
+    {
+      "path": "src/aetp/workspace/windows_files.py",
+      "sha256": "bc460457db5d418f4038cb9e9468b0f067400f2c94a318008b0e7c8f2621a7b1"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "3aaa5a025536dc3b5a6f77c2beaa645104d097e1b5c931184397eda5352d272a"
+    },
+    {
+      "path": "tests/m0/__init__.py",
+      "sha256": "5b31d33fdf6739ca0dde84d9b8f73196c84b1e8b37d7a89e20a2c2702218d811"
+    },
+    {
+      "path": "tests/m0/support.py",
+      "sha256": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497"
+    },
+    {
+      "path": "tests/m0/test_command_boundary.py",
+      "sha256": "7bf66b0f0e5e1063b205ae456d951474b4e5902733998835b015048beec97424"
+    },
+    {
+      "path": "tests/m0/test_conformance_subset.py",
+      "sha256": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6"
+    },
+    {
+      "path": "tests/m0/test_event_projection.py",
+      "sha256": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538"
+    },
+    {
+      "path": "tests/m0/test_idempotency_concurrency.py",
+      "sha256": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d"
+    },
+    {
+      "path": "tests/m0/test_models.py",
+      "sha256": "89799d649d63aab517940fe634f226242f1d627fa7ecb6fd645b0d5b32181b28"
+    },
+    {
+      "path": "tests/m0/test_replay_recovery.py",
+      "sha256": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+    },
+    {
+      "path": "tests/m1/__init__.py",
+      "sha256": "9a7f25e1f836cf0773f8dd8f55708e95d508bbd9f707fbcacafb4bf9a5d8fe37"
+    },
+    {
+      "path": "tests/m1/execution_support.py",
+      "sha256": "24778cd92e1f03c23ad2c414d4e70c4a5d5c7f7f767b7a37ca88975ecd5ceb60"
+    },
+    {
+      "path": "tests/m1/support.py",
+      "sha256": "3f742276788ce097aa939126be26e0e3a17d587f27f69343ec5a837611ec6482"
+    },
+    {
+      "path": "tests/m1/test_evidence_chain.py",
+      "sha256": "34d3e839594907f11fe9f5e6ec0b283246e8a115f8f929dfcb25e9a9bfbd8762"
+    },
+    {
+      "path": "tests/m1/test_execution_boundary.py",
+      "sha256": "46e3d9cb3f7210d6cb7b0e5f29bb96c87618fd13ba1d8027abbfe3eb36180218"
+    },
+    {
+      "path": "tests/m1/test_messages.py",
+      "sha256": "75820ee89bd91143e84eb95b0a498e45f1340b894630e06d34253ec1b34f0097"
+    },
+    {
+      "path": "tests/m1/test_review_regressions.py",
+      "sha256": "1113ecd7d4216804a8ee63410b77f4bf202ab3ba499a338d93fbe10edaa29934"
+    },
+    {
+      "path": "tests/m1/test_verification.py",
+      "sha256": "7421bf7bede5da6e7828e90df7b80177caf4b4570a9b64527546548e1df240b9"
+    },
+    {
+      "path": "tests/preparation/test_devprep.py",
+      "sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a"
+    },
+    {
+      "path": "tests/preparation/test_devprep_fail_closed.py",
+      "sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a"
+    },
+    {
+      "path": "tools/devprep.py",
+      "sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583"
+    }
+  ],
+  "note": "Review pending. Frozen sources/report/output bytes remain immutable. Live metadata, narrative appendices and operational closeout scripts are outside the fixed product candidate."
+}

@@ -1,0 +1,32 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Preparation checks
+        run: |
+          python tools/devprep.py check
+      - name: Preparation tests
+        run: |
+          python -m unittest discover -s tests/preparation -v
+      - name: Conformance runner (clean db)
+        run: |
+          PYTHONPATH=src python -m conformance.runner \
+            --db .tmp/ci-conformance.sqlite \
+            --json .tmp/ci-conformance.json \
+            --frozen-evidence .tmp/ci-conformance-frozen.json
+  note:
+    runs-on: ubuntu-latest
+    if: false
+    steps:
+      - run: echo "This workflow is a config skeleton; it has NOT been run against a real remote + CI host yet. Do not claim CI has passed until it is actually triggered here."

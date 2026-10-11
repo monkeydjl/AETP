@@ -1,0 +1,609 @@
+{
+  "schema_version": "aetp-independent-development-review-0.1",
+  "work_item": "M1-01",
+  "candidate": "v1",
+  "reviewer": {
+    "identity": "/root/m1_reviewer",
+    "role": "independent reviewer",
+    "different_from_executor": true,
+    "spawned_additional_agents": false,
+    "claudelink_used": false
+  },
+  "created_at": "2026-09-12T00:35:49.484765+08:00",
+  "decision": "changes_requested",
+  "accepted": false,
+  "summary": "固定初版的候选证据链真实存在，原测试通过；独立探针确认两个 Important 问题，须修复后重新固定候选复核。",
+  "fixed_inputs": {
+    "report": {
+      "path": "artifacts/m1-01-test-report.json",
+      "sha256": "7b4995e8d3495fcbed7d3fbd4047197e2928ae24980c8e7369f9a696509dfa99"
+    },
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-candidate-snapshot.json",
+      "sha256": "93a2f483d2433cc673e87d9ddbec1492b02276fa2f7693d58c1232baa9577d06"
+    },
+    "source_count": 40,
+    "sources": [
+      {
+        "path": "AGENTS.md",
+        "sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787"
+      },
+      {
+        "path": "conformance/__init__.py",
+        "sha256": "db3fa7779d5eec94cafa78bca73b6a93c9cb73d07a763cf646d8e1503bfa82a2"
+      },
+      {
+        "path": "conformance/m0/__init__.py",
+        "sha256": "486e0b2d681b99eec51e4596e4f946dd2773360e7661d143fe358fa69862b7df"
+      },
+      {
+        "path": "conformance/m0/runner.py",
+        "sha256": "fee0383d7aaa8abf6ab730702c98ad2b369c23bbda110b64868874f254af074e"
+      },
+      {
+        "path": "Docs/AETP-设计方案.md",
+        "sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-11-m1-01-demo.py",
+        "sha256": "62c29552d9ff0dbc372bcdc6e5fe289e806ee2959746f2758d83f9f7a07f3349"
+      },
+      {
+        "path": "Docs/superpowers/plans/2026-09-11-m1-01-collaboration.md",
+        "sha256": "22e8a9252df21d8619b4c3f479e1568feb2fa6b494078a79caf21c9b225637ed"
+      },
+      {
+        "path": "Docs/superpowers/specs/2026-09-11-m1-01-collaboration-design.md",
+        "sha256": "e81fb4c323507411a008cf1d168200ce5af93aa0c2d82a0d3b6d5138c1609567"
+      },
+      {
+        "path": "src/aetp/__init__.py",
+        "sha256": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0"
+      },
+      {
+        "path": "src/aetp/collaboration/__init__.py",
+        "sha256": "9faba390803eeadae48c7b1601c48e52f80a316974fa3a74d1c024b6895ceebe"
+      },
+      {
+        "path": "src/aetp/collaboration/checks.py",
+        "sha256": "ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+      },
+      {
+        "path": "src/aetp/collaboration/contracts.py",
+        "sha256": "0550573059e0c0ed60f1d2d53010e54c87c60749d224b114f99609bbd5787e2b"
+      },
+      {
+        "path": "src/aetp/collaboration/messages.py",
+        "sha256": "705c1d470dafec4fa4f7c5b451cb957fe3d45d680dd11cb539ec17f176f2acb1"
+      },
+      {
+        "path": "src/aetp/collaboration/policy.py",
+        "sha256": "999372d708efcd6a0f725e8f16eb206ad36258f928a13609a5fd7615ec55e007"
+      },
+      {
+        "path": "src/aetp/collaboration/projection.py",
+        "sha256": "6e171baa224b327adb22ff8e58ffc93a64d2654653b9b75e3cf152b7dec32cc2"
+      },
+      {
+        "path": "src/aetp/collaboration/README.md",
+        "sha256": "b301a3264482496f7ed13ba66fa1ada1048c3bafa83a02b06b939c0348fb70c1"
+      },
+      {
+        "path": "src/aetp/collaboration/records.py",
+        "sha256": "c6f4973b08b515ed97a989107ec0f01cb302abc5a5864db4786965dc6bdda9a4"
+      },
+      {
+        "path": "src/aetp/collaboration/service.py",
+        "sha256": "b24d5f1f5a394079b2c2a2fd32301176b077a289ba1aa662f4869cbf3446cd07"
+      },
+      {
+        "path": "src/aetp/core/__init__.py",
+        "sha256": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2"
+      },
+      {
+        "path": "src/aetp/core/commands.py",
+        "sha256": "1a8e3a113fd9ea52c7bb139a76b4b96cf145b4a3b1c03d73e3da9aaec0e5e4e6"
+      },
+      {
+        "path": "src/aetp/core/idempotency.py",
+        "sha256": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c"
+      },
+      {
+        "path": "src/aetp/core/projection.py",
+        "sha256": "f05e42ca4d89efe40ea0ddeaf9faab12bcd1d03afc0b06c34dde962bc79053bf"
+      },
+      {
+        "path": "src/aetp/core/runtime.py",
+        "sha256": "b9c53f0c8c8379a76e1b11b954c7cb1a008879a9c9bf1c7f256640f98e92a5b7"
+      },
+      {
+        "path": "src/aetp/domain/__init__.py",
+        "sha256": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5"
+      },
+      {
+        "path": "src/aetp/domain/models.py",
+        "sha256": "a9a2e0dfb4c6eab105d1ffe168102a52d346146684008c6993aba387c4e13b62"
+      },
+      {
+        "path": "src/aetp/storage/__init__.py",
+        "sha256": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a"
+      },
+      {
+        "path": "src/aetp/storage/sqlite_store.py",
+        "sha256": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8"
+      },
+      {
+        "path": "tests/m0/__init__.py",
+        "sha256": "5b31d33fdf6739ca0dde84d9b8f73196c84b1e8b37d7a89e20a2c2702218d811"
+      },
+      {
+        "path": "tests/m0/support.py",
+        "sha256": "c43b0d6ccde5f665a3540a1b579affa0b6ac078004b9a4d2bf7057dfcc781497"
+      },
+      {
+        "path": "tests/m0/test_command_boundary.py",
+        "sha256": "7bf66b0f0e5e1063b205ae456d951474b4e5902733998835b015048beec97424"
+      },
+      {
+        "path": "tests/m0/test_conformance_subset.py",
+        "sha256": "ff3d88c71816502e6f99c3ccf2d245b523fbc0964f4eac32a6c608a61f23d0b6"
+      },
+      {
+        "path": "tests/m0/test_event_projection.py",
+        "sha256": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538"
+      },
+      {
+        "path": "tests/m0/test_idempotency_concurrency.py",
+        "sha256": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d"
+      },
+      {
+        "path": "tests/m0/test_models.py",
+        "sha256": "89799d649d63aab517940fe634f226242f1d627fa7ecb6fd645b0d5b32181b28"
+      },
+      {
+        "path": "tests/m0/test_replay_recovery.py",
+        "sha256": "6728b8085f2abbac2869b634fcf88cd67229de73ce34248f2faea36df9075ca3"
+      },
+      {
+        "path": "tests/m1/__init__.py",
+        "sha256": "9a7f25e1f836cf0773f8dd8f55708e95d508bbd9f707fbcacafb4bf9a5d8fe37"
+      },
+      {
+        "path": "tests/m1/support.py",
+        "sha256": "3f742276788ce097aa939126be26e0e3a17d587f27f69343ec5a837611ec6482"
+      },
+      {
+        "path": "tests/m1/test_evidence_chain.py",
+        "sha256": "34d3e839594907f11fe9f5e6ec0b283246e8a115f8f929dfcb25e9a9bfbd8762"
+      },
+      {
+        "path": "tests/m1/test_messages.py",
+        "sha256": "75820ee89bd91143e84eb95b0a498e45f1340b894630e06d34253ec1b34f0097"
+      },
+      {
+        "path": "tests/m1/test_verification.py",
+        "sha256": "7421bf7bede5da6e7828e90df7b80177caf4b4570a9b64527546548e1df240b9"
+      }
+    ],
+    "database": {
+      "path": ".tmp/m1-01-demo-20260911.sqlite",
+      "sha256": "af43c223a9979b8b2931477e28467d9af70816e91aa45f4683ccbd93b8fa7439"
+    },
+    "archive": {
+      "path": ".tmp/m1-01-candidate-v1",
+      "mapping": "Docs/development/evidence/2026-09-11-m1-01-candidate-v1-archive.json",
+      "mapping_sha256": "6a9c99fa27ade4876a223921459541ac721be2683824befefa2ee4e4f473aab8",
+      "all_40_source_copies_independently_verified": true
+    },
+    "integrity": {
+      "initial_at": "2026-09-12T00:20:57.310376+08:00",
+      "final_at": "2026-09-12T00:29:56.690044+08:00",
+      "checks_each": 80,
+      "all_match": true,
+      "baseline_copies_checked": 29,
+      "changed_baseline_files": [
+        "Docs/development/backlog.json",
+        "Docs/development/status.json",
+        "src/aetp/core/commands.py",
+        "src/aetp/core/projection.py",
+        "src/aetp/domain/models.py"
+      ],
+      "change_set_matches_declared_scope": true
+    },
+    "seal_note": "主代理在审后摘要核验完成及发现交接后获知可开始 R1；后续示例检查使用已核验的 v1 归档源码，不读取新候选实现。"
+  },
+  "source_review": {
+    "read_all_new_implementation": true,
+    "read_all_m1_tests": true,
+    "reviewed_shared_diffs": [
+      "src/aetp/domain/models.py",
+      "src/aetp/core/commands.py",
+      "src/aetp/core/projection.py"
+    ],
+    "design": "Docs/superpowers/specs/2026-09-11-m1-01-collaboration-design.md",
+    "plan": "Docs/superpowers/plans/2026-09-11-m1-01-collaboration.md",
+    "normative_sections": [
+      "4.3",
+      "7.3",
+      "7.6",
+      "8.2-8.5",
+      "10.1-10.3",
+      "13.9",
+      "14.1-14.2",
+      "14.4",
+      "14.7",
+      "14.10-14.11",
+      "17.2",
+      "18.3"
+    ],
+    "source_and_existing_test_changes_by_reviewer": []
+  },
+  "verification": {
+    "m1_suite": {
+      "tests": 33,
+      "passed": 33,
+      "exit_code": 0
+    },
+    "m0_suite": {
+      "tests": 156,
+      "passed": 156,
+      "exit_code": 0
+    },
+    "independent_probes": {
+      "test_methods": 9,
+      "passing_methods": 6,
+      "affected_methods": 3,
+      "failed_subcases": 7,
+      "errors": 1,
+      "exit_code": 1
+    },
+    "archived_demo": {
+      "archived_sources_verified": 40,
+      "events_verified": 23,
+      "results_verified": 11,
+      "pinned_messages_verified": 3,
+      "artifact_bytes_verified": true,
+      "approved_independent_review": true,
+      "precheck_observation": "PASSED",
+      "formal_result": "INCONCLUSIVE",
+      "task": {
+        "acceptance_criteria": [
+          "直接对话",
+          "独立审查",
+          "证据与权限"
+        ],
+        "criteria_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+        "id": "guide",
+        "owner_id": "agent-a",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "m1-demo",
+        "revision": 1,
+        "status": "assigned",
+        "title": "平等 Agent 协作说明"
+      },
+      "database_unchanged": true,
+      "pure_archive_replay_equal": true
+    },
+    "preparation": {
+      "run_by_reviewer": false,
+      "reason": "按复核写入边界，不在主工作区运行 render/check/preparation；主代理固定运行记录及原始输出摘要已核验。",
+      "author_reported_tests": 27,
+      "author_candidate_render_exit": 0,
+      "author_candidate_check_exit": 0
+    },
+    "runs": [
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "audit-initial",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-11-m1-01-review-driver.py",
+          "audit"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:20:56.872161+08:00",
+        "finished_at": "2026-09-12T00:20:57.325163+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-audit-initial.stdout.txt",
+          "sha256": "7bd0136bca6d8aeccf34967bd46f66f98aa750b51a44c20055c75802ffdbe718"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-audit-initial.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "shared-diff",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-11-m1-01-review-driver.py",
+          "diff"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:20:57.152000+08:00",
+        "finished_at": "2026-09-12T00:20:57.283715+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-shared-diff.stdout.txt",
+          "sha256": "5d11216013c82bf43ba575bd5d72b0b8e477be26d47c5f876af4079d4dd8d3ac"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-shared-diff.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "m1-suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m1",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:20:57.410096+08:00",
+        "finished_at": "2026-09-12T00:21:03.494332+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-m1-suite.stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-m1-suite.stderr.txt",
+          "sha256": "e0ed29aa02e55e70aecb85aa3b3a88f88c76176ced6de422fe68212c586c6eb1"
+        }
+      },
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "m0-suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:20:57.659781+08:00",
+        "finished_at": "2026-09-12T00:21:37.760320+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-m0-suite.stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-m0-suite.stderr.txt",
+          "sha256": "6960431e2a0db3b6850ef49a33fc983c5ad13b7238de3bafe20a044ce7787b40"
+        }
+      },
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "boundary-probes",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-11-m1-01-review-probes.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:28:39.591952+08:00",
+        "finished_at": "2026-09-12T00:28:54.307950+08:00",
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-boundary-probes.stdout.txt",
+          "sha256": "82718fc5d46425f597bd7660a485178e1c9f7e7bb19dbfdc50ced948afc991e3"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-boundary-probes.stderr.txt",
+          "sha256": "fb39aaaf9827b6e7802d9c95c60ffd6d9d8a946991c367102c756f5760bfbf6d"
+        }
+      },
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "audit-final",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-11-m1-01-review-driver.py",
+          "audit"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:29:56.543982+08:00",
+        "finished_at": "2026-09-12T00:29:56.704690+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-audit-final.stdout.txt",
+          "sha256": "28ab0c5bef78bd8f1c395e7fa02576d8dd93b041198ba02e873c9a8a4dca6153"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-audit-final.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "reviewer": "/root/m1_reviewer",
+        "label": "archived-demo",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-11-m1-01-review-demo-check.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T00:33:33.561631+08:00",
+        "finished_at": "2026-09-12T00:33:33.951399+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-archived-demo.stdout.txt",
+          "sha256": "a54bc65545538e64ee34a5eaf7dfdfca6260d5040a5ce10561a01092f294bdb1"
+        },
+        "stderr": {
+          "path": "Docs\\development\\evidence\\2026-09-11-m1-01-review-archived-demo.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    ],
+    "probe_source": {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-review-probes.py",
+      "sha256": "56643e0392238cfbd6a62299c8d63f9a3ec24bf3196245e2b5b3d10306442f25"
+    },
+    "demo_check_source": {
+      "path": "Docs/development/evidence/2026-09-11-m1-01-review-demo-check.py",
+      "sha256": "8593b514e8bc00cdd0b8973b113e1bc6808857d5c1984d14e3f17ce3587672b0"
+    },
+    "auxiliary_read_failure": {
+      "command": "PowerShell Get-Content/ConvertTo-Json over the three fixed demonstration artifacts",
+      "exit_code": 1,
+      "reason": "Formatting read produced no output and was interrupted; subsequent Python read and logged archive/database verification completed successfully. This is not a product test failure."
+    }
+  },
+  "findings": [
+    {
+      "id": "M1-01-REVIEW-R1",
+      "severity": "Important",
+      "blocking": true,
+      "title": "继承的 task.claim / task.release 在 M1 校验之前返回，绕过成员状态和固定 Policy。",
+      "location": {
+        "path": "src/aetp/collaboration/service.py",
+        "line": 39
+      },
+      "cause": "第 40-41 行对不属于 COMMAND_AGGREGATES 且非 task.create 的命令直接调用 M0 super()._evaluate；M0 只检查登记事实，不执行 M1 participant 或 validate_payload。",
+      "reproduction": "在独立真实 SQLite 中登记 available author/peer 及 disabled、terminated、left、failed 成员，创建带固定 Policy 的 M1 Task。四类成员的消息被拒绝，但其 claim 和 release 均 accepted。available 成员的 claim 携带 approval_required=true、risk_level=critical 或未知 policy_version 也 accepted，并产生 task.claimed。",
+      "impact": "被协作入口判定无资格的身份仍可取得/释放 Task；固定低风险 Policy 对该入口的事实写入没有统一生效。存在可观察的 Task revision/owner 变化，不能用后续 M1-02 执行能力未实现解释。",
+      "required_change": "在 M1 Service 委托既有任务操作前执行该入口适用的当前成员、Project 和固定 Policy/字段检查；保持同一事务及原幂等语义。覆盖合法 claim/release 与所有已确认拒绝场景，不要求改写已归档 M0 历史契约。",
+      "evidence": [
+        "Docs/development/evidence/2026-09-11-m1-01-review-boundary-probes.stdout.txt",
+        "Docs/development/evidence/2026-09-11-m1-01-review-boundary-probes.stderr.txt"
+      ],
+      "provenance": "禁用成员问题由作者先提出并由本复核独立复现；扩展到四种成员状态、release 和三种 Policy 绕过输入由独立探针确认。"
+    },
+    {
+      "id": "M1-01-REVIEW-R2",
+      "severity": "Important",
+      "blocking": true,
+      "title": "Message 无法从自身生成的合法 JSON 还原。",
+      "location": {
+        "path": "src/aetp/collaboration/messages.py",
+        "line": 26
+      },
+      "cause": "Message 继承 VersionedModel.from_dict，但 recipients/references 的 _ids 只接受 tuple。JSON 序列化后这两个字段是数组，反序列化返回 list，导致 recipients must be a non-empty tuple。",
+      "reproduction": "Message.from_dict(json.loads(message.to_versioned_json())) 对带 recipient 与回复引用的合法消息抛 ModelValidationError。",
+      "impact": "公开的版本化 Message 序列化契约不闭合；固化的消息快照不能通过同一模型接口恢复为 Message。当前 tuple 进程内用例通过不足以证明该契约可用。",
+      "required_change": "在明确的 wire 解码边界接受合法 JSON 数组并冻结为内部不可变序列，同时保持非法字段、重复/空身份、伪造类型及未知 schema_version 的拒绝。加入含回复链的 JSON 往返测试。",
+      "evidence": [
+        "Docs/development/evidence/2026-09-11-m1-01-review-boundary-probes.stderr.txt"
+      ],
+      "provenance": "由作者先提出并由本复核独立复现。"
+    }
+  ],
+  "severity_counts": {
+    "Critical": 0,
+    "Important": 2,
+    "Minor": 0
+  },
+  "acceptance": [
+    {
+      "criterion": "至少两个平等 Agent 可直接消息、回复、质疑",
+      "assessment": "进程内双身份的直接协作已实测；完整候选仍需修复 Message wire 往返 R2。",
+      "status": "changes_requested",
+      "evidence": [
+        "m1-suite",
+        "boundary-probes",
+        "archived-demo"
+      ]
+    },
+    {
+      "criterion": "没有 Manager 必经路径",
+      "assessment": "满足本项有限范围：直接消息与独立 Review 只检查成员与目标，不要求 Manager、Role 等级或取得作者 Task。",
+      "status": "passes_limited_scope",
+      "evidence": [
+        "m1-suite",
+        "archived-demo"
+      ]
+    },
+    {
+      "criterion": "低风险小成果具有 Artifact/Review/Verification 证据",
+      "assessment": "真实固定文档、不同 actor 的正式 Review、可复查的逐条预检查报告和 INCONCLUSIVE Verification 已绑定并可重放；固定低风险入口还需修复 R1。",
+      "status": "changes_requested",
+      "evidence": [
+        "m1-suite",
+        "boundary-probes",
+        "archived-demo"
+      ]
+    }
+  ],
+  "limited_scope_judgment": {
+    "inconclusive_is_not_itself_a_blocker": true,
+    "rationale": "M1-01 登记验收不要求本项完成正式 Task 质量放行；执行设计已明确把真实执行授权留给 M1-02。此次不是按字段存在判定：已独立验证实际成果字节、不同 actor 的 Review、预检查成功/失败的真实观察、摘要/输入绑定、原子回滚、纯 Replay 与客户端伪造 PASSED 拒绝。INCONCLUSIVE 清楚表示缺少正式执行授权，不宣称已经 PASSED。",
+    "not_authorized_to_infer": [
+      "Task VERIFIED",
+      "Task COMPLETED",
+      "M1 milestone accepted",
+      "real model autonomy",
+      "full TEST-028 passed",
+      "full AETP compatibility",
+      "Bootstrap acceptance"
+    ]
+  },
+  "conformance_scope": {
+    "TEST-003": "negative quality-gate paths only",
+    "TEST-008": "negative quality-gate paths only",
+    "TEST-015": "limited in-process communication and independent review; R1/R2 still block this candidate",
+    "TEST-028": "pending; not accepted"
+  },
+  "limits": [
+    "本复核只针对给定固定初版，不自动接受作者之后的改动。",
+    "MessageBus 是进程内过程记录；真实网络身份绑定、模型隔离和来源入口由后续 Runtime 能力承担。",
+    "预检查只观察指定文本是否存在，不证明文档语义完整或真实工具执行合规。",
+    "Binding/Lease/Workspace、真实 Runner Action、UNKNOWN 对账和成功质量门未实现。",
+    "未复跑完整后续协议、Bootstrap 或真实模型自治；准备检查只核验主代理保留的记录。"
+  ],
+  "handoff": {
+    "next_step": "执行者为 R1/R2 保存 RED→GREEN 证据，提交新的固定候选供同一独立复核者验证；初版及本报告保留，backlog 在独立接受前维持 review。",
+    "product_files_modified": [],
+    "backlog_or_status_modified": false,
+    "git_actions": "none; workspace has no Git repository"
+  }
+}

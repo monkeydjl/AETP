@@ -1,0 +1,559 @@
+{
+  "schema_version": "aetp-development-evidence-0.1",
+  "work_item": "M1-02",
+  "candidate_revision": "v1",
+  "report_revision": "initial",
+  "decision": "changes_requested",
+  "reviewer": "/root/m1_reviewer",
+  "executor": "Codex main agent",
+  "independence": "复核者此前仅提供只读范围咨询，没有参与候选实现。此次独立阅读固定候选、运行原套件并编写新的反例；未修改产品、原测试、backlog/status/MEMORY 或既有证据。",
+  "report_created_at": "2026-09-11 19:02:32 UTC",
+  "logged_validation_started_at": "2026-09-12T02:40:48.822327+08:00",
+  "last_executed_probe_finished_at": "2026-09-12T02:53:19.534285+08:00",
+  "scope": "仅判断 M1-02 四条 backlog 标准。Windows 当前登录会话内的固定 data-only 文档 Broker、真实本地文件、注册 Session、Lease/Checkpoint 与 Action 恢复；不是 OS sandbox 或任意 Coding Runtime 的安全认证。",
+  "candidate": {
+    "report": {
+      "path": "artifacts/m1-02-test-report.json",
+      "sha256": "b5c61ac38fe40ecd66b126cbcbac549fc64e459ce0bac9f5becb879322ad0fa4"
+    },
+    "snapshot": {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-candidate-snapshot.json",
+      "sha256": "a61d1f74430dbf301b0efa1b3988452ac0209281015c94ab7c4644157801b013",
+      "source_count": 82
+    },
+    "baseline": {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-baseline.json",
+      "sha256": "e48bbfdeb730a962b5943739e424b043d2ea527ed10bdaf0d4f6783a73082160",
+      "archived_file_count": 213,
+      "accepted_m1_01_sources_checked": 43
+    },
+    "design": "Docs/superpowers/specs/2026-09-12-m1-02-execution-design.md",
+    "plan": "Docs/superpowers/plans/2026-09-12-m1-02-execution.md"
+  },
+  "input_integrity": {
+    "method": "已执行 audit-initial：核对固定 report/snapshot、报告内带摘要引用、JSONL 已封存字节前缀、82 个受审输入、213 个基线归档文件和基线中的 43 个 M1-01 accepted v2 输入；共享源变化与声明范围比较。",
+    "run_label": "audit-initial",
+    "observed_at": "2026-09-12T02:40:49.060222+08:00",
+    "hash_checks": 423,
+    "all_hashes_matched": true,
+    "unexpected_baseline_changes": [],
+    "changed_baseline_files_observed": [
+      "Docs/development/backlog.json",
+      "Docs/development/status.json",
+      "src/aetp/collaboration/service.py",
+      "src/aetp/core/commands.py",
+      "src/aetp/core/projection.py",
+      "src/aetp/domain/models.py",
+      "src/aetp/storage/sqlite_store.py"
+    ],
+    "historical_handling": "M1-01 的旧工作区摘要规则没有用于否定本次正常共享源变更；旧候选通过保存的 M1-02 baseline 归档核验。",
+    "final_post_probe_candidate_audit_performed": false,
+    "limit": "这是已保存初始摘要核验的结论，不冒充中断后的最终候选封存核验。主线程后来声明只追加了未包含在 82 输入中的 MEMORY；该声明作为主线程来源保留，不计作本复核的新摘要检查。"
+  },
+  "validation": {
+    "suites": [
+      {
+        "run_label": "m1-suite",
+        "tests": 80,
+        "passed": 80,
+        "failed": 0,
+        "exit_code": 0
+      },
+      {
+        "run_label": "m0-suite",
+        "tests": 156,
+        "passed": 156,
+        "failed": 0,
+        "exit_code": 0
+      },
+      {
+        "run_label": "preparation-suite",
+        "tests": 27,
+        "passed": 27,
+        "failed": 0,
+        "exit_code": 0,
+        "isolated_copy": true
+      },
+      {
+        "run_label": "probes",
+        "tests": 7,
+        "passed": 6,
+        "failed": 1,
+        "errors": 0,
+        "exit_code": 1
+      }
+    ],
+    "executed_test_methods_total": 270,
+    "passed_test_methods_total": 269,
+    "failed_test_methods_total": 1,
+    "count_note": "按 unittest 的实际方法数统计，subTest 不另计；复制辅助程序不计为产品测试。",
+    "runs": [
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-audit-initial.json",
+          "sha256": "2bbefd6971f9df4c4295f8ef6ee414b0e093cc5e86223fe8609b69f825ac2929"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "audit-initial",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-12-m1-02-review-driver.py",
+          "audit"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:40:48.822327+08:00",
+        "finished_at": "2026-09-12T02:40:49.076334+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-audit-initial.stdout.txt",
+          "sha256": "570f50aaaf41f7648d4dc2278a05be89e192cced108d95f2cadf8a78a561d164"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-audit-initial.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-shared-diff.json",
+          "sha256": "82bebb86fad2d60060c369392a55ea839b4e9ae84480cdaf88113f2eaa4ff5c2"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "shared-diff",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-12-m1-02-review-driver.py",
+          "diff"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:44:46.200523+08:00",
+        "finished_at": "2026-09-12T02:44:46.356529+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-shared-diff.stdout.txt",
+          "sha256": "ee48a5dc4e9f177ccbda02fa3f08cb5a03c90d06537651967c535f15f2faedc4"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-shared-diff.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-m1-suite.json",
+          "sha256": "a9effca759c99a8748bcfa41645c9f03cd423ddbecef9cc3f97c9e176cb73f9a"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "m1-suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m1",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:41:08.749596+08:00",
+        "finished_at": "2026-09-12T02:41:26.603005+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-m1-suite.stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-m1-suite.stderr.txt",
+          "sha256": "0160fc9a6249d4708b7b47f115007bd1363c4aabb278283042e8092526077cbe"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-m0-suite.json",
+          "sha256": "8f7adb216829505482415c729037f4a40fcfac09aa6081341584acaa10a06526"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "m0-suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:41:08.758221+08:00",
+        "finished_at": "2026-09-12T02:41:49.013546+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-m0-suite.stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-m0-suite.stderr.txt",
+          "sha256": "a6511afbb2cb2d761ac6e09caca51fc2e621e915cfc744c80f3b754e393baad0"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-copy.json",
+          "sha256": "56786dd5009a0fb5e6917c6eaa903a87d09aec0b19e8ed8dafbd7e22312c540a"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation-copy",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-12-m1-02-review-driver.py",
+          "prepare-copy"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:41:08.745850+08:00",
+        "finished_at": "2026-09-12T02:41:22.843337+08:00",
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-copy.stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-copy.stderr.txt",
+          "sha256": "9e02144e0ba3855d5c02746ef1b1bd69777c9d38345024331a55194684b5b356"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-copy-v2.json",
+          "sha256": "0274070ab77e5466cd11c5c074d00c2d9f00ddb5aadab42a0909c9a7e99b16a1"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation-copy-v2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-12-m1-02-review-preparation-helper.py",
+          "copy"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:44:45.912743+08:00",
+        "finished_at": "2026-09-12T02:44:54.462611+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-copy-v2.stdout.txt",
+          "sha256": "e39387c8bdcdb0360ae79a1721e8154f14ace3eade9757c916f6218554c17836"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-copy-v2.stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-suite.json",
+          "sha256": "e4fff8d2260127eccde55d4cc4dc468a3c92edaccb5da1d405231413b0a0ea16"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "preparation-suite",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-12-m1-02-review-preparation-v2",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\Docs\\development\\evidence\\2026-09-12-m1-02-review-preparation-v2\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:45:18.253429+08:00",
+        "finished_at": "2026-09-12T02:45:20.583050+08:00",
+        "exit_code": 0,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-suite.stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-suite.stderr.txt",
+          "sha256": "f5967c00e8897c93471415136ec6662cbcc9ae60a34addcebf24ccb36d01e5a6"
+        }
+      },
+      {
+        "record": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-probes.json",
+          "sha256": "8277651b0f219b4247b74f2348c6b398d69a6e0d050667d1e3608327a8255af0"
+        },
+        "reviewer": "/root/m1_reviewer",
+        "label": "probes",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "Docs/development/evidence/2026-09-12-m1-02-review-probes.py"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "environment": {
+          "PYTHONPATH": "D:\\Github\\AETP\\src",
+          "PYTHONIOENCODING": "utf-8",
+          "PYTHONDONTWRITEBYTECODE": "1"
+        },
+        "started_at": "2026-09-12T02:53:01.110353+08:00",
+        "finished_at": "2026-09-12T02:53:19.534285+08:00",
+        "exit_code": 1,
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-probes.stdout.txt",
+          "sha256": "ddcb26c1181d872f8109bc988fa6050973c3c5e1c281b07301e5f81f94b50822"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-probes.stderr.txt",
+          "sha256": "aada37cecb6c71548fb391b7e38077c3f3ad267baabaac6239bfcf8666ecc944"
+        }
+      }
+    ],
+    "independent_sources": [
+      {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-driver.py",
+        "sha256": "931306d5b3b421903a7222e70665bf1b038cdea0658859a00766d2943e0a2943"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-probes.py",
+        "sha256": "b40527ebc0def7abedebd9c0d805623f5f7360b4dd21e00a23bba2bc82a898d8"
+      },
+      {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-helper.py",
+        "sha256": "99fe65c16da5023511ef3a47981d39f3b5ee2c3c351989b665e56bcbfd88adc8"
+      }
+    ],
+    "preparation_copy": {
+      "root": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-v2",
+      "copied_file_count": 1575,
+      "input_manifest": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-preparation-v2-inputs.json",
+        "sha256": "602a8db748ea42cbe24a1269ed1469b80d2488327675d708c86bc1ed20f640c3"
+      },
+      "reason": "原准备套件会运行 render/check/environment 并写派生文件，故在逐字节复制的隔离树执行原套件，避免改写主工作区既有证据。",
+      "retained_auxiliary_failure": {
+        "run_label": "preparation-copy",
+        "exit_code": 1,
+        "cause": "复制 m1-02-workspace 对象时触及普通 Windows 路径长度限制。",
+        "resolution": "新 preparation-helper 使用 Windows 长路径接口，新复制与 27 项准备套件成功；未弱化产品路径检查。",
+        "product_failure": false
+      }
+    },
+    "independent_observations": [
+      {
+        "probe": "registered Session scope",
+        "result": "passed",
+        "details": "别的 Task Session、复制 Session、JSON 形式和空 Session 均不能取得当前 Task 的工具权限；伪造 actor 不能占用合法 Command 身份。"
+      },
+      {
+        "probe": "old idempotent receipt",
+        "result": "passed",
+        "details": "原 Command 重试返回历史结果，不恢复撤销的执行权；同键不同 epoch 拒绝；旧 PENDING 取消，legacy Handler 不能释放执行 Task。"
+      },
+      {
+        "probe": "Policy and source scope",
+        "result": "passed",
+        "details": "Shell/network/credential/publication、越界参数、未知 Policy 和需审批输入拒绝；跨 Task 文档来源拒绝，拒绝历史可对账。"
+      },
+      {
+        "probe": "expiry after open",
+        "result": "passed",
+        "details": "文件打开后凭据到期，实际内容未写入；空对象不构成成功证据，Action 保持 UNKNOWN，恢复屏障关闭。"
+      },
+      {
+        "probe": "hardlink after open",
+        "result": "failed",
+        "observed": {
+          "attempts": [
+            {
+              "blocked": false
+            }
+          ],
+          "action_status": "completed",
+          "outside_exists": true
+        },
+        "finding": "M1-02-REVIEW-R1"
+      },
+      {
+        "probe": "real process death after effect",
+        "result": "passed",
+        "pid": 32256,
+        "exit_code": 79,
+        "details": "原 Action 查询确认为 completed，dispatch_count 仍为 1；重复恢复不重写、不重建 Session；原 Checkpoint 摘要保留，peer 用 epoch 2 恢复其固定文档。"
+      },
+      {
+        "probe": "real process death before effect",
+        "result": "passed",
+        "pid": 15216,
+        "exit_code": 79,
+        "details": "原 Action 保持 UNKNOWN、dispatch_count 仍为 1，Checkpoint 保留；撤权后仍拒绝未对账的重新排队。"
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "M1-02-REVIEW-R1",
+      "severity": "Important",
+      "blocking": true,
+      "status": "open",
+      "title": "已打开文档对象的并发单链接约束未保持到实际写入。",
+      "locations": [
+        {
+          "path": "src/aetp/workspace/windows_files.py",
+          "line": 123
+        },
+        {
+          "path": "src/aetp/workspace/windows_files.py",
+          "line": 128
+        },
+        {
+          "path": "src/aetp/workspace/documents.py",
+          "line": 42
+        },
+        {
+          "path": "src/aetp/workspace/documents.py",
+          "line": 44
+        }
+      ],
+      "cause": "open_object 在 CreateFile 后只检查一次 links == 1。返回句柄后、file_stream 执行文档内容写入前，现有打开/共享条件仍允许该对象增加硬链接；初次观察不能证明写入期间保持单链接。",
+      "reproduction": "已保存的独立方法 test_open_file_handle_blocks_hardlink_insertion_before_content_write 使用真实 Windows 文件调用，在新文档句柄已打开并通过初次检查后、内容写入前，尝试在本地夹具的工作副本之外建立该对象的硬链接。调用成功；原工具写入继续完成。",
+      "observed": "保存的 stdout 明确记录 attempts=[{\"blocked\":false}]、action_status=\"completed\"、outside_exists=true；stderr 为该方法的 AssertionError。7 个独立测试方法中仅此一项失败。",
+      "impact": "候选宣称的固定文档副本一致性及并发单链接约束未由实际文件边界维持。对象在写入期间已能由工作副本外路径引用，而 Action 仍记录为 completed；正常副本测试和静态已有硬链接拒绝测试不足以覆盖这个窗口。",
+      "scope_note": "这是用户授权工作区内固定文档工具的防御性正确性反例，不将结果扩大为任意 Coding Runtime、OS sandbox 或外部攻击场景的结论。",
+      "required_change": "在真实文档写入期间维持所声明的对象/链接约束，并用已保存反例及实际 Windows 并发证据验证。单纯增加第二次 links 读取仍保留竞态，不能作为充分修正；本复核没有判定任何尚未执行的句柄配置已修复问题。",
+      "evidence": [
+        "Docs/development/evidence/2026-09-12-m1-02-review-probes.py",
+        "Docs/development/evidence/2026-09-12-m1-02-review-probes.json",
+        "Docs/development/evidence/2026-09-12-m1-02-review-probes.stdout.txt",
+        "Docs/development/evidence/2026-09-12-m1-02-review-probes.stderr.txt"
+      ],
+      "normative_basis": [
+        "M1-02 backlog: 工作副本隔离且越界访问被阻止",
+        "设计 §13.9 Workspace/执行边界",
+        "TEST-014",
+        "M1-02 固定设计的文件边界声明"
+      ]
+    }
+  ],
+  "severity_counts": {
+    "Critical": 0,
+    "Important": 1,
+    "Minor": 0
+  },
+  "acceptance": [
+    {
+      "criterion": "旧 epoch 不能推进任务",
+      "assessment": "已观察场景通过。M1 套件覆盖原子 owner/Binding/Lease、旧 epoch 和真实跨进程竞争；独立反例确认原幂等结果不会恢复撤销权限，旧 Handler 不绕过执行归属，崩溃恢复后的新成员取得 epoch 2。",
+      "status": "passes_observed_limited_cases",
+      "evidence_run_labels": [
+        "m1-suite",
+        "probes"
+      ],
+      "limit": "不使存在 R1 的整个候选获得接受，也不等同成功 Task 质量门。"
+    },
+    {
+      "criterion": "工作副本隔离且越界访问被阻止",
+      "assessment": "正常独立副本、部分路径与文件边界场景通过，但独立反例证实写入期间单链接约束可失效；当前候选未满足该项完整声明。",
+      "status": "changes_requested",
+      "blocking_findings": [
+        "M1-02-REVIEW-R1"
+      ],
+      "evidence_run_labels": [
+        "m1-suite",
+        "probes"
+      ]
+    },
+    {
+      "criterion": "外部 UNKNOWN 进入对账而不盲重试",
+      "assessment": "已观察场景通过。两种独立真实进程退出窗口均保持原 Action 与一次 dispatch；效果前保持 UNKNOWN 并拒绝重新排队，效果后通过查询确认而不重写，Checkpoint 和缺失 Session 的恢复边界保留。",
+      "status": "passes_observed_limited_cases",
+      "evidence_run_labels": [
+        "m1-suite",
+        "probes"
+      ],
+      "limit": "文件一致性 finding 仍阻断候选总体接受；没有把所有外部 Provider 的语义一并接受。"
+    },
+    {
+      "criterion": "需 Approval 的操作拒绝",
+      "assessment": "已观察场景通过。固定 Policy 对 Shell/network/credential/publication、显式审批需求和非低风险输入拒绝；客户端低风险标签不授予工具能力。未实现或接受 Approval 引擎。",
+      "status": "passes_observed_limited_cases",
+      "evidence_run_labels": [
+        "m1-suite",
+        "probes"
+      ]
+    }
+  ],
+  "review_limits": {
+    "platform_interruption": {
+      "provenance": "主线程 /root 在后续任务消息中反馈：上一轮被平台内容筛查中断，未形成最终可采纳报告。",
+      "effect": "按主线程要求，本报告仅整理已完成阅读和已保存检查；收到该指令后未运行新探针，也未修改任何既有文件。",
+      "product_result": false
+    },
+    "demonstration": {
+      "referenced_file_hashes_verified": true,
+      "source_and_summary_read": true,
+      "author_demo_rerun": false,
+      "independent_frozen_demo_database_event_by_event_comparison_completed": false,
+      "note": "冻结示例的文件摘要已包含在初始审计内；尚未完成原计划中的独立只读 SQLite/示例逐项对照，不声称该项已完成。独立过程验证来自已运行套件和新的本地夹具。"
+    },
+    "no_final_post_probe_integrity_audit": true,
+    "no_fix_validated": true,
+    "statement": "没有发现其他已确认 Critical/Important 问题，不表示未完成检查已通过。此报告只拒绝给定固定 v1，未来候选需重新固定并复核。"
+  },
+  "claims": {
+    "current_candidate_accepted": false,
+    "formal_verification_passed": false,
+    "task_completed": false,
+    "whole_m1_accepted": false,
+    "full_conformance_accepted": false,
+    "bootstrap_accepted": false,
+    "real_model_autonomy": false,
+    "os_sandbox_certified": false
+  },
+  "remaining_m1_scope": "正式 Verification 保持 INCONCLUSIVE / ENFORCEMENT_UNAVAILABLE，Task in_progress；整个 M1 的正向质量链与显式 Integration 豁免仍未接受。工作项数量不能替代里程碑验收。",
+  "handoff": {
+    "recipient": "/root",
+    "next_step": "保留 v1、原探针与失败日志；执行者完成 R1 的防御性修正和 RED→GREEN 证据后提交新的固定候选，再由同一独立 reviewer 复核。当前 M1-02 保持 review。",
+    "product_or_original_test_files_modified": [],
+    "backlog_status_memory_modified_by_reviewer": false,
+    "existing_evidence_modified_for_this_report": false,
+    "new_report": "Docs/development/evidence/2026-09-12-m1-02-review.json",
+    "git_actions": "none",
+    "collaboration": "仅内部 collaboration 通信；未使用 ClaudeLink，未创建其他子代理。"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": "aetp-development-independent-review-addendum-0.1",
+  "work_item": "M0-06",
+  "finding": "M0-06-R1",
+  "created_at": "2026-09-11T13:20:19.734883+08:00",
+  "kind": "narrative_encoding_correction_only",
+  "review": {
+    "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+    "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+  },
+  "candidate_report": {
+    "path": "artifacts/m0-conformance-report-v2.json",
+    "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+  },
+  "decision": {
+    "status": "accepted",
+    "accepted": true,
+    "scope": "M0-06 development-time M0-only limited acceptance",
+    "changed_by_this_addendum": false
+  },
+  "corrected_narrative_fields": {
+    "/decision/summary": "R1 satisfies the original blocking requirements. Independent regression tests, rejection probes and normal CLI passed. Inheriting the first independent semantic audit, accept only the fixed v2 SHA for M0-06 development: 6 M0-scoped passed, 3 partial pending, 19 later not_applicable.",
+    "/finding_resolution/0/assessment": "The shared _new_database_paths checks the main DB and -journal/-wal/-shm via exists/is_symlink. _distinct_outputs checks equality and bidirectional nesting for all resolved output paths. Both API and CLI preflight precede mkdir, exclusive DB creation and SQLiteStore.open. Fixture behavior, scope mapping and report counting are unchanged.",
+    "/finding_resolution/0/reproductions_now_rejected/0": "Pre-existing journal file: CLI exit2; bytes and entire directory inventory preserved; no new outputs.",
+    "/finding_resolution/0/reproductions_now_rejected/1": "Pre-existing WAL file: CLI exit2; bytes and entire directory inventory preserved; no new outputs.",
+    "/finding_resolution/0/reproductions_now_rejected/2": "Pre-existing SHM file: CLI exit2; bytes preserved. The first-round SHM probe is NOT described as having deleted the file.",
+    "/finding_resolution/0/reproductions_now_rejected/3": "Report equal to a SQLite sidecar, or report/evidence nesting in either direction with the database namespace: refused before any output creation.",
+    "/acceptance_boundaries/partial_pending/TEST-012": "Full scheduling recovery is not implemented.",
+    "/acceptance_boundaries/partial_pending/TEST-016": "Binding impersonation protection is not implemented.",
+    "/acceptance_boundaries/partial_pending/TEST-019": "Lease/Binding consistency and fencing are not implemented."
+  },
+  "reviewer_harness_incident": {
+    "discovered": "Read-back after writing the final review.",
+    "root_cause": "The PowerShell-to-Python stdin pipeline used the default ASCII OutputEncoding when constructing finalize_review.py, replacing its literal Chinese narrative strings with question marks. PYTHONIOENCODING controls Python streams, not PowerShell pipeline encoding.",
+    "affected": "Only nine human-readable narrative fields listed above.",
+    "unaffected": [
+      "Machine-readable acceptance decision and scope/counts",
+      "Fixed candidate/snapshot/report/evidence digests",
+      "Actual test and CLI commands, timestamps, exit codes and raw logs",
+      "Integrity checks, probe observations, source diffs and inherited first review"
+    ],
+    "resolution": "Preserve the original review and generator without overwriting them. Supply the corrected English narrative in this append-only addendum. Explicit UTF-8 PowerShell OutputEncoding is used for this addendum. No tests or product claims are rerun or changed."
+  },
+  "no_new_product_findings": true,
+  "original_review_preserved": true,
+  "first_review_preserved": true,
+  "full_aetp_compatible": false,
+  "full_conformance_accepted": false,
+  "task_completed": false,
+  "bootstrap_verified": false
+}

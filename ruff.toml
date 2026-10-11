@@ -1,0 +1,14 @@
+# Lint configuration skeleton (ruff). NOTE: ruff is not installed in this
+# workspace and the product is stdlib-only, so this file is a config skeleton
+# only; it has NOT been executed. Do not claim lint has passed until a pinned
+# lint tool is actually run.
+
+[lint]
+select = ["E", "F", "W", "I"]
+ignore = []
+
+[format]
+quote-style = "double"
+
+# Product sources use Python 3.14 features (str | None unions etc.).
+target-version = "py314"

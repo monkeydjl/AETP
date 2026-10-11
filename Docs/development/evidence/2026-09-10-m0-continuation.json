@@ -1,0 +1,611 @@
+{
+  "schema_version": "aetp-development-continuation-0.1",
+  "started_at": "2026-09-10T11:48:01.358797+00:00",
+  "work_items": [
+    "M0-02",
+    "M0-03"
+  ],
+  "executor": "Codex (main)",
+  "coordination": {
+    "claudelink": "unavailable; no inbox/send/bulletin tool exposed",
+    "git": "not a repository; no init/commit/push",
+    "local_write_scope": "M0-02 corrections, M0-03 planned files, progress metadata and evidence; reviewer read-only",
+    "reviewer_session_events": [
+      {
+        "recorded_at": "2026-09-10T14:26:59.198268+00:00",
+        "agent_id": "01a08b95-8e3b-7392-b2f0-bb92292924cd",
+        "event": "Closed and resumed the same read-only reviewer after three 300000ms waits and an interrupted checkpoint request yielded no messages.",
+        "close_previous_status": "running",
+        "resume_status": "interrupted",
+        "followup": "Requested prior actual findings/verification rather than duplicate review; M0-03 remains review; no verdict inferred.",
+        "frozen_snapshot_unchanged": true
+      },
+      {
+        "recorded_at": "2026-09-10T14:37:13.574355+00:00",
+        "event": "Original reviewer remained unresponsive after resume and was closed (previous status running). Dispatched Kuhn as the sole replacement reviewer; no concurrent duplicate review and no earlier verdict inferred."
+      },
+      {
+        "recorded_at": "2026-09-10T14:53:49.509976+00:00",
+        "event": "Replacement reviewer Kuhn returned a transport error before completion and was closed. No agents remain assigned to this slice; no M0-03 acceptance conclusion was produced.",
+        "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+        "error": "stream disconnected before completion: Transport error: network error: error decoding response body"
+      }
+    ],
+    "end_inbox_check": {
+      "recorded_at": "2026-09-10T14:53:49.509976+00:00",
+      "status": "unavailable",
+      "reason": "No ClaudeLink read_inbox/send/post_bulletin tools are exposed; no communication is fabricated."
+    }
+  },
+  "baseline_files": {
+    "src/aetp/__init__.py": "9633d8a01ebf928dc7ba29d3b19bc4f8cdd5160000faaa75d383e014bed14bc0",
+    "src/aetp/core/commands.py": "ae57e186129ac4c623aa545749ee9d7a13843a0d239d44094643221cd219bb06",
+    "src/aetp/core/__init__.py": "6e74add393fdb72db7b3e0efdec7114e802c28409b3a86c52cc27eaf486344f2",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+    "src/aetp/domain/__init__.py": "d2ac54da3d69288209738c555c2ca44959ddcdaf4d5987bc679bb7a1fcc267c5",
+    "src/aetp/storage/sqlite_store.py": "bcd2cb09140815044dca5f2a8dd2d0d265c770fe177da08588715cbe6d3ca857",
+    "src/aetp/storage/__init__.py": "271ec59324a676867069e4c0f0edec77664ecd36d2ebe6283d3b78e86e65a23a",
+    "tests/m0/support.py": "f0e12825c8a5f7d36331afb2148a7587a2cdaa1bd4cfbe597232e2836e35fb34",
+    "tests/m0/test_command_boundary.py": "27d0f61fbc7b36ef614ba456330ebf24b107aa63926fce41e1f1dc76351af47d",
+    "tests/m0/test_models.py": "89799d649d63aab517940fe634f226242f1d627fa7ecb6fd645b0d5b32181b28",
+    "tests/m0/__init__.py": "5b31d33fdf6739ca0dde84d9b8f73196c84b1e8b37d7a89e20a2c2702218d811"
+  },
+  "status_correction": {
+    "root_cause": "active_work_items retained M0-02 after transition to review; validator requires only in_progress items",
+    "before": [
+      "M0-02"
+    ],
+    "after": [],
+    "status_sha256_before": "46b453e8378ab0051ec67d7ee940fc14e9a3065025e636ad3269d29fc5aef742"
+  },
+  "runs": [
+    {
+      "phase": "baseline",
+      "command": "python -m unittest discover -s tests/m0 -t . -v",
+      "started_at": "2026-09-10T11:48:01.442539+00:00",
+      "finished_at": "2026-09-10T11:48:02.308091+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actor_mismatch_is_rejected_without_domain_event (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event) ... ok\ntest_agent_cannot_create_project_without_bootstrap_permission (tests.m0.test_command_boundary.CommandBoundaryTests.test_agent_cannot_create_project_without_bootstrap_permission) ... ok\ntest_expected_revision_conflict_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_expected_revision_conflict_is_rejected_without_domain_effect) ... ok\ntest_same_command_retry_returns_original_result_without_duplicate_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_command_retry_returns_original_result_without_duplicate_events) ... ok\ntest_same_idempotency_key_with_different_content_is_rejected (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_idempotency_key_with_different_content_is_rejected) ... ok\ntest_task_create_commits_received_and_domain_events_atomically (tests.m0.test_command_boundary.CommandBoundaryTests.test_task_create_commits_received_and_domain_events_atomically) ... ok\ntest_command_and_event_payloads_are_deeply_immutable (tests.m0.test_models.ModelTests.test_command_and_event_payloads_are_deeply_immutable) ... ok\ntest_command_serializes_with_stable_required_fields (tests.m0.test_models.ModelTests.test_command_serializes_with_stable_required_fields) ... ok\ntest_enum_values_must_use_canonical_lowercase_spelling (tests.m0.test_models.ModelTests.test_enum_values_must_use_canonical_lowercase_spelling) ... ok\ntest_invalid_fixtures_are_rejected (tests.m0.test_models.ModelTests.test_invalid_fixtures_are_rejected) ... ok\ntest_models_are_frozen_and_expose_object_schema_version (tests.m0.test_models.ModelTests.test_models_are_frozen_and_expose_object_schema_version) ... ok\ntest_package_exports_core_contracts (tests.m0.test_models.ModelTests.test_package_exports_core_contracts) ... ok\ntest_valid_fixtures_round_trip_through_models (tests.m0.test_models.ModelTests.test_valid_fixtures_round_trip_through_models) ... ok\ntest_close_is_idempotent (tests.m0.test_models.SQLiteStoreTests.test_close_is_idempotent) ... ok\ntest_event_sequences_are_unique_per_project (tests.m0.test_models.SQLiteStoreTests.test_event_sequences_are_unique_per_project) ... ok\ntest_schema_persists_commands_events_and_idempotency (tests.m0.test_models.SQLiteStoreTests.test_schema_persists_commands_events_and_idempotency) ... ok\ntest_transaction_rolls_back_both_command_and_events (tests.m0.test_models.SQLiteStoreTests.test_transaction_rolls_back_both_command_and_events) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.642s\n\nOK\n"
+    },
+    {
+      "phase": "baseline",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-10T11:48:02.308120+00:00",
+      "finished_at": "2026-09-10T11:48:02.506617+00:00",
+      "exit_code": 1,
+      "stdout": "ERROR status.active_work_items does not match in_progress backlog items\n",
+      "stderr": ""
+    },
+    {
+      "phase": "baseline",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-10T11:48:02.506646+00:00",
+      "finished_at": "2026-09-10T11:48:04.533458+00:00",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... FAIL\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... FAIL\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... FAIL\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... FAIL\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... FAIL\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n======================================================================\nFAIL: test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep.py\", line 41, in test_check_accepts_internal_preparation_material\n    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : ERROR status.active_work_items does not match in_progress backlog items\n\n\n======================================================================\nFAIL: test_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep.py\", line 47, in test_check_reports_markdown_link_validation\n    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : ERROR status.active_work_items does not match in_progress backlog items\n\n\n======================================================================\nFAIL: test_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep.py\", line 133, in test_check_writes_separate_preparation_evidence_reports\n    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : ERROR status.active_work_items does not match in_progress backlog items\n\n\n======================================================================\nFAIL: test_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep.py\", line 75, in test_graph_and_backlog_invariants_are_checked\n    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : ERROR status.active_work_items does not match in_progress backlog items\n\n\n======================================================================\nFAIL: test_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep.py\", line 54, in test_render_reports_zero_product_completion_and_no_bootstrap_claim\n    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : ERROR status.active_work_items does not match in_progress backlog items\n\n\n----------------------------------------------------------------------\nRan 27 tests in 1.737s\n\nFAILED (failures=5)\n"
+    },
+    {
+      "phase": "status-correction-green",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-10T11:48:04.534541+00:00",
+      "finished_at": "2026-09-10T11:48:04.765821+00:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "phase": "status-correction-green",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-10T11:48:04.766359+00:00",
+      "finished_at": "2026-09-10T11:48:06.894737+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.832s\n\nOK\n"
+    },
+    {
+      "phase": "m0-02-corrections-review-handoff",
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-10T12:30:30.549930+00:00",
+      "finished_at": "2026-09-10T12:30:30.765247+00:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: done (8/8 done)\nM0: in_progress (1/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "phase": "m0-02-corrections-review-handoff",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-10T12:30:30.765934+00:00",
+      "finished_at": "2026-09-10T12:30:30.961500+00:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "M0-02 acceptance verification",
+      "command": "python -m unittest tests/m0/test_command_boundary.py -v",
+      "started_at": "2026-09-10T12:50:14.562968+00:00",
+      "finished_at": "2026-09-10T12:50:16.408269+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actor_mismatch_cannot_reserve_legitimate_command_id (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_cannot_reserve_legitimate_command_id) ... ok\ntest_actor_mismatch_is_rejected_without_domain_event (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event) ... ok\ntest_agent_cannot_create_project_without_bootstrap_permission (tests.m0.test_command_boundary.CommandBoundaryTests.test_agent_cannot_create_project_without_bootstrap_permission) ... ok\ntest_authenticated_rejection_is_event_audited_and_retry_is_idempotent (tests.m0.test_command_boundary.CommandBoundaryTests.test_authenticated_rejection_is_event_audited_and_retry_is_idempotent) ... ok\ntest_expected_revision_conflict_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_expected_revision_conflict_is_rejected_without_domain_effect) ... ok\ntest_invalid_target_is_rejected_and_audited (tests.m0.test_command_boundary.CommandBoundaryTests.test_invalid_target_is_rejected_and_audited) ... ok\ntest_missing_expected_revision_cannot_claim_after_intervening_changes (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_claim_after_intervening_changes) ... ok\ntest_missing_expected_revision_cannot_release_an_owned_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_release_an_owned_task) ... ok\ntest_nested_handler_failure_rolls_back_its_entire_batch (tests.m0.test_command_boundary.CommandBoundaryTests.test_nested_handler_failure_rolls_back_its_entire_batch) ... ok\ntest_non_owner_cannot_release_current_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_non_owner_cannot_release_current_task) ... ok\ntest_rejection_audit_does_not_create_target_or_advance_its_revision (tests.m0.test_command_boundary.CommandBoundaryTests.test_rejection_audit_does_not_create_target_or_advance_its_revision) ... ok\ntest_result_index_failure_rolls_back_command_and_both_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_result_index_failure_rolls_back_command_and_both_events) ... ok\ntest_same_command_retry_returns_original_result_without_duplicate_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_command_retry_returns_original_result_without_duplicate_events) ... ok\ntest_same_idempotency_key_with_different_content_is_rejected (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_idempotency_key_with_different_content_is_rejected) ... ok\ntest_task_create_commits_received_and_domain_events_atomically (tests.m0.test_command_boundary.CommandBoundaryTests.test_task_create_commits_received_and_domain_events_atomically) ... ok\ntest_top_level_event_failure_rolls_back_command_and_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_top_level_event_failure_rolls_back_command_and_events) ... ok\ntest_unregistered_actor_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_unregistered_actor_is_rejected_without_domain_effect) ... ok\ntest_unsupported_command_cannot_bypass_missing_quality_gates (tests.m0.test_command_boundary.CommandBoundaryTests.test_unsupported_command_cannot_bypass_missing_quality_gates) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 1.610s\n\nOK\n"
+    },
+    {
+      "stage": "M0-02 acceptance verification",
+      "command": "python -m unittest discover -s tests/m0 -t . -v",
+      "started_at": "2026-09-10T12:50:16.409210+00:00",
+      "finished_at": "2026-09-10T12:50:18.476992+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actor_mismatch_cannot_reserve_legitimate_command_id (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_cannot_reserve_legitimate_command_id) ... ok\ntest_actor_mismatch_is_rejected_without_domain_event (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event) ... ok\ntest_agent_cannot_create_project_without_bootstrap_permission (tests.m0.test_command_boundary.CommandBoundaryTests.test_agent_cannot_create_project_without_bootstrap_permission) ... ok\ntest_authenticated_rejection_is_event_audited_and_retry_is_idempotent (tests.m0.test_command_boundary.CommandBoundaryTests.test_authenticated_rejection_is_event_audited_and_retry_is_idempotent) ... ok\ntest_expected_revision_conflict_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_expected_revision_conflict_is_rejected_without_domain_effect) ... ok\ntest_invalid_target_is_rejected_and_audited (tests.m0.test_command_boundary.CommandBoundaryTests.test_invalid_target_is_rejected_and_audited) ... ok\ntest_missing_expected_revision_cannot_claim_after_intervening_changes (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_claim_after_intervening_changes) ... ok\ntest_missing_expected_revision_cannot_release_an_owned_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_release_an_owned_task) ... ok\ntest_nested_handler_failure_rolls_back_its_entire_batch (tests.m0.test_command_boundary.CommandBoundaryTests.test_nested_handler_failure_rolls_back_its_entire_batch) ... ok\ntest_non_owner_cannot_release_current_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_non_owner_cannot_release_current_task) ... ok\ntest_rejection_audit_does_not_create_target_or_advance_its_revision (tests.m0.test_command_boundary.CommandBoundaryTests.test_rejection_audit_does_not_create_target_or_advance_its_revision) ... ok\ntest_result_index_failure_rolls_back_command_and_both_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_result_index_failure_rolls_back_command_and_both_events) ... ok\ntest_same_command_retry_returns_original_result_without_duplicate_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_command_retry_returns_original_result_without_duplicate_events) ... ok\ntest_same_idempotency_key_with_different_content_is_rejected (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_idempotency_key_with_different_content_is_rejected) ... ok\ntest_task_create_commits_received_and_domain_events_atomically (tests.m0.test_command_boundary.CommandBoundaryTests.test_task_create_commits_received_and_domain_events_atomically) ... ok\ntest_top_level_event_failure_rolls_back_command_and_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_top_level_event_failure_rolls_back_command_and_events) ... ok\ntest_unregistered_actor_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_unregistered_actor_is_rejected_without_domain_effect) ... ok\ntest_unsupported_command_cannot_bypass_missing_quality_gates (tests.m0.test_command_boundary.CommandBoundaryTests.test_unsupported_command_cannot_bypass_missing_quality_gates) ... ok\ntest_command_and_event_payloads_are_deeply_immutable (tests.m0.test_models.ModelTests.test_command_and_event_payloads_are_deeply_immutable) ... ok\ntest_command_serializes_with_stable_required_fields (tests.m0.test_models.ModelTests.test_command_serializes_with_stable_required_fields) ... ok\ntest_enum_values_must_use_canonical_lowercase_spelling (tests.m0.test_models.ModelTests.test_enum_values_must_use_canonical_lowercase_spelling) ... ok\ntest_invalid_fixtures_are_rejected (tests.m0.test_models.ModelTests.test_invalid_fixtures_are_rejected) ... ok\ntest_models_are_frozen_and_expose_object_schema_version (tests.m0.test_models.ModelTests.test_models_are_frozen_and_expose_object_schema_version) ... ok\ntest_package_exports_core_contracts (tests.m0.test_models.ModelTests.test_package_exports_core_contracts) ... ok\ntest_valid_fixtures_round_trip_through_models (tests.m0.test_models.ModelTests.test_valid_fixtures_round_trip_through_models) ... ok\ntest_close_is_idempotent (tests.m0.test_models.SQLiteStoreTests.test_close_is_idempotent) ... ok\ntest_event_sequences_are_unique_per_project (tests.m0.test_models.SQLiteStoreTests.test_event_sequences_are_unique_per_project) ... ok\ntest_schema_persists_commands_events_and_idempotency (tests.m0.test_models.SQLiteStoreTests.test_schema_persists_commands_events_and_idempotency) ... ok\ntest_transaction_rolls_back_both_command_and_events (tests.m0.test_models.SQLiteStoreTests.test_transaction_rolls_back_both_command_and_events) ... ok\n\n----------------------------------------------------------------------\nRan 29 tests in 1.815s\n\nOK\n"
+    },
+    {
+      "stage": "M0-03 integrated preparation verification (review pending)",
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-10T13:52:38.243991+00:00",
+      "finished_at": "2026-09-10T13:52:38.540578+00:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: done (8/8 done)\nM0: in_progress (2/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "M0-03 integrated preparation verification (review pending)",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-10T13:52:38.541624+00:00",
+      "finished_at": "2026-09-10T13:52:38.741785+00:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "M0-03 integrated preparation verification (review pending)",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-10T13:52:38.742831+00:00",
+      "finished_at": "2026-09-10T13:52:43.030400+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 4.008s\n\nOK\n"
+    },
+    {
+      "stage": "M0-03 frozen-snapshot final functional verification (review pending)",
+      "command": "python -m unittest discover -s tests/m0 -t . -v",
+      "started_at": "2026-09-10T14:08:35.842429+00:00",
+      "finished_at": "2026-09-10T14:08:39.653716+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actor_mismatch_cannot_reserve_legitimate_command_id (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_cannot_reserve_legitimate_command_id) ... ok\ntest_actor_mismatch_is_rejected_without_domain_event (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event) ... ok\ntest_agent_cannot_create_project_without_bootstrap_permission (tests.m0.test_command_boundary.CommandBoundaryTests.test_agent_cannot_create_project_without_bootstrap_permission) ... ok\ntest_authenticated_rejection_is_event_audited_and_retry_is_idempotent (tests.m0.test_command_boundary.CommandBoundaryTests.test_authenticated_rejection_is_event_audited_and_retry_is_idempotent) ... ok\ntest_expected_revision_conflict_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_expected_revision_conflict_is_rejected_without_domain_effect) ... ok\ntest_invalid_target_is_rejected_and_audited (tests.m0.test_command_boundary.CommandBoundaryTests.test_invalid_target_is_rejected_and_audited) ... ok\ntest_missing_expected_revision_cannot_claim_after_intervening_changes (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_claim_after_intervening_changes) ... ok\ntest_missing_expected_revision_cannot_release_an_owned_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_release_an_owned_task) ... ok\ntest_nested_handler_failure_rolls_back_its_entire_batch (tests.m0.test_command_boundary.CommandBoundaryTests.test_nested_handler_failure_rolls_back_its_entire_batch) ... ok\ntest_non_owner_cannot_release_current_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_non_owner_cannot_release_current_task) ... ok\ntest_rejection_audit_does_not_create_target_or_advance_its_revision (tests.m0.test_command_boundary.CommandBoundaryTests.test_rejection_audit_does_not_create_target_or_advance_its_revision) ... ok\ntest_result_index_failure_rolls_back_command_and_both_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_result_index_failure_rolls_back_command_and_both_events) ... ok\ntest_same_command_retry_returns_original_result_without_duplicate_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_command_retry_returns_original_result_without_duplicate_events) ... ok\ntest_same_idempotency_key_with_different_content_is_rejected (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_idempotency_key_with_different_content_is_rejected) ... ok\ntest_task_create_commits_received_and_domain_events_atomically (tests.m0.test_command_boundary.CommandBoundaryTests.test_task_create_commits_received_and_domain_events_atomically) ... ok\ntest_top_level_event_failure_rolls_back_command_and_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_top_level_event_failure_rolls_back_command_and_events) ... ok\ntest_unregistered_actor_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_unregistered_actor_is_rejected_without_domain_effect) ... ok\ntest_unsupported_command_cannot_bypass_missing_quality_gates (tests.m0.test_command_boundary.CommandBoundaryTests.test_unsupported_command_cannot_bypass_missing_quality_gates) ... ok\ntest_caught_duplicate_id_batch_leaves_no_partial_events_or_projection (tests.m0.test_event_projection.EventProjectionStoreTests.test_caught_duplicate_id_batch_leaves_no_partial_events_or_projection) ... ok\ntest_caught_revision_gap_rolls_back_the_whole_append_batch (tests.m0.test_event_projection.EventProjectionStoreTests.test_caught_revision_gap_rolls_back_the_whole_append_batch) ... ok\ntest_claim_release_and_rejection_audits_project_exact_current_state (tests.m0.test_event_projection.EventProjectionStoreTests.test_claim_release_and_rejection_audits_project_exact_current_state) ... ok\ntest_corrupt_or_lagging_cache_cannot_authorize_or_change_commands (tests.m0.test_event_projection.EventProjectionStoreTests.test_corrupt_or_lagging_cache_cannot_authorize_or_change_commands) ... ok\ntest_deleted_cache_is_rebuilt_from_facts_before_the_next_append (tests.m0.test_event_projection.EventProjectionStoreTests.test_deleted_cache_is_rebuilt_from_facts_before_the_next_append) ... ok\ntest_event_insert_failure_keeps_cache_and_facts_at_the_same_boundary (tests.m0.test_event_projection.EventProjectionStoreTests.test_event_insert_failure_keeps_cache_and_facts_at_the_same_boundary) ... ok\ntest_event_insert_precedes_any_persisted_projection_change (tests.m0.test_event_projection.EventProjectionStoreTests.test_event_insert_precedes_any_persisted_projection_change) ... ok\ntest_fresh_connection_continues_durable_sequence_and_cache (tests.m0.test_event_projection.EventProjectionStoreTests.test_fresh_connection_continues_durable_sequence_and_cache) ... ok\ntest_numbering_and_cache_are_project_scoped (tests.m0.test_event_projection.EventProjectionStoreTests.test_numbering_and_cache_are_project_scoped) ... ok\ntest_outer_rollback_discards_projection_updates_and_reuses_sequence (tests.m0.test_event_projection.EventProjectionStoreTests.test_outer_rollback_discards_projection_updates_and_reuses_sequence) ... ok\ntest_positive_sequence_hint_cannot_skip_the_store_cursor (tests.m0.test_event_projection.EventProjectionStoreTests.test_positive_sequence_hint_cannot_skip_the_store_cursor) ... ok\ntest_projection_write_failure_rolls_back_command_event_and_result_batch (tests.m0.test_event_projection.EventProjectionStoreTests.test_projection_write_failure_rolls_back_command_event_and_result_batch) ... ok\ntest_read_projection_is_detached_and_performs_no_sql_writes (tests.m0.test_event_projection.EventProjectionStoreTests.test_read_projection_is_detached_and_performs_no_sql_writes) ... ok\ntest_rebuild_from_events_equals_incremental_projection (tests.m0.test_event_projection.EventProjectionStoreTests.test_rebuild_from_events_equals_incremental_projection) ... ok\ntest_sequence_allocation_requires_an_active_transaction (tests.m0.test_event_projection.EventProjectionStoreTests.test_sequence_allocation_requires_an_active_transaction) ... ok\ntest_store_assigns_final_sequence_to_drafts_without_mutating_them (tests.m0.test_event_projection.EventProjectionStoreTests.test_store_assigns_final_sequence_to_drafts_without_mutating_them) ... ok\ntest_aggregate_revision_gap_is_rejected_without_consuming_sequence (tests.m0.test_event_projection.ProjectionReducerTests.test_aggregate_revision_gap_is_rejected_without_consuming_sequence) ... ok\ntest_command_audits_do_not_create_aggregates_or_advance_domain_revision (tests.m0.test_event_projection.ProjectionReducerTests.test_command_audits_do_not_create_aggregates_or_advance_domain_revision) ... ok\ntest_conflicting_event_identity_is_rejected_without_mutation (tests.m0.test_event_projection.ProjectionReducerTests.test_conflicting_event_identity_is_rejected_without_mutation) ... ok\ntest_domain_event_type_must_match_aggregate_address (tests.m0.test_event_projection.ProjectionReducerTests.test_domain_event_type_must_match_aggregate_address) ... ok\ntest_duplicate_sequence_for_a_different_event_is_rejected (tests.m0.test_event_projection.ProjectionReducerTests.test_duplicate_sequence_for_a_different_event_is_rejected) ... ok\ntest_exact_redelivery_has_no_second_effect_even_after_newer_events (tests.m0.test_event_projection.ProjectionReducerTests.test_exact_redelivery_has_no_second_effect_even_after_newer_events) ... ok\ntest_future_event_types_cannot_implicitly_complete_a_task (tests.m0.test_event_projection.ProjectionReducerTests.test_future_event_types_cannot_implicitly_complete_a_task) ... ok\ntest_incremental_claim_and_release_preserve_metadata_and_revision (tests.m0.test_event_projection.ProjectionReducerTests.test_incremental_claim_and_release_preserve_metadata_and_revision) ... ok\ntest_malformed_claim_and_unqualified_created_completion_fail_closed (tests.m0.test_event_projection.ProjectionReducerTests.test_malformed_claim_and_unqualified_created_completion_fail_closed) ... ok\ntest_missing_aggregate_does_not_bind_or_partially_change_projection (tests.m0.test_event_projection.ProjectionReducerTests.test_missing_aggregate_does_not_bind_or_partially_change_projection) ... ok\ntest_missing_sequence_is_not_silently_skipped (tests.m0.test_event_projection.ProjectionReducerTests.test_missing_sequence_is_not_silently_skipped) ... ok\ntest_nonzero_creation_revision_is_rejected (tests.m0.test_event_projection.ProjectionReducerTests.test_nonzero_creation_revision_is_rejected) ... ok\ntest_other_project_cannot_enter_the_same_projection (tests.m0.test_event_projection.ProjectionReducerTests.test_other_project_cannot_enter_the_same_projection) ... ok\ntest_payload_cannot_override_identity_revision_or_claim_ownership (tests.m0.test_event_projection.ProjectionReducerTests.test_payload_cannot_override_identity_revision_or_claim_ownership) ... ok\ntest_rebuild_orders_a_generator_by_sequence_not_id_or_payload_timestamp (tests.m0.test_event_projection.ProjectionReducerTests.test_rebuild_orders_a_generator_by_sequence_not_id_or_payload_timestamp) ... ok\ntest_replay_computes_literal_state_with_external_effect_paths_denied (tests.m0.test_event_projection.ProjectionReducerTests.test_replay_computes_literal_state_with_external_effect_paths_denied) ... ok\ntest_second_creation_cannot_overwrite_existing_aggregate (tests.m0.test_event_projection.ProjectionReducerTests.test_second_creation_cannot_overwrite_existing_aggregate) ... ok\ntest_typed_keys_separate_same_named_entities (tests.m0.test_event_projection.ProjectionReducerTests.test_typed_keys_separate_same_named_entities) ... ok\ntest_unassigned_sequence_is_not_a_replayable_fact (tests.m0.test_event_projection.ProjectionReducerTests.test_unassigned_sequence_is_not_a_replayable_fact) ... ok\ntest_command_and_event_payloads_are_deeply_immutable (tests.m0.test_models.ModelTests.test_command_and_event_payloads_are_deeply_immutable) ... ok\ntest_command_serializes_with_stable_required_fields (tests.m0.test_models.ModelTests.test_command_serializes_with_stable_required_fields) ... ok\ntest_enum_values_must_use_canonical_lowercase_spelling (tests.m0.test_models.ModelTests.test_enum_values_must_use_canonical_lowercase_spelling) ... ok\ntest_invalid_fixtures_are_rejected (tests.m0.test_models.ModelTests.test_invalid_fixtures_are_rejected) ... ok\ntest_models_are_frozen_and_expose_object_schema_version (tests.m0.test_models.ModelTests.test_models_are_frozen_and_expose_object_schema_version) ... ok\ntest_package_exports_core_contracts (tests.m0.test_models.ModelTests.test_package_exports_core_contracts) ... ok\ntest_valid_fixtures_round_trip_through_models (tests.m0.test_models.ModelTests.test_valid_fixtures_round_trip_through_models) ... ok\ntest_close_is_idempotent (tests.m0.test_models.SQLiteStoreTests.test_close_is_idempotent) ... ok\ntest_event_sequences_are_unique_per_project (tests.m0.test_models.SQLiteStoreTests.test_event_sequences_are_unique_per_project) ... ok\ntest_schema_persists_commands_events_and_idempotency (tests.m0.test_models.SQLiteStoreTests.test_schema_persists_commands_events_and_idempotency) ... ok\ntest_transaction_rolls_back_both_command_and_events (tests.m0.test_models.SQLiteStoreTests.test_transaction_rolls_back_both_command_and_events) ... ok\n\n----------------------------------------------------------------------\nRan 64 tests in 3.457s\n\nOK\n"
+    },
+    {
+      "stage": "M0-03 frozen-snapshot final functional verification (review pending)",
+      "command": "python -m unittest discover -v",
+      "started_at": "2026-09-10T14:08:39.655257+00:00",
+      "finished_at": "2026-09-10T14:08:43.552023+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_actor_mismatch_cannot_reserve_legitimate_command_id (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_cannot_reserve_legitimate_command_id) ... ok\ntest_actor_mismatch_is_rejected_without_domain_event (tests.m0.test_command_boundary.CommandBoundaryTests.test_actor_mismatch_is_rejected_without_domain_event) ... ok\ntest_agent_cannot_create_project_without_bootstrap_permission (tests.m0.test_command_boundary.CommandBoundaryTests.test_agent_cannot_create_project_without_bootstrap_permission) ... ok\ntest_authenticated_rejection_is_event_audited_and_retry_is_idempotent (tests.m0.test_command_boundary.CommandBoundaryTests.test_authenticated_rejection_is_event_audited_and_retry_is_idempotent) ... ok\ntest_expected_revision_conflict_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_expected_revision_conflict_is_rejected_without_domain_effect) ... ok\ntest_invalid_target_is_rejected_and_audited (tests.m0.test_command_boundary.CommandBoundaryTests.test_invalid_target_is_rejected_and_audited) ... ok\ntest_missing_expected_revision_cannot_claim_after_intervening_changes (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_claim_after_intervening_changes) ... ok\ntest_missing_expected_revision_cannot_release_an_owned_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_missing_expected_revision_cannot_release_an_owned_task) ... ok\ntest_nested_handler_failure_rolls_back_its_entire_batch (tests.m0.test_command_boundary.CommandBoundaryTests.test_nested_handler_failure_rolls_back_its_entire_batch) ... ok\ntest_non_owner_cannot_release_current_task (tests.m0.test_command_boundary.CommandBoundaryTests.test_non_owner_cannot_release_current_task) ... ok\ntest_rejection_audit_does_not_create_target_or_advance_its_revision (tests.m0.test_command_boundary.CommandBoundaryTests.test_rejection_audit_does_not_create_target_or_advance_its_revision) ... ok\ntest_result_index_failure_rolls_back_command_and_both_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_result_index_failure_rolls_back_command_and_both_events) ... ok\ntest_same_command_retry_returns_original_result_without_duplicate_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_command_retry_returns_original_result_without_duplicate_events) ... ok\ntest_same_idempotency_key_with_different_content_is_rejected (tests.m0.test_command_boundary.CommandBoundaryTests.test_same_idempotency_key_with_different_content_is_rejected) ... ok\ntest_task_create_commits_received_and_domain_events_atomically (tests.m0.test_command_boundary.CommandBoundaryTests.test_task_create_commits_received_and_domain_events_atomically) ... ok\ntest_top_level_event_failure_rolls_back_command_and_events (tests.m0.test_command_boundary.CommandBoundaryTests.test_top_level_event_failure_rolls_back_command_and_events) ... ok\ntest_unregistered_actor_is_rejected_without_domain_effect (tests.m0.test_command_boundary.CommandBoundaryTests.test_unregistered_actor_is_rejected_without_domain_effect) ... ok\ntest_unsupported_command_cannot_bypass_missing_quality_gates (tests.m0.test_command_boundary.CommandBoundaryTests.test_unsupported_command_cannot_bypass_missing_quality_gates) ... ok\ntest_caught_duplicate_id_batch_leaves_no_partial_events_or_projection (tests.m0.test_event_projection.EventProjectionStoreTests.test_caught_duplicate_id_batch_leaves_no_partial_events_or_projection) ... ok\ntest_caught_revision_gap_rolls_back_the_whole_append_batch (tests.m0.test_event_projection.EventProjectionStoreTests.test_caught_revision_gap_rolls_back_the_whole_append_batch) ... ok\ntest_claim_release_and_rejection_audits_project_exact_current_state (tests.m0.test_event_projection.EventProjectionStoreTests.test_claim_release_and_rejection_audits_project_exact_current_state) ... ok\ntest_corrupt_or_lagging_cache_cannot_authorize_or_change_commands (tests.m0.test_event_projection.EventProjectionStoreTests.test_corrupt_or_lagging_cache_cannot_authorize_or_change_commands) ... ok\ntest_deleted_cache_is_rebuilt_from_facts_before_the_next_append (tests.m0.test_event_projection.EventProjectionStoreTests.test_deleted_cache_is_rebuilt_from_facts_before_the_next_append) ... ok\ntest_event_insert_failure_keeps_cache_and_facts_at_the_same_boundary (tests.m0.test_event_projection.EventProjectionStoreTests.test_event_insert_failure_keeps_cache_and_facts_at_the_same_boundary) ... ok\ntest_event_insert_precedes_any_persisted_projection_change (tests.m0.test_event_projection.EventProjectionStoreTests.test_event_insert_precedes_any_persisted_projection_change) ... ok\ntest_fresh_connection_continues_durable_sequence_and_cache (tests.m0.test_event_projection.EventProjectionStoreTests.test_fresh_connection_continues_durable_sequence_and_cache) ... ok\ntest_numbering_and_cache_are_project_scoped (tests.m0.test_event_projection.EventProjectionStoreTests.test_numbering_and_cache_are_project_scoped) ... ok\ntest_outer_rollback_discards_projection_updates_and_reuses_sequence (tests.m0.test_event_projection.EventProjectionStoreTests.test_outer_rollback_discards_projection_updates_and_reuses_sequence) ... ok\ntest_positive_sequence_hint_cannot_skip_the_store_cursor (tests.m0.test_event_projection.EventProjectionStoreTests.test_positive_sequence_hint_cannot_skip_the_store_cursor) ... ok\ntest_projection_write_failure_rolls_back_command_event_and_result_batch (tests.m0.test_event_projection.EventProjectionStoreTests.test_projection_write_failure_rolls_back_command_event_and_result_batch) ... ok\ntest_read_projection_is_detached_and_performs_no_sql_writes (tests.m0.test_event_projection.EventProjectionStoreTests.test_read_projection_is_detached_and_performs_no_sql_writes) ... ok\ntest_rebuild_from_events_equals_incremental_projection (tests.m0.test_event_projection.EventProjectionStoreTests.test_rebuild_from_events_equals_incremental_projection) ... ok\ntest_sequence_allocation_requires_an_active_transaction (tests.m0.test_event_projection.EventProjectionStoreTests.test_sequence_allocation_requires_an_active_transaction) ... ok\ntest_store_assigns_final_sequence_to_drafts_without_mutating_them (tests.m0.test_event_projection.EventProjectionStoreTests.test_store_assigns_final_sequence_to_drafts_without_mutating_them) ... ok\ntest_aggregate_revision_gap_is_rejected_without_consuming_sequence (tests.m0.test_event_projection.ProjectionReducerTests.test_aggregate_revision_gap_is_rejected_without_consuming_sequence) ... ok\ntest_command_audits_do_not_create_aggregates_or_advance_domain_revision (tests.m0.test_event_projection.ProjectionReducerTests.test_command_audits_do_not_create_aggregates_or_advance_domain_revision) ... ok\ntest_conflicting_event_identity_is_rejected_without_mutation (tests.m0.test_event_projection.ProjectionReducerTests.test_conflicting_event_identity_is_rejected_without_mutation) ... ok\ntest_domain_event_type_must_match_aggregate_address (tests.m0.test_event_projection.ProjectionReducerTests.test_domain_event_type_must_match_aggregate_address) ... ok\ntest_duplicate_sequence_for_a_different_event_is_rejected (tests.m0.test_event_projection.ProjectionReducerTests.test_duplicate_sequence_for_a_different_event_is_rejected) ... ok\ntest_exact_redelivery_has_no_second_effect_even_after_newer_events (tests.m0.test_event_projection.ProjectionReducerTests.test_exact_redelivery_has_no_second_effect_even_after_newer_events) ... ok\ntest_future_event_types_cannot_implicitly_complete_a_task (tests.m0.test_event_projection.ProjectionReducerTests.test_future_event_types_cannot_implicitly_complete_a_task) ... ok\ntest_incremental_claim_and_release_preserve_metadata_and_revision (tests.m0.test_event_projection.ProjectionReducerTests.test_incremental_claim_and_release_preserve_metadata_and_revision) ... ok\ntest_malformed_claim_and_unqualified_created_completion_fail_closed (tests.m0.test_event_projection.ProjectionReducerTests.test_malformed_claim_and_unqualified_created_completion_fail_closed) ... ok\ntest_missing_aggregate_does_not_bind_or_partially_change_projection (tests.m0.test_event_projection.ProjectionReducerTests.test_missing_aggregate_does_not_bind_or_partially_change_projection) ... ok\ntest_missing_sequence_is_not_silently_skipped (tests.m0.test_event_projection.ProjectionReducerTests.test_missing_sequence_is_not_silently_skipped) ... ok\ntest_nonzero_creation_revision_is_rejected (tests.m0.test_event_projection.ProjectionReducerTests.test_nonzero_creation_revision_is_rejected) ... ok\ntest_other_project_cannot_enter_the_same_projection (tests.m0.test_event_projection.ProjectionReducerTests.test_other_project_cannot_enter_the_same_projection) ... ok\ntest_payload_cannot_override_identity_revision_or_claim_ownership (tests.m0.test_event_projection.ProjectionReducerTests.test_payload_cannot_override_identity_revision_or_claim_ownership) ... ok\ntest_rebuild_orders_a_generator_by_sequence_not_id_or_payload_timestamp (tests.m0.test_event_projection.ProjectionReducerTests.test_rebuild_orders_a_generator_by_sequence_not_id_or_payload_timestamp) ... ok\ntest_replay_computes_literal_state_with_external_effect_paths_denied (tests.m0.test_event_projection.ProjectionReducerTests.test_replay_computes_literal_state_with_external_effect_paths_denied) ... ok\ntest_second_creation_cannot_overwrite_existing_aggregate (tests.m0.test_event_projection.ProjectionReducerTests.test_second_creation_cannot_overwrite_existing_aggregate) ... ok\ntest_typed_keys_separate_same_named_entities (tests.m0.test_event_projection.ProjectionReducerTests.test_typed_keys_separate_same_named_entities) ... ok\ntest_unassigned_sequence_is_not_a_replayable_fact (tests.m0.test_event_projection.ProjectionReducerTests.test_unassigned_sequence_is_not_a_replayable_fact) ... ok\ntest_command_and_event_payloads_are_deeply_immutable (tests.m0.test_models.ModelTests.test_command_and_event_payloads_are_deeply_immutable) ... ok\ntest_command_serializes_with_stable_required_fields (tests.m0.test_models.ModelTests.test_command_serializes_with_stable_required_fields) ... ok\ntest_enum_values_must_use_canonical_lowercase_spelling (tests.m0.test_models.ModelTests.test_enum_values_must_use_canonical_lowercase_spelling) ... ok\ntest_invalid_fixtures_are_rejected (tests.m0.test_models.ModelTests.test_invalid_fixtures_are_rejected) ... ok\ntest_models_are_frozen_and_expose_object_schema_version (tests.m0.test_models.ModelTests.test_models_are_frozen_and_expose_object_schema_version) ... ok\ntest_package_exports_core_contracts (tests.m0.test_models.ModelTests.test_package_exports_core_contracts) ... ok\ntest_valid_fixtures_round_trip_through_models (tests.m0.test_models.ModelTests.test_valid_fixtures_round_trip_through_models) ... ok\ntest_close_is_idempotent (tests.m0.test_models.SQLiteStoreTests.test_close_is_idempotent) ... ok\ntest_event_sequences_are_unique_per_project (tests.m0.test_models.SQLiteStoreTests.test_event_sequences_are_unique_per_project) ... ok\ntest_schema_persists_commands_events_and_idempotency (tests.m0.test_models.SQLiteStoreTests.test_schema_persists_commands_events_and_idempotency) ... ok\ntest_transaction_rolls_back_both_command_and_events (tests.m0.test_models.SQLiteStoreTests.test_transaction_rolls_back_both_command_and_events) ... ok\n\n----------------------------------------------------------------------\nRan 64 tests in 3.556s\n\nOK\n"
+    },
+    {
+      "stage": "M0-03 replacement-review preparation verification (review pending)",
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-10T14:37:13.575943+00:00",
+      "finished_at": "2026-09-10T14:37:14.022987+00:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: done (8/8 done)\nM0: in_progress (2/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "M0-03 replacement-review preparation verification (review pending)",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-10T14:37:14.024520+00:00",
+      "finished_at": "2026-09-10T14:37:14.234240+00:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "M0-03 replacement-review preparation verification (review pending)",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-10T14:37:14.237174+00:00",
+      "finished_at": "2026-09-10T14:37:19.032081+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 4.301s\n\nOK\n"
+    },
+    {
+      "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+      "command": "python -m unittest discover -s tests/m0 -t .",
+      "started_at": "2026-09-10T14:55:21.299545+00:00",
+      "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+      "finished_at": "2026-09-10T14:55:25.476671+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "................................................................\n----------------------------------------------------------------------\nRan 64 tests in 3.811s\n\nOK\n",
+      "tests_run": 64
+    },
+    {
+      "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+      "command": "python tools/devprep.py render",
+      "started_at": "2026-09-10T14:55:25.479226+00:00",
+      "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+      "finished_at": "2026-09-10T14:55:25.712288+00:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: done (8/8 done)\nM0: in_progress (2/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": ""
+    },
+    {
+      "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+      "command": "python tools/devprep.py check",
+      "started_at": "2026-09-10T14:55:25.714140+00:00",
+      "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+      "finished_at": "2026-09-10T14:55:25.917061+00:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": ""
+    },
+    {
+      "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "started_at": "2026-09-10T14:55:25.918973+00:00",
+      "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+      "finished_at": "2026-09-10T14:55:28.283520+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 2.071s\n\nOK\n",
+      "tests_run": 27
+    }
+  ],
+  "product_acceptance": false,
+  "conformance_passed": 0,
+  "independent_review": {
+    "M0-02": {
+      "reviewer": "Boole",
+      "agent_id": "01a08b23-3083-7090-941b-eb806d9fd4bd",
+      "role_label": "Codex-M0-02-Review-20260910",
+      "recorded_at": "2026-09-10T12:50:18.477834+00:00",
+      "source": "actual multi_agent_v1 completed notification, scoped re-review",
+      "verdict": "accepted within M0-02 correction scope; no remaining Critical/Important/Minor findings",
+      "closed_findings": {
+        "I1": "Existing Task claim/release requires explicit matching expected_revision; missing revision rejected without domain change.",
+        "I2": "Authenticated rejection atomically persists received/rejected audit Events with structured Error; no duplicate audit on retry and no domain revision changes.",
+        "I3": "Identity binding precedes authoritative Command/key writes; mismatched claims enter separate diagnostics and cannot poison a legitimate Command ID.",
+        "I4": "Nested savepoints remove failed Command/key/Event batches while preserving successful outer work; retry works after removing injected failure."
+      },
+      "reviewer_executed": [
+        {
+          "command": "python -m unittest tests/m0/test_command_boundary.py -v",
+          "exit_code": 0,
+          "result": "18/18 passed; no failures/errors/skips"
+        },
+        {
+          "command": "PowerShell here-string -> python - (BooleScopedRereview in-memory probes)",
+          "exit_code": 0,
+          "result": "4/4 passed, one each for I1-I4",
+          "raw_probe_source_persisted": false
+        },
+        {
+          "command": "python -; execute corrections_2026_09_10.mutation_probe_source from report",
+          "exit_code": 0,
+          "result": "4/4 mutants killed, each one assertion failure and zero errors"
+        }
+      ],
+      "reviewer_verified": "Persisted RED output: 18 cases, 11 assertion failures, 0 errors, exit 1 (reviewed historical output, not a replay of the old implementation). Four source hashes match; all five review files stable during re-review.",
+      "limitations": [
+        "Reviewer did not independently rerun the full M0 29-case or preparation 27-case suites.",
+        "Legacy poisoned or missing-audit history is not migrated; isolated databases tested.",
+        "No conclusion for M0-03/M0-04 or overall Conformance/Bootstrap.",
+        "Read-only reviewer; no file, backlog or report writes; no Git or nested agents; ClaudeLink unavailable."
+      ]
+    },
+    "M0-03": {
+      "reviewer": "Kuhn",
+      "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+      "status": "errored_without_conclusion",
+      "dispatched_at": "2026-09-10T14:37:13.574347+00:00",
+      "scope": "Replacement sole read-only M0-03 reviewer on unchanged frozen snapshot; necessary because the previous reviewer produced no result. No nested agents or workspace writes.",
+      "recorded_at": "2026-09-10T14:53:49.509976+00:00",
+      "source": "actual multi_agent_v1.wait_agent result and errored notification; close_agent returned the same errored status",
+      "error": "stream disconnected before completion: Transport error: network error: error decoding response body",
+      "verdict": null,
+      "limitations": [
+        "No actual review result, commands or findings were returned; none are inferred.",
+        "This is an independent-review transport failure, not a product test failure."
+      ]
+    }
+  },
+  "next_slice_preflight": {
+    "work_item": "M0-03",
+    "status": "implemented; independent review pending",
+    "authority": [
+      "Docs/AETP-设计方案.md §§10.4,13.4,14.1,14.2,17.2",
+      "Docs/superpowers/plans/2026-09-06-m0-first-slice.md Task 3"
+    ],
+    "write_scope": [
+      "src/aetp/core/projection.py",
+      "src/aetp/storage/sqlite_store.py",
+      "tests/m0/test_event_projection.py",
+      "tests/m0/support.py",
+      "artifacts/m0-03-test-report.json"
+    ],
+    "acceptance_matrix": [
+      "literal expected state after validated create/claim/release; no COMPLETED state",
+      "incremental persisted projection equals pure Event rebuild after deleting only disposable cache",
+      "out-of-order input sorted by sequence; exact event redelivery has no second effect",
+      "conflicting duplicate sequence/event identity and aggregate revision gaps fail closed without partial application",
+      "unknown-for-M0 Event types cannot silently alter projection",
+      "command.received/rejected audit records never advance domain revisions",
+      "append failure atomically rolls back all events/projection/sequence; store owns final numbering",
+      "per-project numbering and projection isolation; read returns detached state without writes",
+      "pure rebuild has no Command, SQL, subprocess or network side effects"
+    ],
+    "non_goals": [
+      "no new protocol entities",
+      "no Runtime, model, shell, workspace or transport adapter",
+      "no M0-04 cross-process claim acceptance",
+      "no Conformance or Bootstrap acceptance"
+    ],
+    "implementation_notes": [
+      "Projection binds one project, orders rebuild input by sequence, deduplicates exact redelivery, and treats both Command audit types as non-domain facts.",
+      "State keys use aggregate_type:id to keep Agent/Task/project namespaces distinct; callers only receive detached copies.",
+      "Incremental cache and cursor/digest are disposable; Event history remains authoritative for Command validation.",
+      "SQLite assigns final sequence inside append transaction; positive internal sequence expectations must match, zero denotes an unnumbered internal draft.",
+      "Existing low-level storage fixtures contain partial task.created metadata; reducer must not invent missing titles or promote tasks through absent quality gates."
+    ],
+    "baseline_sha256": {
+      "src/aetp/storage/sqlite_store.py": "f02da02e10c6627cec594046768094162da438f7e19b5d158e139bd0409dd516",
+      "tests/m0/support.py": "091fdd7206ed638b14363cd966124f50b3c9f2d9c315b840e50a90c2c4b16504"
+    }
+  },
+  "review_findings": {
+    "reviewer": "Boole (01a08b23-3083-7090-941b-eb806d9fd4bd)",
+    "role_name_reported": "Codex-M0-02-Review-20260910",
+    "received_at": "2026-09-10T12:10:27.601512+00:00",
+    "assessment": "not ready; 0 Critical, 4 Important, 0 Minor",
+    "findings": [
+      {
+        "id": "I-1",
+        "location": "src/aetp/core/commands.py:306-310",
+        "summary": "None expected_revision bypasses existing aggregate version checks; delayed claim accepted at revision 3 after claim/release"
+      },
+      {
+        "id": "I-2",
+        "location": "src/aetp/core/commands.py:177-181;306-310;464-467",
+        "summary": "Authenticated rejection lacks command.received/rejected durable events; snapshot must ignore both audit types"
+      },
+      {
+        "id": "I-3",
+        "location": "src/aetp/core/commands.py:165-174",
+        "summary": "Actor mismatch persists authoritative Command before binding validation, poisoning a legitimate Command ID"
+      },
+      {
+        "id": "I-4",
+        "location": "src/aetp/storage/sqlite_store.py:100-118",
+        "summary": "Caught nested transaction failure commits partial Event batch and unfinished result index; needs SAVEPOINT or fail-closed nesting"
+      }
+    ],
+    "reported_commands": [
+      {
+        "command": "python -m unittest tests/m0/test_command_boundary.py -v",
+        "exit_code": 0,
+        "tests_run": 6
+      },
+      {
+        "command": "here-string -> python -: BoundaryReviewProbes",
+        "exit_code": 1,
+        "tests_run": 4,
+        "failures": 3
+      },
+      {
+        "command": "here-string -> python -: TransactionReviewProbes",
+        "exit_code": 1,
+        "tests_run": 4,
+        "failures": 1
+      }
+    ],
+    "raw_probe_output": "Review agent tool transcript; main will persist reproducible regression RED/GREEN instead of reconstructing missing raw output"
+  },
+  "status_transitions": [
+    {
+      "work_item": "M0-02",
+      "from": "review",
+      "to": "in_progress",
+      "reason": "independent review findings require corrections before dependency acceptance"
+    },
+    {
+      "work_item": "M0-02",
+      "from": "in_progress",
+      "to": "review",
+      "reason": "four fixes locally verified; independent correction review pending"
+    },
+    {
+      "work_item": "M0-02",
+      "from": "review",
+      "to": "done",
+      "recorded_at": "2026-09-10T12:50:18.479483+00:00",
+      "reason": "Actual independent re-review accepted and fresh boundary/full M0 verification passed."
+    },
+    {
+      "work_item": "M0-03",
+      "from": "todo",
+      "to": "ready",
+      "recorded_at": "2026-09-10T12:50:18.479496+00:00",
+      "reason": "M0-02 dependency independently accepted."
+    },
+    {
+      "work_item": "M0-03",
+      "from": "ready",
+      "to": "in_progress",
+      "recorded_at": "2026-09-10T12:50:18.479503+00:00",
+      "reason": "Main Codex owns canonical M0-03 file scope, tests and report; review will be read-only and independent."
+    },
+    {
+      "work_item": "M0-03",
+      "from": "in_progress",
+      "to": "review",
+      "recorded_at": "2026-09-10T13:47:17.938175+00:00",
+      "reason": "RED/GREEN, full M0, cache-deletion replay fixture and mutation verification recorded; awaiting independent review."
+    }
+  ],
+  "m0_02_fixture_source": "import hashlib, json, unittest\nfrom tests.m0.support import open_command_fixture, make_task_create_command, make_command\ncase = unittest.TestCase()\nfixture = open_command_fixture(case)\ntry:\n    command = make_task_create_command()\n    spoof = fixture.handler.handle(command, authenticated_actor_id='a-2')\n    created = fixture.handler.handle(command, authenticated_actor_id='a-1')\n    stale = make_command(command_id='stale', actor_id='a-1', command_type='task.claim',\n        target_id='t-1', payload={}, expected_revision=8, idempotency_key='stale')\n    rejected = fixture.handler.handle(stale, authenticated_actor_id='a-1')\n    before_retry = fixture.store.read_events('p-1')\n    retry = fixture.handler.handle(stale, authenticated_actor_id='a-1')\n    assert retry == rejected and fixture.store.read_events('p-1') == before_retry\n    for kind, key, revision in [('task.claim','claim',0),('task.release','release',1)]:\n        result = fixture.handler.handle(make_command(command_id=key, actor_id='a-1',\n            command_type=kind, target_id='t-1', payload={}, expected_revision=revision,\n            idempotency_key=key), authenticated_actor_id='a-1')\n        assert result.status == 'accepted'\n    events = fixture.store.read_events('p-1')\n    assert [e.sequence for e in events] == list(range(1, 15))\n    assert created.status == 'accepted' and spoof.error_code == 'ACTOR_MISMATCH'\n    output = {\n        'seed_after_sequence': fixture.after_sequence,\n        'actor_mismatch_result': spoof.to_dict(),\n        'legitimate_same_id_result': created.to_dict(),\n        'rejection_result': rejected.to_dict(),\n        'rejection_command': stale.to_versioned_dict(),\n        'rejection_audit_events': [e.to_versioned_dict() for e in events if e.causation_id == stale.id],\n        'domain_event_types_after_seed': [e.type for e in events if e.sequence > fixture.after_sequence and not e.type.startswith('command.')],\n        'sequence_list': [e.sequence for e in events],\n        'task_revisions': [e.aggregate_revision for e in events if e.type.startswith('task.')],\n        'security_audit': fixture.store.read_security_audit(authenticated_actor_id='a-2'),\n        'event_count': len(events),\n        'retry_event_count_delta': 0,\n    }\n    print(json.dumps(output, ensure_ascii=False, sort_keys=True))\nfinally:\n    case.doCleanups()\n",
+  "m0_02_observed_fixture": {
+    "command": "python -c <m0_02_fixture_source>",
+    "started_at": "2026-09-10T12:38:04.808989+00:00",
+    "finished_at": "2026-09-10T12:38:05.169653+00:00",
+    "exit_code": 0,
+    "stdout": "{\"actor_mismatch_result\": {\"aggregate_revision\": null, \"command_id\": \"cmd-k-1\", \"error_code\": \"ACTOR_MISMATCH\", \"event_ids\": [], \"status\": \"rejected\"}, \"domain_event_types_after_seed\": [\"task.created\", \"task.claimed\", \"task.requeued\"], \"event_count\": 14, \"legitimate_same_id_result\": {\"aggregate_revision\": 0, \"command_id\": \"cmd-k-1\", \"error_code\": null, \"event_ids\": [\"cmd-k-1:received\", \"cmd-k-1:effect\"], \"status\": \"accepted\"}, \"rejection_audit_events\": [{\"aggregate_id\": \"t-1\", \"aggregate_revision\": 0, \"aggregate_type\": \"task\", \"causation_id\": \"stale\", \"correlation_id\": \"corr-stale\", \"id\": \"stale:received\", \"payload\": {\"command_type\": \"task.claim\", \"request_digest\": \"b5804b3aaed373817dd16d59fb436344d4a3acecefe701dceeabd2cb7864bfea\"}, \"project_id\": \"p-1\", \"schema_version\": \"0.1\", \"sequence\": 9, \"type\": \"command.received\"}, {\"aggregate_id\": \"t-1\", \"aggregate_revision\": 0, \"aggregate_type\": \"task\", \"causation_id\": \"stale\", \"correlation_id\": \"corr-stale\", \"id\": \"stale:rejected\", \"payload\": {\"error\": {\"code\": \"REVISION_CONFLICT\", \"context\": {\"command_id\": \"stale\", \"current_revision\": 0, \"expected_revision\": 8, \"target_id\": \"t-1\"}, \"message\": \"Command rejected: REVISION_CONFLICT\", \"retryable\": false, \"severity\": \"medium\"}}, \"project_id\": \"p-1\", \"schema_version\": \"0.1\", \"sequence\": 10, \"type\": \"command.rejected\"}], \"rejection_command\": {\"actor_id\": \"a-1\", \"correlation_id\": \"corr-stale\", \"expected_revision\": 8, \"id\": \"stale\", \"idempotency_key\": \"stale\", \"payload\": {}, \"project_id\": \"p-1\", \"schema_version\": \"0.1\", \"target_id\": \"t-1\", \"type\": \"task.claim\"}, \"rejection_result\": {\"aggregate_revision\": 0, \"command_id\": \"stale\", \"error_code\": \"REVISION_CONFLICT\", \"event_ids\": [\"stale:received\", \"stale:rejected\"], \"status\": \"rejected\"}, \"retry_event_count_delta\": 0, \"security_audit\": [{\"audit_id\": 1, \"authenticated_actor_id\": \"a-2\", \"claimed_actor_id\": \"a-1\", \"claimed_project_id\": \"p-1\", \"command_id\": \"cmd-k-1\", \"error_code\": \"ACTOR_MISMATCH\", \"observed_at\": \"2026-09-10T12:38:05.094102+00:00\", \"request_digest\": \"dae548f3440906eee94d9c0d2eb47f061c15185b4d08bb7d5a716f5d1f52bcb2\"}], \"seed_after_sequence\": 6, \"sequence_list\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], \"task_revisions\": [0, 1, 2]}\n",
+    "stderr": ""
+  },
+  "m0_03_review_snapshot_sha256": {
+    "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "tests/m0/test_event_projection.py": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538",
+    "tests/m0/support.py": "e598d914abb3950def5a8d81069b39538e2982510e64a03db41a53dbff53674e",
+    "artifacts/m0-03-test-report.json": "a410d34c0d3ebb1e4dd6b79dbc5a219ae28ce5453d9d450a49b2268e903be0d8"
+  },
+  "handoff": {
+    "recorded_at": "2026-09-10T14:53:49.509976+00:00",
+    "status": "review_pending",
+    "work_items": {
+      "M0-02": "done",
+      "M0-03": "review"
+    },
+    "goal_and_scope": "Complete the independently requested M0-02 boundary corrections and the approved M0-03 Event sequencing/projection slice; no Runtime, external effects, or M0-04 implementation.",
+    "inputs_and_dependencies": [
+      "M0-01 independently accepted",
+      "M0-02 independently accepted by Boole",
+      "Docs/AETP-设计方案.md §§10.4,13.4,13.10,14.1–14.2,17.2",
+      "Docs/superpowers/plans/2026-09-06-m0-first-slice.md Tasks 2–3"
+    ],
+    "changed_files": {
+      "implementation": [
+        "src/aetp/core/commands.py",
+        "src/aetp/core/projection.py",
+        "src/aetp/storage/sqlite_store.py"
+      ],
+      "tests": [
+        "tests/m0/test_command_boundary.py",
+        "tests/m0/test_event_projection.py",
+        "tests/m0/support.py"
+      ],
+      "evidence_and_progress": [
+        "artifacts/m0-02-test-report.json",
+        "artifacts/m0-03-test-report.json",
+        "Docs/development/backlog.json",
+        "Docs/development/status.json",
+        "Docs/development/evidence/2026-09-10-m0-continuation.json"
+      ],
+      "generated_preparation_reports": [
+        "Docs/development/evidence/preparation-report.json",
+        "Docs/development/evidence/devprep-check.json",
+        "Docs/development/evidence/backlog-check.json",
+        "Docs/development/evidence/knowledge-graph-check.json"
+      ]
+    },
+    "verification_evidence": [
+      "artifacts/m0-02-test-report.json",
+      "artifacts/m0-03-test-report.json",
+      "Docs/development/evidence/2026-09-10-m0-continuation.json#runs"
+    ],
+    "verified_counts": {
+      "m0_02": 18,
+      "m0_03": 35,
+      "m0_full_regression": 64,
+      "preparation": 27
+    },
+    "test_discovery_note": "Root unittest discovery currently runs 64 M0 tests, not the preparation suite (tests/preparation has no package marker). The required separate preparation discovery runs 27 tests. No discovery packaging changes are made in this slice.",
+    "independent_review": {
+      "M0-02": "Accepted scoped re-review by Boole (01a08b23-3083-7090-941b-eb806d9fd4bd)",
+      "M0-03": "Not completed: Raman closed without a conclusion; replacement Kuhn (01a08bbf-76ba-7020-8d06-1284cafc1c98) ended with a transport error. No review result is inferred."
+    },
+    "uncovered_risks": [
+      "M0-03 independent review is incomplete; local verification cannot satisfy the done gate.",
+      "Legacy invalid or poisoned database history is not migrated.",
+      "Only the current M0 Event subset is supported; future types fail closed.",
+      "Cache digest detects accidental corruption, not arbitrary privileged DB tampering.",
+      "Cross-process claim acceptance, Runtime/recovery/result-index reconstruction, Lease, quality gates, and real effects are outside this slice.",
+      "No Conformance passed status or Bootstrap acceptance is claimed."
+    ],
+    "next_step": "After reviewer transport is available, obtain a completed independent M0-03 review on the recorded final source snapshot, address any findings, and only then mark M0-03 done and queue M0-04.",
+    "environment_limits": [
+      "No Git repository: no init, branch, commit or push.",
+      "ClaudeLink tools are unavailable; no inbox, send or bulletin operations are claimed."
+    ],
+    "source_sha256": {
+      "src/aetp/core/commands.py": "5ec06278597fe7cc32fddc8c055ea4048bc092b1c03adbfcc83da8fc924b2340",
+      "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+      "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+      "tests/m0/test_command_boundary.py": "7bf66b0f0e5e1063b205ae456d951474b4e5902733998835b015048beec97424",
+      "tests/m0/test_event_projection.py": "80a8de22652f36a0e9410a86168928eebf827e91c636ded497f83a03aa82e538",
+      "tests/m0/support.py": "e598d914abb3950def5a8d81069b39538e2982510e64a03db41a53dbff53674e"
+    },
+    "m0_03_report_sha256": "a9e1534bbb2b71ce2016487a3c6e76c19d56a17bc4760e7dd33eb03cfdabbfd1",
+    "review_snapshot_note": "Code and test bytes stayed unchanged throughout all review attempts. The historical five-file review snapshot is preserved; only report handoff metadata changed afterward to record the missing independent conclusion.",
+    "final_verification": [
+      {
+        "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+        "command": "python -m unittest discover -s tests/m0 -t .",
+        "started_at": "2026-09-10T14:55:21.299545+00:00",
+        "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+        "finished_at": "2026-09-10T14:55:25.476671+00:00",
+        "exit_code": 0,
+        "tests_run": 64
+      },
+      {
+        "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+        "command": "python tools/devprep.py render",
+        "started_at": "2026-09-10T14:55:25.479226+00:00",
+        "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+        "finished_at": "2026-09-10T14:55:25.712288+00:00",
+        "exit_code": 0
+      },
+      {
+        "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+        "command": "python tools/devprep.py check",
+        "started_at": "2026-09-10T14:55:25.714140+00:00",
+        "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+        "finished_at": "2026-09-10T14:55:25.917061+00:00",
+        "exit_code": 0
+      },
+      {
+        "stage": "Final handoff verification: M0-02 accepted; M0-03 independent review pending",
+        "command": "python -m unittest discover -s tests/preparation -v",
+        "started_at": "2026-09-10T14:55:25.918973+00:00",
+        "environment_note": "Child-process PYTHONPATH points to workspace/src; PYTHONDONTWRITEBYTECODE=1; no global environment changes.",
+        "finished_at": "2026-09-10T14:55:28.283520+00:00",
+        "exit_code": 0,
+        "tests_run": 27
+      }
+    ],
+    "finished_at": "2026-09-10T14:55:28.286966+00:00",
+    "functional_verification_complete": true,
+    "independent_m0_03_acceptance_complete": false
+  },
+  "review_attempts": [
+    {
+      "work_item": "M0-03",
+      "reviewer": "Raman",
+      "agent_id": "01a08b95-8e3b-7392-b2f0-bb92292924cd",
+      "status": "closed_without_conclusion",
+      "dispatched_at": "2026-09-10T13:52:38.242858+00:00",
+      "scope": "M0-03 read-only code, tests and report review; no nested agents or workspace writes",
+      "closed_at": "2026-09-10T14:37:13.574314+00:00",
+      "reason": "No messages or actual review result after four bounded waits, checkpoint requests and close/resume of the same session. Not treated as rejection or acceptance."
+    },
+    {
+      "work_item": "M0-03",
+      "reviewer": "Kuhn",
+      "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+      "status": "errored_without_conclusion",
+      "dispatched_at": "2026-09-10T14:37:13.574347+00:00",
+      "scope": "Replacement sole read-only M0-03 reviewer on unchanged frozen snapshot; necessary because the previous reviewer produced no result. No nested agents or workspace writes.",
+      "recorded_at": "2026-09-10T14:53:49.509976+00:00",
+      "source": "actual multi_agent_v1.wait_agent result and errored notification; close_agent returned the same errored status",
+      "error": "stream disconnected before completion: Transport error: network error: error decoding response body",
+      "verdict": null,
+      "limitations": [
+        "No actual review result, commands or findings were returned; none are inferred.",
+        "This is an independent-review transport failure, not a product test failure."
+      ]
+    }
+  ]
+}

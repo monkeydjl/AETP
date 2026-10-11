@@ -1,0 +1,725 @@
+{
+  "schema_version": "aetp-preparation-regression-review-0.1",
+  "reviewer": {
+    "nickname": "Kant",
+    "tool_session_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+    "same_reviewer_as_earlier_codex_alias": true,
+    "independent_of": "Codex main session (executor/status/source owner)",
+    "claudelink": "unavailable; no communication fabricated"
+  },
+  "started_at": "2026-09-09T19:48:14.3688966+08:00",
+  "finished_at": "2026-09-09T20:35:04.481983+08:00",
+  "work_items": [
+    "PREP-007",
+    "PREP-008"
+  ],
+  "write_set": [
+    "Docs/development/evidence/2026-09-09-preparation-regression-review.json"
+  ],
+  "shared_state_writes": false,
+  "source_write_set": [],
+  "scope": "Supplemental preparation-level review of the one repaired positive fixture and PREP-007/PREP-008 applicability; no tool/protocol/product/M0 changes.",
+  "frozen_inputs": {
+    "handoff": {
+      "path": "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json",
+      "expected_sha256": "cd9835235f2cd6902a1714f4ff1e6cb6c8d12224043db905f7529e41c099bdb2",
+      "observed_sha256": "cd9835235f2cd6902a1714f4ff1e6cb6c8d12224043db905f7529e41c099bdb2",
+      "match": true
+    },
+    "handoff_prefix": {
+      "path": "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+      "bytes": 7606,
+      "sha256": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60"
+    },
+    "red_evidence": [
+      "Docs/development/evidence/2026-09-09-preparation-regression-red.json",
+      "Docs/development/evidence/2026-09-09-ready-fixture-probe-red.json"
+    ],
+    "green_evidence": [
+      "Docs/development/evidence/2026-09-09-preparation-regression-green.json"
+    ],
+    "current_shared_state": {
+      "backlog_sha256": "55620150b9da6424de2974cc7eba0e6feaa376df843985d0cf4116925fdc3df3",
+      "status_sha256": "1353a1cc4fcf2c0a173e853cc1519ade30522fe94d022acc36b433469fa3b599",
+      "backlog_counts": {
+        "done": 6,
+        "review": 2,
+        "todo": 12
+      },
+      "work_items": {
+        "PREP-007": "review",
+        "PREP-008": "review",
+        "M0-01": "todo"
+      }
+    },
+    "source_change": {
+      "at": "2026-09-09T19:31:24.046571+08:00",
+      "path": "tests/preparation/test_devprep_fail_closed.py",
+      "old_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "new_sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+      "before_function": "    def test_ready_accepts_fulfilled_dependencies(self):\r\n        backlog = material(\"backlog.json\")\r\n        items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n        items[\"PREP-003\"][\"status\"] = \"ready\"\r\n        self.assertEqual(items[\"PREP-001\"][\"status\"], \"done\")\r\n        self.assertEqual(devprep.validate_backlog(backlog), [])\r\n",
+      "after_function": "    def test_ready_accepts_fulfilled_dependencies(self):\r\n        backlog = material(\"backlog.json\")\r\n        # Keep plan structure, but isolate this positive case from live statuses.\r\n        # A completed downstream item must not depend on our synthetic ready item.\r\n        for item in backlog[\"work_items\"]:\r\n            item[\"status\"] = \"todo\"\r\n        items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n        items[\"PREP-001\"].update(\r\n            status=\"done\",\r\n            acceptance_evidence=\"synthetic evidence, not product acceptance\",\r\n            reproduction_command=\"synthetic command\",\r\n            independent_reviewer=\"synthetic reviewer\",\r\n        )\r\n        items[\"PREP-003\"][\"status\"] = \"ready\"\r\n        self.assertEqual(devprep.validate_backlog(backlog), [])\r\n",
+      "unified_diff": "--- before/tests/preparation/test_devprep_fail_closed.py\n+++ after/tests/preparation/test_devprep_fail_closed.py\n@@ -111,9 +111,18 @@\n \r\n     def test_ready_accepts_fulfilled_dependencies(self):\r\n         backlog = material(\"backlog.json\")\r\n+        # Keep plan structure, but isolate this positive case from live statuses.\r\n+        # A completed downstream item must not depend on our synthetic ready item.\r\n+        for item in backlog[\"work_items\"]:\r\n+            item[\"status\"] = \"todo\"\r\n         items = {item[\"id\"]: item for item in backlog[\"work_items\"]}\r\n+        items[\"PREP-001\"].update(\r\n+            status=\"done\",\r\n+            acceptance_evidence=\"synthetic evidence, not product acceptance\",\r\n+            reproduction_command=\"synthetic command\",\r\n+            independent_reviewer=\"synthetic reviewer\",\r\n+        )\r\n         items[\"PREP-003\"][\"status\"] = \"ready\"\r\n-        self.assertEqual(items[\"PREP-001\"][\"status\"], \"done\")\r\n         self.assertEqual(devprep.validate_backlog(backlog), [])\r\n \r\n     def test_malformed_materials_fail_check_without_creating_success_reports(self):\r\n",
+      "scope": "Only positive preparation-test fixture setup; validator, negative tests and contracts unchanged; original CRLF line endings preserved."
+    },
+    "scope_boundary": {
+      "changed_source": [
+        "tests/preparation/test_devprep_fail_closed.py"
+      ],
+      "tool_unchanged": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+      "other_test_unchanged": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+      "negative_dependency_test": "unchanged; 3 item states x 5 unfinished dependency states",
+      "source_change_requires_new_independent_pass": true
+    }
+  },
+  "source_sha256": {
+    "immutable_34": {
+      "README.md": {
+        "expected_sha256": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+        "observed_sha256": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+        "match": true
+      },
+      "AGENTS.md": {
+        "expected_sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+        "observed_sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+        "match": true
+      },
+      ".gitignore": {
+        "expected_sha256": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+        "observed_sha256": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+        "match": true
+      },
+      ".editorconfig": {
+        "expected_sha256": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+        "observed_sha256": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+        "match": true
+      },
+      "Docs/development/README.md": {
+        "expected_sha256": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+        "observed_sha256": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+        "match": true
+      },
+      "Docs/AETP-设计方案.md": {
+        "expected_sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "observed_sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+        "match": true
+      },
+      "Docs/development/knowledge-map.md": {
+        "expected_sha256": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+        "observed_sha256": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+        "match": true
+      },
+      "Docs/development/knowledge-graph.json": {
+        "expected_sha256": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+        "observed_sha256": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+        "match": true
+      },
+      "Docs/development/roadmap.md": {
+        "expected_sha256": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+        "observed_sha256": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+        "match": true
+      },
+      "Docs/superpowers/plans/2026-09-06-m0-first-slice.md": {
+        "expected_sha256": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+        "observed_sha256": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+        "match": true
+      },
+      "skills/aetp-protocol-navigation/SKILL.md": {
+        "expected_sha256": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+        "observed_sha256": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+        "match": true
+      },
+      "skills/aetp-execution-contracts/SKILL.md": {
+        "expected_sha256": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+        "observed_sha256": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+        "match": true
+      },
+      "skills/aetp-evidence-handoff/SKILL.md": {
+        "expected_sha256": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+        "observed_sha256": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+        "match": true
+      },
+      "tools/devprep.py": {
+        "expected_sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+        "observed_sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+        "match": true
+      },
+      "tests/preparation/test_devprep.py": {
+        "expected_sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+        "observed_sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py": {
+        "expected_sha256": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+        "observed_sha256": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-preparation-corrections-red.json": {
+        "expected_sha256": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+        "observed_sha256": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-preparation-corrections-green.json": {
+        "expected_sha256": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8",
+        "observed_sha256": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-07-prep-001-006-review.json": {
+        "expected_sha256": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec",
+        "observed_sha256": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec",
+        "match": true
+      },
+      "Docs/development/evidence/skill-protocol-navigation.md": {
+        "expected_sha256": "6e1f8b00a15a3721efb2a7436b7df242ff3a87b7a921439df752a47336a232bc",
+        "observed_sha256": "6e1f8b00a15a3721efb2a7436b7df242ff3a87b7a921439df752a47336a232bc",
+        "match": true
+      },
+      "Docs/development/evidence/preparation-log.md": {
+        "expected_sha256": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141",
+        "observed_sha256": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-prep-003-004-review.json": {
+        "expected_sha256": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+        "observed_sha256": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-prep-corrections-review.json": {
+        "expected_sha256": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+        "observed_sha256": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+        "match": true
+      },
+      "Docs/development/evidence/skill-execution-contracts.md": {
+        "expected_sha256": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc",
+        "observed_sha256": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc",
+        "match": true
+      },
+      "Docs/development/evidence/skill-evidence-handoff.md": {
+        "expected_sha256": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d",
+        "observed_sha256": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-prep-006-review.json": {
+        "expected_sha256": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+        "observed_sha256": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-prep-007-review.json": {
+        "expected_sha256": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+        "observed_sha256": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-prep-acceptance-index.json": {
+        "expected_sha256": "12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba",
+        "observed_sha256": "12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-prep-008-review.json": {
+        "expected_sha256": "e987af3ae6b1fb361a33771edbb86fc509eba58ddbe8bcc8945c9212592136e6",
+        "observed_sha256": "e987af3ae6b1fb361a33771edbb86fc509eba58ddbe8bcc8945c9212592136e6",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-09-preparation-regression-red.json": {
+        "expected_sha256": "26bae4d7dd4ecd11acbd819066e31526956c1c170212ce43d2835102e1b9fabd",
+        "observed_sha256": "26bae4d7dd4ecd11acbd819066e31526956c1c170212ce43d2835102e1b9fabd",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-08-preparation-final-validation.json": {
+        "expected_sha256": "26bae4d7dd4ecd11acbd819066e31526956c1c170212ce43d2835102e1b9fabd",
+        "observed_sha256": "26bae4d7dd4ecd11acbd819066e31526956c1c170212ce43d2835102e1b9fabd",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-09-ready-fixture-probe-red.json": {
+        "expected_sha256": "e8d9c8f34c5ad99c2776792e8f3252b69e236baa6dc56b21f59f25eab26fc37f",
+        "observed_sha256": "e8d9c8f34c5ad99c2776792e8f3252b69e236baa6dc56b21f59f25eab26fc37f",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-09-ready-fixture-probe.py": {
+        "expected_sha256": "b206c5381ab48f879e66992fa4594b4d076ef3b4866b16fbef68cadabb501d9e",
+        "observed_sha256": "b206c5381ab48f879e66992fa4594b4d076ef3b4866b16fbef68cadabb501d9e",
+        "match": true
+      },
+      "Docs/development/evidence/2026-09-09-preparation-regression-green.json": {
+        "expected_sha256": "f88d6c37eda33ef7c46393f8d918542610e83b5462cd83bed9225fa8593b360e",
+        "observed_sha256": "f88d6c37eda33ef7c46393f8d918542610e83b5462cd83bed9225fa8593b360e",
+        "match": true
+      }
+    },
+    "changed_source": {
+      "path": "tests/preparation/test_devprep_fail_closed.py",
+      "old_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "new_expected_sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+      "current_shared_sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+      "private_old_reproduction_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "private_new_reproduction_sha256": "c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a",
+      "crlf_preserved": true,
+      "old_42_hash_audit_applies": false,
+      "applicability_statement": "The earlier PREP-007/PREP-008 42-hash audit remains historical evidence for its old source snapshot; it does not cover this new test hash. This report is the supplemental coverage for the new hash."
+    },
+    "unchanged_tool": {
+      "path": "tools/devprep.py",
+      "sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+      "expected_sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+      "match": true
+    },
+    "unchanged_other_test": {
+      "path": "tests/preparation/test_devprep.py",
+      "sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+      "expected_sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+      "match": true
+    },
+    "stable_backlog_contract": {
+      "expected_sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+      "observed_sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+      "match": true,
+      "fields": [
+        "id",
+        "milestone",
+        "title",
+        "depends_on",
+        "files",
+        "acceptance",
+        "conformance_tests"
+      ]
+    }
+  },
+  "scenario_results": [
+    {
+      "id": "completed-PREP-positive-fixture-old-source",
+      "source": "old reconstructed source",
+      "result": "RED as expected: 1/3 failed because real snapshot retained PREP-008 done while synthetic PREP-003 was only ready.",
+      "validator_error": "PREP-008: done requires dependency PREP-003 to be done",
+      "importance": "Confirms validator rejection is not weakened and the reported historical defect is reproducible."
+    },
+    {
+      "id": "completed-PREP-positive-fixture-new-source",
+      "source": "new c320c3... source",
+      "result": "GREEN: 3/3 probe cases passed.",
+      "importance": "Confirms fixture isolates all statuses, makes PREP-001 synthetic done, and accepts only the intended PREP-003 ready case."
+    },
+    {
+      "id": "negative-dependency-guard",
+      "source": "unchanged tools/devprep.py and test_ready_requires_done_dependencies",
+      "result": "Passed in both RED and GREEN probe runs; completed downstream with incomplete PREP-003 is still rejected.",
+      "references": [
+        "tools/devprep.py:347-401",
+        "tests/preparation/test_devprep_fail_closed.py:96-110"
+      ]
+    },
+    {
+      "id": "current-and-future-preparation-suite",
+      "result": "27/27 passed with new source in current private snapshot and synthetic PREP-complete/M0-01-ready snapshot.",
+      "boundary": "Preparation tests only; not product tests."
+    }
+  ],
+  "criteria": {
+    "PREP-007": [
+      {
+        "id": "PREP-007-A1",
+        "criterion": "check 能校验 JSON、关系、依赖和状态",
+        "assessment": "preparation-level pass",
+        "conclusion": "PASS. Validator and check path are unchanged; old/new fixture replay proves the fix does not bypass dependency validation. The unchanged negative matrix remains active, including ready/in_progress/done items against unfinished dependency states.",
+        "references": [
+          "tools/devprep.py:80-89",
+          "tools/devprep.py:347-401",
+          "tools/devprep.py:470-583",
+          "tools/devprep.py:701-766",
+          "tests/preparation/test_devprep_fail_closed.py:96-126"
+        ],
+        "evidence": [
+          "old-source-regression-probe-RED",
+          "new-source-regression-probe-GREEN",
+          "preparation-suite-current-snapshot",
+          "preparation-suite-private-future-state"
+        ]
+      },
+      {
+        "id": "PREP-007-A2",
+        "criterion": "render 生成可读进度摘要",
+        "assessment": "preparation-level pass",
+        "conclusion": "PASS by unchanged-source applicability plus frozen integrated validation: tools/devprep.py is hash-identical to the independently reviewed version, and the current handoff records render exit 0 with real state counts. The fixture-only patch cannot alter render implementation.",
+        "references": [
+          "tools/devprep.py:665-698",
+          "Docs/development/evidence/2026-09-08-prep-007-review.json",
+          "Docs/development/evidence/2026-09-09-preparation-regression-green.json#/commands"
+        ],
+        "evidence": [
+          "immutable-and-contract-hash-check",
+          "frozen integrated validation; not re-run in shared root"
+        ]
+      },
+      {
+        "id": "PREP-007-A3",
+        "criterion": "environment 只报告可验证工具，不读取或打印密钥",
+        "assessment": "preparation-level pass",
+        "conclusion": "PASS by unchanged-source applicability and retained fail-closed tests. collect_environment only reports bounded version/platform/workspace facts; the tested unrecognized-output and version-failure paths do not echo raw output.",
+        "references": [
+          "tools/devprep.py:586-662",
+          "Docs/development/evidence/2026-09-08-prep-007-review.json#/conclusions/PREP-007",
+          "tests/preparation/test_devprep_fail_closed.py:test_environment_does_not_echo_unrecognized_tool_output"
+        ],
+        "evidence": [
+          "immutable-and-contract-hash-check",
+          "preparation-suite-current-snapshot"
+        ]
+      }
+    ],
+    "PREP-008": [
+      {
+        "id": "PREP-008-A1",
+        "criterion": "不同 Agent 复核准备材料",
+        "assessment": "preparation-level pass",
+        "conclusion": "PASS. The main session owns source/status handoff execution; Kant independently reviews this supplemental source change and integration. Kant is the same identity as earlier Kant/Codex reports, not a fabricated second reviewer. The acceptance index remains a locator/summary, not new independent evidence.",
+        "references": [
+          "AGENTS.md:46-52",
+          "skills/aetp-evidence-handoff/SKILL.md:30-55",
+          "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json",
+          "Docs/development/evidence/2026-09-08-prep-008-review.json"
+        ],
+        "evidence": [
+          "immutable-and-contract-hash-check",
+          "old/new regression replay",
+          "current/future preparation suites"
+        ]
+      },
+      {
+        "id": "PREP-008-A2",
+        "criterion": "所有命令有退出码和时间",
+        "assessment": "preparation-level pass",
+        "conclusion": "PASS under the literal handoff-card requirement: all commands have an actual exit code and at least one actual ISO-8601 time endpoint; the latest integrated validation and this review commands have complete start/end pairs. The historical corrections record honestly has 14 complete pairs and 2 one-endpoint records with missing-endpoint reasons; this is not mislabeled as 16 complete durations.",
+        "references": [
+          "skills/aetp-evidence-handoff/SKILL.md:37-48",
+          "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/commands",
+          "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json#/runs",
+          "Docs/development/evidence/2026-09-09-preparation-regression-green.json#/commands"
+        ],
+        "evidence": [
+          "old/new regression command records in this report",
+          "immutable-and-contract-hash-check"
+        ],
+        "caveat": "If a future policy changes the wording to require complete start/end for every historical command, the two partial records need recollection; no such requirement is present in the frozen criterion."
+      },
+      {
+        "id": "PREP-008-A3",
+        "criterion": "明确产品实现与 Bootstrap Acceptance 尚未完成",
+        "assessment": "preparation-level pass",
+        "conclusion": "PASS. Current frozen state is 6 PREP done/2 review and 12 product items todo; product completion remains 0, Bootstrap not_started, Conformance registered 28/passed 0. The 27 preparation tests and 10 material probes are not product or Bootstrap Acceptance evidence.",
+        "references": [
+          "Docs/AETP-设计方案.md:3382-3391 (§15.5),3471-3475 (§17.2),3674-3682 (§18.3)",
+          "skills/aetp-evidence-handoff/SKILL.md:31-36,51",
+          "Docs/development/status.json",
+          "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json#/current_state"
+        ],
+        "evidence": [
+          "current shared state hash check",
+          "preparation-suite-current-snapshot",
+          "preparation-suite-private-future-state"
+        ]
+      }
+    ]
+  },
+  "conclusions": {
+    "PREP-007": {
+      "assessment": "preparation-level pass",
+      "acceptance_all_pass": true,
+      "changes_required": [],
+      "new_source_hash_covered": true
+    },
+    "PREP-008": {
+      "assessment": "preparation-level pass",
+      "acceptance_all_pass": true,
+      "changes_required": [],
+      "historical_partial_timestamps_retained": true
+    }
+  },
+  "findings": [],
+  "nonblocking_observations": [
+    "The old-source RED is a real fixture defect, not a validator/product defect; it is preserved and not converted into a pass.",
+    "One initial future-state suite failure was caused by this reviewer manually setting the private M0 milestone label to in_progress; devprep correctly derived todo for ready-only M0. The private status was then derived from the tool and the final future-state suite passed 27/27. This did not touch shared files.",
+    "The restore-new-source command had exit 0 but no wrapper timestamps; both endpoints are intentionally null in its record. No missing endpoint was invented."
+  ],
+  "historical_failures_preserved": [
+    {
+      "path": "Docs/development/evidence/2026-09-09-preparation-regression-red.json",
+      "sha256": "26bae4d7dd4ecd11acbd819066e31526956c1c170212ce43d2835102e1b9fabd",
+      "meaning": "actual final-validation failure retained"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-09-ready-fixture-probe-red.json",
+      "sha256": "e8d9c8f34c5ad99c2776792e8f3252b69e236baa6dc56b21f59f25eab26fc37f",
+      "meaning": "actual old-fixture RED retained"
+    },
+    {
+      "source": "closeout.service_failures",
+      "meaning": "429/exceeded-retry-limit events retained; no acceptance inferred from service failure",
+      "request_ids": [
+        "b322f508-cf31-45ab-b93f-d819fa4239bf",
+        "4d69eb03-681d-4ed6-bf30-49dc0be1df85"
+      ]
+    }
+  ],
+  "permitted_post_pass_finalization": {
+    "assessment": "accepted conditionally",
+    "condition": "Only after this fresh supplemental preparation-level pass, matching new source hash, and a fresh complete final validation after real state transition.",
+    "allowed_sequence": [
+      "PREP-007 review -> done with this supplemental evidence",
+      "PREP-008 review -> done only after PREP-007 done",
+      "M0-01 todo -> ready only after PREP-008 done"
+    ],
+    "required_operations": "Derive all six count keys, milestone counts and evidence paths; active_work_items=[]; phase preparation/product0/bootstrap not_started/28registered0passed.",
+    "required_final_validation": [
+      "python tools/devprep.py render",
+      "python tools/devprep.py check",
+      "python -m unittest discover -s tests/preparation -v",
+      "python Docs/development/evidence/2026-09-09-ready-fixture-probe.py",
+      "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+    ],
+    "preservation": "Keep frozen handoff body/prefix, old reports/index, RED/GREEN evidence and all reviewed source hashes unchanged; append only actual finalization records. Any source/contract change reopens review.",
+    "boundary": "This is operational preparation closeout only; it does not authorize implementation, product acceptance, Bootstrap verification, or Conformance passes."
+  },
+  "commands": [
+    {
+      "id": "private-copy-setup",
+      "argv": [
+        "PowerShell",
+        "-Command",
+        "New-Item/Copy-Item bounded private material copy"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:52:47.0306989+08:00",
+      "finished_at": "2026-09-09T19:52:47.2658587+08:00",
+      "exit_code": 0,
+      "stdout": "PRIVATE D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909\\nFILES 68\\n",
+      "stderr": ""
+    },
+    {
+      "id": "reconstruct-old-source",
+      "argv": [
+        "python",
+        "-"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T19:53:15.2023007+08:00",
+      "finished_at": "2026-09-09T19:53:15.4240937+08:00",
+      "exit_code": 0,
+      "stdout": "{\"old_expected\": \"87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215\", \"old_actual\": \"87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215\", \"new_expected\": \"c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a\", \"crlf\": true, \"replacement\": \"after->before exact\"}",
+      "stderr": ""
+    },
+    {
+      "id": "old-source-regression-probe-RED",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-09-ready-fixture-probe.py"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T19:59:16.282611+08:00",
+      "finished_at": "2026-09-09T19:59:16.608629+08:00",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "test_completed_downstream_still_rejects_incomplete_dependency ... ok\\ntest_positive_fixture_after_preparation_closeout ... FAIL\\ntest_positive_fixture_before_preparation_closeout ... ok\\n\\nAssertionError: Lists differ: ['PREP-008: done requires dependency PREP-003 to be done'] != []\\nRan 3 tests in 0.033s\\nFAILED (failures=1)\\n",
+      "observed_result": "1/3 probe cases failed; completed downstream rejection case passed; failure is the stale positive fixture after closeout."
+    },
+    {
+      "id": "restore-new-source",
+      "argv": [
+        "python",
+        "-"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": null,
+      "finished_at": null,
+      "exit_code": 0,
+      "stdout": "{\"new_expected\": \"c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a\", \"new_actual\": \"c320c3e63878696684ba2bac27e4f0d095c2993d03de76a763aba4681d98053a\", \"crlf\": true, \"replacement\": \"before->after exact\"}",
+      "stderr": "",
+      "time_capture": "This exact restoration command emitted no timestamp wrapper; endpoint intentionally left null rather than fabricated. The subsequent GREEN command has complete endpoints."
+    },
+    {
+      "id": "new-source-regression-probe-GREEN",
+      "argv": [
+        "python",
+        "Docs/development/evidence/2026-09-09-ready-fixture-probe.py"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:00:11.068680+08:00",
+      "finished_at": "2026-09-09T20:00:11.420590+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_completed_downstream_still_rejects_incomplete_dependency ... ok\\ntest_positive_fixture_after_preparation_closeout ... ok\\ntest_positive_fixture_before_preparation_closeout ... ok\\n\\n----------------------------------------------------------------------\\nRan 3 tests in 0.032s\\n\\nOK\\n",
+      "observed_result": "3/3 probe cases passed, including completed-PREP synthetic snapshot and dependency rejection."
+    },
+    {
+      "id": "preparation-suite-current-snapshot",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:00:56.108653+08:00",
+      "finished_at": "2026-09-09T20:00:58.360923+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material ... ok\\ntest_check_rejects_missing_skill_marker_without_success_reports ... ok\\ntest_check_reports_markdown_link_validation ... ok\\ntest_check_writes_separate_preparation_evidence_reports ... ok\\ntest_environment_report_contains_versions_only_and_no_secret_names ... ok\\ntest_graph_and_backlog_invariants_are_checked ... ok\\ntest_markdown_link_validator_accepts_existing_relative_target ... ok\\ntest_markdown_link_validator_rejects_missing_target ... ok\\ntest_markdown_link_validator_skips_non_file_links ... ok\\ntest_material_validation_includes_broken_entry_links ... ok\\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim ... ok\\ntest_skill_validation_accepts_complete_execution_contract_markers ... ok\\ntest_skill_validation_rejects_missing_execution_contract_marker ... ok\\ntest_backlog_rejects_invalid_work_item_ids ... ok\\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values ... ok\\ntest_environment_does_not_echo_unrecognized_tool_output ... ok\\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them ... ok\\ntest_malformed_materials_fail_check_without_creating_success_reports ... ok\\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets ... ok\\ntest_markdown_rejects_missing_titled_and_reference_targets ... ok\\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax ... ok\\ntest_ready_accepts_fulfilled_dependencies ... ok\\ntest_ready_requires_done_dependencies ... ok\\ntest_structural_validation_handles_non_objects_and_unhashable_fields ... ok\\ntest_version_probe_failure_paths_never_report_unverified_output ... ok\\ntest_version_probe_rejects_unknown_empty_or_multiline_output ... ok\\ntest_version_probe_reports_only_recognized_normalized_versions ... ok\\n\\n----------------------------------------------------------------------\\nRan 27 tests in 1.898s\\n\\nOK\\n",
+      "observed_result": "27/27 preparation tests passed with the new fixture source."
+    },
+    {
+      "id": "construct-private-future-state",
+      "argv": [
+        "python",
+        ".audit_future_state.py"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:05:34.3005932+08:00",
+      "finished_at": "2026-09-09T20:05:34.5513905+08:00",
+      "exit_code": 0,
+      "stdout": "{\"backlog_validation\": [], \"counts\": {\"done\": 8, \"ready\": 1, \"todo\": 11, \"blocked\": 0, \"review\": 0, \"in_progress\": 0}, \"future_state\": \"PREP-001..008 done; M0-01 ready\"}",
+      "stderr": ""
+    },
+    {
+      "id": "future-suite-initial-audit-harness-mismatch",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:05:59.776036+08:00",
+      "finished_at": "2026-09-09T20:06:01.871181+08:00",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "ERROR status.milestones does not match backlog-derived counts\\n5 tests failed because this private synthetic status was manually assigned M0 status in_progress while devprep derives todo for a milestone containing ready but no in_progress/review item.",
+      "classification": "reviewer private harness setup error; not a project finding; no shared file affected."
+    },
+    {
+      "id": "derive-private-future-status",
+      "argv": [
+        "python",
+        ".audit_future_status_fix.py"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:07:27.9094970+08:00",
+      "finished_at": "2026-09-09T20:07:28.1501063+08:00",
+      "exit_code": 0,
+      "stdout": "{\"status_errors\": [], \"future_milestones\": {\"PREP\": \"done\", \"M0\": \"todo\"}, \"counts\": {\"done\": 8, \"ready\": 1, \"todo\": 11, \"blocked\": 0, \"review\": 0, \"in_progress\": 0}}",
+      "stderr": ""
+    },
+    {
+      "id": "preparation-suite-private-future-state",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:07:52.193659+08:00",
+      "finished_at": "2026-09-09T20:07:54.404652+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material ... ok\\ntest_check_rejects_missing_skill_marker_without_success_reports ... ok\\ntest_check_reports_markdown_link_validation ... ok\\ntest_check_writes_separate_preparation_evidence_reports ... ok\\ntest_environment_report_contains_versions_only_and_no_secret_names ... ok\\ntest_graph_and_backlog_invariants_are_checked ... ok\\ntest_markdown_link_validator_accepts_existing_relative_target ... ok\\ntest_markdown_link_validator_rejects_missing_target ... ok\\ntest_markdown_link_validator_skips_non_file_links ... ok\\ntest_material_validation_includes_broken_entry_links ... ok\\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim ... ok\\ntest_skill_validation_accepts_complete_execution_contract_markers ... ok\\ntest_skill_validation_rejects_missing_execution_contract_marker ... ok\\ntest_backlog_rejects_invalid_work_item_ids ... ok\\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values ... ok\\ntest_environment_does_not_echo_unrecognized_tool_output ... ok\\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them ... ok\\ntest_malformed_materials_fail_check_without_creating_success_reports ... ok\\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets ... ok\\ntest_markdown_rejects_missing_titled_and_reference_targets ... ok\\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax ... ok\\ntest_ready_accepts_fulfilled_dependencies ... ok\\ntest_ready_requires_done_dependencies ... ok\\ntest_structural_validation_handles_non_objects_and_unhashable_fields ... ok\\ntest_version_probe_failure_paths_never_report_unverified_output ... ok\\ntest_version_probe_rejects_unknown_empty_or_multiline_output ... ok\\ntest_version_probe_reports_only_recognized_normalized_versions ... ok\\n\\n----------------------------------------------------------------------\\nRan 27 tests in 1.898s\\n\\nOK\\n",
+      "observed_result": "27/27 preparation tests passed for synthetic PREP-complete/M0-01-ready state."
+    },
+    {
+      "id": "immutable-and-contract-hash-check",
+      "argv": [
+        "python",
+        "-"
+      ],
+      "cwd": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+      "started_at": "2026-09-09T20:11:17.9974372+08:00",
+      "finished_at": "2026-09-09T20:11:18.3396386+08:00",
+      "exit_code": 0,
+      "stdout": "immutable_count 34; MATCH 34/34; stable_contract 8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+      "stderr": ""
+    },
+    {
+      "id": "private-copy-cleanup",
+      "argv": [
+        "PowerShell",
+        "-Command",
+        "Resolve-Path/Get-Item/Get-ChildItem boundary and reparse checks; Remove-Item -LiteralPath -Recurse -Force"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T20:14:26.6077994+08:00",
+      "finished_at": "2026-09-09T20:14:26.7608692+08:00",
+      "exit_code": 0,
+      "stdout": "{\"resolved\": \"D:\\\\Github\\\\AETP\\\\.prep-009-regression-review-kant-20260909\", \"items_checked\": 95, \"reparse_points\": 0, \"path_exists_after\": false}",
+      "stderr": ""
+    }
+  ],
+  "tool_availability": {
+    "ClaudeLink": "unavailable; not invoked or fabricated",
+    "network": "not used",
+    "dependency_install": "not used"
+  },
+  "private_isolation": {
+    "path": "D:\\Github\\AETP\\.prep-009-regression-review-kant-20260909",
+    "copied_roots": [
+      "Docs",
+      "skills",
+      "tools",
+      "tests"
+    ],
+    "copied_root_files": [
+      "README.md",
+      "AGENTS.md",
+      ".gitignore",
+      ".editorconfig"
+    ],
+    "excluded": [
+      ".claude",
+      ".codex",
+      ".env*",
+      "user configuration",
+      "Git",
+      "credentials",
+      "__pycache__",
+      "reparse points"
+    ],
+    "cleanup": {
+      "resolved_inside_workspace": true,
+      "reparse_points_checked": 0,
+      "items_checked": 95,
+      "removed_with": "single native PowerShell Remove-Item -LiteralPath -Recurse -Force",
+      "exists_after": false
+    }
+  },
+  "limitations": [
+    "No Runtime/M0/product implementation was executed or changed.",
+    "product_tests=0; preparation tests/material probes are not product tests.",
+    "Bootstrap Acceptance was not executed and remains unverified.",
+    "The changed fixture source is tested directly; render/environment criteria rely on unchanged tool-source hash plus prior independent and frozen integrated evidence, not a shared-root rerun.",
+    "The 2 historical one-endpoint command records are accepted only under the literal current criterion and retain their missing-endpoint explanations.",
+    "No claim of atomic backlog leasing, external tool provenance, or full 28-test Conformance was made."
+  ],
+  "product_tests": {
+    "executed": 0,
+    "accepted": 0
+  },
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "bootstrap_status": "not_started",
+  "conformance": {
+    "registered_tests": 28,
+    "passed_tests": 0,
+    "status": "registered"
+  },
+  "handoff": {
+    "path": "Docs/development/evidence/2026-09-09-preparation-regression-handoff.json",
+    "sha256": "cd9835235f2cd6902a1714f4ff1e6cb6c8d12224043db905f7529e41c099bdb2",
+    "frozen": true,
+    "write_set_conflict": false,
+    "next_actor": "main session may perform only the conditional post-pass operational finalization and required final validation; no source/status writes by this reviewer."
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "PREP-007 static Skill marker regression; not semantic or product acceptance",
+  "command": "python -m unittest discover -s tests/preparation -p test_devprep.py -k missing_execution_contract_marker -v",
+  "started_at": "2026-09-07T00:27:38+08:00",
+  "finished_at": "2026-09-07T00:27:38+08:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "test_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... FAIL\n\n======================================================================\nFAIL: test_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\Github\\AETP\\tests\\preparation\\test_devprep.py\", line 82, in test_skill_validation_rejects_missing_execution_contract_marker\n    self.assertTrue(any(\"Projection\" in error for error in errors), errors)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: False is not true : []\n\n----------------------------------------------------------------------\nRan 1 test in 0.015s\n\nFAILED (failures=1)\n",
+  "product_acceptance": false,
+  "bootstrap_verified": false
+}

@@ -1,0 +1,922 @@
+{
+  "work_item": "M1-02",
+  "candidate_revision": "v2",
+  "checked_at": "2026-09-12T04:03:59.187782+08:00",
+  "executor": "Codex main agent consuming independent acceptance; not another independent reviewer",
+  "decision": "record_independent_limited_acceptance",
+  "review": {
+    "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2.json",
+    "sha256": "3ccdc8a80190b857545fd67303e0b1f28ab1883afd4461c74142c9b1c35f89a8"
+  },
+  "consumer": {
+    "path": "Docs/development/evidence/2026-09-12-m1-02-accept-v2.py",
+    "sha256": "a8e5d3b93c0da994861845f2a2186dc9c76a8b722214c740860735bb04f71259"
+  },
+  "accepted_criteria": [
+    {
+      "criterion": "旧 epoch 不能推进任务",
+      "status": "accepted_within_declared_scope",
+      "evidence_run_labels": [
+        "m1-suite",
+        "original-green-v2",
+        "demo-check-corrected"
+      ],
+      "assessment": "独立套件覆盖原子 owner/Binding/Lease 认领、单调 epoch、两真实进程争同 revision、撤权资源门和旧报告/续租拒绝。原独立方法确认同键旧回执不恢复权限且旧 Handler 不能绕过执行上下文。示例第 35–36 条事件仅归档 STALE_EXECUTION，Task 保持 successor、epoch 2、revision 6。",
+      "limit": "只接受已声明固定 Runtime 的提交与资源边界，不将 Task 执行归属解释为其他 Agent 的审查权或指挥权。"
+    },
+    {
+      "criterion": "工作副本隔离且越界访问被阻止",
+      "status": "accepted_within_declared_scope",
+      "evidence_run_labels": [
+        "m1-suite",
+        "original-r1-red-v1",
+        "original-green-v2",
+        "diff-v1",
+        "demo-check-corrected"
+      ],
+      "assessment": "独立运行覆盖不同 Binding 副本、拒绝路径/ADS/跨 Workspace 参数、junction 与祖先替换、现存硬链接、早期链接和发布失败。未修改的 R1 反例在 v1 失败、v2 成功；delete-pending 在源码中的生命周期覆盖整个写入和刷盘。示例三个完整单链接对象的身份、全部内容与摘要均独立核验，恢复副本与原 Binding 分离。",
+      "closed_findings": [
+        "M1-02-REVIEW-R1"
+      ],
+      "limit": "working_copy 加固定 Broker 的受控文档访问；不是允许任意 Agent 代码执行的 OS/容器安全隔离。"
+    },
+    {
+      "criterion": "外部 UNKNOWN 进入对账而不盲重试",
+      "status": "accepted_within_declared_scope",
+      "evidence_run_labels": [
+        "m1-suite",
+        "original-green-v2",
+        "demo-check-corrected"
+      ],
+      "assessment": "独立原方法在真实子进程效果前/后终止时验证原 Action 的 UNKNOWN/已确认结果、dispatch_count=1、Checkpoint 保留、缺失 Session 不重建、重复恢复不重写以及 peer epoch 2 恢复。独立执行的当前 M1 套件包括发布前真实进程终止和刷盘失败的 UNKNOWN 场景。示例持久事实为一次 invoked、一次 outcome_unknown、一次 reconciled；新 key 重试被拒绝。纯 Replay 只读 Command/Event，不查询或重派发工具。",
+      "qualification": "新增 reviewer PublicationProbes 的发布前方法只在 v1 执行过 RED；当前 v2 的发布前进程通过证据来自独立执行的现有 ProcessBoundaryTests，二者不混计。"
+    },
+    {
+      "criterion": "需 Approval 的操作拒绝",
+      "status": "accepted_within_declared_scope",
+      "evidence_run_labels": [
+        "m1-suite",
+        "original-green-v2"
+      ],
+      "assessment": "固定版本 Policy 拒绝 Shell、network、credential、publication 与显式审批/高风险请求；客户端 low-risk 标签不授予权限。未知工具或缺少 Enforcement 拒绝。两组独立实际运行覆盖这些拒绝和无新 Action 效果。",
+      "limit": "没有实现或验收通用 Approval 引擎。"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "M1-02-REVIEW-R1",
+      "original_severity": "Important",
+      "status": "closed_in_v2",
+      "scope": "固定 v2 的 Windows 同一登录会话、固定 data-only 文档 Provider 写入边界。",
+      "title": "已打开文档对象的并发单链接约束未保持到实际写入。",
+      "v1_decision_unchanged": "changes_requested",
+      "locations": [
+        {
+          "path": "src/aetp/workspace/windows_files.py",
+          "line": 126
+        },
+        {
+          "path": "src/aetp/workspace/windows_files.py",
+          "line": 133
+        },
+        {
+          "path": "src/aetp/workspace/windows_files.py",
+          "line": 142
+        },
+        {
+          "path": "src/aetp/workspace/windows_files.py",
+          "line": 152
+        },
+        {
+          "path": "src/aetp/workspace/documents.py",
+          "line": 44
+        },
+        {
+          "path": "src/aetp/workspace/documents.py",
+          "line": 47
+        }
+      ],
+      "independent_exact_counterexample": {
+        "original_probe": {
+          "path": "Docs/development/evidence/2026-09-12-m1-02-review-probes.py",
+          "sha256": "b40527ebc0def7abedebd9c0d805623f5f7360b4dd21e00a23bba2bc82a898d8"
+        },
+        "method": "test_open_file_handle_blocks_hardlink_insertion_before_content_write",
+        "v1": {
+          "run_label": "original-r1-red-v1",
+          "exit_code": 1,
+          "blocked": false,
+          "action_status": "completed",
+          "outside_exists": true
+        },
+        "v2": {
+          "run_label": "original-green-v2",
+          "exit_code": 0,
+          "blocked": true,
+          "winerror": 5,
+          "action_status": "completed",
+          "outside_exists": false
+        },
+        "original_source_modified": false,
+        "fixture_location_override_only": true
+      },
+      "source_assessment": "新对象在任何内容写入前进入 delete-pending；创建与该转换之间出现的额外名字会使剩余 links 非零而被拒绝。代码在 write、flush、fsync 全程保持该状态，完成后仅清除标记保留对象，此后没有内容写入。open/stream 异常会关闭句柄；无法确认结果的 Action 仍走 UNKNOWN。现有共享访问标志不再被当作阻止链接的依据。",
+      "independently_run_v2_supporting_tests": [
+        "test_failed_flush_does_not_publish_a_partial_document_or_allow_retry (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_failed_flush_does_not_publish_a_partial_document_or_allow_retry) ... ok",
+        "test_hardlinked_final_object_cannot_be_written_or_treated_as_confirmed_output (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_hardlinked_final_object_cannot_be_written_or_treated_as_confirmed_output) ... ok",
+        "test_link_inserted_during_creation_is_rejected_before_any_content_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_link_inserted_during_creation_is_rejected_before_any_content_write) ... ok",
+        "test_unavailable_unpublished_file_enforcement_prevents_content_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_unavailable_unpublished_file_enforcement_prevents_content_write) ... ok",
+        "test_unpublished_object_blocks_new_hardlink_before_content_write (tests.m1.test_execution_boundary.DocumentBoundaryTests.test_unpublished_object_blocks_new_hardlink_before_content_write) ... ok",
+        "test_pause_freezes_lease_clock_but_does_not_extend_session_credentials (tests.m1.test_execution_boundary.LeaseBoundaryTests.test_pause_freezes_lease_clock_but_does_not_extend_session_credentials) ... ok",
+        "test_process_death_before_publication_discards_bytes_and_remains_unknown (tests.m1.test_execution_boundary.ProcessBoundaryTests.test_process_death_before_publication_discards_bytes_and_remains_unknown) ... ok"
+      ],
+      "sufficiency": "原始 R1 方法的独立 v1 失败/v2 成功对照直接覆盖已确认缺陷；源码检查和独立执行的 v2 M1 套件补充覆盖早期链接、不可用标记能力、刷盘失败和真实进程发布前终止。上述证据足以关闭固定 Provider 范围内的 R1。未执行的新增补强探针不计为通过，也不用于扩大能力声明。",
+      "exclusions": [
+        "不保证可信宿主在操作完成后的任意文件系统操作受到限制。",
+        "不是 OS sandbox、任意 Coding Runtime 或完整断电持久性认证。"
+      ]
+    }
+  ],
+  "author_candidate_audit": {
+    "work_item": "M1-02",
+    "candidate_revision": "v2",
+    "audited_at": "2026-09-12T04:03:59.185936+08:00",
+    "purpose": "Author evidence consumption, not independent review",
+    "candidate_snapshot": {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-candidate-v2-snapshot.json",
+      "sha256": "26f45fcf76931518aab205d588547b1e3e33b4c948a7abf187c58863349e1679"
+    },
+    "test_report": {
+      "path": "artifacts/m1-02-test-report-v2.json",
+      "sha256": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c"
+    },
+    "frozen_sources_checked": 90,
+    "v1_frozen_sources_preserved": 82,
+    "v1_archive_files_checked": 389,
+    "baseline_archive_files_checked": 213,
+    "changed_v1_sources": [
+      "Docs/superpowers/specs/2026-09-12-m1-02-execution-design.md",
+      "src/aetp/runtime/README.md",
+      "src/aetp/workspace/documents.py",
+      "src/aetp/workspace/windows_files.py",
+      "tests/m1/execution_support.py",
+      "tests/m1/test_execution_boundary.py"
+    ],
+    "references_checked": 1029,
+    "unique_files_checked": 977,
+    "pure_replay_equal": true,
+    "database_unchanged": true,
+    "work_item_status": "review",
+    "limits_preserved": true
+  },
+  "review_references_checked": 64,
+  "review_reference_checks": [
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2.json",
+      "sha256": "3ccdc8a80190b857545fd67303e0b1f28ab1883afd4461c74142c9b1c35f89a8",
+      "actual": "3ccdc8a80190b857545fd67303e0b1f28ab1883afd4461c74142c9b1c35f89a8",
+      "matches": true
+    },
+    {
+      "path": "artifacts/m1-02-test-report-v2.json",
+      "sha256": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c",
+      "actual": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-candidate-v2-snapshot.json",
+      "sha256": "26f45fcf76931518aab205d588547b1e3e33b4c948a7abf187c58863349e1679",
+      "actual": "26f45fcf76931518aab205d588547b1e3e33b4c948a7abf187c58863349e1679",
+      "matches": true
+    },
+    {
+      "path": "artifacts/m1-02-demo-v2.json",
+      "sha256": "671b1ff2548e054112d5a31c3ae2c2d5023257cb088b79bc2449ef3e7d2e3658",
+      "actual": "671b1ff2548e054112d5a31c3ae2c2d5023257cb088b79bc2449ef3e7d2e3658",
+      "matches": true
+    },
+    {
+      "path": "artifacts/m1-02-test-report-v2.json",
+      "sha256": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c",
+      "actual": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-candidate-v2-snapshot.json",
+      "sha256": "26f45fcf76931518aab205d588547b1e3e33b4c948a7abf187c58863349e1679",
+      "source_count": 90,
+      "actual": "26f45fcf76931518aab205d588547b1e3e33b4c948a7abf187c58863349e1679",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-candidate-v1-archive.json",
+      "sha256": "b915b10d182cfe6d9473e5923fdd2e0a0895d27b7b500e07c07fcd1dd4a952e4",
+      "file_count": 389,
+      "actual": "b915b10d182cfe6d9473e5923fdd2e0a0895d27b7b500e07c07fcd1dd4a952e4",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review.json",
+      "sha256": "d2a95cd6b899cde65fe26594323f88ceb074fc30784b143cd7e5c6e96175c4dc",
+      "decision": "changes_requested",
+      "actual": "d2a95cd6b899cde65fe26594323f88ceb074fc30784b143cd7e5c6e96175c4dc",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-baseline.json",
+      "sha256": "e48bbfdeb730a962b5943739e424b043d2ea527ed10bdaf0d4f6783a73082160",
+      "file_count": 213,
+      "accepted_m1_01_sources": 43,
+      "actual": "e48bbfdeb730a962b5943739e424b043d2ea527ed10bdaf0d4f6783a73082160",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-probes.py",
+      "sha256": "b40527ebc0def7abedebd9c0d805623f5f7360b4dd21e00a23bba2bc82a898d8",
+      "actual": "b40527ebc0def7abedebd9c0d805623f5f7360b4dd21e00a23bba2bc82a898d8",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-initial.json",
+      "sha256": "61ccca04bf417ab0e4497d3108ff3d701f0dcca1a79fbd3b0332ab59ac848769",
+      "actual": "61ccca04bf417ab0e4497d3108ff3d701f0dcca1a79fbd3b0332ab59ac848769",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-initial.stdout.txt",
+      "sha256": "46cdf6d1475219cfebebde9cd0b2be72c33999459ed203531daf25a4bafb3c2d",
+      "actual": "46cdf6d1475219cfebebde9cd0b2be72c33999459ed203531daf25a4bafb3c2d",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-initial.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-diff-v1.json",
+      "sha256": "4272892fc4604487850911fc6489a90c63691a83c53bf358670d0b795b643bdf",
+      "actual": "4272892fc4604487850911fc6489a90c63691a83c53bf358670d0b795b643bdf",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-diff-v1.stdout.txt",
+      "sha256": "f136b9e3d79510e9e35aabc531fef930b2906d36da4e12febf59f07fc794ef34",
+      "actual": "f136b9e3d79510e9e35aabc531fef930b2906d36da4e12febf59f07fc794ef34",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-diff-v1.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m1-suite.json",
+      "sha256": "2f93a66d7f8bc3bd85850192eabf3d3dcfdc23f03aefd914f9e4d4fd77915449",
+      "actual": "2f93a66d7f8bc3bd85850192eabf3d3dcfdc23f03aefd914f9e4d4fd77915449",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m1-suite.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m1-suite.stderr.txt",
+      "sha256": "eff8679fe0ea88b653b45b6f22ebe06cd0470664834ec6f4e52bd519158085a5",
+      "actual": "eff8679fe0ea88b653b45b6f22ebe06cd0470664834ec6f4e52bd519158085a5",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m0-suite.json",
+      "sha256": "f832bcf52660733a2fdcfc2adeeabc2c484b402bda4aa2ffcdd68986f9d8144b",
+      "actual": "f832bcf52660733a2fdcfc2adeeabc2c484b402bda4aa2ffcdd68986f9d8144b",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m0-suite.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m0-suite.stderr.txt",
+      "sha256": "b968a6afbfe5f8e23ef84daf6676a1135fd69c241f611e357fff88f3905fa698",
+      "actual": "b968a6afbfe5f8e23ef84daf6676a1135fd69c241f611e357fff88f3905fa698",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-r1-red-v1.json",
+      "sha256": "163af52c67021c0e9a0a3a3c38403693ae257c81cb6ea90094e25bc39b1076ca",
+      "actual": "163af52c67021c0e9a0a3a3c38403693ae257c81cb6ea90094e25bc39b1076ca",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-r1-red-v1.stdout.txt",
+      "sha256": "0e6252b4568e489a5c5054c10cff34297c45ef935a9476301d4fbd5c8b247f82",
+      "actual": "0e6252b4568e489a5c5054c10cff34297c45ef935a9476301d4fbd5c8b247f82",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-r1-red-v1.stderr.txt",
+      "sha256": "0bd91817356251c57b0577d532836a7352f8aee9673f67f5e2d225bd198e8a5d",
+      "actual": "0bd91817356251c57b0577d532836a7352f8aee9673f67f5e2d225bd198e8a5d",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-copy.json",
+      "sha256": "d24d0897e67a02c7c23a73f14cef21b00f25f70aac166da496f1dd8e8be3f0d2",
+      "actual": "d24d0897e67a02c7c23a73f14cef21b00f25f70aac166da496f1dd8e8be3f0d2",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-copy.stdout.txt",
+      "sha256": "8a4871bccb3fcc4cf173524cd391f0331881f10a39cd7070d6c845c06071beb7",
+      "actual": "8a4871bccb3fcc4cf173524cd391f0331881f10a39cd7070d6c845c06071beb7",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-copy.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-green-v2.json",
+      "sha256": "b80826f4beae383acdb5ef0a2261b2ec85708a4c1637da6d32a0f6fcc4c1e407",
+      "actual": "b80826f4beae383acdb5ef0a2261b2ec85708a4c1637da6d32a0f6fcc4c1e407",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-green-v2.stdout.txt",
+      "sha256": "353927ccbdbd40e65e70f834d3d10503d2b77a55cefad3dbdfc611939bdd9455",
+      "actual": "353927ccbdbd40e65e70f834d3d10503d2b77a55cefad3dbdfc611939bdd9455",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-green-v2.stderr.txt",
+      "sha256": "8ec7817c02ebe70ed9c811725d765e7df4551b37882379e656e7dc6ee90d83cc",
+      "actual": "8ec7817c02ebe70ed9c811725d765e7df4551b37882379e656e7dc6ee90d83cc",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-unpublished-red-v1.json",
+      "sha256": "18f537ffd8aedf9ca22ddc357fa99143b8185f54a7c2ad5a64d1d52794cfab09",
+      "actual": "18f537ffd8aedf9ca22ddc357fa99143b8185f54a7c2ad5a64d1d52794cfab09",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-unpublished-red-v1.stdout.txt",
+      "sha256": "562f490eb671a7282551f684b9dfb8d3a0c7017f1f9dae98e48ea959d4d08e58",
+      "actual": "562f490eb671a7282551f684b9dfb8d3a0c7017f1f9dae98e48ea959d4d08e58",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-unpublished-red-v1.stderr.txt",
+      "sha256": "319bdec9501a2b96e2ce1ae0a65720185ca46386ebdc14a1b0e4c0e816b43a11",
+      "actual": "319bdec9501a2b96e2ce1ae0a65720185ca46386ebdc14a1b0e4c0e816b43a11",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-render.json",
+      "sha256": "e685089933870e8d7ce1431d3e0025dd2ce26024ff615d66e928bedd89ae202d",
+      "actual": "e685089933870e8d7ce1431d3e0025dd2ce26024ff615d66e928bedd89ae202d",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-render.stdout.txt",
+      "sha256": "7aab8c29497cf75722fe5c22941964b24c0d78b1dd97af71e7d00306061efe7d",
+      "actual": "7aab8c29497cf75722fe5c22941964b24c0d78b1dd97af71e7d00306061efe7d",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-render.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-check.json",
+      "sha256": "5031816c2b609ec57ea6999c1c9996070897f1817f786997fffe8a2de5cbbab2",
+      "actual": "5031816c2b609ec57ea6999c1c9996070897f1817f786997fffe8a2de5cbbab2",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-check.stdout.txt",
+      "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07",
+      "actual": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-check.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check.json",
+      "sha256": "d9c03a854689f9bb32b65ecca7d3334badcc04347b9043c5bc8e90d9a46f9bb4",
+      "actual": "d9c03a854689f9bb32b65ecca7d3334badcc04347b9043c5bc8e90d9a46f9bb4",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check.stderr.txt",
+      "sha256": "802670c89a45e3827b7e27d1ee466e3657cdd534706e276ba31cedcbcb1d32a4",
+      "actual": "802670c89a45e3827b7e27d1ee466e3657cdd534706e276ba31cedcbcb1d32a4",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-suite.json",
+      "sha256": "05487a826ea8f1b3e783253473ae6108e76541fbde5dc5a5abfd761a1048054f",
+      "actual": "05487a826ea8f1b3e783253473ae6108e76541fbde5dc5a5abfd761a1048054f",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-suite.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-suite.stderr.txt",
+      "sha256": "26af0dc8f67e8c1c929abb62fb729005d80991c639d7ca2cb1ab961be0b157e8",
+      "actual": "26af0dc8f67e8c1c929abb62fb729005d80991c639d7ca2cb1ab961be0b157e8",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check-corrected.json",
+      "sha256": "053f058d5f4116f15c68a8410bfb52a2445722e5a9d3dc740733e1a3af575ed6",
+      "actual": "053f058d5f4116f15c68a8410bfb52a2445722e5a9d3dc740733e1a3af575ed6",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check-corrected.stdout.txt",
+      "sha256": "b04772066c6683a6d22025084749bc4c12592d87cf00bbb535c68bfb6eacd780",
+      "actual": "b04772066c6683a6d22025084749bc4c12592d87cf00bbb535c68bfb6eacd780",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check-corrected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-final.json",
+      "sha256": "4a523b15299adbb841efcf41487739de7a8c1fc46080e21f8f4dafafe1bc0ab3",
+      "actual": "4a523b15299adbb841efcf41487739de7a8c1fc46080e21f8f4dafafe1bc0ab3",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-final.stdout.txt",
+      "sha256": "fee6d646049401ce3e90249b4fd387c386c6fcfd5be5161af5a04b6dc8cfc81b",
+      "actual": "fee6d646049401ce3e90249b4fd387c386c6fcfd5be5161af5a04b6dc8cfc81b",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-final.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit.py",
+      "sha256": "86d1cfc16908b1d91f8d1fac207d504f771b387aeed96d92c6d5b4e9c91b9ae5",
+      "actual": "86d1cfc16908b1d91f8d1fac207d504f771b387aeed96d92c6d5b4e9c91b9ae5",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-copy.py",
+      "sha256": "ee17145130d610bfb0d596178b58c2af76697b8ccd1ec5a7f429fda647494ea8",
+      "actual": "ee17145130d610bfb0d596178b58c2af76697b8ccd1ec5a7f429fda647494ea8",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check-corrected.py",
+      "sha256": "7046407e4c3190da6902d9b51a2ab5742ca85ce87783c8a2e5d6d77550120546",
+      "actual": "7046407e4c3190da6902d9b51a2ab5742ca85ce87783c8a2e5d6d77550120546",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check.py",
+      "sha256": "43aa829ca658bbacbf271f331bde32fc2e26f173440d2a1b840ae7a793f8f1f8",
+      "actual": "43aa829ca658bbacbf271f331bde32fc2e26f173440d2a1b840ae7a793f8f1f8",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-driver.py",
+      "sha256": "14fa3daf1e048069918b9176b6c1198bfd274749a291d290f921711fb20d3010",
+      "actual": "14fa3daf1e048069918b9176b6c1198bfd274749a291d290f921711fb20d3010",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original.py",
+      "sha256": "c6c0716349ea77c91ac5ef6efd62f10e7fa6f27202108a1846a076945b250519",
+      "actual": "c6c0716349ea77c91ac5ef6efd62f10e7fa6f27202108a1846a076945b250519",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-probes.py",
+      "sha256": "dc85bedf83a2ad4ff02ca7b8bf1bd04ea43fc34748e1d05d84875392f0f18b1a",
+      "actual": "dc85bedf83a2ad4ff02ca7b8bf1bd04ea43fc34748e1d05d84875392f0f18b1a",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-inputs.json",
+      "sha256": "fb09b5bea8e689c70a884d91f3f7e4cd6ec2ae9429e57f36f716b1abb487f9df",
+      "file_count": 1629,
+      "actual": "fb09b5bea8e689c70a884d91f3f7e4cd6ec2ae9429e57f36f716b1abb487f9df",
+      "matches": true
+    },
+    {
+      "path": "artifacts/m1-02-workspace-v2/p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/7n3zniopwuf7xdghpndxrqsrn5ldcv7twyynsxs7byw34videbaq.json",
+      "sha256": "36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c",
+      "single_link": true,
+      "actual": "36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c",
+      "matches": true
+    },
+    {
+      "path": "artifacts/m1-02-workspace-v2/p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/ohlqqhwowwuinqz7mlslvvj65jwd3maxu6memk23ryuwivpx4hza.json",
+      "sha256": "3101749e627b1a868448b19f5a3b6a5527f3af6ba06808666426ba2c275fff66",
+      "single_link": true,
+      "actual": "3101749e627b1a868448b19f5a3b6a5527f3af6ba06808666426ba2c275fff66",
+      "matches": true
+    },
+    {
+      "path": "artifacts/m1-02-workspace-v2/p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-extgg2f6gtohtkxnzt62te3bwk5vjs3lzxwcfrbkvs543wzo2mha/oaj5opotfeevh2w3olnlkdgylzs3kwhqxqniwt7bj7htm6jxmi3q.json",
+      "sha256": "3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b",
+      "single_link": true,
+      "actual": "3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b",
+      "matches": true
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-probes.py",
+      "sha256": "dc85bedf83a2ad4ff02ca7b8bf1bd04ea43fc34748e1d05d84875392f0f18b1a",
+      "actual": "dc85bedf83a2ad4ff02ca7b8bf1bd04ea43fc34748e1d05d84875392f0f18b1a",
+      "matches": true
+    }
+  ],
+  "independent_final_audit_references_rechecked": 1028,
+  "independent_successful_test_counts": {
+    "m1-suite": 85,
+    "m0-suite": 156,
+    "original-green-v2": 6,
+    "preparation-suite": 27
+  },
+  "classified_runs": [
+    {
+      "label": "audit-initial",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-initial.json",
+        "sha256": "61ccca04bf417ab0e4497d3108ff3d701f0dcca1a79fbd3b0332ab59ac848769"
+      }
+    },
+    {
+      "label": "diff-v1",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-diff-v1.json",
+        "sha256": "4272892fc4604487850911fc6489a90c63691a83c53bf358670d0b795b643bdf"
+      }
+    },
+    {
+      "label": "m1-suite",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m1-suite.json",
+        "sha256": "2f93a66d7f8bc3bd85850192eabf3d3dcfdc23f03aefd914f9e4d4fd77915449"
+      }
+    },
+    {
+      "label": "m0-suite",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-m0-suite.json",
+        "sha256": "f832bcf52660733a2fdcfc2adeeabc2c484b402bda4aa2ffcdd68986f9d8144b"
+      }
+    },
+    {
+      "label": "original-r1-red-v1",
+      "exit_code": 1,
+      "classification": "expected_archived_v1_red",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-r1-red-v1.json",
+        "sha256": "163af52c67021c0e9a0a3a3c38403693ae257c81cb6ea90094e25bc39b1076ca"
+      }
+    },
+    {
+      "label": "preparation-copy",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-copy.json",
+        "sha256": "d24d0897e67a02c7c23a73f14cef21b00f25f70aac166da496f1dd8e8be3f0d2"
+      }
+    },
+    {
+      "label": "original-green-v2",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-original-green-v2.json",
+        "sha256": "b80826f4beae383acdb5ef0a2261b2ec85708a4c1637da6d32a0f6fcc4c1e407"
+      }
+    },
+    {
+      "label": "unpublished-red-v1",
+      "exit_code": 1,
+      "classification": "expected_archived_v1_red",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-unpublished-red-v1.json",
+        "sha256": "18f537ffd8aedf9ca22ddc357fa99143b8185f54a7c2ad5a64d1d52794cfab09"
+      }
+    },
+    {
+      "label": "preparation-render",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-render.json",
+        "sha256": "e685089933870e8d7ce1431d3e0025dd2ce26024ff615d66e928bedd89ae202d"
+      }
+    },
+    {
+      "label": "preparation-check",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-check.json",
+        "sha256": "5031816c2b609ec57ea6999c1c9996070897f1817f786997fffe8a2de5cbbab2"
+      }
+    },
+    {
+      "label": "demo-check",
+      "exit_code": 1,
+      "classification": "retained_harness_error_superseded_by_demo_check_corrected",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check.json",
+        "sha256": "d9c03a854689f9bb32b65ecca7d3334badcc04347b9043c5bc8e90d9a46f9bb4"
+      }
+    },
+    {
+      "label": "preparation-suite",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-preparation-suite.json",
+        "sha256": "05487a826ea8f1b3e783253473ae6108e76541fbde5dc5a5abfd761a1048054f"
+      }
+    },
+    {
+      "label": "demo-check-corrected",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-demo-check-corrected.json",
+        "sha256": "053f058d5f4116f15c68a8410bfb52a2445722e5a9d3dc740733e1a3af575ed6"
+      }
+    },
+    {
+      "label": "audit-final",
+      "exit_code": 0,
+      "classification": "current_scoped_validation_passed",
+      "record": {
+        "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-audit-final.json",
+        "sha256": "4a523b15299adbb841efcf41487739de7a8c1fc46080e21f8f4dafafe1bc0ab3"
+      }
+    }
+  ],
+  "demonstration_summary_matches_raw_output": true,
+  "additional_v2_methods_not_run": 5,
+  "transitions": [
+    {
+      "id": "M1-02",
+      "from": "review",
+      "to": "done"
+    },
+    {
+      "id": "M2-01",
+      "from": "todo",
+      "to": "ready"
+    }
+  ],
+  "metadata_before": {
+    "Docs/development/backlog.json": "46416277acf439c40d0d1aa136f5ece6f5c579addc7f5f1214d33cf3264325a1",
+    "Docs/development/status.json": "2abfb54d31fd3e8eace4464f5f0109bba60339d1bc1b38022865df82d34b3c03"
+  },
+  "metadata_after": {
+    "Docs/development/backlog.json": "fd566fe200f61087b8af34b58e0a97e5b32880c414aa7501a825f3d2fa61e400",
+    "Docs/development/status.json": "0e692f108b921158e3a04bb5dabe3b985cac260444e57b4b2c8df030a8909320"
+  },
+  "narrative_prefixes": [
+    {
+      "path": "MEMORY.md",
+      "sha256": "b82db0adee1f35945c90a51eecfdd519ca1c015bc27a28adcb569f093f5b8a4e",
+      "bytes": 27581
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-handoff.md",
+      "sha256": "40e5315cb545f95ba2309443df700566f3a97b3452c9965804c6d5fb5f3f2d3c",
+      "bytes": 6972
+    }
+  ],
+  "status_counts": {
+    "done": 16,
+    "ready": 1,
+    "todo": 3,
+    "blocked": 0,
+    "review": 0,
+    "in_progress": 0
+  },
+  "unchanged_claims": {
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "status": "registered",
+      "registered_tests": 28,
+      "passed_tests": 0,
+      "failed_tests": 0,
+      "not_applicable_tests": 0,
+      "evidence": null,
+      "note": "Full-protocol requirements remain registered; no complete protocol conformance is accepted. Separately accepted M0-only execution is recorded under m0_subset."
+    },
+    "m0_subset": {
+      "work_item": "M0-06",
+      "scope": "m0-core-only",
+      "status": "accepted",
+      "accepted_at": "2026-09-11T13:17:17.286835+08:00",
+      "recorded_at": "2026-09-11T13:31:35.580244+08:00",
+      "counts": {
+        "passed": 6,
+        "failed": 0,
+        "pending": 3,
+        "not_applicable": 19
+      },
+      "execution_counts": {
+        "passed": 9,
+        "failed": 0,
+        "not_run": 19
+      },
+      "test_ids_by_status": {
+        "passed": [
+          "TEST-001",
+          "TEST-002",
+          "TEST-005",
+          "TEST-017",
+          "TEST-018",
+          "TEST-021"
+        ],
+        "pending": [
+          "TEST-012",
+          "TEST-016",
+          "TEST-019"
+        ],
+        "not_applicable": [
+          "TEST-003",
+          "TEST-004",
+          "TEST-006",
+          "TEST-007",
+          "TEST-008",
+          "TEST-009",
+          "TEST-010",
+          "TEST-011",
+          "TEST-013",
+          "TEST-014",
+          "TEST-015",
+          "TEST-020",
+          "TEST-022",
+          "TEST-023",
+          "TEST-024",
+          "TEST-025",
+          "TEST-026",
+          "TEST-027",
+          "TEST-028"
+        ],
+        "failed": []
+      },
+      "execution_report": {
+        "path": "artifacts/m0-conformance-report-v2.json",
+        "sha256": "d4a1de9fd7729f9aac669f580b4c3e76862217f072807f904279f5c7196ccf75"
+      },
+      "candidate_snapshot": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-candidate-v2-snapshot.json",
+        "sha256": "0e4c15b3900089b70ab49d85f45a3aad74c9f7baa4337e0b5b233c5424a69814"
+      },
+      "independent_review": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1.json",
+        "sha256": "828b5346acd8df9e722297de28f12af946902ddcda5b613eda576bd68e775462"
+      },
+      "review_narrative_addendum": {
+        "path": "Docs/development/evidence/2026-09-11-m0-06-review-r1-encoding-addendum.json",
+        "sha256": "d9e3f00fb3524e46a320962468132f515c38b983662414e1796e44bac632dcba"
+      },
+      "reviewer": "Lorentz (01a08e64-7ed1-7db0-846c-82feb095ae71)",
+      "handoff": "artifacts/m0-handoff.json",
+      "claims": {
+        "full_aetp_compatible": false,
+        "protocol_task_completed": false,
+        "bootstrap_verified": false
+      },
+      "note": "Development-time acceptance of this fixed M0 candidate only. Three partial requirements remain pending and 19 later requirements are not run. Not the preparation/full-protocol conformance counter or product completion percentage."
+    },
+    "m1_acceptance": {
+      "status": "not_accepted",
+      "note": "Work-item acceptance is separate from whole M1. Formal Verification, Task quality transitions and explicit integration exemption remain outstanding."
+    }
+  },
+  "review_limits": {
+    "platform_interruption": {
+      "provenance": "主线程 /root 在 follow-up 消息中报告上一轮再次被平台内容筛查中断，并明确收尾范围。",
+      "independently_observed_platform_diagnostic": false,
+      "product_result": false,
+      "effect": "限制新增并发探针；保留全部已完成运行及未执行脚本，报告不将中断计为产品失败或通过。"
+    },
+    "accepted_environment": "当前 Windows 本地文件系统、同一登录会话、固定数据文档 Broker 和可信宿主/数据库/时钟/认证通道。",
+    "additional_probe_v2_execution_incomplete": true,
+    "final_post_validation_input_audit_completed": true,
+    "demo_database_event_command_projection_comparison_completed": true,
+    "pure_replay_checked_with_frozen_database_and_facts_only_memory": true,
+    "author_demo_rerun": false,
+    "no_certification_for": [
+      "任意 Coding Runtime 或任意 Agent 代码",
+      "OS sandbox 或跨登录会话/网络文件系统",
+      "所有物理磁盘故障与整机断电",
+      "真实模型自治",
+      "通用 Approval 或正式 Verification Runner"
+    ]
+  },
+  "additional_probes": {
+    "source": {
+      "path": "Docs/development/evidence/2026-09-12-m1-02-review-v2-probes.py",
+      "sha256": "dc85bedf83a2ad4ff02ca7b8bf1bd04ea43fc34748e1d05d84875392f0f18b1a"
+    },
+    "status": "not_executed_against_v2",
+    "v2_methods_executed": 0,
+    "methods": [
+      {
+        "name": "test_expiry_after_open_removes_unpublished_file_and_keeps_unknown",
+        "v2_status": "not_run",
+        "v1_status": "not_run",
+        "run_label": null
+      },
+      {
+        "name": "test_separate_process_link_attempts_are_blocked_through_write_flush_and_fsync",
+        "v2_status": "not_run",
+        "v1_status": "not_run",
+        "run_label": null
+      },
+      {
+        "name": "test_early_alias_is_rejected_without_document_bytes",
+        "v2_status": "not_run",
+        "v1_status": "not_run",
+        "run_label": null
+      },
+      {
+        "name": "test_failed_publication_discards_fsynced_bytes_and_never_retries",
+        "v2_status": "not_run",
+        "v1_status": "not_run",
+        "run_label": null
+      },
+      {
+        "name": "test_process_death_after_fsync_before_publication_preserves_checkpoint_and_unknown",
+        "v2_status": "not_run",
+        "v1_status": "executed_expected_red",
+        "run_label": "unpublished-red-v1"
+      }
+    ],
+    "archived_v1_process_observation": {
+      "pid": 26904,
+      "exit_code": 83,
+      "phase": "fsynced_before_publication",
+      "reconciled_status": "completed",
+      "file_present": true,
+      "dispatch_count": 1,
+      "checkpoint_preserved": true
+    },
+    "original_expiry_method": {
+      "method": "test_expiry_after_file_open_prevents_content_write_and_stays_unknown",
+      "run_against_v2": false,
+      "source_modified": false,
+      "reason": "原方法断言空文件仍存在；v2 未发布句柄关闭会删除该空文件。替代方法已编写但未执行，不称为独立新增 GREEN。",
+      "source_assessment": "authorize 仍在 stream.write 前；验证失败后以仍带 delete-pending 的句柄退出，Action UNKNOWN 的处理未更改。现有 v2 套件独立验证暂停凭证过期、刷盘失败和发布前进程终止等关联边界。"
+    },
+    "reason": "主线程要求在平台中断后停止追加并发文件探针，收尾限定为源码、只读示例/Replay、普通 preparation 与既有审计。"
+  },
+  "remaining_closeout": "Append MEMORY and handoff; run final_render/final_check/final_preparation and operational closeout. Frozen v1/v2 and independent evidence stay unchanged.",
+  "coordination": "ClaudeLink disabled by user; one existing reviewer reused. No new agents, Git operations, dependency installation or network."
+}

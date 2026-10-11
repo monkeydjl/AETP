@@ -1,0 +1,32 @@
+{
+  "work_item": "M1-02",
+  "candidate_revision": "v2",
+  "audited_at": "2026-09-12T03:21:09.802710+08:00",
+  "purpose": "Author evidence consumption, not independent review",
+  "candidate_snapshot": {
+    "path": "Docs/development/evidence/2026-09-12-m1-02-candidate-v2-snapshot.json",
+    "sha256": "26f45fcf76931518aab205d588547b1e3e33b4c948a7abf187c58863349e1679"
+  },
+  "test_report": {
+    "path": "artifacts/m1-02-test-report-v2.json",
+    "sha256": "19e6c6678aeb9972003bd98c6c7d8b657dec385a2635f755a597c977f154ec0c"
+  },
+  "frozen_sources_checked": 90,
+  "v1_frozen_sources_preserved": 82,
+  "v1_archive_files_checked": 389,
+  "baseline_archive_files_checked": 213,
+  "changed_v1_sources": [
+    "Docs/superpowers/specs/2026-09-12-m1-02-execution-design.md",
+    "src/aetp/runtime/README.md",
+    "src/aetp/workspace/documents.py",
+    "src/aetp/workspace/windows_files.py",
+    "tests/m1/execution_support.py",
+    "tests/m1/test_execution_boundary.py"
+  ],
+  "references_checked": 1029,
+  "unique_files_checked": 977,
+  "pure_replay_equal": true,
+  "database_unchanged": true,
+  "work_item_status": "review",
+  "limits_preserved": true
+}

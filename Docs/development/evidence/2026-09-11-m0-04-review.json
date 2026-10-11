@@ -1,0 +1,171 @@
+{
+  "schema_version": "aetp-development-independent-review-0.1",
+  "work_item": "M0-04",
+  "status": "accepted",
+  "recorded_at": "2026-09-10T17:36:26.866682+00:00",
+  "recorded_by": "Codex main agent, from actual independent reviewer tool response",
+  "reviewer": {
+    "name": "Kuhn",
+    "agent_id": "01a08bbf-76ba-7020-8d06-1284cafc1c98",
+    "independent_of_executor": true
+  },
+  "initial_review": {
+    "submission_id": "01a08c47-9c20-7b63-b5bd-91834fd475cf",
+    "response_source": "multi_agent_v1 independent reviewer final response, received as subagent_notification",
+    "verbatim_verdict": "独立接受 M0-04，可以进入 `done`。",
+    "accepted": true,
+    "critical_findings": 0,
+    "important_findings": 0,
+    "minor_findings": 1,
+    "candidate_snapshot": "Docs/development/evidence/2026-09-11-m0-04-review-snapshot.json",
+    "reviewed_candidate_sha256": {
+      "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+      "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+      "tests/m0/support.py": "07abc92ca86f22ed8943d35d0c4423a700e3284a8ef018f0be4703debafa29ad",
+      "tests/m0/test_idempotency_concurrency.py": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2",
+      "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+      "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+      "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600",
+      "artifacts/m0-04-test-report.json": "f95bc0cfcf71bb8c307390354bc029c65b7b8a619780c5c2684993fa89be3345",
+      "Docs/development/evidence/2026-09-11-m0-04-probes.py": "d6897aad0b20a5acdb73d4cf36694a263404ac7e2d484487caf9ae261d7ca544",
+      "Docs/development/evidence/2026-09-11-m0-04-probes.json": "dff927d57ecdb3acdafd15a1aa14752bc988e6269f7f7cb7b088d64ab7a06e8c"
+    },
+    "candidate_hash_checks": {
+      "before_review_matches": 10,
+      "after_review_matches": 10,
+      "total": 10
+    },
+    "reported_runs": [
+      {
+        "command": "python -m unittest tests/m0/test_idempotency_concurrency.py -v",
+        "exit_code": 0,
+        "tests_run": 29,
+        "duration_seconds": 4.029
+      },
+      {
+        "command": "python -m unittest discover -s tests/m0 -t . -v",
+        "exit_code": 0,
+        "tests_run": 93,
+        "duration_seconds": 7.625,
+        "includes_focused_29": true
+      },
+      {
+        "command": "python Docs/development/evidence/2026-09-11-m0-04-probes.py --mode all --repetitions 5",
+        "exit_code": 0,
+        "real_races_passed": 15,
+        "mutation_checks_killed": 6,
+        "mutation_test_errors": 0
+      },
+      {
+        "command": "python - (reviewer Unicode positive and in-memory escaped-digest probe)",
+        "exit_code": 0,
+        "production_with_real_unicode_correct": true,
+        "original_test_allows_ensure_ascii_true_mutant": true
+      },
+      {
+        "command": "python - (reviewer SQL trace / query-only lookup probe)",
+        "initial_exit_code": 1,
+        "corrected_exit_code": 0,
+        "corrected_checks_passed": 4,
+        "initial_probe_defect": "query_only=ON on the full Handler forbids required BEGIN IMMEDIATE; not a product defect."
+      },
+      {
+        "command": "python - (reviewer frozen SHA-256 verification)",
+        "before_exit_code": 0,
+        "after_exit_code": 0,
+        "files_matched_each_time": 10
+      }
+    ],
+    "reported_run_provenance": "Actual commands reported by the independent reviewer; not copied from main-agent run logs. Raw reviewer stdout is not stored here.",
+    "supplementary_checks": [
+      "BEGIN IMMEDIATE -> lookup -> Command/two Events -> result UPDATE -> COMMIT",
+      "actor mismatch skips authoritative idempotency lookup and only records security diagnostic",
+      "standalone lookup under query_only=ON hits/misses with SELECT only",
+      "normal Handler retry returns original result with SQL write delta zero"
+    ],
+    "review_scope": [
+      "Task 4",
+      "design sections 14.1-14.2",
+      "M0-04 implementation/tests/evidence",
+      "TEST-001/018/019 M0 subset"
+    ],
+    "limitations": [
+      "Historical RED reviewed, not rerun.",
+      "Preparation checks not executed by this reviewer.",
+      "Not M0-05, general corruption recovery, multi-machine/storage-failure proof, Runtime, Lease/Binding, Conformance, Bootstrap or governed Task COMPLETED.",
+      "No canonical file edits, Git/ClaudeLink operations or spawned descendants."
+    ]
+  },
+  "findings": [
+    {
+      "id": "M0-04-R1",
+      "severity": "Minor",
+      "blocking_original_acceptance": false,
+      "file": "tests/m0/test_idempotency_concurrency.py",
+      "original_lines": "77-93 (80,83,88)",
+      "finding": "Unicode-named test and handwritten oracle used ASCII question marks; ensure_ascii=True mutation survived.",
+      "status": "closed_by_independent_reviewer",
+      "fix_evidence": "Docs/development/evidence/2026-09-11-m0-04-unicode-review-fix.json"
+    }
+  ],
+  "delta_review": {
+    "status": "accepted",
+    "submission_id": "01a08c61-8257-7381-8cfd-7280dc5cef31",
+    "changed_test_sha256": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+    "production_change": false,
+    "response_source": "Actual multi_agent_v1.wait_agent completed response",
+    "verbatim_verdict": "原 Unicode Minor 已关闭。更新后的 M0-04 代码／测试快照仍获独立接受，可以进入 `done`。",
+    "accepted": true,
+    "critical_findings": 0,
+    "important_findings": 0,
+    "minor_findings": 0,
+    "reported_runs": [
+      {
+        "command": "python Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py --mode production",
+        "exit_code": 0,
+        "tests_run": 1,
+        "failures": 0,
+        "errors": 0
+      },
+      {
+        "command": "python Docs/development/evidence/2026-09-11-m0-04-unicode-probe.py --mode escaped-mutant",
+        "exit_code": 1,
+        "expected_exit_code": 1,
+        "tests_run": 1,
+        "failures": 1,
+        "errors": 0,
+        "failure_location": "test_idempotency_concurrency.py:97 production digest vs independent UTF-8 oracle"
+      },
+      {
+        "command": "python -m unittest tests/m0/test_idempotency_concurrency.py -v",
+        "exit_code": 0,
+        "tests_run": 29,
+        "duration_seconds": 3.979
+      },
+      {
+        "command": "In-memory old-method reconstruction and before/after file SHA-256 verification",
+        "exit_code": 0,
+        "original_test_file_reconstructed_sha256": "9e6d92aac9f0eded3288a0969ec1f7befc507b93bf4e046b69dbbdc1ae8e07a2"
+      }
+    ],
+    "independently_confirmed_test_sha256": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+    "production_and_support_unchanged_from_initial_snapshot": true,
+    "method_only_change_verified_by_original_full_file_hash_reconstruction": true,
+    "limitations": [
+      "Old production/mutant outputs were reviewed, not rerun.",
+      "No additional full 93-test regression or 15-race probe run in this bounded review; main refreshed both.",
+      "Parallel handoff/report metadata edits not reviewed; main preparation validation covers their consistency.",
+      "No workspace file edits; original full-review scope limitations still apply."
+    ]
+  },
+  "accepted_at_recorded_by_main": "2026-09-10T17:44:42.347974+00:00",
+  "main_verified_accepted_code_sha256": {
+    "src/aetp/core/idempotency.py": "7ee6da61afd1561adf584a832708b9d61519db646e369930657898c61bcca41c",
+    "src/aetp/core/commands.py": "3fc620a5813d2b9cb7a98c4fb6cbf334cf7ea75fb18f07eb4726c6783579dcff",
+    "tests/m0/support.py": "07abc92ca86f22ed8943d35d0c4423a700e3284a8ef018f0be4703debafa29ad",
+    "tests/m0/test_idempotency_concurrency.py": "1d498aa3a118fb25d6dd7235e4ab4fba63d3b183e9e231a3834051fdb057332d",
+    "src/aetp/storage/sqlite_store.py": "819509ff2ae09f872665b00844139f1f4a3348e14387602ed84dfeed7517b6d8",
+    "src/aetp/core/projection.py": "278d39e3d529e687100797fe83bd50d44c57c9096743d65e1f72ff2949d5d180",
+    "src/aetp/domain/models.py": "134269725f5a6d5fec1d85468f33466496ea2ca20152e7cfae8580b12a67d600"
+  }
+}

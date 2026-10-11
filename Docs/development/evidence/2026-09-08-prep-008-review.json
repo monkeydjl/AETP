@@ -1,0 +1,1558 @@
+{
+  "schema_version": "aetp-prep-008-independent-review-1.0",
+  "reviewer": "Kant",
+  "reviewer_identity": {
+    "session_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+    "mapping_source": "主会话实际工具返回映射经本会话提供；与冻结index一致",
+    "prior_alias": "Codex",
+    "same_reviewer_across_prior_reports": true,
+    "independent_of_integration_executor": "Codex main session",
+    "new_subagents_started": 0
+  },
+  "started_at": "2026-09-08T21:57:30.9723997+08:00",
+  "resumed_at": "2026-09-08T22:05:17.7768149+08:00",
+  "finished_at": "2026-09-09T19:07:57.143853+08:00",
+  "clock": "local Asia/Shanghai; DateTimeOffset.Now / datetime.now().astimezone(); no reconstructed timestamps",
+  "workspace": "D:\\Github\\AETP",
+  "write_set": [
+    "Docs/development/evidence/2026-09-08-prep-008-review.json"
+  ],
+  "shared_state_writes": [],
+  "source_write_set": [],
+  "scope": "PREP-008准备材料集成交接；不重做PREP003/004/006/007分项报告，不开发M0，不产品验收",
+  "tool_availability": {
+    "ClaudeLink": "unavailable; no read_inbox/send tools exposed; no fabricated communication",
+    "communication": "本会话消息是真实协作",
+    "used": "PowerShell and local Python via functions.exec_command; no network/install/Git initialization"
+  },
+  "assessment": "preparation-level pass",
+  "criteria": [
+    {
+      "id": "PREP-008-AC1",
+      "criterion": "不同 Agent 复核准备材料",
+      "assessment": "preparation-level pass",
+      "conclusion": "主会话是准备材料/集成交接执行者；本报告由不同会话 Kant 独立核验原始归属、适用源摘要、真实依赖和交接。索引仅作定位，不冒充独立证据；Kant/Codex 是同一 reviewer，非两人。",
+      "references": [
+        "AGENTS.md:46-52",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md:13-24",
+        "Docs/development/evidence/2026-09-08-prep-acceptance-index.json#/accepted_items",
+        "Docs/development/evidence/preparation-log.md:102-109",
+        "Docs/development/evidence/2026-09-07-prep-001-006-review.json#/conclusions/PREP-001"
+      ],
+      "evidence_commands": [
+        "applicability-and-timestamp-verification",
+        "integration-provenance-and-state",
+        "private-check",
+        "private-preparation-tests"
+      ]
+    },
+    {
+      "id": "PREP-008-AC2",
+      "criterion": "所有命令有退出码和时间",
+      "assessment": "preparation-level pass",
+      "conclusion": "按现有文字和交接 Skill:44 的 ISO-8601 时间要求，实际端点属于可验证时间记录；验收未规定每一条历史辅助命令必须有双端点或可计算时长。独立检查确认 corrections 16条均有实际exit及带时区时间，其中14条双端点、2条单端点且缺失原因保留；不能称16条均完整。PREP007 56条及最新整合5条均完整；本次独立复验5条亦完整且保留stdout/stderr。旧记录只作历史，不冒充本次新通过。",
+      "references": [
+        "skills/aetp-evidence-handoff/SKILL.md:37-48",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md:37-39,59-71",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/commands",
+        "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json#/runs"
+      ],
+      "evidence_commands": [
+        "applicability-and-timestamp-verification",
+        "historical-command-and-review-schemas-corrected",
+        "material-probe",
+        "private-render",
+        "private-check",
+        "private-preparation-tests"
+      ]
+    },
+    {
+      "id": "PREP-008-AC3",
+      "criterion": "明确产品实现与 Bootstrap Acceptance 尚未完成",
+      "assessment": "preparation-level pass",
+      "conclusion": "handoff、backlog/status、MEMORY和收尾计划一致：准备7done/1review；12个产品项全todo；产品完成率0；Conformance仅28 registered/0 passed；Bootstrap not_started。本次27项准备测试和10项材料探针不是产品测试或Bootstrap Acceptance。规范§15.5需固定版本证据与CRITICAL人类验收；§17.2连M0模拟也不能替代完整Bootstrap。",
+      "references": [
+        "Docs/AETP-设计方案.md:3382-3391 (§15.5),3471-3475 (§17.2),3674-3682 (§18.3)",
+        "Docs/development/knowledge-map.md:21-27",
+        "Docs/development/status.json",
+        "MEMORY.md:66-80",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md:43-55"
+      ],
+      "evidence_commands": [
+        "focused-acceptance-boundaries",
+        "integration-provenance-and-state",
+        "private-render"
+      ]
+    }
+  ],
+  "conclusions": {
+    "PREP-008": {
+      "assessment": "preparation-level pass",
+      "acceptance": [
+        {
+          "id": "PREP-008-AC1",
+          "criterion": "不同 Agent 复核准备材料",
+          "assessment": "preparation-level pass",
+          "conclusion": "主会话是准备材料/集成交接执行者；本报告由不同会话 Kant 独立核验原始归属、适用源摘要、真实依赖和交接。索引仅作定位，不冒充独立证据；Kant/Codex 是同一 reviewer，非两人。",
+          "references": [
+            "AGENTS.md:46-52",
+            "Docs/development/evidence/2026-09-08-preparation-handoff.md:13-24",
+            "Docs/development/evidence/2026-09-08-prep-acceptance-index.json#/accepted_items",
+            "Docs/development/evidence/preparation-log.md:102-109",
+            "Docs/development/evidence/2026-09-07-prep-001-006-review.json#/conclusions/PREP-001"
+          ],
+          "evidence_commands": [
+            "applicability-and-timestamp-verification",
+            "integration-provenance-and-state",
+            "private-check",
+            "private-preparation-tests"
+          ]
+        },
+        {
+          "id": "PREP-008-AC2",
+          "criterion": "所有命令有退出码和时间",
+          "assessment": "preparation-level pass",
+          "conclusion": "按现有文字和交接 Skill:44 的 ISO-8601 时间要求，实际端点属于可验证时间记录；验收未规定每一条历史辅助命令必须有双端点或可计算时长。独立检查确认 corrections 16条均有实际exit及带时区时间，其中14条双端点、2条单端点且缺失原因保留；不能称16条均完整。PREP007 56条及最新整合5条均完整；本次独立复验5条亦完整且保留stdout/stderr。旧记录只作历史，不冒充本次新通过。",
+          "references": [
+            "skills/aetp-evidence-handoff/SKILL.md:37-48",
+            "Docs/development/evidence/2026-09-08-preparation-handoff.md:37-39,59-71",
+            "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/commands",
+            "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json#/runs"
+          ],
+          "evidence_commands": [
+            "applicability-and-timestamp-verification",
+            "historical-command-and-review-schemas-corrected",
+            "material-probe",
+            "private-render",
+            "private-check",
+            "private-preparation-tests"
+          ]
+        },
+        {
+          "id": "PREP-008-AC3",
+          "criterion": "明确产品实现与 Bootstrap Acceptance 尚未完成",
+          "assessment": "preparation-level pass",
+          "conclusion": "handoff、backlog/status、MEMORY和收尾计划一致：准备7done/1review；12个产品项全todo；产品完成率0；Conformance仅28 registered/0 passed；Bootstrap not_started。本次27项准备测试和10项材料探针不是产品测试或Bootstrap Acceptance。规范§15.5需固定版本证据与CRITICAL人类验收；§17.2连M0模拟也不能替代完整Bootstrap。",
+          "references": [
+            "Docs/AETP-设计方案.md:3382-3391 (§15.5),3471-3475 (§17.2),3674-3682 (§18.3)",
+            "Docs/development/knowledge-map.md:21-27",
+            "Docs/development/status.json",
+            "MEMORY.md:66-80",
+            "Docs/development/evidence/2026-09-08-preparation-handoff.md:43-55"
+          ],
+          "evidence_commands": [
+            "focused-acceptance-boundaries",
+            "integration-provenance-and-state",
+            "private-render"
+          ]
+        }
+      ]
+    }
+  },
+  "accepted_item_applicability": [
+    {
+      "work_item": "PREP-001",
+      "historical_reviewer": "Boole",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "入口能指向全部开发准备材料",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "明确平等 Agent、可选 Manager、确定性 Orchestrator 边界",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "声明状态、证据和权限规则",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "原报告由主会话落盘并明确归属于Boole的独立只读回复，不是主会话自评。当前README/AGENTS/开发README/.gitignore/.editorconfig五源仍匹配其摘要；roadmap/backlog/M0 plan变化不冒用旧Boole PREP006结论，已由后续修订复核覆盖。",
+      "references": [
+        "Docs/development/evidence/2026-09-07-prep-001-006-review.json#/recorded_by",
+        "Docs/development/evidence/2026-09-07-prep-001-006-review.json#/conclusions/PREP-001"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [],
+      "dependencies_done_now": true
+    },
+    {
+      "work_item": "PREP-002",
+      "historical_reviewer": "Mill",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "触发描述可检索且不复述完整流程",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "按问题映射章节、INV、TEST",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "明确图谱是索引而非运行时事实源",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "原Skill应用记录agent/independent_of_preparation_writer及preparation-log Mill增补相互印证；当前Skill仍是问题→章节/INV/TEST导航，图谱只是开发索引。历史记录没有当前版本签名；本轮冻结摘要与静态检查证明当前适用范围，不伪造历史hash。",
+      "references": [
+        "Docs/development/evidence/skill-protocol-navigation.md:3-8,17-34",
+        "Docs/development/evidence/preparation-log.md:102-109",
+        "skills/aetp-protocol-navigation/SKILL.md:14-30"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [
+        "PREP-001"
+      ],
+      "dependencies_done_now": true
+    },
+    {
+      "work_item": "PREP-003",
+      "historical_reviewer": "Kant",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "覆盖 Command→Event Store→Projection",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "不把建议误写成已实现能力",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "复用同一Kant修订报告：F001纯Projection Replay与重启恢复分开；规范/Skill当前摘要匹配。10材料探针本轮再次通过；不重跑旧13场景或声称执行Runtime。",
+      "references": [
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/conclusions/PREP-003",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/prior_findings_resolution"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [
+        "PREP-001"
+      ],
+      "dependencies_done_now": true
+    },
+    {
+      "work_item": "PREP-004",
+      "historical_reviewer": "Kant",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "能区分 planned/implemented/verified/accepted",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "交接含工作项、文件、命令、证据、风险、下一步",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "独立复核缺失时保持 review",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "F002全计划与milestones.PREP计数已闭合；planned/implemented/verified/accepted及缺独立复核留review边界仍适用。实际交接状态与来源相符。",
+      "references": [
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/conclusions/PREP-004",
+        "skills/aetp-evidence-handoff/SKILL.md:21-55"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [
+        "PREP-001"
+      ],
+      "dependencies_done_now": true
+    },
+    {
+      "work_item": "PREP-005",
+      "historical_reviewer": "Mill",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "核心实体、约束、验收、里程碑和工作项有稳定 ID",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "每条边有来源且无悬挂目标",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "A2A 标为可选 Transport Adapter",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "独立pass明确来自preparation-log:102-109 Mill增补，不来自knowledge-graph-check.json单独输出。当前check101节点/144边/引用与稳定ID有效；A2A唯一边为optionally_uses，source_reference为§2.4;§15.5。此处仅接受静态索引能力。",
+      "references": [
+        "Docs/development/evidence/preparation-log.md:33-38,102-109",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md:19",
+        "Docs/development/knowledge-graph.json"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [
+        "PREP-001",
+        "PREP-002"
+      ],
+      "dependencies_done_now": true
+    },
+    {
+      "work_item": "PREP-006",
+      "historical_reviewer": "Kant",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "M0–M3 各有范围、依赖、退出条件",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "M0 首批具备独立可测工作项",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "不把 JSON 清单当成原子认领服务",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "原Boole/Zeno changes_required保留；修订后Kant报告的R1/R2/R3闭合仍适用，R4领域事件与全流断言、R5阶段归属闭合。当前静态源和20项稳定契约匹配；仅backlog/status/生成报告运营字段相对旧报告变化。",
+      "references": [
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/conclusions/PREP-006",
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/prior_findings_resolution",
+        "Docs/development/evidence/2026-09-08-prep-006-review.json"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [
+        "PREP-001",
+        "PREP-005"
+      ],
+      "dependencies_done_now": true
+    },
+    {
+      "work_item": "PREP-007",
+      "historical_reviewer": "Kant",
+      "assessment": "preparation-level pass",
+      "scope": "既有接纳证据的集成适用性；不是新增独立人次或产品重验",
+      "acceptance": [
+        {
+          "criterion": "check 能校验 JSON、关系、依赖和状态",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "render 生成可读进度摘要",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        },
+        {
+          "criterion": "environment 只报告可验证工具，不读取或打印密钥",
+          "assessment": "preparation-level pass",
+          "basis": "原独立结论与当前冻结材料/稳定契约核对一致"
+        }
+      ],
+      "conclusion": "原报告3个受审工具/测试前后摘要均与当前相同；不重新开展25场景工具审计。其依赖PREP006已先done后才接纳PREP007，时间顺序正确；新27项准备回归只验证整合适用性。",
+      "references": [
+        "Docs/development/evidence/2026-09-08-prep-007-review.json#/source_sha256",
+        "Docs/development/evidence/2026-09-08-preparation-closeout.json#/transitions"
+      ],
+      "immutable_evidence_hashes_match": true,
+      "depends_on": [
+        "PREP-001",
+        "PREP-005",
+        "PREP-006"
+      ],
+      "dependencies_done_now": true
+    }
+  ],
+  "command_timestamp_judgment": {
+    "decision": "acceptable_under_current_wording",
+    "independent_rationale": "验收要求退出码和时间而非所有历史命令完整持续时间；Skill交接模板也只规定ISO-8601时间。两条真实辅助记录不能算成完整起止，但并非无时间。最新全套实际验收命令和本轮私有复验均完整，因此不要求改写冻结历史或编造缺失值。",
+    "corrections_total": 16,
+    "corrections_complete_intervals": 14,
+    "corrections_partial_intervals": 2,
+    "partial_records": [
+      {
+        "id": "structural-inspector-attempt1",
+        "started_at": "2026-09-08T21:16:31.7674373+08:00",
+        "finished_at": null,
+        "cwd": "D:\\Github\\AETP",
+        "command": "python -B -",
+        "exit_code": 1,
+        "stdin_description": "Read-only AST, Files/evidence comparison and counters.",
+        "wall_time_seconds_from_tool": 0.3391,
+        "finished_at_note": "Wrapper exited on Python failure before printing end timestamp; not reconstructed.",
+        "result": "Reviewer inspector mistakenly excluded Record paths from Files; M0-01 backlog correctly includes artifacts/m0-01-test-report.json. Not a material defect."
+      },
+      {
+        "id": "read-old-scenario-ids-and-fixture-contract",
+        "command": "python -B -",
+        "cwd": "D:\\Github\\AETP",
+        "started_at": null,
+        "started_at_note": "Immediately after 10-material-probes; exact separate start was not captured.",
+        "finished_at": "2026-09-08T21:18:04.2576887+08:00",
+        "exit_code": 0,
+        "stdin_description": "Read prior scenario IDs/assessment and Zeno identity; plan18-25,71-74,111-126."
+      }
+    ],
+    "prep007_complete_intervals": 56,
+    "main_integrated_complete_intervals": 5,
+    "reviewer_fresh_validation_complete_intervals": 5,
+    "legacy_attribution_limit": "Boole旧汇总仅存命令族/exit与review时段；Mill旧日志有日期/历史命令。未将其宣称逐命令高精度转录；当前可复现性由最新完整整合日志和本次复验承担。"
+  },
+  "permitted_post_pass_finalization": {
+    "decision": "accepted",
+    "requires_actual_pass_and_hash_check": true,
+    "reason": "PREP008依赖全部done且M0-01仅依赖PREP008；限定更新是运营接纳，不改变受审材料契约或启动产品。",
+    "accepted_rules_verbatim": {
+      "condition": "Only after an actual PREP-008 independent preparation-level pass whose reviewed payload/source hashes match.",
+      "backlog": [
+        "PREP-008 review -> done with actual acceptance metadata/evidence",
+        "M0-01 todo -> ready only; every other product item remains todo",
+        "No changes to stable contract fields"
+      ],
+      "status": [
+        "Recompute counts/milestones/evidence_paths from backlog; active_work_items empty",
+        "Keep phase preparation, product 0, Bootstrap not_started, Conformance 28 registered/0 passed"
+      ],
+      "documents": [
+        "Append final actual acceptance section after the frozen handoff body; preserve that body exactly",
+        "Update MEMORY current snapshot/next steps and plan checkboxes to actual outcomes; historical records retained",
+        "Append actual transitions/validation/coordination to closeout JSON; no rewriting prior reviewer evidence"
+      ],
+      "generated_reports": "Refresh only standard five reports through required verification commands.",
+      "immutable": [
+        "This acceptance index",
+        "Original independent review reports",
+        "Reviewed Skills, normative documents, graph, roadmap, first-slice plan, tools/tests, correction probe and historical RED/GREEN evidence"
+      ],
+      "final_evidence": "Main records final source/contract checks and actual commands with full start/end/exit/output in 2026-09-08-preparation-final-validation.json; does not call this a new independent review."
+    },
+    "expected_final_counts_if_main_executes": {
+      "PREP_done": 8,
+      "PREP_review": 0,
+      "product_done": 0,
+      "product_ready": 1,
+      "product_todo": 11,
+      "all_plan_done": 8,
+      "all_plan_ready": 1,
+      "all_plan_todo": 11
+    },
+    "additional_clarifications": [
+      "仅PREP008 review→done并附真实本报告；随后M0-01 todo→ready；本reviewer不执行任何状态转移。",
+      "M0-01 ready只表示可排队协商，不是本轮M0实施、环境/依赖安装、Git初始化或权限放行。",
+      "可更新2026-09-08-preparation-closeout.md的收尾checkbox；不可改2026-09-06-m0-first-slice.md或roadmap等静态源。",
+      "handoff整份冻结字节作为前缀保留，只能在末尾追加真实记录；其整文件hash可因授权追加变化，但旧正文前缀必须仍匹配本次hash。",
+      "index、旧独立报告、规范/Skill/graph/roadmap/M0 plan、工具/测试和材料RED/GREEN/probe不变。",
+      "允许标准五报告刷新、backlog运营元数据/status/MEMORY/收尾日志的限定更新；稳定契约hash必须保持。",
+      "最终实际命令起止/exit/output和摘要另存preparation-final-validation.json；不是新独立复核；任何越界更改须再次审查。"
+    ],
+    "frozen_handoff_prefix": {
+      "bytes": 7606,
+      "sha256": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60"
+    }
+  },
+  "findings": [],
+  "nonblocking_observations": [
+    {
+      "id": "OBS-001",
+      "severity": "informational",
+      "topic": "partial historical timing",
+      "references": [
+        "Docs/development/evidence/2026-09-08-prep-corrections-review.json#/commands"
+      ],
+      "resolution": "两条辅助记录真实单端点和缺失原因原样保留；不能报告为16条完整起止。无需改源或补造。"
+    },
+    {
+      "id": "OBS-002",
+      "severity": "informational",
+      "topic": "PREP005 attribution",
+      "references": [
+        "Docs/development/evidence/preparation-log.md:102-109",
+        "Docs/development/evidence/2026-09-08-preparation-handoff.md:19"
+      ],
+      "resolution": "index的acceptance_evidence摘要提及生成图谱报告，必须与其不可变preparation-log和handoff一起读；已找到Mill明确独立pass，未把生成结果当独立人证。"
+    }
+  ],
+  "validation_results": {
+    "private_render_exit_code": 0,
+    "private_check_exit_code": 0,
+    "preparation_unit_tests": 27,
+    "preparation_unit_tests_exit_code": 0,
+    "material_probes": 10,
+    "material_probes_exit_code": 0,
+    "product_tests": 0,
+    "git_status_exit_code": 128,
+    "graph_nodes": 101,
+    "graph_edges": 144,
+    "work_items": 20,
+    "acyclic": true,
+    "skills": 3,
+    "reviewer_inspector_failure": {
+      "command_id": "historical-command-and-review-schemas",
+      "exit_code": 1,
+      "cause": "Reviewer parser called .items() on source_sha256 list; type assumption corrected in next logged read-only command, exit0. No reviewed material modified."
+    },
+    "tests_not_rerun_on_resume": "2026-09-09只核对完整既存日志及冻结源；9月8日私有复验结果保留原真实日期，不称今日重新运行。",
+    "resume_strict_hash_failure": {
+      "id": "resume-existing-evidence-and-hashes",
+      "exit_code": 1,
+      "cause": "One closeout whole-file hash changed; subsequent preserved-copy comparison proves sole coordination.resume_events addition, no payload/source/status difference."
+    }
+  },
+  "historical_failures_preserved": {
+    "integrated_red": {
+      "path": "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json",
+      "render_exit_code": 1,
+      "cause": "status counts omitted zero-valued states; complete current counters verified. RED and GREEN static-source maps equal; these maps do not by themselves attest an unrecorded old status snapshot."
+    },
+    "prior_changes_required": [
+      "Docs/development/evidence/2026-09-08-prep-003-004-review.json",
+      "Docs/development/evidence/2026-09-08-prep-006-review.json",
+      "Docs/development/evidence/2026-09-07-prep-001-006-review.json"
+    ],
+    "material_red_green": [
+      "Docs/development/evidence/2026-09-08-preparation-corrections-red.json",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-green.json"
+    ],
+    "service_failures": [
+      {
+        "observed_at": "2026-09-08T01:23:31.887288+08:00",
+        "agent_name": "Kant",
+        "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+        "error": "exceeded retry limit, last status: 429 Too Many Requests",
+        "request_id": "b322f508-cf31-45ab-b93f-d819fa4239bf",
+        "reported_by": "multi_agent_v1.wait_agent",
+        "effect": "Reports on disk need validation; no acceptance inferred from failed reviewer request."
+      },
+      {
+        "at": "2026-09-08T22:03:04.316833+08:00",
+        "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+        "work_item": "PREP-008",
+        "error": "exceeded retry limit, last status: 429 Too Many Requests",
+        "request_id": "4d69eb03-681d-4ed6-bf30-49dc0be1df85",
+        "status_effect": "None; PREP-008 review/M0-01 todo; no accepted integrated review yet.",
+        "recovery": "One retry of the same sole Kant; no new reviewer identity."
+      }
+    ],
+    "rule": "失败/429/未取得答复不是新通过，未改写旧报告。",
+    "resume_events": [
+      {
+        "at": "2026-09-09T18:58:57.074231+08:00",
+        "user_request": "Continue after intentional interruption; local date 2026-09-09.",
+        "claudelink_available": false,
+        "mcp_resources": [],
+        "mcp_resource_templates": [],
+        "agent_lookup": "send_input returned agent not found; resume_agent on original Kant ID returned pending_init; same ID then accepted send_input.",
+        "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+        "new_agents_spawned": 0,
+        "payload_hashes_unchanged": true,
+        "report_observed": "PREP-008 independent report absent; private material directory exists.",
+        "state_action": "None; PREP-008 review and all product items todo."
+      }
+    ]
+  },
+  "commands": [
+    {
+      "id": "initial-instructions",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "Get-Content -LiteralPath AGENTS.md, Docs/development/README.md, skills/aetp-evidence-handoff/SKILL.md -Encoding UTF8",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T21:57:30.9723997+08:00",
+      "finished_at": "2026-09-08T21:57:31.0504752+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read project instructions; full initial output not retained across context handoff.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "prior tool-call summary retained across retry"
+    },
+    {
+      "id": "initial-payload-inspection",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T21:58:13.3061098+08:00",
+      "finished_at": "2026-09-08T21:58:13.4579539+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read-only pathlib/json/hashlib stdin: hashed five core inputs, read index metadata and PREP008 acceptance/states. Main closeout then hashed f98884af318717ce4b42869aeba99fe95c92901ce8b791285cdf236a4ff026eb.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "prior tool-call summary retained across retry"
+    },
+    {
+      "id": "read-frozen-handoff",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "Get-Content -LiteralPath Docs/development/evidence/2026-09-08-preparation-handoff.md -Encoding UTF8",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T21:58:45.8200973+08:00",
+      "finished_at": "2026-09-08T21:58:45.9110969+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read all 73 lines of handoff with line numbers.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "prior tool-call summary retained across retry"
+    },
+    {
+      "id": "resume-process-skills",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "Get-Content -LiteralPath 'C:\\Users\\Alin\\.codex\\skills\\using-superpowers\\SKILL.md' -Encoding UTF8; Get-Content -LiteralPath 'C:\\Users\\Alin\\.codex\\skills\\verification-before-completion\\SKILL.md' -Encoding UTF8",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:05:17.7768149+08:00",
+      "finished_at": "2026-09-08T22:05:17.9397298+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read skill instructions only; no configuration/credentials read or copied.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "resume-project-instructions",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "Get-Content -LiteralPath <each of AGENTS.md, Docs/development/README.md, skills/aetp-evidence-handoff/SKILL.md> -Encoding UTF8",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:05:48.6654120+08:00",
+      "finished_at": "2026-09-08T22:05:48.8771530+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Numbered read; display truncated; decisive sections reread/captured later.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "read-index-accepted-items-and-finalization",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:06:27.7204771+08:00",
+      "finished_at": "2026-09-08T22:06:27.9425066+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read-only JSON stdin printed accepted_items and permitted_post_pass_finalization.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "read-original-boole-mill-evidence",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:07:12.4119510+08:00",
+      "finished_at": "2026-09-08T22:07:12.6209970+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read development README, skill-protocol-navigation, preparation-log and Boole summary; tool display truncated.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "read-mill-supplement-and-boole-provenance",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:08:02.2203080+08:00",
+      "finished_at": "2026-09-08T22:08:02.4521167+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read preparation-log lines25-110 including Mill lines102-109; Boole attribution, original source hashes and reported command families.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "read-closeout-and-project-snapshots",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:09:36.1541512+08:00",
+      "finished_at": "2026-09-08T22:09:36.3893390+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read closeout integration/transitions/payload/service_failures, MEMORY and closeout plan. Tool display truncated; targeted captured reads followed.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "capture-frozen-hashes-and-create-private-copy",
+      "shell": "PowerShell -> python where stated",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "command_representation": "invocation/read targets; inline Python purpose in stdout_summary, not a stored verbatim stdin transcript",
+      "started_at": "2026-09-08T22:11:12.0644847+08:00",
+      "finished_at": "2026-09-08T22:11:12.5274130+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Read-only shared-source SHA256/contract assertions; created owned private copy and its audit driver/log only. Verified28 indexed hashes,42 frozen paths,20-item contract; copied55 project material files. No source modifications.",
+      "output_capture": "tool transcript/summary only; raw streams not separately archived for these auxiliary reads; no invented output",
+      "record_origin": "actual tool-call transcript in this resumed review"
+    },
+    {
+      "id": "prepare-private-review-draft",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "stdin_description": "Assemble independent PREP008 criteria/applicability/finalization report into owned private review-draft.json only. No permanent report written.",
+      "started_at": "2026-09-08T22:21:40.1472744+08:00",
+      "finished_at": "2026-09-08T22:21:40.4175426+08:00",
+      "exit_code": 0,
+      "stdout": "{\"draft_only\": true, \"assessment\": \"preparation-level pass\", \"criteria\": 3, \"applicability_items\": 7, \"commands_recorded\": 21, \"source_paths\": 42, \"permanent_report_exists\": false}\n",
+      "stderr": null,
+      "output_capture": "stdout from actual tool transcript; stderr not separately captured"
+    },
+    {
+      "id": "resume-existing-evidence-and-hashes",
+      "cwd": "D:\\Github\\AETP",
+      "command": "PowerShell Resolve-Path + python -B -",
+      "stdin_description": "Read persisted draft/state/11 child command logs; assert report absent, all8 payload hashes equal, then compare42 before hashes. Strict assertion rejected one changed closeout hash.",
+      "started_at": "2026-09-09T18:59:00.8002742+08:00",
+      "finished_at": "2026-09-09T18:59:01.8527052+08:00",
+      "exit_code": 1,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Target absent; draft3 criteria;11 preserved child logs;8/8 frozen payload match; only closeout c54a911a... -> d5aa526c... differs. Traceback AssertionError for that dictionary.",
+      "output_capture": "actual tool transcript summary, not separately stored raw streams"
+    },
+    {
+      "id": "workspace-git-status",
+      "argv": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "stdin_script": null,
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:11:34.547238+08:00",
+      "finished_at": "2026-09-08T22:11:34.592678+08:00",
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git\n",
+      "output_capture": "complete"
+    },
+    {
+      "id": "material-probe",
+      "argv": [
+        "python",
+        "-B",
+        "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py"
+      ],
+      "stdin_script": null,
+      "cwd": "D:\\Github\\AETP\\.prep-008-review-kant-20260908",
+      "started_at": "2026-09-08T22:11:34.593590+08:00",
+      "finished_at": "2026-09-08T22:11:34.908742+08:00",
+      "exit_code": 0,
+      "stdout": "Preparation assertion countermodels only; product tests executed: 0\n",
+      "stderr": "test_approval_expiry_is_m2_not_m0_execution (__main__.PreparationCorrectionProbes.test_approval_expiry_is_m2_not_m0_execution) ... ok\ntest_create_accepts_receipt_and_domain_event (__main__.PreparationCorrectionProbes.test_create_accepts_receipt_and_domain_event) ... ok\ntest_create_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_create_rejects_duplicate_domain_effect) ... ok\ntest_create_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_create_rejects_missing_receipt) ... ok\ntest_prep_statistics_name_the_prep_milestone (__main__.PreparationCorrectionProbes.test_prep_statistics_name_the_prep_milestone) ... ok\ntest_retry_accepts_receipt_and_single_domain_effect (__main__.PreparationCorrectionProbes.test_retry_accepts_receipt_and_single_domain_effect) ... ok\ntest_retry_rejects_an_additional_event (__main__.PreparationCorrectionProbes.test_retry_rejects_an_additional_event) ... ok\ntest_retry_rejects_duplicate_domain_effect (__main__.PreparationCorrectionProbes.test_retry_rejects_duplicate_domain_effect) ... ok\ntest_retry_rejects_missing_receipt (__main__.PreparationCorrectionProbes.test_retry_rejects_missing_receipt) ... ok\ntest_skill_separates_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.077s\n\nOK\n",
+      "output_capture": "complete"
+    },
+    {
+      "id": "private-render",
+      "argv": [
+        "python",
+        "-B",
+        "tools/devprep.py",
+        "render"
+      ],
+      "stdin_script": null,
+      "cwd": "D:\\Github\\AETP\\.prep-008-review-kant-20260908",
+      "started_at": "2026-09-08T22:11:34.924066+08:00",
+      "finished_at": "2026-09-08T22:11:35.268119+08:00",
+      "exit_code": 0,
+      "stdout": "AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (7/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "private-check",
+      "argv": [
+        "python",
+        "-B",
+        "tools/devprep.py",
+        "check"
+      ],
+      "stdin_script": null,
+      "cwd": "D:\\Github\\AETP\\.prep-008-review-kant-20260908",
+      "started_at": "2026-09-08T22:11:35.285809+08:00",
+      "finished_at": "2026-09-08T22:11:35.526643+08:00",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "private-preparation-tests",
+      "argv": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "stdin_script": null,
+      "cwd": "D:\\Github\\AETP\\.prep-008-review-kant-20260908",
+      "started_at": "2026-09-08T22:11:35.543342+08:00",
+      "finished_at": "2026-09-08T22:11:37.770426+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "test_check_accepts_internal_preparation_material (test_devprep.DevprepPreparationTests.test_check_accepts_internal_preparation_material) ... ok\ntest_check_rejects_missing_skill_marker_without_success_reports (test_devprep.DevprepPreparationTests.test_check_rejects_missing_skill_marker_without_success_reports) ... ok\ntest_check_reports_markdown_link_validation (test_devprep.DevprepPreparationTests.test_check_reports_markdown_link_validation) ... ok\ntest_check_writes_separate_preparation_evidence_reports (test_devprep.DevprepPreparationTests.test_check_writes_separate_preparation_evidence_reports) ... ok\ntest_environment_report_contains_versions_only_and_no_secret_names (test_devprep.DevprepPreparationTests.test_environment_report_contains_versions_only_and_no_secret_names) ... ok\ntest_graph_and_backlog_invariants_are_checked (test_devprep.DevprepPreparationTests.test_graph_and_backlog_invariants_are_checked) ... ok\ntest_markdown_link_validator_accepts_existing_relative_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_accepts_existing_relative_target) ... ok\ntest_markdown_link_validator_rejects_missing_target (test_devprep.DevprepPreparationTests.test_markdown_link_validator_rejects_missing_target) ... ok\ntest_markdown_link_validator_skips_non_file_links (test_devprep.DevprepPreparationTests.test_markdown_link_validator_skips_non_file_links) ... ok\ntest_material_validation_includes_broken_entry_links (test_devprep.DevprepPreparationTests.test_material_validation_includes_broken_entry_links) ... ok\ntest_render_reports_zero_product_completion_and_no_bootstrap_claim (test_devprep.DevprepPreparationTests.test_render_reports_zero_product_completion_and_no_bootstrap_claim) ... ok\ntest_skill_validation_accepts_complete_execution_contract_markers (test_devprep.DevprepPreparationTests.test_skill_validation_accepts_complete_execution_contract_markers) ... ok\ntest_skill_validation_rejects_missing_execution_contract_marker (test_devprep.DevprepPreparationTests.test_skill_validation_rejects_missing_execution_contract_marker) ... ok\ntest_backlog_rejects_invalid_work_item_ids (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_invalid_work_item_ids) ... ok\ntest_backlog_rejects_wrong_types_instead_of_coercing_falsey_values (test_devprep_fail_closed.FailClosedPreparationTests.test_backlog_rejects_wrong_types_instead_of_coercing_falsey_values) ... ok\ntest_environment_does_not_echo_unrecognized_tool_output (test_devprep_fail_closed.FailClosedPreparationTests.test_environment_does_not_echo_unrecognized_tool_output) ... ok\ntest_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them (test_devprep_fail_closed.FailClosedPreparationTests.test_graph_rejects_invalid_node_ids_even_if_edges_refer_to_them) ... ok\ntest_malformed_materials_fail_check_without_creating_success_reports (test_devprep_fail_closed.FailClosedPreparationTests.test_malformed_materials_fail_check_without_creating_success_reports) ... ok\ntest_markdown_accepts_existing_titled_reference_and_encoded_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_accepts_existing_titled_reference_and_encoded_targets) ... ok\ntest_markdown_rejects_missing_titled_and_reference_targets (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_rejects_missing_titled_and_reference_targets) ... ok\ntest_markdown_skips_code_examples_and_rejects_unsupported_link_syntax (test_devprep_fail_closed.FailClosedPreparationTests.test_markdown_skips_code_examples_and_rejects_unsupported_link_syntax) ... ok\ntest_ready_accepts_fulfilled_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_accepts_fulfilled_dependencies) ... ok\ntest_ready_requires_done_dependencies (test_devprep_fail_closed.FailClosedPreparationTests.test_ready_requires_done_dependencies) ... ok\ntest_structural_validation_handles_non_objects_and_unhashable_fields (test_devprep_fail_closed.FailClosedPreparationTests.test_structural_validation_handles_non_objects_and_unhashable_fields) ... ok\ntest_version_probe_failure_paths_never_report_unverified_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_failure_paths_never_report_unverified_output) ... ok\ntest_version_probe_rejects_unknown_empty_or_multiline_output (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_rejects_unknown_empty_or_multiline_output) ... ok\ntest_version_probe_reports_only_recognized_normalized_versions (test_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.883s\n\nOK\n",
+      "output_capture": "complete"
+    },
+    {
+      "id": "integration-provenance-and-state",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json,hashlib,collections\nr=pathlib.Path('.')\ndef ld(p):return json.loads((r/p).read_text(encoding='utf-8-sig'))\ndef ev(p):return ld('Docs/development/evidence/'+p)\nc=ev('2026-09-08-preparation-closeout.json')\nprint('TRANSITIONS',json.dumps(c['transitions'],ensure_ascii=False))\nprint('PAYLOAD',json.dumps(c['prep_008_review_payload'],ensure_ascii=False))\nprint('SERVICE_FAILURES',json.dumps(c['service_failures'],ensure_ascii=False))\nprint('INTEGRATION_SUMMARY',json.dumps([{k:v for k,v in a.items() if k not in ['source_sha256_before_operational_updates']} for a in c['evidence_integration']],ensure_ascii=False))\nb=ld('Docs/development/backlog.json');s=ld('Docs/development/status.json');ws=b['work_items'];by={w['id']:w for w in ws};prep=[w for w in ws if w['milestone']=='PREP'];prod=[w for w in ws if w['milestone']!='PREP']\nassert len(prep)==8 and collections.Counter(w['status'] for w in prep)=={'done':7,'review':1}\nassert by['PREP-008']['status']=='review' and all(by[x]['status']=='done' for x in by['PREP-008']['depends_on'])\nassert len(prod)==12 and all(w['status']=='todo' for w in prod)\nprint('STATUS',json.dumps(s,ensure_ascii=False));print('PREP008',json.dumps(by['PREP-008'],ensure_ascii=False));print('M0-01_DEPENDENCIES',by['M0-01']['depends_on'])\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:12:19.576331+08:00",
+      "finished_at": "2026-09-08T22:12:19.691854+08:00",
+      "exit_code": 0,
+      "stdout": "TRANSITIONS [{\"work_item\": \"PREP-003\", \"from\": \"ready\", \"to\": \"in_progress\", \"at\": \"2026-09-08T00:25:39+08:00\", \"actor\": \"Codex main session\", \"reason\": \"User-authorized closeout; existing source handed to Kant for independent preparation scenario review.\"}, {\"work_item\": \"PREP-004\", \"from\": \"ready\", \"to\": \"in_progress\", \"at\": \"2026-09-08T00:25:39+08:00\", \"actor\": \"Codex main session\", \"reason\": \"User-authorized closeout; existing source handed to Kant for independent preparation scenario review.\"}, {\"work_item\": \"PREP-003\", \"from\": \"in_progress\", \"to\": \"review\", \"at\": \"2026-09-08T00:25:39+08:00\", \"actor\": \"Codex main session\", \"reason\": \"User-authorized closeout; existing source handed to Kant for independent preparation scenario review.\"}, {\"work_item\": \"PREP-004\", \"from\": \"in_progress\", \"to\": \"review\", \"at\": \"2026-09-08T00:25:39+08:00\", \"actor\": \"Codex main session\", \"reason\": \"User-authorized closeout; existing source handed to Kant for independent preparation scenario review.\"}, {\"work_item\": \"PREP-003\", \"from\": \"review\", \"to\": \"done\", \"at\": \"2026-09-08T21:37:58.510929+08:00\", \"actor\": \"Codex main session\", \"reason\": \"Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance.\"}, {\"work_item\": \"PREP-004\", \"from\": \"review\", \"to\": \"done\", \"at\": \"2026-09-08T21:37:58.529006+08:00\", \"actor\": \"Codex main session\", \"reason\": \"Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance.\"}, {\"work_item\": \"PREP-006\", \"from\": \"review\", \"to\": \"done\", \"at\": \"2026-09-08T21:37:58.547535+08:00\", \"actor\": \"Codex main session\", \"reason\": \"Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance.\"}, {\"work_item\": \"PREP-007\", \"from\": \"review\", \"to\": \"done\", \"at\": \"2026-09-08T21:37:58.565543+08:00\", \"actor\": \"Codex main session\", \"reason\": \"Frozen independent preparation pass checked against source hashes and criteria; all dependencies done; no product acceptance.\"}, {\"work_item\": \"PREP-008\", \"from\": \"todo\", \"to\": \"ready\", \"at\": \"2026-09-08T21:37:58.582690+08:00\", \"actor\": \"Codex main session\", \"reason\": \"All PREP-002..007 dependencies independently accepted.\"}, {\"work_item\": \"PREP-008\", \"from\": \"ready\", \"to\": \"in_progress\", \"at\": \"2026-09-08T21:37:58.606928+08:00\", \"actor\": \"Codex main session\", \"reason\": \"Main session prepares integrated handoff for sole Kant independent audit; no product implementation.\"}, {\"work_item\": \"PREP-008\", \"from\": \"in_progress\", \"to\": \"review\", \"at\": \"2026-09-08T21:42:52.619068+08:00\", \"actor\": \"Codex main session\", \"reason\": \"Integrated handoff and immutable acceptance index prepared; pending sole Kant independent review. Required verification runs follow before payload freeze.\"}]\nPAYLOAD {\"prepared_at\": \"2026-09-08T21:55:52.136369+08:00\", \"writer\": \"Codex main session\", \"independent_reviewer\": \"Kant (01a07cac-b6db-7393-ae38-bce13d69c67d)\", \"sha256\": {\"Docs/development/evidence/2026-09-08-prep-acceptance-index.json\": \"12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba\", \"Docs/development/evidence/2026-09-08-preparation-handoff.md\": \"e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60\", \"Docs/development/evidence/2026-09-08-preparation-integrated-validation.json\": \"98e23b8e9fc9d4e8dd89c7b839637ee3ec824dd58da7436fb73f8632c4daee74\", \"Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json\": \"e312f4788ebfcfccaedbd410c54c10b4ff962ad31f1cb21a6a5a2954d02a72e4\", \"Docs/development/backlog.json\": \"e7d062ce99f6ed04a15aeb029ccb7a885595536aefd0ec17d352ce1fc4eac543\", \"Docs/development/status.json\": \"46a760a52eef1deba1b72e57b211421e8581913a59eae43ad559509f93c79baf\", \"MEMORY.md\": \"cd0a84abc0e08b8f4fd304af8d476f026b43854d2cc0c7b06df718bb4d255af4\", \"Docs/superpowers/plans/2026-09-08-preparation-closeout.md\": \"d98fbfbbe3abfd12a684e19781ef9bc869f386462f79b99a9072f836afed82b2\"}, \"freeze_rule\": \"No shared source/state/document/report writes while Kant reviews; only its assigned independent report may change.\", \"post_pass_rule\": \"Only documented operational finalization in immutable acceptance index; handoff frozen body preserved.\"}\nSERVICE_FAILURES [{\"observed_at\": \"2026-09-08T01:23:31.887288+08:00\", \"agent_name\": \"Kant\", \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\", \"error\": \"exceeded retry limit, last status: 429 Too Many Requests\", \"request_id\": \"b322f508-cf31-45ab-b93f-d819fa4239bf\", \"reported_by\": \"multi_agent_v1.wait_agent\", \"effect\": \"Reports on disk need validation; no acceptance inferred from failed reviewer request.\"}, {\"at\": \"2026-09-08T22:03:04.316833+08:00\", \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\", \"work_item\": \"PREP-008\", \"error\": \"exceeded retry limit, last status: 429 Too Many Requests\", \"request_id\": \"4d69eb03-681d-4ed6-bf30-49dc0be1df85\", \"status_effect\": \"None; PREP-008 review/M0-01 todo; no accepted integrated review yet.\", \"recovery\": \"One retry of the same sole Kant; no new reviewer identity.\"}]\nINTEGRATION_SUMMARY [{\"at\": \"2026-09-08T21:13:18.437285+08:00\", \"work_item\": \"PREP-007\", \"report\": \"Docs/development/evidence/2026-09-08-prep-007-review.json\", \"report_sha256\": \"fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf\", \"verification\": \"Parsed report; all 3 reviewed tool/test source hashes still match; 56 commands carry numeric exits and start/end times; private workspace absent; 3 criteria pass.\", \"independent_reviewer\": \"Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), same identity as earlier Codex report\", \"status_action\": \"None; PREP-006 dependency still review.\", \"review_counts\": {\"preparation_unit_tests\": 27, \"unit_exit_code\": 0, \"independent_scenarios\": 25, \"final_independent_harness_exit_code\": 0, \"product_tests_run\": 0}}, {\"at\": \"2026-09-08T21:37:58.506126+08:00\", \"work_items\": [\"PREP-003\", \"PREP-004\", \"PREP-006\"], \"report\": \"Docs/development/evidence/2026-09-08-prep-corrections-review.json\", \"report_sha256\": \"af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d\", \"verified_source_count\": 16, \"command_count\": 16, \"command_time_check\": \"Every command has numeric exit and at least one captured time; partial endpoints explicitly preserved in inspection_notes.\", \"stable_backlog_contract_sha256\": \"8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf\", \"independent_reviewer\": \"Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), prior alias Codex, distinct from executor\", \"applicability_note\": \"Reviewed non-operational source/contract unchanged; subsequent backlog/status/generated-report changes are only documented operational metadata.\"}, {\"at\": \"2026-09-08T21:37:58.509752+08:00\", \"work_items\": [\"PREP-007\"], \"report\": \"Docs/development/evidence/2026-09-08-prep-007-review.json\", \"report_sha256\": \"fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf\", \"verified_source_count\": 3, \"command_count\": 56, \"command_time_check\": \"Every command has numeric exit and at least one captured time; partial endpoints explicitly preserved in inspection_notes.\", \"stable_backlog_contract_sha256\": \"8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf\", \"independent_reviewer\": \"Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), prior alias Codex, distinct from executor\", \"applicability_note\": \"Reviewed non-operational source/contract unchanged; subsequent backlog/status/generated-report changes are only documented operational metadata.\"}]\nSTATUS {\"schema_version\": \"aetp-development-status-0.1\", \"updated_at\": \"2026-09-08\", \"phase\": \"preparation\", \"product_completion_percent\": 0, \"bootstrap_status\": \"not_started\", \"conformance\": {\"status\": \"registered\", \"registered_tests\": 28, \"passed_tests\": 0, \"failed_tests\": 0, \"not_applicable_tests\": 0, \"evidence\": null, \"note\": \"Conformance requirements are registered; no product test has been accepted as passed.\"}, \"milestones\": {\"PREP\": {\"status\": \"in_progress\", \"total\": 8, \"blocked\": 0, \"done\": 7, \"in_progress\": 0, \"ready\": 0, \"review\": 1, \"todo\": 0}, \"M0\": {\"status\": \"todo\", \"total\": 6, \"blocked\": 0, \"done\": 0, \"in_progress\": 0, \"ready\": 0, \"review\": 0, \"todo\": 6}, \"M1\": {\"status\": \"todo\", \"total\": 2, \"blocked\": 0, \"done\": 0, \"in_progress\": 0, \"ready\": 0, \"review\": 0, \"todo\": 2}, \"M2\": {\"status\": \"todo\", \"total\": 2, \"blocked\": 0, \"done\": 0, \"in_progress\": 0, \"ready\": 0, \"review\": 0, \"todo\": 2}, \"M3\": {\"status\": \"todo\", \"total\": 2, \"blocked\": 0, \"done\": 0, \"in_progress\": 0, \"ready\": 0, \"review\": 0, \"todo\": 2}}, \"work_item_status_counts\": {\"blocked\": 0, \"done\": 7, \"in_progress\": 0, \"ready\": 0, \"review\": 1, \"todo\": 12}, \"active_work_items\": [], \"evidence_paths\": [\"Docs/development/evidence/preparation-log.md\", \"Docs/development/evidence/preparation-report.json\", \"Docs/development/evidence/environment.json\", \"Docs/development/evidence/devprep-check.json\", \"Docs/development/evidence/knowledge-graph-check.json\", \"Docs/development/evidence/backlog-check.json\", \"Docs/development/evidence/skill-protocol-navigation.md\", \"Docs/development/evidence/skill-execution-contracts.md\", \"Docs/development/evidence/skill-evidence-handoff.md\", \"Docs/development/evidence/m0-plan-review.md\", \"Docs/development/evidence/prep-007-markdown-red.txt\", \"Docs/development/evidence/prep-007-markdown-green.json\", \"Docs/development/evidence/prep-007-final-validation.json\", \"Docs/development/evidence/2026-09-07-prep-001-006-review.json\", \"Docs/development/evidence/2026-09-07-skill-markers-red.json\", \"Docs/development/evidence/2026-09-07-skill-coverage-red-rerun.json\", \"Docs/development/evidence/2026-09-07-skill-coverage-green.json\", \"Docs/development/evidence/2026-09-08-prep-corrections-review.json\", \"Docs/development/evidence/2026-09-08-preparation-closeout.json\", \"Docs/development/evidence/2026-09-08-prep-007-review.json\", \"Docs/development/evidence/2026-09-08-preparation-handoff.md\", \"Docs/development/evidence/2026-09-08-prep-acceptance-index.json\"], \"limitations\": [\"工作区没有 Git repository，未创建 commit、branch 或 push。\", \"ClaudeLink inbox/resource 接口不可用，未虚构跨 Agent 通信。\", \"产品源码、依赖锁定、Runtime 与 28 条 Conformance 执行证据尚未建立。\"]}\nPREP008 {\"id\": \"PREP-008\", \"milestone\": \"PREP\", \"title\": \"独立复核并交接开发准备\", \"status\": \"review\", \"depends_on\": [\"PREP-002\", \"PREP-003\", \"PREP-004\", \"PREP-005\", \"PREP-006\", \"PREP-007\"], \"files\": [\"Docs/development/evidence/preparation-report.json\"], \"acceptance\": [\"不同 Agent 复核准备材料\", \"所有命令有退出码和时间\", \"明确产品实现与 Bootstrap Acceptance 尚未完成\"], \"conformance_tests\": [], \"evidence\": [\"Docs/development/evidence/preparation-report.json\", \"Docs/development/evidence/2026-09-08-preparation-handoff.md\", \"Docs/development/evidence/2026-09-08-prep-acceptance-index.json\", \"Docs/development/evidence/2026-09-08-preparation-closeout.json\"]}\nM0-01_DEPENDENCIES ['PREP-008']\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "historical-command-and-review-schemas",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json\nr=pathlib.Path('Docs/development/evidence')\nfor f in ['2026-09-08-prep-corrections-review.json','2026-09-08-prep-007-review.json','2026-09-08-preparation-integrated-validation.json','2026-09-08-preparation-integrated-validation-red.json']:\n d=json.loads((r/f).read_text(encoding='utf-8-sig'));print(f,'KEYS',list(d))\n cs=d.get('commands',d.get('runs',[]));print('COMMAND_COUNT',len(cs))\n for c in cs:\n  if f.endswith('corrections-review.json') and c.get('id') not in ['structural-inspector-attempt1','read-old-scenario-ids-and-fixture-contract']:continue\n  if f.endswith('prep-007-review.json'):continue\n  print(json.dumps({k:v for k,v in c.items() if k not in ['stdout','stderr','output','code','stdin_script']},ensure_ascii=False))\n  if 'validation' in f:print('OUTPUT',str(c.get('stdout',''))[:650],str(c.get('stderr',''))[-260:])\n for k in ['conclusions','source_sha256','scope_contract_sha256']:\n  if k in d:print(k,'keys',list(d[k]) if isinstance(d[k],dict) else type(d[k]).__name__)\n print('SOURCE_ENTRY_SAMPLE',json.dumps(next(iter(d.get('source_sha256',{}).items()),None),ensure_ascii=False))\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:12:50.583162+08:00",
+      "finished_at": "2026-09-08T22:12:50.718652+08:00",
+      "exit_code": 1,
+      "stdout": "2026-09-08-prep-corrections-review.json KEYS ['schema_version', 'reviewer', 'reviewer_identity', 'started_at', 'finished_at', 'clock', 'workspace', 'write_set', 'source_write_set', 'scope', 'conclusions', 'scenario_results', 'findings', 'prior_findings_resolution', 'plan_structure', 'commands', 'commands_note', 'source_sha256', 'stable_contract', 'current_field_provenance', 'historical_evidence', 'tool_availability', 'limitations', 'product_acceptance', 'bootstrap_verified', 'product_tests_executed', 'handoff', 'report_validation']\nCOMMAND_COUNT 16\n{\"id\": \"structural-inspector-attempt1\", \"started_at\": \"2026-09-08T21:16:31.7674373+08:00\", \"finished_at\": null, \"cwd\": \"D:\\\\Github\\\\AETP\", \"command\": \"python -B -\", \"exit_code\": 1, \"stdin_description\": \"Read-only AST, Files/evidence comparison and counters.\", \"wall_time_seconds_from_tool\": 0.3391, \"finished_at_note\": \"Wrapper exited on Python failure before printing end timestamp; not reconstructed.\", \"result\": \"Reviewer inspector mistakenly excluded Record paths from Files; M0-01 backlog correctly includes artifacts/m0-01-test-report.json. Not a material defect.\"}\n{\"id\": \"read-old-scenario-ids-and-fixture-contract\", \"command\": \"python -B -\", \"cwd\": \"D:\\\\Github\\\\AETP\", \"started_at\": null, \"started_at_note\": \"Immediately after 10-material-probes; exact separate start was not captured.\", \"finished_at\": \"2026-09-08T21:18:04.2576887+08:00\", \"exit_code\": 0, \"stdin_description\": \"Read prior scenario IDs/assessment and Zeno identity; plan18-25,71-74,111-126.\"}\nconclusions keys ['PREP-003', 'PREP-004', 'PREP-006']\nsource_sha256 keys list\n",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 14, in <module>\nAttributeError: 'list' object has no attribute 'items'\n",
+      "output_capture": "complete"
+    },
+    {
+      "id": "historical-command-and-review-schemas-corrected",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json\nr=pathlib.Path('Docs/development/evidence')\nfor f in ['2026-09-08-prep-corrections-review.json','2026-09-08-prep-007-review.json','2026-09-08-preparation-integrated-validation.json','2026-09-08-preparation-integrated-validation-red.json']:\n d=json.loads((r/f).read_text(encoding='utf-8-sig'));print(f,'KEYS',list(d))\n cs=d.get('commands',d.get('runs',[]));print('COMMAND_COUNT',len(cs))\n if 'validation' in f:\n  for c in cs:\n   print(json.dumps({k:v for k,v in c.items() if k not in ['stdout','stderr','output','code','stdin_script']},ensure_ascii=False));print('OUTPUT',str(c.get('stdout',''))[:400],str(c.get('stderr',''))[-220:])\n else:\n  print('command_first_keys',list(cs[0]));print('source_sample',json.dumps(d['source_sha256'][:1] if isinstance(d['source_sha256'],list) else dict(list(d['source_sha256'].items())[:1]),ensure_ascii=False));print('CONCLUSIONS',json.dumps({k:v.get('assessment') for k,v in d['conclusions'].items()},ensure_ascii=False));print('CONTRACT',json.dumps(d.get('stable_contract'),ensure_ascii=False))\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:13:12.658831+08:00",
+      "finished_at": "2026-09-08T22:13:12.767002+08:00",
+      "exit_code": 0,
+      "stdout": "2026-09-08-prep-corrections-review.json KEYS ['schema_version', 'reviewer', 'reviewer_identity', 'started_at', 'finished_at', 'clock', 'workspace', 'write_set', 'source_write_set', 'scope', 'conclusions', 'scenario_results', 'findings', 'prior_findings_resolution', 'plan_structure', 'commands', 'commands_note', 'source_sha256', 'stable_contract', 'current_field_provenance', 'historical_evidence', 'tool_availability', 'limitations', 'product_acceptance', 'bootstrap_verified', 'product_tests_executed', 'handoff', 'report_validation']\nCOMMAND_COUNT 16\ncommand_first_keys ['id', 'started_at', 'finished_at', 'cwd', 'command', 'exit_code', 'additional_operations']\nsource_sample [{\"path\": \"skills/aetp-execution-contracts/SKILL.md\", \"before_sha256\": \"55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4\", \"before_observed_at\": \"2026-09-08T21:12:51.7866297+08:00\", \"sha256\": \"55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4\", \"final_observed_at\": \"2026-09-08T21:23:05.844372+08:00\", \"unchanged_during_resumed_review\": true}]\nCONCLUSIONS {\"PREP-003\": \"preparation-level pass\", \"PREP-004\": \"preparation-level pass\", \"PREP-006\": \"preparation-level pass\"}\nCONTRACT {\"path\": \"Docs/development/backlog.json\", \"selection\": \"work_items sorted by id\", \"fields\": [\"id\", \"milestone\", \"title\", \"depends_on\", \"files\", \"acceptance\", \"conformance_tests\"], \"excluded\": [\"status\", \"evidence\", \"acceptance_evidence\", \"reproduction_command\", \"independent_reviewer\", \"other operational/acceptance metadata\"], \"canonicalization\": \"json.dumps(selected, ensure_ascii=False, sort_keys=True, separators=(\\\",\\\",\\\":\\\")).encode(\\\"utf-8\\\"); work_items sorted by id, field arrays retain source order\", \"work_item_count\": 20, \"sha256\": \"8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf\", \"reviewed_acceptance_contracts\": {\"PREP-003\": {\"id\": \"PREP-003\", \"milestone\": \"PREP\", \"title\": \"建立执行契约 Skill\", \"depends_on\": [\"PREP-001\"], \"files\": [\"skills/aetp-execution-contracts/SKILL.md\"], \"acceptance\": [\"覆盖 Command→Event Store→Projection\", \"覆盖幂等、UNKNOWN 对账、Replay、Lease epoch、执行边界\", \"不把建议误写成已实现能力\"], \"conformance_tests\": [\"TEST-001\", \"TEST-005\", \"TEST-016\", \"TEST-017\", \"TEST-020\", \"TEST-021\", \"TEST-022\", \"TEST-026\"]}, \"PREP-004\": {\"id\": \"PREP-004\", \"milestone\": \"PREP\", \"title\": \"建立证据与交接 Skill\", \"depends_on\": [\"PREP-001\"], \"files\": [\"skills/aetp-evidence-handoff/SKILL.md\"], \"acceptance\": [\"能区分 planned/implemented/verified/accepted\", \"交接含工作项、文件、命令、证据、风险、下一步\", \"独立复核缺失时保持 review\"], \"conformance_tests\": [\"TEST-010\", \"TEST-012\", \"TEST-028\"]}, \"PREP-006\": {\"id\": \"PREP-006\", \"milestone\": \"PREP\", \"title\": \"拆分 M0–M3 工作包与依赖\", \"depends_on\": [\"PREP-001\", \"PREP-005\"], \"files\": [\"Docs/development/roadmap.md\", \"Docs/development/backlog.json\", \"Docs/superpowers/plans/2026-09-06-m0-first-slice.md\"], \"acceptance\": [\"M0–M3 各有范围、依赖、退出条件\", \"M0 首批具备独立可测工作项\", \"不把 JSON 清单当成原子认领服务\"], \"conformance_tests\": [\"TEST-001\", \"TEST-005\", \"TEST-012\", \"TEST-028\"]}}}\n2026-09-08-prep-007-review.json KEYS ['schema_version', 'reviewer', 'started_at', 'finished_at', 'timezone', 'handoff_to', 'write_set', 'reviewed_scope', 'tool_availability', 'conclusions', 'scenario_results', 'findings', 'test_results', 'reviewer_harness_correction', 'commands', 'source_sha256', 'isolation', 'reproducibility', 'limitations', 'product_acceptance', 'bootstrap_verified', 'evidence_write']\nCOMMAND_COUNT 56\ncommand_first_keys ['id', 'shell', 'cwd', 'command', 'started_at', 'finished_at', 'exit_code']\nsource_sample [{\"path\": \"tools/devprep.py\", \"before_sha256\": \"8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583\", \"before_observed_at\": \"2026-09-08T00:58:49.7115502+08:00\", \"copied_sha256\": \"8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583\", \"after_sha256\": \"8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583\", \"after_observed_at\": \"2026-09-08T01:21:30.3638499+08:00\", \"unchanged\": true}]\nCONCLUSIONS {\"PREP-007\": \"preparation-level pass\"}\nCONTRACT null\n2026-09-08-preparation-integrated-validation.json KEYS ['schema_version', 'stage', 'executor', 'started_at', 'cwd', 'runs', 'scope', 'product_tests_executed', 'prior_failure', 'finished_at', 'status', 'frozen_source_sha256_after']\nCOMMAND_COUNT 5\n{\"stage\": \"integrated_pre_review_green\", \"command\": \"git status --short\", \"argv\": [\"git\", \"status\", \"--short\"], \"started_at\": \"2026-09-08T21:54:07.825305+08:00\", \"expected_exit_code\": 128, \"finished_at\": \"2026-09-08T21:54:07.871170+08:00\", \"exit_code\": 128}\nOUTPUT  fatal: not a git repository (or any of the parent directories): .git\n\n{\"stage\": \"integrated_pre_review_green\", \"command\": \"python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py\", \"argv\": [\"python\", \"Docs/development/evidence/2026-09-08-preparation-corrections-probe.py\"], \"started_at\": \"2026-09-08T21:54:07.871266+08:00\", \"expected_exit_code\": 0, \"finished_at\": \"2026-09-08T21:54:08.117673+08:00\", \"exit_code\": 0}\nOUTPUT Preparation assertion countermodels only; product tests executed: 0\n s_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.029s\n\nOK\n\n{\"stage\": \"integrated_pre_review_green\", \"command\": \"python tools/devprep.py render\", \"argv\": [\"python\", \"tools/devprep.py\", \"render\"], \"started_at\": \"2026-09-08T21:54:08.117753+08:00\", \"expected_exit_code\": 0, \"finished_at\": \"2026-09-08T21:54:08.329582+08:00\", \"exit_code\": 0}\nOUTPUT AETP development preparation\nphase: preparation\nproduct_completion_percent: 0%\nbootstrap_status: not_started\nconformance: registered (28 registered, 0 passed)\nPREP: in_progress (7/8 done)\nM0: todo (0/6 done)\nM1: todo (0/2 done)\nM2: todo (0/2 done)\nM3: todo (0/2 done)\nreport: Docs/development/evidence/preparation-report.json\n \n{\"stage\": \"integrated_pre_review_green\", \"command\": \"python tools/devprep.py check\", \"argv\": [\"python\", \"tools/devprep.py\", \"check\"], \"started_at\": \"2026-09-08T21:54:08.329657+08:00\", \"expected_exit_code\": 0, \"finished_at\": \"2026-09-08T21:54:08.546456+08:00\", \"exit_code\": 0}\nOUTPUT OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%\n \n{\"stage\": \"integrated_pre_review_green\", \"command\": \"python -m unittest discover -s tests/preparation -v\", \"argv\": [\"python\", \"-m\", \"unittest\", \"discover\", \"-s\", \"tests/preparation\", \"-v\"], \"started_at\": \"2026-09-08T21:54:08.546530+08:00\", \"expected_exit_code\": 0, \"finished_at\": \"2026-09-08T21:54:10.787407+08:00\", \"exit_code\": 0}\nOUTPUT  st_devprep_fail_closed.FailClosedPreparationTests.test_version_probe_reports_only_recognized_normalized_versions) ... ok\n\n----------------------------------------------------------------------\nRan 27 tests in 1.937s\n\nOK\n\n2026-09-08-preparation-integrated-validation-red.json KEYS ['schema_version', 'stage', 'executor', 'started_at', 'cwd', 'runs', 'scope', 'product_tests_executed', 'finished_at', 'status', 'frozen_source_sha256_after']\nCOMMAND_COUNT 3\n{\"stage\": \"integrated_pre_review_verification\", \"command\": \"git status --short\", \"argv\": [\"git\", \"status\", \"--short\"], \"started_at\": \"2026-09-08T21:49:20.688283+08:00\", \"expected_exit_code\": 128, \"finished_at\": \"2026-09-08T21:49:20.731857+08:00\", \"exit_code\": 128}\nOUTPUT  fatal: not a git repository (or any of the parent directories): .git\n\n{\"stage\": \"integrated_pre_review_verification\", \"command\": \"python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py\", \"argv\": [\"python\", \"Docs/development/evidence/2026-09-08-preparation-corrections-probe.py\"], \"started_at\": \"2026-09-08T21:49:20.731946+08:00\", \"expected_exit_code\": 0, \"finished_at\": \"2026-09-08T21:49:20.962123+08:00\", \"exit_code\": 0}\nOUTPUT Preparation assertion countermodels only; product tests executed: 0\n s_pure_replay_from_recovery (__main__.PreparationCorrectionProbes.test_skill_separates_pure_replay_from_recovery) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.030s\n\nOK\n\n{\"stage\": \"integrated_pre_review_verification\", \"command\": \"python tools/devprep.py render\", \"argv\": [\"python\", \"tools/devprep.py\", \"render\"], \"started_at\": \"2026-09-08T21:49:20.962259+08:00\", \"expected_exit_code\": 0, \"finished_at\": \"2026-09-08T21:49:21.175116+08:00\", \"exit_code\": 1}\nOUTPUT ERROR status.work_item_status_counts does not match backlog: expected={'done': 7, 'review': 1, 'todo': 12, 'in_progress': 0, 'blocked': 0, 'ready': 0}, actual={'done': 7, 'review': 1, 'todo': 12}\n \n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "applicability-and-timestamp-verification",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json,hashlib,datetime\nr=pathlib.Path('.')\ndef ld(p):return json.loads((r/p).read_text(encoding='utf-8-sig'))\ndef ev(p):return ld('Docs/development/evidence/'+p)\ndef sh(p):return hashlib.sha256((r/p).read_bytes()).hexdigest()\ni=ev('2026-09-08-prep-acceptance-index.json');c=ev('2026-09-08-preparation-closeout.json');b=ld('Docs/development/backlog.json');by={w['id']:w for w in b['work_items']}\nassert all(sh(p)==h for p,h in c['prep_008_review_payload']['sha256'].items())\nassert all(w['acceptance_criteria']==by[w['id']]['acceptance'] for w in i['accepted_items'])\nbo=ev('2026-09-07-prep-001-006-review.json');bo_matches={p:sh(p)==h for p,h in bo['source_sha256_parent_verified'].items()};print('BOOLE_SOURCE_APPLICABILITY',json.dumps(bo_matches,ensure_ascii=False))\ncr=ev('2026-09-08-prep-corrections-review.json');pr=ev('2026-09-08-prep-007-review.json')\nops={'Docs/development/backlog.json','Docs/development/status.json','Docs/development/evidence/preparation-report.json'}\ncm={e['path']:sh(e['path'])==e['sha256'] for e in cr['source_sha256']};assert all(v or p in ops for p,v in cm.items());assert all(sh(e['path'])==e['before_sha256']==e['after_sha256'] for e in pr['source_sha256'])\nprint('CORRECTIONS',len(cm),'paths; differing operational paths',[p for p,v in cm.items() if not v]);print('PREP007_ALL3_TOOL_TEST_HASHES_MATCH',True)\nprint('PRIOR_FINDINGS_RESOLUTION',json.dumps(cr['prior_findings_resolution'],ensure_ascii=False))\nfor name,cs in [('corrections',cr['commands']),('prep007',pr['commands']),('integrated_green',ev('2026-09-08-preparation-integrated-validation.json')['runs']),('integrated_red',ev('2026-09-08-preparation-integrated-validation-red.json')['runs'])]:\n partial=[]\n for q in cs:\n  assert isinstance(q['exit_code'],int) and not isinstance(q['exit_code'],bool)\n  ts=[q.get(k) for k in ['started_at','finished_at'] if q.get(k)];assert ts\n  for t in ts:assert datetime.datetime.fromisoformat(t).utcoffset() is not None\n  if len(ts)==2: assert datetime.datetime.fromisoformat(ts[0])<=datetime.datetime.fromisoformat(ts[1])\n  else:partial.append(q.get('id',q.get('command')))\n print('TIMESTAMPS',name,'total',len(cs),'full',len(cs)-len(partial),'partial',partial)\ng=ev('2026-09-08-preparation-integrated-validation.json');red=ev('2026-09-08-preparation-integrated-validation-red.json'); gh=g['frozen_source_sha256_after'];rh=red['frozen_source_sha256_after'];print('INTEGRATED_HASH_CHANGES',[p for p in gh if p in rh and gh[p]!=rh[p]])\nprint('SERVICE_FAILURES',json.dumps(c['service_failures'],ensure_ascii=False))\nkg=ld('Docs/development/knowledge-graph.json');print('A2A_EDGES',json.dumps([x for x in kg['edges'] if 'a2a' in json.dumps(x).lower()],ensure_ascii=False))\nprint('PAYLOAD_8_HASHES_MATCH',True,'ACCEPTANCE_7_MATCH',True)\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:14:23.993041+08:00",
+      "finished_at": "2026-09-08T22:14:24.106702+08:00",
+      "exit_code": 0,
+      "stdout": "BOOLE_SOURCE_APPLICABILITY {\"README.md\": true, \"AGENTS.md\": true, \".gitignore\": true, \".editorconfig\": true, \"Docs/development/README.md\": true, \"Docs/development/roadmap.md\": false, \"Docs/development/backlog.json\": false, \"Docs/superpowers/plans/2026-09-06-m0-first-slice.md\": false}\nCORRECTIONS 16 paths; differing operational paths ['Docs/development/backlog.json', 'Docs/development/status.json', 'Docs/development/evidence/preparation-report.json']\nPREP007_ALL3_TOOL_TEST_HASHES_MATCH True\nPRIOR_FINDINGS_RESOLUTION [{\"id\": \"F-001\", \"work_item\": \"PREP-003\", \"original_severity\": \"medium\", \"resolution\": \"closed at preparation level\", \"references\": [\"skills/aetp-execution-contracts/SKILL.md:39-40\"], \"evidence\": [\"C003-1\", \"C003-2\", \"10-material-probes\"]}, {\"id\": \"F-002\", \"work_item\": \"PREP-004\", \"original_severity\": \"low; previously nonblocking\", \"resolution\": \"closed at preparation level\", \"references\": [\"skills/aetp-evidence-handoff/SKILL.md:31\"], \"evidence\": [\"C004-1\", \"10-material-probes\"]}, {\"id\": \"R1\", \"work_item\": \"PREP-006\", \"resolution\": \"previous closure remains applicable\", \"evidence\": [\"C006-3\", \"current AST counts 1/2/1/2/2/1; 9 planned methods\"]}, {\"id\": \"R2\", \"work_item\": \"PREP-006\", \"resolution\": \"previous closure remains applicable\", \"evidence\": [\"C006-3\", \"6/6 Files and evidence path sets match\"]}, {\"id\": \"R3\", \"work_item\": \"PREP-006\", \"resolution\": \"previous closure remains applicable\", \"evidence\": [\"C006-2\", \"M0-03 lacks TEST-014; M1-02 retains it\"]}, {\"id\": \"R4\", \"work_item\": \"PREP-006\", \"original_severity\": \"important\", \"resolution\": \"closed at preparation level\", \"references\": [\"Docs/superpowers/plans/2026-09-06-m0-first-slice.md:167-173\", \"Docs/superpowers/plans/2026-09-06-m0-first-slice.md:286-296\"], \"evidence\": [\"C006-1\", \"10-material-probes\"]}, {\"id\": \"R5\", \"work_item\": \"PREP-006\", \"original_severity\": \"minor\", \"resolution\": \"closed at preparation level\", \"references\": [\"Docs/development/roadmap.md:9,24\", \"Docs/superpowers/plans/2026-09-06-m0-first-slice.md:406-408\"], \"evidence\": [\"C006-2\", \"10-material-probes\"]}]\nTIMESTAMPS corrections total 16 full 14 partial ['structural-inspector-attempt1', 'read-old-scenario-ids-and-fixture-contract']\nTIMESTAMPS prep007 total 56 full 56 partial []\nTIMESTAMPS integrated_green total 5 full 5 partial []\nTIMESTAMPS integrated_red total 3 full 3 partial []\nINTEGRATED_HASH_CHANGES []\nSERVICE_FAILURES [{\"observed_at\": \"2026-09-08T01:23:31.887288+08:00\", \"agent_name\": \"Kant\", \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\", \"error\": \"exceeded retry limit, last status: 429 Too Many Requests\", \"request_id\": \"b322f508-cf31-45ab-b93f-d819fa4239bf\", \"reported_by\": \"multi_agent_v1.wait_agent\", \"effect\": \"Reports on disk need validation; no acceptance inferred from failed reviewer request.\"}, {\"at\": \"2026-09-08T22:03:04.316833+08:00\", \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\", \"work_item\": \"PREP-008\", \"error\": \"exceeded retry limit, last status: 429 Too Many Requests\", \"request_id\": \"4d69eb03-681d-4ed6-bf30-49dc0be1df85\", \"status_effect\": \"None; PREP-008 review/M0-01 todo; no accepted integrated review yet.\", \"recovery\": \"One retry of the same sole Kant; no new reviewer identity.\"}]\nA2A_EDGES [{\"source\": \"aetp\", \"target\": \"concept-a2a\", \"relation\": \"optionally_uses\", \"source_reference\": \"§2.4; §15.5\"}]\nPAYLOAD_8_HASHES_MATCH True ACCEPTANCE_7_MATCH True\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "normative-boundaries-and-current-documents",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib\nr=pathlib.Path('.')\nfor p,ranges in [('MEMORY.md',[(1,27)]),('Docs/development/knowledge-map.md',[(1,45)]),('Docs/AETP-设计方案.md',[(3382,3410),(3469,3476),(3674,3684)]),('skills/aetp-protocol-navigation/SKILL.md',[(1,42)])]:\n print('---',p);ls=(r/p).read_text(encoding='utf-8-sig').splitlines()\n for lo,hi in ranges:\n  for n in range(lo,min(hi,len(ls))+1):print(f'{n}: {ls[n-1]}')\np='Docs/superpowers/plans/2026-09-08-preparation-closeout.md';ls=(r/p).read_text(encoding='utf-8-sig').splitlines();print('---closeout plan current gates')\nfor n,l in enumerate(ls,1):\n if '[ ]' in l or '[x]' in l or n in [18,19,20,59,67]:print(f'{n}: {l}')\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:16:38.458306+08:00",
+      "finished_at": "2026-09-08T22:16:38.573173+08:00",
+      "exit_code": 0,
+      "stdout": "--- MEMORY.md\n1: # AETP 项目记忆\n2: \n3: 更新：2026-09-08（Asia/Shanghai，本机记录）。范围：`D:\\Github\\AETP`。\n4: \n5: 本文件整理用户提供的协作约定与本轮核实的工作区事实，供后续会话接手。它是开发期摘要，不是新规范、运行时事实源、授权凭据或第二份 backlog；不假定客户端会自动加载本文件。易变进度应重新读取权威来源，不能把本快照当作实时状态。\n6: \n7: ## 1. 先读什么\n8: \n9: 1. `AGENTS.md`、`Docs/development/README.md`。\n10: 2. `Docs/development/backlog.json` 中当前工作项的依赖、输入、文件范围、验收条件及证据。\n11: 3. `Docs/development/knowledge-map.md` 定位章节，再按需阅读原始规范。\n12: 4. 仅在执行首批 M0 时阅读 `Docs/superpowers/plans/2026-09-06-m0-first-slice.md`。\n13: \n14: 权威顺序：用户已确认的基本设定 → `Docs/AETP-设计方案.md` 中规范性约束 → 补充建议 → 开发期决策与计划 → 派生索引。发现冲突先列明影响，不静默改变协议。\n15: \n16: ## 2. 不得改变的产品设定\n17: \n18: - 用户投入想法，由至少两个平等、独立 Agent 直接互相回应、讨论方案并协作交付。\n19: - Role 表示职责与所需能力，不代表上下级或直接通信特权。\n20: - Manager 不是必需成员；Orchestrator 是确定性基础设施，不是隐藏的领导 Agent。\n21: - Task 归属和执行权限不等于审查权；独立审查不要求先夺取作者 Task 的 Lease。\n22: - 开发期 Reviewer、代码所有者和临时分工只是协作安排，不是产品 Agent 等级。\n23: - A2A 仅为可选 Transport Adapter，不是必需依赖。\n24: \n25: ## 3. 开发与授权边界\n26: \n27: - 从第一天遵守 `Command → Event Store → Projection`，不通过临时直接写 State 绕过事实链。\n--- Docs/development/knowledge-map.md\n1: # AETP 知识图谱导览\n2: \n3: 更新：2026-09-06。`knowledge-graph.json` 是**开发期可追溯索引**，不是运行时事实源；权威规范仍是 `Docs/AETP-设计方案.md`。\n4: \n5: ## 核心链路\n6: \n7: ```text\n8: 用户想法\n9:   → 平等 Agent 直接 Message / Discussion\n10:   → Decision / Blueprint\n11:   → Task（Command → Event Store → Projection）\n12:   → Artifact → Review → Verification\n13:   → Integration Gate / Mission Acceptance\n14:   → 成果交付\n15: ```\n16: \n17: Orchestrator 只提供确定性基础设施与恢复，不是隐藏的领导 Agent。Agent 的 Role 是职责/能力标签，不产生上下级或通信特权。A2A 仅是可选 Transport Adapter。\n18: \n19: ## 按问题查找\n20: \n21: - **平级协作**：§§1.1、1.5、3 P1、5.11、8.5、13.1；`INV-008`；`TEST-015`、`TEST-028`。\n22: - **事实链与重放**：§§10.4、13.4、13.10、14.1–14.2；`INV-005`、`INV-011`、`INV-014`、`INV-015`、`INV-016`、`INV-021`；`TEST-001`、`TEST-005`、`TEST-012`、`TEST-017`、`TEST-021`。\n23: - **Task 执行/审查**：§§7.3、7.6、7.10、10.2–10.3、10.6；`INV-004`、`INV-017`；`TEST-003`、`TEST-006`、`TEST-008`、`TEST-009`、`TEST-019`、`TEST-022`、`TEST-024`。\n24: - **审批/高风险**：§§9.3–9.7、14.11；`INV-006`、`INV-010`、`INV-020`；`TEST-004`、`TEST-007`、`TEST-011`、`TEST-023`、`TEST-027`。\n25: - **外部效果与执行边界**：§§5.13、13.5、13.9、14.3–14.4；`INV-012`、`INV-013`；`TEST-014`、`TEST-016`、`TEST-020`、`TEST-026`。\n26: - **版本/变更/冲突**：§§9.2、11.1–11.5、14.8–14.9；`INV-005`、`INV-007`；`TEST-018`、`TEST-022`、`TEST-023`、`TEST-024`。\n27: - **开发前 Bootstrap**：§15.5、§17.2、§18.1–18.3、补充建议 §3；`TEST-001`–`TEST-028` 的实现状态均应以证据为准。\n28: \n29: ## 图谱规则\n30: \n31: 每个节点有稳定 `id`、`type`、`label`、`source` 和摘要；每条边必须指向已登记节点，并写明 `relation` 与来源。索引可以不覆盖所有实现细节，但不能发明规范中不存在的 Entity、INV 或 TEST。源章节变化时，先复核本文件、JSON 和 backlog 的映射，再更新摘要。\n32: \n33: 主要关系：`defines`、`contains`、`constrains`、`verified_by`、`implements`、`depends_on`、`optionally_uses`、`produces`、`reviews`、`hands_off_to`。\n--- Docs/AETP-设计方案.md\n3382: **B5 Bootstrap Acceptance。** 「环境搭好了」不能是一句话。逐项验证 environment / dependency / build / test / git / knowledge，全部通过后产生 Bootstrap Acceptance——与 Mission Acceptance（5.2 / INV-019）同一思想——按 Mission Acceptance 完成固定版本证据与 CRITICAL 人类验收后，Project 的 phase 进入 `BOOTSTRAP_VERIFIED`（不是新的 Project status），才进入正式开发 Planning。初始目标、方案与环境设计的讨论无需等待此阶段。\n3383: \n3384: **权限边界。** Bootstrap Agent 从第一天就遵守 Autonomy ≠ Unlimited Authority（P9）：\n3385: \n3386: ```text\n3387: 工作区内创建目录 / 初始化 Git / 获准依赖安装    → Policy 允许范围内自动\n3388: 系统级安装 / 提权 / 修改服务或防火墙 / 数据出域 → Approval\n3389: 删除数据                                      → 按风险与作用域检查 Approval\n3390: 读取凭据                                      → Credential Broker（14.3）\n3391: 部署生产环境                                  → Approval\n3392: ```\n3393: \n3394: Bootstrap 也是 AETP 最好的第一个演示场景：用户只说「创建 AETP 项目」，UI 上各专职 Agent 依次完成侦察、决策、搭建与验证，最终呈现一份全部 `VERIFIED` 的 Bootstrap 清单——这比「Agent 写了一段代码」更能体现协议的价值。\n3395: \n3396: ---\n3397: \n3398: ## 16. 核心不变量\n3399: \n3400: 以下规则属于协议核心，实现时不得违背。「执行层」标注每条不变量在 Runtime 中的强制位置。\n3401: \n3402: | ID | 规则 | 执行层 |\n3403: | --- | --- | --- |\n3404: | INV-001 | Agent 不得直接修改 Project State，必须通过合法 Protocol Operation | Command Handler |\n3405: | INV-002 | Message 不得直接代表 Decision | Collaboration / Governance |\n3406: | INV-003 | Agent Claim 不得直接代表 Verification | Verification Engine |\n3407: | INV-004 | Task 必须经过有效 Review、Verification 与适用的 Integration Gate 才能 COMPLETED；无集成面豁免须显式留痕 | Task Engine / Integration Gate |\n3408: | INV-005 | 历史 Event 不得被修改 | Event Store |\n3409: | INV-006 | 高风险 Action 必须经过 Governance Policy | Governance Engine |\n3410: | INV-007 | Blueprint 变更必须保留版本历史 | Planning Engine |\n3469: 传输：进程内调用 + WebSocket 即可，不必先接入 A2A（见 2.4）。\n3470: \n3471: M0 仅实现 Core Kernel 五个对象，随后按里程碑增量实现其余各层：M1 双 Agent + Message / Artifact / Lease / Checkpoint / Review / Verification，M2 Discussion / Meeting / Decision / Approval / Governance，M3 Team Formation / Blueprint / Task DAG / Integration / Mission Acceptance。每个里程碑的验收判据见《AETP-设计方案-补充建议》§3。\n3472: \n3473: **M0 是协议内核验证，不是完整产品体验或完整 Bootstrap。** 它只以无危险外部效果的任务 / 模拟 Runtime 验证 Command、事件、版本、幂等、重启与重放，不得在缺少 Review / Verification 时把任务伪装成合规 COMPLETED。测试用断言不是 Verification 实体，也不能产生 Bootstrap Acceptance。\n3474: \n3475: M1 接入 Message 与双 Agent 直接交流，同时具备 Artifact / Review / Verification、Lease / Checkpoint 与必要的执行边界；可用明确的无集成面低风险任务跑通小成果，但不能宣称完成第 15.5 节的完整 Bootstrap。M2 增加结构化讨论与治理；M3 补齐 Blueprint、Integration、Mission Acceptance 后，才把完整 Project Bootstrap 与「一个想法 → 讨论方案 → 成果验收」作为真实项目闭环。M0–M2 的有限演示不代替基本设定的最终验收。M1 只使用固定且版本化的低风险 Policy；完整 Approval 尚未实现时，需要审批的操作一律拒绝或留待 M2，不能把缺少审批模块解释为默认放行。\n3476: \n3674: TEST-001  同键同内容重试返回原结果，不重复提交领域 Event 批次（INV-014 / 14.1）\n3675: TEST-002  Agent 不得直接修改 State（INV-001）\n3676: TEST-003  Task 不得跳过 Review / Verification 进入 VERIFIED（INV-017）\n3677: TEST-004  未经 Approval 的高风险 Command 必须拒绝（INV-006）\n3678: TEST-005  删除 State Store 后重放 Event 得到一致状态（INV-015）\n3679: TEST-006  Agent 崩溃后 Task 可按 Lease 重新分配（7.6）\n3680: TEST-007  Untrusted Input 不得直接授权 Command（INV-020）\n3681: TEST-008  Review 通过但 Verification 缺失不得 VERIFIED（16.1 ⑥）\n3682: TEST-009  有集成面任务未经 Integration Gate 不得 COMPLETED；豁免必须显式留痕（INV-004）\n3683: TEST-010  Mission Acceptance 失败不得 Delivery（INV-019）\n3684: TEST-011  Approval 过期后必须产生升级路径，不得静默悬挂（9.3）\n--- skills/aetp-protocol-navigation/SKILL.md\n1: ---\n2: name: aetp-protocol-navigation\n3: description: Use when changing or reviewing AETP protocol entities, task states, agent relationships, communication permissions, or architectural boundaries and the governing sections or acceptance tests need to be located.\n4: ---\n5: \n6: # AETP 协议导航与变更影响\n7: \n8: 这是项目规范的参考索引，不取代原文或授予变更权限。所有路径从仓库根目录解析；只加载与当前问题有关的章节。\n9: \n10: ## 查找表\n11: \n12: 主规范：`Docs/AETP-设计方案.md`。其 §§16、16.1、18.3 分别定义不变量、十一条冻结区分和 Conformance 要求。\n13: \n14: | 问题 | 原文章节 | 必查约束 / 验收 |\n15: | --- | --- | --- |\n16: | Agent 平等、Manager 是否必经、直接对话 | §§1.1、1.5、3、5.11、8.5、13.1 | INV-008；TEST-015、TEST-028 |\n17: | Reviewer 是否必须取得作者 Task 归属 | §§7.6、10.2、10.3、14.1 | INV-004、INV-017；TEST-003、TEST-008、TEST-015 |\n18: | 新增顶层对象还是子资源 | §§4.2、4.3 | 19 个实体封顶；Lease / Checkpoint 等不是新顶层 Entity |\n19: | Task 状态、Integration 与 Mission 验收 | §§7.3、10.3、10.6、5.2 | INV-004、INV-017、INV-019；TEST-009、TEST-010、TEST-024 |\n20: | 变更、撤销、替代与历史 | §§9.2、11.1–11.5、14.2 | INV-005、INV-007；保留旧版本与溯源 |\n21: | Runtime / Transport / Workspace 边界 | §§2.4、5.13、7.10、13.9 | TEST-013、TEST-014、TEST-016、TEST-026；A2A 可选 |\n22: | 里程碑是否可以缩减要求 | §17.2；补充建议 §3 | M0–M2 仅有限阶段，最终基本设定由 TEST-028 检验 |\n23: \n24: ## 输出一个可复核的影响单\n25: \n26: 读命中的原文后，列出：需求、当前规范、受影响的实体/不变量/命令/事件、需要补的有效与无效夹具、覆盖工作项，以及是否改变用户基本设定。具体编码方案可选，不把这张表变成新增协议规则。\n27: \n28: `Docs/development/knowledge-graph.json` 可按稳定 ID 查关系；`Docs/development/backlog.json` 可按 `conformance_tests` 找工作项。两者都是开发期派生资料，不是运行时事实源。\n29: \n30: 示例：有人要求“Reviewer 先接管 Task 才能审查，以减少冲突”。定位 §§7.6、10.3、14.1 与 TEST-015：执行 Lease 限制的是执行写入，不是独立审查的资格。应测试“审查者不接管 Task 也能提交受校验 Review”，而非加一个 Reviewer 抢占步骤；普通讨论不绕经 Manager。\n31: \n32: ## 易混淆处\n33: \n34: - 平级不等于不校验 Command，不等于绕过人类治理。\n35: - 临时记录者/协作者不等于领导 Agent；工具会话关系不决定产品角色等级。\n36: - 图谱边、旧 ZIP 和补充建议里的历史“建议”不覆盖主规范。\n37: - 原文不足以决定时写出歧义及备选，不发明不存在的 INV 或 TEST 编号。\n38: \n39: 改动后同步图谱来源、受影响计划与测试映射，并运行 `python tools/devprep.py check`；通过只说明资料一致，不说明协议行为正确。\n---closeout plan current gates\n18: - ClaudeLink is unavailable. Coordinate these session agents explicitly; do not claim cross-terminal coordination or an atomic backlog lease.\n19: - No Git/worktree is available. Record source SHA-256 values; reject stale shared-file snapshots before a write. This is change detection, not cross-process locking.\n20: - Reviewers never write backlog/status, source files or shared generated reports. Any CLI/test verification by a reviewer uses a private temporary copy containing only project materials, not user configuration.\n33: - [x] Agree scopes and capture initial source/state hashes; later record the user's one-subagent limit.\n34: - [x] PREP-003/004 reviewer independently applies both Skills to the recorded pressure scenarios and finds the original normative sections.\n35: - [x] PREP-006 reviewer rechecks prior R1/R2/R3 findings, test discovery/fixtures, exact write sets, evidence paths and phase boundaries.\n36: - [x] PREP-007 reviewer audits current check/render/environment code, fail-closed behavior and regression evidence; execute tests only in a private copy.\n42: - [x] Assess reviewer feedback against the actual acceptance requirements; do not turn absence of product implementation into a circular PREP blocker.\n43: - [x] If required, fix verified defects using RED → GREEN and ask the sole retained independent reviewer to re-review (preserving original findings).\n44: - [x] Verify reviewed source hashes, record real status transitions and per-item independent acceptance; update derived status counts from backlog.\n45: - [x] Preserve historical evidence and clearly date superseding conclusions; do not silently rewrite old failure records.\n51: - [x] After PREP-002..007 dependencies are done, move PREP-008 through ready/in_progress/review and prepare the integrated handoff.\n52: - [ ] A separate reviewer audits acceptance evidence, identities, source-hash applicability, scope and honest product/environment limitations.\n53: - [ ] Only a real preparation-level pass permits PREP-008 done; otherwise retain review and describe the remaining work.\n54: - [ ] Mark M0-01 ready only if PREP-008 is done; ready is not execution or environment authorization. Do not create product files.\n55: - [ ] Refresh the memory snapshot and handoff with final actual states and verification, without claiming automatic memory loading.\n59: Run and record full stdout/stderr, timestamps and exit codes:\n67: The test suite also refreshes environment and preparation reports. Validate JSON, reviewed-source hashes and updated document paths. Final handoff includes work IDs, changed files, commands, evidence, independent reviewers, uncovered risks and the next authorized action; no automatic commit/push.\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "focused-acceptance-boundaries",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json\nr=pathlib.Path('.')\np='Docs/AETP-设计方案.md';ls=(r/p).read_text(encoding='utf-8-sig').splitlines();print(p)\nfor lo,hi in [(3382,3394),(3470,3475),(3674,3682)]:\n for n in range(lo,hi+1):print(f'{n}: {ls[n-1]}')\np='MEMORY.md';ls=(r/p).read_text(encoding='utf-8-sig').splitlines();print(p)\nfor n,l in enumerate(ls,1):\n if any(s in l for s in ['PREP-008','7 done','7done','7 个','12 个','当前快照','M0-01','21:5','Conformance','not_started']):print(f'{n}: {l}')\ni=json.loads((r/'Docs/development/evidence/2026-09-08-prep-acceptance-index.json').read_text(encoding='utf-8-sig'));print('INDEX_LIMITS',json.dumps(i['evidence_scope_limits'],ensure_ascii=False))\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-08T22:17:01.939072+08:00",
+      "finished_at": "2026-09-08T22:17:02.035068+08:00",
+      "exit_code": 0,
+      "stdout": "Docs/AETP-设计方案.md\n3382: **B5 Bootstrap Acceptance。** 「环境搭好了」不能是一句话。逐项验证 environment / dependency / build / test / git / knowledge，全部通过后产生 Bootstrap Acceptance——与 Mission Acceptance（5.2 / INV-019）同一思想——按 Mission Acceptance 完成固定版本证据与 CRITICAL 人类验收后，Project 的 phase 进入 `BOOTSTRAP_VERIFIED`（不是新的 Project status），才进入正式开发 Planning。初始目标、方案与环境设计的讨论无需等待此阶段。\n3383: \n3384: **权限边界。** Bootstrap Agent 从第一天就遵守 Autonomy ≠ Unlimited Authority（P9）：\n3385: \n3386: ```text\n3387: 工作区内创建目录 / 初始化 Git / 获准依赖安装    → Policy 允许范围内自动\n3388: 系统级安装 / 提权 / 修改服务或防火墙 / 数据出域 → Approval\n3389: 删除数据                                      → 按风险与作用域检查 Approval\n3390: 读取凭据                                      → Credential Broker（14.3）\n3391: 部署生产环境                                  → Approval\n3392: ```\n3393: \n3394: Bootstrap 也是 AETP 最好的第一个演示场景：用户只说「创建 AETP 项目」，UI 上各专职 Agent 依次完成侦察、决策、搭建与验证，最终呈现一份全部 `VERIFIED` 的 Bootstrap 清单——这比「Agent 写了一段代码」更能体现协议的价值。\n3470: \n3471: M0 仅实现 Core Kernel 五个对象，随后按里程碑增量实现其余各层：M1 双 Agent + Message / Artifact / Lease / Checkpoint / Review / Verification，M2 Discussion / Meeting / Decision / Approval / Governance，M3 Team Formation / Blueprint / Task DAG / Integration / Mission Acceptance。每个里程碑的验收判据见《AETP-设计方案-补充建议》§3。\n3472: \n3473: **M0 是协议内核验证，不是完整产品体验或完整 Bootstrap。** 它只以无危险外部效果的任务 / 模拟 Runtime 验证 Command、事件、版本、幂等、重启与重放，不得在缺少 Review / Verification 时把任务伪装成合规 COMPLETED。测试用断言不是 Verification 实体，也不能产生 Bootstrap Acceptance。\n3474: \n3475: M1 接入 Message 与双 Agent 直接交流，同时具备 Artifact / Review / Verification、Lease / Checkpoint 与必要的执行边界；可用明确的无集成面低风险任务跑通小成果，但不能宣称完成第 15.5 节的完整 Bootstrap。M2 增加结构化讨论与治理；M3 补齐 Blueprint、Integration、Mission Acceptance 后，才把完整 Project Bootstrap 与「一个想法 → 讨论方案 → 成果验收」作为真实项目闭环。M0–M2 的有限演示不代替基本设定的最终验收。M1 只使用固定且版本化的低风险 Policy；完整 Approval 尚未实现时，需要审批的操作一律拒绝或留待 M2，不能把缺少审批模块解释为默认放行。\n3674: TEST-001  同键同内容重试返回原结果，不重复提交领域 Event 批次（INV-014 / 14.1）\n3675: TEST-002  Agent 不得直接修改 State（INV-001）\n3676: TEST-003  Task 不得跳过 Review / Verification 进入 VERIFIED（INV-017）\n3677: TEST-004  未经 Approval 的高风险 Command 必须拒绝（INV-006）\n3678: TEST-005  删除 State Store 后重放 Event 得到一致状态（INV-015）\n3679: TEST-006  Agent 崩溃后 Task 可按 Lease 重新分配（7.6）\n3680: TEST-007  Untrusted Input 不得直接授权 Command（INV-020）\n3681: TEST-008  Review 通过但 Verification 缺失不得 VERIFIED（16.1 ⑥）\n3682: TEST-009  有集成面任务未经 Integration Gate 不得 COMPLETED；豁免必须显式留痕（INV-004）\nMEMORY.md\n30: - 实现前明确验收与失败场景，记录 RED → GREEN；静态准备检查不等于产品功能测试、Conformance 或 Bootstrap Acceptance。\n48: - 完成率按 `done` 工作项计数，不代表工时或产品完成率；Conformance 单独统计，测试映射存在不等于 `passed`。\n66: - 阶段：`preparation`；产品完成率 `0%`；`bootstrap_status = not_started`。\n67: - Conformance：28 条 registered / 0 passed；没有产品执行验收证据。\n68: - PREP：7/8 done（PREP-001..007）；PREP-008 为 review，等待唯一 Kant 独立总审查。\n70: - M0–M3 的 12 项仍为 todo。仅在 PREP-008 真实 done 后将 M0-01 设 ready，本轮不开始实现。\n78: 2. 读取 `Docs/development/evidence/2026-09-08-preparation-handoff.md`、`2026-09-08-preparation-closeout.json` 与 `2026-09-08-prep-acceptance-index.json`；当前下一步是唯一 Kant 的 PREP-008 独立总审查，不重复已有复核、不新增子代理。\n79: 3. 总审查实际通过并检查摘要后，才按限定收尾 PREP-008 done、M0-01 ready；ready 不代表执行授权或环境已就绪。\n80: 4. 本轮不实施 M0。后续获准接手 M0-01 时再加载 M0 首批计划、明确写集/失败场景与独立复核安排。\n99: - 未覆盖：产品行为、28 条 Conformance、Bootstrap Acceptance、跨进程协商与独立复核。\n109: - 准备测试结果：27 项通过；这是准备工具测试，不是 28 条产品 Conformance 的通过证据。\n113: - 工作项：PREP-003/004/006/007 的准备级验收及其后的 PREP-008；本轮不实施 M0。\n118: - 当前验收：修订后 PREP-003/004/006 及 PREP-007 独立结论已接纳，PREP-008 总审查仍待完成；不以测试 GREEN 替代独立验收。此前 F-001 与 R4 的 changes_required 原样保留。\n120: - 交接稿：`Docs/development/evidence/2026-09-08-preparation-handoff.md`。只有 PREP-008 真正 done 后才把 M0-01 置 ready；实际实现仍需后续授权。\nINDEX_LIMITS [\"Acceptance index is a main-session summary, not a replacement for original independent reports.\", \"Two historical auxiliary commands in corrections review have one real time boundary and a numeric exit; missing endpoints remain null and explicitly annotated. No fabricated reconstruction.\", \"Preparation tests/probes are not product tests or Bootstrap Acceptance.\", \"Old generated reports may remain after check failure: consumers must use current command exit/time/source.\", \"No Git repository or cross-process atomic claim; ClaudeLink unavailable.\", \"Environment capability/version formatting is not executable authentication or an external-execution authorization.\"]\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "resume-closeout-append-diff",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json,hashlib\nr=pathlib.Path.cwd();p=r/'.prep-008-review-kant-20260908';rel=pathlib.Path('Docs/development/evidence/2026-09-08-preparation-closeout.json')\nold_bytes=(p/rel).read_bytes();new_bytes=(r/rel).read_bytes();old=json.loads(old_bytes);new=json.loads(new_bytes);print('OLD_COPY_SHA256',hashlib.sha256(old_bytes).hexdigest());print('CURRENT_SHA256',hashlib.sha256(new_bytes).hexdigest())\nassert hashlib.sha256(old_bytes).hexdigest()=='c54a911aee7e5c6e11c3bf3ed8830f8ec2e129e81e46ab6c2aaf0c13d975d5b9'\nchanges=[]\nfor key in sorted(set(old)|set(new)):\n if old.get(key)!=new.get(key):\n  a=old.get(key);b=new.get(key);append_only=isinstance(a,list) and isinstance(b,list) and b[:len(a)]==a;changes.append({'key':key,'append_only':append_only,'old_count':len(a) if isinstance(a,list) else None,'new_count':len(b) if isinstance(b,list) else None,'added':b[len(a):] if append_only else b})\nprint(json.dumps(changes,ensure_ascii=False,indent=2))\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T18:59:25.552663+08:00",
+      "finished_at": "2026-09-09T18:59:25.678193+08:00",
+      "exit_code": 0,
+      "stdout": "OLD_COPY_SHA256 c54a911aee7e5c6e11c3bf3ed8830f8ec2e129e81e46ab6c2aaf0c13d975d5b9\nCURRENT_SHA256 d5aa526c400260cd152cf4194113893a5b06a2588f4af030248913d0ca43dcbc\n[\n  {\n    \"key\": \"coordination\",\n    \"append_only\": false,\n    \"old_count\": null,\n    \"new_count\": null,\n    \"added\": {\n      \"claudelink_available\": false,\n      \"mcp_resources\": [],\n      \"git_repository\": false,\n      \"git_status_exit_code\": 128,\n      \"main_is_only_shared_state_writer\": true,\n      \"cross_terminal_atomic_claim\": false,\n      \"single_subagent_constraint\": {\n        \"recorded_at\": \"2026-09-08T01:07:18.455835+08:00\",\n        \"user_instruction\": \"继续，但是只能开1个子代理\",\n        \"retained\": {\n          \"name\": \"Kant\",\n          \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\"\n        },\n        \"closed\": [\n          {\n            \"name\": \"Zeno\",\n            \"agent_id\": \"01a07cad-2ebc-71f3-a3f9-8e64975104ae\",\n            \"outcome\": \"completed; PREP-006 changes_required report preserved\"\n          },\n          {\n            \"name\": \"Rawls\",\n            \"agent_id\": \"01a07cae-0e8b-7482-8dd8-06e88b5bb42b\",\n            \"outcome\": \"errored: Concurrency limit exceeded for user; closed without review conclusion\"\n          }\n        ],\n        \"rule\": \"No additional child agent; reuse Kant serially. Main writes sources/state; Kant writes only assigned evidence.\"\n      },\n      \"resumed_at\": \"2026-09-08T21:13:24.051678+08:00\",\n      \"mcp_completion_inventory\": \"resources/templates empty on resumed task; no ClaudeLink inbox APIs\",\n      \"corrections_review_frozen_confirmation\": {\n        \"at\": \"2026-09-08T21:37:58.506029+08:00\",\n        \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\",\n        \"received_via\": \"multi_agent_v1.wait_agent\",\n        \"result\": \"completed; report frozen; no shared-state writes\"\n      },\n      \"latest_mcp_inventory\": {\n        \"at\": \"2026-09-08T21:55:52.136278+08:00\",\n        \"resources\": [],\n        \"templates\": [],\n        \"claudelink_inbox_available\": false\n      },\n      \"resume_events\": [\n        {\n          \"at\": \"2026-09-09T18:58:57.074231+08:00\",\n          \"user_request\": \"Continue after intentional interruption; local date 2026-09-09.\",\n          \"claudelink_available\": false,\n          \"mcp_resources\": [],\n          \"mcp_resource_templates\": [],\n          \"agent_lookup\": \"send_input returned agent not found; resume_agent on original Kant ID returned pending_init; same ID then accepted send_input.\",\n          \"agent_id\": \"01a07cac-b6db-7393-ae38-bce13d69c67d\",\n          \"new_agents_spawned\": 0,\n          \"payload_hashes_unchanged\": true,\n          \"report_observed\": \"PREP-008 independent report absent; private material directory exists.\",\n          \"state_action\": \"None; PREP-008 review and all product items todo.\"\n        }\n      ]\n    }\n  }\n]\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "resume-final-applicability-and-draft-check",
+      "argv": [
+        "python",
+        "-B",
+        "-"
+      ],
+      "stdin_script": "\nimport pathlib,json,hashlib,datetime,copy,collections\nr=pathlib.Path.cwd();p=r/'.prep-008-review-kant-20260908';ep='Docs/development/evidence/';cp=ep+'2026-09-08-preparation-closeout.json'\ndef ld(q):return json.loads(q.read_text(encoding='utf-8-sig'))\ndef sha(q):return hashlib.sha256(q.read_bytes()).hexdigest()\nold=ld(p/cp);current=ld(r/cp);normalized=copy.deepcopy(current);resumes=normalized['coordination'].pop('resume_events');assert normalized==old;assert len(resumes)==1 and resumes[0]['new_agents_spawned']==0 and resumes[0]['state_action'].startswith('None;')\nstate=ld(p/'audit-state.json');d=ld(p/'review-draft.json');index=ld(r/(ep+'2026-09-08-prep-acceptance-index.json'));b=ld(r/'Docs/development/backlog.json');s=ld(r/'Docs/development/status.json');by={w['id']:w for w in b['work_items']};now=datetime.datetime.now().astimezone().isoformat()\nexpected=dict(index['frozen_source_sha256'])\nfor item in index['accepted_items']:\n expected.update(item['immutable_evidence_sha256']); assert item['acceptance_criteria']==by[item['id']]['acceptance']\nassert all(sha(r/q)==h for q,h in expected.items());assert all(sha(r/q)==h for q,h in current['prep_008_review_payload']['sha256'].items())\nfor q,h in state['source_sha256_before'].items():assert q==cp or sha(r/q)==h\nfields=state['stable_backlog_contract']['fields'];rows=[{k:w[k] for k in fields} for w in sorted(b['work_items'],key=lambda w:w['id'])];contract=hashlib.sha256(json.dumps(rows,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest();assert contract==state['stable_backlog_contract']['sha256']\nassert collections.Counter(w['status'] for w in b['work_items'])=={'done':7,'review':1,'todo':12};assert by['PREP-008']['status']=='review' and all(by[x]['status']=='done' for x in by['PREP-008']['depends_on']);assert all(w['status']=='todo' for w in b['work_items'] if w['milestone']!='PREP');assert s['phase']=='preparation' and s['product_completion_percent']==0 and s['bootstrap_status']=='not_started' and s['conformance']['passed_tests']==0\nfor e in d['source_sha256']:\n e['after_sha256']=sha(r/e['path']);e['after_observed_at']=now;e['unchanged']=e['before_sha256']==e['after_sha256']\n if e['path']==cp:e['applicability_note']='Only coordination.resume_events added on 2026-09-09. Removing that one new key yields exact parsed equality with yesterday private snapshot whose bytes match before_sha256. Source/contract/payload/old failures and verdicts unchanged; observed operational recovery record, not a new acceptance.'\nd['resume_events']=[{'resumed_at':'2026-09-08T22:05:17.7768149+08:00','reason':'同一任务429后重试；无新独立人次'},{'resumed_at':'2026-09-09T18:59:00.8002742+08:00','reason':'用户恢复原Kant会话；报告名保留2026-09-08，实际完成日期将为本机2026-09-09'}]\nd['freeze_verification']['final_observed_at']=now;d['freeze_verification']['resumed_payload_hashes_verified']=8;d['freeze_verification']['resumed_static_and_evidence_hashes_verified']=len(expected);d['freeze_verification']['resume_metadata_exception']={'path':cp,'old_sha256':sha(p/cp),'new_sha256':sha(r/cp),'only_added_json_path':'coordination.resume_events','event':resumes[0],'structural_comparison':'After removing the sole new resume_events key, parsed JSON equals the preserved September8 private copy. All8 payload/28 indexed hashes and stable contract remain equal.','judgment':'Accept as the actual user-authorized resume coordination record only; no evidence/state/source change. Initial strict whole-file check exit1 retained.'}\nd['limitations']=[x for x in d['limitations'] if not x.startswith('Current closeout contains')];d['limitations'].append('closeout整体字节发生两次已注明运营记录变化：9月8日服务失败追加的更早全文件对比不可恢复；9月9日恢复记录已与保留私有快照逐结构比对，只有coordination.resume_events新增。所有冻结payload与静态/独立证据hash相同。')\nd['validation_results']['tests_not_rerun_on_resume']='2026-09-09只核对完整既存日志及冻结源；9月8日私有复验结果保留原真实日期，不称今日重新运行。';d['validation_results']['resume_strict_hash_failure']={'id':'resume-existing-evidence-and-hashes','exit_code':1,'cause':'One closeout whole-file hash changed; subsequent preserved-copy comparison proves sole coordination.resume_events addition, no payload/source/status difference.'}\nd['historical_failures_preserved']['resume_events']=resumes\nd['commands']=[x for x in d['commands'] if x['id'] in ['initial-instructions','initial-payload-inspection','read-frozen-handoff','resume-process-skills','resume-project-instructions','read-index-accepted-items-and-finalization','read-original-boole-mill-evidence','read-mill-supplement-and-boole-provenance','read-closeout-and-project-snapshots','capture-frozen-hashes-and-create-private-copy']]\nd['commands'].extend([\n {'id':'prepare-private-review-draft','cwd':str(r),'command':'python -B -','stdin_description':'Assemble independent PREP008 criteria/applicability/finalization report into owned private review-draft.json only. No permanent report written.','started_at':'2026-09-08T22:21:40.1472744+08:00','finished_at':'2026-09-08T22:21:40.4175426+08:00','exit_code':0,'stdout':'{\"draft_only\": true, \"assessment\": \"preparation-level pass\", \"criteria\": 3, \"applicability_items\": 7, \"commands_recorded\": 21, \"source_paths\": 42, \"permanent_report_exists\": false}\\n','stderr':None,'output_capture':'stdout from actual tool transcript; stderr not separately captured'},\n {'id':'resume-existing-evidence-and-hashes','cwd':str(r),'command':'PowerShell Resolve-Path + python -B -','stdin_description':'Read persisted draft/state/11 child command logs; assert report absent, all8 payload hashes equal, then compare42 before hashes. Strict assertion rejected one changed closeout hash.','started_at':'2026-09-09T18:59:00.8002742+08:00','finished_at':'2026-09-09T18:59:01.8527052+08:00','exit_code':1,'stdout':None,'stderr':None,'stdout_summary':'Target absent; draft3 criteria;11 preserved child logs;8/8 frozen payload match; only closeout c54a911a... -> d5aa526c... differs. Traceback AssertionError for that dictionary.','output_capture':'actual tool transcript summary, not separately stored raw streams'}])\nd['commands']+=ld(p/'audit-commands.json');d['report_validation']['draft_validation']={'result':'pass','observed_at':now,'checks':['3 exact PREP008 criteria;7 original independent applicability records','28 indexed hashes;8 frozen payload hashes;42 observed paths with1 explained operational-log change','20-item stable backlog contract unchanged','7done/1review and12 products todo; no shared-state writes','report has0 product tests,false product acceptance,false Bootstrap verified','historical timestamp exceptions and real helper failures preserved']};d['report_validation']['final_file_verification']='Publication round-trip and a final read-only JSON/hash verification will be recorded in actual tool transcript; final handoff will cite their real result, not invent an execution timestamp here.'\nassert len(d['criteria'])==3 and [x['criterion'] for x in d['criteria']]==by['PREP-008']['acceptance'];assert d['write_set']==[ep+'2026-09-08-prep-008-review.json'];assert d['product_tests']==0 and d['product_acceptance'] is False and d['bootstrap_verified'] is False\nfor c in d['commands']:\n assert isinstance(c['exit_code'],int);assert datetime.datetime.fromisoformat(c['started_at'])<=datetime.datetime.fromisoformat(c['finished_at'])\nassert len({c['id'] for c in d['commands']})==len(d['commands'])\n(p/'review-draft.json').write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps({'draft_validation':'pass','observed_at':now,'exact_acceptance_criteria':3,'accepted_item_applicability':7,'indexed_hashes_verified':len(expected),'payload_hashes_verified':8,'source_paths':42,'only_hash_difference':cp,'only_json_addition':'coordination.resume_events','stable_contract_sha256':contract,'preserved_fresh_tests':'2026-09-08:27 preparation +10 material; no rerun on2026-09-09','finalization_decision':d['permitted_post_pass_finalization']['decision'],'assessment':d['assessment']},ensure_ascii=False,indent=2))\n",
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-09T19:01:17.040430+08:00",
+      "finished_at": "2026-09-09T19:01:17.192436+08:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"draft_validation\": \"pass\",\n  \"observed_at\": \"2026-09-09T19:01:17.140854+08:00\",\n  \"exact_acceptance_criteria\": 3,\n  \"accepted_item_applicability\": 7,\n  \"indexed_hashes_verified\": 28,\n  \"payload_hashes_verified\": 8,\n  \"source_paths\": 42,\n  \"only_hash_difference\": \"Docs/development/evidence/2026-09-08-preparation-closeout.json\",\n  \"only_json_addition\": \"coordination.resume_events\",\n  \"stable_contract_sha256\": \"8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf\",\n  \"preserved_fresh_tests\": \"2026-09-08:27 preparation +10 material; no rerun on2026-09-09\",\n  \"finalization_decision\": \"accepted\",\n  \"assessment\": \"preparation-level pass\"\n}\n",
+      "stderr": "",
+      "output_capture": "complete"
+    },
+    {
+      "id": "publish-provisional-report-and-parse",
+      "shell": "PowerShell",
+      "cwd": "D:\\Github\\AETP",
+      "command": "PowerShell File.Open(target, CreateNew), UTF8 write of prepared JSON; ReadAllText(target) | ConvertFrom-Json (preflight reads occurred earlier in the same shell call)",
+      "started_at": "2026-09-09T19:05:39.6131778+08:00",
+      "finished_at": "2026-09-09T19:05:39.7128545+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "Provisional report created exclusively at assigned path and parsed; final timing/cleanup metadata not yet serialized."
+    },
+    {
+      "id": "verify-owned-path-and-remove-private-copy",
+      "shell": "PowerShell",
+      "cwd": "D:\\Github\\AETP",
+      "command": "Resolve-Path -LiteralPath D:\\Github\\AETP\\.prep-008-review-kant-20260908; assert exact workspace child and no reparse points; Remove-Item -LiteralPath $resolved -Recurse -Force -ErrorAction Stop; Test-Path -LiteralPath $resolved",
+      "started_at": "2026-09-09T19:05:39.7138917+08:00",
+      "finished_at": "2026-09-09T19:05:39.7573920+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "Owned absolute workspace path verified; one native PowerShell Remove-Item; private directory absent afterwards. No cross-shell deletion."
+    },
+    {
+      "id": "final-frozen-input-hashes",
+      "shell": "PowerShell",
+      "cwd": "D:\\Github\\AETP",
+      "command": "For each of report.source_sha256: Get-FileHash -LiteralPath (Join-Path $root $source.path) -Algorithm SHA256; compare to reviewed after_sha256",
+      "started_at": "2026-09-09T19:05:39.7661232+08:00",
+      "finished_at": "2026-09-09T19:05:39.8817809+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "All 42 reviewed after hashes match; 41 unchanged from September8 plus the independently explained closeout resume-log addition. No shared-state/source writes."
+    },
+    {
+      "id": "published-report-self-check-attempt1",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "stdin_description": "Read assigned JSON, inspect command types; verify unique command IDs, then timestamps/source hashes/cleanup. Stopped at missing id before later checks.",
+      "started_at": "2026-09-09T19:06:14.4204607+08:00",
+      "finished_at": "2026-09-09T19:06:14.6463417+08:00",
+      "exit_code": 1,
+      "stdout": "report_sha256 19a5d7bfc934120e7f53672789f01224c4f4ecf8123c2bb28ccaf298f22d5101\ncommands_top_level_count 16\ncommand_element_types ['dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict', 'dict']\n",
+      "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 3, in <module>\nKeyError: 'id'\n",
+      "output_capture": "actual tool transcript",
+      "result": "Reviewer report serialization defect, not a preparation-material defect: PowerShell wrapped13 persisted commands in {value,Count}; data was present but required flattening before genuine final freeze."
+    },
+    {
+      "id": "inspect-publication-command-wrapper",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "stdin_description": "Read-only inspect missing-id command entry keys/types and three publication-operation timestamps.",
+      "started_at": "2026-09-09T19:06:41.6495711+08:00",
+      "finished_at": "2026-09-09T19:06:41.8326499+08:00",
+      "exit_code": 0,
+      "stdout": null,
+      "stderr": null,
+      "stdout_summary": "Index12 has exactly value:list length13 and Count:13. Original13 command dictionaries including stdin/stdout/stderr/actual times intact. Remaining15 entries have ids.",
+      "output_capture": "actual tool transcript summary; raw streams not separately archived"
+    },
+    {
+      "id": "normalize-own-report-command-array-and-revalidate",
+      "cwd": "D:\\Github\\AETP",
+      "command": "python -B -",
+      "stdin_description": "Assigned-report-only in-memory normalization: unwrap sole {value,Count} into13 original command objects; retain all failures and exact records; verify unique ids/actual times/42 frozen hashes/3 criteria/product boundaries/private cleanup. Final JSON serialization follows this completed validation suboperation.",
+      "started_at": "2026-09-09T19:07:57.129469+08:00",
+      "finished_at": "2026-09-09T19:07:57.143853+08:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "result": "In-memory schema corrected and all described checks passed; no shared sources/states or old independent reports changed."
+    }
+  ],
+  "commands_note": "已归档子进程记录保留完整argv/stdin/stdout/stderr/起止/exit；早期只读辅助批次的原始流未另存，明确为tool摘要而非伪造逐字转录。外层PowerShell编排不重复计数；其中一次子检查exit1即使外层shell exit0也原样保留。",
+  "source_sha256": [
+    {
+      "path": ".editorconfig",
+      "before_sha256": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "484426a97b5395615a67f5e3b0ace1130254763402e07e7aeba8caebdaf70e86",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.133257+08:00"
+    },
+    {
+      "path": ".gitignore",
+      "before_sha256": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "d8f77e0032f31d92290e50be9d781c6430a25e5d974d962d95ff701d65ac56e6",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.133456+08:00"
+    },
+    {
+      "path": "AGENTS.md",
+      "before_sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "e39705f78db8b7b7375195606ebfc40b7d507bcf3b2311803abd0aa589f82787",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.133676+08:00"
+    },
+    {
+      "path": "Docs/AETP-设计方案.md",
+      "before_sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "d33f199a9f70a5977ffb3c9ee3b2f0a48cbf844b601eede06a8fe61914d2bd35",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.134460+08:00"
+    },
+    {
+      "path": "Docs/development/README.md",
+      "before_sha256": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "eae40173172a55d7df243f2ad81c762ad38c2cd685dad4d84cab4f4b0ffa4872",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.134650+08:00"
+    },
+    {
+      "path": "Docs/development/backlog.json",
+      "before_sha256": "e7d062ce99f6ed04a15aeb029ccb7a885595536aefd0ec17d352ce1fc4eac543",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "e7d062ce99f6ed04a15aeb029ccb7a885595536aefd0ec17d352ce1fc4eac543",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.134888+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-07-prep-001-006-review.json",
+      "before_sha256": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "64cbb07c614eb8d9c7dd3d60d1b68c251fea924a1a9b61a2f28ea0bfeec4b7ec",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.135064+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-prep-003-004-review.json",
+      "before_sha256": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "fb0f5f8245c992c66cb860cf8ca9b0347914751c4f75edf5a4dab8bd6d63dd08",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.135465+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-prep-006-review.json",
+      "before_sha256": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "97f40edd26a7ecae9d2a6890d9874fe819948649bf647ab7ba1ca6315a179f36",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.135887+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-prep-007-review.json",
+      "before_sha256": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "fc5947041dff76c58b9dac8f450d1d03e5f5507e7f16d1038a7d9c90dd65a9bf",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.136640+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-prep-acceptance-index.json",
+      "before_sha256": "12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "12ccd93ef6e842eb10a97305694ca56d918153eca604d1b204df5ab48a0cb3ba",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.136904+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+      "before_sha256": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "af379b5f03c1d6029b4ab0b336df88effb9b13165fcee682d14970183d8a354d",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.137332+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-closeout.json",
+      "before_sha256": "c54a911aee7e5c6e11c3bf3ed8830f8ec2e129e81e46ab6c2aaf0c13d975d5b9",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "d5aa526c400260cd152cf4194113893a5b06a2588f4af030248913d0ca43dcbc",
+      "unchanged": false,
+      "after_observed_at": "2026-09-09T19:07:57.137743+08:00",
+      "applicability_note": "Only coordination.resume_events added on 2026-09-09. Removing that one new key yields exact parsed equality with yesterday private snapshot whose bytes match before_sha256. Source/contract/payload/old failures and verdicts unchanged; observed operational recovery record, not a new acceptance."
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-corrections-green.json",
+      "before_sha256": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "f4461ff40e3d491ebd057a4002969a7eac17aa40ea884ef9b02fae34ca1379a8",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.137948+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "before_sha256": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "ae000b4d6db03ae5664074a823f67ff757ef1fa77317bacd6da9027b0adf34dc",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.138133+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-corrections-red.json",
+      "before_sha256": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "88dad61a3a5daeb5ac0e52b352e31469198db518547e13d2775fb101e715f23a",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.138365+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+      "before_sha256": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "e1da1469095414657478ee986af07dcc716614d70801ff949cbb2ba697d2fe60",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.138565+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json",
+      "before_sha256": "e312f4788ebfcfccaedbd410c54c10b4ff962ad31f1cb21a6a5a2954d02a72e4",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "e312f4788ebfcfccaedbd410c54c10b4ff962ad31f1cb21a6a5a2954d02a72e4",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.138745+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json",
+      "before_sha256": "98e23b8e9fc9d4e8dd89c7b839637ee3ec824dd58da7436fb73f8632c4daee74",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "98e23b8e9fc9d4e8dd89c7b839637ee3ec824dd58da7436fb73f8632c4daee74",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.138942+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/backlog-check.json",
+      "before_sha256": "140a9100f2f2ffb83996eccfe69459aae853664a5631e333bcec4ae7915959be",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "140a9100f2f2ffb83996eccfe69459aae853664a5631e333bcec4ae7915959be",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.139104+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/devprep-check.json",
+      "before_sha256": "be95c628b0d23cc2cadf53498a0093848f375f716557d6e5cf0a5b94c47e0645",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "be95c628b0d23cc2cadf53498a0093848f375f716557d6e5cf0a5b94c47e0645",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.139265+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/environment.json",
+      "before_sha256": "b8425ee076932f4fe8dcde748d59202b6a93b688dbee2c823a259554b27695dd",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "b8425ee076932f4fe8dcde748d59202b6a93b688dbee2c823a259554b27695dd",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.139434+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/knowledge-graph-check.json",
+      "before_sha256": "ce989af0f463e1c1a49e2fbdb0041a3afdd4ad33690bcafb5f76052f911ada25",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "ce989af0f463e1c1a49e2fbdb0041a3afdd4ad33690bcafb5f76052f911ada25",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.139590+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/preparation-log.md",
+      "before_sha256": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "16ccc8ff7c47f60d65b6b810d5cbefbded4aeebf9b890ab656ba8ce93bdbe141",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.139796+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/preparation-report.json",
+      "before_sha256": "dcd7b18b79c8387452fd4d782f1c05d90af654047b5194076045615594c34fcd",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "dcd7b18b79c8387452fd4d782f1c05d90af654047b5194076045615594c34fcd",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.139966+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/skill-evidence-handoff.md",
+      "before_sha256": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "a413d4a1a7be68837b11ea0ff6cfa8658ae2575d07190ce2be8da3eb9e78977d",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.140145+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/skill-execution-contracts.md",
+      "before_sha256": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "97ff729a1b6b780ef192d8eaefda5e0c81024742bcc87649bd0f68863cd8c6bc",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.140320+08:00"
+    },
+    {
+      "path": "Docs/development/evidence/skill-protocol-navigation.md",
+      "before_sha256": "6e1f8b00a15a3721efb2a7436b7df242ff3a87b7a921439df752a47336a232bc",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "6e1f8b00a15a3721efb2a7436b7df242ff3a87b7a921439df752a47336a232bc",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.140488+08:00"
+    },
+    {
+      "path": "Docs/development/knowledge-graph.json",
+      "before_sha256": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "0ce4f7871477282e37f906fe217454ac328c7ce533c99ef6f53e73552ad97df3",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.140846+08:00"
+    },
+    {
+      "path": "Docs/development/knowledge-map.md",
+      "before_sha256": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "03b77daa00facf3616efbc9c2ee9d9ef612ffd999fb2f99575faa161d139296f",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.141022+08:00"
+    },
+    {
+      "path": "Docs/development/roadmap.md",
+      "before_sha256": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "fbabdb0cf758fea92b4de5c9a2df80fde1d65e02ae1ae042dd23c6bad8a81a59",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.141207+08:00"
+    },
+    {
+      "path": "Docs/development/status.json",
+      "before_sha256": "46a760a52eef1deba1b72e57b211421e8581913a59eae43ad559509f93c79baf",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "46a760a52eef1deba1b72e57b211421e8581913a59eae43ad559509f93c79baf",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.141375+08:00"
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+      "before_sha256": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "dc9eabfa938ebc70c0ef77545761e591e4eec68a89aa41dbdbe59a64254dc156",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.141623+08:00"
+    },
+    {
+      "path": "Docs/superpowers/plans/2026-09-08-preparation-closeout.md",
+      "before_sha256": "d98fbfbbe3abfd12a684e19781ef9bc869f386462f79b99a9072f836afed82b2",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "d98fbfbbe3abfd12a684e19781ef9bc869f386462f79b99a9072f836afed82b2",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.141801+08:00"
+    },
+    {
+      "path": "MEMORY.md",
+      "before_sha256": "cd0a84abc0e08b8f4fd304af8d476f026b43854d2cc0c7b06df718bb4d255af4",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "cd0a84abc0e08b8f4fd304af8d476f026b43854d2cc0c7b06df718bb4d255af4",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.141987+08:00"
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "4d19ea8c87ede7b2ca4c0500e5960ca9335feb9f42c3cf864fbc4cfb813812d1",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.142144+08:00"
+    },
+    {
+      "path": "skills/aetp-evidence-handoff/SKILL.md",
+      "before_sha256": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "fd563f254c241c1a6d94dacdbd2a7167a6922b4f95b6136cca81f7b33cd0e292",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.142314+08:00"
+    },
+    {
+      "path": "skills/aetp-execution-contracts/SKILL.md",
+      "before_sha256": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "55687dba809990d858a129ca422860181ff85f67b7e3d2fe4fed6e8d688c34c4",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.142491+08:00"
+    },
+    {
+      "path": "skills/aetp-protocol-navigation/SKILL.md",
+      "before_sha256": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "85836b2ff0add20cd0d14da31e6b6bbea9f906a3ce20694f592deb885c2f3ffa",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.142656+08:00"
+    },
+    {
+      "path": "tests/preparation/test_devprep.py",
+      "before_sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "234dc70e25a46d890d1fd33b5b6607abd95ad1fe87b70813816fdfe90b26574a",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.142841+08:00"
+    },
+    {
+      "path": "tests/preparation/test_devprep_fail_closed.py",
+      "before_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "87d3eb97f1236e7d1292d1f7199bdd51bf95406880af965b9b372fa17a65f215",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.143041+08:00"
+    },
+    {
+      "path": "tools/devprep.py",
+      "before_sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+      "before_observed_at": "2026-09-08T22:11:12.513897+08:00",
+      "after_sha256": "8ad89c37ebc4b6c470a1fde59b8dcb1a7b60c2eb66bef1c30d62fc00f547d583",
+      "unchanged": true,
+      "after_observed_at": "2026-09-09T19:07:57.143302+08:00"
+    }
+  ],
+  "stable_backlog_contract": {
+    "fields": [
+      "id",
+      "milestone",
+      "title",
+      "depends_on",
+      "files",
+      "acceptance",
+      "conformance_tests"
+    ],
+    "sha256": "8cd09f50de3ce674768726ce99806e5f53d470a7a20d10110a2f6ab17e822ccf",
+    "work_item_count": 20,
+    "canonicalization": "work_items sorted by id; json.dumps(selected,ensure_ascii=False,sort_keys=True,separators=(\",\",\":\")).encode(\"utf-8\"); array order preserved",
+    "excluded": [
+      "status",
+      "evidence",
+      "acceptance metadata"
+    ]
+  },
+  "freeze_verification": {
+    "shared_freeze_at": "2026-09-08T21:55:52+08:00",
+    "indexed_source_and_immutable_evidence_hashes_verified": 28,
+    "frozen_paths_captured": 42,
+    "payload_hashes_verified": 8,
+    "index_acceptance_items_matched_to_backlog": 7,
+    "authorized_retry_exception": "closeout.service_failures appended 2026-09-08T22:03:04.316833+08:00 for request4d69eb03-681d-4ed6-bf30-49dc0be1df85. Current closeout hash c54a911aee7e5c6e11c3bf3ed8830f8ec2e129e81e46ab6c2aaf0c13d975d5b9 supersedes earlier f98884af...; all8 frozen payload hashes still match. No full pre-retry closeout byte snapshot retained for an independent full-file diff.",
+    "final_observed_at": "2026-09-09T19:07:57.143853+08:00",
+    "resumed_payload_hashes_verified": 8,
+    "resumed_static_and_evidence_hashes_verified": 28,
+    "resume_metadata_exception": {
+      "path": "Docs/development/evidence/2026-09-08-preparation-closeout.json",
+      "old_sha256": "c54a911aee7e5c6e11c3bf3ed8830f8ec2e129e81e46ab6c2aaf0c13d975d5b9",
+      "new_sha256": "d5aa526c400260cd152cf4194113893a5b06a2588f4af030248913d0ca43dcbc",
+      "only_added_json_path": "coordination.resume_events",
+      "event": {
+        "at": "2026-09-09T18:58:57.074231+08:00",
+        "user_request": "Continue after intentional interruption; local date 2026-09-09.",
+        "claudelink_available": false,
+        "mcp_resources": [],
+        "mcp_resource_templates": [],
+        "agent_lookup": "send_input returned agent not found; resume_agent on original Kant ID returned pending_init; same ID then accepted send_input.",
+        "agent_id": "01a07cac-b6db-7393-ae38-bce13d69c67d",
+        "new_agents_spawned": 0,
+        "payload_hashes_unchanged": true,
+        "report_observed": "PREP-008 independent report absent; private material directory exists.",
+        "state_action": "None; PREP-008 review and all product items todo."
+      },
+      "structural_comparison": "After removing the sole new resume_events key, parsed JSON equals the preserved September8 private copy. All8 payload/28 indexed hashes and stable contract remain equal.",
+      "judgment": "Accept as the actual user-authorized resume coordination record only; no evidence/state/source change. Initial strict whole-file check exit1 retained."
+    }
+  },
+  "isolation": {
+    "private_path": "D:\\Github\\AETP\\.prep-008-review-kant-20260908",
+    "copied_files": [
+      "Docs/AETP-设计方案-补充建议.md",
+      "Docs/AETP-设计方案.md",
+      "Docs/development/backlog.json",
+      "Docs/development/knowledge-graph.json",
+      "Docs/development/knowledge-map.md",
+      "Docs/development/README.md",
+      "Docs/development/roadmap.md",
+      "Docs/development/status.json",
+      "Docs/development/evidence/2026-09-07-prep-001-006-review.json",
+      "Docs/development/evidence/2026-09-07-prep-006-plan-structure.json",
+      "Docs/development/evidence/2026-09-07-prep-007-review-green.json",
+      "Docs/development/evidence/2026-09-07-prep-007-review-red-extended.json",
+      "Docs/development/evidence/2026-09-07-prep-007-review-red-rerun.json",
+      "Docs/development/evidence/2026-09-07-prep-007-review-red.json",
+      "Docs/development/evidence/2026-09-07-skill-coverage-green.json",
+      "Docs/development/evidence/2026-09-07-skill-coverage-red-rerun.json",
+      "Docs/development/evidence/2026-09-07-skill-coverage-red.json",
+      "Docs/development/evidence/2026-09-07-skill-markers-red.json",
+      "Docs/development/evidence/2026-09-08-prep-003-004-review.json",
+      "Docs/development/evidence/2026-09-08-prep-006-review.json",
+      "Docs/development/evidence/2026-09-08-prep-007-review.json",
+      "Docs/development/evidence/2026-09-08-prep-acceptance-index.json",
+      "Docs/development/evidence/2026-09-08-prep-corrections-review.json",
+      "Docs/development/evidence/2026-09-08-preparation-closeout.json",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-green.json",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-probe.py",
+      "Docs/development/evidence/2026-09-08-preparation-corrections-red.json",
+      "Docs/development/evidence/2026-09-08-preparation-handoff.md",
+      "Docs/development/evidence/2026-09-08-preparation-integrated-validation-red.json",
+      "Docs/development/evidence/2026-09-08-preparation-integrated-validation.json",
+      "Docs/development/evidence/2026-09-08-preparation-resume-validation.json",
+      "Docs/development/evidence/backlog-check.json",
+      "Docs/development/evidence/devprep-check.json",
+      "Docs/development/evidence/environment.json",
+      "Docs/development/evidence/knowledge-graph-check.json",
+      "Docs/development/evidence/m0-plan-review.md",
+      "Docs/development/evidence/prep-007-final-validation.json",
+      "Docs/development/evidence/prep-007-markdown-green.json",
+      "Docs/development/evidence/preparation-log.md",
+      "Docs/development/evidence/preparation-report.json",
+      "Docs/development/evidence/skill-evidence-handoff.md",
+      "Docs/development/evidence/skill-execution-contracts.md",
+      "Docs/development/evidence/skill-protocol-navigation.md",
+      "Docs/superpowers/plans/2026-09-06-m0-first-slice.md",
+      "Docs/superpowers/plans/2026-09-08-preparation-closeout.md",
+      "skills/aetp-evidence-handoff/SKILL.md",
+      "skills/aetp-execution-contracts/SKILL.md",
+      "skills/aetp-protocol-navigation/SKILL.md",
+      "tools/devprep.py",
+      "tests/preparation/test_devprep.py",
+      "tests/preparation/test_devprep_fail_closed.py",
+      "README.md",
+      "AGENTS.md",
+      ".gitignore",
+      ".editorconfig"
+    ],
+    "excluded": ".env*, .codex, .claude, .git, user configurations, credentials, __pycache__, reparse points; only selected project md/json/py and four root project files copied",
+    "temporary_environment": "Process-local OutputEncoding UTF8; PYTHONIOENCODING=utf-8; PYTHONDONTWRITEBYTECODE=1; child TEMP/TMP inside owned copy",
+    "cleanup_verified": true,
+    "cleanup_finished_at": "2026-09-09T19:05:39.7573920+08:00"
+  },
+  "limitations": [
+    "Preparation-only verdict; product runtime, executable product/M0 behavior,28 Conformance and Bootstrap Acceptance remain unimplemented/unverified.",
+    "No new independent identity is created by Kant/Codex aliases or by main-session summaries. Historical Boole attribution is a parent-persisted independent response summary, not a signed raw session transcript; Mill statement is the preserved narrative supplement.",
+    "Current source hashes and bounded checks establish integrated applicability, not authenticity attestation of external executable paths or cross-process atomic claim.",
+    "Two old corrections commands lack one endpoint; durations unavailable. Early read-only helper outputs in this review have transcript summaries rather than separately archived raw streams. No missing values reconstructed.",
+    "Git status128: not a Git repository. No installs, network, credential access, config changes, new agents, product files, or state advancement.",
+    "Private regression only reruns existing27 preparation tests and10 read-only material probes; not a renewed exhaustive PREP007 audit, general Markdown parser review, or all old Skill scenarios.",
+    "closeout整体字节发生两次已注明运营记录变化：9月8日服务失败追加的更早全文件对比不可恢复；9月9日恢复记录已与保留私有快照逐结构比对，只有coordination.resume_events新增。所有冻结payload与静态/独立证据hash相同。"
+  ],
+  "product_tests": 0,
+  "product_acceptance": false,
+  "bootstrap_verified": false,
+  "bootstrap_status": "not_started",
+  "conformance": {
+    "registered": 28,
+    "passed": 0
+  },
+  "handoff": {
+    "to": "主会话（集成交接/源修改执行者）",
+    "work_item": "PREP-008",
+    "status_action_by_reviewer": "none; shared PREP remains7done/1review; all12 products todo",
+    "next_action": "核验本报告及受审源/稳定契约hash后，严格按accepted permitted_post_pass_finalization进行一次运营收尾并记录最终完整验证；若越界则回到独立审查。"
+  },
+  "report_validation": {
+    "draft_validation": {
+      "result": "pass",
+      "observed_at": "2026-09-09T19:01:17.140854+08:00",
+      "checks": [
+        "3 exact PREP008 criteria;7 original independent applicability records",
+        "28 indexed hashes;8 frozen payload hashes;42 observed paths with1 explained operational-log change",
+        "20-item stable backlog contract unchanged",
+        "7done/1review and12 products todo; no shared-state writes",
+        "report has0 product tests,false product acceptance,false Bootstrap verified",
+        "historical timestamp exceptions and real helper failures preserved"
+      ]
+    },
+    "final_file_verification": "Assigned JSON normalized and validated in memory; final post-write read-only verification result and immutable hash are recorded in actual completion tool transcript and final handoff, not backfilled into the frozen file.",
+    "publication_serialization_correction": {
+      "initial_self_check_exit_code": 1,
+      "cause": "PowerShell array wrapping produced a {value,Count} object containing13 command records; no records lost",
+      "fix": "Flattened that one wrapper in this assigned new report only; all original timestamps/exits/stdout/stderr preserved",
+      "resolved_at": "2026-09-09T19:07:57.143853+08:00",
+      "validated_command_count": 31,
+      "initial_publication_sha256": "19a5d7bfc934120e7f53672789f01224c4f4ecf8123c2bb28ccaf298f22d5101",
+      "first_freeze_marker_superseded": "First serialization was not a successful final freeze: independent self-check failed before handoff. This correction occurs before genuine completed/frozen handoff."
+    }
+  },
+  "resume_events": [
+    {
+      "resumed_at": "2026-09-08T22:05:17.7768149+08:00",
+      "reason": "同一任务429后重试；无新独立人次"
+    },
+    {
+      "resumed_at": "2026-09-09T18:59:00.8002742+08:00",
+      "reason": "用户恢复原Kant会话；报告名保留2026-09-08，实际完成日期将为本机2026-09-09"
+    }
+  ],
+  "frozen_at": "2026-09-09T19:07:57.143853+08:00",
+  "freeze_policy": "No further edits by this reviewer after final serialization; final hash and read-only self-check recorded in actual completion handoff.",
+  "first_publication_at": "2026-09-09T19:05:39.8817809+08:00"
+}
