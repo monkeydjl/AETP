@@ -28,6 +28,9 @@ def evaluate(command, state, at, context):
     if aggregate == "decision":
         from aetp.governance.decisions import transition
         return transition(command, previous, state, at, context)
+    if aggregate == "credential":
+        from aetp.governance.credentials import transition
+        return transition(command, previous, state, at, context)
     if aggregate in {"project", "intervention", "task"}:
         from aetp.governance.controls import transition
         return transition(command, previous, state, at, context)

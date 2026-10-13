@@ -142,3 +142,70 @@ class SandboxRuntimeAdapterTests(unittest.TestCase):
         with self.assertRaises(AdapterSecurityError) as ctx:
             self.adapter.execute_tool(self.session_id, "echo", {"message": "hello"})
         self.assertEqual(ctx.exception.code, "PROJECT_PAUSED")
+
+    def _shell_auth(self):
+        return {
+            "authenticated_actor_id": "agent-worker",
+            "lease_epoch": 1,
+            "approval_id": "app-shell",
+        }
+
+    def test_shell_executes_real_command_and_captures_output(self):
+        """shell is a real subprocess, not an echo; stdout is captured."""
+        res = self.adapter.execute_tool(
+            self.session_id, "shell",
+            {"command": "python -c \"print('sandbox_real')\""},
+            authorization_context=self._shell_auth(),
+        )
+        self.assertEqual(res["status"], "success")
+        self.assertEqual(res["exit_code"], 0)
+        self.assertIn("sandbox_real", res["stdout"])
+
+    def test_shell_cwd_is_locked_to_workspace(self):
+        """shell subprocess working directory is pinned to the workspace root."""
+        res = self.adapter.execute_tool(
+            self.session_id, "shell",
+            {"command": "python -c \"import os; print(os.getcwd())\""},
+            authorization_context=self._shell_auth(),
+        )
+        self.assertEqual(res["status"], "success")
+        printed = res["stdout"].strip().splitlines()[-1]
+        self.assertEqual(printed, str(self.adapter.workspace_root))
+
+    def test_shell_nonzero_exit_is_reported_not_masked(self):
+        """A failing command returns status failed with the real exit code."""
+        res = self.adapter.execute_tool(
+            self.session_id, "shell",
+            {"command": "python -c \"import sys; sys.exit(7)\""},
+            authorization_context=self._shell_auth(),
+        )
+        self.assertEqual(res["status"], "failed")
+        self.assertEqual(res["exit_code"], 7)
+
+    def test_shell_timeout_is_reported(self):
+        """A long-running command is bounded by timeout and reported."""
+        adapter = SandboxRuntimeAdapter(self.adapter.workspace_root, shell_timeout=1)
+        adapter.start_session(self.session_id, self.session_context)
+        res = adapter.execute_tool(
+            self.session_id, "shell",
+            {"command": "python -c \"import time; time.sleep(60)\""},
+            authorization_context=self._shell_auth(),
+        )
+        self.assertEqual(res["status"], "timeout")
+
+    def test_shell_timeout_actually_terminates_within_bound(self):
+        """Timeout must really kill the process tree, not wait for it to finish."""
+        import time
+        adapter = SandboxRuntimeAdapter(self.adapter.workspace_root, shell_timeout=1)
+        adapter.start_session(self.session_id, self.session_context)
+        t0 = time.monotonic()
+        res = adapter.execute_tool(
+            self.session_id, "shell",
+            {"command": "python -c \"import time; time.sleep(30)\""},
+            authorization_context=self._shell_auth(),
+        )
+        elapsed = time.monotonic() - t0
+        self.assertEqual(res["status"], "timeout")
+        # Timeout must return promptly (within a generous bound), not after the
+        # spawned grandchild finishes naturally.
+        self.assertLess(elapsed, 5.0, f"timeout took {elapsed:.1f}s; child was not killed")

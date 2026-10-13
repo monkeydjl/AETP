@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import copy
 import os
+import signal
+import subprocess
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Set
 
@@ -80,6 +82,7 @@ class SandboxRuntimeAdapter(RuntimeAdapter):
         *,
         authorizer: Optional[PreToolAuthorizer] = None,
         capability: Optional[RuntimeCapability] = None,
+        shell_timeout: float = 30.0,
     ):
         # Honest compatibility scope: the local in-process adapter enforces a
         # path-prefix boundary and pre-tool checks, but cannot claim a real OS
@@ -98,6 +101,7 @@ class SandboxRuntimeAdapter(RuntimeAdapter):
         super().__init__(cap)
         self.workspace_root = Path(workspace_root).resolve()
         self.authorizer = authorizer or PreToolAuthorizer()
+        self.shell_timeout = shell_timeout
         self.sessions: Dict[str, Dict[str, Any]] = {}
 
     def start_session(self, session_id: str, context: Dict[str, Any]) -> Dict[str, Any]:
@@ -163,6 +167,44 @@ class SandboxRuntimeAdapter(RuntimeAdapter):
             return {"status": "success", "bytes_written": len(content)}
         elif tool_name == "shell":
             cmd = arguments.get("command", "")
-            return {"status": "success", "command_executed": cmd, "exit_code": 0}
+            if not isinstance(cmd, str) or not cmd.strip():
+                raise AdapterSecurityError("INVALID_ARGUMENTS", "shell command must be a non-empty string")
+            creationflags = 0
+            if os.name == "nt":
+                creationflags = subprocess.CREATE_NEW_PROCESS_GROUP
+            proc = subprocess.Popen(
+                cmd,
+                shell=True,
+                cwd=str(self.workspace_root),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                creationflags=creationflags,
+            )
+            try:
+                stdout, stderr = proc.communicate(timeout=self.shell_timeout)
+            except subprocess.TimeoutExpired:
+                if os.name == "nt":
+                    kill = subprocess.run(
+                        ["taskkill", "/T", "/F", "/PID", str(proc.pid)],
+                        capture_output=True,
+                    )
+                    if kill.returncode != 0:
+                        raise AdapterSecurityError(
+                            "PROCESS_KILL_FAILED",
+                            f"taskkill failed (exit {kill.returncode}): {kill.stderr.strip()}",
+                        )
+                else:
+                    proc.kill()
+                proc.communicate()
+                return {"status": "timeout", "command_executed": cmd, "timeout_seconds": self.shell_timeout}
+            status = "success" if proc.returncode == 0 else "failed"
+            return {
+                "status": status,
+                "command_executed": cmd,
+                "exit_code": proc.returncode,
+                "stdout": stdout,
+                "stderr": stderr,
+            }
 
         return {"status": "success", "result": "ok"}

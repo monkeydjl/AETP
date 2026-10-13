@@ -22,10 +22,11 @@ COMMAND_TERMINALS = {
     "project.pause": frozenset({"project.paused"}), "project.resume": frozenset({"project.resumed"}),
     "intervention.record": frozenset({"intervention.recorded"}), "intervention.apply": frozenset({"intervention.recorded"}),
     "task.governance.block": frozenset({"task.blocked"}), "task.governance.stop": frozenset({"task.cancelled"}),
+    "credential.request": frozenset({"credential.issued"}), "credential.revoke": frozenset({"credential.revoked"}),
 }
 COMMAND_AGGREGATES = {command: command.split(".")[0] for command in COMMAND_TERMINALS}
 DOMAIN_EVENTS = frozenset(event for events in COMMAND_TERMINALS.values() for event in events)
-AGGREGATES = frozenset({"approval", "intervention"})
+AGGREGATES = frozenset({"approval", "intervention", "credential"})
 INTERNAL_COMMANDS = frozenset({"approval.delegate", "approval.invalidate", "approval.expire", "approval.escalate",
                                "approval.renew", "decision.invalidate", "intervention.record", "task.governance.block"})
 

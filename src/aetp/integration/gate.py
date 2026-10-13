@@ -1,5 +1,6 @@
 """Pure validation and guard functions for Integration Gate transitions."""
 from aetp.collaboration.policy import PolicyViolation
+from aetp.integration.gitref import resolve_ref
 
 
 def validate_integration_ready(task, contract):
@@ -23,6 +24,61 @@ def validate_merge(task, payload):
     current = payload.get("current_target_commit")
     if expected is not None and current is not None and expected != current:
         raise PolicyViolation("BASELINE_ADVANCED")
+
+
+def validate_merge_against_repo(task, payload, repo_dir):
+    """Re-check the merge baseline against the real target-branch tip (TEST-024/§10.6).
+
+    Unlike :func:`validate_merge`, this never trusts a caller-supplied
+    ``current_target_commit``. It resolves the actual tip of ``target_ref`` from
+    ``repo_dir`` and compares it with the expected commit, so a target branch
+    that advanced since verification cannot be merged on stale trust.
+    """
+    if task["status"] != "ready_for_integration":
+        raise PolicyViolation("INVALID_TASK_STATUS")
+    target_ref = payload.get("target_ref")
+    expected = payload.get("expected_target_commit")
+    if not isinstance(target_ref, str) or not target_ref:
+        raise PolicyViolation("INVALID_PAYLOAD")
+    if not isinstance(expected, str) or not expected:
+        raise PolicyViolation("INVALID_PAYLOAD")
+    actual_tip = resolve_ref(repo_dir, target_ref)
+    if expected != actual_tip:
+        raise PolicyViolation("BASELINE_ADVANCED")
+
+
+def dispatch_merge(provider, task, payload):
+    """Route git.merge to the trusted provider when present, else simulate.
+
+    With a trusted Workspace Provider (holding its own repo_dir), the merge is
+    real: the provider re-checks the target tip and returns a conflict instead
+    of silently resolving it. Without a provider, the legacy simulated path
+    (:func:`validate_merge`) is preserved for backward compatibility.
+
+    The task-status guard applies to both paths: a Task must be
+    ``ready_for_integration`` before any merge, real or simulated.
+    """
+    if task.get("status") != "ready_for_integration":
+        raise PolicyViolation("INVALID_TASK_STATUS")
+    if provider is not None:
+        # A real provider only reads the agent-supplied refs and expected
+        # commit; it never trusts persisted conflict/result placeholders.
+        result = provider.merge(
+            payload.get("source_ref"),
+            payload.get("target_ref"),
+            payload.get("expected_target_commit"),
+        )
+        if result.get("status") == "conflict":
+            return {"conflict": True, "conflict_paths": result.get("conflict_paths", []), "result_commit": None}
+        return {"conflict": False, "conflict_paths": [], "result_commit": result.get("result_commit")}
+
+    validate_merge(task, payload)
+    has_conflict = bool(payload.get("has_conflict"))
+    return {
+        "conflict": has_conflict,
+        "conflict_paths": payload.get("conflict_paths", []) if has_conflict else [],
+        "result_commit": payload.get("result_commit"),
+    }
 
 
 def validate_system_verify(task, payload):

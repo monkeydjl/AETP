@@ -6,8 +6,8 @@ from aetp.core.commands import CommandHandler
 from aetp.domain.models import Command, ModelValidationError
 from aetp.integration.contracts import COMMAND_AGGREGATES, SCHEMA
 from aetp.integration.gate import (
+    dispatch_merge,
     validate_integration_ready,
-    validate_merge,
     validate_system_verify,
 )
 from aetp.integration.records import evaluate
@@ -16,8 +16,11 @@ from aetp.runtime.policy import observed_time
 
 
 class IntegrationContractService(TaskQualityService):
-    def __init__(self, store, **kwargs):
+    def __init__(self, store, *, git_provider=None, **kwargs):
         super().__init__(store, **kwargs)
+        # Trusted-only: the git provider's repo_dir lives inside the provider
+        # object and never comes from an Agent Command.
+        self._git_provider = git_provider
         self._integration_context = ContextVar(f"integration_{id(self)}", default=None)
 
     def handle(self, command, *, authenticated_actor_id, session=None, input_receipt=None):
@@ -72,17 +75,17 @@ class IntegrationContractService(TaskQualityService):
                 kind = "task.integration_ready"
 
             elif command.type == "git.merge":
-                validate_merge(task, command.payload)
+                outcome = dispatch_merge(self._git_provider, task, command.payload)
                 record = copy.deepcopy(task)
                 record["revision"] += 1
                 record["updated_at_ms"] = at
-                if command.payload.get("has_conflict"):
+                if outcome["conflict"]:
                     record["integration_conflict"] = True
-                    record["conflict_paths"] = copy.deepcopy(command.payload.get("conflict_paths", []))
+                    record["conflict_paths"] = copy.deepcopy(outcome.get("conflict_paths", []))
                     kind = "integration.conflict"
                 else:
                     record["status"] = "integrated"
-                    record["result_commit"] = command.payload.get("result_commit")
+                    record["result_commit"] = outcome.get("result_commit")
                     kind = "integration.completed"
 
             elif command.type == "task.system_verify":

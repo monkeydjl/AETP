@@ -27,7 +27,7 @@ class GovernanceService(MeetingService):
     is rooted explicitly on first configuration and subsequently in Events.
     """
 
-    def __init__(self, store, *, owner_id=None, execution=None, input_authority=None, meter=None, clock=None):
+    def __init__(self, store, *, owner_id=None, execution=None, input_authority=None, meter=None, clock=None, credential_broker=None):
         super().__init__(store, meter=meter, clock=clock)
         if input_authority is not None and not isinstance(input_authority, InputAuthority):
             raise TypeError("a trusted InputAuthority is required")
@@ -36,6 +36,9 @@ class GovernanceService(MeetingService):
         self.owner_id = owner_id
         self.execution = execution
         self.input_authority = input_authority
+        # Trusted-only: the broker holds secrets; it is never supplied by an
+        # Agent Command. None means fail-closed (credential.request is refused).
+        self.credential_broker = credential_broker
         self.gate = ResourceGate(store.database_path)
         self._governance_context = ContextVar(f"governance_{id(self)}", default=None)
 
@@ -156,6 +159,22 @@ class GovernanceService(MeetingService):
                     data["recovery_observations"] = {
                         "live_sessions": {}, "pending_commands": Projection.pending_command_ids(events, commands),
                         "workspace_provider_id": None}
+            if command.type == "credential.request":
+                if self.credential_broker is None:
+                    raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+                # The broker mints the token; the Agent payload can never carry
+                # a token_ref, only the requested permissions + TTL.
+                if "token_ref" in command.payload or "broker_token_ref" in command.payload:
+                    raise PolicyViolation("INVALID_PAYLOAD")
+                issued = self.credential_broker.issue(
+                    command.actor_id,
+                    permissions=command.payload.get("permissions"),
+                    issued_at=at,
+                    expires_in_ms=command.payload.get("ttl_ms"),
+                )
+                # Persist only the non-invertible ref; the token body stays in
+                # the broker's memory and must never reach the Event Store.
+                data["broker_token_ref"] = issued["token_ref"]
             kind, record = evaluate(command, state, at, data)
             payload = {"governance_schema": SCHEMA, "actor_id": command.actor_id, "command_type": command.type,
                        "command_payload": command.payload, "expected_revision": command.expected_revision,

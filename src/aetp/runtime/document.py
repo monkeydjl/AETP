@@ -25,6 +25,10 @@ class DocumentRuntime:
         # Trusted host attaches a registered tool channel; it is never set by an
         # Agent Command and remains optional for document-only deployments.
         self.mcp_provider = None
+        # Trusted host attaches a Credential Broker for scoped tool ingestion;
+        # None means fail-closed (an Action carrying a credential_token_ref is
+        # refused as CREDENTIAL_UNAVAILABLE).
+        self.credential_broker = None
         self._sessions = {}
         self._lock = threading.RLock()
 

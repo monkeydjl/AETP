@@ -50,6 +50,8 @@ def validate_context(command, state, context):
             raise PolicyViolation("INVALID_CAUSAL_CONTEXT")
     elif command.type == "approval.request":
         allowed.add("input_proof")
+    elif command.type == "credential.request":
+        allowed.add("broker_token_ref")
     elif command.type == "project.resume":
         allowed.add("recovery_observations")
         required.add("recovery_observations")

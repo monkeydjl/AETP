@@ -109,6 +109,18 @@ class ActionBroker:
         if project.get("governance") or action.get("authorization"):
             from aetp.governance.execution import authorize_action
             authorize_action(action, state, self._now(state))
+        # Scoped credential ingestion: a consuming Action may carry a
+        # credential_token_ref + required_permission. The broker checks scope,
+        # wall-clock expiry and revocation at the real call boundary (fail-closed).
+        credential_ref = action.get("arguments", {}).get("credential_token_ref")
+        if credential_ref is not None:
+            broker = getattr(self.runtime, "credential_broker", None)
+            if broker is None:
+                raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+            required = action["arguments"].get("required_permission")
+            if not isinstance(required, str) or not required.strip():
+                raise PolicyViolation("INVALID_PAYLOAD")
+            broker.assert_permission_by_ref(credential_ref, required, self._now(state))
         if not self._barriers.get(action["project_id"], False):
             raise PolicyViolation("RECOVERY_REQUIRED")
 
