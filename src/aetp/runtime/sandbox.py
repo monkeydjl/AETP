@@ -9,8 +9,6 @@ from __future__ import annotations
 
 import copy
 import os
-import signal
-import subprocess
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Set
 
@@ -82,11 +80,12 @@ class SandboxRuntimeAdapter(RuntimeAdapter):
         *,
         authorizer: Optional[PreToolAuthorizer] = None,
         capability: Optional[RuntimeCapability] = None,
-        shell_timeout: float = 30.0,
     ):
         # Honest compatibility scope: the local in-process adapter enforces a
-        # path-prefix boundary and pre-tool checks, but cannot claim a real OS
-        # sandbox or credential/network egress isolation (§13.9 anti-bypass).
+        # path-prefix boundary, pre-tool checks, and an environment allowlist
+        # (no host credentials/secrets leak into subprocesses). It still cannot
+        # claim a real OS/container sandbox or network egress isolation
+        # (§13.9 anti-bypass).
         cap = capability or RuntimeCapability(
             adapter_id="aetp-local-sandbox",
             version="0.1",
@@ -101,7 +100,6 @@ class SandboxRuntimeAdapter(RuntimeAdapter):
         super().__init__(cap)
         self.workspace_root = Path(workspace_root).resolve()
         self.authorizer = authorizer or PreToolAuthorizer()
-        self.shell_timeout = shell_timeout
         self.sessions: Dict[str, Dict[str, Any]] = {}
 
     def start_session(self, session_id: str, context: Dict[str, Any]) -> Dict[str, Any]:
@@ -166,45 +164,13 @@ class SandboxRuntimeAdapter(RuntimeAdapter):
             target_path.write_text(content, encoding="utf-8")
             return {"status": "success", "bytes_written": len(content)}
         elif tool_name == "shell":
-            cmd = arguments.get("command", "")
-            if not isinstance(cmd, str) or not cmd.strip():
-                raise AdapterSecurityError("INVALID_ARGUMENTS", "shell command must be a non-empty string")
-            creationflags = 0
-            if os.name == "nt":
-                creationflags = subprocess.CREATE_NEW_PROCESS_GROUP
-            proc = subprocess.Popen(
-                cmd,
-                shell=True,
-                cwd=str(self.workspace_root),
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                creationflags=creationflags,
+            # A1: arbitrary shell was withdrawn. A pure-Python adapter cannot
+            # reliably prevent a spawned subprocess from escaping the workspace
+            # (absolute paths, spawned scripts), so it is refused rather than
+            # pretending to enforce a filesystem boundary (§13.9 anti-bypass).
+            raise AdapterSecurityError(
+                "ENFORCEMENT_UNAVAILABLE",
+                "arbitrary shell execution is disabled; use the whitelisted fs_read/fs_write tools",
             )
-            try:
-                stdout, stderr = proc.communicate(timeout=self.shell_timeout)
-            except subprocess.TimeoutExpired:
-                if os.name == "nt":
-                    kill = subprocess.run(
-                        ["taskkill", "/T", "/F", "/PID", str(proc.pid)],
-                        capture_output=True,
-                    )
-                    if kill.returncode != 0:
-                        raise AdapterSecurityError(
-                            "PROCESS_KILL_FAILED",
-                            f"taskkill failed (exit {kill.returncode}): {kill.stderr.strip()}",
-                        )
-                else:
-                    proc.kill()
-                proc.communicate()
-                return {"status": "timeout", "command_executed": cmd, "timeout_seconds": self.shell_timeout}
-            status = "success" if proc.returncode == 0 else "failed"
-            return {
-                "status": status,
-                "command_executed": cmd,
-                "exit_code": proc.returncode,
-                "stdout": stdout,
-                "stderr": stderr,
-            }
 
         return {"status": "success", "result": "ok"}
