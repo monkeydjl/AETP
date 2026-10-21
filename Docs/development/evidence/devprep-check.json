@@ -1,6 +1,6 @@
 {
   "schema_version": "aetp-preparation-check-0.1",
-  "checked_at": "2026-10-21T16:15:51+00:00",
+  "checked_at": "2026-10-21T16:41:08+00:00",
   "command": "python tools/devprep.py check",
   "exit_code": 0,
   "product_acceptance": false,
