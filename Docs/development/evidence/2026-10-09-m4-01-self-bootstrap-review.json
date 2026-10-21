@@ -1,0 +1,96 @@
+{
+  "work_item": "M4-01（self-bootstrap 存量验证 + B0 证据修复副项）",
+  "reviewer": "本轮 shell-reviewer 独立子代理",
+  "executor": "/root",
+  "reviewed_at": "2026-10-10T00:17:47+08:00",
+  "environment": {
+    "shell": "GNU bash",
+    "bash_path": "/usr/bin/bash",
+    "python_version": "3.14.6",
+    "shell_available": true,
+    "cwd": "D:/Github/AETP"
+  },
+  "decision": "accepted",
+  "commands_run": [
+    {
+      "command": "PYTHONPATH=\"src;.\" python -m unittest tests.bootstrap.test_lifecycle tests.bootstrap.test_contracts -v",
+      "exit_code": 0,
+      "stdout_summary": "Ran 9 tests in 1.674s — OK；包含 test_run_project_bootstrap_full_lifecycle（Execute full B0-B5 Bootstrap scenario and assert BOOTSTRAP_VERIFIED ... ok）"
+    },
+    {
+      "command": "grep -n \"sqlite3\\|sqlite_version\\|store.read_events\" src/aetp/bootstrap/runner.py",
+      "exit_code": 0,
+      "stdout_summary": "13:import sqlite3; 51:events = store.read_events(project_id); 296:\"sqlite_version\": sqlite3.sqlite_version; 339:events = store.read_events(project_id)"
+    },
+    {
+      "command": "grep -n \"id is not None\\|is not None\\|read_events.*\\[0\\]\\|sqlite_version.*True\\|sqlite_version.*=\" src/aetp/bootstrap/runner.py",
+      "exit_code": 0,
+      "stdout_summary": "仅 343:assert proj_state is not None 与 348:assert m0_state is not None（投影状态断言，非 B0 证据占位）；无 sqlite_version 布尔占位残留"
+    },
+    {
+      "command": "python -m py_compile src/aetp/bootstrap/runner.py",
+      "exit_code": 0,
+      "stdout_summary": "无输出；整文件语法通过"
+    },
+    {
+      "command": "python - <<'PY' [import sqlite3; 打印 sqlite3.sqlite_version 的值/类型/非空字符串检查]",
+      "exit_code": 0,
+      "stdout_summary": "value: '3.50.4'; type: str; truthy_string_check: True"
+    },
+    {
+      "command": "python tools/devprep.py check",
+      "exit_code": 0,
+      "stdout_summary": "OK graph nodes=101 edges=144; backlog items=23; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%"
+    },
+    {
+      "command": "python -c \"import json; print json.dumps(status.json conformance)\"",
+      "exit_code": 0,
+      "stdout_summary": "conformance.status=passed; registered_tests=28; passed_tests=28; failed_tests=0; not_applicable_tests=0"
+    }
+  ],
+  "self_bootstrap_verification": {
+    "tests_run": "tests.bootstrap.test_lifecycle + tests.bootstrap.test_contracts，Ran 9 tests OK",
+    "full_lifecycle_verdict": "asserted BOOTSTRAP_VERIFIED（report.verdict、final_project_phase、final_bootstrap_status=verified，replay 投影 phase=BOOTSTRAP_VERIFIED）",
+    "replay_matches_projection": true,
+    "evidence_path": "tests/bootstrap/test_lifecycle.py 第 26-51 行 full lifecycle 断言；src/aetp/bootstrap/runner.py 第 332-349 行 finalize→BOOTSTRAP_VERIFIED→Projection.rebuild(events) 确定性重放"
+  },
+  "b0_evidence_verification": {
+    "sqlite_version_now_real": true,
+    "sqlite_version_value": "sqlite3.sqlite_version",
+    "sqlite_version_runtime_sample": "3.50.4",
+    "boolean_placeholder_residual": false,
+    "import_sqlite3_present": true,
+    "import_line": 13,
+    "env_evidence_line": 296,
+    "note": "runner.py 第 296 行 \"sqlite_version\": sqlite3.sqlite_version（真实字符串，非 store.read_events(...)[0].id is not None → True 布尔占位）；第 13 行 import sqlite3 已加；py_compile exit 0"
+  },
+  "status_effect": {
+    "status_json_not_modified": true,
+    "bootstrap_status": "not_started",
+    "phase": "preparation",
+    "conformance": {
+      "status": "passed",
+      "registered_tests": 28,
+      "passed_tests": 28
+    },
+    "note": "本次为存量实现验证 + runner.py B0 证据修复，不改 Docs/development/status.json；status.json mtime 2026-10-09 21:14 早于 runner.py 2026-10-10 00:13；devprep check exit 0 确认无口径不一致"
+  },
+  "findings": {
+    "critical": [],
+    "important": [],
+    "minor": [
+      {
+        "id": "MINOR-1",
+        "text": "git 仓库当前无提交历史（master 无 commit），无法用 git diff 精确界定本次改动的文件范围；改用文件 mtime 佐证 runner.py 较 status.json 更新，且 devprep check（exit 0）保证 status.json 无不一致。"
+      },
+      {
+        "id": "MINOR-2",
+        "text": "runner.py 第 23 行直接从 tests.m2.governance_support import policy，生产 bootstrap 路径跨测试目录取用治理策略，属既有设计而非本次引入，仅记录不阻断。"
+      }
+    ]
+  },
+  "limitations": [
+    "git log 不可用（master 无 commit，exit 128），无法做提交级三方/多方比对",
+    "未修改 Docs/development/status.json，未重跑冻结产物整体 hash；仅以 devprep check exit 0 与 status.json 关键字段核对确认口径不变"
+  ]
+}

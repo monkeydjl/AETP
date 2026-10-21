@@ -965,6 +965,214 @@ preparation 27/27；准备检查不计完整 Conformance。固定候选 210 输�
 - 待用户决策：`.reasonix/skills/shell-reviewer/SKILL.md`（本会话创建的独立复核 skill）是否提交进仓库。
 - 无 push/commit 执行（仍等用户三项资源）。
 
+## 41. 首次本地 commit（2026-10-09）
+
+- 用户指示「本地提交，先不要推 github」；身份用中性本地标识 AETP <aetp@localhost>（local config）；排除整个 .reasonix/。
+- 策略：按明确清单 add（跳过历史产物），因 `git add -A` 被历史 evidence 里的三类运行产物连续阻塞（Permission-denied temp 目录、Filename-too-long workspace/p-<uuid>/b-<uuid> 路径、89 个 .sqlite）。
+- 纳入：src/tests/conformance/schemas/skills/tools + 顶层文档（README/AGENTS/MEMORY/roadmap/knowledge-map/backlog/status/AETP 设计方案）+ .github/ruff.toml/.gitignore/.editorconfig + status.json evidence_paths 全 113 个权威证据文件。共 345 个文件。
+- 排除（正确，不提交）：.reasonix/、.tmp/、__pycache__、历史 evidence 里的 runs/input-blobs/fixtures/workspace/temp/tmp*/.sqlite 产物，以及 status.json evidence_paths 之外的松散历史 json/txt/py 运行稿。
+- commit：`1263fb3 AETP initial commit: preparation, M0-M3 milestone conformance, M4 partial acceptance`。未 push。
+- 提交后工作区：已跟踪文件无改动（干净）；未跟踪项均为历史产物/运行稿，正确保留不提交。
+- devprep check 仍 exit 0，正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28 registered/28 passed）。
+- push 前准备已固化（.gitignore 排除 .reasonix/、历史 temp/workspace/.sqlite 产物），但用户明确「接下来都不推」，本地 git 保留 tidied 首次 commit 1263fb3，不 push。
+
+## 42. 真实 OS 沙箱 shell 执行（2026-10-10）
+
+- 用户选「推进代码方向」：真实 OS 沙箱执行（把 sandbox.shell 从回显改真实子进程），不 push。
+- TDD（RED→GREEN）：测试/实现贴切，SandboxRuntimeAdapter.shell 分支从回显改为 subprocess.Popen(shell=True, cwd=workspace_root, stdout/stderr=PIPE) + communicate(timeout)；Windows 用 CREATE_NEW_PROCESS_GROUP + taskkill /T /F 杀进程树，POSIX 用 proc.kill()；非零退出码 status=failed，超时 status=timeout。__init__ 加 shell_timeout=30.0 参数。
+- 修复正确性缺口：最初 subprocess.run(timeout) 在 Windows 下杀不死孙进程（sleep 命令实际跑满 30s 才返回），改 Popen + 主动 taskkill 后超时 1.2s 内返回，进程树真正终止。
+- 测试：test_sandbox 从 8→13，test_adapters+test_sandbox 共 17 全 OK（总耗时从 60s 降到 2.8s）
+- 独立复核：shell-reviewer accepted，报告 Docs/development/evidence/2026-10-10-os-sandbox-shell-review.{json,md}。3 minor：POSIX 分支未实测（本地是 Windows）、import signal 冗余、taskkill 退出码未校验。
+- 变更文件：src/aetp/runtime/sandbox.py、tests/runtime/test_sandbox.py；正式口径不变。
+
+## 43. 真实本地 git Integration Gate（2026-10-10）
+
+- 用户选下一个实质切片：真实本地 git Integration Gate。
+- 交付：`src/aetp/integration/gitref.py`（resolve_ref：subprocess `git -C repo_dir rev-parse --verify ref^{commit}`，锁 repo_dir 只读不改，ref 形状白名单防注入，未知 ref→REF_NOT_FOUND）+ `gate.py` 新 `validate_merge_against_repo(task, payload, repo_dir)`（不信任 payload.current_target_commit，真实读 target tip 与 expected 对比，不等→BASELINE_ADVANCED，对 §10.6「实际更新受保护引用时再校验」）。
+- TDD：新增 `tests/m3/test_integration_gitref.py`（4 项：真实 tip 40hex、未知 ref 拒绝、匹配通过、baseline advanced 拒绝），先 RED ModuleNotFound 后 GREEN。
+- 独立复核：shell-reviewer accepted，报告 `Docs/development/evidence/2026-10-10-integration-gitref-review.{json,md}`；回归 100 tests OK；devprep exit0。
+- important 发现（如实记录，不硬做）：生产执行路径 service.py(git.merge)/guards.py 仍调旧 validate_merge，未接到 validate_merge_against_repo；因为后者需要真实 git Workspace Provider（repo_dir 映射 + 真实 merge 写操作 §13.9），是更大的切片，本切片只交付可复用的真实 baseline 纯函数单元，不凭空造 repo_dir。
+- 变更文件：src/aetp/integration/gitref.py、src/aetp/integration/gate.py、tests/m3/test_integration_gitref.py；正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28/28 passed）。
+
+## 44. 真实本地 GitWorktreeProvider（2026-10-10）
+
+- 上轮 important（生产 git.merge 未接线）根因是缺真实 git Workspace Provider；用户选最小本地 GitWorktreeProvider。
+- 交付：`src/aetp/workspace/git_provider.py` — `GitWorktreeProvider`（create_worktree 用 `git worktree add --detach` 独立工作副本；merge 用 resolve_ref 真实 re-check target tip，stale→BASELINE_ADVANCED 不动 repo；`git merge --no-ff --no-commit` 冲突时先收集 unmerged 路径再 `--abort` 返回 conflict_paths 不静默 rebase；干净则 commit --no-gpg-sign 返回 40hex result_commit）。严格只本地操作，无 push/remote。
+- TDD：`tests/m3/test_integration_git_provider.py` 5 项（模块加载、worktree 独立、stale 拒绝、冲突不 rebase、干净 merge commit）；期间修了「先 abort 后收集冲突路径」的顺序 bug。
+- 独立复核：shell-reviewer accepted，报告 `Docs/development/evidence/2026-10-10-git-worktree-provider-review.{json,md}`；探针四项真（独立 worktree、BASELINE_ADVANCED、conflict+tip 不变、clean 40hex result_commit）。1 minor：merge 会 checkout target 分支属设计语义。
+- 变更文件：src/aetp/workspace/git_provider.py、tests/m3/test_integration_git_provider.py；正式口径不变。
+- 遗留（仍非本切片闭合）：service.py/guards.py 的 git.merge 尚未把 repo_dir+GitWorktreeProvider 接入生产 Command 路径（是把 provider 接进 §10.6 merge 执行的下一接线切片，需要 workspace provider 生命周期/注入，且不改正式口径）。
+
+## 45. 受信 git provider 接线（2026-10-10）
+
+- 用户选「引入受信 git provider（真正闭环）」。把前面三块积木（真实 shell、真实 baseline 纯函数、GitWorktreeProvider）接进生产 git.merge 路径。
+- 交付：`gate.py::dispatch_merge(provider, task, payload)`——task.status 非 ready_for_integration 一律先拒；provider 非 None 走 provider.merge(source_ref,target_ref,expected_target_commit)（冲突返回 conflict_paths、干净返回 result_commit），provider 为 None 回退旧 validate_merge 模拟路径（向后兼容 886 tests）。`service.py::IntegrationContractService.__init__` 新增关键字 `git_provider=None`（trusted-only，repo_dir 在 provider 对象内，永不由 agent Command 指定），git.merge 分支改走 dispatch_merge。
+- 安全边界：repo_dir 只来自受信构造参数，agent payload 塞伪造目录被无视（独立复核实测）。
+- 独立复核：shell-reviewer accepted，报告 `Docs/development/evidence/2026-10-10-git-provider-wiring-review.{json,md}`；其 important（provider 分支缺 task.status 校验）已修并在 `dispatch_merge` 首行补 status guard + 回归测试 test_with_provider_also_rejects_non_ready_task。
+- 变更文件：src/aetp/integration/gate.py、src/aetp/integration/service.py、tests/m3/test_integration_merge_dispatch.py；正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28/28 passed）。
+- 至此 §10.6 真实 merge 闭环链完成：resolve_ref（真实读 tip）→ validate_merge_against_repo + dispatch_merge → GitWorktreeProvider（真实 worktree/merge）→ IntegrationContractService 接线。opensolved important。真实 git Workspace Provider 的 OS 级隔离（§13.9 防绕过）仍是更大的后续项（不是 working_copy 能证明的）。
+
+## 46. Credential Broker 最小语义（§14.3/INV-012，2026-10-10）
+
+- 交付：`src/aetp/governance/credential_broker.py` — CredentialBroker（issue 签发 opaque token secrets.token_hex(24)，permissions 排序去重；resolve 墙钟过期 at>=expires→CREDENTIAL_EXPIRED、revoked→CREDENTIAL_REVOKED、未知→CREDENTIAL_UNKNOWN、at<issued→NOT_YET_VALID；assert_permission 越权→PERMISSION_DENIED；revoke；不存储/返回长期 secret）。§14.3 唯一墙钟语义（暂停不延长）落实。
+- TDD：`tests/m2/test_credential_broker.py` 7 项 RED→GREEN（签发/鉴权/越权/过期/撤销/未知/暂停不延长）。
+- 独立复核：shell-reviewer accepted，报告 `Docs/development/evidence/2026-10-10-credential-broker-review.{json,md}`；探针 5 PASS、无硬编码密钥、devprep exit0。1 minor：devprep check 会重写 evidence 时间戳（既有行为）。
+- 变更文件：src/aetp/governance/credential_broker.py、tests/m2/test_credential_broker.py；正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28/28 passed）。
+- 局限：这是纯内存 opaque token 最小语义，未接真实 OS/容器沙箱、真实凭据隔离与端到端 Runtime 集成（是 §14.3 更完整实现的后续项）。
+
+## 47. 现状回填 backlog/status（2026-10-10）
+
+- 把五个实质切片如实反映进计划，避免代码与计划脱节。
+- backlog M4-03 仍 blocked（OS 容器级隔离/Credential Broker Runtime 集成/自主 peer delivery 仍未实现），block_reason 更新为「已交付 5 切片 + 剩余缺口」，files 与 evidence 补 5 份独立复核报告 + 相关源码路径。
+- status.json evidence_paths 补 10 份本轮新增证据（m4-01 环境/build/self-bootstrap/m4-02 + 5 份切片复习）；修正过时 limitations L203「工作区没有 git repo」为「已 git init + 本地 commit 1263fb3，未 branch/push，历史产物不进 git」。
+- 正式计数不变：phase=preparation、product=0、bootstrap=not_started、conformance 28 registered/28 passed；devprep check exit0。
+
+## 48. 跨里程碑全量回归（2026-10-10）
+
+- 五个实质切片（§42-46）改动 integration/workspace/governance 模块后，跑全部里程碑回归确认零破坏。
+- 结果（全 OK，无回归）：M0 156、M1 86、M2 174（原 167 + broker 等 7 新增）、M3 375（原 360 + 15 新增）、preparation 27、bootstrap 9、runtime 38、fault_injection 15、conformance 28。总计 916 tests 通过。
+- devprep check exit 0；正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28/28 passed）。
+
+## 49. git 卫生确认（2026-10-10）
+
+- 确认 `.tmp/` 已被 .gitignore 正确忽略（`git check-ignore .tmp/` 返回 `.tmp/`），从未混入 staged/untracked。
+- `.tmp/` 内含两类：本会话 scratch（cb_probe.py、evidence_paths_existing.txt、imp002/m402/m4 探针等）与历史冻结证据引用的正式产物（conformance-frozen-run.sqlite、各类 m0-m3 baseline/candidate 目录）。按「不清理其他 Agent 工作 + 不覆盖冻结产物」纪律，不做删除；git 状态已干净。
+- 现状：已跟踪文件无改动，仅历史产物/运行稿为未跟踪且正确排除。无 push。
+
+## 50. Credential Broker 接入 Runtime（进行中，2026-10-10）
+
+- 用户批准 §14.3 设计提案（Docs/development/evidence/2026-10-10-credential-broker-design-proposal.md），进入 TDD 实现。
+- 已做：governance/contracts.py 注册 `credential.request`→`credential.issued`、`credential.revoke`→`credential.revoked`，AGGREGATES 加 `credential`；devprep check exit0。
+- 待做（跨模块四层）：① domain/models.py 的 COMMAND_TYPES/EVENT_TYPES 已通过 union(GOVERNANCE_COMMANDS/GOVERNANCE_EVENTS) 自动覆盖，只验不破；② governance/records.py 求值器 evaluate 处理 credential.request/revoke（校验 agent/scope/ttl 上限 + Policy 授权 + 墙钟过期；token_ref opaque，token 本体只在 broker 内存）；③ governance/projection.py reducer 把 credential.* 落 projection（不含 token 本体）；④ service 层注入受信 CredentialBroker，tool.request 边界 assert_permission。RED 测试锁 5 条安全断言（未授权拒绝/墙钟过期/撤销/脱敏/Replay 不重 mint）。
+- 进度：仅完成词汇注册，求值器/投影/服务接线/TDD 均未做。
+
+## 50b. Credential 接线精确分步（防丢失，2026-10-10）
+
+- 关键结构（来自 governance/causality.py + projection.py）：
+  - `evaluate(command, state, at, context)`（projection.py L11）在 COMMAND_AGGREGATES[type]=="credential" 时需新增 transition 分支（当前 L34 会 raise ENFORCEMENT_UNAVAILABLE）。
+  - `validate_context`（causality.py L19）需对 credential.request 允许 context 字段（如 input_proof），credential.revoke 可能是 internal 或人类授权命令。
+  - `continuations`（causality.py L61）决定 credential 命令是否产生子命令——最小设计应返回 []（凭证签发/撤销是终态事实，无子命令），否则 reduce_record 的 canonical 匹配会失败。
+  - `reduce_record`（projection.py L37-59）把 event.payload 反推 Command 再调 evaluate，要求 kind/event.type/expected.id/project_id/revision/canonical_json(expected)/continuations 全等。
+  - credential 事件的 projection record 必须含 id/project_id/revision 且不含 token 本体（只 token_ref + permissions + expires_at_ms + revoked）。
+  - `_DOMAIN_TYPES` 在 core/projection.py 已 union GOVERNANCE_EVENTS，自动覆盖，但 credential 事件 reducer 走 `governance/projection.py::reduce_record`（需 event.payload 含 governance_schema 信封）。
+- 接线顺序（安全）：① RED 测试锁 5 断言（用真实 CredentialBroker + 手工构造 state/context 调 evaluate+reduce_record）；② governance/projection.py evaluate 加 credential 分支；③ validate_context+continuations 加 credential 语义；④ GovernanceService 受信注入 broker；⑤ core 全量回归。
+- 风险点：credential 事件的 aggregate 是 "credential"，reduce_record 需能处理 previous=None（新签发）与 previous 存在（revoke）两种情况；continuations 必须精确返回与 evaluate 一致，否则确定性重放失败。
+
+## 50c. Credential 求值器接线完成（2026-10-10）
+
+- 已完成：① `governance/credentials.py` 新增 transition（issue：agent 主体 + SCOPE_WHITELIST {github.repo.read/write, browser.read_only} + ttl>0 + token_ref 必须有，产出 credential.issued record 含 token_ref/permissions/expires_at_ms/revoked=false，不含 token/secret；revoke：human 或 agent 主体，产出 credential.revoked）；② `governance/projection.py::evaluate` 加 `aggregate=="credential"` 分派；③ `governance/causality.py::validate_context` 对 credential.request 允许 `broker_token_ref` 字段。
+- 测试：`tests/m2/test_credential_transitions.py` 4 项（scope/过期持久化且不含 secret、越权 PERMISSION_DENIED、revoke 标记、evaluate 分派），全 GREEN；M2 178 tests OK（原174+4），devprep check exit0。
+- 关键安全风险（留 service 层接线解决）：当前向 transition 传入的 broker_token_ref 由调用方提供，agent 可伪造任意 token_ref 而不经真实 broker 签发。必须在 service 层接线时，由受信 GovernanceService 调用 CredentialBroker.issue() 得真实 token，再把 token_ref 放进 context（agent 不可直接指定），并禁止 agent payload 直接携带 token_ref。
+- 待做：④ service 注入受信 CredentialBroker + tool.request 边界 assert_permission + 阻断 agent 伪造 token_ref；⑤ reduce_record 对 credential 事件确定性重放验证（continuations=[]）；⑥ 5 条完整安全断言（未授权/墙钟过期/撤销/脱敏/Replay 不重 mint）。
+
+## 50d. Credential service 受信注入完成（2026-10-10）
+
+- 已完成：GovernanceService.__init__ 加 `credential_broker=None`（受信 only，None=fail-closed）；_evaluate 在 credential.request 时：① broker 为 None → CREDENTIAL_UNAVAILABLE；② agent payload 带 token_ref/broker_token_ref → INVALID_PAYLOAD（阻断伪造）；③ 用 broker.issue(actor, permissions, issued_at=at, expires_in_ms=ttl_ms) 生成真实 token，把 token 放进 data["broker_token_ref"]（agent 永不可指定）。
+- 关键：governance/credentials.py::issue 用 context["broker_token_ref"] 记 token_ref，但 service 层 data 的 broker_token_ref = 真实 broker.issue 产物的 token 本体。注意：这里 token 本体进了 data → 会进入 event.payload.context？需检查——governance/projection.py 的 payload 把 `"context": data` 写进 event payload，这会把 broker token 写进 Event Store！这是 INV-012 违反（秘密不入 Event）。**必须修复**：context 里放 token_ref（非 token），token 本体只存 broker 内存。下一步先写 RED 测「event payload 不含 token 本体」再修。
+- 测试：M2 178 OK（含 credential_transitions 4 + credential_broker 7），devprep check exit0。
+- 待做（关键安全）：修复上述 token 本体可能入 Event 的问题 + service 层集成测试（有 broker 签发成功/无 broker fail-closed/伪造 token_ref 拒）。
+
+## 50e. Credential token 泄漏修复（2026-10-10）
+
+- 发现 §50d 的安全缺陷：service 层最初把 broker.issue 返回的 token **本体**放进 data["broker_token_ref"]，会经 event.payload.context 写入 Event Store，违反 INV-012「秘密不入 Event」。
+- 修复：broker.issue 额外返回 `token_ref` = "credref_" + sha256(token)（不可反推摘要，可入 Event），token 本体只存 broker 内存；service 层 data["broker_token_ref"] 改为 issued["token_ref"]（ref 而非本体）。
+- 测试：credential_broker 7 + credential_transitions 4 共 11 tests OK；M2 178 OK；devprep check exit0。
+- 关键安全断言已锁：evaluate 产出 record 只含 token_ref（"credref_abc"），assertNotIn("token") 断言 record 不含 token 本体。
+
+## 50f. Credential 确定性重放完成（2026-10-10）
+
+- 已完成：`tests/m2/test_credential_replay.py` 2 项（credential.issued 事件经 reduce_record 确定性重放回相同 record、credential.revoked 重放标记 revoked 且不含 token/secret），全 GREEN。现有 reduce_record 通用处理 credential 事件（continuations=[]），无需新实现。
+- 测试累计：broker 7 + transitions 4 + replay 2 = 13 项 credential 测试；M2 全量 180 tests OK；devprep check exit0。
+- 至此 Credential Broker 核心闭环完成：签发（issue）→ 撤销（revoke）→ 持久化（token_ref 不落 token 本体到 Event）→ 确定性重放（replay 重建 record 不重 mint）。正式口径不变。
+- 剩余唯一待做：tool.request 消费点 assert_permission（凭证在真实工具调用边界校验 scope+时效+撤销）。这是 runtime action 授权链的跨模块切片（action 模型表达凭证消费 + runtime 注入 broker + dispatch 时 assert_permission），范围较大，未在本轮做。
+
+## 50g. Credential 消费点 token_ref 反查语义（2026-10-10）
+
+- 用户选「传 token_ref，broker 内存反查 token」。已完成 broker 内存索引 `_ref_to_token` + `assert_permission_by_ref(token_ref, permission, at)` + `revoke_by_ref(token_ref)`；issue 返回 token_ref=sha256(token) 非反推摘要。
+- 测试：broker 7→10 tests（by_ref 正当/越权/未知/过期/撤销），M2 全量 183 tests OK，devprep check exit0。
+- 至此 Credential Broker 语义闭环：签发→撤销→token_ref 持久化（token 不入 Event）→确定性重放→消费点 by_ref 校验 scope/时效/撤销，全部有测试锁定。正式口径不变。
+- 剩余真正未做：runtime dispatch 的 credential 消费接线——需在 Runtime 核心引入 credential_broker 作为受信设施（与 mcp_provider 同级的 trust-boundary 注入），action 模型支持 credential.consume 语义，dispatch 时调用 assert_permission_by_ref。这是最大跨模块切片（动 Runtime 信任设施），未在本轮做。
+
+## 50h. Credential 接线后全量回归（2026-10-10）
+
+- 连续多轮 Credential Broker 接线（contracts/credentials/projection/causality/service/broker）后做全量跨里程碑回归，确认零破坏。
+- 结果（全 OK）：M0 156、M1 86、M2 183、M3 375、preparation 27、bootstrap+runtime 53、fault_injection 15、conformance 28。总计 923 tests 通过。
+- devprep check exit 0；正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28/28 passed）。
+- 至此 Credential Broker 语义闭环 + 全量回归零破坏，是稳定交接点。
+
+## 50i. Runtime credential 消费接线设计（待实现，2026-10-10）
+
+- 镜像参照：`DocumentRuntime` 的 `mcp_provider`（constructor 后 `self.mcp_provider=None`，受信 host 注入，agent 不可设）；`ActionBroker._expected_provider_identity`/`_authorize_tool_channel`/`_effect_provider` 按 operation 分派。
+- 接线设计（最小）：
+  ① `DocumentRuntime.__init__` 增加 `self.credential_broker = None`（受信 host 注入，镜像 mcp_provider）。
+  ② action 语义：新增 operation `credential.consume`？或复用 tool.request 的 arguments 里带 `credential_token_ref` + `required_permission`。**最小且合规**：不在 action operation 新增顶层类型，而是在 `_authorize_action` 当 `action["operation"]=="mcp.call"` 或文档操作时，若 arguments 含 `credential_token_ref`，则 broker.assert_permission_by_ref 校验 required_permission + wall_clock 时效 + 撤销。
+  ③ `normalize_arguments`（runtime/records.py L13）当前把 `credential.*` 前缀 APPROVAL_REQUIRED——需区分「credential.consume/credential.* 自身操作」与「带 credential_token_ref 的 tool 消费」；消费是 tool 调用的 helper，不是独立 operation。
+  ④ dispatch 前授权（_authorize_action L93-113）在 mcp/document 分支外，若 runtime.credential_broker 非 None 且 arguments 有 credential_token_ref，调用 assert_permission_by_ref（fail-closed）。
+- 风险：这是核心 Runtime 信任边界切片，动 document.py/actions.py/records.py，务必全量回归；credential_token_ref 只来自受信 broker 签名，agent 不可直接指定任意 ref（未知 ref→CREDENTIAL_UNKNOWN reject）。
+
+## 50j. Runtime credential 消费接线完成（2026-10-10）
+
+- 实现：① DocumentRuntime.__init__ 加 `self.credential_broker=None`（受信 host 注入，镜像 mcp_provider）；② ActionBroker._authorize_action 在 governance 授权后、recovery barrier 前，若 action.arguments 含 credential_token_ref，则 runtime.credential_broker.assert_permission_by_ref(ref, required_permission, now)（broker None→CREDENTIAL_UNAVAILABLE、缺 required_permission→INVALID_PAYLOAD、越权/过期/撤销/未知→对应 PolicyViolation，均为 fail-closed）。
+- 关键修复：CredentialBrokerError 原来是 Exception 子类，会逃逸 `_evaluate` 的 except PolicyViolation，且 code 语义冲突；改为继承 PolicyViolation（PolicyViolation.__init__(code) 正确设置 self.code），使 CREDENTIAL_EXPIRED/PERMISSION_DENIED/CREDENTIAL_UNKNOWN/CREDENTIAL_REVOKED 成为协议拒绝词汇。
+- 测试：tests/runtime/test_credential_ingestion.py 4 项（合法 scope 通过、越权 PERMISSION_DENIED、无 broker CREDENTIAL_UNAVAILABLE、过期 CREDENTIAL_EXPIRED）；runtime 全 48 OK；M2 183 OK；devprep check exit0。
+- 至此 §14.3 Credential Broker 端到端闭环：签发→持久化(token_ref 不落 token)→撤销→确定性重放→runtime 消费点 assert_permission_by_ref（挂载 _authorize_action 授权链），全部 fail-closed 且有测试。正式口径不变。
+- 遗留设计说明（非 bug）：credential 消费是「附着在现有 action.arguments 的 helper」，不是独立 operation（用户选最小侵入）；normalize_arguments 里 credential.* 操作仍 APPROVAL_REQUIRED（fail-closed，正确）。
+
+## 50k. 最终全量回归（2026-10-10）
+
+- Credential runtime 接线（document.py/actions.py 改动）后做全量跨里程碑回归，确认零破坏。
+- 结果（全 OK）：M0 156、M1 86、M2 183、M3 375、preparation 27、bootstrap+runtime 57、fault_injection 15、conformance 28。总计 927 tests 通过。
+- devprep check exit 0；正式口径不变（phase=preparation/product=0/bootstrap=not_started/conformance 28/28 passed）。
+- Credential Broker §14.3/INV-012 现已**端到端完整闭环**，本次会话所有可独立完成、不依赖外部资源/OS 能力的实质代码切片全部交付完毕。
+
+## 50l. ci.yml 骨架本地 dry-run（2026-10-10）
+
+- 对 M4-01 B4 的 ci.yml 骨架做本地 dry-run，验证三条命令在当前代码下真实可运行（不是真实 CI，真实 CI 需 remote+CI host）。
+- 结果：step1 `python tools/devprep.py check` exit0；step2 `python -m unittest discover -s tests/preparation -v` 27 OK；step3 `PYTHONPATH=src python -m conformance.runner --db .tmp/ci-conformance.sqlite ...` 28 passed。
+- 结论：ci.yml 命令骨架本身正确，但「真实 CI host 已跑通」仍未成立（需用户提供 remote+CI host）。诚实边界不变。
+
+## 50m. backlog 回填补漏（2026-10-10）
+
+- 发现 §47 回填时漏了 §50 新增的 credential 接线文件，补上：M4-03 files 增 `src/aetp/governance/credentials.py`（§50c 新增求值器）、contracts/projection/causality/service.py（§50-50j 改动）、runtime/document.py + actions.py（§50j）、4 个 credential 测试文件。evidence 维持已登记的 5 份独立复核报告。
+- devprep check exit0，正式口径不变。
+
+## 50n. OS 沙箱 env 白名单隔离（§13.9/§14.3，2026-10-10）
+
+- 发现并修复真实安全缺陷：shell 子进程原先继承宿主完整环境（可能含凭证/密钥）。改为 env 白名单（仅 PATH/SYSTEMROOT/SystemRoot/TEMP/TMP），Popen 传 env=self.shell_env。
+- TDD：新增 test_shell_env_is_allowlisted_not_inherited（注入 AETP_TEST_HOST_SECRET，子进程应取 None）；14 tests GREEN（原 13 + 1）。
+- 独立复核：shell-reviewer accepted，报告 Docs/development/evidence/2026-10-10-os-env-isolation-review.{json,md}；确认 secret 不泄漏 + PATH 存在 + shell 功能不破坏。2 minor：F1 Windows 下 COMSPEC/PATHEXT/PROMPT 系统注入（非宿主 secret，不影响安全目标）；F2 旧注释口径（已修，注释同步 env 白名单诚实度）。
+- 变更文件：src/aetp/runtime/sandbox.py、tests/runtime/test_sandbox.py；runtime 全 49 OK；devprep check exit0；正式口径不变。
+- 这是 OS 隔离（本地进程隔离骨架）授权的第一个实质切片：真实 env 白名单隔离（凭证不泄漏）+ 既有真实 subprocess/cwd 锁定/超时/进程树终止。
+
+## 50o. OS 沙箱文件系统越界缺口（待决策，2026-10-10）
+
+- 探针确认：shell 子进程用绝对路径可读写工作区外文件（outside_created=true）。当前 cwd 锁定 + env 白名单**不能**阻止文件系统越界——这是 §13.9「防绕过」第三条的实质缺口。
+- 现状：`workspace_isolation` 仍诚实标 working_copy；fs_read/fs_write 工具层有 path 前缀校验，但 shell 子进程可绕过该前缀直接绝对路径读写。
+- 待决策（纯 Python 无零依赖 OS 文件沙箱）：
+  方案A：收紧 shell 语义——shell 只能运行经 fs_read/fs_write 校验过的白名单工具，禁止绝对路径文件写（需改 shell 分支，不让任意外部文件写，最安全且纯代码可做）。
+  方案B：引入 OS Job/Object/容器能力（需外部依赖或 OS 级权限，超出当前沙箱）。
+  方案C：保持 fail-closed 现状并如实登记（不宣称防绕过）。
+- 探针 .tmp/sandbox_bypass_probe.py 已记录。
+
+## 50p. 方案 A1：收回任意 shell（真安全，2026-10-10）
+
+- 用户选 A1：把 sandbox 的「任意 shell 子进程执行」收回（§42/§50n 曾交付的能力），因纯 Python 无法可靠阻止子进程经绝对路径/脚本间接写越界文件（§13.9 防绕过）。
+- 变更：sandbox.py shell 分支 fail-closed（raise ENFORCEMENT_UNAVAILABLE）；清理 subprocess/signal import、shell_timeout 参数、shell_env 白名单字段。tests/runtime/test_sandbox.py 14→10（删 6 个任意 shell 执行测试，新增 test_shell_is_fail_closed + test_fs_write_still_enforces_workspace_boundary）。
+- 独立复核：shell-reviewer accepted，报告 Docs/development/evidence/2026-10-10-os-shell-withdrawal-review.{json,md}；shell fail-closed 无副作用、fs_write 边界 intact、无死代码。runtime 45 OK、devprep exit0、口径不变。
+- **重要更正**：§42「真实 shell 执行」与 §50n「env 白名单」两个切片交付的是「真实子进程 + 环境隔离」，但探针证明它们不能阻止文件系统越界；按用户 A1 决策，这两个能力已收回，文件访问唯一入口为 fs_read/fs_write 白名单工具（有 path 前缀校验）。§42/§50n 的「真实 shell」结论作废，以本 50p 的 fail-closed 为准。
+
+## 51. A1 本地提交与 git 历史（2026-10-21）
+
+- A1（§50p 收回任意 shell）已本地 commit：`800ef70 Withdraw arbitrary shell in sandbox (A1): fail-closed, files via fs_read/fs_write only`，仅 2 文件（`src/aetp/runtime/sandbox.py`、`tests/runtime/test_sandbox.py`，+38/-103）。
+- 当前 git 历史（本地，**未 push**）：
+  - `800ef70` A1 收回任意 shell
+  - `4dec280` M4 code：真实 OS sandbox shell、真实 git integration gate、credential broker end-to-end（§42-50k）
+  - `1263fb3` AETP initial commit：preparation、M0-M3 conformance、M4 partial acceptance
+- 验证：commit 后 `python tools/devprep.py check` exit 0；runtime 45 tests OK。
+- 未提交改动（真实内容变更，待提交）：`Docs/development/backlog.json`（M4-03 block_reason 更新为「已交付 5 切片 + 剩余缺口」，files 补源码路径，evidence 补 5 份复核报告）、`Docs/development/status.json`（evidence_paths +10 份新证据，修正 limitations「工作区没有 git repo」为已 init+commit 1263fb3）、`MEMORY.md`。这些即 §47 镜像回填的落盘，尚未 commit。
+- 未跟踪：`.tmp/`（已 gitignore）、`artifacts/`（冻结产物，按约定不覆盖/不提交）、历史 evidence 运行产物（runs/workspace/temp/.sqlite）、`Docs/superpowers/`、`Docs/Docs.zip`。均按「不清理其他 Agent 工作 + 不覆盖冻结产物」保留。
+- 正式口径不变：phase=preparation、product_completion_percent=0、bootstrap_status=not_started、conformance 28 registered/28 passed（有限范围）。
+
 
 
 

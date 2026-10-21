@@ -1,0 +1,127 @@
+{
+  "schema_version": "aetp-review-evidence-0.1",
+  "work_item": "M4-03",
+  "title": "受信 git provider 接线切片（AETP 生产 git.merge 路径闭环）",
+  "reviewer": "本轮 shell-reviewer 独立子代理",
+  "executor": "/root",
+  "reviewed_at": "2026-10-12T20:41:18+08:00",
+  "environment": {
+    "shell_available": true,
+    "shell": "/usr/bin/bash",
+    "python": "3.14.6",
+    "git": "git version 2.54.0",
+    "workspace": "D:\\Github\\AETP",
+    "workspace_git_repository": true,
+    "head_commit": "1263fb3 AETP initial commit: preparation, M0-M3 milestone conformance, M4 partial acceptance"
+  },
+  "decision": "accepted",
+  "commands_run": [
+    {
+      "command": "which bash; python --version; git -C . rev-parse --show-toplevel 2>&1; pwd",
+      "exit_code": 0,
+      "stdout": "/usr/bin/bash\nPython 3.14.6\nD:/Github/AETP\n/d/Github/AETP"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python -m unittest tests.m3.test_integration_merge_dispatch tests.m3.test_integration_git_provider tests.m3.test_integration_gate -v",
+      "exit_code": 0,
+      "stdout": "Ran 19 tests in 35.248s\nOK (5 dispatch + 5 git_provider + 9 gate)"
+    },
+    {
+      "command": "cd /d/Github/AETP && python tools/devprep.py check",
+      "exit_code": 0,
+      "stdout": "OK graph nodes=101 edges=144; backlog items=23; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python -m unittest tests.m3.test_integration_guard_wiring tests.m3.test_integration_live -v",
+      "exit_code": 0,
+      "stdout": "Ran 30 tests in 19.434s\nOK (15 guard_wiring + 15 live)"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python .tmp/m4_dispatch_e2e_probe.py",
+      "exit_code": 0,
+      "stdout": "stale raised=BASELINE_ADVANCED tip_unchanged=True; forged-repo-dir-proof ok; conflict outcome={'conflict': True, 'conflict_paths': ['base.txt'], 'result_commit': None} tip_unchanged=True; clean outcome={'conflict': False, 'conflict_paths': [], 'result_commit': '5444ab1d85f544933c27ea794becdffac03c7814'} hex40=True cat_type=commit parents=2 feat_in_target=True; failures=[]"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python .tmp/m4_service_e2e_probe.py",
+      "exit_code": 0,
+      "stdout": "setup main_tip=76480e5a4b345edf3872ac8ddd309c3c5ecff06c; before_ready status=verified revision=6; integration_ready result=accepted status=ready_for_integration; merge result=accepted status=integrated result_commit=3c45247a9a9e64860399fc5e9da59a5fa5dcc9bf; commit_type=commit parents=2 feat_in_target=True; payload_forged_repo_dir_ignored=True; failures=[]"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python .tmp/m4_status_gap_probe.py",
+      "exit_code": 0,
+      "stdout": "dispatch_merge(provider) with status=verified returned False result=a103d18533dd063b6660f15ef05cabd232fb7e03; feat_in_target=True (proves dispatch_merge itself does not check task.status when provider is present)"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python .tmp/m4_status_guard_probe.py",
+      "exit_code": 0,
+      "stdout": "from_status=verified result.status=rejected error_code=INVALID_TASK_STATUS; task_status_after=verified; feat_in_target=False (proves the service-level path DOES enforce task.status before dispatch)"
+    }
+  ],
+  "dispatch_verification": {
+    "provider_real_merge": {
+      "status": "verified",
+      "evidence": "dispatch_merge(GitWorktreeProvider, task, payload) with matching expected_target_commit produced a real 40-hex merge commit (parents=2, cat-file=commit, feat_in_target=True); no simulated placeholders."
+    },
+    "fallback_simulated": {
+      "status": "verified",
+      "evidence": "gate.py source line 70 calls validate_merge(task, payload) when provider is None; test_no_provider_* (2 tests) pass and return payload has_conflict/result_commit verbatim."
+    },
+    "payload_no_repo_dir": {
+      "status": "verified",
+      "evidence": "git.merge payload accepted by dispatch_merge/service only carries source_ref, target_ref, expected_target_commit; a forged payload repo_dir='/nonexistent/agent-supplied-repo-dir' was ignored and the provider resolved its own internal repo_dir."
+    },
+    "trusted_only_injection": {
+      "status": "verified",
+      "evidence": "IntegrationContractService.__init__(self, store, *, git_provider=None, **kwargs); repo_dir lives inside GitWorktreeProvider, never a kwarg exposed to agent Command; integration/service.py comment states 'Trusted-only ... never comes from an Agent Command'."
+    },
+    "conflict_no_silent_rebase": {
+      "status": "verified",
+      "evidence": "GitWorktreeProvider.merge returns {'status':'conflict','conflict_paths':['base.txt']} and aborts; probe confirmed target tip unchanged after conflict. No rebase/resolve fallback."
+    }
+  },
+  "regression": {
+    "tests_run": [
+      "tests.m3.test_integration_merge_dispatch (5/5)",
+      "tests.m3.test_integration_git_provider (5/5)",
+      "tests.m3.test_integration_gate (9/9)",
+      "tests.m3.test_integration_guard_wiring (15/15)",
+      "tests.m3.test_integration_live (15/15)"
+    ],
+    "all_ok": true
+  },
+  "status_effect": {
+    "phase": "preparation",
+    "bootstrap_status": "not_started",
+    "conformance": "28/28 passed",
+    "status_json_updated_at_unchanged": "2026-10-09T21:40:00+08:00"
+  },
+  "findings": {
+    "critical": [],
+    "important": [
+      {
+        "id": "M4-03-F1",
+        "severity": "important",
+        "statement": "dispatch_merge(provider is not None) 自身不校验 task['status']==ready_for_integration，直接执行 provider.merge。以 status=verified 的 task 直接调用 dispatch_merge 会真实合并成功（探针 result_commit=a103d18...，feat_in_target=True）。",
+        "assessment": "不阻断接受：正式 IntegrationContractService 路径经核心 CommandHandler 守卫（guards.command_error -> validate_merge）先拦截，探针证实 status=verified 从 service 提交 git.merge 得到 rejected INVALID_TASK_STATUS 且仓库未变。风险仅存在于把 dispatch_merge 当公开纯函数直调的场景。",
+        "recommendation": "后续切片在 dispatch_merge 的两个分支统一做 task status 前置校验（或显式注释声明 dispatch_merge 仅供 service 层在守卫之后调用），消除函数级防御性不一致。"
+      }
+    ],
+    "minor": [
+      {
+        "id": "M4-03-F2",
+        "severity": "minor",
+        "statement": "provider=None 时仍走旧模拟 validate_merge 路径，此为设计保留的向后兼容行为，非缺陷。"
+      },
+      {
+        "id": "M4-03-F3",
+        "severity": "minor",
+        "statement": ".tmp/m4_gitworktree_probe.py 是执行者先前的 GitWorktreeProvider 探针，本次复核只读，未运行（本轮改用自写的 .tmp/m4_dispatch_e2e_probe.py 与 .tmp/m4_service_e2e_probe.py）。"
+      }
+    ]
+  },
+  "limitations": [
+    "仅本地 .tmp 临时 git 仓库操作，未 push、未改动主仓库（head 1263fb3 只读）。",
+    "本次写集仅两个产出报告文件；临时探针写入 .tmp/（m4_dispatch_e2e_probe.py、m4_service_e2e_probe.py、m4_status_gap_probe.py、m4_status_guard_probe.py）。",
+    "未执行 devprep render（任务只要求 check 与口径核实），未改动 status.json。"
+  ]
+}

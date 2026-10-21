@@ -1,0 +1,25 @@
+{
+  "evidence_kind": "m4-01-b0-environment-profile",
+  "spec": "Docs/AETP-设计方案.md §15.5 B0 Discovery",
+  "observed_at": "2026-10-09",
+  "collector": "shell (read-only commands)",
+  "rule": "environment facts must be real Action output, not agent prose (frozen distinction 5)",
+  "facts": {
+    "os": {
+      "system": "Windows",
+      "release": "10",
+      "machine": "AMD64",
+      "processor": "Intel64 Family 6 Model 63 Stepping 2, GenuineIntel",
+      "cpu_count": 24,
+      "source_command": "python -c \"import platform,os; print(platform.system(), platform.release(), platform.machine(), platform.processor(), os.cpu_count())\""
+    },
+    "python": {"available": true, "version": "3.14.6", "source_command": "python tools/devprep.py environment"},
+    "node": {"available": true, "version": "v24.18.1", "source_command": "node --version"},
+    "git": {"available": true, "version": "git version 2.54.0.windows.1", "source_command": "git --version"},
+    "go": {"available": true, "version": "go version go1.26.5 windows/amd64", "source_command": "go version"},
+    "uv": {"available": true, "version": "uv 0.12.5 (210d1f678 2026-08-14 x86_64-pc-windows-msvc)", "source_command": "uv --version"},
+    "docker": {"available": true, "version": "Docker version 29.2.1, build a5c7197", "source_command": "docker --version"},
+    "workspace": {"git_repository_detected": false, "source_command": "python tools/devprep.py environment"}
+  },
+  "status_effect": "analysis/output only; no status.json mutation beyond already-authorized M4-02 conformance upgrade"
+}

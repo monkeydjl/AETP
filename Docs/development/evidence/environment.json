@@ -1,6 +1,6 @@
 {
   "schema_version": "aetp-preparation-environment-0.1",
-  "observed_at": "2026-10-09T13:41:17+00:00",
+  "observed_at": "2026-10-13T05:20:34+00:00",
   "platform": {
     "system": "Windows",
     "release": "10",
@@ -30,7 +30,7 @@
   },
   "workspace": {
     "root": ".",
-    "git_repository_detected": false,
+    "git_repository_detected": true,
     "product_source_present": true,
     "dependency_lock_present": false
   },

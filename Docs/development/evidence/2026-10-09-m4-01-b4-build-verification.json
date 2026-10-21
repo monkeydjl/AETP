@@ -1,0 +1,25 @@
+{
+  "evidence_kind": "m4-01-b4-build-verification",
+  "spec": "Docs/AETP-设计方案.md §15.5 B4 Infrastructure",
+  "generated_at": "2026-10-09",
+  "build": {
+    "framework": "stdlib-only (no third-party dependencies)",
+    "compileall": {
+      "command": "PYTHONPATH=src python -m compileall -q src/",
+      "exit_code": 0,
+      "result": "COMPILEALL_OK",
+      "meaning": "all product sources compile without syntax errors"
+    },
+    "import_smoke": {
+      "command": "PYTHONPATH=src python -c \"import aetp.core.commands, aetp.bootstrap.runner, aetp.planning.service, aetp.acceptance.mission\"",
+      "exit_code": 0,
+      "result": "IMPORT_SMOKE_OK",
+      "meaning": "key modules import cleanly (Command/bootstr ap/planning/acceptance)"
+    }
+  },
+  "remaining_b4_gaps": [
+    "no remote repository / CI service (needs user-provided remote + CI host)",
+    "no pinned lint tool (ruff/flake8 not installed; product is stdlib-only so no lint tool is pinned)"
+  ],
+  "status_effect": "facts only; no status.json mutation beyond already-authorized M4-02 conformance upgrade"
+}

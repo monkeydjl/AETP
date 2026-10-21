@@ -1,0 +1,114 @@
+{
+  "work_item": "M4-03",
+  "description": "真实本地 GitWorktreeProvider 切片：真实 git worktree add --detach + 真实基线 re-check + 冲突不静默 rebase + 干净 merge 出 merge commit，本地 only，无 push/remote。",
+  "reviewer": "本轮 shell-reviewer 独立子代理",
+  "executor": "/root",
+  "reviewed_at": "2026-10-12T20:06:34+08:00",
+  "environment": {
+    "shell_available": true,
+    "bash": "/usr/bin/bash",
+    "python": "Python 3.14.6",
+    "cwd": "D:\\Github\\AETP",
+    "git_head_readonly": "1263fb3c4559210ffaf7a2d9f4f9c9252743f886",
+    "git_remote_count": 0
+  },
+  "decision": "accepted",
+  "commands_run": [
+    {
+      "command": "which bash; python --version; echo \"PWD=$(pwd)\"",
+      "exit_code": 0,
+      "stdout_summary": "/usr/bin/bash; Python 3.14.6; PWD=/d/Github/AETP"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python -m unittest tests.m3.test_integration_git_provider -v",
+      "exit_code": 0,
+      "stdout_summary": "Ran 5 tests in 3.876s; OK (test_clean_merge_produces_merge_commit ok, test_create_worktree_is_independent_of_main ok, test_merge_conflict_returns_conflict_not_silent_rebase ok, test_merge_rejected_on_stale_baseline ok, test_provider_module_loads ok)"
+    },
+    {
+      "command": "cd /d/Github/AETP && PYTHONPATH=\"src;.\" python .tmp/m4_gitworktree_probe.py",
+      "exit_code": 0,
+      "stdout_summary": "A.create_worktree head=78f925a… status=ready; A.independent main_sees_file=False wt_sees_file=True; B.stale raised=BASELINE_ADVANCED tip_unchanged=True head_unchanged=True; C.conflict status=conflict paths=['base.txt'] tip_unchanged=True; D.clean status=merged result=c1346de… hex40=True parents=2 feat_in_target=True; E.remote rc=0 stdout='' stderr=''; failures=[]"
+    },
+    {
+      "command": "cd /d/Github/AETP && grep -nE 'worktree|--detach|--no-ff|--no-commit|--abort|resolve_ref|BASELINE_ADVANCED|--no-gpg-sign|push|remote' src/aetp/workspace/git_provider.py",
+      "exit_code": 0,
+      "stdout_summary": "第46行 worktree add --detach; 第66/68行 resolve_ref + BASELINE_ADVANCED; 第73行 merge --no-ff --no-commit; 第78/86行 merge --abort; 第83行 commit --no-edit --no-gpg-sign; 无 git push/remote 子命令调用（仅第5行注释声明 never pushes/never talks to a remote）"
+    },
+    {
+      "command": "cd /d/Github/AETP && python tools/devprep.py check",
+      "exit_code": 0,
+      "stdout_summary": "OK graph nodes=101 edges=144; backlog items=23; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%"
+    },
+    {
+      "command": "cd /d/Github/AETP && python -c \"import json; d=json.load(open('Docs/development/status.json',encoding='utf-8')); print('phase=',d['phase']); print('bootstrap_status=',d['bootstrap_status']); print('conformance.status=',d['conformance']['status']); print('conformance_counts=',d['conformance']['registered_tests'],d['conformance']['passed_tests'],d['conformance']['failed_tests'],d['conformance']['not_applicable_tests'])\"",
+      "exit_code": 0,
+      "stdout_summary": "phase= preparation; bootstrap_status= not_started; conformance.status= passed; conformance_counts= 28 28 0 0"
+    },
+    {
+      "command": "cd /d/Github/AETP && git -C . rev-parse HEAD; git -C . remote -v",
+      "exit_code": 0,
+      "stdout_summary": "HEAD=1263fb3c4559210ffaf7a2d9f4f9c9252743f886; remote -v 输出为空（无 remote）"
+    },
+    {
+      "command": "cd /d/Github/AETP && git -C . status --short -- src/aetp/workspace/git_provider.py tests/m3/test_integration_git_provider.py Docs/development/status.json",
+      "exit_code": 0,
+      "stdout_summary": "?? src/aetp/workspace/git_provider.py; ?? tests/m3/test_integration_git_provider.py; status.json 未出现在输出（未被修改）"
+    }
+  ],
+  "gitworktree_verification": {
+    "independent_worktree": {
+      "result": true,
+      "evidence": "create_worktree('ws-1', wt_path, 'main') 返回 head==main_tip 且 status=ready；向 worktree 写 only_in_worktree.txt 后，主工作树 os.path.exists(repo/only_in_worktree.txt)=False，worktree 内 =True。"
+    },
+    "baseline_recheck": {
+      "result": true,
+      "evidence": "merge('feature','main',base_commit)（base_commit 落后 main tip）抛出 PolicyViolation('BASELINE_ADVANCED')；抛出后 main tip 与 HEAD 均不变。"
+    },
+    "conflict_no_silent_rebase": {
+      "result": true,
+      "evidence": "真实冲突 merge 返回 {status:conflict, conflict_paths:['base.txt']}；返回后 rev-parse main 仍等于合并前 tip（无 rebase、无 merge commit）。"
+    },
+    "clean_merge_commit": {
+      "result": true,
+      "evidence": "干净 merge 返回 {status:merged, result_commit:c1346ded562e0e768fc5007ae7ab658efa3f1efe}，匹配 40hex，rev-list --parents 显示 2 个父提交（真 merge commit），feat.txt 内容进入 target 工作树。"
+    },
+    "no_push_no_remote": {
+      "result": true,
+      "evidence": "git_provider.py 内无 git push/remote 子命令调用；临时仓库 probe E 项 git remote 输出为空；主仓库 git remote -v 输出为空。"
+    }
+  },
+  "regression": {
+    "tests_run": 5,
+    "all_ok": true,
+    "result": "OK",
+    "test_module": "tests.m3.test_integration_git_provider"
+  },
+  "status_effect": {
+    "phase": "preparation",
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "status": "passed",
+      "registered_tests": 28,
+      "passed_tests": 28,
+      "failed_tests": 0,
+      "not_applicable_tests": 0
+    },
+    "note": "本轮只读，status.json 未被本复核修改。devprep check exit 0，口径不变。"
+  },
+  "findings": {
+    "critical": [],
+    "important": [],
+    "minor": [
+      {
+        "id": "M4-03-GITWP-MIN1",
+        "text": "merge() 会先 checkout 到 target_ref 再执行 git merge（在受保护 ref 更新点操作），因此会改变主仓库当前检出的分支状态；这是 design 语义而非缺陷，但调用方需知晓 merge 后主仓库停留在 target_ref。",
+        "disposition": "保留意见，不阻断。"
+      }
+    ]
+  },
+  "limitations": [
+    "本次仅复核 M4-03 的真实本地 GitWorktreeProvider 切片（create_worktree + merge 四项验证），不覆盖 Workspace Provider 其余控制面或真实 Integration Gate 集成。",
+    "探针临时仓库与临时文件位于系统临时目录/.tmp 并已清理；主仓库 git 状态只读（HEAD 1263fb3c 未动，src/tests 新文件保持 untracked 未提交）。",
+    "未运行全量测试套件；仅运行目标集成测试 5 项与 devprep check。"
+  ]
+}

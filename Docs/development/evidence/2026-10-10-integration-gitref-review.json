@@ -1,0 +1,121 @@
+{
+  "work_item": "M4-03",
+  "title": "真实本地 git Integration Gate 切片（§10.6 merge baseline 真实读目标分支 tip）",
+  "reviewer": "shell-reviewer 独立子代理",
+  "executor": "/root",
+  "reviewed_at": "2026-10-12T19:14:32+08:00",
+  "environment": {
+    "shell_available": true,
+    "bash": "/usr/bin/bash",
+    "python": "3.14.6",
+    "workspace": "D:\\Github\\AETP"
+  },
+  "decision": "accepted",
+  "decision_rationale": "四项判定全部满足：步骤1 4 tests OK（exit 0）；步骤2 探针真实临时 git 仓库 resolve_ref 读出 40-hex tip 且未知 ref 抛 PolicyViolation(REF_NOT_FOUND)；步骤3 源码 grep 确认 git -C / rev-parse --verify / ref^{commit} / REF_NOT_FOUND / BASELINE_ADVANCED 均存在且逻辑正确；步骤4 devprep check exit 0 且 status.json 口径不变（phase=preparation、bootstrap_status=not_started、conformance 28/28 passed）。额外回归 100 tests OK。",
+  "commands_run": [
+    {
+      "command": "which bash; python --version",
+      "exit_code": 0,
+      "stdout_summary": "bash=/usr/bin/bash; Python=3.14.6"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python -W error::ResourceWarning -m unittest tests.m3.test_integration_gitref -v",
+      "exit_code": 0,
+      "stdout_summary": "Ran 4 tests in 1.376s - OK（4/4：real tip、unknown ref、匹配通过、baseline advanced 拒绝）"
+    },
+    {
+      "command": "grep -n rev-parse/--verify/ref^{commit}/REF_NOT_FOUND/BASELINE_ADVANCED src/aetp/integration/gitref.py src/aetp/integration/gate.py",
+      "exit_code": 0,
+      "stdout_summary": "gitref.py:31 [\"git\",\"-C\",repo_dir,\"rev-parse\",\"--verify\",\"{ref}^{commit}\"]；REF_NOT_FOUND 于 lines 36/39；gate.py resolve_ref 调用、BASELINE_ADVANCED at line 47"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python .tmp/integration_gitref_probe.py",
+      "exit_code": 0,
+      "stdout_summary": "real_tip=resolved=21fd0fc4deb7d98af2253530403c4d74d14ac236; is_40hex=True; match=True; unknown_ref_REJECTED=True code=REF_NOT_FOUND"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python .tmp/integration_gitref_no_trust_probe.py",
+      "exit_code": 0,
+      "stdout_summary": "case1_stale_with_fake_current=REJECTED code=BASELINE_ADVANCED; case2_good_expected_garbage_current=PASSED (current ignored)"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python -W error::ResourceWarning -m unittest tests.m3.test_integration_gate tests.m3.test_integration_contract_inputs tests.m3.test_integration_declaration_records tests.m3.test_integration_shared_guards tests.m3.test_integration_guard_wiring -v",
+      "exit_code": 0,
+      "stdout_summary": "Ran 100 tests in 37.556s - OK"
+    },
+    {
+      "command": "python tools/devprep.py check",
+      "exit_code": 0,
+      "stdout_summary": "OK graph nodes=101 edges=144; backlog items=23; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%"
+    },
+    {
+      "command": "python -c read Docs/development/status.json keys",
+      "exit_code": 0,
+      "stdout_summary": "phase=preparation; product_completion_percent=0; bootstrap_status=not_started; conformance.status=passed; conformance.registered_tests=28; conformance.passed_tests=28; conformance.failed_tests=0"
+    },
+    {
+      "command": "git diff --stat src/aetp/integration/gate.py",
+      "exit_code": 0,
+      "stdout_summary": "src/aetp/integration/gate.py | 22 insertions(+)"
+    }
+  ],
+  "gitref_verification": {
+    "real_rev_parse": true,
+    "real_rev_parse_evidence": "resolve_ref 通过 subprocess git -C repo_dir rev-parse --verify {ref}^{commit} 读临时仓库真实 tip，结果与 git rev-parse main 的真实输出完全一致",
+    "40hex": "21fd0fc4deb7d98af2253530403c4d74d14ac236",
+    "40hex_note": "该值是运行时探针新建的临时 git 仓库 tip（aetp-probe-*），非本工作区仓库 tip",
+    "unknown_ref_REJECTED": true,
+    "unknown_ref_code": "REF_NOT_FOUND",
+    "baseline_advanced_rejected": true,
+    "baseline_advanced_evidence": "单测 test_validate_merge_baseline_advanced_rejected 通过；探针 case1：expected_target_commit='0'*40 而真实 tip 不等于它时抛 PolicyViolation(BASELINE_ADVANCED)",
+    "no_payload_trust": true,
+    "no_payload_trust_evidence": "探针 case1 伪造 current_target_commit=真实 tip 但 expected 为 stale，仍被 REJECTED；探针 case2 expected=真实 tip 而 current_target_commit 为垃圾值 '1'*40，仍 PASSED —— 证明 validate_merge_against_repo 完全不读取 payload.current_target_commit"
+  },
+  "regression": {
+    "tests_run": [
+      "tests.m3.test_integration_gate",
+      "tests.m3.test_integration_contract_inputs",
+      "tests.m3.test_integration_declaration_records",
+      "tests.m3.test_integration_shared_guards",
+      "tests.m3.test_integration_guard_wiring"
+    ],
+    "tests_count": 100,
+    "all_ok": true,
+    "exit_code": 0
+  },
+  "status_effect": {
+    "devprep_exit_code": 0,
+    "phase": "preparation",
+    "bootstrap_status": "not_started",
+    "conformance_registered_tests": 28,
+    "conformance_passed_tests": 28,
+    "conformance_failed_tests": 0,
+    "conformance_status": "passed",
+    "unchanged": true
+  },
+  "findings": {
+    "critical": [],
+    "important": [
+      {
+        "id": "M4-03-IMPORTANT-1",
+        "scope": "生产执行路径尚未接线到真实读 tip",
+        "detail": "新增函数 validate_merge_against_repo 目前只被 tests/m3/test_integration_gitref.py 引用；runtime 执行路径 src/aetp/integration/service.py 的 git.merge（line 75）与 src/aetp/integration/guards.py 的 command_error（line 49）仍然调用旧的 validate_merge（比较两个调用方提供的字符串）。因此本切片交付的是真实解析函数与单测口径，但端到端真实读 tip 的 Integration Gate 尚未生效。不阻断本切片（四项判定标准均满足），但建议在后续切片把 git.merge 真实执行路径切到 validate_merge_against_repo。",
+        "evidence_commands": [
+          "grep -rn validate_merge_against_repo src/ tests/ --include=*.py",
+          "grep -n validate_merge src/aetp/integration/service.py src/aetp/integration/guards.py"
+        ]
+      }
+    ],
+    "minor": []
+  },
+  "limitations": [
+    "本复核未重跑 28 项 conformance 测试套件本身；步骤 4 的“conformance 28/28 passed 口径不变”依据 devprep check exit 0 与 Docs/development/status.json 的现有记录，未重新执行 conformance 套件。",
+    "resolve_ref 的读操作仅用临时仓库验证（.tmp/ 探针）；未在本工作区 AETP 主仓库上执行任何 git 写操作。",
+    "未验证 validate_merge_against_repo 在 service 真实写事务路径的接线（见 findings.important：当前未接线）。",
+    "临时文件位于 .tmp/integration_gitref_probe.py 与 .tmp/integration_gitref_no_trust_probe.py，用后保留但已登记，未删除。"
+  ],
+  "temporary_files": [
+    ".tmp/integration_gitref_probe.py",
+    ".tmp/integration_gitref_no_trust_probe.py"
+  ]
+}

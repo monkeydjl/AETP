@@ -1,6 +1,6 @@
 {
   "schema_version": "aetp-preparation-report-0.1",
-  "generated_at": "2026-10-10T14:37:44+00:00",
+  "generated_at": "2026-10-13T05:20:37+00:00",
   "phase": "preparation",
   "product_completion_percent": 0,
   "bootstrap_status": "not_started",
@@ -223,10 +223,19 @@
     "Docs/development/evidence/2026-09-15-m3-02-quality-next-slice-inputs.md",
     "Docs/development/evidence/2026-09-15-m3-02-quality-closeout.json",
     "Docs/development/evidence/2026-09-17-m3-02-integration-review-v1.json",
-    "Docs/development/evidence/2026-09-17-m3-02-integration-review-consumption.json"
+    "Docs/development/evidence/2026-09-17-m3-02-integration-review-consumption.json",
+    "Docs/development/evidence/2026-10-09-m4-01-b0-environment-profile.json",
+    "Docs/development/evidence/2026-10-09-m4-01-b4-build-verification.json",
+    "Docs/development/evidence/2026-10-09-m4-01-self-bootstrap-review.json",
+    "Docs/development/evidence/2026-10-09-m4-02-conformance-review.json",
+    "Docs/development/evidence/2026-10-10-os-sandbox-shell-review.json",
+    "Docs/development/evidence/2026-10-10-integration-gitref-review.json",
+    "Docs/development/evidence/2026-10-10-git-worktree-provider-review.json",
+    "Docs/development/evidence/2026-10-10-git-provider-wiring-review.json",
+    "Docs/development/evidence/2026-10-10-credential-broker-review.json"
   ],
   "limitations": [
-    "工作区没有 Git repository，未创建 commit、branch 或 push。",
+    "工作区于 2026-10-09 执行 git init 并完成首次本地 commit（1263fb3），未创建 branch 或 push；历史证据目录中的 review runs/workspace/temp 产物保留为未跟踪文件，不进 git。",
     "User explicitly disabled ClaudeLink; one independent reviewer is reused.",
     "M0 five-object simulation and fixed M0-only conformance subset are independently accepted in their stated scope; full Runtime/Orchestrator, external Action recovery beyond the fixed document Provider, dependency lock and full-protocol Conformance acceptance remain unestablished.",
     "M1-01 and fixed M1-02 work-item criteria are independently accepted. Whole M1 remains not_accepted. Legacy M1 verification.run reporting INCONCLUSIVE/ENFORCEMENT_UNAVAILABLE is by design: that old entry has no formal submission round or final-use proof, so it must not fabricate a formal PASS (verified by tests/m1/test_verification.py); the formal Verification execution path is supplied by M3 AcceptanceService/TaskQualityService. M3-02's bounded trusted JSON Runner has independent first-batch acceptance. The bounded explicit Task quality/exemption batch has independent acceptance. Working copies are not a general OS sandbox; five additional reviewer methods were not executed against M1-02 v2.",

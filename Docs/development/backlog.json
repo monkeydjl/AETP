@@ -1139,7 +1139,7 @@
       "milestone": "M4",
       "title": "M1–M3 整里程碑正式验收与 product_completion 抬升",
       "status": "blocked",
-      "block_reason": "legacy M1 verification.run INCONCLUSIVE 已澄清为设计如此（旧入口无 formal submission round，不伪造 PASS；正式 Verification 由 M3 AcceptanceService/TaskQualityService 提供）。剩余缺口均为未实现功能：真实 OS 沙箱/credential 隔离/network egress（§13.9）、真实 Git provider 集成、自主 peer delivery/TEST-028 完整准入、整里程碑验收证据。",
+      "block_reason": "legacy M1 verification.run INCONCLUSIVE 已澄清为设计如此（旧入口无 formal submission round，不伪造 PASS；正式 Verification 由 M3 AcceptanceService/TaskQualityService 提供）。2026-10-10 已交付五个实质切片（独立复核均 accepted）：真实 OS 沙箱 shell 执行、真实 git baseline 解析、真实 GitWorktreeProvider、受信 git provider 接线（§10.6 真实 merge 闭环）、Credential Broker 最小语义（§14.3）。剩余缺口仍为未实现功能：真实 OS 容器级隔离（§13.9 防绕过，working_copy 不能证明）、Credential Broker 的 Runtime 集成、自主 peer delivery/TEST-028 完整准入、整里程碑验收证据。",
       "depends_on": [
         "M4-01",
         "M4-02"
@@ -1147,7 +1147,24 @@
       "files": [
         "Docs/AETP-设计方案.md",
         "Docs/development/status.json",
-        "Docs/development/evidence/2026-10-09-m4-gap-analysis.json"
+        "Docs/development/evidence/2026-10-09-m4-gap-analysis.json",
+        "src/aetp/runtime/sandbox.py",
+        "src/aetp/integration/gitref.py",
+        "src/aetp/integration/gate.py",
+        "src/aetp/workspace/git_provider.py",
+        "src/aetp/integration/service.py",
+        "src/aetp/governance/credential_broker.py",
+        "src/aetp/governance/credentials.py",
+        "src/aetp/governance/contracts.py",
+        "src/aetp/governance/projection.py",
+        "src/aetp/governance/causality.py",
+        "src/aetp/governance/service.py",
+        "src/aetp/runtime/document.py",
+        "src/aetp/runtime/actions.py",
+        "tests/m2/test_credential_broker.py",
+        "tests/m2/test_credential_transitions.py",
+        "tests/m2/test_credential_replay.py",
+        "tests/runtime/test_credential_ingestion.py"
       ],
       "acceptance": [
         "M1 acceptance 闭合（legacy verification INCONCLUSIVE 属设计如此，非待修；正式 Verification= M3 路径）",
@@ -1157,7 +1174,12 @@
       "conformance_tests": [],
       "evidence": [
         "Docs/development/evidence/2026-10-09-m4-gap-analysis.json",
-        "Docs/development/evidence/2026-10-09-m4-01-m4-03-acceptance-blockers.json"
+        "Docs/development/evidence/2026-10-09-m4-01-m4-03-acceptance-blockers.json",
+        "Docs/development/evidence/2026-10-10-os-sandbox-shell-review.json",
+        "Docs/development/evidence/2026-10-10-integration-gitref-review.json",
+        "Docs/development/evidence/2026-10-10-git-worktree-provider-review.json",
+        "Docs/development/evidence/2026-10-10-git-provider-wiring-review.json",
+        "Docs/development/evidence/2026-10-10-credential-broker-review.json"
       ]
     }
   ]

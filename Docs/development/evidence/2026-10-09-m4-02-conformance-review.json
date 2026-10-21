@@ -1,0 +1,107 @@
+{
+  "work_item": "M4-02",
+  "artifact_reviewed": "Docs/development/evidence/2026-10-09-m4-02-conformance-acceptance.json",
+  "reviewer": "本轮 shell-reviewer 独立子代理",
+  "executor": "/root",
+  "reviewed_at": "2026-10-09T20:58:32.338369+08:00",
+  "environment": {
+    "shell_available": true,
+    "python_version": "3.14.6",
+    "cwd": "D:\\Github\\AETP"
+  },
+  "decision": "accepted",
+  "commands_run": [
+    {
+      "command": "which bash; python --version",
+      "exit_code": 0,
+      "stdout_summary": "/usr/bin/bash; Python 3.14.6"
+    },
+    {
+      "command": "PFX=review-m402-$RANDOM; PYTHONPATH=src python -m conformance.runner --db .tmp/$PFX.sqlite --json .tmp/$PFX-report.json --frozen-evidence .tmp/$PFX-frozen.json",
+      "exit_code": 0,
+      "stdout_summary": "PFX=review-m402-20446; Conformance Results: 28 passed, 0 failed, 0 not run (Total: 28); Report written to .tmp/review-m402-20446-report.json; Frozen evidence written to .tmp/review-m402-20446-frozen.json"
+    },
+    {
+      "command": "python .tmp/review-m402-digest-check.py",
+      "exit_code": 0,
+      "stdout_summary": "suite_digest_match=True; run=&froze=sha256:69acdab6a7ab5b1c9ed85643b86bf985eb8f640c502a5976bd5fc94d57a57310; per_test_digest_diffs=[]; elements_recompute_mismatches=[]; recomputed_suite_digest=sha256:69acdab6a7ab5b1c9ed85643b86bf985eb8f640c502a5976bd5fc94d57a57310; OK=True"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python -W error::ResourceWarning tests/fault_injection/runner.py --json .tmp/review-m402-fi.json",
+      "exit_code": 0,
+      "stdout_summary": "Ran 15 tests in 2.091s; OK; Report written to .tmp/review-m402-fi.json"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python -W error::ResourceWarning -m unittest tests.runtime.test_adapters tests.runtime.test_sandbox -v",
+      "exit_code": 0,
+      "stdout_summary": "Ran 11 tests in 0.019s; OK; no ResourceWarning"
+    },
+    {
+      "command": "grep -n \"workspace_isolation\\|credential_isolation\\|os_sandbox\\|working_copy\\|shell\" src/aetp/runtime/sandbox.py",
+      "exit_code": 0,
+      "stdout_summary": "33 allowed_tools includes shell; 34 high_risk_tools includes shell/deploy/fs_write; 95 credential_isolation=False; 96 workspace_isolation=\"working_copy\"; 165 elif tool_name == \"shell\"; no os_sandbox match"
+    },
+    {
+      "command": "grep -n \"subprocess\\|os.system\\|Popen\\|\\.run(\" src/aetp/runtime/sandbox.py",
+      "exit_code": 0,
+      "stdout_summary": "12:import subprocess (only match; no subprocess invocation anywhere in sandbox.py)"
+    },
+    {
+      "command": "python .tmp/review-m402-json-check.py",
+      "exit_code": 0,
+      "stdout_summary": "json_valid=True; work_item=M4-02; compatibility_scope=limited; conformance_formal=registered only; passed_tests remains 0; m4_02_r1_status=closed_by_scope_reduction; OK=True"
+    }
+  ],
+  "digest_verification": {
+    "suite_digest_match": true,
+    "suite_digest_review_run": "sha256:69acdab6a7ab5b1c9ed85643b86bf985eb8f640c502a5976bd5fc94d57a57310",
+    "suite_digest_frozen": "sha256:69acdab6a7ab5b1c9ed85643b86bf985eb8f640c502a5976bd5fc94d57a57310",
+    "per_test_digests_match": true,
+    "per_test_digest_diffs": [],
+    "elements_recompute_mismatches": [],
+    "recomputed_suite_digest": "sha256:69acdab6a7ab5b1c9ed85643b86bf985eb8f640c502a5976bd5fc94d57a57310",
+    "recompute_matches": true,
+    "snapshot_digest_expected_drift_noted": true,
+    "snapshot_digest_review_run": "sha256:b0e43c513ca51014ba816bf82923440eaff0eb9311a928485e7decb68ff98765",
+    "snapshot_digest_frozen": "sha256:9b0de6d2ba618b7918b5260ec24a22b0b893a94615325a24fedf21ac3a0fcdb0"
+  },
+  "conformance_verification": {
+    "passed": 28,
+    "failed": 0,
+    "not_run": 0,
+    "total": 28,
+    "exit_code": 0
+  },
+  "fault_injection_verification": {
+    "tests_run": 15,
+    "all_passed": true,
+    "exit_code": 0
+  },
+  "runtime_adapter_verification": {
+    "tests_run": 11,
+    "resource_warning_remaining": false,
+    "exit_code": 0
+  },
+  "boundary_declaration_audit": {
+    "workspace_isolation_declared": "working_copy",
+    "credential_isolation_declared": false,
+    "shell_tool_simulation_only": true,
+    "os_sandbox_residual": "none in sandbox.py (only adapters.py dataclass field comment mentions os_sandbox as a possible enum value); sandbox.py L12 has an unused `import subprocess`"
+  },
+  "findings": {
+    "critical": [],
+    "important": [],
+    "minor": [
+      {
+        "id": "M4-02-REV-M1",
+        "severity": "minor",
+        "what": "src/aetp/runtime/sandbox.py L12 keeps `import subprocess` although no code path calls subprocess; shell tool only echoes the command string.",
+        "impact": "Dead import; no runtime effect, but could mislead a reader into believing real subprocess execution exists."
+      }
+    ]
+  },
+  "status_effect": {
+    "note": "接受的是 LIMITED compatibility scope（诚实 working_copy 边界）。本次复核不修改 Docs/development/status.json：phase 仍为 preparation、product_completion_percent 仍 0、bootstrap_status 仍 not_started，conformance 仍 28 registered / 0 passed。",
+    "conformance_formal": "registered only; passed_tests remains 0"
+  }
+}

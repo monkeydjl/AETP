@@ -1,0 +1,116 @@
+{
+  "work_item": "M4-03",
+  "title": "M4-03 真实 OS 沙箱 shell 执行切片（sandbox.py shell 分支 runtime 复核）",
+  "slice": "SandboxRuntimeAdapter shell 工具由回显改为真实 OS 子进程执行；Windows 超时真实杀进程树",
+  "reviewer": "shell-reviewer（本轮独立子代理，独立于 executor /root）",
+  "executor": "/root",
+  "reviewed_at": "2026-10-12T02:12:54+08:00",
+  "environment": {
+    "shell_available": true,
+    "shell": "/usr/bin/bash",
+    "python_version": "3.14.6",
+    "os_name": "nt",
+    "cwd": "D:\\Github\\AETP",
+    "workspace_is_git_repo": true
+  },
+  "decision": "accepted",
+  "decision_rationale": "步骤1 17 tests 全 OK（含新增 5 个 shell 测试）；步骤2 四项 shell 断言全真（真实子进程、cwd 锁定、非零退出码 failed/exit_code=7、超时真实杀进程树且 1.207s 内返回）；步骤3 源码逻辑正确（import subprocess/Popen/cwd/taskkill/communicate(timeout) 齐备）；步骤4 devprep check exit0 且 status.json 口径未变（phase=preparation、bootstrap_status=not_started、conformance 28/28 passed）。",
+  "commands_run": [
+    {
+      "command": "which bash; python --version; pwd",
+      "exit_code": 0,
+      "stdout_summary": "/usr/bin/bash; Python 3.14.6; /d/Github/AETP"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python -m unittest tests.runtime.test_adapters tests.runtime.test_sandbox -v",
+      "exit_code": 0,
+      "stdout_summary": "Ran 17 tests in 2.842s — OK（含 test_shell_executes_real_command_and_captures_output、test_shell_cwd_is_locked_to_workspace、test_shell_nonzero_exit_is_reported_not_masked、test_shell_timeout_is_reported、test_shell_timeout_actually_terminates_within_bound 共 5 个 shell 测试全 ok）"
+    },
+    {
+      "command": "PYTHONPATH=\"src;.\" python .tmp/shell-review-probe.py",
+      "exit_code": 0,
+      "stdout_summary": "四项 runtime probe（print / sys.exit(7) / os.getcwd() / time.sleep(30) with shell_timeout=1）：A_STATUS=success A_STDOUT='hello-runtime-check' A_EXIT=0; B_STATUS=failed B_EXIT=7 B_STDERR=''; C_STATUS=success C_CWD='D:\\\\Github\\\\AETP\\n' C_MATCH=True; D_STATUS=timeout D_ELAPSED=1.207 D_BOUND=True"
+    },
+    {
+      "command": "grep -n \"CREATE_NEW_PROCESS_GROUP\\|taskkill\\|shell_timeout\\|import subprocess\" src/aetp/runtime/sandbox.py",
+      "exit_code": 0,
+      "stdout_summary": "L12 import subprocess; L84 shell_timeout=30.0; L103 self.shell_timeout; L173 CREATE_NEW_PROCESS_GROUP; L184 communicate(timeout=self.shell_timeout); L188 taskkill /T /F /PID"
+    },
+    {
+      "command": "python tools/devprep.py check",
+      "exit_code": 0,
+      "stdout_summary": "OK graph nodes=101 edges=144; backlog items=23; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%"
+    },
+    {
+      "command": "git diff --quiet -- Docs/development/status.json",
+      "exit_code": 0,
+      "stdout_summary": "status.json 无未提交改动（git diff 输出为空），口径未被本次改动触及"
+    }
+  ],
+  "shell_execution_verification": {
+    "real_subprocess": {
+      "verified": true,
+      "detail": "执行 shell 命令 'import sys; sys.stdout.write(\"hello-runtime-check\")' 返回 status=success、stdout='hello-runtime-check'、exit_code=0，非回显（回显旧实现恒返 exit_code=0 且无 stdout 字段）"
+    },
+    "cwd_locked": {
+      "verified": true,
+      "detail": "os.getcwd() 返回 'D:\\Github\\AETP\\n'，与 workspace_root 'D:\\Github\\AETP' 匹配（match=True）"
+    },
+    "nonzero_exit_reported": {
+      "verified": true,
+      "detail": "sys.exit(7) 返回 status=failed、exit_code=7、stderr=''"
+    },
+    "timeout_kills_process_tree": {
+      "verified": true,
+      "detail": "time.sleep(30) 在 shell_timeout=1 下返回 status=timeout，D_ELAPSED=1.207s，未等到子进程自然结束；Windows 分支存在 CREATE_NEW_PROCESS_GROUP + taskkill /T /F /PID"
+    },
+    "timeout_elapsed_bounded": {
+      "verified": true,
+      "detail": "elapsed=1.207s < 5s 上限，满足任务给定 bound"
+    }
+  },
+  "regression": {
+    "tests_run": "tests.runtime.test_adapters + tests.runtime.test_sandbox",
+    "total": 17,
+    "all_ok": true,
+    "detail": "既有预工具授权边界测试（actor_mismatch / lease_expired / high_risk_unauthorized / tampered_arguments / workspace_boundary_escape / paused_runtime）全部 ok，未破坏授权边界"
+  },
+  "status_effect": {
+    "status_json_modified": false,
+    "phase": "preparation",
+    "bootstrap_status": "not_started",
+    "conformance": {
+      "registered_tests": 28,
+      "passed_tests": 28,
+      "failed_tests": 0
+    },
+    "note": "本次复核只读，不修改 Docs/development/status.json；仅新增本报告两文件。devprep check 复核 phase=preparation、conformance 28/28 passed。"
+  },
+  "findings": {
+    "critical": [],
+    "important": [],
+    "minor": [
+      {
+        "id": "SHELL-POSIX-1",
+        "severity": "minor",
+        "detail": "POSIX 超时分支使用 proc.kill() 只杀直接子进程（shell）不递归杀 grandson 进程树；当前验证环境为 Windows（os.name='nt'），走 taskkill /T /F 路径，POSIX 分支未在本机实测。不阻断本切片（本切片明确针对 Windows 进程树修复）。"
+      },
+      {
+        "id": "SHELL-ERR-1",
+        "severity": "minor",
+        "detail": "POSIX 分支注释性 import signal 实际冗余（proc.kill() 不需要 signal）；纯代码整洁问题，不影响行为。"
+      },
+      {
+        "id": "SHELL-ERR-2",
+        "severity": "minor",
+        "detail": "taskkill 结果被 capture_output=True 捕获后丢弃，未检查 taskkill 自身退出码；实测超时已在 1.207s 内返回且状态正确，说明本机 taskkill 生效。"
+      }
+    ]
+  },
+  "limitations": [
+    "验证环境为 Windows/MSYS bash（os.name='nt'），POSIX 超时杀进程树分支未被实际执行。",
+    "未执行 rm 或任何危险命令；shell 探针仅使用 print / sys.exit / os.getcwd / time.sleep。",
+    "未对完整 M4（含 bootstrap/integration 等）做端到端验收，本报告仅针对 M4-03 这一 OS shell 执行切片。",
+    "临时探针脚本 .tmp/shell-review-probe.py 已登记保留（任务禁止 rm，仅登记不删除），仅含 print/sys.exit/os.getcwd/time.sleep。"
+  ]
+}
