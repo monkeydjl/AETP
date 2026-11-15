@@ -1,0 +1,51 @@
+{
+  "schema": "aetp-isolation-probe-report-1",
+  "observed_at": "2026-11-11T13:22:25+00:00",
+  "probe_command": "PYTHONPATH=\"src;.\" python tests/conformance/test_isolation_probe.py",
+  "report": {
+    "verified_levels": [
+      "working_copy",
+      "os_sandbox"
+    ],
+    "observations": {
+      "working_copy": {
+        "level": "working_copy",
+        "observed": true,
+        "facts": {
+          "sibling_directory_reachable": true,
+          "host_paths_reachable": true
+        }
+      },
+      "os_sandbox": {
+        "level": "os_sandbox",
+        "observed": true,
+        "facts": {
+          "outside_escape": "denied",
+          "host_secret": "denied",
+          "host_secret_visible": false,
+          "env_credential_visible": false,
+          "work_write": "allowed",
+          "write_inside_visible_on_host": true,
+          "host_escape_created": false,
+          "host_secret_created": false
+        }
+      }
+    }
+  },
+  "qualification_gate": {
+    "workspace_isolation_levels": [
+      "working_copy",
+      "os_sandbox"
+    ],
+    "verified_without_evidence": [
+      "working_copy"
+    ],
+    "os_sandbox_measured": true,
+    "os_sandbox_accepted_by_gate": false,
+    "os_sandbox_high_risk_eligible": false
+  },
+  "host": {
+    "docker_server_version": "29.2.1",
+    "runtime": "Docker Desktop (desktop-linux context)"
+  }
+}

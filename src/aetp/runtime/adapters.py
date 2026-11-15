@@ -19,15 +19,33 @@ class AdapterSecurityError(PermissionError):
         self.code = code
 
 
+# §13.9: "capability declarations are not a security proof". Only these two
+# isolation levels have a meaning AETP can act on; anything else is an
+# unrecognised claim and is treated as unverified rather than honoured.
+WORKSPACE_ISOLATION_LEVELS = ("working_copy", "os_sandbox")
+# §13.9: the isolation level an adapter may declare as SATISFIED without
+# evidence. working_copy is the honest floor - it says only "a separate working
+# copy", which is exactly what GitWorktree/Local FS providers provide. A
+# declaration of os_sandbox has to be measured (see Conformance/host probe)
+# before the qualification gate may treat it as met; this is the fail-closed
+# half of "claiming a control you cannot prove" (§13.9 anti-bypass).
+VERIFIED_WORKSPACE_ISOLATION = ("working_copy",)
+
+
 @dataclass(frozen=True)
 class RuntimeEnforcement:
     mode: str  # "mediated" | "observation_only"
     authenticated_actor: bool = True
     pre_tool_authorization: bool = True
     credential_isolation: bool = True
-    workspace_isolation: str = "working_copy"  # "working_copy" | "os_sandbox"
+    workspace_isolation: str = "working_copy"  # see WORKSPACE_ISOLATION_LEVELS
     network_egress: str = "disabled"  # "unrestricted" | "allowlist" | "disabled"
     pause_control: str = "controlled_execution"  # "controlled_execution" | "dispatch_only"
+
+
+def verified_workspace_isolation(enforcement: RuntimeEnforcement) -> bool:
+    """True only when the declared isolation level is one AETP has measured."""
+    return enforcement.workspace_isolation in VERIFIED_WORKSPACE_ISOLATION
 
 
 @dataclass(frozen=True)
@@ -41,11 +59,12 @@ class RuntimeCapability:
     enforcement: RuntimeEnforcement = field(default_factory=lambda: RuntimeEnforcement(mode="mediated"))
 
     def is_eligible_for_high_risk(self) -> bool:
-        """High-risk tasks strictly require mediated mode with pre-tool checks."""
+        """High-risk tasks require mediated mode, pre-tool checks, verified isolation."""
         return (
             self.enforcement.mode == "mediated"
             and self.enforcement.pre_tool_authorization
             and self.enforcement.authenticated_actor
+            and verified_workspace_isolation(self.enforcement)
         )
 
     def to_dict(self) -> Dict[str, Any]:

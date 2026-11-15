@@ -1,0 +1,70 @@
+{
+  "schema_version": "aetp-evidence-0.1",
+  "work_item": "M4-03",
+  "title": "Container-isolation probe now runs inside the full suite, plus a collection guard",
+  "recorded_at": "2026-11-10",
+  "status_after": "blocked",
+  "why_not_done": [
+    "The container-level assertions of the probe still have zero executions: docker info exits 1 on this host (npipe:////./pipe/dockerDesktopLinuxEngine is absent), so os_sandbox remains observed=false / skipped=docker_daemon_unreachable.",
+    "Honest claim kept: VERIFIED_WORKSPACE_ISOLATION = ('working_copy',) is a fail-closed placeholder, not a measurement that os_sandbox is unsafe. Adding os_sandbox requires a host with a container runtime where all four bypass assertions are observed as refused."
+  ],
+  "root_cause_fixed": "unittest discover walks the hard-coded file pattern 'test*.py'. The probe lived at tests/conformance/isolation_probe.py, so it was never a candidate and the full suite reported success while it never ran. Confirmed by a byte-identical rename experiment (0 ids vs 4 ids) and by the loader source.",
+  "changes": [
+    {
+      "file": "tests/conformance/test_isolation_probe.py",
+      "change": "renamed from tests/conformance/isolation_probe.py; content unchanged (sha256 a66a47fa7216dc399f57765586e749312aa26ff23a73f2f9b04400257cb5fb15)"
+    },
+    {
+      "file": "tests/conformance/test_collection_guard.py",
+      "change": "new guard: AST-scan tests/ for files that define TestCase subclasses but do not match 'test*.py' and are not a declared compatibility shim; plus shims-must-exist self-check, self-check that the guard detects a synthetic hidden module, and an assertion that the isolation probe is a discoverable test module"
+    },
+    {
+      "file": "Docs/development/backlog.json",
+      "change": "M4-03.block_reason updated (numstat 1/1); status stays blocked"
+    },
+    {
+      "file": "Docs/development/evidence/2026-11-09-m4-03-container-isolation-gap.json",
+      "change": "probe path references, focused command and the collection finding updated to the fixed state"
+    }
+  ],
+  "compatibility_shims": {
+    "declared": [
+      "tests/m1/execution_support.py",
+      "tests/m1/support.py",
+      "tests/m2/support.py",
+      "tests/m3/integration_record_support.py"
+    ],
+    "reason": "Each defines a TestCase base class imported by name from real test modules (ExecutionCase, CollaborationCase, MeetingCase, RecordCase). Renaming them to test_*.py would pull the base classes into the suite and run their fixture setup as tests."
+  },
+  "collection_measurement": {
+    "before": {
+      "total_ids": 1007,
+      "modules": 106,
+      "probe_ids": []
+    },
+    "after": {
+      "total_ids": 1011,
+      "modules": 108,
+      "probe_ids": [
+        "tests.conformance.test_isolation_probe.ContainerBoundaryProbeTests.test_container_cannot_escape_the_mounted_working_copy",
+        "tests.conformance.test_isolation_probe.IsolationProbeTests.test_probe_report_separates_observed_from_unavailable",
+        "tests.conformance.test_isolation_probe.IsolationProbeTests.test_working_copy_facts_are_measured_not_hardcoded",
+        "tests.conformance.test_isolation_probe.IsolationProbeTests.test_working_copy_is_not_reported_as_a_container_boundary"
+      ]
+    },
+    "focused_run": "tests.conformance.test_isolation_probe + tests.runtime.test_isolation_qualification -> Ran 8 tests OK (skipped=1)"
+  },
+  "guard_falsification": {
+    "mutation": "renamed test_isolation_probe.py back to isolation_probe.py",
+    "result": "FAIL: test_no_test_module_is_invisible_to_discover and FAIL: test_the_isolation_probe_is_a_discoverable_test_module (Ran 4, failures=2)",
+    "restored": "file renamed back; sha256 back to a66a47fa7216dc399f57765586e749312aa26ff23a73f2f9b04400257cb5fb15"
+  },
+  "verification": {
+    "devprep_check": "python tools/devprep.py check -> OK graph nodes=101 edges=144; backlog items=23; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%",
+    "full_suite": "PYTHONPATH='src;.' python -m unittest discover -s tests -t . -> Ran 1015 tests in 623.243s, OK (skipped=1). 1007 before this round + 4 probe ids + 4 collection-guard ids. Note: the suite has verbatim-runner cases that print their own 'Ran N tests ... FAILED/OK' blocks, so the bare grep for '^Ran' matched those sub-runner lines too; the discover-level line is the 1015 one."
+  },
+  "open_followups": [
+    "Run tests/conformance/test_isolation_probe.py on a host with a container runtime; only if all four bypass assertions are observed as refused may os_sandbox enter VERIFIED_WORKSPACE_ISOLATION.",
+    "is_eligible_for_high_risk() still admits credential_isolation=False and network_egress='unrestricted'; the same fail-closed treatment is not yet applied there (out of scope for this round)."
+  ]
+}

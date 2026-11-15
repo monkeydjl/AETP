@@ -1,0 +1,69 @@
+{
+  "round": "2026-11-09 M4-03 container/OS isolation gap",
+  "scope": "M4-03 remaining gap '真实 OS 容器级隔离 (§13.9 防绕过)'. Three files touched, no new protocol entity. Note on repo state: `git status -- src/aetp` lists six modified files, but only src/aetp/runtime/adapters.py belongs to this round (mtime 2026-11-09 evening); the other five are earlier uncommitted work from previous rounds.",
+  "changes": [
+    {
+      "file": "src/aetp/runtime/adapters.py",
+      "what": "RuntimeEnforcement.workspace_isolation fail-closed: WORKSPACE_ISOLATION_LEVELS, VERIFIED_WORKSPACE_ISOLATION=('working_copy',), verified_workspace_isolation(); is_eligible_for_high_risk() now conjoins verified_workspace_isolation()",
+      "why": "§13.9 '能力声明不是安全证明' + §6.4 qualification gate. Before this change the field was a free string that the gate never read, so declaring os_sandbox (or any word) passed with no host boundary behind it."
+    },
+    {
+      "file": "tests/runtime/test_isolation_qualification.py",
+      "what": "4 new tests: os_sandbox declaration alone is NOT eligible; free-text claims (container/vm/os_sandbox_v2/''/OS_SANDBOX) are not honoured; working_copy is the verified floor; mediated mode still required",
+      "why": "pin the new conjunct"
+    },
+    {
+      "file": "tests/conformance/test_isolation_probe.py",
+      "what": "Executable container anti-bypass probe with an explicit three-state report (observed / unavailable+reason). Container assertions: outside-the-mount write denied, outside path unreadable, host secret path invisible, host env credentials not inherited, in-mount write visible on host. Without Docker the container test is skipped and the report records observed=false with a machine-readable reason.",
+      "why": "§13.9 anti-bypass; the gap is measurement, not the declaration"
+    }
+  ],
+  "red_green": {
+    "red": "With HEAD's adapters.py restored: ImportError: cannot import name 'WORKSPACE_ISOLATION_LEVELS' (Ran 1, FAILED errors=1). Honest limitation: this is an import-shaped RED, not a behavioural assertion failure. An assertion-shaped RED was not obtainable because the new tests import the new helper by design; the gate behaviour itself is what the 4 GREEN tests assert.",
+    "green": "Ran 4 tests OK",
+    "restored": "adapters.py restored byte-for-byte from $TMPDIR/adapters.new.py; sha256 equal; git diff --numstat -- src/aetp/runtime/adapters.py = '21 2'"
+  },
+  "probe_mutation_falsification": {
+    "method": "mutate the probe itself, py_compile-gated, restore original bytes",
+    "M1_skip_gate_removed": "FAIL: test_container_cannot_escape_the_mounted_working_copy (Ran 3, FAILED failures=1) -- CAUGHT",
+    "M2_unavailable_marked_observed": "FAIL: test_probe_report_separates_observed_from_unavailable (Ran 3, FAILED failures=1, skipped=1) -- CAUGHT",
+    "restored_identical": true
+  },
+  "isolation_report_on_this_host": {
+    "verified_levels": [
+      "working_copy"
+    ],
+    "working_copy": {
+      "observed": true,
+      "facts": {
+        "sibling_directory_reachable": true,
+        "host_paths_reachable": true
+      }
+    },
+    "os_sandbox": {
+      "observed": false,
+      "facts": {
+        "skipped": "docker_daemon_unreachable"
+      }
+    },
+    "docker_binary_present": true,
+    "read": "The host has a docker CLI but no reachable daemon, so the container assertions never executed here. 'Container isolation verified' was NOT obtained in this round and must not be claimed."
+  },
+  "verification": {
+    "focused": "tests.conformance.test_isolation_probe + tests.runtime.test_isolation_qualification -> Ran 8 tests OK (skipped=1)",
+    "existing_runtime_tests": "tests.runtime.test_adapters + tests.runtime.test_sandbox + new: Ran 20 tests OK (before probe module existed); the sandbox pins that assert workspace_isolation == 'working_copy' and is_eligible_for_high_risk() still hold",
+    "conformance": "python -m conformance.runner --summary -> 28 passed, 0 failed, 0 not run (Total: 28)",
+    "frozen_drift": "suite_digest equal sha256:69acdab6...7310; entries 28 vs 28; id sets equal; elements_digest drift 0; element_keys equal; counts equal {total 28, executed_passed 28, others 0}",
+    "devprep": "python tools/devprep.py check -> OK graph nodes=101 edges=144; backlog items=23; phase=preparation 0%",
+    "preparation": "python -m unittest discover -s tests/preparation -> Ran 41 OK",
+    "full_suite": "PYTHONPATH='src;.' python -m unittest discover -s tests -t . -> Ran 1007 tests in 573.764s, OK (1003 baseline + 4 qualification tests)",
+    "collection_probe": "independent id enumeration: TOTAL 1007, DUPLICATES 0 -- matches the run count",
+    "finding_while_probing": "tests/conformance/isolation_probe.py was NOT collected by unittest discover. ROOT CAUSE (confirmed by a byte-identical rename experiment): `unittest discover` walks the hard-coded file pattern 'test*.py', so a module called 'isolation_probe.py' is never a candidate. An earlier draft blamed an import in tests/conformance/__init__.py; that file holds only a docstring and zero imports, so that reason was wrong. FIXED in this round: the module was renamed to tests/conformance/test_isolation_probe.py, which discover now collects (4 ids), so the probe runs as part of PYTHONPATH='src;.' python -m unittest discover -s tests -t ."
+  },
+  "not_addressed": [
+    "Container-level isolation remains UNPROVEN on this host (no Docker daemon). Re-run tests/conformance/test_isolation_probe.py on a host with a container runtime before os_sandbox may be added to VERIFIED_WORKSPACE_ISOLATION.",
+    "RuntimeEnforcement.credential_isolation defaults to True while SandboxRuntimeAdapter explicitly declares False; not changed this round (out of scope), flagged for review.",
+    "network_egress remains declaration-only: no probe measures egress; not changed this round."
+  ],
+  "discipline": "Not committed. Independent second-party review pending."
+}
