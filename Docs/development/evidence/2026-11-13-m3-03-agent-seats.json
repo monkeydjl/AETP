@@ -1,0 +1,50 @@
+{
+  "title": "M3-03 注入式 Agent 席位：实现、测试与独立复核证据",
+  "date": "2026-11-13",
+  "work_item": "M3-03",
+  "origin_gap": "GAP-TEST028-SCOPE",
+  "origin_gap_record": "Docs/development/evidence/2026-11-12-m2-m3-evidence-gaps.json",
+  "what_was_built": {
+    "module": "src/aetp/collaboration/seats.py",
+    "summary": "AgentSeat = 决策函数 + 自身身份；SeatView 只含 project_id/agent_id/inbox/said，不含 Role、Task 归属或 Lease；Decision 强制类型/非空/引用一致性，并接受一个永远被忽略的 untrusted_input 声称；converse 轮转发言；seat_evidence 通过 MessageBus.snapshots 计算 sha256，本地过滤只收窄、不放宽。",
+    "tests": "tests/m3/test_agent_seats.py（9 条）"
+  },
+  "design_decision": {
+    "declined": "给 MessageBus 增加 conversation()（会改动 M1-01 已 done 的语义边界）",
+    "chosen": "SeatView 增加 said 字段，由席位自己记住已发出的消息",
+    "reason": "MessageBus.inbox() 只返回收件人包含自己的消息，不含自己发出的；inbox 是收件箱语义，M1 已验收。席位记住自己说过什么是席位职责。"
+  },
+  "independent_review": {
+    "performed_by": "隔离复核子代理（subagent，与执行者不同的上下文与工具历史）",
+    "subagent_reference": "sa_20261113_151343_000000000_89ababeccfa9",
+    "verdict": "无阻断性问题；生产代码 6 个关注点中防冒充、视图最小化、证据可见性、untrusted 标记均站得住；问题集中在测试覆盖名不副实。",
+    "should_fix_raised": [
+      "outsider 用例在本地过滤处就抛错，从未走到 bus.snapshots，注释与事实相反",
+      "test_seat_words_are_untrusted_input 没有任何席位作相反声称，封堵路径未被测到",
+      "冒充用例只测手写 Impostor 直调 bus.send，未测 AgentSeat.step 的信封",
+      "converse 的轮次上限从未被测到"
+    ],
+    "nits_raised": [
+      "assertEqual(type(view1), type(view2)) 是空断言",
+      "try/except ImportError 死代码",
+      "answered 赋值后未使用",
+      "seat_evidence 误用 bus 的 INVALID_REFERENCE 表达『看不到任何消息』"
+    ],
+    "disposition": "should-fix 全部处理：证据用例拆成 NOTHING_VISIBLE 与 MessageError 两段验证；Decision 增加 untrusted_input 声称字段并验证被忽略；冒充用例改为真实 AgentSeat.step 信封；新增 converse 轮次与非成员席位用例。nits 全部处理，seat_evidence 改用独立码 NOTHING_VISIBLE。",
+    "not_adopted": "『补一条两席位在同一输入下分叉的用例』未采纳：analyst/architect 已是两个不同决策函数，对话序列断言本身依赖其分叉，再加一条属于重复覆盖。此为执行者判断，记录在案以便复核者推翻。",
+    "independence_caveat": "该复核由同一会话内启动的隔离子代理完成，上下文与工具历史独立，但**不是**外部独立主体。按 AGENTS.md『不得用一个 Agent 的自评伪装两个独立审查者』，此复核不构成 done 所需的独立验收；M3-03 因此保持 in_progress。"
+  },
+  "verified_facts": {
+    "module_sha256": "3588491bced8243d41a8707ce050d53297d67dcada9d179c600f63f8f7b7daf5",
+    "tests_sha256": "5939b41db0f4e16409ae9bf9665e143e9572c6f9c4096d2fdfad3cb8193557a9",
+    "seat_tests": "PYTHONPATH=\"src;.\" python -m unittest tests.m3.test_agent_seats -> Ran 9 tests OK",
+    "m3_module_regression": "PYTHONPATH=\"src;.\" python -m unittest discover -s tests/m3 -t . -> Ran 426 tests in 595.778s OK (exit=0)",
+    "message_bus_unchanged": "src/aetp/collaboration/messages.py 未改动，inbox 语义保持 M1 原样"
+  },
+  "honest_limits": {
+    "not_real_agents": "注入式席位是决策函数，不是外部 LLM Agent。未接 Provider、未走网络、未新建 aetp.collaboration.delivery。",
+    "does_not_close_gap": "GAP-TEST028-SCOPE 仍然存在：现有能力证明的是『对话内容由决策方决定而非硬编码』，不是『真实两个 Agent 自主协商并交付』。",
+    "no_independent_human_review": "隔离子代理复核不等于独立复核主体；M3-03 保持 in_progress，reviewer 为 pending_independent_review。"
+  },
+  "next": "需要与执行者真正不同的复核主体（人或其他会话的 Agent）复核 seats.py 与 9 条用例后，才能把 M3-03 推进到 review/done。"
+}
