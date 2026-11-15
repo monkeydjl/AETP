@@ -98,12 +98,24 @@ class BootstrapLifecycleTests(unittest.TestCase):
         start = Command("start-m0-acceptance", project_id, "human-owner", "mission.acceptance_start",
                         "mission-0-bootstrap", {}, 1, "start-m0-acceptance", "bootstrap")
         self.assertEqual(planning.handle(start, authenticated_actor_id="human-owner").status, "accepted")
-        verify = Command("verify-m0", project_id, "a-1", "mission.verify", "mission-0-bootstrap", {
+        # Evidence is a real observation recorded by a-1; the gate resolves it
+        # against projected state instead of trusting a claimed digest.
+        from aetp.acceptance.service import AcceptanceService
+        acceptance = AcceptanceService(store, owner_id="human-owner")
+        observed = Command("observe-proof", project_id, "a-1", "artifact.observe", "bootstrap-proof",
+                           {"content": '{"criterion":"B0-B5 verified"}',
+                            "observer_note": "Bootstrap acceptance evidence"},
+                           0, "observe-proof", "bootstrap")
+        self.assertEqual(acceptance.handle(observed, authenticated_actor_id="a-1").status, "accepted")
+        proof = store.read_projection(project_id)["artifact:bootstrap-proof"]
+        # A PASSED claim must cite someone else's observation (TEST-010), so the
+        # observer is a-1 and the verifier is a-2.
+        verify = Command("verify-m0", project_id, "a-2", "mission.verify", "mission-0-bootstrap", {
             "criterion": "B0-B5 verified", "result": "PASSED",
-            "evidence": {"artifact_id": "bootstrap-proof", "content_digest": "sha256:" + "a" * 64},
-            "verifier_id": "a-1",
+            "evidence": {"artifact_id": "bootstrap-proof", "content_digest": proof["content_digest"]},
+            "verifier_id": "a-2",
         }, 2, "verify-m0", "bootstrap")
-        self.assertEqual(planning.handle(verify, authenticated_actor_id="a-1").status, "accepted")
+        self.assertEqual(planning.handle(verify, authenticated_actor_id="a-2").status, "accepted")
         complete = Command("complete-m0", project_id, "human-owner", "mission.complete", "mission-0-bootstrap",
                            {}, 3, "complete-m0", "bootstrap")
         self.assertEqual(planning.handle(complete, authenticated_actor_id="human-owner").status, "accepted")

@@ -14,6 +14,7 @@ import sqlite3
 import sys
 from typing import Any, Dict, List, Optional
 
+from aetp.acceptance.service import AcceptanceService
 from aetp.collaboration.messages import Message, MessageBus
 from aetp.core.commands import CommandHandler
 from aetp.core.projection import Projection
@@ -31,6 +32,7 @@ def run_project_bootstrap(db_path: str, *, project_id: str = "p-bootstrap") -> D
     store = SQLiteStore.open(db_path)
     handler = CommandHandler(store)
     planning = PlanningService(store, owner_id="human-owner")
+    acceptance = AcceptanceService(store, owner_id="human-owner")
     message_bus = MessageBus(store)
 
     verification_log: List[Dict[str, Any]] = []
@@ -302,8 +304,27 @@ def run_project_bootstrap(db_path: str, *, project_id: str = "p-bootstrap") -> D
     res = planning.handle(cmd_acc_start, authenticated_actor_id="human-owner")
     assert res.status == "accepted", f"acceptance_start failed: {res.to_dict()}"
 
-    # Verify each B0..B5 criterion item-by-item
+    # Verify each B0..B5 criterion item-by-item. The evidence is a real
+    # Artifact the observer (a-1) recorded, never a synthetic digest: the gate
+    # checks existence, project, digest and independence, and a PASSED claim has
+    # to name someone else's observation.
     for idx, crit in enumerate(criteria):
+        artifact_id = f"bootstrap-proof-{crit}"
+        cmd_o = make_cmd(
+            "artifact.observe",
+            artifact_id,
+            {
+                "content": json.dumps(
+                    {"criterion": crit, "bootstrap_evidence": env_evidence, "recorded_by": "a-1"},
+                    sort_keys=True,
+                ),
+                "observer_note": f"Bootstrap observation supporting {crit}",
+            },
+            actor="a-1",
+        )
+        res = acceptance.handle(cmd_o, authenticated_actor_id="a-1")
+        assert res.status == "accepted", f"artifact.observe {crit} failed: {res.to_dict()}"
+        observed = Projection.rebuild(store.read_events(project_id))[f"artifact:{artifact_id}"]
         cmd_v = make_cmd(
             "mission.verify",
             mission_id,
@@ -311,8 +332,8 @@ def run_project_bootstrap(db_path: str, *, project_id: str = "p-bootstrap") -> D
                 "criterion": crit,
                 "result": "PASSED",
                 "evidence": {
-                    "artifact_id": f"art-{crit}",
-                    "content_digest": "sha256:" + f"{idx:x}".zfill(64),
+                    "artifact_id": artifact_id,
+                    "content_digest": observed["content_digest"],
                 },
                 "verifier_id": "a-2",
             },

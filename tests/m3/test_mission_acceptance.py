@@ -1,5 +1,6 @@
 """Mission Acceptance verification and delivery gate tests (TEST-010 / INV-019)."""
 
+
 from aetp.core.projection import Projection
 from tests.m3.support import PlanningCase
 
@@ -19,15 +20,27 @@ class MissionAcceptanceTests(PlanningCase):
         cmd = self.command("mission.acceptance_start", self.mission_id, actor="human-owner")
         return self.accept(cmd)
 
+    # Evidence is a real observation recorded through artifact.observe: the
+    # observer is a-1 and the verifier a-2, so a PASSED claim cites someone
+    # else's document instead of a synthetic digest.
+    def observe(self, criterion):
+        from aetp.acceptance.service import AcceptanceService
+        identifier = "obs-" + criterion.lower().replace(" ", "-")
+        if f"artifact:{identifier}" not in self.state():
+            acceptance = AcceptanceService(self.store, owner_id="human-owner")
+            command = self.command("artifact.observe", identifier,
+                                   {"content": f'{{"criterion":"{criterion}"}}',
+                                    "observer_note": f"Observation for {criterion}"}, actor="a-1")
+            result = acceptance.handle(command, authenticated_actor_id="a-1")
+            self.assertEqual(result.status, "accepted", result.to_dict())
+        artifact = self.state()[f"artifact:{identifier}"]
+        return {"artifact_id": identifier, "content_digest": artifact["content_digest"]}
+
     def verify_criterion(self, criterion, result="PASSED", verifier="a-2"):
         payload = {
             "criterion": criterion,
             "result": result,
-            "evidence": {
-                "artifact_id": f"art-verify-{self.counter + 1}",
-                "content_digest": "sha256:" + "a" * 64,
-                "runner_id": "runner-1"
-            },
+            "evidence": self.observe(criterion),
             "verifier_id": verifier
         }
         cmd = self.command("mission.verify", self.mission_id, payload, actor=verifier)

@@ -45,6 +45,22 @@ def validate_mission_acceptance_start(command, previous, state, at):
     return "mission.acceptance_started", record
 
 
+def evidence_artifact(state, identifier, claimed_digest, project_id):
+    """Return the artifact an evidence reference points at, or refuse it.
+
+    The reference is not taken on trust: the artifact must exist in the
+    projected state, belong to this Project, and carry exactly the claimed
+    digest -- compared against the artifact's ``content_digest``, which the
+    capture path derived from the content it recorded.
+    """
+    artifact = state.get(f"artifact:{identifier}")
+    if artifact is None or artifact.get("project_id") != project_id:
+        raise PolicyViolation("EVIDENCE_STALE")
+    if artifact.get("content_digest") != claimed_digest:
+        raise PolicyViolation("EVIDENCE_STALE")
+    return artifact
+
+
 def validate_mission_verify(command, previous, state, at):
     if previous is None:
         raise PolicyViolation("INVALID_TARGET")
@@ -52,6 +68,9 @@ def validate_mission_verify(command, previous, state, at):
         raise PolicyViolation("MISSION_NOT_IN_ACCEPTANCE")
     fields(command.payload, {"criterion", "result", "evidence", "verifier_id"},
            {"criterion", "result", "evidence", "verifier_id"})
+    verifier = command.payload["verifier_id"]
+    if verifier != command.actor_id:
+        raise PolicyViolation("PERMISSION_DENIED")
     active_ver = str(previous.get("active_version") or previous.get("latest_proposal_version"))
     content = previous.get("versions", {}).get(active_ver, {}).get("content", {})
     criteria = content.get("success_criteria", [])
@@ -62,8 +81,18 @@ def validate_mission_verify(command, previous, state, at):
     if result not in {"PASSED", "FAILED", "INCONCLUSIVE"}:
         raise PolicyViolation("INVALID_PAYLOAD")
     evidence = command.payload["evidence"]
-    if not isinstance(evidence, dict) or not evidence.get("artifact_id") or not evidence.get("content_digest"):
+    if not isinstance(evidence, dict) or set(evidence) - {"artifact_id", "content_digest"}:
         raise PolicyViolation("INVALID_PAYLOAD")
+    if not evidence.get("artifact_id") or not evidence.get("content_digest"):
+        raise PolicyViolation("INVALID_PAYLOAD")
+    identifier = text(evidence["artifact_id"], identifier=True, limit=512)
+    claimed = text(evidence["content_digest"], limit=512)
+    artifact = evidence_artifact(state, identifier, claimed, command.project_id)
+    # A PASSED result is a positive claim about the delivered work. It has to
+    # name an artifact that was produced by someone other than the verifier --
+    # evidence nobody independent ever produced proves nothing (TEST-010).
+    if result == "PASSED" and artifact.get("created_by") == verifier:
+        raise PolicyViolation("EVIDENCE_STALE")
     record = copy.deepcopy(previous)
     record.update(
         revision=previous["revision"] + 1,
@@ -74,8 +103,8 @@ def validate_mission_verify(command, previous, state, at):
         record["criteria_verifications"] = {}
     record["criteria_verifications"][criterion] = {
         "result": result,
-        "evidence": copy.deepcopy(evidence),
-        "verifier_id": command.payload["verifier_id"],
+        "evidence": {"artifact_id": identifier, "content_digest": claimed},
+        "verifier_id": verifier,
         "verified_at_ms": at
     }
     return "mission.criteria_verified", record

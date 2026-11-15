@@ -131,6 +131,35 @@ def capture(command, state, at, context):
              "command_digest": command.digest(), "action_id": source_id, "action_revision": action["revision"]}}
 
 
+def observe(command, state, at, context):
+    """Record an Agent's own document observation as an immutable Artifact.
+
+    Bootstrap evidence has to exist before any Runtime Task or Session does, so
+    it cannot be captured. It must still be a real fact: the observer is the
+    authenticated Agent, the content digest is recomputed here, and the payload
+    cannot name the author, a Task, a source or a digest.
+    """
+    fields(command.payload, {"content", "observer_note"}, {"content", "observer_note"})
+    require(f"artifact:{command.target_id}" not in state, "REVISION_CONFLICT")
+    revision(command, None)
+    governance_config, _ = current(state, command.project_id)
+    require(principal(state, command.project_id, command.actor_id)["type"] == "agent", "PERMISSION_DENIED")
+    require(context.get("channel") == "agent", "ENFORCEMENT_UNAVAILABLE")
+    content = text(command.payload["content"], limit=MAX_DOCUMENT_BYTES)
+    note = text(command.payload["observer_note"], limit=1024)
+    digest = digest_text(content)
+    source = source_record(command, context, governance_config.get("input_authority_id"))
+    source.update(kind="agent_observation", command_id=command.id, observer_note=note,
+                  observed_at_ms=at, content_digest=digest)
+    return {"id": command.target_id, "project_id": command.project_id, "task_id": None,
+            "created_by": command.actor_id, "type": "document", "content": content,
+            "content_digest": digest, "task_revision": 0, "criteria": [],
+            "criteria_digest": digest_value([]), "policy_version": POLICY_VERSION, "source": source,
+            "derived_from": [], "supersedes": None, "data_classification": "internal", "revision": 0,
+            "digest": digest_value(content),
+            "origin": {"kind": "agent_observation", "command_id": command.id}}
+
+
 def target_snapshot(state, identifier, claimed_digest=None):
     artifact = state.get(f"artifact:{identifier}")
     require(artifact is not None and artifact["type"] == "document", "INVALID_TARGET")
@@ -360,6 +389,8 @@ def evaluate(command, state, at, context):
         execution = execution_snapshot(state, command.project_id, record["task_id"], command.actor_id, command.payload, at)
         _live(context, execution)
         return [("artifact.captured", "artifact", command.target_id, record)]
+    if command.type == "artifact.observe":
+        return [("artifact.observed", "artifact", command.target_id, observe(command, state, at, context))]
     if command.type == "verification.request":
         record = request(command, state, at, context)
         return [("verification.requested", "verification", command.target_id, record)]

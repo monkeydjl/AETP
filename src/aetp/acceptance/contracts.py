@@ -12,6 +12,7 @@ SCHEMA = "aetp-trusted-document-verification-1"
 COMMAND_TERMINALS = {
     "project.quality.configure": frozenset({"project.quality_configured"}),
     "artifact.capture": frozenset({"artifact.captured"}),
+    "artifact.observe": frozenset({"artifact.observed"}),
     "verification.request": frozenset({"verification.requested"}),
     "verification.revoke": frozenset({"verification.revoked"}),
     "verification.dispatch": frozenset({"verification.dispatched"}),

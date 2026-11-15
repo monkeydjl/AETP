@@ -19,6 +19,7 @@ from typing import Any, Dict, List, Optional
 
 from aetp.collaboration.messages import Message, MessageBus
 from aetp.core.commands import CommandHandler
+from aetp.acceptance.service import AcceptanceService
 from aetp.core.projection import Projection
 from aetp.domain.models import Command
 from aetp.integration.service import IntegrationContractService
@@ -243,18 +244,29 @@ def run_test_028_scenario(db_path: str) -> Dict[str, Any]:
     verification_log.append({"step": "autonomous_team_and_blueprint_dag_created", "status": "passed"})
 
     # 7. Mission Acceptance Gate (TEST-010 / INV-019)
+
     acc_start_cmd = make_cmd("mission.acceptance_start", mission_id, {}, actor="human-owner", revision=1)
     res = planning_service.handle(acc_start_cmd, authenticated_actor_id="human-owner")
     assert res.status == "accepted", f"mission.acceptance_start failed: {res.to_dict()}"
 
+    acceptance_service = AcceptanceService(store, owner_id="human-owner")
     for idx, crit in enumerate(["ping_endpoint_implemented", "tests_passing"]):
+        # Evidence is a real observation by a-1; a-2 verifies someone else's
+        # document rather than citing a synthetic digest.
+        proof_id = f"obs-{crit}"
+        o_cmd = make_cmd("artifact.observe", proof_id,
+                         {"content": f'{{"criterion":"{crit}"}}',
+                          "observer_note": f"TEST-028 evidence for {crit}"}, actor="a-1")
+        res = acceptance_service.handle(o_cmd, authenticated_actor_id="a-1")
+        assert res.status == "accepted", f"artifact.observe {crit} failed: {res.to_dict()}"
+        proof = Projection.rebuild(store.read_events(project_id))[f"artifact:{proof_id}"]
         v_cmd = make_cmd(
             "mission.verify",
             mission_id,
             {
                 "criterion": crit,
                 "result": "PASSED",
-                "evidence": {"artifact_id": f"art-{crit}", "content_digest": "sha256:" + "b" * 64},
+                "evidence": {"artifact_id": proof_id, "content_digest": proof["content_digest"]},
                 "verifier_id": "a-2",
             },
             actor="a-2",

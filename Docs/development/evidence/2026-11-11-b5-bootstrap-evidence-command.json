@@ -1,0 +1,60 @@
+{
+  "title": "把 8 条已知缺口补回来：新增受控证据命令 artifact.observe，摘除全部 11 处登记",
+  "work_item": "M4-01",
+  "date": "2026-11-11",
+  "decision_by_user": "改协议：新增受控证据命令（acceptance 域，命名 artifact.observe）",
+  "problem": {
+    "statement": "收紧后的 mission.verify 只接受投影中真实存在、同项目、digest 一致的 Artifact 证据；而真实 Artifact 只能由 acceptance capture 在 Runtime Task + Session + 已完成 document.write Action 下产出，Bootstrap 在 B5 之前根本没有这些对象。",
+    "consequence": "runner 只能伪造 art-{crit} + 合成 digest，被 EVIDENCE_STALE 拒绝；上一轮把 8 个场景登记为已知缺口，全量虽绿但覆盖率真实下降（expected failures=11、TEST-028 只执行 27/28）。"
+  },
+  "design": {
+    "command": "artifact.observe",
+    "event": "artifact.observed",
+    "domain": "acceptance（COMMAND_TERMINALS + COMMAND_AGGREGATES 注册，因此 core 的命令/事件白名单与归约路由自动生效）",
+    "payload": "恰好 {content, observer_note}；不接受 task_id / created_by / content_digest / criteria，作者与摘要都不能由载荷指定",
+    "rules": [
+      "created_by 恒为已认证 actor，digest 由服务端对 content 现算",
+      "目标 Artifact 必须不存在（REVISION_CONFLICT），观测不可覆盖",
+      "actor 必须是 agent 主体（PERMISSION_DENIED），channel 必须是 agent（ENFORCEMENT_UNAVAILABLE）",
+      "不要求 Runtime Session：因此 B5 之前的 Bootstrap 也能产出真证据",
+      "mission.verify 仍只认投影中的 Artifact，并保留 PASSED 需由非作者复核的独立性要求"
+    ],
+    "why_not_weaken_gate": "没有放宽 mission.verify，也没有给 runner 开旁路：只是补了一条能诚实产出证据的受控命令，伪证据路径依然被拒（test_mission_evidence_integrity 12 条保持全绿）。"
+  },
+  "changed_files": [
+    {"path": "src/aetp/acceptance/contracts.py", "change": "注册 artifact.observe -> artifact.observed"},
+    {"path": "src/aetp/acceptance/records.py", "change": "新增 observe()：严格载荷、不可覆盖、agent 主体、源记录、digest 现算"},
+    {"path": "src/aetp/bootstrap/runner.py", "change": "B5 先用 a-1 真实观测产出 Artifact，再由 a-2 用其真实 digest 调 mission.verify"},
+    {"path": "tests/m3/test_artifact_observe.py", "change": "新增 9 条契约/拒绝路径用例"},
+    {"path": "tests/m3/test_mission_acceptance.py", "change": "夹具改走 artifact.observe，摘除 5 处 expectedFailure"},
+    {"path": "tests/bootstrap/test_lifecycle.py", "change": "runner 与 finalize 用例改用真实观测证据（observer a-1 / verifier a-2），摘除 3 处 expectedFailure"},
+    {"path": "conformance/m3/test_028.py", "change": "删除 EVIDENCE_CAPTURE_AVAILABLE 跳过分支，验收步真正执行"},
+    {"path": "tests/m3/test_conformance_028.py", "change": "摘除 2 处 expectedFailure"},
+    {"path": "tests/conformance/test_runner.py", "change": "摘除 1 处 expectedFailure，TEST-028 恢复 28/28"}
+  ],
+  "evidence": {
+    "red": "实现前 tests.m3.test_artifact_observe 全部报 unsupported type: 'artifact.observe'",
+    "green": "tests.m3.test_artifact_observe Ran 9 tests OK",
+    "affected_modules": "tests.bootstrap.test_lifecycle + tests.m3.test_mission_acceptance + tests.m3.test_conformance_028 + tests.conformance.test_runner + tests.m3.test_artifact_observe -> Ran 39 tests OK",
+    "markers_removed": "rg 'expectedFailure|EVIDENCE_CAPTURE_AVAILABLE|KNOWN_GAP' tests conformance 已无本轮登记残留",
+    "gate_still_red_proof": "tests.m3.test_mission_evidence_integrity Ran 12 tests OK；变异去掉 digest/归属重算后 failures=6"
+  },
+  "full_suite": {
+    "command": "PYTHONPATH=\"src;.\" python -m unittest discover -s tests -t .",
+    "result": "Ran 1036 tests in 629.342s, FAILED (failures=2)，两条均为 tests.conformance.test_isolation_probe",
+    "attribution": [
+      "tests.conformance.test_isolation_probe 在 git stash 掉本次全部改动后单跑同样 FAILED (failures=2)，与本轮无关；根因是 Docker daemon 不可达，探针把 'outside_write': 'allowed' 与 'write_inside_visible_on_host': True 记为已观测而非 skipped",
+      "tests.fault_injection.test_batch1.FaultInjectionBatch1Tests.test_fi_05_projection_cache_loss_and_pure_rebuild 在单跑时 Ran 8 tests OK；全量日志里的那行来自 tests/fault_injection/test_runner_report.py:78 的注入用例 'injected: the replay evidence did not hold'，与此前 FI-05 误读同源"
+    ],
+    "delta": "1015 (收紧前) -> 1027 (登记缺口) -> 1036 (摘除登记并新增 9 条命令用例)；expected failures 从 11 降到 0"
+  },
+  "not_done": {
+    "isolation_probe": "容器隔离探针仍红，属于既有环境缺口（Docker daemon 不可达），本轮未处理也未登记；需要独立一轮处理。",
+    "mission_verify_scope": "artifact.observe 让证据可诚实产出，但不代表 bootstrap 的业务正确性已被验证：criteria 仍是 runner 自报的 B0..B5 名称。",
+    "a2a_transport": "未涉及，A2A 仍只是可选 Transport Adapter。"
+  },
+  "status": {
+    "work_item_state": "M4-01 仍为 blocked：B5 证据链路已通，但 bootstrap 交付验收仍未独立复核。",
+    "committed": false
+  }
+}
