@@ -1070,11 +1070,54 @@
       "independent_reviewer": "/root/m1_reviewer; distinct from /root, final v1 accepted; work item marked done."
     },
     {
+      "id": "M3-03",
+      "milestone": "M3",
+      "title": "注入式 Agent 席位：让对话内容由 Agent 决定而非硬编码",
+      "status": "in_progress",
+      "depends_on": [
+        "M1-01",
+        "M2-01",
+        "M3-02"
+      ],
+      "origin": {
+        "gap": "GAP-TEST028-SCOPE",
+        "gap_record": "Docs/development/evidence/2026-11-12-m2-m3-evidence-gaps.json",
+        "finding": "TEST-028 与 bootstrap runner 的双 Agent 对话内容均为硬编码字符串；投递通道（MessageBus）是真的，对话内容是假的。"
+      },
+      "files": [
+        "src/aetp/collaboration/seats.py",
+        "tests/m3/test_agent_seats.py",
+        "Docs/development/backlog.json",
+        "MEMORY.md"
+      ],
+      "acceptance": [
+        "席位只能以自身 authenticated_actor_id 发言，冒充他人被 MessageBus 以 ACTOR_MISMATCH 拒绝",
+        "两名席位的对话由各自独立的决策函数产生，系统不提供内容模板；同一输入下各自输出可不同",
+        "协商产物可被 seat_evidence 快照为带 sha256 的证据，且只包含发言者可见的消息"
+      ],
+      "not_in_scope": "不接真实 LLM Provider、不引入网络、不新建 aetp.collaboration.delivery 模块；注入式席位不得被表述为“真实外部 Agent 已自主协商”。",
+      "conformance_tests": [
+        "TEST-028"
+      ],
+      "executor": "Reasonix coding agent (session 2026-11-12)",
+      "reviewer": "pending_independent_review",
+      "independent_reviewer": "pending — 需要与执行者不同的独立复核人，当前尚未落实",
+      "coordination": "用户选定“注入式接口”方案；单 Agent 执行，尚无独立复核。",
+      "acceptance_evidence": "实现、测试与复核证据见 Docs/development/evidence/2026-11-13-m3-03-agent-seats.json（含 seats.py 与 test_agent_seats.py 的 SHA256 重算值、9 条席位用例 OK、M3 全模块 426 tests OK）。已由隔离复核子代理完成一轮复核（sa_20261113_151343_000000000_89ababeccfa9），其 4 条 should-fix 与 4 条 nit 全部处理；但该复核与执行者同属一个会话，不构成 AGENTS.md 要求的独立审查主体，故 M3-03 保持 in_progress，不作 done 判定。",
+      "reproduction_command": "PYTHONPATH=\"src;.\" python -m unittest tests.m3.test_agent_seats",
+      "evidence": [
+        "src/aetp/collaboration/seats.py",
+        "tests/m3/test_agent_seats.py",
+        "Docs/development/evidence/2026-11-12-m2-m3-evidence-gaps.json",
+        "Docs/development/evidence/2026-11-13-m3-03-agent-seats.json"
+      ]
+    },
+    {
       "id": "M4-01",
       "milestone": "M4",
       "title": "Project Bootstrap 正式验收（§15.5 B0–B5）",
       "status": "blocked",
-      "block_reason": "B0 Discovery/B1 Architecture/B2 Environment/B3 Knowledge/B4 build 已完成并有证据（自运行 Mission #0 能力已证实存在于 src/aetp/bootstrap/），但 B5 正式验收卡在外部资源：真实 CI 需用户提供 remote 仓库+CI host（ci.yml 仅为配置骨架）、CRITICAL 人类验收（§9.4/INV-019）AI 不能代章。",
+      "block_reason": "B0 Discovery/B1 Architecture/B2 Environment/B3 Knowledge/B4 build 已完成并有证据（自运行 Mission #0 能力已证实存在于 src/aetp/bootstrap/），但 B5 正式验收卡在外部资源：真实 CI 需用户提供 remote 仓库+CI host（ci.yml 仅为配置骨架）、CRITICAL 人类验收（§9.4/INV-019）AI 不能代章；B5 证据链已于 2026-11-11 收紧：mission.verify 现在必须在校验投影中真实存在的 artifact 并重算 content_digest，伪造 digest 一律 EVIDENCE_STALE（证据 Docs/development/evidence/2026-11-11-b5-mission-evidence-integrity.json）。但 bootstrap runner 仍以伪造 digest 调 mission.verify，全链路测试因此 3 红，2026-11-11 追加：8 条受影响的既有用例已按用户决定改为显式已知缺口（mission_acceptance 5、TEST-028 2+1、bootstrap 3，共 11 处 expectedFailure/skipped），全量回到 OK (expected failures=11)；这 8 个场景从'被验证'降级为'被登记'，覆盖率真实下降，详见 Docs/development/evidence/2026-11-11-b5-known-gap-registration.json。runner 侧仍需新增受控证据命令后，才能逐条摘掉这些标记。 2026-11-11 协议改造（用户决定：新增受控证据命令）：acceptance 域新增 artifact.observe -> artifact.observed，载荷恰好 {content, observer_note}，作者恒为已认证 agent、digest 服务端现算、不可覆盖、不依赖 Runtime Session；bootstrap runner 改为 B5 先由 a-1 真实观测、再由 a-2 用其真实 digest 调 mission.verify。上一轮登记的 11 处 expectedFailure/skipped 已全部摘除（mission_acceptance 5、TEST-028 2+1、bootstrap 3），TEST-028 恢复 28/28；全量 1036 tests，隔离探针两条亦已闭合（根因是用例判据错误，非 Docker 不可达；见下文隔离探针复测更正）。证据 Docs/development/evidence/2026-11-11-b5-bootstrap-evidence-command.json。剩余阻塞不变：真实 CI remote + CRITICAL 人类验收（§9.4/INV-019）仍需用户提供，且 mission.verify 的 criteria 仍是 runner 自报项。",
       "depends_on": [
         "M3-02"
       ],
@@ -1139,7 +1182,7 @@
       "milestone": "M4",
       "title": "M1–M3 整里程碑正式验收与 product_completion 抬升",
       "status": "blocked",
-      "block_reason": "legacy M1 verification.run INCONCLUSIVE 已澄清为设计如此（旧入口无 formal submission round，不伪造 PASS；正式 Verification 由 M3 AcceptanceService/TaskQualityService 提供）。2026-10-10 已交付五个实质切片（独立复核均 accepted）：真实 OS 沙箱 shell 执行、真实 git baseline 解析、真实 GitWorktreeProvider、受信 git provider 接线（§10.6 真实 merge 闭环）、Credential Broker 最小语义（§14.3）。剩余缺口仍为未实现功能：真实 OS 容器级隔离（§13.9 防绕过，working_copy 不能证明）、Credential Broker 的 Runtime 集成、自主 peer delivery/TEST-028 完整准入、整里程碑验收证据。",
+      "block_reason": "legacy M1 verification.run INCONCLUSIVE 已澄清为设计如此（旧入口无 formal submission round，不伪造 PASS；正式 Verification 由 M3 AcceptanceService/TaskQualityService 提供）。2026-10-10 已交付五个实质切片（独立复核均 accepted）：真实 OS 沙箱 shell 执行、真实 git baseline 解析、真实 GitWorktreeProvider、受信 git provider 接线（§10.6 真实 merge 闭环）、Credential Broker 最小语义（§14.3）。2026-11-01 复核更正：原列的「Credential Broker 的 Runtime 集成」缺口已不成立，该集成已由 2026-10-22 切片交付（evidence/2026-10-22-credential-action-ingestion-real-path.json：runtime/records.py 放行 credential 键组合、tests/runtime/test_credential_ingestion.py 改为真实 ExecutionService+MCPClientAdapter 路径、8 tests GREEN），且 governance 侧 service.py::_sync_consuming_broker 强制两侧共用同一 Broker，冲突即 ValueError；本轮探针在同一次运行中实测三项均成立。剩余缺口仍为未实现功能：真实 OS 容器级隔离（§13.9 防绕过）、自主 peer delivery/TEST-028 完整准入（探针复核 aetp.collaboration.delivery 模块不存在）、整里程碑验收证据。2026-11-09 容器级隔离进展（evidence/2026-11-09-m4-03-container-isolation-gap.json）：①能力声明已改 fail-closed——RuntimeEnforcement.workspace_isolation 不再是自由字符串，is_eligible_for_high_risk() 新增 verified_workspace_isolation() 合取项，只有 AETP 实际测量过的等级（当前仅 working_copy）才算满足，声明 os_sandbox 在测量之前不给资格；②越权探针 tests/conformance/test_isolation_probe.py 已就位（挂载外写入/读取、宿主机 secret 路径、env 凭证不继承），三态报告区分 observed 与 unavailable，已随 discover 进入全量套件；tests/conformance/test_collection_guard.py 守住“用例文件必须可被 discover 收集”。解除条件：在具备容器运行时（Docker 守护进程可达）的主机上运行该探针，四项断言全部观察为拒绝，才可把 os_sandbox 加入 VERIFIED_WORKSPACE_ISOLATION；本机 docker info 失败，os_sandbox 仍为 observed=false / skipped=docker_daemon_unreachable，故缺口未闭合，状态保持 blocked。 2026-11-11 隔离探针复测更正：此前记录的“本机 docker info 失败 / Docker daemon 不可达”不成立——实测 docker ServerVersion 29.2.1 可达、docker ps 有运行中容器。两条探针红的真实根因是用例自身的判据错误：①越界写入目标写成容器内的 /outside_escape，该路径在容器自有可写根文件系统内必然可写，与挂载边界无关；②working_copy 层的 host_paths_reachable 被写死为 False（只记录了 True 分支之外的 refuses_host_path_writes），使 test_working_copy_facts_are_measured_not_hardcoded 无法通过。修法：探针根目录以 :ro 挂载，越界目标改为宿主侧路径，判据改为宿主侧文件是否出现（host_escape_created / host_secret_created），working_copy 层恢复为实测赋值。复测结果 tests.conformance.test_isolation_probe Ran 4 tests OK，os_sandbox 层 observed=true：outside_escape/host_secret 均 denied、宿主侧无 canary、env 凭证不可见、挂载卷内写入可见于宿主。证据 Docs/development/evidence/2026-11-11-isolation-probe-remeasured.json。仍未闭合：VERIFIED_WORKSPACE_ISOLATION 仍只有 working_copy，items and 是否把 os_sandbox 加入已验证等级属于资格口径决策，待用户确认。",
       "depends_on": [
         "M4-01",
         "M4-02"

@@ -1190,3 +1190,917 @@ preparation 27/27；准备检查不计完整 Conformance。固定候选 210 输�
 
 
 
+
+## 凭证 Action 调用链真实化（2026-10-22）
+
+- 问题：`tests/runtime/test_credential_ingestion.py` 原用 `_Probe` 覆写 `_authorize_action`，通过的 4 个测试只证明复制逻辑；生产分支 `runtime/actions.py:112-123 Rider` 实际不可达（`normalize_arguments` 对 `credential_token_ref`/`required_permission` 直接 `INVALID_PAYLOAD`）。
+- 修复：`runtime/records.py` 新增 `_CREDENTIAL_FIELDS`/`_credential_metadata`，配对且非空字符串才放行，并先把两键剔除为 `supplied` 再做各操作原有精确键检查；`mcp.call`/`document.write`/`document.restore`/`document.append` 均随 Action 携带元数据。
+- 首版曾把 `_CREDENTIAL_FIELDS` 并入精确键集合，导致 31 个 M1 用例 `INVALID_PAYLOAD`；改为剔除后比较即复位。
+- 证据：RED 为 8 例 7 失败（全 `INVALID_PAYLOAD`）；GREEN 为凭证 8、M1 86、M2 183、runtime 36 全 OK。变异验证：删掉 document.write 透传→`KeyError` 失败→还原。
+- 独立复核 `accepted_with_reservations`，无阻断项；复核人受宿主只读限制无法运行测试，已在证据中标注。3 条 minor 已记录未修（docstring 措辞、`identifier=True` 长度约定、豁免对无注释）。
+- 证据文件：`Docs/development/evidence/2026-10-22-credential-action-ingestion-real-path.json`。**正式口径未变**：phase=preparation、product_completion_percent=0、bootstrap_status=not_started、conformance 28/28、M4 blocked (1/3)；未提交。
+
+## 凭证撤销归属校验（2026-10-23）
+
+- 缺口：`governance/credentials.py` 的 `revoke()` docstring 写「humans or the owning Agent may revoke」，实际只校验主体类型，项目内任意 Agent 可撤销他人凭证；`credential.issued` 也未持久化归属。
+- 修复：`issue()` 记录 `owner_id=command.actor_id`；`revoke()` 对 agent 主体要求 `previous["owner_id"] == command.actor_id`，否则 `PERMISSION_DENIED`；human 仍可撤销项目内任意凭证；无 `owner_id` 的旧记录仅 human 可撤。
+- 证据：RED 为 `tests.m2.test_credential_transitions` 6 例中 1 失败（`PolicyViolation not raised`）；GREEN 为该模块 6 examples OK、M2 全量 185 tests OK（原 183 + 新增 2）。
+- 已知未修：Broker 侧 `revoke_by_ref()`/`revoke()` 不接受 actor，持有裸 `token_ref` 仍可绕过 Command 路径直接撤销；修它需改 Broker API，超出本次最小修复范围。
+- 状态留 `review`，尚无独立复核人。证据：`Docs/development/evidence/2026-10-23-credential-revoke-ownership.json`。**未提交**，正式口径未变。
+
+## Broker 撤销归属校验（2026-10-23）
+
+- 缺口：`CredentialBroker.revoke(token)` / `revoke_by_ref(ref)` 不接受调用者身份，而 `_Credential.agent` 一直存着归属却无人比对；持有裸 token 或 ref 者可撤销他人凭证，绕开 Command 路径的归属规则。
+- 修复：两者改为必填 keyword-only `actor`；空/非字符串 → `INVALID_AGENT`，非归属者 → `PERMISSION_DENIED`，被拒的撤销不改状态。无需改数据结构。
+- 设计取舍：不设默认值——默认值会把本次修掉的宽松行为又放回来。
+- 证据：RED 为 4 例 `TypeError: ... unexpected keyword argument actor`；GREEN 为 broker 14 tests OK、M2 全量 189 tests OK。
+- 调用方更新：`tests/m2/test_credential_broker.py`（2 处）、`tests/runtime/test_credential_ingestion.py:106` 均显式传 actor。
+- 证据文件：`Docs/development/evidence/2026-10-23-credential-broker-revoke-actor.json`。状态留 `review`，无独立复核人；**未提交**，正式口径未变。
+
+## 独立复核驳回与修复（2026-10-23）
+
+- 独立复核（shell-reviewer 子代理）对前两批凭证修复给出 **rejected**，2 个 critical：
+  1. `tests/runtime/test_credential_ingestion.py:106` 仍用旧签名导致该套件红，而证据 JSON 谎称已更新——**执行者错误**，已修正为 `actor="a-1"` 并在证据中写明 CORRECTION。
+  2. 撤销不闭环：`credential.revoke` 只改投影记录，Broker 仍 GRANTED，凭证撤销后消费 Action 照常可用。已用探测复现，并修复。
+- 修复：`GovernanceService._evaluate` 在 `evaluate()` 成功后对 `credential.revoke` 调用 `_revoke_in_broker(record)`；无 broker / 无 token_ref / 无 owner_id → `CREDENTIAL_UNAVAILABLE`（fail-closed，不留下投影说撤销、Broker 放行的状态）；Broker 返回 `CREDENTIAL_UNKNOWN` 视为成功（已不认识的 ref 本就无法授权）。
+- 证据：RED 为 `test_credential_revoke_sync` 3 例全失败（前两例 `CredentialBrokerError not raised`）；GREEN 为该 3 例 OK、M2 全量 192 tests OK（189+3）、broker 15 OK、runtime 凭证 22 OK、replay 2 OK。
+- minor 已补：`test_revoke_requires_a_named_actor` 覆盖 `""`/空白/None/123/list → `INVALID_AGENT`，且被拒不改变凭证可用性。
+- **未修 important-3**：`owner_id` 是新增字段，修复前的 `credential.issued` 事件重放会被 `canonical_json` 严格比对拒绝。已核实冻结证据不含 credential、28 个 fixture 不覆盖、`.tmp` 无 credential 事件，故非阻断；不改 `reduce_record` 去默认补 `owner_id`（那会给历史记录凭空发明归属，削弱本次加固）。记为迁移说明。
+- 证据文件：`Docs/development/evidence/2026-10-23-credential-revoke-broker-sync.json`。**未提交**，正式口径未变。
+
+## IMP-002 复核与闭合（2026-10-23）
+
+- 来源：`Docs/development/evidence/2026-10-09-conformance-frozen-independent-review.json` 的 important 项。原文称步骤5 抽查 8 项中仅 TEST-028 的 `details` 非空（`events_count=26, steps_count=7`），TEST-005/008/014/020/021/023/024 均为空 dict `{}`；当时判定为「报告丰富度缺口，不阻断接受」。
+- **实测结论：该问题已不再复现，无需改代码。** `run_conformance` 全量重跑 → `total=28, executed_passed=28`，`execution_status == passed` 且 `details` 为空的条目数为 **0**。
+- 8 个原抽查项现均带真实运行时字段（非占位填充）：TEST-005 `cache_rows_remaining/rebuilt_equals_cached`；TEST-008 `task_status_after_approval_without_verification`；TEST-014 `blocked`；TEST-020 `dispatch_status/reconcile_status`；TEST-021 `rebuilt_nonempty/tripwires_armed`；TEST-023 `approved_action_id/approved_action_status`；TEST-024 `rejected`；TEST-028 `events_count/steps_count`（与原报告一致）。
+- 守卫测试已存在且非恒真：`tests/conformance/test_runner.py::test_all_passed_fixtures_expose_nonempty_details`，对 `passed` 且 `details` 为假的条目断言为空列表。`conformance/runner.py:140` 的 `details` 直接取自 fixture handler 返回值，空 dict 即 handler 未返回。
+- **冻结零漂移已验证而非假设**：`suite_digest` 冻结值 `sha256:69acdab6…7310` 与重跑值完全相等；28 条 `elements_digest` 逐条比对 drift 为空。`details` 不属于 §18.3 六要素，故丰富化不会移动 digest。
+- 证据文件：`Docs/development/evidence/2026-10-23-imp002-details-closure.json`（`disposition: already_closed`）。**未修改任何 src/、tests/、conformance/、artifacts/ 或 status 文件**。
+- 临时库 `.tmp/imp002_*.sqlite` 探针已清理；`.tmp/` 下其余 `imp002*`/`review-imp002*` 为更早会话遗留，未清理他人工作。
+
+## 复核新发现的重要缺口（未修，2026-10-23）
+
+- 第二轮独立复核（shell-reviewer）对凭证修复给出 `accepted_with_reservations`：**critical-1、critical-2 均已闭环**（探针实测 human 与归属 agent 撤销后 Broker 均 `CREDENTIAL_REVOKED`；非归属 agent `PERMISSION_DENIED` 且状态不变；无 broker → `CREDENTIAL_UNAVAILABLE` 且 revision 不变）。
+- **important-1（未修）**：`service.credential_broker` 与 `runtime.credential_broker` 是两个独立挂载点。撤销只作用于 governance 侧（`service.py:216`），消费侧 dispatch 读 `runtime.credential_broker`（`runtime/actions.py:117`）。复核人注入两个不同实例实测：`revoke=accepted, record.revoked=True, service_broker=CREDENTIAL_REVOKED, dispatch_broker=GRANTED` —— 原 critical-2 症状完整复现。仓库内无装配代码保证二者同一实例，也无测试同时接线两处。另：`CREDENTIAL_UNKNOWN` 视为成功仅在「同一实例」假设下成立。
+- **important-2（未修）**：`credentials.py:51` 新增 `owner_id` 会打断历史 `credential.issued` 事件重放（`ModelValidationError: governance Event disagrees with deterministic transition`），影响整个项目重放而非单条。缓解：冻结证据不含 credential、`.tmp` 无 credential 事件，无现存数据。与前述 important-3 同源。
+- **minor-1**：`_revoke_in_broker` 只捕 `PolicyViolation`；Broker 抛 `RuntimeError` 时冒泡（`('RAISED','RuntimeError')`，未持久化，方向安全）。
+- **minor-2**：Broker 撤销先于事件持久化（`service.py:185` 在 `_batch` 之前）；持久化失败时 `broker=REVOKED` 而 `record.revoked=False`（反向不一致，fail-closed 方向）。
+- 下一步建议：为 important-1 写 RED（两挂载点指向不同实例时撤销必须被拒或强制同实例），或在 `GovernanceService.__init__` 校验 `execution.runtime.credential_broker is credential_broker`。两批凭证修复仍在 `review`，不得标 `done`。
+
+## important-1 修复：Broker 单挂载点（2026-10-23）
+
+- **问题**：`GovernanceService.credential_broker`（撤销侧，`service.py:216`）与 `DocumentRuntime.credential_broker`（消费侧，`runtime/actions.py:117`）是两个独立挂载点，仓库内无装配代码保证同一实例。复核人注入两个不同实例实测出 `service_broker=CREDENTIAL_REVOKED` 而 `dispatch_broker=GRANTED` —— 原 critical-2 症状完整复现。附带问题：`_revoke_in_broker` 把 `CREDENTIAL_UNKNOWN` 视为成功，仅在「同实例」假设下成立。
+- **修复**（`src/aetp/governance/service.py`）：`credential_broker` 改为 property。赋值时把同一实例钉到 `execution.runtime.credential_broker`；若消费侧已挂着**另一个**实例 → `ValueError`（不静默取胜）；重复赋同一实例 → no-op；赋 `None` 只清 governance 侧，**不**顺带关掉调用边界的检查。
+- **未采用**：在 `__init__` 里硬校验 `execution.runtime.credential_broker is credential_broker`。原因：`GovernanceService` 常在 host 挂 broker 之前构造，既有调用点都是构造后赋值（`tests/m2/test_credential_revoke_sync.py:19`、`tests/runtime/test_credential_ingestion.py:34` 直接赋 runtime 侧）。property 兼容两种顺序且仍拒绝真实冲突。
+- **证据**：RED 为 `test_credential_broker_wiring` 5 例失败 4 个（两处 `AssertionError: None is not <CredentialBroker object>`、一处 `ValueError not raised`）；GREEN 为该 5 例 OK、M2 全量 **198 tests OK**（193+5）、runtime 36 OK、M1 **86 OK**、`devprep.py check` exit 0。
+- **残留缺口（未修）**：important-2（`owner_id` 打断历史事件重放）；minor-1（`_revoke_in_broker` 只捕 `PolicyViolation`，`RuntimeError` 冒泡但未持久化，方向安全）；minor-2（Broker 撤销先于事件持久化，失败时反向不一致但 fail-closed）；host 直接赋 `DocumentRuntime.credential_broker` 绕过 `GovernanceService` 时仍无交叉校验。
+- 证据文件：`Docs/development/evidence/2026-10-23-credential-broker-single-mount.json`。**未提交**，正式口径未变。
+
+## 撤销时一致性校验：补两条旁路（2026-10-23）
+
+- 第三轮复核给 `accepted_with_reservations`，确认「赋值时钉住同一实例」主体闭环，但实测复现两条仍能让撤销静默失效的旁路：
+  1. **旁路 A**：装配后再直接改绑 `runtime.credential_broker = 副本` → 真实 dispatch 仍 `completed`，撤销无效。
+  2. **旁路 B**：`GovernanceService(execution=None)` 构造、之后再挂 `execution` → governance 侧 A、消费侧 B 分裂且无任何报错。
+- **修复**（`src/aetp/governance/service.py::_revoke_in_broker`）：不只依赖 setter，在**撤销发生的那一刻**再校验 `execution.runtime.credential_broker is self.credential_broker`；不一致 → `PolicyViolation("CREDENTIAL_UNAVAILABLE")`，拒绝记录撤销事实，而不是记成已完成。这样保证与装配顺序无关，覆盖 host 直接改绑 runtime 侧、以及延迟挂 execution 两条路径。
+- **为何不只改 setter**：setter 只能看见经过它的写入；host 直接操作 `DocumentRuntime.credential_broker`、或之后再挂 `execution`，都不会经过它。撤销时校验覆盖通往该事实的所有路径。
+- **证据**：RED 为新增 2 例（`test_rebinding_the_consuming_side_makes_revoke_fail_closed`、`test_execution_attached_after_wiring_does_not_split_the_broker`）均 `AssertionError: Tuples differ: ('accepted', None) != ('rejected', 'CREDENTIAL_UNAVAILABLE')`；GREEN 为 wiring 7 例 OK、M2 全量 **200 tests OK**、M1 **86 OK**、runtime **36 OK**、`devprep.py check` exit 0。
+- **第三轮复核其余发现（未修）**：important-2（无 `owner_id` 的旧记录撤销被拒而 Broker 仍放行，历史凭证 TTL 内不可撤销）；minor-1（Broker 改动先于 `_batch` 持久化，失败时两侧分叉）；minor-2（重复撤销被接受，`credentials.py` 未拒绝 `revoked=True`）；minor-3（`revoke(actor=)` 是破坏性签名变更，外部调用方会 `TypeError`）。
+
+## 孤儿 token：签发侧 fail-open 修复（2026-10-23）
+
+- **复核报告只把它记为 minor-2**（「Broker 改动先于持久化，方向 fail-closed」）。探针查了**签发侧**，发现更严重的实情：
+  - `broker.issue()` 同样先于提交执行。让 `_batch` 抛 `RuntimeError` 后实测：`broker._credentials` 留 1 条、`_ref_to_token` 留 1 条，而 Projection 里 `credential:cred-1` **不存在**。
+  - 撤销必须经过 Projection 记录，所以这条 token **任何人都无法撤销**，只能等 TTL 到期 —— 是 **fail-open**，不是 fail-closed。
+- **修复**：
+  - `CredentialBroker._discard(token)`（私有：不接受 actor，不属于对外 API）：丢弃一条从未可被观察到的凭证（同时清 `_ref_to_token`）。
+  - `GovernanceService.handle` 在 `with self.store.transaction()` **之外**调用 `_discard_minted_if_orphaned(command, context)`：`credential.request` 且（`forced_error` 或没有 `credential.issued` 事件）→ 回收。
+- **为何必须在事务之外**（第四轮复核实测纠正）：最初把判断放在 `_submit` 的 `finally`，那时仍在 `with self.store.transaction()` 内，`read_events` 能看到**未提交**的 `credential.issued`，于是判为「已接受」不回收；随后 COMMIT 失败回滚，token 成为永久孤儿。判断必须等事务真正结束。
+- **为何 `_discard` 不叫 `revoke`**：撤销是授权行为、需要一条记录承载；事件从未落库的 token 没有记录也没有观察者，丢弃它只是对「从未成为事实」的东西做记账，因此不需要 actor。
+- **证据**：RED 为 `AssertionError: {'cred_40cad...': _Credential(agent='a-1', revoked=False)} != {} : a minted token survived a failed commit`；GREEN 为 `test_credential_revoke_sync` 5 例 OK（含后补的真实 COMMIT 失败用例）、M2 全量 **201 tests OK**、M1 **86 OK**、runtime **36 OK**、`devprep.py check` exit 0。
+
+## 第四轮独立复核：rejected 与 C1 修复（2026-10-23）
+
+- 复核结论 **rejected**，2 critical / 2 important / 2 minor。核心 C1 是**我上一轮修复自身引入的缺陷**：
+  - 回收判断最初放在 `_submit` 的 `finally`，而该 `finally` 仍在 `with self.store.transaction()` **内部**。此时 `read_events` 读到**未提交**的 `credential.issued`，判为「已提交」→ 不回收；随后 COMMIT 失败回滚，token 永久孤儿。复核探针 P90/P70 实测：判定时 `in_tx=True`，commit 抛错后 `events=[]`、`record=None`、`_credentials=1`，且 `assert_permission_by_ref` **成功**。
+  - 我原来的 RED 用 `_batch` 抛 `RuntimeError`，那是**事务内失败**，覆盖不到 COMMIT 失败，所以没暴露。复核用变异确认该测试本身非恒真（禁用 discard 则失败）。
+- **C1 修复**：`handle` 在 `with self.store.transaction()` **之外**调用 `_discard_minted_if_orphaned`；`except BaseException` 分支先回收再 `raise`。新增 `test_commit_failure_does_not_strand_a_usable_token`（包装 `store._connection.commit` 抛错）覆盖真实提交失败。
+- **C2（已修）**：`_discard` 曾无任何归属判断，任何持有 broker 者可丢弃**已提交**的有效凭证，而 Projection 仍称未撤销 —— 权威从 Projection 滑向内存对象。
+  - 修复：`issue()` 把 token 记为 pending；`_discard_minted_if_orphaned` 在 `credential.issued` 已提交时调 `_confirm()`（移出 pending），否则调 `_discard()`；`_discard` 对非 pending 的 token 抛 `CREDENTIAL_COMMITTED`。于是已提交的凭证只能走 Command 撤销路径，而那条路径校验归属。
+  - RED：`AssertionError: CredentialBrokerError not raised`（丢弃已提交凭证竟静默成功）。GREEN：`test_credential_revoke_sync` 7 例 OK、M2 **205 tests OK**、M1 **86 OK**、runtime **36 OK**。
+  - 残余：这是状态标志而非授权检查，进程内能触达 `_pending` 的代码仍可伪造；外部 Command 不可达（payload 禁 `token_ref`），故可达面限于可信宿主代码。
+- **C2 修复自身引入的回归（已修）**：`_discard` 改为抛 `CREDENTIAL_COMMITTED` 后，若宿主在 mint 与 commit 之间换掉 broker，清理阶段会抛凭证异常并**覆盖**解释失败的 `RuntimeError`，把调用方引向错误方向。修复：清理循环逐 token `except CredentialBrokerError: pass`，`minted.clear()` 仍执行。RED 为 `CredentialBrokerError: CREDENTIAL_COMMITTED` 替代了模拟的 `RuntimeError`；GREEN 为 `test_credential_revoke_sync` 8 例 OK、M2 **206 tests OK**、runtime **36 OK**。
+  - 为何 best-effort 可接受：该 token 无论如何都不可达——它在一个治理侧已不再通信的 Broker 里，且没有为它提交任何 Event，失去回收机会不放宽 Projection 承认的任何权限。
+- **I1（已修）**：`service.execution` 改为 property，setter 重新执行 `_sync_consuming_broker`，构造与后置挂载走同一路径；新增 `test_execution_attached_after_wiring_pins_the_broker` 真正覆盖后置挂载。`execution=None` 时仍跳过消费侧校验（该侧本就不存在），但撤销时两侧同一实例会再校验一次。
+- **I2（已修）**：`_discard_minted_if_orphaned` 先取 `broker = self.credential_broker` 再判空，避免宿主在 request 后置 None 时 `AttributeError` 覆盖原始异常。
+- **minor（判定不改）**：重复撤销仍被接受（两次均 accepted，revision 2→3，产生两条 `credential.revoked`，非幂等）——规范 14.3 未规定该语义，改动会静默改变协议行为；`_child` 的 token 回收**不可达**——`causality.py::continuations` 只产出 `approval.*`、`decision.invalidate`、`task.governance.*`、`intervention.*`，不产出 `credential.request`。
+- **第五轮独立复核（accepted_with_reservations）清理失败路径四项已修**：F1 探针读失败时 token 留 pending 致 C2 保证被击穿 → 读失败保守判 `committed=True`（Projection 是权威，未知时偏向保留）；F2 同段异常覆盖原始 COMMIT 错误 → cleanup 全程不抛；F3 mint/commit 之间换 broker 使旧 token 无人回收 → `minted_tokens` 改存 `(broker, token)`，用签发实例回收；F5 直接 `issue()` 的 token 永不离开 `_pending`（50 次后 pending=50）→ `issue(pending=False)` 默认安全，仅治理侧显式传 `pending=True`。新增测试 `test_cleanup_read_failure_cannot_expose_a_committed_credential`、`test_cleanup_reaches_the_broker_that_minted_the_token`。
+- **F4 判定不改**：撤销副作用在事务内，COMMIT 失败后 `projection_revoked=False broker_revoked=True` 是 **fail-closed**（凭证已不可用，且无 Event 声称撤销发生）。移到 COMMIT 之后反而会变成 fail-open（记录已撤销但 broker 仍放行）。重试可收敛，因 `_revoke_in_broker` 已把 `CREDENTIAL_UNKNOWN` 视为成功。
+- **第七轮独立复核（accepted_with_reservations）三项 findings 已处理**：复核确认第六轮三项改动全部正确——`committed=result.status == "accepted"` 经穷举 mint 后所有抛出点验证（evaluate 抛 / `_batch` 抛 RuntimeError / `_batch` 抛 PolicyViolation 均 discard，accepted 才 confirm），`forced_error` 路径不误判，`_require_reachable_broker` 与 HEAD 内联条件等价，三项新测试经变异测试全部被捕获。
+  - **important-1（已修）**：`_revoke_in_broker` 原在 `_batch` **之前**执行 → 后续阶段拒绝 Command 时 Broker 已撤销、Projection 仍称 `revoked=False`，违反「rejected Command 无副作用」且 Replay 无法重建。修复：移到 `_batch` 返回**之后**（仍在事务内，COMMIT 失败仍 fail-closed）。变异验证：移回旧顺序 → `test_a_rejected_revoke_leaves_the_broker_alone` 报 `CREDENTIAL_REVOKED` 失败。
+  - **important-2（已修）**：同 target 第二次 `credential.request` 原本 accepted → 新 ref 覆盖旧 ref，首个 token 存活至过期且无记录可撤（探针 `creds=2 refs=2`）。修复：`credentials.issue` 在 `credential:<target>` 已存在时抛 `REVISION_CONFLICT`，与其他 aggregate 的 `_new()` 守卫一致。
+  - **minor-1（已修）**：cleanup 只 catch `CredentialBrokerError`，owner 非 broker 的 `AttributeError`、`_confirm` 抛 `RuntimeError` 仍会逃逸并替换原始异常 → 改为 `except Exception`，与「cleanup 全程不抛」名副其实。
+- **区分两类「副作用残留」**：F4 是 COMMIT 失败（崩溃路径），fail-closed 可接受，判定不改；important-1 是 **rejected（业务拒绝路径）**，必须无副作用，必须改。判断依据是 Command 的最终状态，不是异常本身。
+- **自查发现的自伤回归（2026-10-24）**：important-2 首版守卫写成「`credential:<target>` 已存在即拒绝」，把合法轮换一起挡掉。探针实测：撤销后重新申请 `A3 rejected REVISION_CONFLICT`、过期后 `B2 rejected REVISION_CONFLICT`。规范 14.3 只约束 scope 与时效，**从未禁止同一 target 重新申请**。正确语义是只拦「旧 token 仍有效」的覆盖：`existing is not None and not existing.get("revoked") and at < existing.get("expires_at_ms", 0)`。教训：**新增拒绝分支时，必须同时验证「该拒的拒了」与「不该拒的没被拒」**——只测前者会造出过度收紧的假修复。变异验证：恢复过宽守卫 → 两个轮换测试均报 `('rejected','REVISION_CONFLICT') != ('accepted', None)`。
+- **第八轮 critical：credential 聚合从未校验 revision（2026-10-31 修复）**：`issue()` 硬编码 `revision: 1` / `revised: False`，`revoke()` 却 `previous["revision"] + 1`；撤销一次后轮换使 revision 从 2 退回 1，过期 `expected_revision` 被接受、已撤销事实被覆盖。修 `revision = (existing revision) + 1`、`revised = existing is not None`。更深一层：`credentials.py` **从未调用 `policy.revision()`**，乐观并发对 credential 一直失效——轮换把 revision 压回 1 恰好让两者巧合相等，把缺陷藏住了。修复：`issue()`/`revoke()` 均调用 `revision(command, existing/previous)`。连带：3 个单元级 revoke 测试用 `expected_revision=0` 撤 revision 1 的记录，守卫正确拒绝，**是夹具错误不是产品缺陷**，给 `_command()` 加 `revision` 参数修正。
+- **教训：测试夹具可能一直在撒谎（2026-10-31）**：上述 3 个测试长期通过，只是因为产品从未校验 revision。**一个从未被强制的约束，其测试的通过不构成任何证据**。补上校验后暴露的失败，应先判断是产品过严还是夹具失真，不能反过来削弱产品去迁就夹具。
+- **第九轮 important：错误码必须区分「语义拒绝」与「并发冲突」**：轮换守卫与 revision 校验原共用 `REVISION_CONFLICT`，调用方无法判断该「重读后重试」还是「等撤销/过期」。守卫改抛 `CREDENTIAL_STILL_LIVE`（沿用 Broker 的 `CREDENTIAL_*` 家族命名）。判断依据：**调用方的正确处理动作不同，错误码就不能相同**。
+- **`tests/m2/test_credential_scope_coverage.py` 状态存疑（2026-10-31）**：本会话早期创建并被修改过，现在工作区已不存在且从未被 git 跟踪。不影响已验证的全量回归（833 tests OK 时它已缺失），但它不在任何证据中，也未恢复（非本 Agent 的产物，遵循「不清理他人工作」）。
+- **第十轮 accepted_with_reservations（2026-10-31）**：第九轮 `CREDENTIAL_STILL_LIVE` 修复经探针实跑确认——活凭证二次请求得 `CREDENTIAL_STILL_LIVE`，stale/ahead revision 均得 `REVISION_CONFLICT`，两码在最终 `CommandResult` 上可区分，`service.py:223/369/396` 的 `raise PolicyViolation(result.error_code)` 不吞码。全仓无错误码枚举注册表（`PolicyViolation` 接受任意 str），无调用方按 `REVISION_CONFLICT` 匹配 credential 命令。
+- **教训：证据里的历史快照不能改，只能加指向（2026-10-31）**：round_eight 节写「守卫抛 REVISION_CONFLICT」已与代码不符，但它的 `red_evidence` 记录的正是当时的 RED。**改掉正文会让一条真实的失败记录描述从未发生的事**，破坏证据存在的意义。正确做法是加 `superseded_by` 字段指向新码，原文一字不动。
+- **教训：改 JSON 证据后必须立刻校验（2026-10-31）**：本轮我两次在同一类位置（数组末项后）留下尾逗号，两次都被 `python -m json.tool` 拦下。**追加数组/对象时，最后一项后面不带逗号**——尤其是从其它段落复制模板时最容易带过来。
+- **教训：变异必须打在被观察的那一侧（2026-10-31）**：重建 `test_credential_scope_coverage.py` 后我先做变异验证判别力，第一刀把幻影权限加进 `SCOPE_WHITELIST`，测试**照样通过**。原因是测试自己签发它自己展示的权限，白名单里多一条没人签发的条目对它不可见——**我把变异打错了侧，于是又得到一次假的 GREEN**。改打在正确位置（短路 `assert_permission` 的 scope 检查；签发时丢弃 granted scope）后，两个测试立刻失败。教训：**「测试通过」不能证明测试有效，只有「改坏产品后测试失败」才能**；变异打错位置时，通过反而是危险信号而不是安慰。
+- **教训：`__pycache__` 是丢失源码的考古线索（2026-10-31）**：`test_credential_scope_coverage.py` 源文件已从工作区消失且从未入 git，但 `tests/m2/__pycache__/test_credential_scope_coverage.cpython-314.pyc` 仍在。用 `marshal.loads(data[16:])` 读出 `co_names` 与 `co_consts` 里的 docstring，还原了该测试的**真实意图**（凭证必须能被真实 Action 消费，spec 14.3 / INV-012）——否则我会凭猜测重写一个没有判别力的替代品。`.pyc` 只是线索，**不能用它充当源码证据**。
+- **凭证范围覆盖缺口（已补，2026-10-31）**：`SCOPE_WHITELIST` 含 `github.repo.read` / `github.repo.write` / `browser.read_only`，但端到端测试此前只跑过 `github.repo.read`，无人验证其余条目可被消费，也无人验证消费侧拒绝未授予权限。补两个测试后 `tests/m2` 216 → **218**，全量 833 → **835**。
+  - **important-1 双故障孤儿**：F1 的 `committed=True` 兜底在「COMMIT 失败 **且** `read_events` 也故障」时会 `_confirm` 一个从未落库的 token → 可用孤儿、无 Projection 记录、无人可撤销、存活至 TTL。**根因是 cleanup 试图用读事件流来「发现」结果**。修复：`_discard_minted_if_orphaned(command, context, *, committed)` 由调用点陈述意图——`handle()` 异常分支传 `committed=False`（COMMIT 失败本身即孤儿证明），成功分支传 `committed=result.status == "accepted"`。**整个 `read_events` 探针及其 `except Exception` 兜底被删除**，F1/F2 的故障面随之消失。
+  - **important-2 issue/revoke 不对称**：`revoke` 校验消费侧同一实例，`issue` 不校验 → 宿主改 `runtime.credential_broker` 后 `credential.request` 返回 accepted 而调用边界答 `CREDENTIAL_UNKNOWN`（谎报成功）。修复：抽出 `_require_reachable_broker()`（broker 非 None + 消费侧同一实例），两个方向共用，不会再漂移。
+  - **minor-1**：解包加 `isinstance/len` 保护，未知形状跳过而非抛 `ValueError`。**minor-2**：测试改用生产同形的 `(broker, token)` 二元组。
+  - **自查教训**：新 RED 首版恒真通过——`handle()` 在 mint **之前**就读事件流，前置 patch `read_events` 会让 mint 根本不发生。改为用 `_evaluate` 钩子在 token 存在后才激活读故障，断言才真正生效。**测试意外通过时必须查清原因，不能接受假 GREEN**。
+  - 验证：`test_credential_revoke_sync` 11 例、`test_credential_broker_wiring` 9 例、M2 **210**、M1 **86**、runtime **36** 全 OK。
+- **确认未复活**：P50 撤销后 dispatch `CREDENTIAL_REVOKED`；P52 非归属 agent `PERMISSION_DENIED` 且 `revoked=False`、dispatch 仍可执行；P13/P23 换绑消费侧 → `CREDENTIAL_UNAVAILABLE`（变异确认测试为真）。
+- **未验证**：全量 `discover -s tests -t .` 超时未完成。
+
+## 第十二轮：M4-03 peer-delivery 缺口的探针与新增真实执行准入测试（2026-11-02）
+
+- **决策由用户做出**：给 TEST-028 接执行层会让 `elements_digest` 与 `suite_digest` 漂移，需重冻 conformance 并重审 M4-02 已独立 accepted 的 `done`。两条路的代价不对称，因此用 `ask` 交由用户选择，用户选「另写新测试，不动 TEST-028」。
+- **TEST-028 的 `simulation-only` 是诚实的**：`rg -c ExecutionService conformance/m3/test_028.py` → **0**。协商/Team·Blueprint 提案/验收三段都用真实对象，但「交付」只是 planning 与 acceptance 事件，从未派发 Action。这是它自身范围的真实陈述，不是缺陷，故未改。
+- **探针又骗了一次**：首个探针报告「a-2 能 claim a-1 已持有的任务」，结论是错的——它从未检查 `result.status`。重测：`rejected TASK_NOT_ASSIGNABLE`，owner 仍是 a-1（守卫在 `src/aetp/runtime/service.py:309-310`）。**探针必须检查它正在探测的那个返回值本身**。
+- **RED 的原因在测试侧**：两个拒绝用例失败于 `Lists differ ... First extra element 12: command.received`。`command.received`/`command.rejected` 是**设计上的审计事件**（属于 `Projection._AUDIT_TYPES`，M0 conformance 还断言 `command.received` 出现在 committed batch 中）。已改为只比较领域事件，并额外断言新增事件只能是审计。
+- **不依赖私有常量**：测试初版 `from aetp.core.projection import _AUDIT_TYPES`，已改为在测试内自述契约 `AUDIT_TYPES = {"command.received", "command.rejected"}`，避免私有范围变动时测试静默跟随。
+- 新增 `tests/runtime/test_peer_delivery_real_execution.py`（4 例）：peer 不能接管已 claim 的任务；被拒 claim 不产生领域事件且 Projection 不变；owner 会话下 claim→start→tool.request→dispatch 真到 `completed`；无会话的 tool.request 在任何 Action 之前被拒。
+- 变异确认：短路 `service.py:309` 的 claim 守卫 → 2 例失败 `ModelValidationError: Task is not claimable`；已从备份还原并复跑 4 OK，源码无变异残留。
+- 验证：新测试 4 OK；`test_peer_delivery_real_execution`+`test_credential_ingestion`+`test_mcp_action_integration` **26 OK**；`discover -s tests/m1 -t .` **86 OK**；收尾三件套 OK（conformance 28/28、M4 blocked 1/3、preparation 27 OK）；`git diff --check` 干净。
+- **范围诚实**：这只回答了「交付路径是否真被执行准入约束」；TEST-028 仍未 end-to-end，跨进程自主 peer delivery 仍无 `aetp.collaboration.delivery` 模块。**M4-03 仍是 blocked**，conformance 定义、冻结证据、status.json 均未动。
+
+## 第十三轮：§13.9 容器级隔离缺口调研（2026-11-02）
+
+- **结论：这条缺口代码补不了，但它的诚实声明此前无人守。** §13.9（`Docs/AETP-设计方案.md:2722`）规定的是**防绕过**——「若能通过原始 Shell、直连 API、共享凭证或访问受保护仓库绕过代理，就不能宣称该控制有效」；`:2745` 进一步说明 worktree 不能证明他人无法读相邻目录，因此只能声明 `working_copy`。规范禁止超额声明，并未要求本仓库自带容器运行时。
+- **代码是守信的**：`src/aetp/runtime/sandbox.py:85-97` 自述 `mode=mediated`、`credential_isolation=False`、`workspace_isolation="working_copy"`。活体探针实测：`adapter_id=aetp-local-sandbox`、`network_egress=disabled`。backlog 说它「未实现」属实，是**环境能力缺口而非缺陷**。
+- **但发现了真实测试缺口**：`rg` 全 `tests/` 显示能力断言只覆盖抽象 `RuntimeCapability`（`test_adapters.py`），**从未覆盖 `SandboxRuntimeAdapter` 自己的 enforcement 记录**。该 adapter 与 §13.9 唯一的契约——它对自身的声明——完全没有测试，静默升级成 `workspace_isolation="os_sandbox"` 能通过整套测试。
+- 新增 `tests/runtime/test_sandbox.py` 两例：`test_declared_capability_does_not_claim_isolation_it_cannot_prove`（三项声明值）、`test_an_adapter_that_upgrades_its_isolation_claim_must_say_so_here`（`adapter_id`、`mode`、高风险资格；标明将来真有边界时该改哪一处，使升级无法悄悄发生）。
+- 变异确认：把 `sandbox.py:97` 改成 `workspace_isolation="os_sandbox"`（而背后并无该边界）→ 1 failure；从备份还原，`rg` 确认回到 `working_copy`，12 例 OK。
+- 验证：`test_sandbox` **12 OK**（原 10）；`test_sandbox`+`test_peer_delivery_real_execution`+`test_credential_ingestion` **24 OK**；收尾三件套 OK（conformance 28/28、M4 blocked 1/3、preparation 27 OK）；证据 JSON OK；`git diff --check` 干净。
+- **范围诚实**：这只防止「诚实声明被悄悄换成不诚实声明」，**没有也无法关闭 §13.9 缺口**——缺的是 OS/容器边界，测试变不出来。**M4-03 仍 blocked**。
+
+## 第十四轮：独立复核两批新测试（2026-11-03）
+
+- **复核结论 `accepted_with_reservations`，无 critical**，3 条 important 全部成立并已修：
+  1. `test_a_tool_request_outside_a_session_is_refused_before_any_action` 只断言 `status=="rejected"`，不锁理由。已加 `assertEqual(result.error_code, "SESSION_INVALID")`。
+  2. 模块自述 `AUDIT_TYPES` 与 `Projection._AUDIT_TYPES` 无绑定，生产侧扩容审计集合会被静默放过。新增 `test_the_local_audit_range_matches_production` 在 `TestCase` 内比对两集合。
+  3. 原断言 `state.get(f"action:{result.event_ids[0]}") if event_ids else None` 退化为「查一个不存在的 key」，且空列表会 `IndexError`。改为 `assertFalse([k for k in state if k.startswith("action:")])`。
+- **自查又抓到一个自伤 bug**：important-2 的第一版写成**模块级** `def test_audit_types_match_production()`——`unittest` 只收集 `TestCase` 方法，它**永远不会运行**，套件仍报 `4 OK`。移进 `TestCase` 后计数 4→5，缺口才暴露。**「加了测试」不等于「测试在跑」，要核对计数变化**。
+- **变异启示**：先把 `TASK_NOT_EXECUTING`(247) 改成 `SESSION_INVALID` → 测试仍 OK。**不是测试失效**：该用例在 `service.py:143` 的会话缺失检查处就先被拒，根本走不到 247/258。改打真正命中的 143 → `FAILED (failures=2)`。**变异必须打在被观察的那条路径上**，与第九轮「变异必须打在被观察的那一侧」是同一教训的更深一层。
+- 变异均已还原：`rg` 确认 `projection.py:54` 为原始两元素集合、`service.py` 无 `SESSION_REQUIRED_VARIANT`/`or True` 残留、143/247/258 三处拒绝码复原。
+- 验证：`test_peer_delivery_real_execution` **5 OK**（原 4）；与 `test_sandbox` 合并 **17 OK**；收尾三件套 OK（conformance 28/28、M4 blocked 1/3、preparation 27 OK）；证据 JSON OK；`git diff --check` 干净。
+- 复核人另确认：sandbox 两例**不冗余**（三处变异各有独立检出者）；`conformance/`、`artifacts/`、`status.json` 无已跟踪文件改动。
+- **仍未 `done`**：这两批测试由执行者自修，需执行者以外的签核。
+
+## 第十五轮：全量回归静默跳过 114 个测试（2026-11-03）——本会话最重要的发现
+
+- **问题**：项目一直当作「全量回归」的 `python -m unittest discover -s tests -t .` **从不执行 114 个测试**。它只递归进**可导入的包目录**；`tests/runtime`、`tests/bootstrap`、`tests/conformance`、`tests/fault_injection`、`tests/preparation` 没有 `__init__.py`，于被**静默跳过**——无警告、无报错，跑完仍然显示 `OK`。
+- **发现方式**：枚举已收集测试 id 的探针给出 `TOTAL COLLECTED: 835` 且 `runtime/* collected: 0`；而 `m0(156)+m1(86)+m2(218)+m3(375)=835` 恰好吻合，说明此前证据里的 835 **从来不是全量**。
+- **被跳过的量**：runtime 56、preparation 27、fault_injection 15、bootstrap 9、conformance 7，**合计 114**。
+- **为何比数量更严重**：静默跳过的集合包含**整条 runtime 边界套件**（adapters、mcp、mcp_action_integration、sandbox、credential_ingestion），正是本项目纪律所依赖的执行边界；而上一轮、上上轮新增的两个测试文件也在这个被跳过的集合里，**「全量回归」从未执行过它们**。一个报 `OK` 却漏掉 12% 的套件比一个失败的套件更危险——它把「未运行」变成了「看似证据」。
+- **修复**：给五个目录补 `__init__.py`（与已是包的 `tests/m0..m3` 一致），每个文件带 docstring 说明存在理由，避免被当作噪音删除。
+- **验证**：`discover -s tests -t .` → **Ran 949 tests OK（493.3s）**，收集数 835 → **949（+114）**；`discover -s tests/preparation` 仍 **27 OK**（AGENTS.md 规定的命令未坏）；`discover -s tests/runtime` **56 OK**；`devprep.py check` OK。
+- **证据更正**：此前证据中「Full suite → 835 OK」「833 OK」的运行是真实的，但被读成覆盖整个套件；那几句**按原样保留**（它们是真实运行记录），更正的是读法而非运行。独立证据见 `Docs/development/evidence/2026-11-03-full-suite-silent-test-skip.json`。
+- **未覆盖**：仓库其他命令是否有同类陷阱未审计（`.tmp/check_evidence_paths.py`、`tools/devprep.py`、conformance runner 未再查静默跳过行为）。
+- **教训**：数字对不上就必须查（835 与新增测试数矛盾是唯一线索）；**命令报 `OK` 不等于它跑全了**。
+
+## 第十五轮补充：同类缺陷的第二处——conformance `all_passed` 静默放行（2026-11-03）
+
+- **来源**：独立复核（`accepted_with_reservations`）被要求「审计 discover 缺陷是否在别处也存在」，用探针注入一个没有 handler 的 definition，观测到 `not_run:1, status_pending:1, all_passed:True, CLI 还会 exit 0`。
+- **位置**：`conformance/runner.py:189`，原为 `"all_passed": (counts["executed_failed"] == 0)`；CLI `main()` 也只按 `executed_failed > 0` 决定退出码。
+- **性质**：与 discover 静默跳过**同构**——**未执行**的测试仍产出「通过」外观。注意区分：把未注册 fixture 记为 `not_run`/`pending` 是**有意设计**（有注释、有测试 `test_run_conformance_records_unregistered_tests_as_not_run` 固定），危险在于**汇总与退出码语义没跟着收紧**。
+- **修复**：`all_passed = (executed_failed == 0 and not_run == 0)`；pending 表示法不动，只收紧汇总与退出语义。
+- **TDD**：先写 RED `test_a_test_that_never_ran_is_not_reported_as_all_passed` → `AssertionError: True is not false`（9 tests, failures=1）；修复后 **9 tests OK**。
+- **不误伤**：正式跑 `python -m conformance.runner --summary` → **28 passed, 0 failed, 0 not run**,exit=0（真实套件本就没有未跑的，收紧规则不改变它报的结论）。
+- **冻结证据零漂移**：重算后与 `artifacts/conformance-frozen-evidence.json` 比对——`suite_digest` 双方同为 `sha256:69acdab6…7310`，28 条 entries，`elements_digest` 漂移 **0**。**M4-02 的 `done` 不受影响。**
+- **补覆盖守卫**：`test_every_defined_test_has_a_registered_fixture` —— 断言每个 definition 都有 handler，这正是「一个 pending 测试能长期待在套件里不被察觉」的根因条件。今天通过（28 defined = 28 handlers），将来若有人只加 definition 不接 fixture，它会失败。
+- **教训（与上一条同源）**：**「未运行」必须在汇总与退出码上表现为失败，否则它就是伪装成证据的空白。** 检查一个「全绿」结论时，要同时问：到底跑了多少个？有多少个没跑？
+- **`not_addressed` 已更新**：conformance runner、`tools/devprep.py`、`.tmp/check_evidence_paths.py` 均已查（后两者用固定路径元组、不枚举测试，无此失效模式）；未穷举的是仓库历史的每条 shell 命令。
+
+## 第十五轮再补充：修复不完整——只改了汇总没改退出码（2026-11-03）
+
+- **我自己的失误**：复核 important-1 的要求是「`not_run>0` 时 `all_passed=False` **或** exit≠0」。我第一遍只把 `all_passed` 收紧为 `(executed_failed == 0 and not_run == 0)`，**`main()` 的退出码仍只看 `executed_failed`**。等于只修了危险的一半。
+- **为什么这是危险的一半**：脚本/CI 读的是**退出码**，不是 JSON 里的字段。汇总说「没通过」而退出码说「成功」，包装命令仍会把空跑读成绿色。
+- **补全**：`conformance/runner.py` `main()` → `if counts["executed_failed"] > 0 or counts["not_run"] > 0: return 1`。
+- **TDD**：RED `test_cli_exits_nonzero_when_a_test_never_ran` → `AssertionError: 0 == 0`，且输出行明确写着 `1 not run` 却退出 0（这就是缺陷的直观形态）；修复后 **10 tests OK**。
+- **不误伤**：正式跑仍 **28 passed, 0 failed, 0 not run**，exit 0。
+- **冻结证据零漂移（修正后的核对）**：`entries` 28 vs 28，`elements_digest` 漂移 0，`suite_digest` 同为 `sha256:69acdab6…7310`。
+- **本轮我自己的近失误，值得记牢**：核对零漂移的探针先写成读 `elements` 键，而该文件根本没有这个键——于是它报 `entries: 0 0`、`drift: 0`。**从两个不存在的集合算出来的 0，和"已验证的 0"长得一模一样。** 发现后改用真实键 `entries` 重算才下结论。
+- **教训**：(1) 「汇总字段」与「退出码」是两条独立通道，修语义不excuse只修一条；(2) **比较之前先确认你比较的东西真的存在**——空集合的相等是最容易被误读的"零漂移"。
+
+## 第十五轮第三段：复核又揪出两处同类漏网（2026-11-03）
+
+上一段修 `all_passed`/退出码后，独立复核（`accepted_with_reservations`）又找到两处**同类残留**，都在 `conformance/runner.py`：
+
+1. **`--filter` 指向不存在的 ID → 静默全绿**：`--filter TEST-999-DOES-NOT-EXIST` → `Total: 0, all_passed=True, exit 0`。CI 里拼错一个 ID，跑零个测试，照样报成功。
+2. **`execution_status` 无枚举约束 → 结果在计数中隐身**：fixture 返回 `execution_status="skipped"` → `total=1`，但 `executed_passed/executed_failed/not_run` **全为 0**，`all_passed=True`。因为 `counts` 是靠**精确字符串匹配**推导的，集合外的任何值都会让该结果从三个计数器里消失，而 `total` 仍然把它算进去。
+
+**修复**：
+- `all_passed` 追加两个条件：`total > 0` 且 `accounted == total`（三个执行计数器之和必须等于总数）
+- 产品侧**拒绝**枚举外的 `execution_status`，记为 failed 并把非法值放进 `details["unaccounted_execution_status"]`——不让它从缝里漏过去
+- `main()` 退出码追加 `or counts["total"] == 0`
+
+**TDD**：RED `failures=2`，其中第二条的断言消息直接暴露缺陷形态：`0 != 1 ... got {'total': 1, 'executed_passed': 0, 'executed_failed': 0, 'not_run': 0}`；修复后 **12 tests OK**。
+
+**退出码三场景实测**：全量 28/28 → `0`；`--filter TEST-001` → `0`；`--filter TEST-999-NOPE` → **`1`**（修复前是 0）。
+
+**零漂移再确认**：`suite_digest` 相等、`entries` 28/28、`elements_digest` drift 0、`counts` 相等。
+
+**复核给的一条有价值的纠正**：`snapshot_digest` **不能跨运行复现**——它把 `database` 路径和 wall-clock 的 `duration_ms` 算进了哈希，28 条里 27 条不同。所以它**不是**漂移检测器，别拿它做变更检测；能用来比对的只有 `suite_digest` 与 `elements_digest`。
+
+**教训**：修「未执行却看似通过」这类缺陷，不要只堵被指出的那一个入口。**同构的旁路会在同一文件里排着队**——空选择集、自由字符串字段、自由文本枚举，每一个都是同一句话的变体：*没落进计数器的东西，不该被当成通过*。
+
+## 第十五轮第四段：第三处同类缺陷 + 我自己制造的重复收集（2026-11-03）
+
+**第三处缺陷**（复核 minor，但与本轮同族，故修）：`tests/fault_injection/runner.py:58` 用 `result.wasSuccessful()` 作 `all_passed`，而 **unittest 的 `wasSuccessful()` 对 skipped 返回 True**，且报告里**根本没有 skipped 字段**。一个从未运行的故障类会安坐在 `all_passed=True` 的报告里，却不在这份报告的任何一个数字中出现。当前 `tests/fault_injection` 无任何 `@skip`/`skipIf`/`skipUnless`（grep 零命中），所以是**潜伏**而非已发作。
+- 修复：报告新增 `"skipped": len(result.skipped)`，`all_passed` 改为 `result.wasSuccessful() and not result.skipped`。
+- TDD：RED `KeyError: 'skipped'` → GREEN `Ran 1 test OK`。
+
+**我自己犯的错（更值得记）**：新测试 `tests/fault_injection/test_runner_report.py` 第一版在**模块顶层** `from tests.fault_injection.test_batch1 import FaultInjectionBatch1Tests`（为了给该类挂一个 skip 方法）。但 **unittest 的 discover 会收集模块命名空间里出现的每一个 `TestCase` 子类**，于是整个 batch1 被**二次收集**：套件从 954 → **963**，其中 **8 个是重复 test id**，而全量运行**照样报 OK**。
+- 发现方式：**数字对不上**。我只加了 1 个测试方法，+9 不可能。探针枚举全部 id → `TOTAL: 963, DUPLICATES: 8`，8 条全是 `FaultInjectionBatch1Tests.*`。
+- 修复：把 import 移进测试方法内部，并在注释里写明**为什么必须留在里面**。
+- 修复后：探针 `TOTAL: 955, DUPLICATES: 0`；全量 `Ran 955 tests OK`，**探针与实跑完全一致**。
+
+**本轮的元教训（三处缺陷共享同一形态）**：
+> 未发生的工作，被报告成已通过的工作。
+
+三种伪装：discover 跳过五个目录、未跑的 conformance 测试不否决 `all_passed`、重复收集把计数虚增却仍报 OK。**三次都是"数字对不上"才发现，没有一次是失败报出来的。**
+
+**由此得到两条可复用检查**：
+1. 任何"全绿"结论，必须同时给出**跑了多少个**，并与**独立枚举的 id 数**比对（`DUPLICATES` 与 `TOTAL` 两个数一起看）。
+2. 测试文件里**顶层 import 别的 TestCase 类 = 二次收集**。需要引用别的测试类时，import 必须放进方法内。
+
+## 第十五轮第五段：第四批同类漏网 + 双轴收口（2026-11-03）
+
+第三轮独立复核（`accepted_with_reservations`）**又**找出三处同族缺陷，都有实测复现：
+
+1. **`status` 也是自由字符串**（`conformance/runner.py`）：`status='not_applicable'`（**docstring 自己列出的合法值**）时 `status_passed+status_pending+status_failed = 0`，而 `total=1`，`all_passed=True`。
+2. **缺 `execution_status` 键默认成 `passed`**：fixture 返回 `status='failed'` 但省略 `execution_status`，被记为**通过**。`dict.get(key, "passed")` —— **缺键即成功是危险默认**。
+3. **fault_injection 计数未比总数**：删掉一个测试 → `tests_run=14` vs `total_fault_classes=15`，仍 `all_passed=true`、exit 0。**只修 skipped 不够**，"故障类不存在/被删"是另一半。
+
+**修复（这次做结构性收口，停止打地鼠）**：
+- 新增模块级常量 `EXECUTION_STATUSES`、`RESULT_STATUSES`，**两个自由字符串字段在唯一入口处一起校验**
+- `status_accounted == total` 纳入 `all_passed`（把无独立计数器的 `not_applicable` 显式求和）
+- 缺键/枚举外值 → 记为 failed，原因进 `details["unaccounted_result_fields"]`
+- `fault_injection`: `all_passed` 追加 `result.testsRun == len(FAULT_DEFINITIONS)`
+
+**TDD**：RED `failures=2`（`'passed' == 'passed'` 与 `True is not false`）→ GREEN `14 tests OK`；fault_injection `2 tests OK`。
+
+**零漂移仍成立**：`suite_digest` 相等、`entries` 28/28 且 id 集合相等、`elements_digest` drift 0、`counts` 相等（28/28 passed）。正式套件仍 28 passed / 0 not run / exit 0。
+
+**计数演进（每步都有测试解释）**：835（四目录，误读为全量）→ 949（修 discover）→ 951（前两条守卫）→ 952（CLI 退出码）→ 954（filter/枚举守卫）→ 955（fault_injection skip，去掉 8 个重复收集）→ **958**（status 双轴 + 故障类计数）。探针 `TOTAL: 958 / DUPLICATES: 0`，与全量 `Ran 958` **完全一致**。
+
+**本轮最能复用的一句话**：
+> 自由字符串字段 + 精确匹配计数 = 必然存在"落不进任何计数器"的取值。
+
+只要看到「计数靠 `== "某个字符串"` 推导」，就要问：**枚举外的值去哪了？键缺失时默认值是什么？计数器之和等于总数吗？** 这三个问题本轮各抓出一处真实缺陷。
+
+## 第十五轮第六段：第四轮复核的两条 important（2026-11-03/04）
+
+第四轮独立复核（`accepted_with_reservations`）又抓出两处同族缺口，都已修：
+
+1. **`--filter` 部分不匹配被静默丢弃**：`--filter TEST-001,TEST-999-BOGUS` 只跑认得的 1 个、报绿、exit 0。**这与 discover 跳过目录是同一形态——"悄悄少跑了你要的"**。原有测试只覆盖"全不匹配"。修复：`unmatched_filter_ids` 纳入 `all_passed` 并打印到 stderr；现在 `MIX_exit=1`。
+2. **`main()` 的退出码是 `all_passed` 的二次实现**：两份同样的判断，复核构造了宽一格的枚举就令二者分歧（`all_passed=False` 而 `main()` 返回 0）。修复：`main()` 直接消费 `report["all_passed"]`。**一个判断只能有一份实现。**
+
+TDD：RED `failures=2`（两条都 `0 == 0`）→ GREEN `16 tests OK`。
+
+**退出码四场景实测**：全量 28/28 → 0；`--filter TEST-001` → 0；未定义 ID → 1；**部分不匹配 → 1**（同时仍跑完认得的那 1 个）。
+
+**计数演进**：835 → 949 → 951 → 952 → 954 → 955 → 958 → **960**。探针 `TOTAL: 960 / DUPLICATES: 0` 与全量 `Ran 960` 一致。
+
+### 本轮第五条可复用判据
+> **同一个判断被写了两遍，就一定会分歧。**
+
+前三轮抓的是"字段是自由字符串"、"缺键默认成功"、"计数靠精确匹配"；这一轮是"判据重复实现"。检查清单再加一条：**任何 `exit code` / `all_passed` / `is_ok` 这类结论，只允许有一个计算点，其余全部消费它。**
+
+### 复核未验证项（如实记录，不要当成已验证）
+- 全量 `discover -s tests -t .` 复核方未跑（超 2 分钟上限），以 958/0 收集探针替代；我自己跑了，**960 OK**。
+- `conformance/m0/runner.py` 与 `src/aetp/quality/evidence.py` 的同类汇总仅静态阅读，**未做变异证伪**。
+- minor 保留未改：`fixture_kind` 无校验且不进 `suite_digest`；fault_injection 只比 `testsRun` 数量不比身份。
+
+## 2026-11-04 第五轮复核闭环 + 同形缺口定性
+
+**`status` 与 `execution_status` 必须都进 `all_passed`**:fixture 可返回 `status="failed"` 而 `execution_status="passed"`,前者进 `status_failed`、后者不进 `executed_failed`,于是 `all_passed` 仍为真。收紧后正式套件仍 28 passed / exit 0,未扰动冻结口径。
+
+**「涵洞的位置」要先查证再修**:复核建议把 Broker revoke 移出写事务。查证的结论相反——事务内撤销是已复核过的 F4 有意 fail-closed;移到 COMMIT 之后会让撤销失败变成「记录已撤销 + Broker 仍放行」,那才是 fail-open。**方向不改,把该发现固化成回归测试。**
+
+**复核的措辞也要实测**:复核称 owner mismatch 是 fail-open,探针显示 Command 被拒、两边都未改,方向是 fail-closed;真正的缺陷是**错误码语义**——透传 Broker 的 `PERMISSION_DENIED` 会把内部不一致归咎于调用者。改为 `CREDENTIAL_UNAVAILABLE`。
+
+**变异证伪是区分「真缺口」与「冗余防御」的唯一办法**(本轮新立判据):
+> **摘掉一条判定却不红,不等于没有覆盖——要再摘另一条。两次都不红,才是冗余防御。**
+
+- `src/aetp/quality/evidence.py:58` 摘 `review["status"]=="approved"` → 红 ⇒ **真缺口**,已加测试钉住。
+- `conformance/m0/runner.py:464` 摘 `not result.skipped` → 绿;再摘 `case.complete` → 也绿 ⇒ **互为兜底**,不是缺口。
+
+**我自己写错过一次 docstring**:先断言 m0 那处「unguarded」,变异实测推翻,已改成「pins the outcome, not either guard;reddens only if both are lost at once」。**变异结论进注释前必须真的跑过。**
+
+**计数**:960 → **964**(conformance 1 + m2 1 + m3 1 + m0 1),全量 `Ran 964 tests OK / exit=0`;零漂移复核:`suite_digest` equal、entries 28/28、drift 0、counts equal。三件套:phase=preparation、0%、28/28、M4 blocked (1/3)、nodes=101 edges=144、items=23、acyclic=yes。
+
+**仍未独立签核**:本轮的错误码修复、两条新守卫、docstring 更正。全部留在 `review`,未提交。
+
+## 2026-11-05 fixture_kind 闭集强制 + 两处陈旧台账更正
+
+**声明型字段是第三类缺口**:前几轮抓的是「自由字符串枚举」(`status`/`execution_status`)与「缺键默认成功」。这一轮是**纯声明字段**——`fixture_kind` 注释写明只有 `real_path` / `boundary_assertion` 两个合法值,runner 却从不校验,还把它原样 republish 进 frozen snapshot。对读快照的人,这是唯一的证据强度信号。乱值 = 宣称一个从未建立的强度。
+
+**为什么它比前两类更隐蔽**:该字段**不进任何 digest**。`suite_digest` 由 `elements_digest` 构成,`elements` 只含 `FROZEN_ELEMENT_KEYS` 六项 —— 所以它同时逃出了「校验」和「摘要约束」。检查清单加一条:**凡被输出给外部判读的字段,要么有闭集校验,要么进 digest,不能两头都不占。**
+
+**同族边界要探清再动手**:`domain`(7 值)、`invariant`(26 值)、`section`(20 值)都是自由描述标签,无闭集注释、不宣称强度,不属于本类 —— **只有 `fixture_kind` 收紧**。不要顺手扩大范围。
+
+**修复只在校验「实际执行」的分支**:无 handler 的 definition 不产出证据,没有强度可谎报;在那里校验会用错理由拒绝 scope 注册。
+
+**变异证伪**:`if defn.fixture_kind not in FIXTURE_KINDS:` → `if False:` ⇒ CAUGHT(exit 1,唯一红点正是新测试,`'passed' != 'failed'`),文件精确恢复。**真缺口,守卫有牙**。(对比上轮 m0 那两处是冗余防御。)
+
+**新判据(第六条)**:
+> **数字对不上就必须查到底,不能摊平。跨轮 delta 尤其要看时间戳,而不是相信台账。**
+
+本轮 964 → 966 而只加了 1 个测试。查出两处陈旧台账:
+- 上轮证据称 964 **已含** m0 的守卫测试 —— 但 `full_r22.txt` 写于 **23:21:04**,`tests/m0/test_conformance_subset.py` 写于 **23:22:11**,**晚 67 秒**。那次跑根本没带上它。
+- 更早的 `949 = 835 + 114` 分解两侧都过期:当时记 fault_injection 15 / conformance 7,现测 **17 / 18**。
+
+**当前实测分解**:m0 157 + m1 86 + m2 220 + m3 376 = **839**;runtime 56 + preparation 27 + fault_injection 17 + bootstrap 9 + conformance 18 = **127**;合计 **966**。三重自洽:全量 `Ran 966`、收集探针 `TOTAL 966 / DUPLICATES 0`、逐文件 `def test_` 求和 966。
+
+**零漂移**:`suite_digest` equal、entries 28/28、drift 0、counts equal、`fixture_kind` 分布不变(24 `real_path` + 4 `boundary_assertion`)。三件套:phase=preparation、0%、28/28、M4 blocked (1/3)。
+
+**仍未独立签核**:`FIXTURE_KINDS` 常量、runner 守卫、新测试。全部留在 `review`,未提交。
+
+## 2026-11-05 §18.2 判据由「声明」改为「推导」
+
+**第四类缺口:整份报告声称的验收判据,本次运行根本没有测量。**
+
+`tests/fault_injection/runner.py` 把 §18.2 的四条验收判据写成**四个字面量 `True`**(`criteria_verification`)。而 `Docs/AETP-设计方案.md` §18.2 明确规定判据就是这四条,且产物 `artifacts/fault-injection-report.json` 在 `MEMORY.md` 与 `Docs/superpowers/plans/2026-09-17-fault-injection-plan.md` 里**被当作验收证据引用**。
+
+**实测自相矛盾**(探针注入 1 个失败用例后跑真实套件):
+```
+all_passed           : False
+failures / tests_run : 1 / 16
+criteria_verification: 四个全 True     ← 报告否认自己的顶层结论
+```
+
+前几轮抓的是「枚举外值」「缺键默认成功」「declared 强度无人校验」;这一层更靠上:**报告断言四条判据全部满足,而运行没量过任何一条。**
+
+**修法**:`CRITERION_EVIDENCE` 把每条判据映射到承载它的故障类 —— FI-05 承载纯重放(FI-05 正是"删掉缓存从 Event Store 重建"),FI-02/FI-03 承载幂等零副作用;前两条是套件整体属性(证据 = 整套通过且每个声明的类都真跑过)。`_evaluate_criteria` 由**本次运行结果**推导:承载类失败或跳过、或套件未通过 ⇒ 该判据不成立。
+
+**单一来源**:`all_passed` 与四条判据读同一个 `suite_passed` 局部变量 ⇒ 报告不可能断言自己被顶层否定的判据。
+
+**踩到的坑(记下来,不显然)**:`unittest.TestSuite` 在测试完成后会把自己的条目置为 `None` 以释放内存。运行**之后**去问套件要 id ⇒ `AttributeError: 'NoneType' object has no attribute 'id'`。**必须在 `runner.run(suite)` 之前收集 id。**
+
+**双向验证(避免改成一律 False)**:
+- 注入失败 ⇒ 四条全 `False`,探针报 `no contradiction`
+- 干净运行 ⇒ 四条全 `True`,产物 exit 0
+- `test_the_four_criteria_are_verified_when_their_evidence_passes` 专门防止守卫被过度收紧、把合法的绿盘断言也打掉
+
+**变异证伪**:`return {name: True for name in CRITERION_EVIDENCE}` ⇒ **CAUGHT**(exit 1,`FAILED (failures=2)`),文件精确恢复。真缺口,守卫有牙。
+
+**同族排查**:`conformance/fixtures.py:165` 与 `src/aetp/acceptance/mission.py` 的 `criteria_verifications`(复数)是 Mission success_criteria 记录,是经 Command 路径写入的真实状态,**不是**同族。其余报告生成器未再发现字面量判据块。
+
+**仍未独立签核**:`CRITERION_EVIDENCE`、`_collect_test_ids`、`_evaluate_criteria` 与 3 条新测试。全部留在 `review`,未提交。
+
+## 2026-11-05 系统性审计「结论字段」族(不再逐个撞见)
+
+前四轮都是**碰撞式发现**同一族缺陷:枚举外值隐身 → 缺键默认成功 → declared 强度无人校验 → 整份报告判据是字面量。**模式未收敛**,所以这轮改为系统性审计。
+
+**这一族的判据**:一个把结论发布给外部读者的字段(`passed`/`verified`/`complete`/`satisfied`)——**能否在它命名的事情没发生时仍为 true?** 能,且无 digest、无断言兜底 ⇒ 就是缺口。
+
+**审计方法**:枚举所有活跃生成器(`json.dump`/`_write_json` 在 `Docs/` 之外的调用点),再把每个产物里 verdict 形状的键**逐个回溯到写它的代码**,问「背后是断言还是推导」。
+
+**逐项判定(活跃生成器 5 个)**:
+| 生成器 | 判定 |
+|---|---|
+| `tools/devprep.py` | 干净 —— 全部 fail-closed(`product_implementation_complete=False`、`bootstrap_verified=False`、`evidence_is_product_acceptance=False`);唯一推导值 `status.conformance` 有交叉校验(第 484-492 行) |
+| `conformance/runner.py` | 干净(本会话前几轮已收紧)|
+| `conformance/m0/runner.py` | 干净 —— `CAPABILITIES` 全 False 初始化;`claims` 三项 False;每条结论经 `self.check`(**先记录观测、再立即 `assertEqual`**,不满足先抛异常)⇒ **断言前置** |
+| `tests/fault_injection/runner.py` | **曾是本族缺口**,上一轮已修 |
+| `src/aetp/acceptance/runner.py` | 干净,**但有一处值得记的近失** |
+
+**近失(记下来)**:`src/aetp/acceptance/runner.py:156` 的 `passed = all(check["matched"] for check in checks)` —— **`all([])` 为 True**,即"什么都没检查的运行报 PASSED",正是本族。**不可达**:`normalize_cases`(第 49 行)拒绝 1..32 之外的 case 列表并抛 `ValueError("one to 32 Cases required")`。实测:`run('{"a": 1}', [])` 抛 ValueError 而非返回 PASSED;一个匹配 case → PASSED,一个不匹配 → FAILED。**上游已守住,未改动。**
+
+**排查后不属于本族**:`criteria_verifications`(复数)是 Mission 经 Command 路径写入的真实投影状态。
+
+**遗留项(需仓库所有者定夺,不是我该单方面改的)**:`artifacts/m0-01..05-test-report.json` 含 `review.independent_review_complete=True`、`review.verification_complete=True`、`review.acceptance_complete=True`。**全仓 `.py` 里搜不到 `independent_review_complete` 这个字符串** ⇒ 它们是 2026-09-10 的**手工撰写产物**,git 已跟踪,且无活跃代码读取(`m0-0*-test-report` 在 `.py` 里零命中)。没有生成器 ⇒ 没有代码路径可收紧。已在证据里如实标注"这些声称无机器支撑",**按纪律未改他人工作**。
+
+**残留(不抹平)**:审计是"检查 + 定向探针",不是证明。结论是**「我能枚举的活跃生成器里已收敛」,不是「已证明不存在」**。
+
+**第七条判据**:**别再等碰撞。同一族出现两次以上,就停下来枚举全类,逐个回溯到代码。**
+
+证据 `Docs/development/evidence/2026-11-05-verdict-field-audit.json`(13 键)。本轮零产品代码改动,故 969 收集集不变。仍在 `review`,未提交。
+
+## 2026-11-05 `done` 门只验存在、不验独立(审计的"进度声明"维度)
+
+上一轮把「结论字段」族在**报告生成器**里关了。这轮问相反的问题:**报告说某结论"有断言前置"时,断言真的够到声称吗?** 查了两处。
+
+**第一处:m0 的 `self.check` 模式 —— 健全,不改。**
+- 59 个 `check` 调用点;`check` 自身(222 行)**先记录观测,再立即 `assertEqual`**,不满足先抛 → 记录不可能先于断言。
+- `_execute`(456 行)的 `valid` 是**八项合取**:`testsRun == 1`、`wasSuccessful`、无 skip/xfail/unexpected、`case.complete`、`commands` 非空、`fault_injection` 非空、`checks` 非空、`all(check["passed"])`、`replay_state is not None`。
+- **没有 `try/except` 包裹任何 `check`**(全文件只有 127 行 argv 解析、576 行顶层 OSError/TypeError/ValueError 两个 except)。
+- 实跑真实 m0(28 条)三方交叉:status=passed 但 execution!=passed → `[]`;9 条 executed-passed 的 `checks` 全非空且全绿 → `[]`;scope 注册冒充 passed → `[]`。计数自洽:6+3+19=28;execution 9(=6 core+3 partial)+19=28。
+
+**第二处:backlog 的 `done` 门 —— 真缺口,本轮修。**
+`Docs/development/backlog.json` 的 `truth_rules.completion_requires` 明文声明完成需要 `independent_reviewer`。但 `tools/devprep.py:373-376` **只检查三个字段非空**。变异实测(修复前):
+| 变异 | 结果 |
+|---|---|
+| `M2-01`/`M2-02`/`M3-01` 的 `independent_reviewer := 自己的 executor` | **NOT CAUGHT** |
+| `M0-01` 的 reviewer 填 `"definitely not a reviewer"` | **ACCEPTED** |
+
+即:**机器只验证了「存在一个字符串」,报告却读成「有独立复核人」**——与上轮同一族,换成进度声明维度。
+
+**修法(窄,故意窄)**:新增 `_identity(value)` —— 取**第一个分隔符 `[,;(]` 之前的身份头**并 `casefold`,使尾部日期/注记不掩盖同一性;`done` 门在两处身份**都已声明且相等**时报错。
+- RED→GREEN:2 个新测试先失败(277、293 行)后通过;另 **3 个防过度收紧**(无 executor 仍有效、不同 reviewer 仍有效、**live backlog 仍全绿**)。
+- 变异证伪:禁用守卫 → `failures=2` **CAUGHT**;用 `str()` 原始字符串比较替代身份比较 → `failures=1` **CAUGHT**;工具文件字节级还原 `restored identical: True`。
+
+**残留(不抹平)**:此门**只能抓"同一身份被声明两次"**。它**不能**证明 reviewer 真是第二方——无 executor 字段、或 reviewer 拼写不同的条目照样通过。实证:done 项里 7 个声明 executor,其中 6 个共用**同一个** reviewer 身份 `/root/m1_reviewer`(各自注记写"distinct from /root"),而 `M2-02` 的 executor 是 `Codex main agent /root`——两者共享 `/root` 前缀但不相等,门放行。**该 reviewer 是否真的独立,字符串比较定不了,本改动不声称它定了。**
+
+**更大的问题(留给你定夺)**:`truth_rules.completion_requires` 被声明成机器可校验的契约,但「独立性」**单靠材料无法机器校验**。诚实的两条路:把规则降为「记录了复核人身份」,或要求复核证据点名不同的第二方。**这是仓库所有者的选择**,本轮只阻止了门静默接受**明显自相矛盾**的那种情形。6 个 done 项指向同一 reviewer 身份属历史复核记录,**不是我能改的**。
+
+**验证**:`preparation` 27 → **32**(5 新测试);全量 **974 OK / exit=0**,独立收集探针 **974 / DUPLICATES: 0**;冻结证据零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、28 entries、id 集合相等、`elements_digest` 漂移 0、`fixture_kind` 24 real_path + 4 boundary_assertion);收尾三件套通过;`git diff --check` 干净。
+
+**踩到的坑(记下)**:我这轮第一次启动全量回归时**漏写 `PYTHONPATH="src;."`**,得到 `Ran 113 tests / FAILED (errors=81)`、154 处 `ImportError`——**是我的命令错,不是代码回归**。全量回归**必须**带 `PYTHONPATH="src;."`。判据:**全量数字骤降 + 大批 ImportError = 先查自己的命令,别急着查代码。**
+
+**第八条判据**:**一个门声称校验 X,就去看它实际读了几个字面量。`independent` 被实现成 `_nonempty` 时,它校验的是「非空」,不是「独立」。**
+
+证据 `Docs/development/evidence/2026-11-05-reviewer-independence-gate.json`(12 键)。仍在 `review`,未提交。
+
+## 2026-11-06 第八条判据扫全 devprep 校验器:`conformance` 计数自相矛盾
+
+上轮用第八条判据只查了 `done` 门。这轮把它**扫遍 `tools/devprep.py` 全部 5 个校验器**:`validate_markdown_links`、`validate_backlog`、`validate_graph`、`validate_status`、`validate_skills`。
+
+**4 个干净**:markdown 解析本地目标且不支持语法 fail-closed;backlog 已含上轮的独立性守卫 + 重算 conformance 注册集;graph 重算 conformance 节点集 + 唯一 id + 重复边 + A2A `optionally_uses`;skills 读 frontmatter 与必需 marker。
+
+**`validate_status` 的 `conformance` 块 —— 真缺口,本轮修。**
+**不对称是线索**:同函数里 `work_item_status_counts`、`milestones`、`active_work_items` **都从 backlog 重算并比对**,唯独 `conformance` 块**只读 3 个字面量**(`status`/`registered_tests`/`passed_tests`),**从不读 `failed_tests`/`not_applicable_tests`**——却向 preparation-report 发布「conformance: passed (28 registered, 28 passed)」。
+
+变异实测(修复前):
+| 注入 | 结果 |
+|---|---|
+| `passed_tests=28` 且 `failed_tests=28` | **ACCEPTED**(全失败的记录读成全通过)|
+| `passed_tests=28` 且 `not_applicable_tests=28` | **ACCEPTED** |
+| `status='passed'` 且 `passed_tests=0` | **ACCEPTED**(标题否定自己的计数)|
+| `failed_tests=True` | **ACCEPTED**(**`bool` 是 `int` 子类,读成 1**)|
+| `failed_tests=-1` / `None` / `'28'` | **ACCEPTED** |
+
+**修法**:3 个守卫,各覆盖一种不同的矛盾 ——(1) 每个计数必须是**非负 int 且非 bool**;(2) `status=passed` 要求 `passed_tests=28`;(3) `passed+failed+not_applicable` 不得超过 `registered_tests`。
+
+**⚠️ 本轮自我纠错(重要)**:我第一次写修复时带了**第 4 个守卫**(单独的"全通过不得报失败")。变异测试显示它**无法独立证伪**——禁用它毫无变化,因为它是求和守卫的**严格子集**(`passed==registered` 且 `(failed or na)>0` ⇒ 和必然超过 `registered`,求和守卫同样触发)。**我删掉了这个冗余守卫**,只保留求和检查(覆盖同样情形)。
+> **判据**:冗余防御看起来像安全,实际让**幸存的那个守卫不可验证** —— 与 m0 的 `not result.skipped`/`case.complete` 对是同一个教训。
+删除后 3 个守卫**各自独立可证伪**:禁用类型检查 → `failures=2, errors=8` **CAUGHT**;禁用 status↔passed 绑定 → `failures=1` **CAUGHT**;禁用求和 → `failures=2` **CAUGHT**;工具文件字节级还原。
+
+**有意不查(边界,不是缺口)**:
+- devprep **不校验** `conformance.evidence` 路径是否存在 —— 工具 docstring 明示**不从文档存在性推断产品 conformance**;证据路径由专用探针查(122 条当前全部存在)。加进去是**越界**。
+- devprep **不读** `artifacts/conformance-frozen-evidence.json` 比对 `suite_digest` —— 那等于 devprep 断言产品 conformance,与其 docstring 声明相悖。digest 由 `conformance/runner.py` 验、由 `tests/conformance/test_runner.py` 钉。
+
+**验证**:`preparation` 32 → **37**(5 新测试);全量 **979 OK / exit=0**,独立收集探针 **979 / DUPLICATES: 0**;冻结证据零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、28 entries、id 集合相等、漂移 0、`fixture_kind` 24 real_path + 4 boundary_assertion);正式套件 28 passed / 0 not run;收尾三件套通过。
+
+**⚠️ 更正上轮的一处错误陈述**:上轮我写过 `tests/m2/test_credential_scope_coverage.py`「现在不存在」。**这是错的**——该文件**存在**(5099 字节,mtime 2026-10-31,untracked),且已计入全量收集。计数(974、979)本身无误,只是我那句关于该文件的描述是错的。
+
+**第九条判据**:**同一个函数里其他块都在"重算并比对",却有一块只"读值"——那块就是缺口所在。不对称是线索。**
+
+证据 `Docs/development/evidence/2026-11-05-status-conformance-counter-consistency.json`(14 键)。仍在 `review`,未提交。
+
+### 复核后追补:求和守卫抓不到的第四类矛盾
+
+独立复核(shell-reviewer `sa_20261105_164302_000000000_d59dfa6e5e61`,**accepted_with_reservations**)发现:我的求和守卫 `passed+failed+na > registered` **抓不到"和恰好等于 28"的矛盾**:
+
+| 注入 | 修复前 | 说明 |
+|---|---|---|
+| `status=registered` + `failed_tests=28` | **ACCEPTED** | 和 = 28,**不超** `registered` |
+| `status=registered` + `failed=20` + `na=8` | **ACCEPTED** | 和 = 28,**恰好等于** |
+| `status=passed` + `evidence=None` | **ACCEPTED** | 无任何证据引用 |
+
+**为什么这是真缺口**:`registered` 在记录里**自带语义**——它的 note 原文「no product test has been accepted as passed」,即**尚无任何结果**;在它下面报任何结果就是**否定该状态**。而 `status_vocabulary` 只有 `registered`/`passed`,「registered 但 20 条失败」是**没有任何词能表达的状态**——正是**不该可表示**的状态。
+
+**加了 2 个守卫**:`registered` ⇒ 三个结果计数全为 0;`passed` ⇒ `evidence` 非空。
+**边界刻意保留**:evidence 守卫**只查非空,不查文件存在**——查存在性等于 devprep 从磁盘文档推断产品 conformance,与其 docstring 声明相悖。所以复核建议的"校验路径"我只采纳到**非空**为止。
+
+**5 个守卫现已全部可独立证伪**:type-check CAUGHT(failures=2, errors=8);passed-status CAUGHT(failures=1);passed-evidence CAUGHT(failures=1);registered-zero CAUGHT(failures=3);outcome-sum CAUGHT(failures=2);工具文件字节级还原。
+
+**复核的 minor 我照实改了**:
+1. 我写「32 → 37」当基线 —— 复核从任何仓库状态都复现不出 32,**HEAD 实测是 27**。32 只是本会话中段的中间态。诚实口径是 **HEAD 27 → 工作区 41**。已在证据里改。
+2. 文件名 `2026-11-05` 与 `date: 2026-11-06` 跨午夜不一致 —— 保留原样但注明,免得被当成陈旧产物。
+
+**⚠️ 我又犯了同一类错两次**:在证据 JSON 里写 `counts.tool_diff` 时**凭估计填数字**(先写 +30/-6、+57,实测 +41/-0、+171/-0),两次都被 `git diff --numstat` 打回改正。
+> **判据**:**证据文件里的每个数字都必须来自一条命令的输出。凭估计填的数,和"未发生的工作被报告成已通过"是同一个错误,只是发生在更小的尺度上。**
+
+**验证**:`preparation` **HEAD 27 → 41**(全量 983 = 979 + 4);全量 **983 OK / exit=0**,独立收集探针 **983 / DUPLICATES: 0**;冻结证据零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、28 entries、id 集合相等、`elements_digest` 漂移 0、`fixture_kind` 24 real_path + 4 boundary_assertion);正式套件 28 passed / 0 not run;收尾三件套通过。
+
+**第十条判据**:**求和守卫只能抓"超出",抓不到"恰好用尽"。任何"总数约束"都要再问一句:配额被别的结果占满、但语义上不该被占,算不算矛盾?**
+
+## 2026-11-06 第八轮:quality/evidence.py 的四变异定性(门有效 ≠ 有测量)
+
+**判据差** 上一轮对 `src/aetp/quality/evidence.py` 做了 9 变异扫描,4 个 NOT CAUGHT。**NOT CAUGHT 不等于缺口**——必须先分「语义等价」与「门死了」两岔,再分「无测量」与「测量缺失」。
+
+**第一步先排除选择性偏倚**:把 4 个变异对 **9 个模块 / 120 tests**(而非原来的 2 个模块)重跑,仍全 NOT CAUGHT ⇒ 不是测试集选窄了。这一步不能省:只跑窄集就说「没测到」是无效推断。
+
+**第二步用探针实测原代码行为**(在 `$TMPDIR` 构造篡改 State 直接调 `assess`),结果:
+- 删 `cycle["reviews"]` 条目 → `missing=['review']` + `INCONCLUSIVE`(evidence.py:41 分支是活的)
+- `reviewer_id := 任务 owner` → `RAISED INDEPENDENCE_REQUIRED`(evidence.py:48 是活的)
+- approved 但 `response_authorization=None` → `RAISED EVIDENCE_STALE`(evidence.py:56 是活的)
+- 独有一例:review 记录被删但 cycle 仍映射它 → `evidence_checks.py:17` 抛 `KeyError`(另一条路径,非静默通过)
+
+⇒ **守卫都活着、都有效,只是没有测试钉住它们**。这是第八条判据的新形态:**门有效却没有测量它的东西——未来重构可静默删掉它而全绿。**
+
+**第三步补测量并证伪**:补 3 个测试(`tests/m3/test_task_quality_evidence.py`,22 → 25),逐个禁用其守卫验证:**每个变异只失败它自己那一条**,无交叉污染。`src/aetp/quality/evidence.py` **一字未改**(实测 `git diff --numstat` 为空)——产品代码本是对的,缺的是测量。
+
+**第 4 个变异判为语义等价,不是缺口**:`result-precedence-swapped`。`negative=True` 在 evidence.py 的两个站点(:57 review status ∈ {changes_requested, rejected}、:68 `use["result"] == "FAILED"`)各自**同时**把 `all_passed` 置 False ⇒ `negative ⇒ ¬all_passed` 恒成立 ⇒ 变体与原文在所有输入上一致,任何测试都不应也无法区分它。**注意区分:前一轮我判过一个同族结论**——「冗余防御」要「摘掉一条不红、再摘另一条也不红」才算;**语义等价**只需证明两者在所有可达输入上一致。两者都可能表现为 NOT CAUGHT,但修法完全不同:冗余防御删掉,语义等价什么都不做。
+
+**本轮数字(全部来自命令输出)**:全量 `Ran 986 tests / 520.813s / OK / exit=0`;收集探针 `TOTAL: 986 / DUPLICATES: 0`;分目录 m0 157 / m1 86 / m2 220 / m3 379 / runtime 56 / preparation 41 / conformance 18 / fault_injection 20 / bootstrap 9;`tests/m3/test_task_quality_evidence.py` diff `72 0`;冻结证据 `suite_digest` 双方 `sha256:69acdab6…7310`、28/28 entries、id 集合相等、`elements_digest` 漂移 0、fixture_kind 24 real_path / 4 boundary_assertion;三件套 phase=preparation、0%、conformance passed (28 registered, 28 passed)、M4 blocked (1/3)、nodes=101 edges=144、items=23、acyclic=yes、preparation 41 OK。
+
+**纪律**:全部改动仍在 `review`,未提交。新补的 3 个测试是**新的测量**,本身未经独立复核;证据文件为执行者自撰。
+
+## 2026-11-06 第八轮复核处置:两条 important 一真一假,一条 minor 是基准混用
+
+**复核**(shell-reviewer 子代理,ref `sa_20261106_114943_000000000_58ffc19b3c26`,结论 `accepted_with_reservations`)提出两条 important + 一条 minor。**逐条实测后:一条成立、一条部分成立且复核自身有一处不准、一条是我的表述缺陷。**
+
+**important-1(成立)**:我加的是 4 个 `def test_`,证据只记 3 个;且计数基准混用。实测:`git show HEAD:` 该文件 `def test_` = **21**,工作区 = **25**,`git diff` 有 **4** 个 `+def test_`。第 4 个 `test_a_pending_review_never_verifies_a_passing_verification` 是**更早轮次的未提交测试**,本轮我实加 3 个。⇒ 我写的 `22 -> 25` 与 `72 insertions` 各自都对,但**同一句里混了「工作区 vs 本轮前」与「文件 vs HEAD」两个基准**。教训:凡引用 diff 数字,必须写明**基准是谁**。
+
+**important-2(部分成立,复核有一处不准)**:复核称三个 pinning 测试构造的状态生产不可达,并称 `service.py:71` 只捕 `PolicyViolation`。实测:
+- **(G1) 反证复核**:`submit → assess` **零篡改**即得 `('OK','INCONCLUSIVE',['review'])`——`missing`-review 分支**生产可达**。已把该测试从「删 review 记录」改成真实形状(`ready_quality()` 后断言 `cycle["reviews"] == {}`),并重做变异证伪 CAUGHT。
+- (G2/G3) **复核成立**:去掉 a-2 的 `independent_reviewer` 角色会先被 `durable_cycle` 的 `GOVERNANCE_CHANGED` 拦下;`submit_review` 在 `reviews.py:74` 无条件写 `response_authorization`(真实态实测 `is None: False`)。⇒ 二者只能靠改 State 触发,已在 docstring 与分类里如实标为 **defence in depth**。
+- 复核称裸 `KeyError` 逃逸:**不准确**。`quality/service.py:73` 的 `except (ModelValidationError, KeyError, TypeError, ValueError, ...)` 会兜住并返回 `INVALID_PAYLOAD`;复核只看 `service.py:71`,漏了下一行的 `except`。裸 `KeyError` 确实可复现(`evidence_checks.py:17`),但**不逃逸 Command 路径**,只是错误码不如 `EVIDENCE_STALE` 精确。
+
+**minor-3(是基准问题,非矛盾)**:复核测 21/119(HEAD 基准),我写 22/120(工作区基准),差 1 恰是那个更早的未提交测试;`120 + 3 = 123` 与实测 9 模块收集数一致。
+
+**新判据**:**「同一句里混用两个基准」是最隐蔽的数字失真**——两个数字都真,合起来却不成立。凡写「A → B,diff X 行」,先确认 A、B、X 出自同一个基准。
+
+**本轮验证结果**:重写测试后全量 `Ran 986 tests / 529.248s / OK / exit=0`;收集探针 `986 / DUPLICATES: 0`;变异证伪三守卫全 CAUGHT 且失败用例名一一对应;`src/aetp/quality/evidence.py` 与 `evidence_checks.py` 仍零改动(实测 diff 空);冻结零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、28/28、drift 0);三件套 phase=preparation、0%、conformance passed (28 registered, 28 passed)、M4 blocked (1/3)、nodes=101 edges=144、items=23、acyclic=yes、preparation 41 OK;`tests/m3/test_task_quality_evidence.py` diff `73 0`;`.tmp/r29*` 已清。
+
+**纪律**:重写后的测试(r29)**已经第二方复核**(shell-reviewer 子代理,ref `sa_20261106_143135_000000000_23a3af8b3eab`,结论 `accepted_with_reservations`):复核独立禁用 evidence.py 三处守卫,三次都 CAUGHT 且失败用例名唯一对应、零交叉污染;产品文件按字节还原 `sha256=632918cf…2774`。复核**确认了我的反驳**——G1 零篡改可达;并指出证据里「reachable on the production path」略夸(末步 `assess()` 仍是直调,端到端 Command 因 `evidence.py:83` 要求 `in_review` 而未走通),已改为「reachable at the cycle level」并加范围注。三条 minor 均已逐条处置。本轮仍留 `review`(项目要求 done 需独立复核人签核工作项本身),未提交。
+
+## 2026-11-06 第九轮:第三条线索闭环——"门有效却无测量"这次**不成立**
+
+**线索**来自第一次复核留档的 minor:`src/aetp/quality/evidence_checks.py:17` 的裸 `KeyError`。我上轮已确证它**生产不可达**(裸 KeyError 只在直接调 `assess` 且手工删 review 记录/cycle 映射时出现,且 `quality/service.py:73` 的 `except` 会兜成 `INVALID_PAYLOAD`)。本轮要回答的是**更深的问题**:挡住它的那道门 `verification_allowed`(`src/aetp/quality/evidence.py:13-22`)是否**自己也没有测量**?
+
+**为什么值得查**:`src/aetp/acceptance/records.py:192` 在生产路径上必调 `verification_allowed(state, identifier, command.actor_id)`(只要 target task 带 quality 合约)。所以 `evidence.py:16` 与 `:20-21` 就守在 `evidence_checks.py:17` 之后要查的 verification 记录前面。**若无人测量这道门,重构可静默删掉它而全绿**——正是我第八轮定的判据。
+
+**方法**:逐个原地变异 + 重跑生产路径套件 + 字节还原比对:
+- `evidence.py:16` 的 `require(task["status"] == "in_review", ...)` 删除 → **CAUGHT**,失败用例 `test_verification_requires_in_review_and_preserves_original_revision`
+- `evidence.py:21` 的 `review["reviewer_id"] == actor` 改成 `True` → **CAUGHT**,失败用例 `test_only_designated_reviewer_can_request_cycle_verification`
+- `restored identical: True`;`git diff --numstat -- src/aetp/quality/` 空;`sha256=632918cf…2774`
+
+**结论**:**这道门是有测量的**,不是"门有效却无测量"。裸 `KeyError` 维持不改,理由两条:① 生产不可达(没通过 `verification_allowed` 就创建不出 verification);② 真正挡住它的门已被覆盖。**按我自己第八轮的规则,不可达 + 门有测量 ⇒ 记录而不改产品代码。**
+
+**探针方法学教训(值得复用)**:**做变异前先确认模式串唯一**。第一版探针 `require(task["status"] == "in_review", ...)` 匹配到 **2** 处(evidence.py:16 与 :83 同形),探针自己报了 `PATTERN COUNT 2 -- skipped` 而不是静默变异错误的位置。第二版锚定 `task = state[...]` + `require(...)` + `cycle = durable_cycle(...)` 三行上下文,计数才为 1。⇒ **变异脚本必须自检模式计数,否则"CAUGHT/NOT CAUGHT"可能来自变异错了地方**。
+
+**本轮无产品代码改动**;证据文件新增 `third_lead_closed` 节。三件套通过(check nodes=101 edges=144、items=23、acyclic=yes;preparation 41 OK)。仍未提交。
+
+## 2026-11-07 第十轮:`verification_use` 的守卫审计——3 处 NOT CAUGHT,判为 defence in depth 并补 pinning
+
+**线索**:第九轮收尾后,`src/aetp/quality/evidence_checks.py` 只查过第 17 行的裸 `KeyError`,同模块其余守卫没做同样的审计。用变异探针找"门有效却无人测量"的形态。
+
+**变异探针(改前,3 模块 / 54 tests 基线 105.745s OK)**:
+
+| 变异 | 结果 |
+|---|---|
+| `:18` `record["verifier_id"] == reviewer` → `True` | **NOT CAUGHT** |
+| `:18` `reviewer != task["owner_id"]` → `True` | **NOT CAUGHT** |
+| `:19` `principal(...)["type"] == "agent"` → `True` | **NOT CAUGHT** |
+| `:21` `grant["revoked"] is False` → `True` | CAUGHT(`test_all_cycle_records_are_collected_before_validity_filtering`) |
+
+⇒ 四个守卫有 **3 个可以删掉而套件全绿**。`GRANT_REVOKED` 那条早已被钉住。
+
+**可达性判定(关键,不靠推理靠实测)**:
+- `records.py:223` 写 `verifier_id = command.actor_id`,且创建前必经 `verification_allowed`(`evidence.py:20-21` 强制 `reviewer_id == actor`)⇒ **创建后 `verifier_id == reviewer_id` 被强制**,两字段都无重写路径。
+- 写 `cycle["reviews"]` 只有 `request_reviews`(`reviews.py:50`,要求 `ready_for_review`);`submission.py` 初始化为 `{}`。实测 `in_review` 时再发 `request_review` → **`INVALID_TRANSITION`**。
+- **没有任何命令把 quality task 从 `in_review` 送回 `ready_for_review`**:`advance_task` 目标是 `in_review`/`verified`/`completed`,`rework` 只收 `{rejected, blocked}`(`lifecycle.py:35`)。实测对 quality task 调 core `task.assigned` → **`ModelValidationError unsupported type`**。
+- 经 `assess()` 触发时,`reviewer == owner` 会先被 `evidence.py:48` 以 **`INDEPENDENCE_REQUIRED`** 拦下(不到 `:18`);请求期由 `reviews.py:14` 拦。
+- **直接调 `verification_use`** 时三处各自触发:`verifier != reviewer` → `REVIEWER_MISMATCH`;`reviewer == owner` → `REVIEWER_MISMATCH`;`reviewer` 为 human → `PERMISSION_DENIED`。
+
+⇒ **三处都是"活着但生产不可达"的 defence in depth**(与第八轮 `evidence.py:48`/`:56` 同类),不是可达缺口。**按既有规则:不改产品代码,补 pinning 测试**。
+
+**补的 3 个测试**(用 helper `_first_verification_use(state)` 直调 `verification_use`;docstring 说明为何不绕 `assess()`——上游的抢先拒绝正是让这些守卫离开真实路径的原因):
+- `test_verification_use_binds_the_stored_verifier_to_the_reviewer` → `REVIEWER_MISMATCH`
+- `test_verification_use_refuses_a_reviewer_who_owns_the_task`(同时改 `verifier_id` 与 `reviewer_id`,使只有该子句而非上面那行相等判断决定结果)→ `REVIEWER_MISMATCH`
+- `test_verification_use_requires_an_agent_reviewer` → `PERMISSION_DENIED`
+
+**变异证伪(补后)**:三处全 **CAUGHT**,失败用例名一一对应、零交叉污染、`restored identical: True`。
+
+**新判据(值得复用)**:**「错误码相同 ≠ 来源相同」,而「生产不可达」不能靠读代码断言**。判 b 时我先看 `assess()` 得到 `INDEPENDENCE_REQUIRED`,差点误判为"该子句被上游覆盖所以测不到";改为**直接调 `verification_use`** 才确证子句本身可触发。⇒ 判定守卫可达性时,要分别测**真实路径**与**该函数自身的契约**,两者结论可能不同。
+
+**本轮验证结果**:focused `Ran 28 tests in 61.897s OK`(25 → 28);全量 `Ran 989 tests in 552.039s OK exit=0`;收集探针 `989 / DUPLICATES: 0`;产品代码零改动(`evidence_checks.py` sha256 `9ba9860d…b4b3`、`git diff --numstat` 空);冻结零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、28/28、drift 0、counts 相等);三件套 phase=preparation、0%、conformance 28/28、M4 blocked (1/3)、nodes=101 edges=144、items=23、acyclic=yes、preparation 41 OK;`tests/m3/test_task_quality_evidence.py` diff `148 0`;`.tmp/r10*` 已清。
+
+**纪律**(当时状态):新增测试在写下这段时尚未复核;该轮随后已完成第二方复核,结论见下一节。按用户指示未提交。
+
+## 2026-11-07 第十轮复核处置:两条 minor 成立,但复核的一条建议会毁掉 pinning
+
+**复核**(shell-reviewer 子代理,ref `sa_20261107_142506_000000000_68cbbd57da9b`)结论 `accepted_with_reservations`,核心声称 (1)(3)(4) 全部独立复现。
+
+**复核自身标了 `[unverified]`,并自述两处操作失误**:一条变异命令超时被杀、未还原,`evidence_checks.py` 短暂处于变异态(sha256 `68405b34`);`write_file` 相对路径被解析进仓库,误建 `D:\Github\AETP\tmp\`。**两处我都亲自核实而非采信其自述**:sha256 已回到 `9ba9860d…`、`git diff --numstat -- src/aetp/quality/` 为空、仓库内无 `tmp/`。
+
+**minor #1(成立,但建议有害,不采纳)**:`:18` 第二合取项是**间接捕获**——删掉后调用并不成功,控制流落到 `:41` 的 execution 绑定检查,抛 `EVIDENCE_STALE`。实测失败文本 `AssertionError: 'EVIDENCE_STALE' != 'REVIEWER_MISMATCH'`。复核建议改成 `assertIn({"REVIEWER_MISMATCH","EVIDENCE_STALE"})`;**若采纳,变异后两个值都通过,该守卫会退回 NOT CAUGHT、pinning 失效**。⇒ 保留精确断言,只把捕获形态写进测试 docstring 与证据 `catch_form`。
+
+**新判据(值得复用)**:**「放宽断言以让失败信息更准确」与「保住 pinning」是冲突目标**。当测试靠错误码区分变异时,把断言放宽成集合 = 主动放弃测量。正解是**保留严格断言 + 把间接性写进注释**,而不是改断言。
+
+**minor #2(成立,我原文过强,已改正)**:我写「无命令把 quality task 从 `in_review` 送回 `ready_for_review`」——`ready_for_review` 这半句对,但漏了 `in_review → block → rework → in_progress` 这条出口(`lifecycle.py:18` 接受 `in_review`,`:35` 接受 `blocked`)。实测:`block` 成功(status=blocked)→ `rework` 成功(status=in_progress,**`quality_cycle=None`**)→ 旧 cycle 只留在 `quality_history` 里,不再是活 State。⇒ **defence-in-depth 判定仍成立**(旧 `reviews` 映射无法作为活 State 被 `verification_use` 读到),但原表述已更正。
+
+**minor #3**:变异脚本在 `$TMPDIR` 未入仓,无法从树里复算。复核自行重建脚本得到一致结论。已记入 `not_addressed`。
+
+**复核未验证**:989 全量(仅跑 3 个相关套件 57 tests);`verification_use` 其余守卫(`:13-16`、`:25-45`、`:55-61`)同样未做变异。
+
+**本轮验证结果**:docstring 改动后 focused `Ran 28 tests in 65.502s OK`;证据 JSON 合法;`git diff --check` 干净;产品代码仍零改动(`evidence_checks.py` sha256 `9ba9860d…`)。
+
+**纪律**:改动仍留 `review`,未提交。
+
+## 2026-11-07 第十一轮:扫完 verification_use 其余守卫——三处 NOT CAUGHT 里有一处是真缺口
+
+**线索**:第十轮审了 `verification_use` 的身份/授权子句(`:18`、`:19`、`:21`),同函数其余守卫未扫。本轮把 `:16`、`:23-24`、`:36`、`:46`、`:50`、`:56` 全部变异。
+
+**变异探针(改前,基线 Ran 28 tests OK)**:
+
+| 守卫 | 变异前 | 变异后 |
+|---|---|---|
+| `:16` target 快照 vs `record["input"]` | **NOT CAUGHT** | **CAUGHT** |
+| `:23-24` governance version+digest | CAUGHT | CAUGHT |
+| `:36` runner descriptor | CAUGHT | CAUGHT |
+| `:46` `dispatch_count in {0,1}` | **NOT CAUGHT** | **CAUGHT** |
+| `:50` `at < grant["expires_at_ms"]` | **NOT CAUGHT** | **CAUGHT** |
+| `:56` evidence age | CAUGHT | CAUGHT |
+
+**可达性判定(逐个实测,不靠读代码)——三处 NOT CAUGHT 得到两种不同答案**:
+
+- **`:50` GRANT_EXPIRED = 生产可达的真缺口**。`reviewed_quality()` + `request_verification()`(不 dispatch,record 留 `pending`)→ 把时钟推到 `expires_at_ms`(**零 State 篡改**)→ Command 路径 `task.quality.evaluate` 返回 `status=rejected, error_code=GRANT_EXPIRED`,task 留 `in_review`。⇒ **门有效却完全无测量**;一旦被删,过期 grant 仍可被消费。这是本轮最有价值的一处。
+- **`:16` = 不可达**。`in_review` 下 `artifact.capture` 被拒(`'rejected' != 'accepted'`,artifact revision 仍 0),`task.quality.submit` → `INVALID_TRANSITION`、`task.quality.enroll` → `INVALID_PAYLOAD`。target 无法在 record 存在后被改写。
+- **`:46` = 不可达**。`dispatch_count` 全仓唯一写入口是 `acceptance/records.py:394`(在 `ACTION_NOT_PENDING` 前置下 0 → 1),`:219` 初始化为 0。
+
+**处置**:按可达性分两类——`:50` 写**真实路径测试**(只推时钟),`:16`/`:46` 写 **State-编辑型 pinning** 并在 docstring 标注 defence in depth。focused 28 → 31。
+
+**关键设计点(易错,已写进 docstring)**:两个 pinning 测试**刻意用 pending record**。若用 finished record,同一变异会被下游 `_historical_report` 与 `:58`(`dispatch_count == 1`)以**相同错误码 `EVIDENCE_STALE`** 接住 ⇒ 删掉被测子句后套件仍绿、pinning 退化为**非测量**。**pending record 是唯一让被测子句成为唯一防线的位置。**
+
+**变异证伪(补后)**:三处 NOT CAUGHT 现全 **CAUGHT**,失败用例名精确对应新测试,`restored=True`。
+
+**新判据(值得复用)**:
+1. **「NOT CAUGHT」只是提问,不是答案**。同样形态的结果可以一个是真缺口、两个是 defence in depth;必须逐个做可达性实测才能分开。
+2. **「测试钉在哪里」决定它是否真在测量**。若测试还会顺带触发同函数下游的等价检查,它测的是下游那条,不是它点名的那条。选择记录的**生命周期阶段**(pending vs finished)就是选择钉在哪条线上——这个理由必须写进 docstring,因为从测试正文看不出来。
+
+**本轮验证结果**:focused `Ran 31 tests in 70.123s OK`;冻结零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、28/28、drift 0、counts 相等);产品代码零改动(`evidence_checks.py` sha256 `9ba9860d…b4b3`);`tests/m3/test_task_quality_evidence.py` 对 **HEAD** 的 numstat `218 0`(**跨多轮未提交累计,非本轮**;本轮单轮 28 → 31);计数基准分别标明:工作区 31 / HEAD 21 / diff 累计 `+def test_` 10(跨多轮,非本轮)。
+
+**纪律**:三个新测试**已经过第二方复核**(见下一节,`accepted_with_reservations`,四条核心声称全部独立复现)⇒ 已满足 AGENTS.md 对 `done` 的「独立复核人」要求。`backlog.json` 状态本轮未改写;按用户指示**未提交**。
+
+## 2026-11-08 第十一轮复核处置:四条声称全复现,三条 finding 是同一个记账病
+
+**复核**(`shell-reviewer`,ref `sa_20261108_140022_000000000_82f3c5fe157e`,结论 `accepted_with_reservations`)**独立重做了全部四条核心声称**,且结论与我一致:
+
+- 它自己做了**三方变异对照表**:对 HEAD(21 tests)三处全 NOT CAUGHT;对本轮前 28-test 套件三处全 NOT CAUGHT;对新的 31-test 套件每处都被**恰好它自己那一个**测试抓到。
+- `:50` 真实路径可达性复现(accept at expires-1,`GRANT_EXPIRED` at expires,task 留 `in_review`,零 State 写入)。
+- **pending-record 设计理由被证实为真,不是断言**:它在 finished-record 变体上实测,两处变异仍从 `_historical_report`/`:104`/`:58` 抛 `EVIDENCE_STALE` ⇒ finished-record 的 pin 在变异下仍是绿的、确为非测量。
+- 产品代码零改动、无测试泄漏(`read_projection` 返回分离副本、DB 每测试一个 `TemporaryDirectory`、`clock_value` 在 `setUp` 重置)。
+- 它尝试 8 条真实 Command 序列攻破 `:16` 的 defence-in-depth 判定,未成功。
+
+**5 条 finding 我的逐条判定(2 条证伪、1 条误读、1 条已修、1 条存疑)**:
+
+- **F1/F2/F3(成立,纯表述)**:`28 -> 31` 与 `HEAD=21 / 工作区=31 / +218 行` 算不平;70 行的 `test_a_pending_review_never_verifies_a_passing_verification` 在 diff 里却不属本轮。**根因与第八轮同一个病:数字都对,缺的是基准标注**——`218 0` 是**对 HEAD** 的 numstat,跨了多个未提交轮次。已修:`measurements.diff_numstat` 现在明写基准,并点名 diff 内那 7 个更早轮次的测试。
+- **F4 证伪**:复核称 docstring 引的 `records.py:223` 应为「约 :221」。实测 `records.py:223` **正是** `"verifier_id": command.actor_id`,引用无误,复核的行号估计错了。
+- **F5 误读**:复核称 round 10 的两个身份测试在 L16 变异下仍返回 `PERMISSION_DENIED`/`REVIEWER_MISMATCH`,故「归错了地方」。它们**本就属 round 10、目标是 `:18`/`:19`**;本轮 L16 变异报告 `failures=1` 且失败用例唯一为 `test_verification_use_refuses_a_record_whose_input_drifted_from_its_target`。**round 10 的测试在 L16 变异下保持绿,恰恰是「每个 pin 解耦且精确」的证据**——与 finding 的结论相反。
+- **存疑项**:文件带着一个与 HEAD 字节相等却显示 ` M` 的 git 状态标记,疑为 EOL/autocrlf 伪影,标记而未解决(不属本轮改动)。
+- 复核**未验证**(2 分钟命令上限放不下 9 分钟全量套件):992 全量与 28/28 冻结漂移、round 前 blob 的精确复原(它的 28-test 基线是删掉三个新方法重建的,但计数与三处 NOT CAUGHT 判定都复现了)。
+
+**残留风险(如实记)**:`:16`/`:46` 的 defence-in-depth 结论是「**未找到**可达序列」,不是「不存在可达序列」——两条子句都做过变异(CAUGHT)也都被真实 Command 序列攻击过,但都无法穷举证明不可达。
+
+**处置**:复核 finding 全部核实完毕(2 证伪、1 误读、1 已修、1 存疑),证据文件新增 `independent_review` 节记录复核 ref、结论、我的逐条判定与复核未验证项。**核心工作经第二方复核通过,本轮改动可标 `done`**;按纪律仍未提交。
+
+## 2026-11-09 第十二轮:_historical_report 8 处守卫全 8 个 NOT CAUGHT,且不是死代码
+
+**审计对象**:`src/aetp/quality/evidence_checks.py::_historical_report`(`:71-111`)。这是第十一轮自己在 `not_addressed` 里点名的未覆盖区。**产品代码零改动**(`sha256 9ba9860d...b4b3`)。
+
+**变异证伪(改前,基线 31 tests OK)**:8 个锚点 `:75-76`(report 存在+id+三方 digest 链)、`:86`(report 内容==由 record 重建)、`:98`(整个 artifact 全量比对)、`:100-101`(outcome/result 枚举)、`:104`(completed+dispatch_count)、`:106`(result/reason==观测)、`:108-109`(not_executed 形态)、`:110-111`(recovered termination)——**8/8 全部 NOT CAUGHT**。全仓没有任何测试钉住这个函数。
+
+**活性探针(关键)**:把 `:72` 首条语句换成 `raise` → `Ran 31 tests, FAILED (errors=12)`。**12 个测试实际调用它**。所以 8/8 NOT CAUGHT 是「零测量」,不是「零执行」——与「死代码」是完全不同的结论,必须用探针区分。
+
+**可达性判定:8 处全部生产不可达(defence in depth)**。构造层保证:`records.py:293-346 finish()` 在**同一事务内由同一份 previous** 同时生成 report(`:317-327`)与 record(`:342-345`);report 用**保留 id**(`contracts.py:30`),`core/commands.py:189` 直接拒 `artifact.submit`/`capture` 打保留 id,`core/projection.py:171` 再拒一次;**6 条真实 Command 序列**全被堵(re-capture 拒、submit→`ARTIFACT_ID_RESERVED`、二次 finish 拒、二次 dispatch 幂等、finish 后 recovery 空、record 与 report 内容未变)。
+
+**处置**:补 6 个 State-编辑型 pinning 测试(31 → 37),**6/6 变异全部 CAUGHT 且失败用例名一一唯一对应**。两个子句刻意**不钉**:`:100-101` 与 `:104`——删掉它们后下游 `:106`/`:107-109` 会以**同一错误码** `EVIDENCE_STALE` 从同一函数抛出,测试无法把删除与正常拒绝区分,任何测试都会在自己的变异下保持绿 ⇒ 如实记为同码冗余。
+
+**本轮最大教训(值得复用)**:**`rc=1` 不是「变异被抓到」,它有两种截然不同的成因——断言失败,或文件根本不可导入。** 第一版脚本把 m5/m6/m7 报成 CAUGHT,实际是我给替换行写了 4 空格缩进,而原文在 `if outcome == "completed":` 块内是 8/12 空格 ⇒ `IndentationError: unexpected indent`,`套件根本没跑`。**只有输出里含 `Ran N tests` 才算数**;`ran=?` + 空失败列表就是这枚伪影的信号,我差点把它读成「通过」。修正:变异体**先 `py_compile` 再算结果**,且替换串必须逐处核对缩进。
+
+**第二条教训**:**State-编辑型 pin 必须重封 digest 链**。若只改 report 内容而不重封 `content`/`content_digest`/`record.evidence_digest`,所有编辑都会**停在 `:75-76` 并以同一错误码被拒**,6 个测试会全绿却什么都没测——与第十一轮「finished-record 陷阱」同型。已写 `_rewrite_committed_report` helper 三处一起重封。
+
+**本轮验证**:focused `Ran 37 tests in 79.610s OK`(31 → 37);全量 `Ran 998 tests in 526.018s OK exit=0`(992 + 6);冻结零漂移(`suite_digest` 双方 `sha256:69acdab6...7310`、28/28、`element_keys` 相同、`elements_digest` drift 0、counts 相同、`fixture_kind {real_path:24, boundary_assertion:4}`);conformance `28 passed, 0 failed, 0 not run`;三件套 phase=preparation、0%、M4 blocked (1/3)、nodes=101 edges=144、items=23、acyclic=yes、preparation 41 OK;计数基准:工作区 37 / HEAD 21 / **对 HEAD** 的 numstat `361 0`(**跨多轮累计,非本轮**;本轮 31 → 37);`.tmp/r12*` 已清。
+
+**纪律**:6 个新测试**已经过第二方复核**(`shell-reviewer`,ref `sa_20261108_184139_000000000_10e45d68e940`,`accepted_with_reservations`)⇒ 已满足 AGENTS.md 对 `done` 的「独立复核人」要求。复核独立重做并**证实了全部六条核心声称**(含 `:100-101`/`:104` 不可钉、helper 重封必要性、可达性 A–G)。它返回时带宿主 `[unverified]` 标记,故其事实我一律自行复核:目标文件 sha256 仍为 GOLD、numstat 空、无残留 `.orig`/`.bak`。其唯一 *important* finding 成立且已修(基线标注)。左侧那句「尚未经复核」是写下时的状态,已被此句取代。`backlog.json` 本轮未改写;按用户指示**未提交**。
+
+## 2026-11-09 第十三轮:守卫可达性判定,以及两个被证伪的假 pin
+
+**对象**:`src/aetp/quality/cycles.py`(13 个 require)与 `src/aetp/quality/reviews.py`(12 个)。二者在 `tests/` 里零直接引用,是最大的未直接覆盖区。**产品代码本轮零改动**(两文件 sha256 仍为 GOLD `d6c55925…` / `8e41e323…`,`git diff --numstat -- src/aetp/quality/` 空)。
+
+**变异普查:**25 个守卫中 CAUGHT 6 个、NOT CAUGHT 19 个。活性探针(函数体首行插 `raise`,数有多少测试到达)给出 `durable_cycle` 26 / `active_cycle` 26 / `target_binding` 24 / `independent_reviewer` 24 / `request_reviews` 27 / `submit_review` 20 ⇒ 19 个 NOT CAUGHT 是**零测量**,不是零执行的死代码。
+
+**可达性判定**(必须读 `CommandResult.error_code`,只看 `status=rejected` 会把上游守卫误当成目标守卫):7 个可由真实 Command 触发 —— `cycles:15-16`(QUALITY_CONTRACT_REQUIRED)、`cycles:30-31`(TASK_QUALITY_POLICY_CHANGED)、`cycles:33-34`(GOVERNANCE_CHANGED)、`reviews:15`(PERMISSION_DENIED)、`reviews:17`(PERMISSION_DENIED)、`reviews:58`(INVALID_TARGET)、`reviews:70`(INVALID_PAYLOAD);12 个不可达,其中 `reviews:46` 与 `reviews:63` 是实测被上游更早守卫抢先(`INVALID_TRANSITION` / `REVIEW_FINAL`)。
+
+**两个假 pin 被自己的变异证伪**(本轮最重要的事):
+1. `cycles:15-16` —— 第一版测试断言 `QUALITY_CONTRACT_REQUIRED` 能通过,但把整条 `require()` 删掉后**测试仍绿**:`submission.py:45` 以**同一个错误码**更早抛出,调用方无从区分。断言错误码在这里等于断言上游。已删除该测试,改为注释说明。
+2. `reviews:15` —— 结构性不可钉:human reviewer 触发 `:15` 后,若抹掉 `:15` 会以同码撞上 `:17`;而 `normalize()` 禁止 human 持有 `independent_reviewer`,故 `:15` 永远不会是唯一决定者。
+剩余 5 个 pin 逐个就地变异(保留缩进、`py_compile` 门控、**只跑它自己那条测试**)全部 `only-this-pin-dies=True`,文件按字节还原。
+
+**新判据(值得复用)**:一个 pin 只有在「删掉它自己的守卫后**仅它自己**变红」时才成立。跑整个套件看「有没有红」是不够的 —— 别的测试红会掩盖这条 pin 是假的;同理,断言错误码时若上游有同码守卫,那个断言测的是上游。
+
+**验证结果**:新建 `tests/m3/test_quality_cycles_reviews_pins.py`(5 tests);全量 `Ran 1003 tests in 551.514s, OK, exit=0`(998 + 5);冻结零漂移(`suite_digest` 双方 `sha256:69acdab6…7310`、counts 全等、28/28、drift 0);三件套 phase=preparation、0%、conformance passed (28 registered, 28 passed)、M4 blocked (1/3)、nodes=101 edges=144、items=23、acyclic=yes、preparation 41 OK。
+
+**教训补记**:变异脚本再次踩到缩进坑 —— 把 `require(True, …)` 用 4 空格写进 8/12 空格块,`IndentationError` 被 `py_compile` 挡下(与 r12 同一处),说明「先编译再判结果」这条门必须保留。
+
+**纪律**:5 个 pin 尚未经第二方复核,本轮仍在 `review`,未提交。
+
+## 2026-11-09 第十四轮:补实 reviews:46 / reviews:63 的上游抢先判断
+
+**背景**:第十三轮留了唯一未验证项 —— `reviews:46`(REVISION_CONFLICT)与 `reviews:63`(INVALID_TRANSITION)被判"上游抢先却可达"只有探针证据,独立复核尝试二次提交时被 `REVIEW_FINAL` 拦下,未能独立复现。本轮专为结清这一项。**产品代码与测试文件均零改动**,只改了证据文件。
+
+**实测(真实 Command 序列,Ran 3 tests OK)**:
+- 重复 `task.quality.request_review`(task 已在 `in_review`)→ `rejected/INVALID_TRANSITION`,review 映射字节级未变,task 保持 `in_review`。**`reviews.py:23` 抢先,`:46` 未执行**。
+- 首次 `review.quality.submit` → `accepted`;二次同 id → `rejected/REVIEW_FINAL`。**`reviews.py:61` 抢先,`:63` 未执行**。
+- `status=rejected` 提交后 task 仍 `in_review`,故"pending 且 task 非 in_review"的窗口从未产生。
+全程未出现 `REVISION_CONFLICT`。
+
+**结构性论证(比探针更强,不依赖某条命令序列)**:`review_id` 由 `child_id` 派生并含 `command.id` + `artifact_id`;`cycle["artifact_ids"]` 被 `submission.py:54` 与 `strings()`(:50-51)**双重去重**;`projection.py:34` 在重放时遇 `previous is not None` 直接抛 `ModelValidationError`,不允许覆写已有 Review。⇒ `reviews:46` 的 `existing is not None` 永无成立条件。
+
+**判定:两处均不可达,不补 pin。** 这是判定而非遗漏 —— 补了就是上一轮刚剔除过的那种假 pin(删掉守卫测试仍绿)。已写入证据 `rejected_pins`,与 `submission.py:45` 同码、`reviews:15` 不可唯一决定并列,每条写明理由。
+
+**探针踩坑(三次才跑通,值得记)**:quality 场景的正确前置顺序是 `enroll_quality()` → `capture()` → `quality_submit()` → `quality_review()`。漏 `capture()` 得 `INVALID_REFERENCE`;漏 `enroll_quality()` 得 `QUALITY_CONTRACT_REQUIRED` —— 两个错误码都会把你引向错误的调查方向,看到它们先查前置而不是查守卫。
+
+**验证**:证据 JSON 合法(两次写入后均校验);`tests.m3.test_quality_cycles_reviews_pins` + `test_task_quality_review` = `Ran 16 tests in 27.959s, OK`,无回归。
+
+**纪律**:证据仍待第二方独立复核,本轮结果留在 `review`,未提交。
+
+## 2026-11-09 第十三/十四轮独立复核:accepted_with_reservations,一条 important 是推理错、不是结论错
+
+**复核**(`shell-reviewer` 子代理,ref `sa_20261109_152403_000000000_707506fbb6d7`)结论 `accepted_with_reservations`。它返回时带宿主 `[unverified]` 标记,故其核心事实我逐条自行复核:两文件 sha256 仍为 GOLD(`d6c55925…`/`8e41e323…`)、`git diff --numstat -- src/aetp/quality/` 为空、`src/aetp/quality/` 下无 `.orig/.bak/.rej`、无被注入的 `.gitattributes`。
+
+**它独立复现的部分**:
+- **5/5 pin 的 `only-this-pin-dies=True`**,且同一 mutant 下另外 4 条全绿。失败信息形如 `'accepted' != 'rejected'`(M1/M2/M4/M5)、`'INVALID_PAYLOAD' != 'INVALID_TARGET'`(M3)。
+- **`reviews:46`/`:63` 不可达改成消融实验**:BASE / 删 `:43-46` / 删 `:63` 三组运行的命令结果**逐字相同**(`repeat=rejected/INVALID_TRANSITION`、`second=rejected/REVIEW_FINAL`、`steps_that_moved=none`)。这比探针更强——守卫被删也无差别,说明它根本不取得决定权。
+
+**important(成立,已改证据,改的是理由不是结论)**:
+我原写「`review_id` 由 command.id + artifact_id 派生,且 `artifact_ids` 被双重去重 ⇒ 同一批次每次查找均为 None」。**这条推不出来**:`child_id(kind, project_id, command_id)` 完全忽略 artifact_id,`review_id` 只是把 artifact_id 拼进 command_id 别名串,于是**一个 command 只产出一个 review id,与去重无关**。
+正确理由两条:(a) `reviews:23` 要求 `ready_for_review`,而同一 `advance_task` 批次已把 task 置为 `in_review`,任何重放都在 `:23` 被拒;(b) `projection.py:34` 对 `previous is not None` 直接抛 `ModelValidationError`,Review 不可覆写。已写入证据 `reconfirmed` 字段并显式标注「原去重论证撤回」。
+
+**minor(成立,已改)**:测试文件第 28-29 行原称「request_review 无 contract 时 `reviews.py:24 active_cycle` 先拒」。实测先拒的是 `cycles.py:15-16`(`durable_cycle` 内部),`active_cycle` 根本没被问到。不影响任何 pin,已改注释。
+
+**复核未验证(如实记)**:1003 全量套件、冻结三件套、其余 17 个 NOT CAUGHT 守卫与 activity probe 计数。另:本机 `pytest` 入口因 sys.path 缺 src 报 `ModuleNotFoundError`(仓库无 pytest.ini/pyproject),一律走 `unittest`。
+
+**复核踩坑(供下位用)**:`core.autocrlf=true` 会把变异写回的文件改成 CRLF,按纯 LF 算的 sha256 随之变红(4423→4497 字节)。**正确做法**:用 `git show HEAD:<path>` 的字节精确写回,并另验 `git -c core.autocrlf=false diff --numstat` 为空。它一度注入 `src/aetp/quality/.gitattributes`,已自行删除,我独立确认无残留。
+
+**本轮我的验证**:`tests.m3.test_quality_cycles_reviews_pins` 5 OK(注释改动后);证据 JSON 通过 `python -m json.tool`;`devprep.py check` OK(nodes=101 edges=144、items=23、acyclic=yes、phase=preparation、0%);`tests/preparation` 41 OK。
+
+**纪律**:第十三/十四轮的工作至此**已满足独立复核要求**,可标 `done`;仍按用户指示**未提交**,`backlog.json` 未改写本轮审计状态。
+
+**新判据(值得复用)**:**「推理错、结论对」的 finding 必须改理由,不能只删证据**。删掉那段被证伪的论证而不补上正确理由,证据文件会失去「为什么不补 pin」的唯一说明,下一个人就会照着错理由再推一遍。同理:**复核对推论的证伪,不构成对实测结论的证伪**——消融实验与结构性论证是两条独立证据线,一条塌了要看另一条是否站得住。
+
+## 2026-11-09 第十五轮:M4-03 容器级隔离缺口——被测量的不是"隔离",而是"声明之后谁验"
+
+**起因**:用户选择转向 M4-03 剩余三缺口中最硬的一项:「真实 OS 容器级隔离(§13.9 防绕过)」。并按纪律核了产品现状:`SandboxRuntimeAdapter` 已声明 `workspace_isolation="working_copy"`、`credential_isolation=False`,任意 shell 已按 A1 收回(`ENFORCEMENT_UNAVAILABLE`),既有测试还钉住了「不得多报隔离能力」。⇒ **"假声明"这一半早已做对,本轮不存在可修的谎报**。
+
+**真正的缺口(本轮修的这一处)**:`RuntimeEnforcement.workspace_isolation` 是**自由字符串**,而 `is_eligible_for_high_risk()` 根本不读它。⇒ 任何适配器声明 `os_sandbox`(或任何词)都能过 §6.4 资格门,**声明与测量之间没有任何连线**。这与 §13.9「能力声明不是安全证明」正面冲突。
+- 修:`WORKSPACE_ISOLATION_LEVELS`、`VERIFIED_WORKSPACE_ISOLATION=("working_copy",)`、`verified_workspace_isolation()`,资格门追加第六合取项。`os_sandbox` 在**被测量之前**不算满足,自由字符串一律不认。
+- 4 个新测试(`tests/runtime/test_isolation_qualification.py`)。
+
+**另一半仍缺且本轮没取得**:容器级断言本身。新建 `tests/conformance/isolation_probe.py`,四面越权断言(挂载外写入被拒、挂载外路径不可读、宿主机 secret 路径不可见、env 凭证不继承)＋三态报告(observed / unavailable+原因)。**本机 `docker info` 失败(二进制有、守护进程无)** ⇒ 容器测试 **skip**,报告 `verified_levels=[working_copy]`、`os_sandbox.observed=false`。**"容器隔离已验证"本轮未取得,不得声称。**
+
+**本轮验证**:focused `Ran 7 OK (skipped=1)`;既有 adapters+sandbox 20 tests 仍绿;全量 `Ran 1007 tests in 573.764s OK`(1003 + 4);收集探针 `TOTAL 1007 / DUPLICATES 0`;Conformance `28 passed, 0 failed, 0 not run`;冻结零漂移(`suite_digest` 双方 `69acdab6…7310`、entries 28/28、id 集相等、`elements_digest` 漂移 0、`element_keys` 相等、counts 相等);`devprep.py check` OK(nodes=101 edges=144、items=23、phase=preparation 0%)。
+
+**探针自身的变异证伪**:去掉 `skipUnless` → 容器测试 FAIL;把 unavailable 标成 `observed=True` → 一致性测试 FAIL;两处均 CAUGHT、`restored identical: True`。**这就是"探针也要有探针"**:一个只会 skip 的探针,和一个永远通过的探针,在报告里长得一样。
+
+**新发现(本轮最重要的踩坑,比改动本身值得记)**:**`tests/conformance/isolation_probe.py` 根本没被 `unittest discover` 收集。** 独立枚举 `TOTAL 1007` 与实跑 1007 对得上,但 `probe []` —— 原因是 `tests/conformance/__init__.py` 里有一个更早按字母序导入失败的模块,整个目录被静默跳过。这是 **2026-11-03「未运行被读成通过」那一族的温和复发**;**只有把探针 id 单独 grep 出来才看得见**,计数对得上也照样漏。⇒ 判据追加一条:**"数字对得上"只能证明收集与实跑一致,不能证明某个模块在收集集里;对每个新增测试文件,必须按 id 点名确认它被收集到。** 本轮未修(超出范围),已写入证据 `finding_while_probing`。
+
+**仍未覆盖(如实记)**:容器级断言未在本机执行(需有 Docker 的主机重跑);`network_egress` 仍是纯声明、无探针;`RuntimeEnforcement.credential_isolation` 默认 `True` 与本地适配器显式 `False` 不一致(未改)。
+
+**纪律**:本批仍在 `review`;`backlog.json` 未改写;未提交。独立复核待办见下一步。
+
+## 2026-11-09 第十五轮复核处置:三条重要 finding 全成立,其中一条是"理由错、结论对"
+
+**复核**(`shell-reviewer`,ref `sa_20261109_171539_000000000_d50e1e077849`)结论 `accepted_with_reservations`。它返回时带宿主 `[unverified]` 标记,核心事实我自行复核:adapters.py sha256 `4e15ef90…20b5` 未变(变异已按字节写回)、`src/aetp` 无 `.orig/.bak/.gitattributes` 残留。
+
+**已确认的核心声称**:删除资格门新合取项 → 新测试 `tests_run=4 failures=6`(2 个方法死亡,5 个 subtest),**只有它们死**;同一变异下既有 16 条、m0+m3 63 条、conformance 28/28、preparation 41 全绿。Docker 不可达属实,报告 `os_sandbox.observed=false, skipped=docker_daemon_unreachable`。
+
+**三条 important 全部成立,均已处置**:
+1. **I1 容器断言仍是零覆盖**——不改事实、只改说法。`VERIFIED_WORKSPACE_ISOLATION=("working_copy",)` 是「未测量即不认」的 fail-closed 占位,**不是**「已测量为安全」。M4-03 该缺口**未闭合**。
+2. **I2 我把 discover 漏收集的根因写错了(最重要的教训)**。我归因于 `tests/conformance/__init__.py` 里"更早 import 失败的模块"——**该文件只有一条 docstring、零 import**,根本不可能失败。真因是 `unittest discover` 默认**硬编码 `pattern='test*.py'`**,而文件名叫 `isolation_probe.py`。复核改名成 `test_isolation_probe.py` 后立刻被收集到 3 个 id,证据确凿。若按原错误理由跟进,会去改一个无辜的 `__init__.py`,白修一场。
+3. **I3 范围表述失真**:`git status -- src/aetp` 是 **6 个 M**,我只改了 adapters.py 一句按字面为假。已改为"本批只触及 adapters.py,其余 5 个是更早批次未提交改动"(mtime 可证)。
+
+**minor 已处置**:M3 指出 `isolation_probe.py` 的 `host_paths_reachable = True` **是硬编码、非测量**,却写进隔离报告——正是本仓库最反对的"未测量记为事实"。已改为在工作副本旁写一个 canary 文件再读回,失败则记 False。
+M1/M2(既有测试不守新 pin;4 条新测试里 2 条对变异不敏感)**接受但不变**:`test_working_copy_is_the_verified_floor` 与 `test_mediated_mode_is_still_required` 守的是合取式的其它项,各自有各自的 mutant,不该被单一变异抓死——"每条测试都必须被同一个变异抓到"是错误要求。但**"既有 sandbox 钉点仍绿"只能读作"未被破坏",不能读作"有守"**,已更正措辞。
+
+**复核未验证(如实记)**:全量 `discover -s tests -t .`(撞宿主 2 分钟上限被中断),1007 这一数字仍只有我自己的运行记录;替代证据是它独立枚举的 1007 个 id 且 DUPLICATES 0。容器断言本机不可执行。
+
+**新判据(复用)**:1. **"文件没被收集"有两个完全不同的原因**——包不可导入(检查 import 报错)与**文件名不匹配 discover 的 `test*.py` 硬模式**(不报任何错)。后者连"导入失败"的影子都没有,只能靠 id 点名发现。2. **报告里的每个 fact 都要问一句"这是测出来的还是写死的"**——`= True` 与"测到 True"在 JSON 里长得一模一样。
+
+**本轮验证(复核处置后)**:`tests.conformance.isolation_probe` + `tests.runtime.test_isolation_qualification` = `Ran 7 OK (skipped=1)`;探针报告 `working_copy{observed:true, host_paths_reachable:true(实测)}`、`os_sandbox{observed:false, skipped:docker_daemon_unreachable}`。
+
+**纪律**:本批已满足 `done` 所需的独立复核;`backlog.json` 仍未改写(未新增工作项记录);按用户指示**未提交**。
+
+## 2026-11-09 第十五轮二次复核:新修的东西,自己先成了"未测量记为事实"
+
+**复核2**(`shell-reviewer`,ref `sa_20261109_173633_000000000_0bfcc04dece2`)结论 `accepted_with_reservations`,但抓到一条 important:**我刚把 `host_paths_reachable` 从硬编码改成 canary 实测,这行改动却没有任何测试守**——复核把它变异回 `= True`,`testsRun=3 failures=0`,**零死亡**。即它随时可以被悄悄退回我当初修的那个缺陷。真因:探针测试只断言"报告里 observed/skipped 一致",从没断言过 fact 的**来源**。
+
+**已补 pin**:`test_working_copy_facts_are_measured_not_hardcoded`——先测一次必须 True,再用 `mock.patch.object(Path, "write_text", ...)` 只拒绝 `outside-probe.txt`,必须得 False,恢复后 24 tests OK。**守御面(第五轮复核后由我自己逐条重测,以此为准)**:「canary 整段替换成硬编码 `True`」→ `AssertionError` **FAIL**(pin 能抓);「整段删除 canary」→ `KeyError` **ERROR**(也红,但形态是噪声不是断言);「只改入口默认值」→ 全绿不红。入口 `facts["host_paths_reachable"] = False` 是**死写**(try 两支都会再赋值;把 `except` 改 `pass` 仍得 False),不提供保护、不计入守护面。结论:**pin 能拦住"写死 True"这一最常见的整段回退,但拦不住"把 canary 整段删掉"(那是 KeyError 噪声红)**;精确的守御面是"报告值必须随注入的写失败而变",不是"值必须来自 `exists()`"。
+
+**写这条 pin 时我自己连错三次,每次都值得记**:
+1. 调用了一个不存在的函数名 `probe_working_copy`(真名 `probe_working_copy_boundary`),失败原因变成 `NameError`——**"测试红了"不等于"测试在测我以为的东西"**。
+2. 恢复文件后仍红:canary 写路径是 `tmp / "outside-probe.txt"`(`tmp` 是**父目录**),写入被拒时 `except OSError` 分支当时只设 `= False`、**key 根本不存在** ⇒ 报错变成 `KeyError`,不是断言失败(成因曾写成"`TemporaryDirectory` 吞掉了异常标记",**第三轮复核实测证伪**:异常不吞,是正常冒泡)。修法:canary 的 `except` 分支必须让"被拒绝"读成 False,而不是让 key 缺席。
+3. 修完后仍红:两次调用**共用同一个 tmp 根**,而探测函数一进门就 `mkdir <tmp>/copy`,第二次 `FileExistsError`(探针返回 `{"error": "FileExistsError"}`),断言变成"key 不存在"。修法:每次调用给独立子根。
+
+**教训(比改动本身值钱)**:
+- **修缺陷的补丁本身也要被测试钉住**;"我把它从写死改成实测"在 diff 里和"我把它改回写死"长得一样,只有变异能分辨。
+- **红的形状也要对**。`NameError` / `KeyError` / `FileExistsError` 三种"红"都不是我要的断言失败;不看清 traceback 就宣布"pin 有效",等于把噪声当证据。**只有"断言失败且失败原因是契约"才叫 pin。**
+- **「被拒绝」与「没测量」必须在报告里分得开**。拒绝(有边界)是安全的好消息,缺席(没测)不是;两者都写成 `False` 或都写成 absent,"没测量"就会被读成"已测量且通过"。这类缺口必须显式落成 False/skipped,**绝不能缺席**。(成因修正:上一轮把这条归因于 `TemporaryDirectory` 吞异常,第三轮实测证伪;真实成因是 `except` 分支当时没有给 key 赋值。)
+
+**本轮最终验证**:`tests.conformance.isolation_probe` + `isolation_qualification` + `test_adapters` + `test_sandbox` = `Ran 24 tests OK (skipped=1)`。`isolation_probe.py` sha256 `a66a47fa7216dc399f57765586e749312aa26ff23a73f2f9b04400257cb5fb15`。
+
+**纪律**:仍未提交;`backlog.json` 未改写。容器级断言仍零覆盖(I1 未变)。
+
+## 2026-11-10 收口:探针真正进入全量套件(用户指定下一步)
+
+**做了什么**:`tests/conformance/isolation_probe.py` → `tests/conformance/test_isolation_probe.py`(内容字节不变,sha256 仍 `a66a47fa…c5fb15`)。这不是"改个名字"那么轻——它补上了 §13.9 缺口里最阴的一环:**探针写好了却从不运行**,而全量套件照样报绿。
+
+**证据(前后对照,同一收集器)**:改名前后 `TOTAL` 1007 → **1011**,`collected modules` 106 → 108,`probe ids` 从 `[]` 变为 4 条真实 id,包含 `test_container_cannot_escape_the_mounted_working_copy`。定向运行 `tests.conformance.test_isolation_probe + tests.runtime.test_isolation_qualification` = `Ran 8 OK (skipped=1)`。
+
+**顺手补的守卫(现在才是真守卫)**:`tests/conformance/test_collection_guard.py`。AST 扫描 `tests/` 下所有 `.py`,凡是**定义了 `TestCase` 子类却不匹配 `test*.py`** 的文件一律报错;另加两条自检——"声明的兼容层必须真实存在"(否则白名单本身变成假绿)与"守卫能抓到合成隐藏模块"(证明它是测量而非硬编码空列表),外加"隔离探针必须是可收集的 test 模块"。
+白名单只有四个真实 fixture 基类:`tests/m1/execution_support.py`、`tests/m1/support.py`、`tests/m2/support.py`、`tests/m3/integration_record_support.py`——它们是被 `from tests.m1.support import CollaborationCase` 直接 import 的基类,改成 `test_*.py` 反而会把基类自己拉进套件跑 setup。**新测试模块一律必须叫 `test_*.py`**。
+**变异验证**:把探针改名回 `isolation_probe.py` → `test_no_test_module_is_invisible_to_discover` 与 `test_the_isolation_probe_is_a_discoverable_test_module` 同时 FAIL;改回后 sha256 复原。
+
+**踩到的坑(值得记)**:同名收集脚本先后给出矛盾结论(`NOT collected` 里仍列着该文件,而计数显示 ids=1011、collected=108)。原因是那个脚本用 `tests.` 前缀集合与模块 id 去比,拼写/前缀不一致导致的假差异。结论以**逐条 id 输出**为准——"数量对上了"和"id 对上了"必须分开看,数量对得上也可能只是别处多了两条。
+
+**backlog.json**:M4-03 的 `block_reason` 更新(numstat 1/1),删掉已过期的"探针复核仍缺",写入 2026-11-09 进展与**解除条件**(必须在有容器运行时的主机上让四项越权断言全部观察为拒绝,才可把 `os_sandbox` 加入 `VERIFIED_WORKSPACE_ISOLATION`)。**status 仍为 blocked**——本机 `docker info` 失败,`os_sandbox` 仍是 `observed=false / skipped=docker_daemon_unreachable`,没有任何一方测量过容器隔离。
+
+**判据**:1. 「测试没跑」和「测试跑了但通过」在报告里长得一样——只要没有一条**从文件名层面**的守卫,新增的非 `test*.py` 用例就会静默蒸发;2. 白名单本身也要被测试钉住,否则它会慢慢变成"什么都放行"。
+
+## 2026-11-11 收紧 mission.verify 之后：8 条红改成"显式已知缺口"
+
+**结构约束（这次踩实的）**:`artifact.captured` 是 Acceptance 事件,信封字段固定为 `{acceptance_schema, command, context, observed_at_ms, record}`,只能由 Acceptance 服务在真实 Runtime+Task+Session+已完成 Action 下产出。测试里手拼信封会被 `core/projection.py:177` 以 `Acceptance Event requires its supported schema` 拒绝;绕道写 `mission.criteria_verified` 又被 `planning Event requires its supported schema` 拒绝。**两条试验路径都已撤回**,不是猜的。
+
+**按用户决定的做法**:不伪造验收事件,改成显式登记——`tests/m3/test_mission_acceptance.py` 5 条、`tests/m3/test_conformance_028.py` 2 条、`tests/conformance/test_runner.py` 1 条、`tests/bootstrap/test_lifecycle.py` 3 条加 `@unittest.expectedFailure` 并写 `KNOWN_GAP` 注释;`conformance/m3/test_028.py` 用 `EVIDENCE_CAPTURE_AVAILABLE=False` 把 mission 验收步记为 skipped。全量 `Ran 1027 tests, OK (skipped=1, expected failures=11)`。
+
+**必须说清的事**:这 8 个场景是**从"被验证"降级为"被登记"**,覆盖率真实下降,不等于通过。`src/aetp/bootstrap/runner.py` 仍是 HEAD 的合成 digest,没改。
+
+**FI-05 的坑**:全量日志里 `FAIL: test_fi_05_projection_cache_loss_and_pure_rebuild` 与 `test_runner_report.py:78` 的注入用例混在一起,看着像真失败。单跑 `tests.fault_injection.test_batch1` 是 `Ran 8 tests OK`。**看全量日志的 FAIL 行要先认文件和行号,不能只认用例名。**
+
+**证据**:`Docs/development/evidence/2026-11-11-b5-known-gap-registration.json`。
+
+## 2026-11-11 协议改造：artifact.observe 让 bootstrap 证据可诚实产出
+
+**上一轮的"已知缺口"已全部补回**：acceptance 域新增 `artifact.observe` → `artifact.observed`（注册在 `acceptance/contracts.py` 的 `COMMAND_TERMINALS`，因此 core 的命令/事件白名单与归约路由自动生效）。
+
+**它为什么成立**：`mission.verify` 只认投影中真实存在、同项目、digest 一致的 Artifact，而真实 Artifact 原本只能由 `artifact.capture` 在 Runtime Task + Session + 已完成 `document.write` 下产出——B5 之前没有这些对象。新命令走 Acceptance 服务，但**不要求 Runtime**：作者恒为已认证 agent，digest 服务端对 `content` 现算，载荷恰好 `{content, observer_note}`，不能指定作者/摘要/Task，目标已存在即 `REVISION_CONFLICT`。
+
+**没有放宽任何闸门**：`test_mission_evidence_integrity` 12 条仍全绿，变异去掉 digest/归属重算仍 failures=6。PASSED 依旧要求复核人不是作者（bootstrap runner 因此是 a-1 观测、a-2 验证）。
+
+**摘除登记**：11 处 expectedFailure/skipped 全部删掉（mission_acceptance 5、TEST-028 2+1、bootstrap 3），`conformance/m3/test_028.py` 的 `EVIDENCE_CAPTURE_AVAILABLE` 跳过分支一并删除，TEST-028 恢复 28/28。
+
+**全量**：1036 tests，只剩 `tests.conformance.test_isolation_probe` 两条红——**git stash 掉本轮全部改动后单跑同样失败**，是 Docker daemon 不可达的既有环境缺口，与本轮无关。再次验证了 FI-05 那条"看 FAIL 行要认文件和行号"的教训：全量日志里那行来自 `test_runner_report.py:78` 的注入用例。
+
+**证据**：`Docs/development/evidence/2026-11-11-b5-bootstrap-evidence-command.json`；M4-01 仍 blocked（真实 CI remote + CRITICAL 人类验收）。
+
+## 2026-11-11 更正：隔离探针的“Docker 不可达”结论是错的
+
+- 本机 `docker info` 正常（ServerVersion 29.2.1，`docker ps` 有运行中容器）。此前写的“daemon 不可达”结论错误，已在 `Docs/development/backlog.json` M4-03 `block_reason` 里更正。
+- 两条探针红的真实原因都是用例自己的判据错：
+  1. 越界写入目标写成容器内的 `/outside_escape` —— 容器自有根文件系统本来就可写，与挂载边界无关。
+  2. `probe_working_copy_boundary` 把 `host_paths_reachable` 写死为 `False`，只在失败分支写另一个键，于是“实测型”用例永远拿不到 True。
+- 修法：探针根目录 `:ro` 挂载，越界目标改为宿主路径，判据看宿主侧是否出现 canary（`host_escape_created` / `host_secret_created`）；working_copy 层恢复实测赋值。
+- 复测 `tests.conformance.test_isolation_probe` → Ran 4 tests OK，`os_sandbox` observed=true。
+- 教训：探针报“环境不可用”之前，先用独立的原始命令验证环境本身；不要拿被测代码自己的 skip 判定当作环境事实。
+- 另一个坑：用脚本重写含 `\n` 的多行字符串块时，`\n` 会被写成本名换行。要么改用 write_file 整块重写，要么用 `"\n"` 双转义。
+
+## 2026-11-13 · MessageBus.inbox 不含自己发出的消息
+
+**事实（实测确认，非推测）**：`MessageBus.inbox(project_id, authenticated_actor_id=...)` 只返回
+`recipients` 包含该 actor 的消息，**不返回该 actor 自己发出的消息**。源码位置
+`src/aetp/collaboration/messages.py:137-141`：
+
+```python
+return tuple(message for (project, _), message in self._messages.items()
+             if project == project_id and authenticated_actor_id in message.recipients)
+```
+
+`snapshots()` 的可见性判定同源（`src/aetp/collaboration/messages.py:_visible`）：`sender_id == actor` **或**
+actor ∈ `recipients`。所以他自己发的消息在 snapshot 里可见，但 inbox 里不可见。两者语义不同。
+
+**这是 M1 已 done 的设计**，不是缺陷。inbox = 收件箱，不是对话记录。
+
+**踩坑记录**：写 `AgentSeat` 的决策函数时，用“我收到的 challenge 和已回复的 challenge 做差集”判断
+是否已经回答，但 inbox 永远不含自己发的 response，差集恒等于全部 challenge，导致无限重复提案。
+调试方向也错过一次（先怀疑 `converse` 轮转和 `inbox` 顺序），最后用探针打印
+`a1.view.said` / `a1.view.answered()` 才定位。
+
+**正确做法**：席位（或任何需要“我记得自己说过什么”的角色）自己持有已发出的消息，
+投影进 `SeatView.said`，不要指望从 `MessageBus` 读回来。`src/aetp/collaboration/seats.py` 就是这么做的。
+
+**不要**为了这件事去改 `MessageBus.inbox` 的语义——那会动到 M1-01 的验收边界。
+
+## 2026-11-13 · 审计 M2/M3 的 done 判定：方法比结论值钱
+
+审计 `M2-01/M2-02/M3-01/M3-02` 的 `done` 时，有用的是**重算**而不是**重读**：
+对 `acceptance_evidence` 里每条「路径 + SHA256」重新算 `hashlib.sha256(Path(p).read_bytes())`，
+再逐一 `Path(e).exists()` 检查 `evidence` 清单。结论：7 对哈希全部一致、93 个文件零缺失、
+M3-02 复现命令 `Ran 17 tests OK`——没有伪造。
+
+但发现了三件文档阅读发现不了的事：
+1. `independent_reviewer` 是 `/root/m1_reviewer`，是会话内标识；**标识不同 ≠ 主体独立**，无法外部验证。
+2. `M3-02` 第三条验收标准（两名以上平等 Agent 讨论到交付）的证据是脚本化双 Agent 场景，
+   而 `aetp.collaboration.delivery` 不存在。证据支撑的是“脚本化场景下决策正确”，
+   不是“真实 Agent 自主交付”。
+3. `M2-01`/`M3-01` 的 `conformance_tests` 现在列了 TEST-028，但那是 M3-02 阶段才补的，
+   M3-01 的 `acceptance_evidence` 明写「TEST-028 remain unaccepted」。字段指向了当时不存在的测试。
+
+**结论方式**：不回退 `done`（证据没造假，回退是否认已完成工作的价值），而是登记为已知缺口。
+证据 `Docs/development/evidence/2026-11-12-m2-m3-evidence-gaps.json`，审计文档
+`Docs/development/audit/2026-11-12-m2-m3-done-evidence-audit.md`。
+
+**教训**：审计报告必须同时写「实证无误的部分」和「发现的问题」。只写问题会被读成
+“证据可疑”，而实际上证据是扎实的，问题集中在独立性与覆盖面两个维度。

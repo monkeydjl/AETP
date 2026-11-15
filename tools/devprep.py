@@ -93,6 +93,18 @@ def _nonempty(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip())
 
 
+def _identity(value: Any) -> str | None:
+    """The identity-bearing head of a declared actor, or None if none was declared.
+
+    Entries are prose: "Boole (01a0...), 2026-09-07", "Codex main agent /root". The
+    head before the first separator is the identity; a trailing date or note is not.
+    """
+    if not _nonempty(value):
+        return None
+    head = re.split(r"[,;(]", value.strip(), maxsplit=1)[0]
+    return head.strip().casefold() or None
+
+
 def _relative(path: Path) -> str:
     return str(path.relative_to(ROOT)).replace("\\", "/")
 
@@ -374,6 +386,12 @@ def validate_backlog(backlog: dict[str, Any]) -> list[str]:
             for field in ("acceptance_evidence", "reproduction_command", "independent_reviewer"):
                 if not _nonempty(item.get(field)):
                     errors.append(f"{label}: done requires {field}")
+            # Non-empty is not the same as independent. Where both identities are
+            # declared and agree, the reviewer cannot have been a second party.
+            executor = _identity(item.get("executor"))
+            reviewer = _identity(item.get("independent_reviewer"))
+            if executor is not None and executor == reviewer:
+                errors.append(f"{label}: independent_reviewer must differ from the executor")
     if errors:
         return errors
 
@@ -481,6 +499,14 @@ def validate_status(status: dict[str, Any], backlog: dict[str, Any]) -> list[str
     if not isinstance(conformance, dict):
         errors.append("status.conformance must be an object")
     else:
+        counters: dict[str, int] = {}
+        for field in ("registered_tests", "passed_tests", "failed_tests", "not_applicable_tests"):
+            value = conformance.get(field)
+            # bool subclasses int: True must not read as a count of 1.
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                errors.append(f"status.conformance.{field} must be a non-negative integer")
+            else:
+                counters[field] = value
         if conformance.get("status") not in ("registered", "passed"):
             errors.append("status.conformance.status must be registered or passed")
         if conformance.get("registered_tests") != len(CONFORMANCE_IDS):
@@ -490,6 +516,37 @@ def validate_status(status: dict[str, Any], backlog: dict[str, Any]) -> list[str
             errors.append("status.conformance.passed_tests must be 0 or 28")
         if passed == len(CONFORMANCE_IDS) and conformance.get("status") != "passed":
             errors.append("status.conformance.passed_tests=28 requires status passed")
+        # The headline conclusion must agree with the count that supports it.
+        if conformance.get("status") == "passed" and passed != len(CONFORMANCE_IDS):
+            errors.append("status.conformance.status=passed requires passed_tests=28")
+        # A full pass must name the evidence behind it. This checks only that the
+        # reference is non-empty, not that the file exists: devprep's docstring
+        # disclaims inferring product conformance from documents on disk.
+        if conformance.get("status") == "passed" and not _nonempty(conformance.get("evidence")):
+            errors.append("status.conformance.status=passed requires an evidence reference")
+        # `registered` means no result exists yet - the record's own note says no
+        # product test has been accepted as passed. Reporting any outcome under it
+        # denies the status, and the sum guard cannot catch these cases: failed=28
+        # alone, or failed=20 with not_applicable=8, sums to exactly registered_tests
+        # and never exceeds it.
+        if conformance.get("status") == "registered":
+            for field in ("passed_tests", "failed_tests", "not_applicable_tests"):
+                if conformance.get(field):
+                    errors.append(
+                        f"status.conformance.status=registered requires {field}=0"
+                    )
+        # The counters describe one set of results, so they cannot contradict each
+        # other: nothing is both passed and failed, and a full pass leaves no room
+        # for failures or non-applicable outcomes. One check covers both cases:
+        # passed==registered with any failure implies the sum exceeds registered.
+        if len(counters) == len(("registered_tests", "passed_tests", "failed_tests", "not_applicable_tests")):
+            registered = counters["registered_tests"]
+            accounted = counters["passed_tests"] + counters["failed_tests"] + counters["not_applicable_tests"]
+            if accounted > registered:
+                errors.append(
+                    "status.conformance outcome counts contradict registered_tests: "
+                    f"passed+failed+not_applicable={accounted} > registered={registered}"
+                )
     items = backlog.get("work_items", [])
     expected_counts = dict(_counts_by_status(items))
     for state in STATUS_VOCABULARY:
