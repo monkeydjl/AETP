@@ -56,9 +56,41 @@ class CredentialBrokerTests(unittest.TestCase):
 
     def test_revoked_credential_is_rejected(self):
         credential = self._issue()
-        self.broker.revoke(credential["token"])
+        self.broker.revoke(credential["token"], actor="agent-work")
         with self.assertRaises(CredentialBrokerError) as ctx:
             self.broker.resolve(credential["token"], self.now + 1_000)
+        self.assertEqual(ctx.exception.code, "CREDENTIAL_REVOKED")
+
+    def test_non_owner_cannot_revoke_by_token(self):
+        """Revocation must identify who asks; a foreign Agent is refused."""
+        credential = self._issue()
+        with self.assertRaises(CredentialBrokerError) as ctx:
+            self.broker.revoke(credential["token"], actor="agent-other")
+        self.assertEqual(ctx.exception.code, "PERMISSION_DENIED")
+        # The credential is still usable: a refused revoke changes nothing.
+        self.broker.resolve(credential["token"], self.now + 1_000)
+
+    def test_non_owner_cannot_revoke_by_ref(self):
+        credential = self._issue()
+        with self.assertRaises(CredentialBrokerError) as ctx:
+            self.broker.revoke_by_ref(credential["token_ref"], actor="agent-other")
+        self.assertEqual(ctx.exception.code, "PERMISSION_DENIED")
+        self.broker.assert_permission_by_ref(
+            credential["token_ref"], "github.repo.read", self.now + 1_000)
+
+    def test_owner_can_revoke_its_own_credential(self):
+        credential = self._issue()
+        self.broker.revoke(credential["token"], actor="agent-work")
+        with self.assertRaises(CredentialBrokerError) as ctx:
+            self.broker.resolve(credential["token"], self.now + 1_000)
+        self.assertEqual(ctx.exception.code, "CREDENTIAL_REVOKED")
+
+    def test_owner_can_revoke_by_ref(self):
+        credential = self._issue()
+        self.broker.revoke_by_ref(credential["token_ref"], actor="agent-work")
+        with self.assertRaises(CredentialBrokerError) as ctx:
+            self.broker.assert_permission_by_ref(
+                credential["token_ref"], "github.repo.read", self.now + 1_000)
         self.assertEqual(ctx.exception.code, "CREDENTIAL_REVOKED")
 
     def test_unknown_token_rejected(self):
@@ -82,6 +114,17 @@ class CredentialBrokerTests(unittest.TestCase):
             self.broker.assert_permission_by_ref("credref_nope", "github.repo.read", self.now)
         self.assertEqual(ctx.exception.code, "CREDENTIAL_UNKNOWN")
 
+    def test_revoke_requires_a_named_actor(self):
+        """A blank or non-string actor is refused, never treated as a wildcard."""
+        credential = self._issue()
+        for actor in ("", "   ", None, 123, ["agent-work"]):
+            with self.subTest(actor=actor):
+                with self.assertRaises(CredentialBrokerError) as ctx:
+                    self.broker.revoke(credential["token"], actor=actor)
+                self.assertEqual(ctx.exception.code, "INVALID_AGENT")
+        # A refused revoke changes nothing.
+        self.broker.resolve(credential["token"], self.now + 1_000)
+
     def test_assert_permission_by_ref_respects_expiry_and_revoke(self):
         credential = self._issue(permissions=("github.repo.read",), expires_in=30_000)
         ref = credential["token_ref"]
@@ -90,7 +133,7 @@ class CredentialBrokerTests(unittest.TestCase):
         self.assertEqual(ctx.exception.code, "CREDENTIAL_EXPIRED")
         credential2 = self._issue(permissions=("github.repo.read",))
         ref2 = credential2["token_ref"]
-        self.broker.revoke_by_ref(ref2)
+        self.broker.revoke_by_ref(ref2, actor="agent-work")
         with self.assertRaises(CredentialBrokerError) as ctx:
             self.broker.assert_permission_by_ref(ref2, "github.repo.read", self.now + 1_000)
         self.assertEqual(ctx.exception.code, "CREDENTIAL_REVOKED")

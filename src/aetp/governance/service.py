@@ -9,6 +9,7 @@ from aetp.core.projection import Projection
 from aetp.domain.models import Command, ModelValidationError
 from aetp.governance.contracts import COMMAND_AGGREGATES, SCHEMA, system_actor
 from aetp.governance.causality import command_id, continuations, expiry_id
+from aetp.governance.credential_broker import CredentialBrokerError
 from aetp.governance.policy import current
 from aetp.governance.projection import evaluate
 from aetp.governance.snapshots import snapshot
@@ -34,13 +35,59 @@ class GovernanceService(MeetingService):
         if execution is not None and execution.store is not store:
             raise ValueError("execution and governance must use the same store")
         self.owner_id = owner_id
-        self.execution = execution
         self.input_authority = input_authority
         # Trusted-only: the broker holds secrets; it is never supplied by an
         # Agent Command. None means fail-closed (credential.request is refused).
-        self.credential_broker = credential_broker
+        self._credential_broker = credential_broker
+        self._execution = None
+        # Assigning through the setter pins the broker onto the consuming side,
+        # so construction and late attachment follow one path.
+        self.execution = execution
         self.gate = ResourceGate(store.database_path)
         self._governance_context = ContextVar(f"governance_{id(self)}", default=None)
+
+    @property
+    def execution(self):
+        return self._execution
+
+    @execution.setter
+    def execution(self, value):
+        """Attaching execution must also reach the consuming side.
+
+        A host that constructs governance first and attaches execution later
+        would otherwise leave the Broker mounted on this side only, and every
+        revocation would be recorded and then ignored at the call boundary.
+        """
+        self._execution = value
+        self._sync_consuming_broker(getattr(self, "_credential_broker", None))
+
+    @property
+    def credential_broker(self):
+        return self._credential_broker
+
+    @credential_broker.setter
+    def credential_broker(self, broker):
+        self._sync_consuming_broker(broker)
+        self._credential_broker = broker
+
+    def _sync_consuming_broker(self, broker):
+        """Keep both mount points on one Broker, or refuse the wiring.
+
+        Revocation happens here (governance) while authorisation happens at the
+        call boundary (`runtime/actions.py` reads `DocumentRuntime.credential_broker`).
+        Two instances would record a revocation and then ignore it, so the
+        consuming side is pinned to the same object. Detaching on this side
+        (None) deliberately leaves the consuming side's check in place.
+        """
+        if broker is None:
+            return
+        runtime = getattr(self.execution, "runtime", None)
+        if runtime is None:
+            return
+        current = getattr(runtime, "credential_broker", None)
+        if current is not None and current is not broker:
+            raise ValueError("governance and execution must share one Credential Broker")
+        runtime.credential_broker = broker
 
     def snapshot(self, project_id, target_type, target_id):
         return snapshot(Projection.rebuild(self.store.read_events(project_id)), target_type, target_id)
@@ -75,8 +122,18 @@ class GovernanceService(MeetingService):
                         self.execution.recover(command.project_id)
                 except PolicyViolation as exc:
                     context["forced_error"] = exc.code
-            with self.store.transaction():
-                result = self._submit(command, actor, context)
+            try:
+                with self.store.transaction():
+                    result = self._submit(command, actor, context)
+            except BaseException:
+                # The COMMIT failed, so a token minted for this Command has no
+                # Event behind it and nothing could ever revoke it. The failure
+                # itself is the proof: cleanup does not need to ask the store.
+                self._discard_minted_if_orphaned(command, context, committed=False)
+                raise
+            # The transaction committed, so the result now says whether a
+            # credential.issued landed with it.
+            self._discard_minted_if_orphaned(command, context, committed=result.status == "accepted")
             if result.status == "accepted" and command.type == "project.pause" and self.execution is not None:
                 self.execution._barriers[command.project_id] = False
             return result
@@ -111,6 +168,51 @@ class GovernanceService(MeetingService):
                 return super().handle(command, authenticated_actor_id=actor)
         finally:
             self._governance_context.reset(token)
+
+    def _discard_minted_if_orphaned(self, command, context, *, committed):
+        """Settle every token minted for a Command that did not land.
+
+        The caller states the outcome instead of letting cleanup probe for it:
+        a failed COMMIT proves the credential.issued never landed, and a
+        committed Command's result says whether one did. Reading the event
+        stream here would add a failure mode of its own, and a probe failure
+        during a failed COMMIT would leave a usable credential that nobody can
+        revoke.
+
+        Cleanup never raises. It runs on the way out of a failed Command, so an
+        exception here would replace the real failure with a credential error
+        and send the caller after the wrong problem.
+        """
+        if command.type != "credential.request":
+            return
+        minted = context.get("minted_tokens") or []
+        if not minted:
+            return
+        for entry in minted:
+            # Each entry records the Broker that minted it: a host can swap or
+            # clear the mounted instance mid-Command, and cleanup must reach the
+            # one actually holding the token.
+            if not isinstance(entry, tuple) or len(entry) != 2:
+                # Unknown shape: which Broker holds it is unknowable, so leave
+                # it alone rather than guess at the owner.
+                continue
+            owner, body = entry
+            if owner is None:
+                continue
+            try:
+                if committed:
+                    # The Event landed, so the Projection now owns this
+                    # credential and the Broker must refuse to drop it later.
+                    owner._confirm(body)
+                else:
+                    owner._discard(body)
+            except Exception:
+                # Best effort, and that includes a Broker that is not the one
+                # this entry names: raising here would replace the real failure
+                # with a credential error and send the caller after the wrong
+                # problem.
+                pass
+        minted.clear()
 
     def _rejection_events(self, command, result):
         # A rejected child cannot coexist with its parent's accepted fact.
@@ -160,32 +262,109 @@ class GovernanceService(MeetingService):
                         "live_sessions": {}, "pending_commands": Projection.pending_command_ids(events, commands),
                         "workspace_provider_id": None}
             if command.type == "credential.request":
-                if self.credential_broker is None:
-                    raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+                # A token minted into a Broker the call boundary ignores would
+                # be reported as granted and then answer CREDENTIAL_UNKNOWN.
+                broker = self._require_reachable_broker()
                 # The broker mints the token; the Agent payload can never carry
                 # a token_ref, only the requested permissions + TTL.
                 if "token_ref" in command.payload or "broker_token_ref" in command.payload:
                     raise PolicyViolation("INVALID_PAYLOAD")
-                issued = self.credential_broker.issue(
+                issued = broker.issue(
                     command.actor_id,
                     permissions=command.payload.get("permissions"),
                     issued_at=at,
                     expires_in_ms=command.payload.get("ttl_ms"),
+                    # Pending until the Event commits: this token may still be
+                    # discarded if the Command fails.
+                    pending=True,
                 )
                 # Persist only the non-invertible ref; the token body stays in
                 # the broker's memory and must never reach the Event Store.
                 data["broker_token_ref"] = issued["token_ref"]
+                # Revocation travels through a Projection record, so a token
+                # minted for a Command that never commits could not be revoked
+                # by anyone until it expired. _submit discards it instead.
+                # The minting Broker is recorded with the token: cleanup must
+                # un-mint from the instance that holds it, not from whatever is
+                # mounted by the time the Command ends.
+                context.setdefault("minted_tokens", []).append((broker, issued["token"]))
             kind, record = evaluate(command, state, at, data)
             payload = {"governance_schema": SCHEMA, "actor_id": command.actor_id, "command_type": command.type,
                        "command_payload": command.payload, "expected_revision": command.expected_revision,
                        "observed_at_ms": at, "context": data, "record": record,
                        "continuations": continuations(command, record, state)}
-            return self._batch(command, state, [(kind, COMMAND_AGGREGATES[command.type], command.target_id,
-                                                record["revision"], payload)])
+            outcome = self._batch(command, state, [(kind, COMMAND_AGGREGATES[command.type], command.target_id,
+                                                    record["revision"], payload)])
+            if command.type == "credential.revoke":
+                # The Projection record and the Broker are two halves of one
+                # fact: marking the record revoked is cosmetic unless the
+                # Broker stops honouring the ref. The Command-side authority
+                # check already ran inside evaluate(), so the Broker is asked
+                # on behalf of the credential's owner.
+                #
+                # This runs after the batch is built, so a Command that turns
+                # out to be rejected (a later stage raising) never leaves a
+                # Broker-side revocation behind: a rejected Command must have
+                # no effects at all.
+                self._revoke_in_broker(record)
+            return outcome
         except PolicyViolation as exc:
             return self._rejected(command, exc.code), []
         except (ModelValidationError, TypeError, KeyError, ValueError):
             return self._rejected(command, "INVALID_PAYLOAD"), []
+
+    def _require_reachable_broker(self):
+        """Return the Broker only if the call boundary would honour it.
+
+        Assignment pins the broker onto the consuming side, but a host can swap
+        that side afterwards or attach execution later. Checking here, at the
+        moment the fact is recorded, keeps the guarantee independent of wiring
+        order. Both directions need it: a revoke the boundary would ignore is
+        cosmetic, and a token minted into an unreachable Broker is a credential
+        the Command reports as granted but nobody can use.
+        """
+        if self.credential_broker is None:
+            raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+        runtime = getattr(self.execution, "runtime", None)
+        if runtime is not None and getattr(runtime, "credential_broker", None) is not self.credential_broker:
+            raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+        return self.credential_broker
+
+    def _revoke_in_broker(self, record):
+        """Make the Broker stop honouring a credential the Projection revoked.
+
+        Called only after ``evaluate()`` has established the Command's
+        authority, so the Broker is asked on behalf of the record's owner: the
+        Broker itself has no human concept and checks ownership by agent id.
+        """
+        broker = self._require_reachable_broker()
+        token_ref = record.get("token_ref")
+        owner = record.get("owner_id")
+        if not isinstance(token_ref, str) or not token_ref:
+            raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+        if not isinstance(owner, str) or not owner:
+            # A record predating ownership persistence cannot be matched to a
+            # Broker identity. Refusing keeps the Projection from claiming a
+            # revocation the Broker would go on honouring.
+            raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
+        try:
+            self.credential_broker.revoke_by_ref(token_ref, actor=owner)
+        except PolicyViolation as exc:
+            code = getattr(exc, "code", None)
+            if code == "CREDENTIAL_UNKNOWN":
+                # A ref the Broker no longer knows cannot be granted either, so
+                # the intended effect already holds.
+                return
+            # The Command-side authority check already passed, so the Broker is
+            # not rejecting the caller: its own idea of who owns this ref
+            # disagrees with the Projection record. The two halves of one fact
+            # cannot be reconciled, which is what CREDENTIAL_UNAVAILABLE means.
+            # Passing the Broker's own code through (PERMISSION_DENIED) would
+            # blame the caller for an internal inconsistency and send them after
+            # the wrong problem. Not reachable through the protocol - issue()
+            # derives both sides from one command.actor_id - but a host can mount
+            # a Broker that already holds the ref for someone else.
+            raise PolicyViolation("CREDENTIAL_UNAVAILABLE")
 
     def _child(self, parent, kind, target, payload, context, *, actor=None):
         state = Projection.rebuild(self.store.read_events(parent.project_id))

@@ -44,8 +44,21 @@ class CredentialBroker:
         # token_ref (the non-invertible digest) -> token body. The body is
         # memory-only and is how a consuming Tool authorizer recovers it.
         self._ref_to_token: Dict[str, str] = {}
+        # Tokens minted for a Command whose Event has not committed yet. Only
+        # these may be discarded; a committed credential belongs to the
+        # Projection, which is the authority on whether it is still live.
+        self._pending: set = set()
 
-    def issue(self, agent: str, *, permissions, issued_at: int, expires_in_ms: int) -> Dict:
+    def issue(self, agent: str, *, permissions, issued_at: int, expires_in_ms: int,
+              pending: bool = False) -> Dict:
+        """Mint a credential.
+
+        `pending` is set only by the governance path, for a token whose Event
+        has not committed yet: such a token may be discarded if the Command
+        fails. Everything else is committed on arrival, because a caller that
+        mints directly has no cleanup step and a permanent pending entry would
+        leak for the process lifetime.
+        """
         if not isinstance(agent, str) or not agent.strip():
             raise CredentialBrokerError("INVALID_AGENT")
         if not isinstance(permissions, (list, tuple)) or not permissions:
@@ -65,6 +78,8 @@ class CredentialBroker:
             issued_at_ms=issued_at,
             expires_at_ms=issued_at + expires_in_ms,
         )
+        if pending:
+            self._pending.add(token)
         token_ref = "credref_" + hashlib.sha256(token.encode("utf-8")).hexdigest()
         self._ref_to_token[token_ref] = token
         return {
@@ -115,11 +130,26 @@ class CredentialBroker:
             raise CredentialBrokerError("CREDENTIAL_UNKNOWN")
         return self.assert_permission(token, permission, at)
 
-    def revoke(self, token: str) -> None:
-        """Revoke an issued credential; subsequent resolutions are rejected."""
+    def revoke(self, token: str, *, actor: str) -> None:
+        """Revoke an issued credential; subsequent resolutions are rejected.
+
+        `actor` is mandatory: revocation is an authorized act, so the caller
+        must name itself and the Broker checks it owns the credential. Only
+        the owning Agent can revoke, matching the Command-side rule.
+
+        Migration note: `actor` was added as a required keyword-only argument,
+        so any caller written against the older two-argument form fails loudly
+        with TypeError instead of revoking anonymously. Passing it is not
+        optional and has no default: an unnamed revoke would have to skip the
+        ownership check, which is the loophole this signature closes.
+        """
         credential = self._credentials.get(token)
         if credential is None:
             raise CredentialBrokerError("CREDENTIAL_UNKNOWN")
+        if not isinstance(actor, str) or not actor.strip():
+            raise CredentialBrokerError("INVALID_AGENT")
+        if actor != credential.agent:
+            raise CredentialBrokerError("PERMISSION_DENIED")
         self._credentials[token] = _Credential(
             agent=credential.agent,
             permissions=credential.permissions,
@@ -128,9 +158,39 @@ class CredentialBroker:
             revoked=True,
         )
 
-    def revoke_by_ref(self, token_ref: str) -> None:
+    def revoke_by_ref(self, token_ref: str, *, actor: str) -> None:
         """Revoke an issued credential by its persistable ref."""
         token = self._ref_to_token.get(token_ref)
         if token is None:
             raise CredentialBrokerError("CREDENTIAL_UNKNOWN")
-        self.revoke(token)
+        self.revoke(token, actor=actor)
+
+    def _discard(self, token: str) -> None:
+        """Drop a credential minted for a Command that never committed.
+
+        Not a revocation: no authorisation is involved, because the credential
+        was never observable. Revocation needs a Projection record to travel
+        through, so a token whose Event never landed could not be revoked by
+        anyone for the rest of its TTL. Un-minting it is the only way back.
+
+        Only a token still pending its commit may be dropped. Once the Event
+        committed, the Projection is the authority on whether the credential
+        is live: discarding it here would leave a record saying "not revoked"
+        while the token silently stopped resolving.
+        """
+        if not isinstance(token, str):
+            return
+        if token not in self._pending:
+            raise CredentialBrokerError("CREDENTIAL_COMMITTED")
+        self._pending.discard(token)
+        if self._credentials.pop(token, None) is None:
+            return
+        for ref, body in list(self._ref_to_token.items()):
+            if body == token:
+                del self._ref_to_token[ref]
+                return
+
+    def _confirm(self, token: str) -> None:
+        """Record that the token's Event committed; it is no longer discardable."""
+        if isinstance(token, str):
+            self._pending.discard(token)

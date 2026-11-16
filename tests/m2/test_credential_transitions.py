@@ -12,8 +12,8 @@ from aetp.governance import credentials
 
 
 class CredentialTransitionTests(unittest.TestCase):
-    def _command(self, type_, payload, *, actor="a-1", target="cred-1"):
-        return Command("cmd-1", "p-1", actor, type_, target, payload, 0, "cmd-1", "corr")
+    def _command(self, type_, payload, *, actor="a-1", target="cred-1", revision=0):
+        return Command("cmd-1", "p-1", actor, type_, target, payload, revision, "cmd-1", "corr")
 
     def _state(self, *, credential=None):
         state = {
@@ -61,7 +61,7 @@ class CredentialTransitionTests(unittest.TestCase):
     def test_revoke_marks_revoked_and_preserves_history(self):
         previous = {"id": "cred-1", "revision": 1, "token_ref": "cred_old", "revoked": False}
         state = self._state(credential=previous)
-        command = self._command("credential.revoke", {}, actor="human-owner", target="cred-1")
+        command = self._command("credential.revoke", {}, actor="human-owner", target="cred-1", revision=1)
         kind, record = credentials.revoke(command, previous, state, at=2000, context={})
         self.assertEqual(kind, "credential.revoked")
         self.assertTrue(record["revoked"])
@@ -80,6 +80,28 @@ class CredentialTransitionTests(unittest.TestCase):
         self.assertEqual(kind, "credential.issued")
         self.assertNotIn("token", record)
         self.assertEqual(record["token_ref"], "credref_abc")
+
+    def test_non_owner_agent_cannot_revoke_another_agents_credential(self):
+        """Only the owning Agent or a human may revoke (see revoke docstring)."""
+        previous = {"id": "cred-1", "revision": 1, "token_ref": "cred_a",
+                    "revoked": False, "owner_id": "a-1"}
+        state = self._state(credential=previous)
+        state["agent:a-2"] = {"id": "a-2", "project_id": "p-1", "status": "available"}
+        state["project:p-1"]["governance"]["versions"]["gov-1"]["policy"]["subjects"]["a-2"] = {
+            "type": "agent", "roles": ["engineer"]}
+        command = self._command("credential.revoke", {}, actor="a-2", target="cred-1", revision=1)
+        with self.assertRaises(PolicyViolation) as ctx:
+            credentials.revoke(command, previous, state, at=2000, context={})
+        self.assertEqual(ctx.exception.code, "PERMISSION_DENIED")
+
+    def test_owning_agent_can_revoke_its_own_credential(self):
+        previous = {"id": "cred-1", "revision": 1, "token_ref": "cred_a",
+                    "revoked": False, "owner_id": "a-1"}
+        state = self._state(credential=previous)
+        command = self._command("credential.revoke", {}, actor="a-1", target="cred-1", revision=1)
+        kind, record = credentials.revoke(command, previous, state, at=2000, context={})
+        self.assertEqual(kind, "credential.revoked")
+        self.assertTrue(record["revoked"])
 
 
 if __name__ == "__main__":
