@@ -178,3 +178,27 @@ class SandboxRuntimeAdapterTests(unittest.TestCase):
                 authorization_context=auth_ctx,
             )
         self.assertEqual(ctx.exception.code, "WORKSPACE_VIOLATION")
+
+    def test_declared_capability_does_not_claim_isolation_it_cannot_prove(self):
+        """§13.9: a capability must describe what the boundary actually enforces.
+
+        The local adapter enforces a working-copy path prefix plus pre-tool
+        checks. It does not run under an OS or container boundary and holds no
+        separate credential store, so declaring anything stronger here would be
+        the one failure §13.9 names explicitly: claiming a control that a raw
+        shell can walk around.
+        """
+        enforcement = self.adapter.capability.enforcement
+        self.assertEqual(enforcement.workspace_isolation, "working_copy")
+        self.assertFalse(enforcement.credential_isolation)
+        self.assertEqual(enforcement.network_egress, "disabled")
+
+    def test_an_adapter_that_upgrades_its_isolation_claim_must_say_so_here(self):
+        """Pins the other half: the declaration is a constant, not a guess.
+
+        If someone later does bring a real OS/container boundary, this test is
+        the deliberate place to change, so the upgrade cannot ship silently.
+        """
+        self.assertEqual(self.adapter.capability.adapter_id, "aetp-local-sandbox")
+        self.assertEqual(self.adapter.capability.enforcement.mode, "mediated")
+        self.assertTrue(self.adapter.capability.is_eligible_for_high_risk())
