@@ -3,7 +3,12 @@
   "date": "2026-11-12",
   "auditor": "Reasonix coding agent (session 2026-11-11/12)",
   "audit_document": "Docs/development/audit/2026-11-12-m2-m3-done-evidence-audit.md",
-  "scope": ["M2-01", "M2-02", "M3-01", "M3-02"],
+  "scope": [
+    "M2-01",
+    "M2-02",
+    "M3-01",
+    "M3-02"
+  ],
   "method": {
     "hash_recompute": "对 backlog.json 中 acceptance_evidence 的每条「路径 + SHA256」配对重新计算 sha256 并比对",
     "evidence_presence": "逐一检查 evidence 清单中的每个文件是否存在",
@@ -12,16 +17,56 @@
   },
   "verified_facts": {
     "hash_recompute": {
-      "M2-01": {"pairs": 2, "mismatches": 0, "files": ["artifacts/m2-01-test-report-v2.json", "Docs/development/evidence/2026-09-12-m2-01-review-v2.json"]},
-      "M2-02": {"pairs": 2, "mismatches": 0, "files": ["artifacts/m2-02-test-report.json", "Docs/development/evidence/2026-09-12-m2-02-review.json"]},
-      "M3-01": {"pairs": 2, "mismatches": 0, "files": ["artifacts/m3-01-test-report.json", "Docs/development/evidence/2026-09-13-m3-01-review.json"]},
-      "M3-02": {"pairs": 1, "mismatches": 0, "files": ["Docs/development/evidence/2026-09-17-m3-02-final-review.json"], "note": "该配对以 SHA256: 内联出现在 acceptance_evidence 正文中，非「路径 SHA256」连续格式"}
+      "M2-01": {
+        "pairs": 2,
+        "mismatches": 0,
+        "files": [
+          "artifacts/m2-01-test-report-v2.json",
+          "Docs/development/evidence/2026-09-12-m2-01-review-v2.json"
+        ]
+      },
+      "M2-02": {
+        "pairs": 2,
+        "mismatches": 0,
+        "files": [
+          "artifacts/m2-02-test-report.json",
+          "Docs/development/evidence/2026-09-12-m2-02-review.json"
+        ]
+      },
+      "M3-01": {
+        "pairs": 2,
+        "mismatches": 0,
+        "files": [
+          "artifacts/m3-01-test-report.json",
+          "Docs/development/evidence/2026-09-13-m3-01-review.json"
+        ]
+      },
+      "M3-02": {
+        "pairs": 1,
+        "mismatches": 0,
+        "files": [
+          "Docs/development/evidence/2026-09-17-m3-02-final-review.json"
+        ],
+        "note": "该配对以 SHA256: 内联出现在 acceptance_evidence 正文中，非「路径 SHA256」连续格式"
+      }
     },
     "evidence_presence": {
-      "M2-01": {"listed": 15, "missing": 0},
-      "M2-02": {"listed": 11, "missing": 0},
-      "M3-01": {"listed": 11, "missing": 0},
-      "M3-02": {"listed": 56, "missing": 0}
+      "M2-01": {
+        "listed": 15,
+        "missing": 0
+      },
+      "M2-02": {
+        "listed": 11,
+        "missing": 0
+      },
+      "M3-01": {
+        "listed": 11,
+        "missing": 0
+      },
+      "M3-02": {
+        "listed": 56,
+        "missing": 0
+      }
     },
     "reproduction": {
       "command": "PYTHONPATH=\"src;.\" python -m unittest tests.m3.test_integration_gate tests.m3.test_mission_acceptance tests.m3.test_conformance_028",
@@ -34,7 +79,12 @@
     {
       "id": "GAP-REVIEWER-INDEPENDENCE",
       "severity": "medium",
-      "applies_to": ["M2-01", "M2-02", "M3-01", "M3-02"],
+      "applies_to": [
+        "M2-01",
+        "M2-02",
+        "M3-01",
+        "M3-02"
+      ],
       "observation": "四项 reviewer 均为 /root/m1_reviewer，executor 为 'Codex main agent'（M2-02/M3-01/M3-02 为 'Codex main agent /root'）。",
       "issue": "/root/m1_reviewer 是会话内 Agent 标识，本环境无法证实其为独立主体，而非同一进程扮演的第二角色。标识不同不等于主体独立。",
       "rule_reference": "AGENTS.md：「done 必须有验收证据和独立复核人（与执行者不同），不得用一个 Agent 的自评伪装两个独立审查者。」",
@@ -44,16 +94,35 @@
     {
       "id": "GAP-TEST028-SCOPE",
       "severity": "high",
-      "applies_to": ["M3-02"],
+      "applies_to": [
+        "M3-02"
+      ],
       "observation": "M3-02 第三条验收标准「两名以上平等 Agent 从粗糙想法讨论到成果交付」的证据是 conformance/m3/test_028.py 的脚本化双 Agent 场景。",
       "issue": "aetp.collaboration.delivery 模块此前已确认不存在（见 Docs/development/evidence/2026-11-09-m4-03-container-isolation-gap.json）。因此现有证据支撑的是「系统在脚本化双 Agent 场景下决策正确」，而非「真实两个 Agent 自主协商并交付」。",
       "assessment": "当时的 acceptance_evidence 已用「TEST-028 autonomous equal-agent negotiation」限定范围，措辞无误；风险在于 done 状态容易被读成产品已能自主交付。",
-      "not_a_status_change": "不回退 done；仅登记为已知缺口。"
+      "not_a_status_change": "不回退 done；仅登记为已知缺口。",
+      "amendments": [
+        {
+          "date": "2026-11-16",
+          "by": "later session, same workspace",
+          "why": "登记时的描述把缺口写成“脚本化双 Agent”，并暗含“缺少 delivery 模块”即未证交付。随后两轮的事实推翻了这个范围划分，原描述低估了已有覆盖。",
+          "corrections": [
+            "tests/runtime/test_peer_delivery_real_execution.py（5 tests OK）用真实 ExecutionService 走 Command -> Event Store -> Projection -> dispatch，断言拒绝来自 admission 而非夹具让路。交付后的执行准入已有真实链路测试，不是空白。",
+            "src/aetp/collaboration/seats.py 与 tests/m3/test_agent_seats.py 让对话内容由注入式决策函数产生，系统不提供内容模板。“内容是决策方给的而非硬编码”已成立。",
+            "两处都不需要 aetp.collaboration.delivery 模块：交付走既有 Task/Session/Action 链路。把“模块不存在”当作缺口证据是方向错了。"
+          ],
+          "restated_scope": "剩余缺口收窄为一条：没有任何一环由外部真实 Agent（LLM / 独立进程 / 远程主体）参与。系统内的两个 Agent 由测试注入的 python 可调用对象驱动，故本缺口不应表述为“脚本化对话”，而应表述为“外部主体缺席”。",
+          "not_a_status_change": "缺口仍未闭合，状态不上调。M3-03 仍为 in_progress；其代码与 9 条用例已提交（e2c8bb8），等待与执行者真正不同的复核主体。"
+        }
+      ]
     },
     {
       "id": "GAP-CONFORMANCE-MAPPING-DRIFT",
       "severity": "low",
-      "applies_to": ["M2-01", "M3-01"],
+      "applies_to": [
+        "M2-01",
+        "M3-01"
+      ],
       "observation": "M2-01 与 M3-01 的 conformance_tests 字段现均包含 TEST-028，但 M3-01 的 acceptance_evidence 明确写着「TEST-028 remain unaccepted」。",
       "issue": "TEST-028 是在 M3-02 阶段才补齐的；已完成工作项的映射字段指向了其完成时并不存在的测试，易被误读为 done 依赖了 TEST-028。",
       "suggested_fix": "在 conformance_tests 中区分「完成时已通过」与「事后补入映射」，未执行。",
