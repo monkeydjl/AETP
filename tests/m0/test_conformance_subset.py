@@ -91,6 +91,28 @@ class ConformanceSubsetTests(unittest.TestCase):
             projects = {row[0] for row in connection.execute("SELECT DISTINCT project_id FROM events")}
         self.assertEqual(projects, {"m0-" + test_id.lower() for test_id in PASSED | PARTIAL})
 
+    def test_a_skipped_fixture_never_counts_as_passed(self):
+        """A skip in a fixture must not read as execution.
+
+        `_execute` requires `not result.skipped`, and `case.complete` independently
+        stays False because the fixture body never reached its own end. Two guards,
+        one outcome. Measured by mutation: removing either guard alone still leaves
+        this test green, because the other one already fails the fixture. This test
+        therefore pins the outcome, not either guard - it reddens only if both are
+        lost at once.
+        """
+        original = runner._CoreFixtures.test_001
+        runner._CoreFixtures.test_001 = unittest.skip("injected by this test")(original)
+        try:
+            report = self.run_subset()
+        finally:
+            runner._CoreFixtures.test_001 = original
+
+        entry = report["TEST-001"]
+        self.assertNotEqual(entry["status"], "passed", "a skipped fixture was counted as passed")
+        self.assertEqual(entry["execution"]["status"], "failed")
+        self.assertEqual(entry["execution"]["skipped"], 1)
+
     def test_fixture_failure_is_derived_from_a_real_product_regression(self):
         original = CommandHandler.handle
         seen = set()

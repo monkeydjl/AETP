@@ -14,6 +14,14 @@ from dataclasses import dataclass, field
 from typing import Dict, Tuple
 
 
+# The only values `fixture_kind` may take. The frozen snapshot republishes this
+# field, and for a reader of that snapshot it is the sole signal of how strong
+# the evidence behind a result is. A definition carrying anything else - a blank,
+# a typo, an invented label - therefore advertises a strength that was never
+# established, so the runner refuses it rather than passing it through.
+FIXTURE_KINDS = ("real_path", "boundary_assertion")
+
+
 @dataclass(frozen=True)
 class ConformanceDefinition:
     id: str

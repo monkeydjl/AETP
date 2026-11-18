@@ -16,7 +16,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional
 
-from conformance.definitions import CONFORMANCE_DEFINITIONS, ConformanceDefinition
+from conformance.definitions import CONFORMANCE_DEFINITIONS, FIXTURE_KINDS, ConformanceDefinition
 from conformance.registry import FIXTURE_HANDLERS, register_fixture
 import conformance.fixtures  # Register standard executable fixtures
 
@@ -36,6 +36,13 @@ class TestResult:
     elements: Optional[Dict[str, str]] = None
     evidence_digest: str = ""
 
+
+# counts is built from exact string matches on these two fields. A value outside
+# the sets below - or a missing key - would leave a result counted by `total` and
+# by no other counter, so the suite could report all-passed over a run in which
+# that result never landed anywhere.
+EXECUTION_STATUSES = ("passed", "failed", "not_run")
+RESULT_STATUSES = ("passed", "pending", "failed", "not_applicable")
 
 FROZEN_ELEMENT_KEYS = (
     "initial_state",
@@ -77,6 +84,11 @@ def run_conformance(
     results: Dict[str, TestResult] = {}
     started_at = dt.datetime.now(dt.timezone.utc).isoformat()
     start_perf = time.perf_counter()
+
+    # A filter naming an id the suite does not define must not be quietly ignored.
+    # Running a subset of what was asked for while reporting success is the same
+    # defect as discovery skipping a directory it never entered.
+    unmatched_filter_ids = [f for f in (filter_ids or []) if f not in CONFORMANCE_DEFINITIONS]
 
     target_ids = list(CONFORMANCE_DEFINITIONS.keys())
     if filter_ids:
@@ -124,25 +136,73 @@ def run_conformance(
             )
             continue
 
-        # Execute registered fixture
-        t0 = time.perf_counter()
-        try:
-            res_dict = handler(store, project_id=f"p-{tid.lower()}")
-            duration_ms = (time.perf_counter() - t0) * 1000.0
+        # A declared evidence strength is not evidence. The frozen snapshot
+        # republishes `fixture_kind` verbatim, so a value outside FIXTURE_KINDS
+        # would publish a strength nobody established - and unlike the six frozen
+        # elements, this field is bound by no digest, so nothing else would catch
+        # it. Refuse it before the fixture runs.
+        if defn.fixture_kind not in FIXTURE_KINDS:
             results[tid] = TestResult(
                 test_id=tid,
                 title=defn.title,
                 invariant=defn.invariant,
                 domain=defn.domain,
-                status=res_dict.get("status", "passed"),
-                execution_status=res_dict.get("execution_status", "passed"),
-                summary=res_dict.get("summary", "Test fixture passed successfully"),
-                details=res_dict.get("details", {}),
-                duration_ms=round(duration_ms, 2),
+                status="failed",
+                execution_status="failed",
+                summary=f"fixture_kind {defn.fixture_kind!r} is not one of {FIXTURE_KINDS}",
+                details={"invalid_fixture_kind": defn.fixture_kind},
+                duration_ms=0.0,
                 fixture_kind=defn.fixture_kind,
                 elements=elements,
                 evidence_digest=_canonical_digest(elements),
             )
+            continue
+
+        # Execute registered fixture
+        t0 = time.perf_counter()
+        try:
+            res_dict = handler(store, project_id=f"p-{tid.lower()}")
+            duration_ms = (time.perf_counter() - t0) * 1000.0
+            problems = []
+            execution_status = res_dict.get("execution_status")
+            if execution_status not in EXECUTION_STATUSES:
+                problems.append(f"execution_status {execution_status!r} is not one of {EXECUTION_STATUSES}")
+            result_status = res_dict.get("status")
+            if result_status not in RESULT_STATUSES:
+                problems.append(f"status {result_status!r} is not one of {RESULT_STATUSES}")
+
+            if problems:
+                # Refuse it rather than let it fall through the gaps. A missing key
+                # is included on purpose: absence is not evidence of passing.
+                results[tid] = TestResult(
+                    test_id=tid,
+                    title=defn.title,
+                    invariant=defn.invariant,
+                    domain=defn.domain,
+                    status="failed",
+                    execution_status="failed",
+                    summary="; ".join(problems) + " - refusing to count it as anything but a failure",
+                    details={"unaccounted_result_fields": problems},
+                    duration_ms=round(duration_ms, 2),
+                    fixture_kind=defn.fixture_kind,
+                    elements=elements,
+                    evidence_digest=_canonical_digest(elements),
+                )
+            else:
+                results[tid] = TestResult(
+                    test_id=tid,
+                    title=defn.title,
+                    invariant=defn.invariant,
+                    domain=defn.domain,
+                    status=result_status,
+                    execution_status=execution_status,
+                    summary=res_dict.get("summary", "Test fixture passed successfully"),
+                    details=res_dict.get("details", {}),
+                    duration_ms=round(duration_ms, 2),
+                    fixture_kind=defn.fixture_kind,
+                    elements=elements,
+                    evidence_digest=_canonical_digest(elements),
+                )
         except Exception as exc:
             duration_ms = (time.perf_counter() - t0) * 1000.0
             results[tid] = TestResult(
@@ -173,6 +233,19 @@ def run_conformance(
         "status_pending": sum(1 for r in results.values() if r.status == "pending"),
         "status_failed": sum(1 for r in results.values() if r.status == "failed"),
     }
+    # Every result must land in exactly one counter. execution_status is a free
+    # string, so a fixture reporting any other value would make its result
+    # invisible: `total` counts it, the counters do not, and the suite reads green.
+    accounted = counts["executed_passed"] + counts["executed_failed"] + counts["not_run"]
+    # The status axis must account for every result too. not_applicable is a valid
+    # status with no counter of its own, so sum it here rather than leave it able
+    # to disappear from the status breakdown.
+    status_accounted = (
+        counts["status_passed"]
+        + counts["status_pending"]
+        + counts["status_failed"]
+        + sum(1 for r in results.values() if r.status == "not_applicable")
+    )
 
     report = {
         "suite": "AETP Full-Protocol Conformance",
@@ -186,7 +259,20 @@ def run_conformance(
             "platform": platform.platform(),
         },
         "counts": counts,
-        "all_passed": (counts["executed_failed"] == 0),
+        # A test that executed nothing is not a pass. Reporting the suite as
+        # all-passed while tests sat unrun is the same defect class as
+        # `unittest discover` silently skipping a non-package directory. A run
+        # that selected no test at all (total == 0) is likewise not a pass.
+        "all_passed": (
+            counts["total"] > 0
+            and accounted == counts["total"]
+            and status_accounted == counts["total"]
+            and counts["executed_failed"] == 0
+            and counts["status_failed"] == 0
+            and counts["not_run"] == 0
+            and not unmatched_filter_ids
+        ),
+        "unmatched_filter_ids": unmatched_filter_ids,
         "results": {tid: asdict(res) for tid, res in results.items()},
         "frozen_evidence": build_frozen_snapshot(results, db_path, counts),
     }
@@ -271,7 +357,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     counts = report["counts"]
     print(f"Conformance Results: {counts['executed_passed']} passed, {counts['executed_failed']} failed, {counts['not_run']} not run (Total: {counts['total']})")
 
-    if counts["executed_failed"] > 0:
+    # The exit code follows all_passed directly rather than re-deriving it. Two
+    # copies of the same judgement drifted apart once already: extending the status
+    # enumeration left all_passed False while this returned 0.
+    if not report["all_passed"]:
+        if report.get("unmatched_filter_ids"):
+            print(
+                f"Error: --filter named tests this suite does not define: "
+                f"{report['unmatched_filter_ids']}",
+                file=sys.stderr,
+            )
         return 1
     return 0
 

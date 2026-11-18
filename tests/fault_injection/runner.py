@@ -34,6 +34,59 @@ FAULT_DEFINITIONS = [
     {"id": "FI-15", "title": "不可信输入缺乏有效收据直接阻断", "mechanism": "Input Authority 收据校验 (14.11 / INV-020)"},
 ]
 
+# §18.2 states the verification criteria are the four below, and the generated
+# report is cited as acceptance evidence. They were previously written as four
+# literal True, so a run with failures still reported "all four criteria
+# satisfied" - a claim about the run that the run had not made. Each criterion is
+# now derived from this run's evidence.
+#
+# Criteria 3 and 4 name the fault classes that carry their evidence: FI-05 rebuilds
+# the projection from the event store alone, FI-02/FI-03 exercise repeated delivery
+# of one idempotency key. Criteria 1 and 2 are properties of the suite as a whole -
+# every class being handled by an existing mechanism, and the audit trail being
+# asserted through the event store - so the evidence for them is the whole suite
+# passing, with every declared class having actually run.
+CRITERION_EVIDENCE = {
+    "existing_mechanisms_only": (),
+    "event_store_fully_auditable": (),
+    "pure_replay_deterministic": ("FI-05",),
+    "idempotency_zero_side_effects": ("FI-02", "FI-03"),
+}
+
+
+def _collect_test_ids(suite: unittest.TestSuite) -> list:
+    ids: list = []
+    for item in suite:
+        if isinstance(item, unittest.TestSuite):
+            ids.extend(_collect_test_ids(item))
+        else:
+            ids.append(item.id())
+    return ids
+
+
+def _evaluate_criteria(test_ids: list, result: unittest.TestResult, suite_passed: bool) -> dict:
+    """Derive §18.2's four criteria from what this run actually established."""
+    outcomes = {}
+    for test, _ in list(result.failures) + list(result.errors):
+        outcomes[test.id()] = "failed"
+    for test, _ in result.skipped:
+        outcomes[test.id()] = "skipped"
+
+    def evidence_held(fault_ids):
+        for fault_id in fault_ids:
+            prefix = "test_" + fault_id.lower().replace("-", "_") + "_"
+            matching = [tid for tid in test_ids if tid.rsplit(".", 1)[-1].startswith(prefix)]
+            if not matching:
+                return False
+            if any(outcomes.get(tid, "passed") != "passed" for tid in matching):
+                return False
+        return True
+
+    return {
+        name: (suite_passed and evidence_held(required))
+        for name, required in CRITERION_EVIDENCE.items()
+    }
+
 
 def run_fault_injection_suite(*, json_out: str | None = None) -> dict:
     loader = unittest.TestLoader()
@@ -42,9 +95,20 @@ def run_fault_injection_suite(*, json_out: str | None = None) -> dict:
     suite.addTests(loader.loadTestsFromTestCase(FaultInjectionBatch2Tests))
 
     started_at = dt.datetime.now(dt.timezone.utc).isoformat()
+    # Collected before the run: TestSuite drops its entries (sets them to None)
+    # as tests complete, so asking it for ids afterwards yields None.
+    test_ids = _collect_test_ids(suite)
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(suite)
     finished_at = dt.datetime.now(dt.timezone.utc).isoformat()
+
+    # One source for this answer: the report and §18.2's criteria read the same
+    # variable, so they cannot disagree.
+    suite_passed = (
+        result.wasSuccessful()
+        and not result.skipped
+        and result.testsRun == len(FAULT_DEFINITIONS)
+    )
 
     report = {
         "suite": "AETP Anti-Fragility Fault Injection Suite (FI-01..FI-15)",
@@ -55,14 +119,17 @@ def run_fault_injection_suite(*, json_out: str | None = None) -> dict:
         "tests_run": result.testsRun,
         "failures": len(result.failures),
         "errors": len(result.errors),
-        "all_passed": result.wasSuccessful(),
+        # wasSuccessful() returns True when a test was skipped, so an unrun fault
+        # class would sit inside an all_passed=True report without appearing in
+        # it at all. Count skips explicitly and let them deny all_passed. The same
+        # goes for a fault class that was deleted or never collected: `tests_run`
+        # must cover every class the suite claims to exercise.
+        "skipped": len(result.skipped),
+        "all_passed": suite_passed,
         "fault_definitions": FAULT_DEFINITIONS,
-        "criteria_verification": {
-            "existing_mechanisms_only": True,
-            "event_store_fully_auditable": True,
-            "pure_replay_deterministic": True,
-            "idempotency_zero_side_effects": True,
-        },
+        "criteria_verification": _evaluate_criteria(
+            test_ids, result, suite_passed
+        ),
     }
 
     if json_out:

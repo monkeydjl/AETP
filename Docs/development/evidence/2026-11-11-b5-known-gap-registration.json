@@ -1,0 +1,31 @@
+{
+  "title": "收紧 mission.verify 后 12 条红的处置：8 条改为显式已知缺口，FI-05 澄清为日志错位",
+  "work_item": "M4-01",
+  "date": "2026-11-11",
+  "decision_by_user": "撤掉手拼信封，只保留诚实路径（已知缺口显式登记，不伪造验收事件）",
+  "structural_constraint": {
+    "summary": "artifact.captured 是 Acceptance 事件，信封字段固定为 {acceptance_schema, command, context, observed_at_ms, record}，只能由 Acceptance 服务在真实 Runtime + Task + Session + 已完成 Action 下产出。",
+    "observation": "手工拼信封被 core/projection.py:177 以 'Acceptance Event requires its supported schema' 拒绝；改走 planning 的 mission.criteria_verified 又被 'planning Event requires its supported schema' 拒绝。两条试验路径都已撤回，仓库无残余。"
+  },
+  "registered_gaps": [
+    {"file": "tests/m3/test_mission_acceptance.py", "count": 5, "how": "@unittest.expectedFailure + KNOWN_GAP 注释", "why": "verify_criterion 仍用 art-verify-N + 'a'*64，mission.verify 收紧后必然 EVIDENCE_STALE"},
+    {"file": "conformance/m3/test_028.py", "count": 1, "how": "EVIDENCE_CAPTURE_AVAILABLE=False，mission 验收步如实记为 skipped", "why": "场景内没有 Runtime，无法产出真实 Artifact 证据"},
+    {"file": "tests/m3/test_conformance_028.py", "count": 2, "how": "@unittest.expectedFailure", "why": "依赖 TEST-028 的 mission 验收步"},
+    {"file": "tests/conformance/test_runner.py", "count": 1, "how": "@unittest.expectedFailure", "why": "TEST-028 跳过验收步后 executed_passed 为 27 而非 28"},
+    {"file": "tests/bootstrap/test_lifecycle.py", "count": 3, "how": "@unittest.expectedFailure + KNOWN_GAP 注释", "why": "runner 仍以合成 digest 调 mission.verify，被 EVIDENCE_STALE 拒绝"}
+  ],
+  "fi_05_clarification": {
+    "observed": "tests.fault_injection.test_batch1 单模块 Ran 8 tests OK；tests.fault_injection.test_runner_report 中有故意失败的注入用例（'injected: the replay evidence did not hold'），其真名在全量日志里容易被误读成 FI-05。",
+    "conclusion": "FI-05 不是被本轮收紧打红；全量 exit=0 的 OK 结果里不包含它。"
+  },
+  "full_suite": {
+    "command": "PYTHONPATH=\"src;.\" python -m unittest discover -s tests -t .",
+    "result": "exit=0；Ran 1027 tests，OK (skipped=1, expected failures=11)",
+    "note": "11 = 5 (mission_acceptance) + 2 (028) + 1 (conformance runner) + 3 (bootstrap)"
+  },
+  "not_done": {
+    "coverage": "这 8 个场景从'被验证'降级为'被登记'，覆盖率是真实下降的，不等于测试通过。",
+    "runner": "src/aetp/bootstrap/runner.py 未改，仍保持 HEAD 版本的合成 digest。",
+    "next": "需要新增受控 bootstrap 证据命令（或让 runner 走 AcceptanceService）后，再逐条摘掉 expectedFailure；届时时 TEST-028 的 EVIDENCE_CAPTURE_AVAILABLE 才能翻为 True。"
+  }
+}

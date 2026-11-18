@@ -253,5 +253,176 @@ class FailClosedPreparationTests(unittest.TestCase):
             self.assertTrue(devprep.validate_markdown_links([path]))
 
 
+    def test_done_rejects_a_reviewer_that_is_the_executor(self):
+        """`independent_reviewer` claims independence; a copy of the executor is not one.
+
+        truth_rules.completion_requires names independent_reviewer, but the gate only
+        checked that the field was non-empty. An executor signing off on its own work
+        therefore validated cleanly, and the report still read as independently
+        reviewed. The rule is deliberately narrow: it fires only where both identities
+        are declared and agree.
+        """
+        backlog = material("backlog.json")
+        for item in backlog["work_items"]:
+            item["status"] = "todo"
+        items = {item["id"]: item for item in backlog["work_items"]}
+        items["PREP-001"].update(
+            status="done",
+            acceptance_evidence="synthetic evidence, not product acceptance",
+            reproduction_command="synthetic command",
+            executor="the same agent",
+            independent_reviewer="the same agent",
+        )
+        errors = devprep.validate_backlog(backlog)
+        self.assertTrue(any("PREP-001" in error and "independent_reviewer" in error for error in errors), errors)
+
+    def test_done_rejects_a_reviewer_equal_to_the_executor_after_trailing_prose(self):
+        """The comparison is by declared identity, so a trailing date must not hide a match."""
+        backlog = material("backlog.json")
+        for item in backlog["work_items"]:
+            item["status"] = "todo"
+        items = {item["id"]: item for item in backlog["work_items"]}
+        items["PREP-001"].update(
+            status="done",
+            acceptance_evidence="synthetic evidence, not product acceptance",
+            reproduction_command="synthetic command",
+            executor="Codex main agent",
+            independent_reviewer="Codex main agent, 2026-01-01",
+        )
+        errors = devprep.validate_backlog(backlog)
+        self.assertTrue(any("PREP-001" in error and "independent_reviewer" in error for error in errors), errors)
+
+    def test_done_without_a_declared_executor_stays_valid(self):
+        """Most live done items declare no executor; the gate must not invent a conflict."""
+        backlog = material("backlog.json")
+        for item in backlog["work_items"]:
+            item["status"] = "todo"
+        items = {item["id"]: item for item in backlog["work_items"]}
+        items["PREP-001"].update(
+            status="done",
+            acceptance_evidence="synthetic evidence, not product acceptance",
+            reproduction_command="synthetic command",
+            independent_reviewer="some other reviewer",
+        )
+        self.assertEqual(devprep.validate_backlog(backlog), [])
+
+    def test_done_with_a_distinct_reviewer_stays_valid(self):
+        """The gate must not reject a genuinely different reviewer - no over-tightening."""
+        backlog = material("backlog.json")
+        for item in backlog["work_items"]:
+            item["status"] = "todo"
+        items = {item["id"]: item for item in backlog["work_items"]}
+        items["PREP-001"].update(
+            status="done",
+            acceptance_evidence="synthetic evidence, not product acceptance",
+            reproduction_command="synthetic command",
+            executor="the executing agent",
+            independent_reviewer="a different reviewer",
+        )
+        self.assertEqual(devprep.validate_backlog(backlog), [])
+
+    def test_the_live_backlog_still_satisfies_the_reviewer_gate(self):
+        """Tightening must not false-positive on the materials as they actually stand."""
+        self.assertEqual(devprep.validate_backlog(material("backlog.json")), [])
+
+
+    def test_conformance_outcome_counts_must_not_contradict_each_other(self):
+        """28 passed and 28 failed in one record is not a record of anything.
+
+        The gate pinned status/registered_tests/passed_tests but never read
+        failed_tests or not_applicable_tests, so a self-contradictory count passed.
+        """
+        for field, value in (("failed_tests", 28), ("not_applicable_tests", 28)):
+            with self.subTest(field=field):
+                status = material("status.json")
+                status["conformance"][field] = value
+                errors = devprep.validate_status(status, material("backlog.json"))
+                self.assertTrue(any("conformance" in error for error in errors), errors)
+
+    def test_conformance_counters_must_be_non_negative_integers(self):
+        """bool subclasses int; a true/false counter must not read as 1/0."""
+        for field in ("registered_tests", "passed_tests", "failed_tests", "not_applicable_tests"):
+            for bad in (True, -1, None, "28"):
+                with self.subTest(field=field, bad=bad):
+                    status = material("status.json")
+                    status["conformance"][field] = bad
+                    errors = devprep.validate_status(status, material("backlog.json"))
+                    self.assertTrue(any("conformance" in error for error in errors), errors)
+
+    def test_a_passed_conformance_status_requires_a_full_pass_count(self):
+        """`status: passed` with `passed_tests: 0` denies its own headline."""
+        status = material("status.json")
+        status["conformance"]["status"] = "passed"
+        status["conformance"]["passed_tests"] = 0
+        errors = devprep.validate_status(status, material("backlog.json"))
+        self.assertTrue(any("conformance" in error for error in errors), errors)
+
+    def test_a_registered_conformance_record_stays_valid(self):
+        """Nothing has passed yet; the registered state is legitimate, not a defect."""
+        status = material("status.json")
+        status["conformance"].update(
+            status="registered", passed_tests=0, failed_tests=0,
+            not_applicable_tests=0, evidence=None,
+        )
+        self.assertEqual(devprep.validate_status(status, material("backlog.json")), [])
+
+    def test_a_registered_record_cannot_carry_results(self):
+        """`registered` means no result exists yet, so reporting one denies the status.
+
+        The sum guard alone let these through: registered=28 with failed=28, or with
+        failed=20 + not_applicable=8, sums to exactly 28 and never exceeds it.
+        """
+        for field, value in (
+            ("failed_tests", 28), ("not_applicable_tests", 28), ("passed_tests", 28),
+        ):
+            with self.subTest(field=field):
+                status = material("status.json")
+                status["conformance"].update(
+                    status="registered", passed_tests=0, failed_tests=0,
+                    not_applicable_tests=0, evidence=None,
+                )
+                status["conformance"][field] = value
+                errors = devprep.validate_status(status, material("backlog.json"))
+                self.assertTrue(any("conformance" in error for error in errors), errors)
+
+    def test_a_registered_record_cannot_split_the_registration_across_outcomes(self):
+        """failed=20 + not_applicable=8 sums to 28: under the sum guard alone it passes."""
+        status = material("status.json")
+        status["conformance"].update(
+            status="registered", passed_tests=0, failed_tests=20,
+            not_applicable_tests=8, evidence=None,
+        )
+        errors = devprep.validate_status(status, material("backlog.json"))
+        self.assertTrue(any("conformance" in error for error in errors), errors)
+
+    def test_a_passed_conformance_status_must_cite_evidence(self):
+        """A full pass with no evidence reference is a claim with nothing behind it.
+
+        This checks that the reference is non-empty, not that the file exists:
+        devprep's docstring disclaims inferring conformance from documents on disk.
+        """
+        status = material("status.json")
+        for bad in (None, "", "   "):
+            with self.subTest(evidence=bad):
+                status["conformance"]["evidence"] = bad
+                errors = devprep.validate_status(status, material("backlog.json"))
+                self.assertTrue(any("conformance" in error for error in errors), errors)
+
+    def test_a_registered_record_may_omit_its_evidence_reference(self):
+        """Nothing has passed, so there is nothing to cite - this must stay valid."""
+        status = material("status.json")
+        status["conformance"].update(
+            status="registered", passed_tests=0, failed_tests=0,
+            not_applicable_tests=0, evidence=None,
+        )
+        self.assertEqual(devprep.validate_status(status, material("backlog.json")), [])
+
+    def test_the_live_status_still_stands(self):
+        """Tightening must not false-positive on the record as it actually stands."""
+        self.assertEqual(
+            devprep.validate_status(material("status.json"), material("backlog.json")), []
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
