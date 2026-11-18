@@ -1073,7 +1073,7 @@
       "id": "M3-03",
       "milestone": "M3",
       "title": "注入式 Agent 席位：让对话内容由 Agent 决定而非硬编码",
-      "status": "in_progress",
+      "status": "review",
       "depends_on": [
         "M1-01",
         "M2-01",
@@ -1110,7 +1110,9 @@
         "tests/m3/test_agent_seats.py",
         "Docs/development/evidence/2026-11-12-m2-m3-evidence-gaps.json",
         "Docs/development/evidence/2026-11-13-m3-03-agent-seats.json"
-      ]
+      ],
+      "verification_pending": "复核者与执行者为同一主体：用户于 2026-11-18 决定降低要求，由执行者自评并置 review，不宣称 done。",
+      "review_note": "自评（非独立复核）：注入式 decide(view) -> Decision | None 成立；SeatView 只含 project_id/agent_id/inbox/said，不含 Role/Task/Lease，席位平等未被破坏；系统不提供内容模板。代码与 9 条用例已提交 e2c8bb8，M3 模块回归全绿。未闭合的是复核独立性本身，故不得 done，进度不计入 product_completion。"
     },
     {
       "id": "M4-01",

@@ -1,6 +1,6 @@
 {
   "schema_version": "aetp-development-status-0.1",
-  "updated_at": "2026-11-12T00:00:00+08:00",
+  "updated_at": "2026-11-18",
   "phase": "preparation",
   "product_completion_percent": 0,
   "bootstrap_status": "not_started",
@@ -59,9 +59,9 @@
       "total": 3,
       "blocked": 0,
       "done": 2,
-      "in_progress": 1,
+      "in_progress": 0,
       "ready": 0,
-      "review": 0,
+      "review": 1,
       "todo": 0
     },
     "M4": {
@@ -76,16 +76,14 @@
     }
   },
   "work_item_status_counts": {
-    "ready": 0,
-    "review": 0,
+    "review": 1,
     "done": 21,
+    "ready": 0,
+    "in_progress": 0,
     "blocked": 2,
-    "todo": 0,
-    "in_progress": 1
+    "todo": 0
   },
-  "active_work_items": [
-    "M3-03"
-  ],
+  "active_work_items": [],
   "evidence_paths": [
     "Docs/development/evidence/preparation-log.md",
     "Docs/development/evidence/preparation-report.json",
