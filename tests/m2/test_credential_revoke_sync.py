@@ -7,6 +7,7 @@ honouring the ref. If only the record changes, a consuming Action still passes
 """
 
 import unittest
+from unittest.mock import patch
 
 from aetp.collaboration.policy import PolicyViolation
 from aetp.governance.credential_broker import CredentialBroker, CredentialBrokerError
@@ -181,6 +182,63 @@ class CredentialRevokeSyncTests(GovernanceCase):
         finally:
             store._connection = real
             self.service._batch = original_batch
+
+    def test_a_broker_that_raises_during_cleanup_never_replaces_the_real_failure(self):
+        """Cleanup runs on the way out of a failed Command, and it never raises.
+
+        The neighbouring test shows a *commit* failure reaching the caller. This
+        one shows the narrower claim the code actually makes: a Broker whose
+        _confirm or _discard raises cannot turn the Command's own failure into a
+        credential error. That swallowing was only asserted in a comment - an
+        earlier guard narrowed the except and every test still passed.
+        """
+        broker = self.broker
+        token = broker.issue("a-1", permissions=["github.repo.read"],
+                             issued_at=self.clock_value, expires_in_ms=30_000, pending=True)["token"]
+        request = self.command("credential.request", "cred-1",
+                               {"permissions": ["github.repo.read"], "ttl_ms": 30_000}, actor="a-1")
+
+        for method, committed in (("_confirm", True), ("_discard", False)):
+            with self.subTest(method=method):
+                error = CredentialBrokerError("CREDENTIAL_COMMITTED")
+
+                def raising(*args, **kwargs):
+                    raise error
+
+                # No assertRaises: if the exception escaped, the test fails here.
+                with patch.object(broker, method, side_effect=raising):
+                    self.service._discard_minted_if_orphaned(
+                        request, {"minted_tokens": [(broker, token)]}, committed=committed)
+
+    def test_a_cleanup_that_cannot_finish_still_empties_the_minted_list(self):
+        """The list is per-Command scratch state; a raising Broker must not leave it queued.
+
+        If minted.clear() were skipped on the exception path, the next reader of
+        that context would try the same dead Broker again.
+        """
+        broker = self.broker
+        token = broker.issue("a-1", permissions=["github.repo.read"],
+                             issued_at=self.clock_value, expires_in_ms=30_000, pending=True)["token"]
+        request = self.command("credential.request", "cred-1",
+                               {"permissions": ["github.repo.read"], "ttl_ms": 30_000}, actor="a-1")
+        context = {"minted_tokens": [(broker, token)]}
+
+        def raising(*args, **kwargs):
+            raise RuntimeError("broker went away")
+
+        with patch.object(broker, "_confirm", side_effect=raising):
+            self.service._discard_minted_if_orphaned(request, context, committed=True)
+        self.assertEqual(context["minted_tokens"], [])
+
+    def test_an_unknown_minted_entry_is_left_alone_rather_than_guessed_at(self):
+        """A malformed entry cannot be attributed to a Broker, so cleanup skips it."""
+        broker = self.broker
+        request = self.command("credential.request", "cred-1",
+                               {"permissions": ["github.repo.read"], "ttl_ms": 30_000}, actor="a-1")
+        for entry in (("only-one",), (None, "body", "extra"), "not-a-tuple"):
+            with self.subTest(entry=entry):
+                self.service._discard_minted_if_orphaned(
+                    request, {"minted_tokens": [entry]}, committed=False)
 
     def test_cleanup_never_discards_a_committed_credential(self):
         """Committed is decided by the caller, and it always wins.
