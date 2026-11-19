@@ -126,7 +126,21 @@
       "observation": "M2-01 与 M3-01 的 conformance_tests 字段现均包含 TEST-028，但 M3-01 的 acceptance_evidence 明确写着「TEST-028 remain unaccepted」。",
       "issue": "TEST-028 是在 M3-02 阶段才补齐的；已完成工作项的映射字段指向了其完成时并不存在的测试，易被误读为 done 依赖了 TEST-028。",
       "suggested_fix": "在 conformance_tests 中区分「完成时已通过」与「事后补入映射」，未执行。",
-      "not_a_status_change": "不影响任何判定。"
+      "not_a_status_change": "不影响任何判定。",
+      "amendment": {
+        "date": "2026-11-20",
+        "by": "later session, same workspace",
+        "why": "The suggested_fix was left unexecuted. Executing it revealed the gap was wider than recorded: the audit named M2-01 and M3-01, but seven done items list TEST-028 and every one of them was accepted before conformance/m3/test_028.py entered the tree on 2026-11-11 (fbafcc9).",
+        "what_changed": "backlog.json: the seven affected items (PREP-002, PREP-004, PREP-005, PREP-006, M1-01, M2-01, M3-01) gained conformance_tests_added_after_acceptance.TEST-028, recording the date the mapping appeared and stating it is not acceptance evidence. No element was removed from conformance_tests: devprep requires the union of all items' mappings to equal CONFORMANCE_IDS, so deleting TEST-028 would break the conformance registry instead of clarifying it.",
+        "why_not_removed": "The registry must stay complete. Marking is the honest form of the distinction the suggesting fix asked for.",
+        "unaffected": [
+          "M3-02",
+          "M3-03"
+        ],
+        "unaffected_reason": "Both appear after TEST-028 existed, so their TEST-028 mapping is contemporaneous and needed no annotation.",
+        "verification": "PYTHONPATH=\"src;.\" python tools/devprep.py check -> exit 0",
+        "not_a_status_change": "no work-item status changed; no percentage moved."
+      }
     }
   ],
   "interaction_with_this_session": {

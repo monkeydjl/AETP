@@ -71,7 +71,13 @@
       ],
       "acceptance_evidence": "Docs/development/evidence/skill-protocol-navigation.md; Mill 独立只读复核结论为 preparation-level pass。",
       "reproduction_command": "python tools/devprep.py check",
-      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06"
+      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "PREP-003",
@@ -136,7 +142,13 @@
       ],
       "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
       "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
-      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias"
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "PREP-005",
@@ -166,7 +178,13 @@
       ],
       "acceptance_evidence": "Docs/development/evidence/knowledge-graph-check.json; Mill 独立只读复核图谱静态索引结论为 preparation-level pass。",
       "reproduction_command": "python tools/devprep.py check",
-      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06"
+      "independent_reviewer": "Mill (01a07535-69d0-7ea3-b87d-5453b341684b), 2026-09-06",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "PREP-006",
@@ -201,7 +219,13 @@
       ],
       "acceptance_evidence": "Docs/development/evidence/2026-09-08-prep-corrections-review.json; three criteria independently preparation-level pass; source hashes/contract verified before operational updates; applicability in closeout.json.",
       "reproduction_command": "python Docs/development/evidence/2026-09-08-preparation-corrections-probe.py; python tools/devprep.py check",
-      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias"
+      "independent_reviewer": "Kant (01a07cac-b6db-7393-ae38-bce13d69c67d), 2026-09-08; same as earlier Codex alias",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "PREP-007",
@@ -571,7 +595,13 @@
       "coordination": "User disabled ClaudeLink; one independent reviewer /root/m1_reviewer; shared model/projection scope synchronized before editing.",
       "acceptance_evidence": "Fixed v2 artifacts/m1-01-test-report-v2.json SHA256 9012cc933585ac12935bd500129755179e817a70e67e81f43b1b637ca82c4379; independent Docs/development/evidence/2026-09-11-m1-01-review-v2.json SHA256 b8f2be53cd2cd85fd9c4873dfcea8797cf29f97c07802c2e727aed0a8330ba15; R1/R2 closed; M1 40/40, M0 156/156, independent original probes 9/9 and follow-up probes 3/3. Accepted only direct peer communication and candidate Artifact/Review/Verification evidence. Formal Verification remains INCONCLUSIVE; Task quality gates and M1-02 execution authorization remain pending.",
       "reproduction_command": "Set child-process PYTHONPATH to repository src; python -m unittest discover -s tests/m1 -t . -v; python -m unittest discover -s tests/m0 -t . -v; python tools/devprep.py render; python tools/devprep.py check; python -m unittest discover -s tests/preparation -v",
-      "independent_reviewer": "/root/m1_reviewer; v2 independently accepted 2026-09-12T00:56:36.411387+08:00; initial changes_requested retained."
+      "independent_reviewer": "/root/m1_reviewer; v2 independently accepted 2026-09-12T00:56:36.411387+08:00; initial changes_requested retained.",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "M1-02",
@@ -687,7 +717,13 @@
       "reviewer": "/root/m1_reviewer",
       "acceptance_evidence": "Fixed v2 artifacts/m2-01-test-report-v2.json SHA256 2569f2c26210d4f67370cc4439186fa0f1f6c296a75ba098d8a31a3083451c02; independent Docs/development/evidence/2026-09-12-m2-01-review-v2.json SHA256 45c3673ee6f97e86dde63d4a62d77337033ea2eab6f6e1eb536053f667cf35ec; R1/R2 and metadata sampling note independently closed, no remaining findings. Three work-item criteria accepted for local structured Discussion/Meeting and immutable proposed Decision only. Independent full M2 69/69, M1 85/85, M0 156/156, preparation 27/27 and original probes 16/16; all additional actually executed methods are listed in review-consumption.json. No provider billing, Approval/activation, whole-M1/M2 acceptance, formal Verification or full Conformance claim.",
       "reproduction_command": "Use the M2-01 recorder with a fresh label (it sets child PYTHONPATH=src): python -m unittest discover -s tests/m2 -t . -v; python -m unittest discover -s tests/m1 -t . -v; python -m unittest discover -s tests/m0 -t . -v; python tools/devprep.py render; python tools/devprep.py check; python -m unittest discover -s tests/preparation -v. Demo reruns must use a new m2-01- output name; never overwrite frozen evidence.",
-      "independent_reviewer": "/root/m1_reviewer; fixed v2 accepted 2026-09-12T12:42:53.460174+00:00; v1 changes_requested retained."
+      "independent_reviewer": "/root/m1_reviewer; fixed v2 accepted 2026-09-12T12:42:53.460174+00:00; v1 changes_requested retained.",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "M2-02",
@@ -811,7 +847,13 @@
       "plan": "Docs/superpowers/plans/2026-09-13-m3-01-planning.md",
       "acceptance_evidence": "Fixed v1 artifacts/m3-01-test-report.json SHA256 20c6538d2836d51ece938d32c8e2b1125cc42038e492daf85cc1d1d5e0a20c3d; independent Docs/development/evidence/2026-09-13-m3-01-review.json SHA256 774e38ed220d44d193c95fed202ecb0161de19bff96dfb88b72354825a1c75d5; all three work-item criteria independently accepted within candidate-only planning. Persistent Project scope blocks raw execution; immutable Team/Blueprint proposals preserve equality, provenance, full DAG validation and changes without Manager permission. Independent M3 63/63, M2 167/167, M1 85/85, M0 156/156, preparation 27/27. Formal Bootstrap, Team/Blueprint activation, legal Task COMPLETED, whole M1/M2/M3 and TEST-028 remain unaccepted.",
       "reproduction_command": "Use 2026-09-13-m3-01-record.py with unused labels (sets child PYTHONPATH=src). python -m unittest discover -s tests/m3 -t . -v; python -m unittest discover -s tests/m2 -t . -v; python -m unittest discover -s tests/m1 -t . -v; python -m unittest discover -s tests/m0 -t . -v; python tools/devprep.py render; python tools/devprep.py check; python -m unittest discover -s tests/preparation -v. Run m3-01-audit.py for frozen evidence. Demo reruns require an unused m3-01- name.",
-      "independent_reviewer": "/root/m1_reviewer; different from /root, fixed v1 accepted; see pinned independent report."
+      "independent_reviewer": "/root/m1_reviewer; different from /root, fixed v1 accepted; see pinned independent report.",
+      "conformance_tests_added_after_acceptance": {
+        "TEST-028": {
+          "added_on": "2026-11-11",
+          "note": "TEST-028 did not exist when this item was accepted: conformance/m3/test_028.py first entered the tree on 2026-11-11. The mapping was added afterwards to keep the conformance registry complete, and is not evidence that acceptance depended on it."
+        }
+      }
     },
     {
       "id": "M3-02",
