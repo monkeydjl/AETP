@@ -389,6 +389,54 @@ class DocumentBoundaryTests(ExecutionCase):
         self.assertFalse(self.workspace.path_for(action).exists())
 
 
+class ProviderFailureBoundaryTests(ExecutionCase):
+    """A provider that raises must be accounted for, not silently treated as safe.
+
+    dispatch() and reconcile() each wrap the provider call in a deliberately wide
+    except: an unknown outcome is the honest answer when a provider dies mid-write,
+    and the alternative — a stack trace out of the effect path — would leave the
+    Action IN_FLIGHT with nothing recording why. Those branches carried no test,
+    so their two properties were only asserted in prose.
+    """
+
+    def setUp(self):
+        super().setUp()
+        self.claim()
+        self.start()
+
+    def test_dispatch_that_raises_reports_unknown_and_leaves_no_file(self):
+        action = self.request()
+        path = self.workspace.path_for(action)
+        with patch.object(self.workspace, "write", side_effect=OSError("provider vanished")):
+            result = self.dispatch(action)
+        # An exception tells us the write did not report success. It does not tell
+        # us the write did not happen, so the outcome is unknown, never completed.
+        self.assertEqual(result["status"], "unknown")
+        self.assertEqual(result["reason"], "PROVIDER_OUTCOME_UNKNOWN")
+        self.assertFalse(path.exists())
+        self.assertEqual(self.state()[f"action:{action['id']}"]["status"], "unknown")
+
+    def test_reconcile_that_raises_reports_unknown_rather_than_claiming_completion(self):
+        action = self.request()
+        with patch.object(self.workspace, "write", side_effect=OSError("provider vanished")):
+            self.dispatch(action)
+        with patch.object(self.workspace, "query", side_effect=RuntimeError("provider still down")):
+            result = self.service.reconcile("p-1", action["id"])
+        # A failed query is not evidence of non-execution; it is evidence of nothing.
+        self.assertEqual(result["status"], "unknown")
+        self.assertEqual(result["reason"], "QUERY_UNAVAILABLE")
+        self.assertEqual(self.state()[f"action:{action['id']}"]["status"], "unknown")
+
+    def test_a_masked_provider_error_never_publishes_a_completion_receipt(self):
+        action = self.request()
+        with patch.object(self.workspace, "write", side_effect=OSError("provider vanished")):
+            result = self.dispatch(action)
+        self.assertIsNone(result.get("result"))
+        with patch.object(self.workspace, "query", side_effect=RuntimeError("provider still down")):
+            reconciled = self.service.reconcile("p-1", action["id"])
+        self.assertIsNone(reconciled.get("result"))
+
+
 class RecoveryBoundaryTests(ExecutionCase):
     def setUp(self):
         super().setUp()
