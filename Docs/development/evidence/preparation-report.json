@@ -1,11 +1,12 @@
 {
   "schema_version": "aetp-preparation-report-0.1",
-  "generated_at": "2026-11-11T14:31:39+00:00",
+  "generated_at": "2026-11-19T14:17:34+00:00",
   "phase": "preparation",
   "product_completion_percent": 0,
   "bootstrap_status": "not_started",
   "work_item_status_counts": {
     "done": 21,
+    "review": 1,
     "blocked": 2
   },
   "milestones": {
@@ -50,13 +51,13 @@
       "todo": 0
     },
     "M3": {
-      "status": "done",
-      "total": 2,
+      "status": "in_progress",
+      "total": 3,
       "blocked": 0,
       "done": 2,
       "in_progress": 0,
       "ready": 0,
-      "review": 0,
+      "review": 1,
       "todo": 0
     },
     "M4": {
