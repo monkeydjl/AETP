@@ -22,15 +22,42 @@
     "why_not_weaken_gate": "没有放宽 mission.verify，也没有给 runner 开旁路：只是补了一条能诚实产出证据的受控命令，伪证据路径依然被拒（test_mission_evidence_integrity 12 条保持全绿）。"
   },
   "changed_files": [
-    {"path": "src/aetp/acceptance/contracts.py", "change": "注册 artifact.observe -> artifact.observed"},
-    {"path": "src/aetp/acceptance/records.py", "change": "新增 observe()：严格载荷、不可覆盖、agent 主体、源记录、digest 现算"},
-    {"path": "src/aetp/bootstrap/runner.py", "change": "B5 先用 a-1 真实观测产出 Artifact，再由 a-2 用其真实 digest 调 mission.verify"},
-    {"path": "tests/m3/test_artifact_observe.py", "change": "新增 9 条契约/拒绝路径用例"},
-    {"path": "tests/m3/test_mission_acceptance.py", "change": "夹具改走 artifact.observe，摘除 5 处 expectedFailure"},
-    {"path": "tests/bootstrap/test_lifecycle.py", "change": "runner 与 finalize 用例改用真实观测证据（observer a-1 / verifier a-2），摘除 3 处 expectedFailure"},
-    {"path": "conformance/m3/test_028.py", "change": "删除 EVIDENCE_CAPTURE_AVAILABLE 跳过分支，验收步真正执行"},
-    {"path": "tests/m3/test_conformance_028.py", "change": "摘除 2 处 expectedFailure"},
-    {"path": "tests/conformance/test_runner.py", "change": "摘除 1 处 expectedFailure，TEST-028 恢复 28/28"}
+    {
+      "path": "src/aetp/acceptance/contracts.py",
+      "change": "注册 artifact.observe -> artifact.observed"
+    },
+    {
+      "path": "src/aetp/acceptance/records.py",
+      "change": "新增 observe()：严格载荷、不可覆盖、agent 主体、源记录、digest 现算"
+    },
+    {
+      "path": "src/aetp/bootstrap/runner.py",
+      "change": "B5 先用 a-1 真实观测产出 Artifact，再由 a-2 用其真实 digest 调 mission.verify"
+    },
+    {
+      "path": "tests/m3/test_artifact_observe.py",
+      "change": "新增 9 条契约/拒绝路径用例"
+    },
+    {
+      "path": "tests/m3/test_mission_acceptance.py",
+      "change": "夹具改走 artifact.observe，摘除 5 处 expectedFailure"
+    },
+    {
+      "path": "tests/bootstrap/test_lifecycle.py",
+      "change": "runner 与 finalize 用例改用真实观测证据（observer a-1 / verifier a-2），摘除 3 处 expectedFailure"
+    },
+    {
+      "path": "conformance/m3/test_028.py",
+      "change": "删除 EVIDENCE_CAPTURE_AVAILABLE 跳过分支，验收步真正执行"
+    },
+    {
+      "path": "tests/m3/test_conformance_028.py",
+      "change": "摘除 2 处 expectedFailure"
+    },
+    {
+      "path": "tests/conformance/test_runner.py",
+      "change": "摘除 1 处 expectedFailure，TEST-028 恢复 28/28"
+    }
   ],
   "evidence": {
     "red": "实现前 tests.m3.test_artifact_observe 全部报 unsupported type: 'artifact.observe'",
@@ -56,5 +83,17 @@
   "status": {
     "work_item_state": "M4-01 仍为 blocked：B5 证据链路已通，但 bootstrap 交付验收仍未独立复核。",
     "committed": false
-  }
+  },
+  "corrections": [
+    {
+      "date": "2026-11-19",
+      "why": "本文件把隔离探针的两条红归因为 'Docker daemon 不可达 / 既有环境缺口'。该归因是错的，且它把一处由判据写错导致的失败算成了环境问题。",
+      "corrected_finding": "Docker 守护进程实际可达（ServerVersion 29.2.1）。探针报红的真实原因是越界判据：它在容器内写 '/outside_escape' 并据此判断越界，而该路径位于容器自己的可写根文件系统，任何容器都能写。判据改到宿主侧之后，探针 4 条用例全绿，os_sandbox observed=true。",
+      "supersedes": [
+        "full_suite.attribution[0] 中 '根因是 Docker daemon 不可达'",
+        "not_done.isolation_probe 中 '既有环境缺口（Docker daemon 不可达）'"
+      ],
+      "unchanged": "本文件关于 artifact.observe 与 mission.verify 的主要结论不受影响；全量套件当时确为 1036 条、仅剩这两条红，这一计数仍然准确。"
+    }
+  ]
 }

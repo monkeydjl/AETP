@@ -65,5 +65,18 @@
     "RuntimeEnforcement.credential_isolation defaults to True while SandboxRuntimeAdapter explicitly declares False; not changed this round (out of scope), flagged for review.",
     "network_egress remains declaration-only: no probe measures egress; not changed this round."
   ],
-  "discipline": "Not committed. Independent second-party review pending."
+  "discipline": "Not committed. Independent second-party review pending.",
+  "corrections": [
+    {
+      "date": "2026-11-19",
+      "why": "本轮原记录写 'Docker daemon 不可达'，据此把容器隔离判为 UNPROVEN。后续复测证明该结论错误：本机 Docker 守护进程可达（ServerVersion 29.2.1），当时探针报红不是环境不可达，而是判据本身写错了。",
+      "what_was_wrong": "旧判据在容器内写 '/outside_escape' 并据此判断是否越界。该路径位于容器自己的可写根文件系统，任何容器都能写，因此既证不了越界也证不了隔离；同时它把这一必然结果记成 observed 而非 unavailable。",
+      "corrected_finding": "判据已改为宿主侧真相：探针根目录只读挂载，越界目标指向宿主路径，是否越界由宿主上是否出现 canary 文件判定。复测 os_sandbox observed=true：outside_escape/host_secret 均 denied，宿主无 canary，work 写入 allowed 且宿主可见。",
+      "unchanged": "os_sandbox 仍未纳入 VERIFIED_WORKSPACE_ISOLATION——那是用户决定的 fail-closed 口径，不是测量结论。M4-03 继续 blocked。",
+      "supersedes": [
+        "isolation_report_on_this_host.read",
+        "not_addressed[0] 中 'no Docker daemon' 的说法"
+      ]
+    }
+  ]
 }

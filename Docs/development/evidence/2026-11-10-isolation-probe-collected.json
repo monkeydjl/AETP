@@ -66,5 +66,13 @@
   "open_followups": [
     "Run tests/conformance/test_isolation_probe.py on a host with a container runtime; only if all four bypass assertions are observed as refused may os_sandbox enter VERIFIED_WORKSPACE_ISOLATION.",
     "is_eligible_for_high_risk() still admits credential_isolation=False and network_egress='unrestricted'; the same fail-closed treatment is not yet applied there (out of scope for this round)."
+  ],
+  "corrections": [
+    {
+      "date": "2026-11-19",
+      "why": "原文记 '本机缺少 npipe 端点，os_sandbox observed=false / skipped=docker_daemon_unreachable'。该判断已被复测推翻。",
+      "corrected_finding": "Docker 守护进程可达；探针之所以报红，是越界判据拿容器内路径当越界证据。判据改到宿主侧之后，探针 4 条用例全绿，os_sandbox observed=true。",
+      "unchanged": "探针仍随 discover 进入全量套件；收集守卫不变。"
+    }
   ]
 }
