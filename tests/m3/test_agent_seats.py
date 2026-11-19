@@ -186,6 +186,29 @@ class AgentSeatTests(unittest.TestCase):
         with self.assertRaises(MessageError):
             self.bus.snapshots("p-1", (said[0].id,), authenticated_actor_id="outsider")
 
+    def test_received_from_narrows_the_inbox_to_one_sender(self):
+        """The seat's own filter, and the bus's visibility, are different things.
+
+        A seat can narrow what it already sees; it can never widen it. This is
+        the narrowing half, and it must not invent mail: a sender who said
+        nothing, or is not a member at all, produces an empty tuple rather than
+        an error or a default.
+        """
+        self.assertEqual(self.a1.view("p-1").received_from("a-2"), ())
+        said = converse([self.a1, self.a2], "p-1", rounds=4)
+        self.assertTrue(said)
+
+        inbox = self.bus.inbox("p-1", authenticated_actor_id="a-1")
+        view = SeatView(project_id="p-1", agent_id="a-1", inbox=inbox)
+        from_a2 = view.received_from("a-2")
+        self.assertTrue(from_a2)
+        self.assertTrue(all(m.sender_id == "a-2" for m in from_a2))
+        # The order is the inbox's own; narrowing does not reshuffle it.
+        self.assertEqual(from_a2, tuple(m for m in inbox if m.sender_id == "a-2"))
+        # A sender that never spoke and one that is not a member both give nothing.
+        self.assertEqual(view.received_from("a-1"), ())
+        self.assertEqual(view.received_from("nobody"), ())
+
     def test_a_non_member_never_becomes_a_speaking_seat(self):
         # Membership is the bus's check, not the seat's: an unregistered agent
         # holding a seat is refused on its first turn.

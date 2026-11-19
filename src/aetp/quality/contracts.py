@@ -19,16 +19,6 @@ DOMAIN_EVENTS = frozenset(event for values in COMMAND_TERMINALS.values() for eve
 AUTHOR_COMMANDS = frozenset({"task.quality.enroll", "task.quality.submit", "task.quality.block", "task.quality.rework"})
 
 
-def action_for(kind):
-    if kind in {"task.quality.request_review", "review.quality.submit"}:
-        return "task.quality.review"
-    if kind == "task.quality.evaluate":
-        return "task.quality.evaluate"
-    if kind == "task.quality.complete":
-        return "task.integration.exempt"
-    return "task.quality.transition"
-
-
 def review_id(command, artifact_id):
     from aetp.runtime.contracts import child_id
     return child_id("quality-review", command.project_id, f"{len(command.id)}:{command.id}{artifact_id}")

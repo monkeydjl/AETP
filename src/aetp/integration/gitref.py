@@ -38,8 +38,3 @@ def resolve_ref(repo_dir: str, ref: str) -> str:
     if proc.returncode != 0 or _HEX40.fullmatch(tip) is None:
         raise PolicyViolation("REF_NOT_FOUND")
     return tip
-
-
-def current_tip(repo_dir: str, ref: str) -> str:
-    """Alias kept explicit: the Integration Gate reads the current target tip."""
-    return resolve_ref(repo_dir, ref)
