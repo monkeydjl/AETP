@@ -1,0 +1,1967 @@
+{
+  "test_id": "TEST-018",
+  "project_id": "m0-test-018",
+  "database": ".tmp/m0-conformance-2026-09-11-v2.sqlite",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  },
+  "initial_events": [
+    {
+      "id": "m0-test-018:seed-project:received",
+      "project_id": "m0-test-018",
+      "sequence": 1,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-018",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-project",
+      "correlation_id": "corr-m0-test-018:seed-project",
+      "payload": {
+        "command_type": "project.create",
+        "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-project:effect",
+      "project_id": "m0-test-018",
+      "sequence": 2,
+      "type": "project.created",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-018",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-project",
+      "correlation_id": "corr-m0-test-018:seed-project",
+      "payload": {
+        "status": "planning"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a1:received",
+      "project_id": "m0-test-018",
+      "sequence": 3,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a1",
+      "correlation_id": "corr-m0-test-018:seed-agent-a1",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a1:effect",
+      "project_id": "m0-test-018",
+      "sequence": 4,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a1",
+      "correlation_id": "corr-m0-test-018:seed-agent-a1",
+      "payload": {
+        "model_id": "model-1",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a2:received",
+      "project_id": "m0-test-018",
+      "sequence": 5,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a2",
+      "correlation_id": "corr-m0-test-018:seed-agent-a2",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a2:effect",
+      "project_id": "m0-test-018",
+      "sequence": 6,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a2",
+      "correlation_id": "corr-m0-test-018:seed-agent-a2",
+      "payload": {
+        "model_id": "model-2",
+        "status": "available"
+      }
+    }
+  ],
+  "initial_state": {
+    "agent:a-1": {
+      "id": "a-1",
+      "model_id": "model-1",
+      "project_id": "m0-test-018",
+      "revision": 0,
+      "status": "available"
+    },
+    "agent:a-2": {
+      "id": "a-2",
+      "model_id": "model-2",
+      "project_id": "m0-test-018",
+      "revision": 0,
+      "status": "available"
+    },
+    "project:m0-test-018": {
+      "id": "m0-test-018",
+      "project_id": "m0-test-018",
+      "revision": 0,
+      "status": "planning"
+    }
+  },
+  "commands": [
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-create",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "task",
+        "payload": {
+          "title": "Conformance task"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "create",
+        "correlation_id": "m0-test-018-create"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-018-create",
+        "event_ids": [
+          "m0-test-018-create:received",
+          "m0-test-018-create:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-claim",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "claim",
+        "correlation_id": "m0-test-018-claim"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-018-claim",
+        "event_ids": [
+          "m0-test-018-claim:received",
+          "m0-test-018-claim:effect"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-claim-changed",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "task",
+        "payload": {
+          "note": "different content"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "claim",
+        "correlation_id": "m0-test-018-claim"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "m0-test-018-claim-changed",
+        "event_ids": [],
+        "aggregate_revision": null,
+        "error_code": "IDEMPOTENCY_CONFLICT"
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-release",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.release",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 1,
+        "idempotency_key": "release",
+        "correlation_id": "m0-test-018-release"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-018-release",
+        "event_ids": [
+          "m0-test-018-release:received",
+          "m0-test-018-release:effect"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-claim",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "claim",
+        "correlation_id": "m0-test-018-claim"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-018-claim",
+        "event_ids": [
+          "m0-test-018-claim:received",
+          "m0-test-018-claim:effect"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-new-claim",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 2,
+        "idempotency_key": "new-claim",
+        "correlation_id": "m0-test-018-new-claim"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-018-new-claim",
+        "event_ids": [
+          "m0-test-018-new-claim:received",
+          "m0-test-018-new-claim:effect"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-018-release",
+        "project_id": "m0-test-018",
+        "actor_id": "a-1",
+        "type": "task.release",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 1,
+        "idempotency_key": "release",
+        "correlation_id": "m0-test-018-release"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-018-release",
+        "event_ids": [
+          "m0-test-018-release:received",
+          "m0-test-018-release:effect"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    }
+  ],
+  "fault_injection": [
+    {
+      "kind": "same-key content conflict and delayed old Commands",
+      "point": "before and after real release/new-key reclaim"
+    }
+  ],
+  "checks": [
+    {
+      "name": "literal initial state",
+      "actual": {
+        "agent:a-1": {
+          "id": "a-1",
+          "model_id": "model-1",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "model_id": "model-2",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "available"
+        },
+        "project:m0-test-018": {
+          "id": "m0-test-018",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "planning"
+        }
+      },
+      "expected": {
+        "project:m0-test-018": {
+          "id": "m0-test-018",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "model_id": "model-1",
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "model_id": "model-2",
+          "status": "available"
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "initial receipt/domain count",
+      "actual": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "name": "create accepted",
+      "actual": "accepted",
+      "expected": "accepted",
+      "passed": true
+    },
+    {
+      "name": "initial claim accepted",
+      "actual": "accepted",
+      "expected": "accepted",
+      "passed": true
+    },
+    {
+      "name": "same-key changed content refused",
+      "actual": "IDEMPOTENCY_CONFLICT",
+      "expected": "IDEMPOTENCY_CONFLICT",
+      "passed": true
+    },
+    {
+      "name": "conflict leaves batch unchanged",
+      "actual": [
+        {
+          "id": "m0-test-018:seed-project:received",
+          "project_id": "m0-test-018",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-project:effect",
+          "project_id": "m0-test-018",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:received",
+          "project_id": "m0-test-018",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:effect",
+          "project_id": "m0-test-018",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:received",
+          "project_id": "m0-test-018",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:effect",
+          "project_id": "m0-test-018",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018-create:received",
+          "project_id": "m0-test-018",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+          }
+        },
+        {
+          "id": "m0-test-018-create:effect",
+          "project_id": "m0-test-018",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        }
+      ],
+      "expected": [
+        {
+          "id": "m0-test-018:seed-project:received",
+          "project_id": "m0-test-018",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-project:effect",
+          "project_id": "m0-test-018",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:received",
+          "project_id": "m0-test-018",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:effect",
+          "project_id": "m0-test-018",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:received",
+          "project_id": "m0-test-018",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:effect",
+          "project_id": "m0-test-018",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018-create:received",
+          "project_id": "m0-test-018",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+          }
+        },
+        {
+          "id": "m0-test-018-create:effect",
+          "project_id": "m0-test-018",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "real owner release accepted",
+      "actual": "accepted",
+      "expected": "accepted",
+      "passed": true
+    },
+    {
+      "name": "release really requeues",
+      "actual": {
+        "agent:a-1": {
+          "id": "a-1",
+          "model_id": "model-1",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "model_id": "model-2",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "available"
+        },
+        "project:m0-test-018": {
+          "id": "m0-test-018",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "planning"
+        },
+        "task:task": {
+          "id": "task",
+          "owner_id": null,
+          "project_id": "m0-test-018",
+          "revision": 2,
+          "status": "pending",
+          "title": "Conformance task"
+        }
+      },
+      "expected": {
+        "project:m0-test-018": {
+          "id": "m0-test-018",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "model_id": "model-1",
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "model_id": "model-2",
+          "status": "available"
+        },
+        "task:task": {
+          "id": "task",
+          "project_id": "m0-test-018",
+          "revision": 2,
+          "title": "Conformance task",
+          "status": "pending",
+          "owner_id": null
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "old claim retains old result",
+      "actual": {
+        "status": "accepted",
+        "command_id": "m0-test-018-claim",
+        "event_ids": [
+          "m0-test-018-claim:received",
+          "m0-test-018-claim:effect"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      },
+      "expected": {
+        "status": "accepted",
+        "command_id": "m0-test-018-claim",
+        "event_ids": [
+          "m0-test-018-claim:received",
+          "m0-test-018-claim:effect"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      },
+      "passed": true
+    },
+    {
+      "name": "old claim cannot reassign",
+      "actual": [
+        {
+          "id": "m0-test-018:seed-project:received",
+          "project_id": "m0-test-018",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-project:effect",
+          "project_id": "m0-test-018",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:received",
+          "project_id": "m0-test-018",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:effect",
+          "project_id": "m0-test-018",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:received",
+          "project_id": "m0-test-018",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:effect",
+          "project_id": "m0-test-018",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018-create:received",
+          "project_id": "m0-test-018",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+          }
+        },
+        {
+          "id": "m0-test-018-create:effect",
+          "project_id": "m0-test-018",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "m0-test-018-release:received",
+          "project_id": "m0-test-018",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "command_type": "task.release",
+            "request_digest": "13de218f5acc2dd31d09850d43e411d294357e21fec49b21a6fc4afad58bfb45"
+          }
+        },
+        {
+          "id": "m0-test-018-release:effect",
+          "project_id": "m0-test-018",
+          "sequence": 12,
+          "type": "task.requeued",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 2,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "actor_id": "a-1",
+            "reason": "release",
+            "status": "pending"
+          }
+        }
+      ],
+      "expected": [
+        {
+          "id": "m0-test-018:seed-project:received",
+          "project_id": "m0-test-018",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-project:effect",
+          "project_id": "m0-test-018",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:received",
+          "project_id": "m0-test-018",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:effect",
+          "project_id": "m0-test-018",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:received",
+          "project_id": "m0-test-018",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:effect",
+          "project_id": "m0-test-018",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018-create:received",
+          "project_id": "m0-test-018",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+          }
+        },
+        {
+          "id": "m0-test-018-create:effect",
+          "project_id": "m0-test-018",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "m0-test-018-release:received",
+          "project_id": "m0-test-018",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "command_type": "task.release",
+            "request_digest": "13de218f5acc2dd31d09850d43e411d294357e21fec49b21a6fc4afad58bfb45"
+          }
+        },
+        {
+          "id": "m0-test-018-release:effect",
+          "project_id": "m0-test-018",
+          "sequence": 12,
+          "type": "task.requeued",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 2,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "actor_id": "a-1",
+            "reason": "release",
+            "status": "pending"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "new key and current revision can reclaim",
+      "actual": [
+        "accepted",
+        3
+      ],
+      "expected": [
+        "accepted",
+        3
+      ],
+      "passed": true
+    },
+    {
+      "name": "old release retains old result",
+      "actual": {
+        "status": "accepted",
+        "command_id": "m0-test-018-release",
+        "event_ids": [
+          "m0-test-018-release:received",
+          "m0-test-018-release:effect"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      },
+      "expected": {
+        "status": "accepted",
+        "command_id": "m0-test-018-release",
+        "event_ids": [
+          "m0-test-018-release:received",
+          "m0-test-018-release:effect"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      },
+      "passed": true
+    },
+    {
+      "name": "old release cannot revoke new ownership",
+      "actual": [
+        {
+          "id": "m0-test-018:seed-project:received",
+          "project_id": "m0-test-018",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-project:effect",
+          "project_id": "m0-test-018",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:received",
+          "project_id": "m0-test-018",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:effect",
+          "project_id": "m0-test-018",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:received",
+          "project_id": "m0-test-018",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:effect",
+          "project_id": "m0-test-018",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018-create:received",
+          "project_id": "m0-test-018",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+          }
+        },
+        {
+          "id": "m0-test-018-create:effect",
+          "project_id": "m0-test-018",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "m0-test-018-release:received",
+          "project_id": "m0-test-018",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "command_type": "task.release",
+            "request_digest": "13de218f5acc2dd31d09850d43e411d294357e21fec49b21a6fc4afad58bfb45"
+          }
+        },
+        {
+          "id": "m0-test-018-release:effect",
+          "project_id": "m0-test-018",
+          "sequence": 12,
+          "type": "task.requeued",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 2,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "actor_id": "a-1",
+            "reason": "release",
+            "status": "pending"
+          }
+        },
+        {
+          "id": "m0-test-018-new-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 13,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 2,
+          "causation_id": "m0-test-018-new-claim",
+          "correlation_id": "m0-test-018-new-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "3b7c9da58f26136f33d16601cad5fac02ff690782e9a0450dd6b08b85480854f"
+          }
+        },
+        {
+          "id": "m0-test-018-new-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 14,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 3,
+          "causation_id": "m0-test-018-new-claim",
+          "correlation_id": "m0-test-018-new-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        }
+      ],
+      "expected": [
+        {
+          "id": "m0-test-018:seed-project:received",
+          "project_id": "m0-test-018",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-project:effect",
+          "project_id": "m0-test-018",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-018",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-project",
+          "correlation_id": "corr-m0-test-018:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:received",
+          "project_id": "m0-test-018",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a1:effect",
+          "project_id": "m0-test-018",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a1",
+          "correlation_id": "corr-m0-test-018:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:received",
+          "project_id": "m0-test-018",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+          }
+        },
+        {
+          "id": "m0-test-018:seed-agent-a2:effect",
+          "project_id": "m0-test-018",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018:seed-agent-a2",
+          "correlation_id": "corr-m0-test-018:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-018-create:received",
+          "project_id": "m0-test-018",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+          }
+        },
+        {
+          "id": "m0-test-018-create:effect",
+          "project_id": "m0-test-018",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-create",
+          "correlation_id": "m0-test-018-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+          }
+        },
+        {
+          "id": "m0-test-018-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 10,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-claim",
+          "correlation_id": "m0-test-018-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        },
+        {
+          "id": "m0-test-018-release:received",
+          "project_id": "m0-test-018",
+          "sequence": 11,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 1,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "command_type": "task.release",
+            "request_digest": "13de218f5acc2dd31d09850d43e411d294357e21fec49b21a6fc4afad58bfb45"
+          }
+        },
+        {
+          "id": "m0-test-018-release:effect",
+          "project_id": "m0-test-018",
+          "sequence": 12,
+          "type": "task.requeued",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 2,
+          "causation_id": "m0-test-018-release",
+          "correlation_id": "m0-test-018-release",
+          "payload": {
+            "actor_id": "a-1",
+            "reason": "release",
+            "status": "pending"
+          }
+        },
+        {
+          "id": "m0-test-018-new-claim:received",
+          "project_id": "m0-test-018",
+          "sequence": 13,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 2,
+          "causation_id": "m0-test-018-new-claim",
+          "correlation_id": "m0-test-018-new-claim",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "3b7c9da58f26136f33d16601cad5fac02ff690782e9a0450dd6b08b85480854f"
+          }
+        },
+        {
+          "id": "m0-test-018-new-claim:effect",
+          "project_id": "m0-test-018",
+          "sequence": 14,
+          "type": "task.claimed",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 3,
+          "causation_id": "m0-test-018-new-claim",
+          "correlation_id": "m0-test-018-new-claim",
+          "payload": {
+            "actor_id": "a-1",
+            "status": "assigned"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "literal domain sequence",
+      "actual": [
+        "task.created",
+        "task.claimed",
+        "task.requeued",
+        "task.claimed"
+      ],
+      "expected": [
+        "task.created",
+        "task.claimed",
+        "task.requeued",
+        "task.claimed"
+      ],
+      "passed": true
+    },
+    {
+      "name": "literal replay state",
+      "actual": {
+        "project:m0-test-018": {
+          "id": "m0-test-018",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "available",
+          "model_id": "model-1"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "available",
+          "model_id": "model-2"
+        },
+        "task:task": {
+          "id": "task",
+          "project_id": "m0-test-018",
+          "revision": 3,
+          "status": "assigned",
+          "title": "Conformance task",
+          "owner_id": "a-1"
+        }
+      },
+      "expected": {
+        "project:m0-test-018": {
+          "id": "m0-test-018",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "model_id": "model-1",
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-018",
+          "revision": 0,
+          "model_id": "model-2",
+          "status": "available"
+        },
+        "task:task": {
+          "id": "task",
+          "project_id": "m0-test-018",
+          "revision": 3,
+          "title": "Conformance task",
+          "status": "assigned",
+          "owner_id": "a-1"
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "pending facts",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "no recovery simulation",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    }
+  ],
+  "replay_state": {
+    "project:m0-test-018": {
+      "id": "m0-test-018",
+      "project_id": "m0-test-018",
+      "revision": 0,
+      "status": "planning"
+    },
+    "agent:a-1": {
+      "id": "a-1",
+      "project_id": "m0-test-018",
+      "revision": 0,
+      "status": "available",
+      "model_id": "model-1"
+    },
+    "agent:a-2": {
+      "id": "a-2",
+      "project_id": "m0-test-018",
+      "revision": 0,
+      "status": "available",
+      "model_id": "model-2"
+    },
+    "task:task": {
+      "id": "task",
+      "project_id": "m0-test-018",
+      "revision": 3,
+      "status": "assigned",
+      "title": "Conformance task",
+      "owner_id": "a-1"
+    }
+  },
+  "final_events": [
+    {
+      "id": "m0-test-018:seed-project:received",
+      "project_id": "m0-test-018",
+      "sequence": 1,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-018",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-project",
+      "correlation_id": "corr-m0-test-018:seed-project",
+      "payload": {
+        "command_type": "project.create",
+        "request_digest": "2fecf947f5828efe1100ca55c5f7ac4a091d95de64c094405cc1bff2f6210022"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-project:effect",
+      "project_id": "m0-test-018",
+      "sequence": 2,
+      "type": "project.created",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-018",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-project",
+      "correlation_id": "corr-m0-test-018:seed-project",
+      "payload": {
+        "status": "planning"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a1:received",
+      "project_id": "m0-test-018",
+      "sequence": 3,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a1",
+      "correlation_id": "corr-m0-test-018:seed-agent-a1",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "e60fc1e9dbc724f1eae3a2e3816c7772bf392bd24d9699a2c099084cac926177"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a1:effect",
+      "project_id": "m0-test-018",
+      "sequence": 4,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a1",
+      "correlation_id": "corr-m0-test-018:seed-agent-a1",
+      "payload": {
+        "model_id": "model-1",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a2:received",
+      "project_id": "m0-test-018",
+      "sequence": 5,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a2",
+      "correlation_id": "corr-m0-test-018:seed-agent-a2",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "71fd66f8540c955772fcece16cbaaf9e2c3cdfc499c7371d32c3a3fe0538800a"
+      }
+    },
+    {
+      "id": "m0-test-018:seed-agent-a2:effect",
+      "project_id": "m0-test-018",
+      "sequence": 6,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018:seed-agent-a2",
+      "correlation_id": "corr-m0-test-018:seed-agent-a2",
+      "payload": {
+        "model_id": "model-2",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m0-test-018-create:received",
+      "project_id": "m0-test-018",
+      "sequence": 7,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018-create",
+      "correlation_id": "m0-test-018-create",
+      "payload": {
+        "command_type": "task.create",
+        "request_digest": "c77bf111b555ca904f70a128e760ae90bfbaaa620f8ee199cbbfd9519cc49b79"
+      }
+    },
+    {
+      "id": "m0-test-018-create:effect",
+      "project_id": "m0-test-018",
+      "sequence": 8,
+      "type": "task.created",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018-create",
+      "correlation_id": "m0-test-018-create",
+      "payload": {
+        "status": "pending",
+        "title": "Conformance task"
+      }
+    },
+    {
+      "id": "m0-test-018-claim:received",
+      "project_id": "m0-test-018",
+      "sequence": 9,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-018-claim",
+      "correlation_id": "m0-test-018-claim",
+      "payload": {
+        "command_type": "task.claim",
+        "request_digest": "cebb1c601c7c4efb66a9f0d3f49bf786b01afd5843dc0d983b22dc7feff79a0f"
+      }
+    },
+    {
+      "id": "m0-test-018-claim:effect",
+      "project_id": "m0-test-018",
+      "sequence": 10,
+      "type": "task.claimed",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 1,
+      "causation_id": "m0-test-018-claim",
+      "correlation_id": "m0-test-018-claim",
+      "payload": {
+        "actor_id": "a-1",
+        "status": "assigned"
+      }
+    },
+    {
+      "id": "m0-test-018-release:received",
+      "project_id": "m0-test-018",
+      "sequence": 11,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 1,
+      "causation_id": "m0-test-018-release",
+      "correlation_id": "m0-test-018-release",
+      "payload": {
+        "command_type": "task.release",
+        "request_digest": "13de218f5acc2dd31d09850d43e411d294357e21fec49b21a6fc4afad58bfb45"
+      }
+    },
+    {
+      "id": "m0-test-018-release:effect",
+      "project_id": "m0-test-018",
+      "sequence": 12,
+      "type": "task.requeued",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 2,
+      "causation_id": "m0-test-018-release",
+      "correlation_id": "m0-test-018-release",
+      "payload": {
+        "actor_id": "a-1",
+        "reason": "release",
+        "status": "pending"
+      }
+    },
+    {
+      "id": "m0-test-018-new-claim:received",
+      "project_id": "m0-test-018",
+      "sequence": 13,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 2,
+      "causation_id": "m0-test-018-new-claim",
+      "correlation_id": "m0-test-018-new-claim",
+      "payload": {
+        "command_type": "task.claim",
+        "request_digest": "3b7c9da58f26136f33d16601cad5fac02ff690782e9a0450dd6b08b85480854f"
+      }
+    },
+    {
+      "id": "m0-test-018-new-claim:effect",
+      "project_id": "m0-test-018",
+      "sequence": 14,
+      "type": "task.claimed",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 3,
+      "causation_id": "m0-test-018-new-claim",
+      "correlation_id": "m0-test-018-new-claim",
+      "payload": {
+        "actor_id": "a-1",
+        "status": "assigned"
+      }
+    }
+  ],
+  "execution": {
+    "status": "passed",
+    "started_at": "2026-09-11T12:55:59.805266+08:00",
+    "finished_at": "2026-09-11T12:56:00.823099+08:00",
+    "tests_run": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "fixture_complete": true
+  }
+}

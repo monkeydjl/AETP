@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-024",
+  "requirement": "更换代码、测试集、环境或验收标准后旧验证不能自动放行；合并基线检查有效",
+  "status": "not_applicable",
+  "reason": "M3: Verification freshness and integration baselines are absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

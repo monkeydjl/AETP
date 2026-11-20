@@ -1,0 +1,3901 @@
+{
+  "work_item": "M3-02",
+  "scope": "first fixed Verification prerequisite",
+  "created_at": "2026-09-14T22:57:55.632500+08:00",
+  "identity_mode": "deterministic fixture identities; no model calls",
+  "database": {
+    "path": "artifacts/m3-02-verification-demo-v1.sqlite",
+    "sha256": "27fe66cdc261d0ba79c81608cb4792a5e65448bbb6fbcd8f0fc02bc8e55080ae"
+  },
+  "facts_only_database": {
+    "path": "artifacts/m3-02-verification-demo-v1-facts.sqlite",
+    "sha256": "08ff142a43cbd8304ca3a04d90dc7868a465f5d8d729ab380e0e7652ddb6c3e0"
+  },
+  "document": {
+    "path": "artifacts/m3-02-verification-demo-v1.md",
+    "sha256": "97cc0c3d36574bfb1b8a78f0505bea453994d5e6cd9d27b436cf70dce65c86d4"
+  },
+  "event_count": 85,
+  "command_count": 40,
+  "outcomes": {
+    "pass": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-pass",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-pass",
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+        "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e",
+        "revoked": false,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "9ac83bb2dd7f8440e62da7d00876d54c24a21770a8ddcfe43b957c6bf8ab6d67",
+          "exposure": "internal",
+          "receipt_id": "0aa7c82bf5fa42948cbbaa12307e3d3d",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low"
+      },
+      "action": {
+        "id": "verification-action-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e",
+        "status": "completed",
+        "dispatch_count": 1,
+        "request_command_id": "verification-scenario-16",
+        "dispatch_command_id": "verification-host-f8aaa1063b8d7b86b9c4fa4f2be705699a619d77d715ea10a41cf15382499bd8",
+        "finish_command_id": "verification-host-7094965151e7d8c7d8a2011b6b6331829a2abf15f86837f389bce796bfd0ede9",
+        "started_at_ms": 1000,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "PASSED",
+      "reason": "ALL_CHECKS_MATCHED",
+      "evidence_id": "verification-report-753d3ab981cdfb4f2263b2ab9287256b3acee272f5a8806c174186f3e3da9ecf",
+      "evidence_digest": "sha256:830c9c6bad6cb9e49bb3dfa9895da38f2fb93bb5dbb433c41d76ce5f02be2ecf",
+      "observed_at_ms": 1000
+    },
+    "fail": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-fail",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-fail",
+      "artifact_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-fail",
+        "artifact_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2",
+        "capture_origin_digest": "sha256:2ffe0435ce99d630687debaaa6051478a18bd242361bc5b5388554e52cd3825e"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758",
+        "revoked": false,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "6849a6d6f9655ffa9708ee1993e8d4f2417bd562b1f3b9142d8b4e74cb0ab76e",
+          "exposure": "internal",
+          "receipt_id": "3a58e606bb914e718b3abf675d4df730",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-fail",
+              "content_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+              "source_digest": "sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "48708cf89d03c2781740885bc2950d541d02c488e360fa54bed17e6c11a29225",
+                "exposure": "internal",
+                "receipt_id": "c7d466dd2a2e4b77bcee1d6e3fb4371f",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+                    "content_digest": "sha256:71e56640b4f38244700b529e1c8681d56a08588031d5409b66faa98ee6b169bf",
+                    "source_digest": "sha256:30beff2e3ccb1b8b5f7602ce29f4867424d1d5c39009d30696e11775522491fd",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+                      "exposure": "internal",
+                      "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-19",
+                "source_action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+                "action_revision": 2,
+                "arguments_digest": "sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3",
+                "result_digest": "sha256:cf0b70ae05278afce462e972873d7d58c1020e8294b870457c48c5cea207bf05",
+                "authorization": {
+                  "approval_id": "approval-document-fail",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+                    "exposure": "internal",
+                    "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low"
+      },
+      "action": {
+        "id": "verification-action-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758",
+        "status": "completed",
+        "dispatch_count": 1,
+        "request_command_id": "verification-scenario-20",
+        "dispatch_command_id": "verification-host-a0e57ba9c856a663955e38525f61781e731dde86617369d823ad8788c786a223",
+        "finish_command_id": "verification-host-92a2a114024abc950586e7ff78763415f30f7fef0421c7540847be2a8645e068",
+        "started_at_ms": 1000,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "FAILED",
+      "reason": "CHECKS_FAILED",
+      "evidence_id": "verification-report-8b9f50252a62dbd1118e1fb2b40837daada7ad858c8867ffd9bc0208796bd722",
+      "evidence_digest": "sha256:67575f91ed731cc72b6144a01215e968b6ec7aa2b1e177826be38d713b642b9d",
+      "observed_at_ms": 1000
+    },
+    "revoked": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-revoked",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-pass",
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+        "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677",
+        "revoked": true,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "f1824d7e8749107a0fdae94bcf28a492f234c055436f34af79ef6f9896162814",
+          "exposure": "internal",
+          "receipt_id": "fbf6b8d36f5244e48f44a0aebcfce551",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low",
+        "revoked_by": "a-2",
+        "revoked_at_ms": 1000,
+        "revocation_command_id": "verification-scenario-22",
+        "revocation_reason": "Revise the test assumptions"
+      },
+      "action": {
+        "id": "verification-action-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677",
+        "status": "cancelled",
+        "dispatch_count": 0,
+        "request_command_id": "verification-scenario-21",
+        "dispatch_command_id": null,
+        "finish_command_id": "verification-host-ebda7ffc002e026aa5eea2151408f99a136c39121fe28f2de3ad2008b0e08079",
+        "started_at_ms": null,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "INCONCLUSIVE",
+      "reason": "GRANT_REVOKED",
+      "evidence_id": "verification-report-6780d454c3274bcd2d6751f3d2cecc448d0b65d0e9de0b7af90b4cb949603676",
+      "evidence_digest": "sha256:a898455ca72d2fbeb397b414183afb3cc799afb1aa474133013d4d8217c0238e",
+      "observed_at_ms": 1000
+    },
+    "lost": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-lost",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-pass",
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+        "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+        "revoked": false,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "0790b577ff1f75c7b640aff1ac4675cfe251d9240844c498fc47118928ede5eb",
+          "exposure": "internal",
+          "receipt_id": "c4d66c901b1446589c3d68d9c39c74dc",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low"
+      },
+      "action": {
+        "id": "verification-action-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+        "status": "abandoned",
+        "dispatch_count": 1,
+        "request_command_id": "verification-scenario-23",
+        "dispatch_command_id": "verification-host-66ee1867f4b482d1bb941a56f996e76a1addca701cd9ab8e337cb82a511e0fd2",
+        "finish_command_id": "verification-host-b457f4ce1885bb1642c99e6ed32516ca90da66f909ddaa6265ee00e1600331d1",
+        "started_at_ms": 1000,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "INCONCLUSIVE",
+      "reason": "RESULT_LOST_RECOVERY_NO_RERUN",
+      "evidence_id": "verification-report-781fabe46f1f80d9b20b87362f4000d9c47ec3b20c87cec3942ad58c06e0712e",
+      "evidence_digest": "sha256:6e9d1478d305eddf810f2771188afa186d1e8f7a24f9359ab4d84f501893a8b0",
+      "observed_at_ms": 1000
+    }
+  },
+  "observations": [
+    {
+      "scenario": "actual_result_transaction_failure",
+      "exception": "ValueError",
+      "cause": "IntegrityError",
+      "state": {
+        "schema": "aetp-trusted-document-verification-1",
+        "id": "verification-lost",
+        "project_id": "p-1",
+        "revision": 1,
+        "task_id": "t-1",
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "verifier_id": "a-2",
+        "input": {
+          "artifact_id": "document-pass",
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+          "task_id": "t-1",
+          "task_revision": 2,
+          "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+          "criteria": [
+            "Scope",
+            "Recovery"
+          ],
+          "artifact_author_id": "a-1",
+          "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+          "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+        },
+        "runner": {
+          "environment": {
+            "implementation": "CPython",
+            "python_version": "3.14.6"
+          },
+          "id": "aetp.fixed-json-document/v1",
+          "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+          "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+          "method": "strict_json_path_equals",
+          "sources": {
+            "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+            "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+          },
+          "version": 1
+        },
+        "case_set": {
+          "author_id": "a-2",
+          "cases": [
+            {
+              "criterion": "Scope",
+              "equals": "local",
+              "path": [
+                "scope"
+              ]
+            },
+            {
+              "criterion": "Recovery",
+              "equals": true,
+              "path": [
+                "recovery"
+              ]
+            }
+          ],
+          "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+        },
+        "grant": {
+          "id": "verification-grant-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+          "revoked": false,
+          "issued_at_ms": 1000,
+          "expires_at_ms": 2000,
+          "governance_version": "gov-verification-1",
+          "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+          "quality": {
+            "generation": 1,
+            "policy": {
+              "runner_id": "aetp.fixed-json-document/v1",
+              "grant_ttl_ms": 1000,
+              "max_cases": 32,
+              "max_case_bytes": 16384,
+              "max_document_bytes": 65536,
+              "max_depth": 32,
+              "max_path": 16,
+              "independent_authors_required": true
+            },
+            "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+          },
+          "execution": {
+            "exec_task_id": "qa-task",
+            "actor_id": "a-2",
+            "task_revision": 2,
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "lease_epoch": 1,
+            "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "session": {
+              "actor_id": "a-2",
+              "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+              "expires_at_wall_ms": 121000,
+              "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+              "lease_epoch": 1,
+              "project_id": "p-1",
+              "task_id": "qa-task"
+            },
+            "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+            "lease_expires_at": 300000
+          },
+          "source": {
+            "actor_id": "a-2",
+            "command_digest": "0790b577ff1f75c7b640aff1ac4675cfe251d9240844c498fc47118928ede5eb",
+            "exposure": "internal",
+            "receipt_id": "c4d66c901b1446589c3d68d9c39c74dc",
+            "source_id": "scenario-fixed-input-gateway",
+            "sources": [],
+            "untrusted_input": false,
+            "derived_sources": [
+              {
+                "type": "artifact",
+                "id": "document-pass",
+                "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+                "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+                "source": {
+                  "actor_id": "a-1",
+                  "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                  "exposure": "internal",
+                  "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                  "source_id": "scenario-fixed-input-gateway",
+                  "sources": [],
+                  "untrusted_input": false,
+                  "derived_sources": [
+                    {
+                      "type": "action",
+                      "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                      "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                      "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                      "source": {
+                        "actor_id": "a-1",
+                        "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                        "exposure": "internal",
+                        "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                        "source_id": "scenario-fixed-input-gateway",
+                        "sources": [],
+                        "untrusted_input": false
+                      },
+                      "untrusted_input": false
+                    }
+                  ],
+                  "kind": "runtime_document_capture",
+                  "command_id": "verification-scenario-15",
+                  "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                  "action_revision": 2,
+                  "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                  "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                  "authorization": {
+                    "approval_id": "approval-document-pass",
+                    "policy_version": "gov-verification-1",
+                    "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                    "requested_risk": "low",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    }
+                  },
+                  "execution_authority": "captured_document_bytes_only"
+                },
+                "untrusted_input": false
+              }
+            ]
+          },
+          "routing": {
+            "risk_level": "low",
+            "mode": "auto",
+            "required_role": null,
+            "rule": {
+              "action": "verification.execute",
+              "approval": "auto",
+              "risk_level": "low"
+            }
+          },
+          "requested_risk": "low"
+        },
+        "action": {
+          "id": "verification-action-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+          "status": "in_flight",
+          "dispatch_count": 1,
+          "request_command_id": "verification-scenario-23",
+          "dispatch_command_id": "verification-host-66ee1867f4b482d1bb941a56f996e76a1addca701cd9ab8e337cb82a511e0fd2",
+          "finish_command_id": null,
+          "started_at_ms": 1000,
+          "finished_at_ms": null
+        },
+        "status": "running",
+        "result": null,
+        "reason": null,
+        "evidence_id": null,
+        "evidence_digest": null,
+        "observed_at_ms": 1000
+      }
+    },
+    {
+      "scenario": "global_recovery_blocked",
+      "result": {
+        "barrier": "closed",
+        "missing_sessions": [],
+        "unknown_actions": [
+          "verification-action-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e"
+        ],
+        "reconciled_actions": [],
+        "cancelled_actions": [],
+        "pending_commands": []
+      }
+    }
+  ],
+  "submitted_commands": [
+    {
+      "command": {
+        "id": "verification-scenario-1",
+        "project_id": "p-1",
+        "actor_id": "bootstrap",
+        "type": "project.create",
+        "target_id": null,
+        "payload": {
+          "status": "planning"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-1",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-1",
+        "event_ids": [
+          "verification-scenario-1:received",
+          "verification-scenario-1:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-2",
+        "project_id": "p-1",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "a-1",
+        "payload": {
+          "model_id": "deterministic-fixture-a-1",
+          "status": "available"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-2",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-2",
+        "event_ids": [
+          "verification-scenario-2:received",
+          "verification-scenario-2:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-3",
+        "project_id": "p-1",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "a-2",
+        "payload": {
+          "model_id": "deterministic-fixture-a-2",
+          "status": "available"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-3",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-3",
+        "event_ids": [
+          "verification-scenario-3:received",
+          "verification-scenario-3:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-4",
+        "project_id": "p-1",
+        "actor_id": "bootstrap",
+        "type": "project.execution.configure",
+        "target_id": "p-1",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-4",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-4",
+        "event_ids": [
+          "verification-scenario-4:received",
+          "verification-scenario-4:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-5",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.governance.configure",
+        "target_id": "p-1",
+        "payload": {
+          "policy": {
+            "version": "gov-verification-1",
+            "mode": "selective",
+            "max_ttl_ms": 3600000,
+            "max_renewals": 2,
+            "rules": [
+              {
+                "action": "decision.activate",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "document.write",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "document.restore",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "document.append",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "verification.execute",
+                "risk_level": "low",
+                "approval": "auto"
+              }
+            ],
+            "subjects": {
+              "human-owner": {
+                "type": "human",
+                "roles": [
+                  "human_owner"
+                ]
+              },
+              "human-peer": {
+                "type": "human",
+                "roles": [
+                  "human_collaborator"
+                ]
+              },
+              "a-1": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              },
+              "a-2": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              }
+            }
+          }
+        },
+        "expected_revision": 1,
+        "idempotency_key": "verification-scenario-5",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-5",
+        "event_ids": [
+          "verification-scenario-5:received",
+          "verification-scenario-5:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-6",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.quality.configure",
+        "target_id": "p-1",
+        "payload": {
+          "grant_ttl_ms": 1000
+        },
+        "expected_revision": 2,
+        "idempotency_key": "verification-scenario-6",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-6",
+        "event_ids": [
+          "verification-scenario-6:received",
+          "verification-scenario-6:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-7",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "t-1",
+        "payload": {
+          "title": "Fixed document scenario",
+          "acceptance_criteria": [
+            "Scope",
+            "Recovery"
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-7",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-7",
+        "event_ids": [
+          "verification-scenario-7:received",
+          "verification-scenario-7:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-8",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "t-1",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-8",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-8",
+        "event_ids": [
+          "verification-scenario-8:received",
+          "verification-scenario-8:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-9",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "execution.start",
+        "target_id": "t-1",
+        "payload": {
+          "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1
+        },
+        "expected_revision": 1,
+        "idempotency_key": "verification-scenario-9",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-9",
+        "event_ids": [
+          "verification-scenario-9:received",
+          "verification-scenario-9:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-10",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "task.create",
+        "target_id": "qa-task",
+        "payload": {
+          "title": "Fixed document scenario",
+          "acceptance_criteria": [
+            "Execute Cases"
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-10",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-10",
+        "event_ids": [
+          "verification-scenario-10:received",
+          "verification-scenario-10:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-11",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "task.claim",
+        "target_id": "qa-task",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-11",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-11",
+        "event_ids": [
+          "verification-scenario-11:received",
+          "verification-scenario-11:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-12",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "execution.start",
+        "target_id": "qa-task",
+        "payload": {
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1
+        },
+        "expected_revision": 1,
+        "idempotency_key": "verification-scenario-12",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-12",
+        "event_ids": [
+          "verification-scenario-12:received",
+          "verification-scenario-12:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-13",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "approval.request",
+        "target_id": "approval-document-pass",
+        "payload": {
+          "target": {
+            "type": "task",
+            "id": "t-1",
+            "revision": 2,
+            "content_digest": "sha256:f5a231a98e251285a5318aebb90e585b9bd87238d161ea04deb56247a8a64a07",
+            "revision_kind": "aggregate"
+          },
+          "action": "document.write",
+          "arguments": {
+            "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+            "lease_epoch": 1,
+            "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+            "document": {
+              "content": "{\"scope\":\"local\",\"recovery\":true}"
+            }
+          },
+          "ttl_ms": 1000
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-13",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-13",
+        "event_ids": [
+          "verification-scenario-13:received",
+          "verification-scenario-13:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-14",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "tool.request",
+        "target_id": "t-1",
+        "payload": {
+          "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1,
+          "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+          "operation": "document.write",
+          "arguments": {
+            "content": "{\"scope\":\"local\",\"recovery\":true}"
+          },
+          "approval_id": "approval-document-pass"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "verification-scenario-14",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-14",
+        "event_ids": [
+          "verification-scenario-14:received",
+          "verification-scenario-14:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-15",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "artifact.capture",
+        "target_id": "document-pass",
+        "payload": {
+          "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1,
+          "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+          "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-15",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-15",
+        "event_ids": [
+          "verification-scenario-15:received",
+          "verification-scenario-15:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-16",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "verification.request",
+        "target_id": "verification-pass",
+        "payload": {
+          "artifact_id": "document-pass",
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+          "exec_task_id": "qa-task",
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "cases": [
+            {
+              "criterion": "Scope",
+              "path": [
+                "scope"
+              ],
+              "equals": "local"
+            },
+            {
+              "criterion": "Recovery",
+              "path": [
+                "recovery"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-16",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-16",
+        "event_ids": [
+          "verification-scenario-16:received",
+          "verification-scenario-16:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-17",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "approval.request",
+        "target_id": "approval-document-fail",
+        "payload": {
+          "target": {
+            "type": "task",
+            "id": "t-1",
+            "revision": 2,
+            "content_digest": "sha256:f5a231a98e251285a5318aebb90e585b9bd87238d161ea04deb56247a8a64a07",
+            "revision_kind": "aggregate"
+          },
+          "action": "document.write",
+          "arguments": {
+            "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+            "lease_epoch": 1,
+            "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+            "document": {
+              "content": "{\"scope\":\"public\",\"recovery\":true}"
+            }
+          },
+          "ttl_ms": 1000
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-17",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-17",
+        "event_ids": [
+          "verification-scenario-17:received",
+          "verification-scenario-17:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-18",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "tool.request",
+        "target_id": "t-1",
+        "payload": {
+          "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1,
+          "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+          "operation": "document.write",
+          "arguments": {
+            "content": "{\"scope\":\"public\",\"recovery\":true}"
+          },
+          "approval_id": "approval-document-fail"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "verification-scenario-18",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-18",
+        "event_ids": [
+          "verification-scenario-18:received",
+          "verification-scenario-18:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-19",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "artifact.capture",
+        "target_id": "document-fail",
+        "payload": {
+          "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1,
+          "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+          "source_action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-19",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-19",
+        "event_ids": [
+          "verification-scenario-19:received",
+          "verification-scenario-19:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-20",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "verification.request",
+        "target_id": "verification-fail",
+        "payload": {
+          "artifact_id": "document-fail",
+          "artifact_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+          "exec_task_id": "qa-task",
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "cases": [
+            {
+              "criterion": "Scope",
+              "path": [
+                "scope"
+              ],
+              "equals": "local"
+            },
+            {
+              "criterion": "Recovery",
+              "path": [
+                "recovery"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-20",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-20",
+        "event_ids": [
+          "verification-scenario-20:received",
+          "verification-scenario-20:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-21",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "verification.request",
+        "target_id": "verification-revoked",
+        "payload": {
+          "artifact_id": "document-pass",
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+          "exec_task_id": "qa-task",
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "cases": [
+            {
+              "criterion": "Scope",
+              "path": [
+                "scope"
+              ],
+              "equals": "local"
+            },
+            {
+              "criterion": "Recovery",
+              "path": [
+                "recovery"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-21",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-21",
+        "event_ids": [
+          "verification-scenario-21:received",
+          "verification-scenario-21:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-22",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "verification.revoke",
+        "target_id": "verification-revoked",
+        "payload": {
+          "reason": "Revise the test assumptions"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-22",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-22",
+        "event_ids": [
+          "verification-scenario-22:received",
+          "verification-scenario-22:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-23",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "verification.request",
+        "target_id": "verification-lost",
+        "payload": {
+          "artifact_id": "document-pass",
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+          "exec_task_id": "qa-task",
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "cases": [
+            {
+              "criterion": "Scope",
+              "path": [
+                "scope"
+              ],
+              "equals": "local"
+            },
+            {
+              "criterion": "Recovery",
+              "path": [
+                "recovery"
+              ],
+              "equals": true
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-23",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-23",
+        "event_ids": [
+          "verification-scenario-23:received",
+          "verification-scenario-23:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-24",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "verification.run",
+        "target_id": "legacy-precheck",
+        "payload": {
+          "artifact_id": "document-pass",
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-24",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-24",
+        "event_ids": [
+          "verification-scenario-24:received",
+          "verification-scenario-24:effect:1",
+          "verification-scenario-24:effect:2"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-25",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "review.request",
+        "target_id": "review-pass",
+        "payload": {
+          "artifact_id": "document-pass",
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+          "reviewer_id": "a-2"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-25",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-25",
+        "event_ids": [
+          "verification-scenario-25:received",
+          "verification-scenario-25:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-26",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "review.submit",
+        "target_id": "review-pass",
+        "payload": {
+          "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+          "status": "approved",
+          "feedback": "Independently compared the declared checks with the document"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "verification-scenario-26",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "verification-scenario-26",
+        "event_ids": [
+          "verification-scenario-26:received",
+          "verification-scenario-26:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "verification-scenario-27",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.complete",
+        "target_id": "t-1",
+        "payload": {
+          "artifact_id": "document-pass",
+          "review_id": "review-pass",
+          "verification_id": "verification-pass"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "verification-scenario-27",
+        "correlation_id": "fixed-verification-scenario"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "verification-scenario-27",
+        "event_ids": [
+          "verification-scenario-27:received",
+          "verification-scenario-27:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "ENFORCEMENT_UNAVAILABLE"
+      }
+    }
+  ],
+  "final_state": {
+    "project:p-1": {
+      "id": "p-1",
+      "project_id": "p-1",
+      "revision": 3,
+      "status": "planning",
+      "observed_at_ms": 1000,
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+      "execution_clock": {
+        "elapsed_ms": 0,
+        "wall_anchor_ms": 1000
+      },
+      "collaboration_clock": {
+        "excluded_ms": 0,
+        "paused_at_ms": null
+      },
+      "governance": {
+        "owner_id": "human-owner",
+        "versions": {
+          "gov-verification-1": {
+            "policy": {
+              "max_renewals": 2,
+              "max_ttl_ms": 3600000,
+              "mode": "selective",
+              "rules": [
+                {
+                  "action": "decision.activate",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.append",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.restore",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.write",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "verification.execute",
+                  "approval": "auto",
+                  "risk_level": "low"
+                }
+              ],
+              "subjects": {
+                "a-1": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "a-2": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "human-owner": {
+                  "roles": [
+                    "human_owner"
+                  ],
+                  "type": "human"
+                },
+                "human-peer": {
+                  "roles": [
+                    "human_collaborator"
+                  ],
+                  "type": "human"
+                }
+              },
+              "version": "gov-verification-1"
+            },
+            "content_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-5"
+          }
+        },
+        "input_authority_id": "scenario-fixed-input-gateway",
+        "current_version": "gov-verification-1"
+      },
+      "quality": {
+        "generation": 1,
+        "versions": {
+          "1": {
+            "policy": {
+              "runner_id": "aetp.fixed-json-document/v1",
+              "grant_ttl_ms": 1000,
+              "max_cases": 32,
+              "max_case_bytes": 16384,
+              "max_document_bytes": 65536,
+              "max_depth": 32,
+              "max_path": 16,
+              "independent_authors_required": true
+            },
+            "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-6",
+            "observed_at_ms": 1000
+          }
+        }
+      }
+    },
+    "agent:a-1": {
+      "id": "a-1",
+      "project_id": "p-1",
+      "revision": 0,
+      "status": "available",
+      "model_id": "deterministic-fixture-a-1"
+    },
+    "agent:a-2": {
+      "id": "a-2",
+      "project_id": "p-1",
+      "revision": 0,
+      "status": "available",
+      "model_id": "deterministic-fixture-a-2"
+    },
+    "task:t-1": {
+      "id": "t-1",
+      "project_id": "p-1",
+      "revision": 2,
+      "status": "in_progress",
+      "title": "Fixed document scenario",
+      "owner_id": "a-1",
+      "policy_version": "m1-document-candidate-v1",
+      "acceptance_criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+      "lease_epoch": 1,
+      "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+      "lease": {
+        "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+        "expires_at_governance_ms": 300000,
+        "lease_epoch": 1,
+        "owner_id": "a-1",
+        "revoked": false
+      },
+      "bindings": {
+        "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a": {
+          "agent_id": "a-1",
+          "id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1,
+          "resume_checkpoint_id": null,
+          "runtime_id": "fixed-document-v1",
+          "session": {
+            "actor_id": "a-1",
+            "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+            "expires_at_wall_ms": 121000,
+            "id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "t-1"
+          },
+          "status": "running",
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7"
+        }
+      },
+      "observed_at_ms": 1000
+    },
+    "task:qa-task": {
+      "id": "qa-task",
+      "project_id": "p-1",
+      "revision": 2,
+      "status": "in_progress",
+      "title": "Fixed document scenario",
+      "owner_id": "a-2",
+      "policy_version": "m1-document-candidate-v1",
+      "acceptance_criteria": [
+        "Execute Cases"
+      ],
+      "criteria_digest": "sha256:3709c18e4da4c8480e43f13387a43278f6e1f4c601bcba257f6843eb5c48c1eb",
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+      "lease_epoch": 1,
+      "current_binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+      "lease": {
+        "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+        "expires_at_governance_ms": 300000,
+        "lease_epoch": 1,
+        "owner_id": "a-2",
+        "revoked": false
+      },
+      "bindings": {
+        "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6": {
+          "agent_id": "a-2",
+          "id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "resume_checkpoint_id": null,
+          "runtime_id": "fixed-document-v1",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "status": "running",
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7"
+        }
+      },
+      "observed_at_ms": 1000
+    },
+    "approval:approval-document-pass": {
+      "id": "approval-document-pass",
+      "project_id": "p-1",
+      "revision": 1,
+      "status": "approved",
+      "validity": "current",
+      "target": {
+        "content_digest": "sha256:f5a231a98e251285a5318aebb90e585b9bd87238d161ea04deb56247a8a64a07",
+        "id": "t-1",
+        "revision": 2,
+        "revision_kind": "aggregate",
+        "type": "task"
+      },
+      "scope": {
+        "action": "document.write",
+        "arguments_digest": "sha256:a59b5d0d22af5a6433c0e4e6254f17e1b5b9ce3e9153d0728f8ba39e92bd589a"
+      },
+      "arguments": {
+        "operation": "document.write",
+        "arguments": {
+          "content": "{\"scope\":\"local\",\"recovery\":true}"
+        },
+        "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+        "lease_epoch": 1,
+        "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079"
+      },
+      "requested_arguments": {
+        "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+        "document": {
+          "content": "{\"scope\":\"local\",\"recovery\":true}"
+        },
+        "lease_epoch": 1,
+        "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079"
+      },
+      "policy_version": "gov-verification-1",
+      "policy_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+      "requested_by": {
+        "type": "agent",
+        "id": "a-1"
+      },
+      "executor": {
+        "type": "agent",
+        "id": "a-1"
+      },
+      "approver": {
+        "type": "system",
+        "id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369"
+      },
+      "approved_by": {
+        "type": "system",
+        "id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369"
+      },
+      "authority": {
+        "type": "system",
+        "required_role": null
+      },
+      "routing": {
+        "risk_level": "low",
+        "mode": "auto",
+        "required_role": null,
+        "rule": {
+          "action": "document.write",
+          "approval": "auto",
+          "risk_level": "low"
+        }
+      },
+      "risk_level": "low",
+      "declared_risk": "low",
+      "delegated_to": null,
+      "revocable_until": null,
+      "source": {
+        "actor_id": "a-1",
+        "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+        "exposure": "internal",
+        "receipt_id": "5ffabce9e140454f816527e1617eb446",
+        "source_id": "scenario-fixed-input-gateway",
+        "sources": [],
+        "untrusted_input": false
+      },
+      "ttl_ms": 1000,
+      "requested_at": 1000,
+      "expires_at": 2000,
+      "on_expire": "escalate",
+      "renew_limit": 2,
+      "renewal_count": 0,
+      "renewed_from": null,
+      "origin_command_id": "verification-scenario-13",
+      "observed_at_ms": 1000,
+      "last_actor_id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369",
+      "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+      "decided_by": {
+        "type": "system",
+        "id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369"
+      },
+      "decision_reason": "deterministic policy rule"
+    },
+    "action:action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888": {
+      "actor_id": "a-1",
+      "arguments": {
+        "content": "{\"scope\":\"local\",\"recovery\":true}"
+      },
+      "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+      "authorization": {
+        "approval_id": "approval-document-pass",
+        "policy_version": "gov-verification-1",
+        "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+        "requested_risk": "low",
+        "source": {
+          "actor_id": "a-1",
+          "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+          "exposure": "internal",
+          "receipt_id": "5ffabce9e140454f816527e1617eb446",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false
+        }
+      },
+      "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+      "correlation_id": "fixed-verification-scenario",
+      "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+      "lease_epoch": 1,
+      "operation": "document.write",
+      "policy_version": "m1-fixed-document-execution-v1",
+      "project_id": "p-1",
+      "request_command_id": "verification-scenario-14",
+      "requested_arguments": {
+        "content": "{\"scope\":\"local\",\"recovery\":true}"
+      },
+      "requested_task_revision": 2,
+      "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+      "task_id": "t-1",
+      "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+      "revision": 2,
+      "status": "completed",
+      "result": {
+        "action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+        "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+        "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "envelope_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+        "object_key": "p-a5k7y6hpdv6dyhjg6jobhmye2n3kwpycc4nevxghsu2nfxws4nuq/b-vaeiz5cyad6tfiew4oh6yi5qoar5enk7vr5f7w64jw3xt5yaaanq/ehuz5d67kta5za74mrqbsdvman5i6hmy2mzzerycfuiknjlg7rua.json"
+      },
+      "reason": null,
+      "historical": false,
+      "dispatch_count": 1,
+      "query_count": 0,
+      "created_sequence": 30,
+      "observed_at_ms": 1000
+    },
+    "artifact:document-pass": {
+      "id": "document-pass",
+      "project_id": "p-1",
+      "task_id": "t-1",
+      "created_by": "a-1",
+      "type": "document",
+      "content": "{\"scope\":\"local\",\"recovery\":true}",
+      "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "task_revision": 2,
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "policy_version": "m1-document-candidate-v1",
+      "source": {
+        "actor_id": "a-1",
+        "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+        "exposure": "internal",
+        "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+        "source_id": "scenario-fixed-input-gateway",
+        "sources": [],
+        "untrusted_input": false,
+        "derived_sources": [
+          {
+            "type": "action",
+            "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+            "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+            "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+            "source": {
+              "actor_id": "a-1",
+              "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+              "exposure": "internal",
+              "receipt_id": "5ffabce9e140454f816527e1617eb446",
+              "source_id": "scenario-fixed-input-gateway",
+              "sources": [],
+              "untrusted_input": false
+            },
+            "untrusted_input": false
+          }
+        ],
+        "kind": "runtime_document_capture",
+        "command_id": "verification-scenario-15",
+        "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+        "action_revision": 2,
+        "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+        "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+        "authorization": {
+          "approval_id": "approval-document-pass",
+          "policy_version": "gov-verification-1",
+          "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+          "requested_risk": "low",
+          "source": {
+            "actor_id": "a-1",
+            "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+            "exposure": "internal",
+            "receipt_id": "5ffabce9e140454f816527e1617eb446",
+            "source_id": "scenario-fixed-input-gateway",
+            "sources": [],
+            "untrusted_input": false
+          }
+        },
+        "execution_authority": "captured_document_bytes_only"
+      },
+      "derived_from": [],
+      "supersedes": null,
+      "data_classification": "internal",
+      "revision": 0,
+      "capture_origin": {
+        "schema": "aetp-trusted-document-verification-1",
+        "command_id": "verification-scenario-15",
+        "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+        "action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+        "action_revision": 2
+      }
+    },
+    "verification:verification-pass": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-pass",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-pass",
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+        "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e",
+        "revoked": false,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "9ac83bb2dd7f8440e62da7d00876d54c24a21770a8ddcfe43b957c6bf8ab6d67",
+          "exposure": "internal",
+          "receipt_id": "0aa7c82bf5fa42948cbbaa12307e3d3d",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low"
+      },
+      "action": {
+        "id": "verification-action-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e",
+        "status": "completed",
+        "dispatch_count": 1,
+        "request_command_id": "verification-scenario-16",
+        "dispatch_command_id": "verification-host-f8aaa1063b8d7b86b9c4fa4f2be705699a619d77d715ea10a41cf15382499bd8",
+        "finish_command_id": "verification-host-7094965151e7d8c7d8a2011b6b6331829a2abf15f86837f389bce796bfd0ede9",
+        "started_at_ms": 1000,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "PASSED",
+      "reason": "ALL_CHECKS_MATCHED",
+      "evidence_id": "verification-report-753d3ab981cdfb4f2263b2ab9287256b3acee272f5a8806c174186f3e3da9ecf",
+      "evidence_digest": "sha256:830c9c6bad6cb9e49bb3dfa9895da38f2fb93bb5dbb433c41d76ce5f02be2ecf",
+      "observed_at_ms": 1000
+    },
+    "artifact:verification-report-753d3ab981cdfb4f2263b2ab9287256b3acee272f5a8806c174186f3e3da9ecf": {
+      "schema_version": "0.1",
+      "id": "verification-report-753d3ab981cdfb4f2263b2ab9287256b3acee272f5a8806c174186f3e3da9ecf",
+      "project_id": "p-1",
+      "task_id": "t-1",
+      "created_by": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369",
+      "type": "report",
+      "content": "{\"action_id\":\"verification-action-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e\",\"case_set\":{\"author_id\":\"a-2\",\"cases\":[{\"criterion\":\"Scope\",\"equals\":\"local\",\"path\":[\"scope\"]},{\"criterion\":\"Recovery\",\"equals\":true,\"path\":[\"recovery\"]}],\"content_digest\":\"sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9\"},\"dispatch_command_id\":\"verification-host-f8aaa1063b8d7b86b9c4fa4f2be705699a619d77d715ea10a41cf15382499bd8\",\"execution_outcome\":\"completed\",\"finished_at_ms\":1000,\"grant\":{\"execution\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"exec_task_id\":\"qa-task\",\"lease_epoch\":1,\"lease_expires_at\":300000,\"session\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"expires_at_wall_ms\":121000,\"id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"lease_epoch\":1,\"project_id\":\"p-1\",\"task_id\":\"qa-task\"},\"session_id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"task_revision\":2,\"workspace_provider_id\":\"workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7\"},\"expires_at_ms\":2000,\"governance_digest\":\"sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a\",\"governance_version\":\"gov-verification-1\",\"id\":\"verification-grant-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e\",\"issued_at_ms\":1000,\"quality\":{\"content_digest\":\"sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28\",\"generation\":1,\"policy\":{\"grant_ttl_ms\":1000,\"independent_authors_required\":true,\"max_case_bytes\":16384,\"max_cases\":32,\"max_depth\":32,\"max_document_bytes\":65536,\"max_path\":16,\"runner_id\":\"aetp.fixed-json-document/v1\"}},\"requested_risk\":\"low\",\"revoked\":false,\"routing\":{\"mode\":\"auto\",\"required_role\":null,\"risk_level\":\"low\",\"rule\":{\"action\":\"verification.execute\",\"approval\":\"auto\",\"risk_level\":\"low\"}},\"source\":{\"actor_id\":\"a-2\",\"command_digest\":\"9ac83bb2dd7f8440e62da7d00876d54c24a21770a8ddcfe43b957c6bf8ab6d67\",\"derived_sources\":[{\"content_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"id\":\"document-pass\",\"source\":{\"action_revision\":2,\"actor_id\":\"a-1\",\"arguments_digest\":\"sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731\",\"authorization\":{\"approval_id\":\"approval-document-pass\",\"policy_version\":\"gov-verification-1\",\"request_digest\":\"sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1\",\"requested_risk\":\"low\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5\",\"exposure\":\"internal\",\"receipt_id\":\"5ffabce9e140454f816527e1617eb446\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"command_digest\":\"b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2\",\"command_id\":\"verification-scenario-15\",\"derived_sources\":[{\"content_digest\":\"sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9\",\"id\":\"action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5\",\"exposure\":\"internal\",\"receipt_id\":\"5ffabce9e140454f816527e1617eb446\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569\",\"type\":\"action\",\"untrusted_input\":false}],\"execution_authority\":\"captured_document_bytes_only\",\"exposure\":\"internal\",\"kind\":\"runtime_document_capture\",\"receipt_id\":\"1e9e1c820b7948dc82191a4030fabe31\",\"result_digest\":\"sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542\",\"source_action_id\":\"action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99\",\"type\":\"artifact\",\"untrusted_input\":false}],\"exposure\":\"internal\",\"receipt_id\":\"0aa7c82bf5fa42948cbbaa12307e3d3d\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"grant_id\":\"verification-grant-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e\",\"input\":{\"artifact_author_id\":\"a-1\",\"artifact_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"artifact_id\":\"document-pass\",\"capture_origin_digest\":\"sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93\",\"criteria\":[\"Scope\",\"Recovery\"],\"criteria_digest\":\"sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a\",\"source_digest\":\"sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99\",\"task_id\":\"t-1\",\"task_revision\":2},\"observation\":{\"checks\":[{\"criterion\":\"Scope\",\"diagnostic\":\"MATCH\",\"matched\":true,\"observed_digest\":\"sha256:ea17e25c6c7aa6ef9407f976a670e87e37bc7e2a86b7bd4a3305bb16f1ba6052\",\"observed_type\":\"string\",\"path\":[\"scope\"]},{\"criterion\":\"Recovery\",\"diagnostic\":\"MATCH\",\"matched\":true,\"observed_digest\":\"sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b\",\"observed_type\":\"boolean\",\"path\":[\"recovery\"]}],\"diagnostic\":\"ALL_CHECKS_MATCHED\",\"observed_result\":\"PASSED\"},\"project_id\":\"p-1\",\"reason\":\"ALL_CHECKS_MATCHED\",\"record_command_id\":\"verification-host-7094965151e7d8c7d8a2011b6b6331829a2abf15f86837f389bce796bfd0ede9\",\"request_command_id\":\"verification-scenario-16\",\"result\":\"PASSED\",\"runner\":{\"environment\":{\"implementation\":\"CPython\",\"python_version\":\"3.14.6\"},\"id\":\"aetp.fixed-json-document/v1\",\"implementation_digest\":\"sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682\",\"invocation\":\"FixedJsonRunner.run(immutable_content, immutable_cases)\",\"method\":\"strict_json_path_equals\",\"sources\":{\"contracts.py\":\"sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0\",\"runner.py\":\"sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa\"},\"version\":1},\"schema\":\"aetp-trusted-document-verification-1\",\"scope\":\"fixed_checks_only_no_task_or_mission_acceptance\",\"started_at_ms\":1000,\"termination\":null,\"verification_id\":\"verification-pass\"}",
+      "content_digest": "sha256:830c9c6bad6cb9e49bb3dfa9895da38f2fb93bb5dbb433c41d76ce5f02be2ecf",
+      "task_revision": 2,
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "policy_version": "m1-document-candidate-v1",
+      "source": {
+        "kind": "trusted_fixed_verification",
+        "command_id": "verification-host-7094965151e7d8c7d8a2011b6b6331829a2abf15f86837f389bce796bfd0ede9",
+        "verification_id": "verification-pass",
+        "action_id": "verification-action-d2cb661daf8b03ccc894ab3b020b489e67318eaba1db81ab13aee64e0a9d5f9e",
+        "untrusted_input": false,
+        "input_source": {
+          "actor_id": "a-2",
+          "command_digest": "9ac83bb2dd7f8440e62da7d00876d54c24a21770a8ddcfe43b957c6bf8ab6d67",
+          "exposure": "internal",
+          "receipt_id": "0aa7c82bf5fa42948cbbaa12307e3d3d",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "execution_authority": "fixed_single_use_grant"
+      },
+      "derived_from": [
+        "document-pass"
+      ],
+      "supersedes": null,
+      "data_classification": "internal",
+      "revision": 0
+    },
+    "approval:approval-document-fail": {
+      "id": "approval-document-fail",
+      "project_id": "p-1",
+      "revision": 1,
+      "status": "approved",
+      "validity": "current",
+      "target": {
+        "content_digest": "sha256:f5a231a98e251285a5318aebb90e585b9bd87238d161ea04deb56247a8a64a07",
+        "id": "t-1",
+        "revision": 2,
+        "revision_kind": "aggregate",
+        "type": "task"
+      },
+      "scope": {
+        "action": "document.write",
+        "arguments_digest": "sha256:a4b9773aa92e966d73940f1a870380a7d1616969e0725327be880a7996ee80d5"
+      },
+      "arguments": {
+        "operation": "document.write",
+        "arguments": {
+          "content": "{\"scope\":\"public\",\"recovery\":true}"
+        },
+        "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+        "lease_epoch": 1,
+        "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079"
+      },
+      "requested_arguments": {
+        "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+        "document": {
+          "content": "{\"scope\":\"public\",\"recovery\":true}"
+        },
+        "lease_epoch": 1,
+        "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079"
+      },
+      "policy_version": "gov-verification-1",
+      "policy_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+      "requested_by": {
+        "type": "agent",
+        "id": "a-1"
+      },
+      "executor": {
+        "type": "agent",
+        "id": "a-1"
+      },
+      "approver": {
+        "type": "system",
+        "id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369"
+      },
+      "approved_by": {
+        "type": "system",
+        "id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369"
+      },
+      "authority": {
+        "type": "system",
+        "required_role": null
+      },
+      "routing": {
+        "risk_level": "low",
+        "mode": "auto",
+        "required_role": null,
+        "rule": {
+          "action": "document.write",
+          "approval": "auto",
+          "risk_level": "low"
+        }
+      },
+      "risk_level": "low",
+      "declared_risk": "low",
+      "delegated_to": null,
+      "revocable_until": null,
+      "source": {
+        "actor_id": "a-1",
+        "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+        "exposure": "internal",
+        "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+        "source_id": "scenario-fixed-input-gateway",
+        "sources": [],
+        "untrusted_input": false
+      },
+      "ttl_ms": 1000,
+      "requested_at": 1000,
+      "expires_at": 2000,
+      "on_expire": "escalate",
+      "renew_limit": 2,
+      "renewal_count": 0,
+      "renewed_from": null,
+      "origin_command_id": "verification-scenario-17",
+      "observed_at_ms": 1000,
+      "last_actor_id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369",
+      "request_digest": "sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292",
+      "decided_by": {
+        "type": "system",
+        "id": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369"
+      },
+      "decision_reason": "deterministic policy rule"
+    },
+    "action:action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5": {
+      "actor_id": "a-1",
+      "arguments": {
+        "content": "{\"scope\":\"public\",\"recovery\":true}"
+      },
+      "arguments_digest": "sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3",
+      "authorization": {
+        "approval_id": "approval-document-fail",
+        "policy_version": "gov-verification-1",
+        "request_digest": "sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292",
+        "requested_risk": "low",
+        "source": {
+          "actor_id": "a-1",
+          "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+          "exposure": "internal",
+          "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false
+        }
+      },
+      "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+      "correlation_id": "fixed-verification-scenario",
+      "id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+      "lease_epoch": 1,
+      "operation": "document.write",
+      "policy_version": "m1-fixed-document-execution-v1",
+      "project_id": "p-1",
+      "request_command_id": "verification-scenario-18",
+      "requested_arguments": {
+        "content": "{\"scope\":\"public\",\"recovery\":true}"
+      },
+      "requested_task_revision": 2,
+      "session_id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+      "task_id": "t-1",
+      "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+      "revision": 2,
+      "status": "completed",
+      "result": {
+        "action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+        "arguments_digest": "sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3",
+        "content_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+        "envelope_digest": "sha256:71e56640b4f38244700b529e1c8681d56a08588031d5409b66faa98ee6b169bf",
+        "object_key": "p-a5k7y6hpdv6dyhjg6jobhmye2n3kwpycc4nevxghsu2nfxws4nuq/b-vaeiz5cyad6tfiew4oh6yi5qoar5enk7vr5f7w64jw3xt5yaaanq/7d7ggiwjcx2zvb5lqfj24xzvgiq4nuzwvh3klwsu2qisduyt4rxq.json"
+      },
+      "reason": null,
+      "historical": false,
+      "dispatch_count": 1,
+      "query_count": 0,
+      "created_sequence": 49,
+      "observed_at_ms": 1000
+    },
+    "artifact:document-fail": {
+      "id": "document-fail",
+      "project_id": "p-1",
+      "task_id": "t-1",
+      "created_by": "a-1",
+      "type": "document",
+      "content": "{\"scope\":\"public\",\"recovery\":true}",
+      "content_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+      "task_revision": 2,
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "policy_version": "m1-document-candidate-v1",
+      "source": {
+        "actor_id": "a-1",
+        "command_digest": "48708cf89d03c2781740885bc2950d541d02c488e360fa54bed17e6c11a29225",
+        "exposure": "internal",
+        "receipt_id": "c7d466dd2a2e4b77bcee1d6e3fb4371f",
+        "source_id": "scenario-fixed-input-gateway",
+        "sources": [],
+        "untrusted_input": false,
+        "derived_sources": [
+          {
+            "type": "action",
+            "id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+            "content_digest": "sha256:71e56640b4f38244700b529e1c8681d56a08588031d5409b66faa98ee6b169bf",
+            "source_digest": "sha256:30beff2e3ccb1b8b5f7602ce29f4867424d1d5c39009d30696e11775522491fd",
+            "source": {
+              "actor_id": "a-1",
+              "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+              "exposure": "internal",
+              "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+              "source_id": "scenario-fixed-input-gateway",
+              "sources": [],
+              "untrusted_input": false
+            },
+            "untrusted_input": false
+          }
+        ],
+        "kind": "runtime_document_capture",
+        "command_id": "verification-scenario-19",
+        "source_action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+        "action_revision": 2,
+        "arguments_digest": "sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3",
+        "result_digest": "sha256:cf0b70ae05278afce462e972873d7d58c1020e8294b870457c48c5cea207bf05",
+        "authorization": {
+          "approval_id": "approval-document-fail",
+          "policy_version": "gov-verification-1",
+          "request_digest": "sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292",
+          "requested_risk": "low",
+          "source": {
+            "actor_id": "a-1",
+            "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+            "exposure": "internal",
+            "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+            "source_id": "scenario-fixed-input-gateway",
+            "sources": [],
+            "untrusted_input": false
+          }
+        },
+        "execution_authority": "captured_document_bytes_only"
+      },
+      "derived_from": [],
+      "supersedes": null,
+      "data_classification": "internal",
+      "revision": 0,
+      "capture_origin": {
+        "schema": "aetp-trusted-document-verification-1",
+        "command_id": "verification-scenario-19",
+        "command_digest": "48708cf89d03c2781740885bc2950d541d02c488e360fa54bed17e6c11a29225",
+        "action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+        "action_revision": 2
+      }
+    },
+    "verification:verification-fail": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-fail",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-fail",
+      "artifact_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-fail",
+        "artifact_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2",
+        "capture_origin_digest": "sha256:2ffe0435ce99d630687debaaa6051478a18bd242361bc5b5388554e52cd3825e"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758",
+        "revoked": false,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "6849a6d6f9655ffa9708ee1993e8d4f2417bd562b1f3b9142d8b4e74cb0ab76e",
+          "exposure": "internal",
+          "receipt_id": "3a58e606bb914e718b3abf675d4df730",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-fail",
+              "content_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+              "source_digest": "sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "48708cf89d03c2781740885bc2950d541d02c488e360fa54bed17e6c11a29225",
+                "exposure": "internal",
+                "receipt_id": "c7d466dd2a2e4b77bcee1d6e3fb4371f",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+                    "content_digest": "sha256:71e56640b4f38244700b529e1c8681d56a08588031d5409b66faa98ee6b169bf",
+                    "source_digest": "sha256:30beff2e3ccb1b8b5f7602ce29f4867424d1d5c39009d30696e11775522491fd",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+                      "exposure": "internal",
+                      "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-19",
+                "source_action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+                "action_revision": 2,
+                "arguments_digest": "sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3",
+                "result_digest": "sha256:cf0b70ae05278afce462e972873d7d58c1020e8294b870457c48c5cea207bf05",
+                "authorization": {
+                  "approval_id": "approval-document-fail",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+                    "exposure": "internal",
+                    "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low"
+      },
+      "action": {
+        "id": "verification-action-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758",
+        "status": "completed",
+        "dispatch_count": 1,
+        "request_command_id": "verification-scenario-20",
+        "dispatch_command_id": "verification-host-a0e57ba9c856a663955e38525f61781e731dde86617369d823ad8788c786a223",
+        "finish_command_id": "verification-host-92a2a114024abc950586e7ff78763415f30f7fef0421c7540847be2a8645e068",
+        "started_at_ms": 1000,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "FAILED",
+      "reason": "CHECKS_FAILED",
+      "evidence_id": "verification-report-8b9f50252a62dbd1118e1fb2b40837daada7ad858c8867ffd9bc0208796bd722",
+      "evidence_digest": "sha256:67575f91ed731cc72b6144a01215e968b6ec7aa2b1e177826be38d713b642b9d",
+      "observed_at_ms": 1000
+    },
+    "artifact:verification-report-8b9f50252a62dbd1118e1fb2b40837daada7ad858c8867ffd9bc0208796bd722": {
+      "schema_version": "0.1",
+      "id": "verification-report-8b9f50252a62dbd1118e1fb2b40837daada7ad858c8867ffd9bc0208796bd722",
+      "project_id": "p-1",
+      "task_id": "t-1",
+      "created_by": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369",
+      "type": "report",
+      "content": "{\"action_id\":\"verification-action-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758\",\"case_set\":{\"author_id\":\"a-2\",\"cases\":[{\"criterion\":\"Scope\",\"equals\":\"local\",\"path\":[\"scope\"]},{\"criterion\":\"Recovery\",\"equals\":true,\"path\":[\"recovery\"]}],\"content_digest\":\"sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9\"},\"dispatch_command_id\":\"verification-host-a0e57ba9c856a663955e38525f61781e731dde86617369d823ad8788c786a223\",\"execution_outcome\":\"completed\",\"finished_at_ms\":1000,\"grant\":{\"execution\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"exec_task_id\":\"qa-task\",\"lease_epoch\":1,\"lease_expires_at\":300000,\"session\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"expires_at_wall_ms\":121000,\"id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"lease_epoch\":1,\"project_id\":\"p-1\",\"task_id\":\"qa-task\"},\"session_id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"task_revision\":2,\"workspace_provider_id\":\"workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7\"},\"expires_at_ms\":2000,\"governance_digest\":\"sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a\",\"governance_version\":\"gov-verification-1\",\"id\":\"verification-grant-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758\",\"issued_at_ms\":1000,\"quality\":{\"content_digest\":\"sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28\",\"generation\":1,\"policy\":{\"grant_ttl_ms\":1000,\"independent_authors_required\":true,\"max_case_bytes\":16384,\"max_cases\":32,\"max_depth\":32,\"max_document_bytes\":65536,\"max_path\":16,\"runner_id\":\"aetp.fixed-json-document/v1\"}},\"requested_risk\":\"low\",\"revoked\":false,\"routing\":{\"mode\":\"auto\",\"required_role\":null,\"risk_level\":\"low\",\"rule\":{\"action\":\"verification.execute\",\"approval\":\"auto\",\"risk_level\":\"low\"}},\"source\":{\"actor_id\":\"a-2\",\"command_digest\":\"6849a6d6f9655ffa9708ee1993e8d4f2417bd562b1f3b9142d8b4e74cb0ab76e\",\"derived_sources\":[{\"content_digest\":\"sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb\",\"id\":\"document-fail\",\"source\":{\"action_revision\":2,\"actor_id\":\"a-1\",\"arguments_digest\":\"sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3\",\"authorization\":{\"approval_id\":\"approval-document-fail\",\"policy_version\":\"gov-verification-1\",\"request_digest\":\"sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292\",\"requested_risk\":\"low\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99\",\"exposure\":\"internal\",\"receipt_id\":\"97a38e710c624054a1d54e8a2723107c\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"command_digest\":\"48708cf89d03c2781740885bc2950d541d02c488e360fa54bed17e6c11a29225\",\"command_id\":\"verification-scenario-19\",\"derived_sources\":[{\"content_digest\":\"sha256:71e56640b4f38244700b529e1c8681d56a08588031d5409b66faa98ee6b169bf\",\"id\":\"action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99\",\"exposure\":\"internal\",\"receipt_id\":\"97a38e710c624054a1d54e8a2723107c\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:30beff2e3ccb1b8b5f7602ce29f4867424d1d5c39009d30696e11775522491fd\",\"type\":\"action\",\"untrusted_input\":false}],\"execution_authority\":\"captured_document_bytes_only\",\"exposure\":\"internal\",\"kind\":\"runtime_document_capture\",\"receipt_id\":\"c7d466dd2a2e4b77bcee1d6e3fb4371f\",\"result_digest\":\"sha256:cf0b70ae05278afce462e972873d7d58c1020e8294b870457c48c5cea207bf05\",\"source_action_id\":\"action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2\",\"type\":\"artifact\",\"untrusted_input\":false}],\"exposure\":\"internal\",\"receipt_id\":\"3a58e606bb914e718b3abf675d4df730\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"grant_id\":\"verification-grant-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758\",\"input\":{\"artifact_author_id\":\"a-1\",\"artifact_digest\":\"sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb\",\"artifact_id\":\"document-fail\",\"capture_origin_digest\":\"sha256:2ffe0435ce99d630687debaaa6051478a18bd242361bc5b5388554e52cd3825e\",\"criteria\":[\"Scope\",\"Recovery\"],\"criteria_digest\":\"sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a\",\"source_digest\":\"sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2\",\"task_id\":\"t-1\",\"task_revision\":2},\"observation\":{\"checks\":[{\"criterion\":\"Scope\",\"diagnostic\":\"NOT_EQUAL\",\"matched\":false,\"observed_digest\":\"sha256:b78532572a08261cbc0c918d293a0d4fb83b1a83e9dacef857e52efbd4b5c78b\",\"observed_type\":\"string\",\"path\":[\"scope\"]},{\"criterion\":\"Recovery\",\"diagnostic\":\"MATCH\",\"matched\":true,\"observed_digest\":\"sha256:b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b\",\"observed_type\":\"boolean\",\"path\":[\"recovery\"]}],\"diagnostic\":\"CHECKS_FAILED\",\"observed_result\":\"FAILED\"},\"project_id\":\"p-1\",\"reason\":\"CHECKS_FAILED\",\"record_command_id\":\"verification-host-92a2a114024abc950586e7ff78763415f30f7fef0421c7540847be2a8645e068\",\"request_command_id\":\"verification-scenario-20\",\"result\":\"FAILED\",\"runner\":{\"environment\":{\"implementation\":\"CPython\",\"python_version\":\"3.14.6\"},\"id\":\"aetp.fixed-json-document/v1\",\"implementation_digest\":\"sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682\",\"invocation\":\"FixedJsonRunner.run(immutable_content, immutable_cases)\",\"method\":\"strict_json_path_equals\",\"sources\":{\"contracts.py\":\"sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0\",\"runner.py\":\"sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa\"},\"version\":1},\"schema\":\"aetp-trusted-document-verification-1\",\"scope\":\"fixed_checks_only_no_task_or_mission_acceptance\",\"started_at_ms\":1000,\"termination\":null,\"verification_id\":\"verification-fail\"}",
+      "content_digest": "sha256:67575f91ed731cc72b6144a01215e968b6ec7aa2b1e177826be38d713b642b9d",
+      "task_revision": 2,
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "policy_version": "m1-document-candidate-v1",
+      "source": {
+        "kind": "trusted_fixed_verification",
+        "command_id": "verification-host-92a2a114024abc950586e7ff78763415f30f7fef0421c7540847be2a8645e068",
+        "verification_id": "verification-fail",
+        "action_id": "verification-action-ff7b5960c167f67a523825ce338f2fe1c3556a8ab73df9d40fb959b43be66758",
+        "untrusted_input": false,
+        "input_source": {
+          "actor_id": "a-2",
+          "command_digest": "6849a6d6f9655ffa9708ee1993e8d4f2417bd562b1f3b9142d8b4e74cb0ab76e",
+          "exposure": "internal",
+          "receipt_id": "3a58e606bb914e718b3abf675d4df730",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-fail",
+              "content_digest": "sha256:a0376d7fc7f8f8c841fd6ee7c1088fc3cfab5b4fcdc9eeca16a25b280d21e5fb",
+              "source_digest": "sha256:9c023e72f1bc1c768b2ac7a65394b5b54203ee6a761ed51eb0149a7e5a7c22b2",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "48708cf89d03c2781740885bc2950d541d02c488e360fa54bed17e6c11a29225",
+                "exposure": "internal",
+                "receipt_id": "c7d466dd2a2e4b77bcee1d6e3fb4371f",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+                    "content_digest": "sha256:71e56640b4f38244700b529e1c8681d56a08588031d5409b66faa98ee6b169bf",
+                    "source_digest": "sha256:30beff2e3ccb1b8b5f7602ce29f4867424d1d5c39009d30696e11775522491fd",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+                      "exposure": "internal",
+                      "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-19",
+                "source_action_id": "action-0d1b4b5d06e4a678709fc42db999c19fb19c00bada2729c01bff07477b1dbeb5",
+                "action_revision": 2,
+                "arguments_digest": "sha256:221b672d76f2020ec7a864939af3ea7bbfa6dbf42e982c24207abaab10cbc8f3",
+                "result_digest": "sha256:cf0b70ae05278afce462e972873d7d58c1020e8294b870457c48c5cea207bf05",
+                "authorization": {
+                  "approval_id": "approval-document-fail",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:62ddb3e832bd2d82f88f7565bce755460d918e7d2d103c824314a190b7ff3292",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "7c4bfe1031cf46f5f703b3367cb9f3e99cd13f15a3655dcda41cd6c5f95b6c99",
+                    "exposure": "internal",
+                    "receipt_id": "97a38e710c624054a1d54e8a2723107c",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "execution_authority": "fixed_single_use_grant"
+      },
+      "derived_from": [
+        "document-fail"
+      ],
+      "supersedes": null,
+      "data_classification": "internal",
+      "revision": 0
+    },
+    "verification:verification-revoked": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-revoked",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-pass",
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+        "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677",
+        "revoked": true,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "f1824d7e8749107a0fdae94bcf28a492f234c055436f34af79ef6f9896162814",
+          "exposure": "internal",
+          "receipt_id": "fbf6b8d36f5244e48f44a0aebcfce551",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low",
+        "revoked_by": "a-2",
+        "revoked_at_ms": 1000,
+        "revocation_command_id": "verification-scenario-22",
+        "revocation_reason": "Revise the test assumptions"
+      },
+      "action": {
+        "id": "verification-action-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677",
+        "status": "cancelled",
+        "dispatch_count": 0,
+        "request_command_id": "verification-scenario-21",
+        "dispatch_command_id": null,
+        "finish_command_id": "verification-host-ebda7ffc002e026aa5eea2151408f99a136c39121fe28f2de3ad2008b0e08079",
+        "started_at_ms": null,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "INCONCLUSIVE",
+      "reason": "GRANT_REVOKED",
+      "evidence_id": "verification-report-6780d454c3274bcd2d6751f3d2cecc448d0b65d0e9de0b7af90b4cb949603676",
+      "evidence_digest": "sha256:a898455ca72d2fbeb397b414183afb3cc799afb1aa474133013d4d8217c0238e",
+      "observed_at_ms": 1000
+    },
+    "artifact:verification-report-6780d454c3274bcd2d6751f3d2cecc448d0b65d0e9de0b7af90b4cb949603676": {
+      "schema_version": "0.1",
+      "id": "verification-report-6780d454c3274bcd2d6751f3d2cecc448d0b65d0e9de0b7af90b4cb949603676",
+      "project_id": "p-1",
+      "task_id": "t-1",
+      "created_by": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369",
+      "type": "report",
+      "content": "{\"action_id\":\"verification-action-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677\",\"case_set\":{\"author_id\":\"a-2\",\"cases\":[{\"criterion\":\"Scope\",\"equals\":\"local\",\"path\":[\"scope\"]},{\"criterion\":\"Recovery\",\"equals\":true,\"path\":[\"recovery\"]}],\"content_digest\":\"sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9\"},\"dispatch_command_id\":null,\"execution_outcome\":\"not_executed\",\"finished_at_ms\":1000,\"grant\":{\"execution\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"exec_task_id\":\"qa-task\",\"lease_epoch\":1,\"lease_expires_at\":300000,\"session\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"expires_at_wall_ms\":121000,\"id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"lease_epoch\":1,\"project_id\":\"p-1\",\"task_id\":\"qa-task\"},\"session_id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"task_revision\":2,\"workspace_provider_id\":\"workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7\"},\"expires_at_ms\":2000,\"governance_digest\":\"sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a\",\"governance_version\":\"gov-verification-1\",\"id\":\"verification-grant-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677\",\"issued_at_ms\":1000,\"quality\":{\"content_digest\":\"sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28\",\"generation\":1,\"policy\":{\"grant_ttl_ms\":1000,\"independent_authors_required\":true,\"max_case_bytes\":16384,\"max_cases\":32,\"max_depth\":32,\"max_document_bytes\":65536,\"max_path\":16,\"runner_id\":\"aetp.fixed-json-document/v1\"}},\"requested_risk\":\"low\",\"revocation_command_id\":\"verification-scenario-22\",\"revocation_reason\":\"Revise the test assumptions\",\"revoked\":true,\"revoked_at_ms\":1000,\"revoked_by\":\"a-2\",\"routing\":{\"mode\":\"auto\",\"required_role\":null,\"risk_level\":\"low\",\"rule\":{\"action\":\"verification.execute\",\"approval\":\"auto\",\"risk_level\":\"low\"}},\"source\":{\"actor_id\":\"a-2\",\"command_digest\":\"f1824d7e8749107a0fdae94bcf28a492f234c055436f34af79ef6f9896162814\",\"derived_sources\":[{\"content_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"id\":\"document-pass\",\"source\":{\"action_revision\":2,\"actor_id\":\"a-1\",\"arguments_digest\":\"sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731\",\"authorization\":{\"approval_id\":\"approval-document-pass\",\"policy_version\":\"gov-verification-1\",\"request_digest\":\"sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1\",\"requested_risk\":\"low\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5\",\"exposure\":\"internal\",\"receipt_id\":\"5ffabce9e140454f816527e1617eb446\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"command_digest\":\"b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2\",\"command_id\":\"verification-scenario-15\",\"derived_sources\":[{\"content_digest\":\"sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9\",\"id\":\"action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5\",\"exposure\":\"internal\",\"receipt_id\":\"5ffabce9e140454f816527e1617eb446\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569\",\"type\":\"action\",\"untrusted_input\":false}],\"execution_authority\":\"captured_document_bytes_only\",\"exposure\":\"internal\",\"kind\":\"runtime_document_capture\",\"receipt_id\":\"1e9e1c820b7948dc82191a4030fabe31\",\"result_digest\":\"sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542\",\"source_action_id\":\"action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99\",\"type\":\"artifact\",\"untrusted_input\":false}],\"exposure\":\"internal\",\"receipt_id\":\"fbf6b8d36f5244e48f44a0aebcfce551\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"grant_id\":\"verification-grant-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677\",\"input\":{\"artifact_author_id\":\"a-1\",\"artifact_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"artifact_id\":\"document-pass\",\"capture_origin_digest\":\"sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93\",\"criteria\":[\"Scope\",\"Recovery\"],\"criteria_digest\":\"sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a\",\"source_digest\":\"sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99\",\"task_id\":\"t-1\",\"task_revision\":2},\"observation\":null,\"project_id\":\"p-1\",\"reason\":\"GRANT_REVOKED\",\"record_command_id\":\"verification-host-ebda7ffc002e026aa5eea2151408f99a136c39121fe28f2de3ad2008b0e08079\",\"request_command_id\":\"verification-scenario-21\",\"result\":\"INCONCLUSIVE\",\"runner\":{\"environment\":{\"implementation\":\"CPython\",\"python_version\":\"3.14.6\"},\"id\":\"aetp.fixed-json-document/v1\",\"implementation_digest\":\"sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682\",\"invocation\":\"FixedJsonRunner.run(immutable_content, immutable_cases)\",\"method\":\"strict_json_path_equals\",\"sources\":{\"contracts.py\":\"sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0\",\"runner.py\":\"sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa\"},\"version\":1},\"schema\":\"aetp-trusted-document-verification-1\",\"scope\":\"fixed_checks_only_no_task_or_mission_acceptance\",\"started_at_ms\":null,\"termination\":null,\"verification_id\":\"verification-revoked\"}",
+      "content_digest": "sha256:a898455ca72d2fbeb397b414183afb3cc799afb1aa474133013d4d8217c0238e",
+      "task_revision": 2,
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "policy_version": "m1-document-candidate-v1",
+      "source": {
+        "kind": "trusted_fixed_verification",
+        "command_id": "verification-host-ebda7ffc002e026aa5eea2151408f99a136c39121fe28f2de3ad2008b0e08079",
+        "verification_id": "verification-revoked",
+        "action_id": "verification-action-43011dd772bb66e33f0b3e530a5e27d971eaee6ac38b05bc36299ba7c1117677",
+        "untrusted_input": false,
+        "input_source": {
+          "actor_id": "a-2",
+          "command_digest": "f1824d7e8749107a0fdae94bcf28a492f234c055436f34af79ef6f9896162814",
+          "exposure": "internal",
+          "receipt_id": "fbf6b8d36f5244e48f44a0aebcfce551",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "execution_authority": "fixed_single_use_grant"
+      },
+      "derived_from": [
+        "document-pass"
+      ],
+      "supersedes": null,
+      "data_classification": "internal",
+      "revision": 0
+    },
+    "verification:verification-lost": {
+      "schema": "aetp-trusted-document-verification-1",
+      "id": "verification-lost",
+      "project_id": "p-1",
+      "revision": 2,
+      "task_id": "t-1",
+      "artifact_id": "document-pass",
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "verifier_id": "a-2",
+      "input": {
+        "artifact_id": "document-pass",
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "task_id": "t-1",
+        "task_revision": 2,
+        "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+        "criteria": [
+          "Scope",
+          "Recovery"
+        ],
+        "artifact_author_id": "a-1",
+        "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+        "capture_origin_digest": "sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93"
+      },
+      "runner": {
+        "environment": {
+          "implementation": "CPython",
+          "python_version": "3.14.6"
+        },
+        "id": "aetp.fixed-json-document/v1",
+        "implementation_digest": "sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682",
+        "invocation": "FixedJsonRunner.run(immutable_content, immutable_cases)",
+        "method": "strict_json_path_equals",
+        "sources": {
+          "contracts.py": "sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0",
+          "runner.py": "sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa"
+        },
+        "version": 1
+      },
+      "case_set": {
+        "author_id": "a-2",
+        "cases": [
+          {
+            "criterion": "Scope",
+            "equals": "local",
+            "path": [
+              "scope"
+            ]
+          },
+          {
+            "criterion": "Recovery",
+            "equals": true,
+            "path": [
+              "recovery"
+            ]
+          }
+        ],
+        "content_digest": "sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9"
+      },
+      "grant": {
+        "id": "verification-grant-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+        "revoked": false,
+        "issued_at_ms": 1000,
+        "expires_at_ms": 2000,
+        "governance_version": "gov-verification-1",
+        "governance_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+        "quality": {
+          "generation": 1,
+          "policy": {
+            "runner_id": "aetp.fixed-json-document/v1",
+            "grant_ttl_ms": 1000,
+            "max_cases": 32,
+            "max_case_bytes": 16384,
+            "max_document_bytes": 65536,
+            "max_depth": 32,
+            "max_path": 16,
+            "independent_authors_required": true
+          },
+          "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28"
+        },
+        "execution": {
+          "exec_task_id": "qa-task",
+          "actor_id": "a-2",
+          "task_revision": 2,
+          "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "session_id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "workspace_provider_id": "workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7",
+          "lease_expires_at": 300000
+        },
+        "source": {
+          "actor_id": "a-2",
+          "command_digest": "0790b577ff1f75c7b640aff1ac4675cfe251d9240844c498fc47118928ede5eb",
+          "exposure": "internal",
+          "receipt_id": "c4d66c901b1446589c3d68d9c39c74dc",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "routing": {
+          "risk_level": "low",
+          "mode": "auto",
+          "required_role": null,
+          "rule": {
+            "action": "verification.execute",
+            "approval": "auto",
+            "risk_level": "low"
+          }
+        },
+        "requested_risk": "low"
+      },
+      "action": {
+        "id": "verification-action-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+        "status": "abandoned",
+        "dispatch_count": 1,
+        "request_command_id": "verification-scenario-23",
+        "dispatch_command_id": "verification-host-66ee1867f4b482d1bb941a56f996e76a1addca701cd9ab8e337cb82a511e0fd2",
+        "finish_command_id": "verification-host-b457f4ce1885bb1642c99e6ed32516ca90da66f909ddaa6265ee00e1600331d1",
+        "started_at_ms": 1000,
+        "finished_at_ms": 1000
+      },
+      "status": "finished",
+      "result": "INCONCLUSIVE",
+      "reason": "RESULT_LOST_RECOVERY_NO_RERUN",
+      "evidence_id": "verification-report-781fabe46f1f80d9b20b87362f4000d9c47ec3b20c87cec3942ad58c06e0712e",
+      "evidence_digest": "sha256:6e9d1478d305eddf810f2771188afa186d1e8f7a24f9359ab4d84f501893a8b0",
+      "observed_at_ms": 1000
+    },
+    "artifact:verification-report-781fabe46f1f80d9b20b87362f4000d9c47ec3b20c87cec3942ad58c06e0712e": {
+      "schema_version": "0.1",
+      "id": "verification-report-781fabe46f1f80d9b20b87362f4000d9c47ec3b20c87cec3942ad58c06e0712e",
+      "project_id": "p-1",
+      "task_id": "t-1",
+      "created_by": "governance-system-0755fc78ef1d7c3c1d26f25c13b304d376ab3f02171a4adcc79534d2ded2e369",
+      "type": "report",
+      "content": "{\"action_id\":\"verification-action-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e\",\"case_set\":{\"author_id\":\"a-2\",\"cases\":[{\"criterion\":\"Scope\",\"equals\":\"local\",\"path\":[\"scope\"]},{\"criterion\":\"Recovery\",\"equals\":true,\"path\":[\"recovery\"]}],\"content_digest\":\"sha256:6dab4493ed8a08a52fd3f25c5f4d32a0be3d924180f9828e8649b06f02098ca9\"},\"dispatch_command_id\":\"verification-host-66ee1867f4b482d1bb941a56f996e76a1addca701cd9ab8e337cb82a511e0fd2\",\"execution_outcome\":\"recovered\",\"finished_at_ms\":1000,\"grant\":{\"execution\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"exec_task_id\":\"qa-task\",\"lease_epoch\":1,\"lease_expires_at\":300000,\"session\":{\"actor_id\":\"a-2\",\"binding_id\":\"binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6\",\"expires_at_wall_ms\":121000,\"id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"lease_epoch\":1,\"project_id\":\"p-1\",\"task_id\":\"qa-task\"},\"session_id\":\"session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87\",\"task_revision\":2,\"workspace_provider_id\":\"workspace-76cdabf567e223c753d0c4105930cf9b3aa9ae2ada2a334d4ff96c828b778ba7\"},\"expires_at_ms\":2000,\"governance_digest\":\"sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a\",\"governance_version\":\"gov-verification-1\",\"id\":\"verification-grant-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e\",\"issued_at_ms\":1000,\"quality\":{\"content_digest\":\"sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28\",\"generation\":1,\"policy\":{\"grant_ttl_ms\":1000,\"independent_authors_required\":true,\"max_case_bytes\":16384,\"max_cases\":32,\"max_depth\":32,\"max_document_bytes\":65536,\"max_path\":16,\"runner_id\":\"aetp.fixed-json-document/v1\"}},\"requested_risk\":\"low\",\"revoked\":false,\"routing\":{\"mode\":\"auto\",\"required_role\":null,\"risk_level\":\"low\",\"rule\":{\"action\":\"verification.execute\",\"approval\":\"auto\",\"risk_level\":\"low\"}},\"source\":{\"actor_id\":\"a-2\",\"command_digest\":\"0790b577ff1f75c7b640aff1ac4675cfe251d9240844c498fc47118928ede5eb\",\"derived_sources\":[{\"content_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"id\":\"document-pass\",\"source\":{\"action_revision\":2,\"actor_id\":\"a-1\",\"arguments_digest\":\"sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731\",\"authorization\":{\"approval_id\":\"approval-document-pass\",\"policy_version\":\"gov-verification-1\",\"request_digest\":\"sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1\",\"requested_risk\":\"low\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5\",\"exposure\":\"internal\",\"receipt_id\":\"5ffabce9e140454f816527e1617eb446\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"command_digest\":\"b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2\",\"command_id\":\"verification-scenario-15\",\"derived_sources\":[{\"content_digest\":\"sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9\",\"id\":\"action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888\",\"source\":{\"actor_id\":\"a-1\",\"command_digest\":\"6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5\",\"exposure\":\"internal\",\"receipt_id\":\"5ffabce9e140454f816527e1617eb446\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569\",\"type\":\"action\",\"untrusted_input\":false}],\"execution_authority\":\"captured_document_bytes_only\",\"exposure\":\"internal\",\"kind\":\"runtime_document_capture\",\"receipt_id\":\"1e9e1c820b7948dc82191a4030fabe31\",\"result_digest\":\"sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542\",\"source_action_id\":\"action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false},\"source_digest\":\"sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99\",\"type\":\"artifact\",\"untrusted_input\":false}],\"exposure\":\"internal\",\"receipt_id\":\"c4d66c901b1446589c3d68d9c39c74dc\",\"source_id\":\"scenario-fixed-input-gateway\",\"sources\":[],\"untrusted_input\":false}},\"grant_id\":\"verification-grant-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e\",\"input\":{\"artifact_author_id\":\"a-1\",\"artifact_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"artifact_id\":\"document-pass\",\"capture_origin_digest\":\"sha256:795fbbd86281f6f891d5f3f34ffc8fe194ff061d7f922797fa8821cbe789ed93\",\"criteria\":[\"Scope\",\"Recovery\"],\"criteria_digest\":\"sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a\",\"source_digest\":\"sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99\",\"task_id\":\"t-1\",\"task_revision\":2},\"observation\":null,\"project_id\":\"p-1\",\"reason\":\"RESULT_LOST_RECOVERY_NO_RERUN\",\"record_command_id\":\"verification-host-b457f4ce1885bb1642c99e6ed32516ca90da66f909ddaa6265ee00e1600331d1\",\"request_command_id\":\"verification-scenario-23\",\"result\":\"INCONCLUSIVE\",\"runner\":{\"environment\":{\"implementation\":\"CPython\",\"python_version\":\"3.14.6\"},\"id\":\"aetp.fixed-json-document/v1\",\"implementation_digest\":\"sha256:8aedc7a9760d5020efaa3ebaf699648cbe286ac5cc64a8deebccc799802fd682\",\"invocation\":\"FixedJsonRunner.run(immutable_content, immutable_cases)\",\"method\":\"strict_json_path_equals\",\"sources\":{\"contracts.py\":\"sha256:e6c3c3b281c6e2dc58db4f9c273b9adf740a42c9dca0729dcb979a146ed543f0\",\"runner.py\":\"sha256:1b365918fb29755e06eaff14d4b4e716ccc1674a61921ecb8d9e4a77575c2daa\"},\"version\":1},\"schema\":\"aetp-trusted-document-verification-1\",\"scope\":\"fixed_checks_only_no_task_or_mission_acceptance\",\"started_at_ms\":1000,\"termination\":\"exclusive_gate_fixed_memory_runner_exited\",\"verification_id\":\"verification-lost\"}",
+      "content_digest": "sha256:6e9d1478d305eddf810f2771188afa186d1e8f7a24f9359ab4d84f501893a8b0",
+      "task_revision": 2,
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "policy_version": "m1-document-candidate-v1",
+      "source": {
+        "kind": "trusted_fixed_verification",
+        "command_id": "verification-host-b457f4ce1885bb1642c99e6ed32516ca90da66f909ddaa6265ee00e1600331d1",
+        "verification_id": "verification-lost",
+        "action_id": "verification-action-97a4fc925cef0c4563bfff5e4c52c639a6941a185d7aa9bf7a1a2dc8d8d56a9e",
+        "untrusted_input": false,
+        "input_source": {
+          "actor_id": "a-2",
+          "command_digest": "0790b577ff1f75c7b640aff1ac4675cfe251d9240844c498fc47118928ede5eb",
+          "exposure": "internal",
+          "receipt_id": "c4d66c901b1446589c3d68d9c39c74dc",
+          "source_id": "scenario-fixed-input-gateway",
+          "sources": [],
+          "untrusted_input": false,
+          "derived_sources": [
+            {
+              "type": "artifact",
+              "id": "document-pass",
+              "content_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+              "source_digest": "sha256:d3a1e96c94aef3bcd2e7d1990469837fbb882156f1ceafa2dfc8caf54e196c99",
+              "source": {
+                "actor_id": "a-1",
+                "command_digest": "b1a67c6b4c419a7517706ed6ea3a386835c234ca56f29f84d62fa7df7e224db2",
+                "exposure": "internal",
+                "receipt_id": "1e9e1c820b7948dc82191a4030fabe31",
+                "source_id": "scenario-fixed-input-gateway",
+                "sources": [],
+                "untrusted_input": false,
+                "derived_sources": [
+                  {
+                    "type": "action",
+                    "id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                    "content_digest": "sha256:5162613a384208af40d0fc51a04802381f586cc877921cfdfd0a09e9928784f9",
+                    "source_digest": "sha256:5194e9ae9c56aafc2b4c0c0fbef5ef307384a6ac86c2c00aa3dc631abce76569",
+                    "source": {
+                      "actor_id": "a-1",
+                      "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                      "exposure": "internal",
+                      "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "untrusted_input": false
+                  }
+                ],
+                "kind": "runtime_document_capture",
+                "command_id": "verification-scenario-15",
+                "source_action_id": "action-7931218c705a7a7452b06d8e674692349070fb6a76c0c5ced4e82fa05687a888",
+                "action_revision": 2,
+                "arguments_digest": "sha256:637811bc970f9b0a0d755bc3326af058edae70f3d2bdfbae8a600f81729c3731",
+                "result_digest": "sha256:a00dde80d7a8bd4539c0ee1c0012673f15d25434f693c26152f9fe965da12542",
+                "authorization": {
+                  "approval_id": "approval-document-pass",
+                  "policy_version": "gov-verification-1",
+                  "request_digest": "sha256:83280d1b004bd46f83b2daed76cc26129bac58a87c5cc266bddeab0c1f1a11d1",
+                  "requested_risk": "low",
+                  "source": {
+                    "actor_id": "a-1",
+                    "command_digest": "6f1c52ff5b52162ea3b3420560b1ef0555304462172cfa2e2465d095dcd4f3d5",
+                    "exposure": "internal",
+                    "receipt_id": "5ffabce9e140454f816527e1617eb446",
+                    "source_id": "scenario-fixed-input-gateway",
+                    "sources": [],
+                    "untrusted_input": false
+                  }
+                },
+                "execution_authority": "captured_document_bytes_only"
+              },
+              "untrusted_input": false
+            }
+          ]
+        },
+        "execution_authority": "fixed_single_use_grant"
+      },
+      "derived_from": [
+        "document-pass"
+      ],
+      "supersedes": null,
+      "data_classification": "internal",
+      "revision": 0
+    },
+    "artifact:legacy-precheck:evidence": {
+      "content": "{\"artifact_digest\":\"sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03\",\"artifact_id\":\"document-pass\",\"checks\":[{\"criterion\":\"Scope\",\"matched\":false},{\"criterion\":\"Recovery\",\"matched\":false}],\"command\":\"aetp.document.contains_all/v1\",\"criteria_ref\":{\"content_digest\":\"sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a\",\"revision\":2,\"task_id\":\"t-1\"},\"environment\":{\"implementation\":\"cpython\",\"platform\":\"win32\",\"python\":\"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\",\"scope\":\"in_process_text_precheck\"},\"environment_digest\":\"sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6\",\"limitation\":\"Internal precheck only; Runner action authorization is unavailable.\",\"method\":\"literal_text_contains_all\",\"observed_at\":\"2026-09-14T14:57:48.633783+00:00\",\"observed_result\":\"FAILED\",\"schema_version\":\"0.1\",\"test_suite_digest\":\"sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c\"}",
+      "content_digest": "sha256:bbebdf2f6cb9aa446fb8a557a226935f1e811820c2ccf8619186cd78bb4447be",
+      "created_by": "system:document-precheck",
+      "criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "data_classification": "internal",
+      "derived_from": [
+        "document-pass"
+      ],
+      "id": "legacy-precheck:evidence",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "p-1",
+      "revision": 0,
+      "source": {
+        "artifact_id": "document-pass",
+        "command_id": "verification-scenario-24",
+        "execution_authority": "unavailable",
+        "kind": "trusted_precheck",
+        "untrusted_input": false
+      },
+      "supersedes": null,
+      "task_id": "t-1",
+      "task_revision": 2,
+      "type": "report"
+    },
+    "verification:legacy-precheck": {
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "artifact_id": "document-pass",
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "evidence_digest": "sha256:bbebdf2f6cb9aa446fb8a557a226935f1e811820c2ccf8619186cd78bb4447be",
+      "evidence_id": "legacy-precheck:evidence",
+      "execution": {
+        "action_id": null,
+        "authorization": "unavailable",
+        "binding_id": null,
+        "kind": "internal_precheck",
+        "request_command_id": "verification-scenario-24",
+        "runner_id": "aetp.document.precheck/v1"
+      },
+      "id": "legacy-precheck",
+      "inputs": {
+        "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+        "command": "aetp.document.contains_all/v1",
+        "criteria_ref": {
+          "content_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+          "revision": 2,
+          "task_id": "t-1"
+        },
+        "environment_digest": "sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6",
+        "test_suite_digest": "sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+      },
+      "method": {
+        "name": "literal_text_contains_all",
+        "type": "runtime_check"
+      },
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "p-1",
+      "reason": "ENFORCEMENT_UNAVAILABLE",
+      "result": "INCONCLUSIVE",
+      "revision": 0,
+      "task_id": "t-1",
+      "task_revision": 2,
+      "verifier_id": "a-2"
+    },
+    "review:review-pass": {
+      "artifact_digest": "sha256:3f2f19d57418454820c33e9020ca25336adc8fc205fdc6c54a894e23b7a47f03",
+      "artifact_id": "document-pass",
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "feedback": "Independently compared the declared checks with the document",
+      "id": "review-pass",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "p-1",
+      "requested_by": "a-1",
+      "reviewer_id": "a-2",
+      "revision": 1,
+      "status": "approved",
+      "task_id": "t-1",
+      "task_revision": 2
+    }
+  },
+  "state_digest": "b22239dbd57fc05e5ad3350c888d86e4b23940b45778303345f31b92903b4000",
+  "replay": [
+    {
+      "path": "artifacts/m3-02-verification-demo-v1.sqlite",
+      "sha256": "27fe66cdc261d0ba79c81608cb4792a5e65448bbb6fbcd8f0fc02bc8e55080ae",
+      "event_count": 85,
+      "command_count": 40,
+      "prefixes_checked": 85,
+      "prefixes_with_pending_commands": 47,
+      "state_digest": "b22239dbd57fc05e5ad3350c888d86e4b23940b45778303345f31b92903b4000",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.acceptance.runner.FixedJsonRunner.run": 0,
+        "aetp.acceptance.runner.FixedJsonRunner.__init__": 0,
+        "aetp.acceptance.service.AcceptanceService.handle": 0,
+        "aetp.acceptance.service.AcceptanceService.dispatch": 0,
+        "aetp.acceptance.service.AcceptanceService.recover_verifications": 0,
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.runtime.service.ExecutionService.validation_context": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0,
+        "socket.socket": 0
+      }
+    },
+    {
+      "path": "artifacts/m3-02-verification-demo-v1-facts.sqlite",
+      "sha256": "08ff142a43cbd8304ca3a04d90dc7868a465f5d8d729ab380e0e7652ddb6c3e0",
+      "event_count": 85,
+      "command_count": 40,
+      "prefixes_checked": 85,
+      "prefixes_with_pending_commands": 47,
+      "state_digest": "b22239dbd57fc05e5ad3350c888d86e4b23940b45778303345f31b92903b4000",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.acceptance.runner.FixedJsonRunner.run": 0,
+        "aetp.acceptance.runner.FixedJsonRunner.__init__": 0,
+        "aetp.acceptance.service.AcceptanceService.handle": 0,
+        "aetp.acceptance.service.AcceptanceService.dispatch": 0,
+        "aetp.acceptance.service.AcceptanceService.recover_verifications": 0,
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.runtime.service.ExecutionService.validation_context": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0,
+        "socket.socket": 0
+      }
+    }
+  ],
+  "task_completion": false,
+  "mission_acceptance": false,
+  "test_028_passed": false
+}

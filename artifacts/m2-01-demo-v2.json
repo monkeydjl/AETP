@@ -1,0 +1,632 @@
+{
+  "work_item": "M2-01",
+  "recorded_at": "2026-09-12T18:59:45.016365+08:00",
+  "scope": "local process_admission fixture; no provider/model/billing",
+  "database": {
+    "path": "artifacts/m2-01-demo-v2.sqlite",
+    "sha256": "0fb1f6260c73d80745efb8ac0d3054b81a0edca44bb68867d90f37c9cb62fac3"
+  },
+  "facts_only_database": {
+    "path": "artifacts/m2-01-demo-v2-facts.sqlite",
+    "sha256": "a5abcb70566c11d56046587ed2adbf9be033cf7cc12e06ec984851611d74c548"
+  },
+  "commands_sent": [
+    {
+      "command": {
+        "id": "demo-command-1",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "project.create",
+        "target_id": null,
+        "payload": {
+          "status": "planning"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-1",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-1",
+        "event_ids": [
+          "demo-command-1:received",
+          "demo-command-1:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-2",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "agent-a",
+        "payload": {
+          "model_id": "fixture-agent-a"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-2",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-2",
+        "event_ids": [
+          "demo-command-2:received",
+          "demo-command-2:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-3",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "agent-b",
+        "payload": {
+          "model_id": "fixture-agent-b"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-3",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-3",
+        "event_ids": [
+          "demo-command-3:received",
+          "demo-command-3:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-4",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "meeting.create",
+        "target_id": "storage-meeting",
+        "payload": {
+          "topic": "Choose a local storage format",
+          "objective": "Record two independent views and retain disagreement",
+          "participants": [
+            "agent-a",
+            "agent-b"
+          ],
+          "moderator_id": "agent-a",
+          "policy": {
+            "token_budget": 8,
+            "max_rounds": 3
+          }
+        },
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-4",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-4",
+        "event_ids": [
+          "demo-command-4:received",
+          "demo-command-4:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-5",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "meeting.open",
+        "target_id": "storage-meeting",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-5",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-5",
+        "event_ids": [
+          "demo-command-5:received",
+          "demo-command-5:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-6",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "meeting.advance",
+        "target_id": "storage-meeting",
+        "payload": {},
+        "expected_revision": 1,
+        "idempotency_key": "demo-command-6",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-6",
+        "event_ids": [
+          "demo-command-6:received",
+          "demo-command-6:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-7",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "meeting.advance",
+        "target_id": "storage-meeting",
+        "payload": {},
+        "expected_revision": 2,
+        "idempotency_key": "demo-command-7",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-7",
+        "event_ids": [
+          "demo-command-7:received",
+          "demo-command-7:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-8",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "decision.propose",
+        "target_id": "storage-proposal",
+        "payload": {
+          "title": "Storage proposal",
+          "choice": "SQLite",
+          "alternatives": [
+            "SQLite",
+            "JSON"
+          ],
+          "reasoning": "Prefer atomic commits while preserving the inspection concern.",
+          "risk_level": "low",
+          "source": {
+            "kind": "meeting",
+            "id": "storage-meeting",
+            "revision": 4
+          }
+        },
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-8",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-8",
+        "event_ids": [
+          "demo-command-8:received",
+          "demo-command-8:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-9",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "decision.activate",
+        "target_id": "storage-proposal",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "demo-command-9",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "demo-command-9",
+        "event_ids": [
+          "demo-command-9:received",
+          "demo-command-9:rejected"
+        ],
+        "aggregate_revision": 0,
+        "error_code": "ENFORCEMENT_UNAVAILABLE"
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-10",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "meeting.advance",
+        "target_id": "storage-meeting",
+        "payload": {
+          "decision_id": "storage-proposal"
+        },
+        "expected_revision": 4,
+        "idempotency_key": "demo-command-10",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-10",
+        "event_ids": [
+          "demo-command-10:received",
+          "demo-command-10:effect:1"
+        ],
+        "aggregate_revision": 5,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "demo-command-11",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "meeting.close",
+        "target_id": "storage-meeting",
+        "payload": {},
+        "expected_revision": 5,
+        "idempotency_key": "demo-command-11",
+        "correlation_id": "bounded-peer-meeting"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "demo-command-11",
+        "event_ids": [
+          "demo-command-11:received",
+          "demo-command-11:effect:1"
+        ],
+        "aggregate_revision": 6,
+        "error_code": null
+      }
+    }
+  ],
+  "event_count": 24,
+  "state_digest": "d8d81baf244b00fcb8e6fb746e3103893ef9b943e6795aa9735a101dd2685ec7",
+  "before_reveal_ids": [
+    "independent-a"
+  ],
+  "peer_before_answer": [],
+  "post_event_deltas": [
+    0,
+    0,
+    0,
+    2
+  ],
+  "process_rows_compacted": 4,
+  "decision": {
+    "alternatives": [
+      "SQLite",
+      "JSON"
+    ],
+    "authority": "proposal_only",
+    "choice": "SQLite",
+    "concerns": [
+      {
+        "author_id": "agent-b",
+        "category": "disagreement",
+        "content": "Retain the concern that a SQLite file needs inspection tools.",
+        "context": "",
+        "conversation_id": "storage-meeting",
+        "conversation_type": "meeting",
+        "evidence": [],
+        "id": "dissent-b",
+        "observed_at_ms": 1000000,
+        "phase": "debate",
+        "position": "JSON",
+        "project_id": "demo-project",
+        "receipt": {
+          "call_id": "fixture-call:dissent-b",
+          "purpose": "process_admission",
+          "receipt_id": "ddd8028f5fdb454281f1f83f5f7e8e82",
+          "source_id": "fixture-local-admission-only",
+          "subject_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+          "tokens": 2,
+          "unit": "token"
+        },
+        "references": [],
+        "round": 1,
+        "semantic_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+        "untrusted_input": true
+      }
+    ],
+    "consensus_level": 0.5,
+    "content_digest": "sha256:8adc9d05376c202fb9e13b571e110221eefc07a3a09bdbc0c208002e9ecdb556",
+    "escalation": [
+      "independent_review",
+      "human_governance"
+    ],
+    "id": "storage-proposal",
+    "minority_opinions": [
+      {
+        "author_id": "agent-b",
+        "category": "analysis",
+        "content": "Append-only JSON is easier to inspect.",
+        "context": "",
+        "conversation_id": "storage-meeting",
+        "conversation_type": "meeting",
+        "evidence": [],
+        "id": "independent-b",
+        "observed_at_ms": 1000000,
+        "phase": "individual_analysis",
+        "position": "JSON",
+        "project_id": "demo-project",
+        "receipt": {
+          "call_id": "fixture-call:independent-b",
+          "purpose": "process_admission",
+          "receipt_id": "69a1f90693da4a89936e682f9f20a5b8",
+          "source_id": "fixture-local-admission-only",
+          "subject_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+          "tokens": 2,
+          "unit": "token"
+        },
+        "references": [],
+        "round": 0,
+        "semantic_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+        "untrusted_input": true
+      },
+      {
+        "author_id": "agent-b",
+        "category": "disagreement",
+        "content": "Retain the concern that a SQLite file needs inspection tools.",
+        "context": "",
+        "conversation_id": "storage-meeting",
+        "conversation_type": "meeting",
+        "evidence": [],
+        "id": "dissent-b",
+        "observed_at_ms": 1000000,
+        "phase": "debate",
+        "position": "JSON",
+        "project_id": "demo-project",
+        "receipt": {
+          "call_id": "fixture-call:dissent-b",
+          "purpose": "process_admission",
+          "receipt_id": "ddd8028f5fdb454281f1f83f5f7e8e82",
+          "source_id": "fixture-local-admission-only",
+          "subject_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+          "tokens": 2,
+          "unit": "token"
+        },
+        "references": [],
+        "round": 1,
+        "semantic_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+        "untrusted_input": true
+      }
+    ],
+    "missing_participants": [],
+    "origin_command_id": "demo-command-8",
+    "policy_version": "m2-local-discussion-v1",
+    "project_id": "demo-project",
+    "proposal_metering": "outside_process_admission",
+    "proposed_by": "agent-b",
+    "reasoning": "Prefer atomic commits while preserving the inspection concern.",
+    "revision": 0,
+    "risk_level": "low",
+    "source": {
+      "checkpoint": {
+        "analysis_authors": [
+          "agent-a",
+          "agent-b"
+        ],
+        "consensus_peak": 0.5,
+        "digest": "sha256:11ddc2286a65163699bbde26970c0a90fb31f2c47b285fd766a42fe9ed3a0b28",
+        "evidence": [],
+        "messages": 4,
+        "tokens": 8
+      },
+      "id": "storage-meeting",
+      "kind": "meeting",
+      "metering_scope": "process_admission",
+      "participants": [
+        "agent-a",
+        "agent-b"
+      ],
+      "records": [
+        {
+          "author_id": "agent-a",
+          "category": "analysis",
+          "content": "SQLite gives atomic append and query.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "independent-a",
+          "observed_at_ms": 1000000,
+          "phase": "individual_analysis",
+          "position": "SQLite",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:independent-a",
+            "purpose": "process_admission",
+            "receipt_id": "12de13fe999147c3aba348b4d7e350e5",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:08520a5c783a75b768aa66c971c4180df0dfd28cd3f0fb01dbccb2ef3d8b2ebb",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 0,
+          "semantic_digest": "sha256:08520a5c783a75b768aa66c971c4180df0dfd28cd3f0fb01dbccb2ef3d8b2ebb",
+          "untrusted_input": true
+        },
+        {
+          "author_id": "agent-b",
+          "category": "analysis",
+          "content": "Append-only JSON is easier to inspect.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "independent-b",
+          "observed_at_ms": 1000000,
+          "phase": "individual_analysis",
+          "position": "JSON",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:independent-b",
+            "purpose": "process_admission",
+            "receipt_id": "69a1f90693da4a89936e682f9f20a5b8",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 0,
+          "semantic_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+          "untrusted_input": true
+        },
+        {
+          "author_id": "agent-a",
+          "category": "recommendation",
+          "content": "Use SQLite to commit the shared facts atomically.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "response-a",
+          "observed_at_ms": 1000000,
+          "phase": "debate",
+          "position": "SQLite",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:response-a",
+            "purpose": "process_admission",
+            "receipt_id": "635afccca1654c5ea4c07aaa02aef4c0",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:63b9e9bedc1fa14b2d1eaa57d5890ff56d2d31992d8bd63607a28832c72865ee",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 1,
+          "semantic_digest": "sha256:63b9e9bedc1fa14b2d1eaa57d5890ff56d2d31992d8bd63607a28832c72865ee",
+          "untrusted_input": true
+        },
+        {
+          "author_id": "agent-b",
+          "category": "disagreement",
+          "content": "Retain the concern that a SQLite file needs inspection tools.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "dissent-b",
+          "observed_at_ms": 1000000,
+          "phase": "debate",
+          "position": "JSON",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:dissent-b",
+            "purpose": "process_admission",
+            "receipt_id": "ddd8028f5fdb454281f1f83f5f7e8e82",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 1,
+          "semantic_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+          "untrusted_input": true
+        }
+      ],
+      "revision": 4,
+      "termination_reason": "token_budget",
+      "untrusted_input": true
+    },
+    "source_digest": "sha256:747428f0b7615038e4fd72d320ef6ddef2d3ea3270d2a6679066a17ef89c5398",
+    "status": "proposed",
+    "supersedes": null,
+    "supporting_agents": [
+      "agent-a"
+    ],
+    "title": "Storage proposal",
+    "unexpressed_participants": [],
+    "unresolved": [],
+    "untrusted_input": true
+  },
+  "meeting": {
+    "checkpoint": {
+      "analysis_authors": [
+        "agent-a",
+        "agent-b"
+      ],
+      "consensus_peak": 0.5,
+      "digest": "sha256:11ddc2286a65163699bbde26970c0a90fb31f2c47b285fd766a42fe9ed3a0b28",
+      "evidence": [],
+      "messages": 4,
+      "tokens": 8
+    },
+    "completed_rounds": 0,
+    "created_by": "agent-a",
+    "deadline_ms": 2200000,
+    "decision_id": "storage-proposal",
+    "evidence_seen": [],
+    "governance_at_ms": 1000000,
+    "id": "storage-meeting",
+    "kind": "meeting",
+    "last_actor_id": "agent-a",
+    "last_command_id": "demo-command-11",
+    "meter_source": "fixture-local-admission-only",
+    "moderator_id": "agent-a",
+    "no_new_evidence": 0,
+    "objective": "Record two independent views and retain disagreement",
+    "observed_at_ms": 1000000,
+    "origin_command_id": "demo-command-4",
+    "participants": [
+      "agent-a",
+      "agent-b"
+    ],
+    "policy": {
+      "consensus_threshold": 0.8,
+      "max_rounds": 3,
+      "no_new_evidence_rounds": 2,
+      "time_budget_ms": 1200000,
+      "token_budget": 8
+    },
+    "policy_version": "m2-local-discussion-v1",
+    "project_id": "demo-project",
+    "revision": 6,
+    "round": 1,
+    "started_at_ms": 1000000,
+    "status": "closed",
+    "termination_reason": "token_budget",
+    "topic": "Choose a local storage format"
+  },
+  "replay": {
+    "equal": true,
+    "prefixes_checked": 24,
+    "databases_byte_unchanged": true,
+    "guard_calls": {
+      "aetp.meetings.process.ProcessLog.__init__": 0,
+      "aetp.meetings.process.ProcessLog.read": 0,
+      "aetp.meetings.metering.MeteringAuthority.issue": 0,
+      "aetp.meetings.metering.MeteringAuthority.verify": 0,
+      "aetp.meetings.service.MeetingService.post": 0,
+      "aetp.core.runtime.SimulatedRuntime.execute": 0,
+      "aetp.runtime.document.DocumentRuntime.register": 0,
+      "aetp.runtime.service.ExecutionService.start_session": 0,
+      "aetp.workspace.documents.DocumentWorkspace.write": 0,
+      "time.time_ns": 0
+    }
+  }
+}

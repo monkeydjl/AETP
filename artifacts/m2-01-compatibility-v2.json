@@ -1,0 +1,48 @@
+{
+  "work_item": "M2-01",
+  "candidate_revision": "v2",
+  "created_at": "2026-09-12T20:01:19.804395+08:00",
+  "purpose": "author compatibility verification; not independent acceptance",
+  "original_demo": {
+    "path": "artifacts/m2-01-demo-v2.json",
+    "sha256": "eb81033b24d12491aa7d386bb8b629cb3986fdc4a4a4bc936ed38db4209f9f75"
+  },
+  "checks": [
+    {
+      "path": "artifacts/m2-01-demo-v2.sqlite",
+      "sha256": "0fb1f6260c73d80745efb8ac0d3054b81a0edca44bb68867d90f37c9cb62fac3",
+      "decision_unchanged": true,
+      "original_meeting_fields_unchanged": true,
+      "derived_checkpoint_message_counts": [
+        0,
+        2,
+        4
+      ],
+      "database_bytes_unchanged": true
+    },
+    {
+      "path": "artifacts/m2-01-demo-v2-facts.sqlite",
+      "sha256": "a5abcb70566c11d56046587ed2adbf9be033cf7cc12e06ec984851611d74c548",
+      "decision_unchanged": true,
+      "original_meeting_fields_unchanged": true,
+      "derived_checkpoint_message_counts": [
+        0,
+        2,
+        4
+      ],
+      "database_bytes_unchanged": true
+    }
+  ],
+  "guard_calls": {
+    "aetp.meetings.process.ProcessLog.__init__": 0,
+    "aetp.meetings.process.ProcessLog.read": 0,
+    "aetp.meetings.metering.MeteringAuthority.issue": 0,
+    "aetp.meetings.metering.MeteringAuthority.verify": 0,
+    "aetp.meetings.service.MeetingService.post": 0,
+    "aetp.core.runtime.SimulatedRuntime.execute": 0,
+    "aetp.runtime.document.DocumentRuntime.register": 0,
+    "aetp.runtime.service.ExecutionService.start_session": 0,
+    "aetp.workspace.documents.DocumentWorkspace.write": 0,
+    "time.time_ns": 0
+  }
+}

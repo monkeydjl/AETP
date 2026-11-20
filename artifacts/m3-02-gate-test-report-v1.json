@@ -1,0 +1,70 @@
+{
+  "work_item": "M3-02",
+  "slice": "integration_gate",
+  "revision": "v1",
+  "created_at": "2026-09-17T02:42:00+08:00",
+  "executor": "/root",
+  "status": "passed",
+  "summary": "Integration Gate lifecycle and baseline verification tests",
+  "command": "PYTHONPATH=src python -m unittest tests/m3/test_integration_gate.py -v",
+  "exit_code": 0,
+  "tests_run": 9,
+  "passed": 9,
+  "failures": 0,
+  "errors": 0,
+  "test_cases": [
+    {
+      "name": "test_exempted_task_with_audit_trail_can_complete",
+      "status": "passed",
+      "description": "TEST-009: Exempted task with explicit audit trail can complete without gate"
+    },
+    {
+      "name": "test_full_gate_deterministic_replay",
+      "status": "passed",
+      "description": "Full gate lifecycle events replay deterministically without side effects"
+    },
+    {
+      "name": "test_merge_baseline_advanced_rejected_test_024",
+      "status": "passed",
+      "description": "TEST-024: Target branch baseline advancement rejects merge"
+    },
+    {
+      "name": "test_merge_conflict_records_event_and_does_not_advance_to_integrated",
+      "status": "passed",
+      "description": "Merge conflict records integration.conflict and keeps task in ready_for_integration"
+    },
+    {
+      "name": "test_merge_success_transitions_to_integrated",
+      "status": "passed",
+      "description": "Matching baseline git.merge succeeds and transitions task to integrated"
+    },
+    {
+      "name": "test_missing_declaration_cannot_enter_integration_ready",
+      "status": "passed",
+      "description": "Task without integration declaration cannot enter ready_for_integration"
+    },
+    {
+      "name": "test_system_verification_required_before_completed",
+      "status": "passed",
+      "description": "Task in integrated state must pass system verification before completed"
+    },
+    {
+      "name": "test_unexempted_task_cannot_complete_without_gate_test_009",
+      "status": "passed",
+      "description": "TEST-009: Unexempted task cannot complete without passing Integration Gate"
+    },
+    {
+      "name": "test_verified_transitions_to_ready_for_integration",
+      "status": "passed",
+      "description": "Task in verified state transitions to ready_for_integration when integration declared"
+    }
+  ],
+  "full_integration_suite": {
+    "command": "PYTHONPATH=src python -m unittest discover -s tests/m3 -p 'test_integration*.py' -t .",
+    "tests_run": 143,
+    "passed": 143,
+    "failures": 0,
+    "errors": 0,
+    "exit_code": 0
+  }
+}

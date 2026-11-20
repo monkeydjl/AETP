@@ -1,0 +1,2818 @@
+{
+  "work_item": "M3-02",
+  "created_at": "2026-09-17T00:23:36.987228+08:00",
+  "status": "author_evidence_pending_independent_review",
+  "generator": {
+    "path": "Docs/development/evidence/2026-09-17-m3-02-integration-review-inputs-demo.py",
+    "bytes": 17067,
+    "sha256": "aaa49d3ed23be413ba17fac4af34a98f889fd7fb8c706ad630217e95bdf2d2be"
+  },
+  "database": {
+    "path": "artifacts/m3-02-integration-demo-v1.sqlite",
+    "bytes": 188416,
+    "sha256": "1434819fcbbe7d23b4fe521efcf67d9e153e8a6239a3ef56048d8792acf8b1a9"
+  },
+  "facts_database": {
+    "path": "artifacts/m3-02-integration-demo-v1-facts.sqlite",
+    "bytes": 106496,
+    "sha256": "9da9ea15f051b221fff22204de0cc05c2f0edb7f924be5bf04d7b5c0f5f35ae2"
+  },
+  "outcomes": [
+    {
+      "label": "merge_without_declaration",
+      "command": {
+        "id": "integration-persistent-1",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "git.merge",
+        "target_id": "t-1",
+        "payload": {
+          "declaration_version": 1,
+          "declaration_digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-1",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-1",
+        "event_ids": [
+          "integration-persistent-1:received",
+          "integration-persistent-1:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "INTEGRATION_DECLARATION_REQUIRED"
+      },
+      "state_before_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+      "state_after_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29"
+    },
+    {
+      "label": "missing_receipt",
+      "command": {
+        "id": "integration-persistent-2",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.integration.declare",
+        "target_id": "p-1",
+        "payload": {
+          "task_id": "t-1",
+          "expected_task_revision": 2,
+          "version": 1,
+          "supersedes_version": null,
+          "requirement": "required",
+          "target": {
+            "provider_id": "future_git_provider",
+            "repository_id": "project_repository",
+            "object_format": "sha1",
+            "source": {
+              "ref": "refs/heads/agent/task_042",
+              "commit": "1111111111111111111111111111111111111111"
+            },
+            "target": {
+              "ref": "refs/heads/main",
+              "expected_commit": "2222222222222222222222222222222222222222"
+            }
+          },
+          "reason": "Fixed human-owner input for Integration contract evidence"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "integration-persistent-2",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-2",
+        "event_ids": [
+          "integration-persistent-2:received",
+          "integration-persistent-2:rejected"
+        ],
+        "aggregate_revision": 6,
+        "error_code": "INPUT_CONTEXT_INVALID"
+      },
+      "state_before_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+      "state_after_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29"
+    },
+    {
+      "label": "wrong_owner",
+      "command": {
+        "id": "integration-persistent-3",
+        "project_id": "p-1",
+        "actor_id": "a-2",
+        "type": "project.integration.declare",
+        "target_id": "p-1",
+        "payload": {
+          "task_id": "t-1",
+          "expected_task_revision": 2,
+          "version": 1,
+          "supersedes_version": null,
+          "requirement": "required",
+          "target": {
+            "provider_id": "future_git_provider",
+            "repository_id": "project_repository",
+            "object_format": "sha1",
+            "source": {
+              "ref": "refs/heads/agent/task_042",
+              "commit": "1111111111111111111111111111111111111111"
+            },
+            "target": {
+              "ref": "refs/heads/main",
+              "expected_commit": "2222222222222222222222222222222222222222"
+            }
+          },
+          "reason": "Fixed human-owner input for Integration contract evidence"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "integration-persistent-3",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-3",
+        "event_ids": [
+          "integration-persistent-3:received",
+          "integration-persistent-3:rejected"
+        ],
+        "aggregate_revision": 6,
+        "error_code": "PERMISSION_DENIED"
+      },
+      "state_before_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+      "state_after_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29"
+    },
+    {
+      "label": "stale_project_revision",
+      "command": {
+        "id": "integration-persistent-4",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.integration.declare",
+        "target_id": "p-1",
+        "payload": {
+          "task_id": "t-1",
+          "expected_task_revision": 2,
+          "version": 1,
+          "supersedes_version": null,
+          "requirement": "required",
+          "target": {
+            "provider_id": "future_git_provider",
+            "repository_id": "project_repository",
+            "object_format": "sha1",
+            "source": {
+              "ref": "refs/heads/agent/task_042",
+              "commit": "1111111111111111111111111111111111111111"
+            },
+            "target": {
+              "ref": "refs/heads/main",
+              "expected_commit": "2222222222222222222222222222222222222222"
+            }
+          },
+          "reason": "Fixed human-owner input for Integration contract evidence"
+        },
+        "expected_revision": 5,
+        "idempotency_key": "integration-persistent-4",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-4",
+        "event_ids": [
+          "integration-persistent-4:received",
+          "integration-persistent-4:rejected"
+        ],
+        "aggregate_revision": 6,
+        "error_code": "REVISION_CONFLICT"
+      },
+      "state_before_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+      "state_after_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29"
+    },
+    {
+      "label": "stale_task_revision",
+      "command": {
+        "id": "integration-persistent-5",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.integration.declare",
+        "target_id": "p-1",
+        "payload": {
+          "task_id": "t-1",
+          "expected_task_revision": 1,
+          "version": 1,
+          "supersedes_version": null,
+          "requirement": "required",
+          "target": {
+            "provider_id": "future_git_provider",
+            "repository_id": "project_repository",
+            "object_format": "sha1",
+            "source": {
+              "ref": "refs/heads/agent/task_042",
+              "commit": "1111111111111111111111111111111111111111"
+            },
+            "target": {
+              "ref": "refs/heads/main",
+              "expected_commit": "2222222222222222222222222222222222222222"
+            }
+          },
+          "reason": "Fixed human-owner input for Integration contract evidence"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "integration-persistent-5",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-5",
+        "event_ids": [
+          "integration-persistent-5:received",
+          "integration-persistent-5:rejected"
+        ],
+        "aggregate_revision": 6,
+        "error_code": "REVISION_CONFLICT"
+      },
+      "state_before_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+      "state_after_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29"
+    },
+    {
+      "label": "first_declaration",
+      "command": {
+        "id": "integration-persistent-6",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.integration.declare",
+        "target_id": "p-1",
+        "payload": {
+          "task_id": "t-1",
+          "expected_task_revision": 2,
+          "version": 1,
+          "supersedes_version": null,
+          "requirement": "required",
+          "target": {
+            "provider_id": "future_git_provider",
+            "repository_id": "project_repository",
+            "object_format": "sha1",
+            "source": {
+              "ref": "refs/heads/agent/task_042",
+              "commit": "1111111111111111111111111111111111111111"
+            },
+            "target": {
+              "ref": "refs/heads/main",
+              "expected_commit": "2222222222222222222222222222222222222222"
+            }
+          },
+          "reason": "Fixed human-owner input for Integration contract evidence"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "integration-persistent-6",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "integration-persistent-6",
+        "event_ids": [
+          "integration-persistent-6:received",
+          "integration-persistent-6:effect:1"
+        ],
+        "aggregate_revision": 7,
+        "error_code": null
+      },
+      "state_before_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+      "state_after_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6"
+    },
+    {
+      "label": "idempotent_retry_without_receipt",
+      "original_command_id": "integration-persistent-6",
+      "same_result": true,
+      "event_count_unchanged": 42
+    },
+    {
+      "label": "current_merge_unavailable",
+      "command": {
+        "id": "integration-persistent-7",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "git.merge",
+        "target_id": "t-1",
+        "payload": {
+          "declaration_version": 1,
+          "declaration_digest": "sha256:6fccbb5e0512c23dcf02a9d363788696d0d98b592d8927ea4cd75c6ba24d3607"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-7",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-7",
+        "event_ids": [
+          "integration-persistent-7:received",
+          "integration-persistent-7:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "ENFORCEMENT_UNAVAILABLE"
+      },
+      "state_before_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+      "state_after_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6"
+    },
+    {
+      "label": "second_declaration",
+      "command": {
+        "id": "integration-persistent-8",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.integration.declare",
+        "target_id": "p-1",
+        "payload": {
+          "task_id": "t-1",
+          "expected_task_revision": 2,
+          "version": 2,
+          "supersedes_version": 1,
+          "requirement": "required",
+          "target": {
+            "provider_id": "future_git_provider",
+            "repository_id": "project_repository",
+            "object_format": "sha1",
+            "source": {
+              "ref": "refs/heads/agent/task_042",
+              "commit": "1111111111111111111111111111111111111111"
+            },
+            "target": {
+              "ref": "refs/heads/main",
+              "expected_commit": "2222222222222222222222222222222222222222"
+            }
+          },
+          "reason": "Explicit superseding fixed input"
+        },
+        "expected_revision": 7,
+        "idempotency_key": "integration-persistent-8",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "integration-persistent-8",
+        "event_ids": [
+          "integration-persistent-8:received",
+          "integration-persistent-8:effect:1"
+        ],
+        "aggregate_revision": 8,
+        "error_code": null
+      },
+      "state_before_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "superseded_merge_reference",
+      "command": {
+        "id": "integration-persistent-9",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "git.merge",
+        "target_id": "t-1",
+        "payload": {
+          "declaration_version": 1,
+          "declaration_digest": "sha256:6fccbb5e0512c23dcf02a9d363788696d0d98b592d8927ea4cd75c6ba24d3607"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-9",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-9",
+        "event_ids": [
+          "integration-persistent-9:received",
+          "integration-persistent-9:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "INTEGRATION_DECLARATION_STALE"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "base_complete_guard",
+      "command": {
+        "id": "integration-persistent-10",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.complete",
+        "target_id": "t-1",
+        "payload": {},
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-10",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-10",
+        "event_ids": [
+          "integration-persistent-10:received",
+          "integration-persistent-10:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "INTEGRATION_REQUIRED"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "base_quality_complete_guard",
+      "command": {
+        "id": "integration-persistent-11",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.quality.complete",
+        "target_id": "t-1",
+        "payload": {},
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-11",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-11",
+        "event_ids": [
+          "integration-persistent-11:received",
+          "integration-persistent-11:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "INTEGRATION_REQUIRED"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "base_exemption_guard",
+      "command": {
+        "id": "integration-persistent-12",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.task_quality.configure",
+        "target_id": "p-1",
+        "payload": {
+          "version": "base-forbidden-exemption",
+          "max_evidence_age_ms": 60000,
+          "integration_exemptions": [
+            {
+              "task_id": "t-1",
+              "scope": "standalone_fixed_json_document",
+              "reason": "Should not override an explicit required declaration"
+            }
+          ]
+        },
+        "expected_revision": 8,
+        "idempotency_key": "integration-persistent-12",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-12",
+        "event_ids": [
+          "integration-persistent-12:received",
+          "integration-persistent-12:rejected"
+        ],
+        "aggregate_revision": 8,
+        "error_code": "INTEGRATION_SCOPE_CONFLICT"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "quality_complete_guard",
+      "command": {
+        "id": "integration-persistent-13",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.complete",
+        "target_id": "t-1",
+        "payload": {},
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-13",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-13",
+        "event_ids": [
+          "integration-persistent-13:received",
+          "integration-persistent-13:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "INTEGRATION_REQUIRED"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "quality_quality_complete_guard",
+      "command": {
+        "id": "integration-persistent-14",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "task.quality.complete",
+        "target_id": "t-1",
+        "payload": {},
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-14",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-14",
+        "event_ids": [
+          "integration-persistent-14:received",
+          "integration-persistent-14:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "INTEGRATION_REQUIRED"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "quality_exemption_guard",
+      "command": {
+        "id": "integration-persistent-15",
+        "project_id": "p-1",
+        "actor_id": "human-owner",
+        "type": "project.task_quality.configure",
+        "target_id": "p-1",
+        "payload": {
+          "version": "quality-forbidden-exemption",
+          "max_evidence_age_ms": 60000,
+          "integration_exemptions": [
+            {
+              "task_id": "t-1",
+              "scope": "standalone_fixed_json_document",
+              "reason": "Should not override an explicit required declaration"
+            }
+          ]
+        },
+        "expected_revision": 8,
+        "idempotency_key": "integration-persistent-15",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-15",
+        "event_ids": [
+          "integration-persistent-15:received",
+          "integration-persistent-15:rejected"
+        ],
+        "aggregate_revision": 8,
+        "error_code": "INTEGRATION_SCOPE_CONFLICT"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    },
+    {
+      "label": "legacy_current_merge_unavailable",
+      "command": {
+        "id": "integration-persistent-16",
+        "project_id": "p-1",
+        "actor_id": "a-1",
+        "type": "git.merge",
+        "target_id": "t-1",
+        "payload": {
+          "declaration_version": 2,
+          "declaration_digest": "sha256:b1929964eeb96722cfebac03d6415050b114f99556e5c2e65c24134f6580c408"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "integration-persistent-16",
+        "correlation_id": "fixed-integration-evidence"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "integration-persistent-16",
+        "event_ids": [
+          "integration-persistent-16:received",
+          "integration-persistent-16:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "ENFORCEMENT_UNAVAILABLE"
+      },
+      "state_before_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "state_after_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354"
+    }
+  ],
+  "replay": [
+    {
+      "database": {
+        "path": "artifacts/m3-02-integration-demo-v1.sqlite",
+        "bytes": 188416,
+        "sha256": "1434819fcbbe7d23b4fe521efcf67d9e153e8a6239a3ef56048d8792acf8b1a9"
+      },
+      "tables": [
+        "collaboration_entries",
+        "collaboration_processes",
+        "collaboration_usage",
+        "commands",
+        "events",
+        "idempotency",
+        "projection_meta",
+        "projections",
+        "security_audit",
+        "sqlite_sequence"
+      ],
+      "event_count": 62,
+      "command_count": 31,
+      "prefixes": [
+        {
+          "count": 1,
+          "state_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "pending": [
+            "verification-scenario-1"
+          ]
+        },
+        {
+          "count": 2,
+          "state_digest": "01375f49d440448c1692b994c304f287a547f7da185bd5bd8157eee889d50a4b",
+          "pending": []
+        },
+        {
+          "count": 3,
+          "state_digest": "01375f49d440448c1692b994c304f287a547f7da185bd5bd8157eee889d50a4b",
+          "pending": [
+            "verification-scenario-2"
+          ]
+        },
+        {
+          "count": 4,
+          "state_digest": "e3c10d22fa0a56cad8190e15bfd0e2adeee13add1e67dd532d62a451e46cd14f",
+          "pending": []
+        },
+        {
+          "count": 5,
+          "state_digest": "e3c10d22fa0a56cad8190e15bfd0e2adeee13add1e67dd532d62a451e46cd14f",
+          "pending": [
+            "verification-scenario-3"
+          ]
+        },
+        {
+          "count": 6,
+          "state_digest": "1e683339d76ce52b9ecb17384ceb59332959d7fc1897b3369f29013260ae2aa4",
+          "pending": []
+        },
+        {
+          "count": 7,
+          "state_digest": "1e683339d76ce52b9ecb17384ceb59332959d7fc1897b3369f29013260ae2aa4",
+          "pending": [
+            "verification-scenario-4"
+          ]
+        },
+        {
+          "count": 8,
+          "state_digest": "92531ad3bc10b10c02448c6babd267ab2dbf03179a014d9c0dad3f174fb4c4a9",
+          "pending": []
+        },
+        {
+          "count": 9,
+          "state_digest": "92531ad3bc10b10c02448c6babd267ab2dbf03179a014d9c0dad3f174fb4c4a9",
+          "pending": [
+            "verification-scenario-5"
+          ]
+        },
+        {
+          "count": 10,
+          "state_digest": "f5dc61e7124e9bd7387956656bc9d88b40c4152e7ac4f10f2631b1d81ff16f83",
+          "pending": []
+        },
+        {
+          "count": 11,
+          "state_digest": "f5dc61e7124e9bd7387956656bc9d88b40c4152e7ac4f10f2631b1d81ff16f83",
+          "pending": [
+            "verification-scenario-6"
+          ]
+        },
+        {
+          "count": 12,
+          "state_digest": "8b675e988df474016beb8549b32488f38af9c365bf1ef6f8e9342f29ceeeea1f",
+          "pending": []
+        },
+        {
+          "count": 13,
+          "state_digest": "8b675e988df474016beb8549b32488f38af9c365bf1ef6f8e9342f29ceeeea1f",
+          "pending": [
+            "verification-scenario-7"
+          ]
+        },
+        {
+          "count": 14,
+          "state_digest": "c423d8e85443a440381073b52f0fee6eb65b3be13819bb42882380b1409c1516",
+          "pending": []
+        },
+        {
+          "count": 15,
+          "state_digest": "c423d8e85443a440381073b52f0fee6eb65b3be13819bb42882380b1409c1516",
+          "pending": [
+            "verification-scenario-8"
+          ]
+        },
+        {
+          "count": 16,
+          "state_digest": "de11910054e72a6623e354a63cb9e1cfb7200cf209a2376dfd281243836c6563",
+          "pending": []
+        },
+        {
+          "count": 17,
+          "state_digest": "de11910054e72a6623e354a63cb9e1cfb7200cf209a2376dfd281243836c6563",
+          "pending": [
+            "verification-scenario-9"
+          ]
+        },
+        {
+          "count": 18,
+          "state_digest": "a99041f8e699073b4480d73ffd3a1b2586dd38c8f08b5eb0ef21d7e683acb281",
+          "pending": []
+        },
+        {
+          "count": 19,
+          "state_digest": "a99041f8e699073b4480d73ffd3a1b2586dd38c8f08b5eb0ef21d7e683acb281",
+          "pending": [
+            "verification-scenario-10"
+          ]
+        },
+        {
+          "count": 20,
+          "state_digest": "3d5cbaa884b4f993db21b2fa66c0a6f0d50828eaf6b38a8277162b1479551af0",
+          "pending": []
+        },
+        {
+          "count": 21,
+          "state_digest": "3d5cbaa884b4f993db21b2fa66c0a6f0d50828eaf6b38a8277162b1479551af0",
+          "pending": [
+            "verification-scenario-11"
+          ]
+        },
+        {
+          "count": 22,
+          "state_digest": "69da65159cff9a10b2e24a25f880fe2493208a519370b50fbad47046d33f1abb",
+          "pending": []
+        },
+        {
+          "count": 23,
+          "state_digest": "69da65159cff9a10b2e24a25f880fe2493208a519370b50fbad47046d33f1abb",
+          "pending": [
+            "verification-scenario-12"
+          ]
+        },
+        {
+          "count": 24,
+          "state_digest": "2af199e37118d7186f905b8eceb11f8c21c64658293ad958b0c8f0a2a1c86934",
+          "pending": []
+        },
+        {
+          "count": 25,
+          "state_digest": "2af199e37118d7186f905b8eceb11f8c21c64658293ad958b0c8f0a2a1c86934",
+          "pending": [
+            "verification-scenario-13"
+          ]
+        },
+        {
+          "count": 26,
+          "state_digest": "970da03149e114ca30b2f57485db79fda301017826db7d4f288327f662f17e40",
+          "pending": []
+        },
+        {
+          "count": 27,
+          "state_digest": "970da03149e114ca30b2f57485db79fda301017826db7d4f288327f662f17e40",
+          "pending": [
+            "verification-scenario-14"
+          ]
+        },
+        {
+          "count": 28,
+          "state_digest": "aa0ee2b6779222f39a7edc5d4224d0c841630764e6ebc417b5c0bde4e1da692f",
+          "pending": []
+        },
+        {
+          "count": 29,
+          "state_digest": "aa0ee2b6779222f39a7edc5d4224d0c841630764e6ebc417b5c0bde4e1da692f",
+          "pending": [
+            "verification-scenario-15"
+          ]
+        },
+        {
+          "count": 30,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 31,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-1"
+          ]
+        },
+        {
+          "count": 32,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 33,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-2"
+          ]
+        },
+        {
+          "count": 34,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 35,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-3"
+          ]
+        },
+        {
+          "count": 36,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 37,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-4"
+          ]
+        },
+        {
+          "count": 38,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 39,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-5"
+          ]
+        },
+        {
+          "count": 40,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 41,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-6"
+          ]
+        },
+        {
+          "count": 42,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": []
+        },
+        {
+          "count": 43,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": [
+            "integration-persistent-7"
+          ]
+        },
+        {
+          "count": 44,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": []
+        },
+        {
+          "count": 45,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": [
+            "integration-persistent-8"
+          ]
+        },
+        {
+          "count": 46,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 47,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-9"
+          ]
+        },
+        {
+          "count": 48,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 49,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-10"
+          ]
+        },
+        {
+          "count": 50,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 51,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-11"
+          ]
+        },
+        {
+          "count": 52,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 53,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-12"
+          ]
+        },
+        {
+          "count": 54,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 55,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-13"
+          ]
+        },
+        {
+          "count": 56,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 57,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-14"
+          ]
+        },
+        {
+          "count": 58,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 59,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-15"
+          ]
+        },
+        {
+          "count": 60,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 61,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-16"
+          ]
+        },
+        {
+          "count": 62,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        }
+      ],
+      "empty_prefix_checked": true,
+      "final_state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "final_state": {
+        "project:p-1": {
+          "id": "p-1",
+          "project_id": "p-1",
+          "revision": 8,
+          "status": "planning",
+          "observed_at_ms": 1000,
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+          "execution_clock": {
+            "elapsed_ms": 0,
+            "wall_anchor_ms": 1000
+          },
+          "collaboration_clock": {
+            "excluded_ms": 0,
+            "paused_at_ms": null
+          },
+          "governance": {
+            "owner_id": "human-owner",
+            "versions": {
+              "gov-verification-1": {
+                "policy": {
+                  "max_renewals": 2,
+                  "max_ttl_ms": 3600000,
+                  "mode": "selective",
+                  "rules": [
+                    {
+                      "action": "decision.activate",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.append",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.restore",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.write",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "verification.execute",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    }
+                  ],
+                  "subjects": {
+                    "a-1": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "a-2": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "human-owner": {
+                      "roles": [
+                        "human_owner"
+                      ],
+                      "type": "human"
+                    },
+                    "human-peer": {
+                      "roles": [
+                        "human_collaborator"
+                      ],
+                      "type": "human"
+                    }
+                  },
+                  "version": "gov-verification-1"
+                },
+                "content_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-5"
+              },
+              "gov-task-quality-1": {
+                "policy": {
+                  "max_renewals": 2,
+                  "max_ttl_ms": 3600000,
+                  "mode": "selective",
+                  "rules": [
+                    {
+                      "action": "decision.activate",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.append",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.restore",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.write",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.integration.exempt",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.quality.evaluate",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.quality.review",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.quality.transition",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "verification.execute",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    }
+                  ],
+                  "subjects": {
+                    "a-1": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "a-2": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "human-owner": {
+                      "roles": [
+                        "human_owner"
+                      ],
+                      "type": "human"
+                    },
+                    "human-peer": {
+                      "roles": [
+                        "human_collaborator"
+                      ],
+                      "type": "human"
+                    }
+                  },
+                  "version": "gov-task-quality-1"
+                },
+                "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-13"
+              }
+            },
+            "input_authority_id": "scenario-fixed-input-gateway",
+            "current_version": "gov-task-quality-1"
+          },
+          "quality": {
+            "generation": 1,
+            "versions": {
+              "1": {
+                "policy": {
+                  "runner_id": "aetp.fixed-json-document/v1",
+                  "grant_ttl_ms": 1000,
+                  "max_cases": 32,
+                  "max_case_bytes": 16384,
+                  "max_document_bytes": 65536,
+                  "max_depth": 32,
+                  "max_path": 16,
+                  "independent_authors_required": true
+                },
+                "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-6",
+                "observed_at_ms": 1000
+              }
+            }
+          },
+          "task_quality_policy": {
+            "versions": {
+              "task-quality-1": {
+                "policy": {
+                  "schema": "aetp-task-quality-1",
+                  "version": "task-quality-1",
+                  "max_evidence_age_ms": 60000,
+                  "integration_exemptions": {
+                    "t-1": {
+                      "task_id": "t-1",
+                      "scope": "standalone_fixed_json_document",
+                      "reason": "This specific deliverable is a standalone JSON document with no integration surface",
+                      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                      "owner_id": "a-1",
+                      "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                      "lease_epoch": 1,
+                      "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                      "declared_by": "human-owner",
+                      "command_id": "verification-scenario-14",
+                      "basis": "explicit_human_owner_task_scope"
+                    }
+                  }
+                },
+                "content_digest": "sha256:e9ccd5cf4bf3a868193a6ab6e950e809a5d1f0317fb5d9baf468557fe6a645b1",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-14",
+                "observed_at_ms": 1000
+              },
+              "integration-unexempt": {
+                "policy": {
+                  "schema": "aetp-task-quality-1",
+                  "version": "integration-unexempt",
+                  "max_evidence_age_ms": 60000,
+                  "integration_exemptions": {}
+                },
+                "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-15",
+                "observed_at_ms": 1000
+              }
+            },
+            "current_version": "integration-unexempt"
+          },
+          "integration_contract": {
+            "schema": "aetp-integration-contract-1",
+            "tasks": {
+              "t-1": {
+                "current_version": 2,
+                "versions": {
+                  "1": {
+                    "task_id": "t-1",
+                    "expected_task_revision": 2,
+                    "version": 1,
+                    "supersedes_version": null,
+                    "requirement": "required",
+                    "target": {
+                      "provider_id": "future_git_provider",
+                      "repository_id": "project_repository",
+                      "object_format": "sha1",
+                      "source": {
+                        "ref": "refs/heads/agent/task_042",
+                        "commit": "1111111111111111111111111111111111111111"
+                      },
+                      "target": {
+                        "ref": "refs/heads/main",
+                        "expected_commit": "2222222222222222222222222222222222222222"
+                      }
+                    },
+                    "reason": "Fixed human-owner input for Integration contract evidence",
+                    "declared_by": "human-owner",
+                    "command_id": "integration-persistent-6",
+                    "observed_at_ms": 1000,
+                    "project_revision": 6,
+                    "task_revision": 2,
+                    "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                    "owner_id": "a-1",
+                    "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                    "lease_epoch": 1,
+                    "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                    "governance": {
+                      "owner_id": "human-owner",
+                      "version": "gov-task-quality-1",
+                      "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff"
+                    },
+                    "task_quality_policy": {
+                      "version": "integration-unexempt",
+                      "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa"
+                    },
+                    "source": {
+                      "actor_id": "human-owner",
+                      "command_digest": "414c686c651983764678d5c01c3d53b25b11c688c33f2af9f55e1df0430a8e55",
+                      "exposure": "internal",
+                      "receipt_id": "84af362310e2463b8ff73fa0a84fed6a",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "content_digest": "sha256:6fccbb5e0512c23dcf02a9d363788696d0d98b592d8927ea4cd75c6ba24d3607"
+                  },
+                  "2": {
+                    "task_id": "t-1",
+                    "expected_task_revision": 2,
+                    "version": 2,
+                    "supersedes_version": 1,
+                    "requirement": "required",
+                    "target": {
+                      "provider_id": "future_git_provider",
+                      "repository_id": "project_repository",
+                      "object_format": "sha1",
+                      "source": {
+                        "ref": "refs/heads/agent/task_042",
+                        "commit": "1111111111111111111111111111111111111111"
+                      },
+                      "target": {
+                        "ref": "refs/heads/main",
+                        "expected_commit": "2222222222222222222222222222222222222222"
+                      }
+                    },
+                    "reason": "Explicit superseding fixed input",
+                    "declared_by": "human-owner",
+                    "command_id": "integration-persistent-8",
+                    "observed_at_ms": 1000,
+                    "project_revision": 7,
+                    "task_revision": 2,
+                    "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                    "owner_id": "a-1",
+                    "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                    "lease_epoch": 1,
+                    "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                    "governance": {
+                      "owner_id": "human-owner",
+                      "version": "gov-task-quality-1",
+                      "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff"
+                    },
+                    "task_quality_policy": {
+                      "version": "integration-unexempt",
+                      "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa"
+                    },
+                    "source": {
+                      "actor_id": "human-owner",
+                      "command_digest": "7687335c102033bfd4b62fe04510bd0b598a23ddc7a75bdf4aa843cb9242db0b",
+                      "exposure": "internal",
+                      "receipt_id": "84d7738aa55f414cb2cf36e1f0fd102d",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "content_digest": "sha256:b1929964eeb96722cfebac03d6415050b114f99556e5c2e65c24134f6580c408"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "p-1",
+          "revision": 0,
+          "status": "available",
+          "model_id": "deterministic-fixture-a-1"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "p-1",
+          "revision": 0,
+          "status": "available",
+          "model_id": "deterministic-fixture-a-2"
+        },
+        "task:t-1": {
+          "id": "t-1",
+          "project_id": "p-1",
+          "revision": 2,
+          "status": "in_progress",
+          "title": "Fixed document scenario",
+          "owner_id": "a-1",
+          "policy_version": "m1-document-candidate-v1",
+          "acceptance_criteria": [
+            "Scope",
+            "Recovery"
+          ],
+          "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+          "lease_epoch": 1,
+          "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease": {
+            "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+            "expires_at_governance_ms": 300000,
+            "lease_epoch": 1,
+            "owner_id": "a-1",
+            "revoked": false
+          },
+          "bindings": {
+            "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a": {
+              "agent_id": "a-1",
+              "id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+              "lease_epoch": 1,
+              "resume_checkpoint_id": null,
+              "runtime_id": "fixed-document-v1",
+              "session": {
+                "actor_id": "a-1",
+                "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                "expires_at_wall_ms": 121000,
+                "id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+                "lease_epoch": 1,
+                "project_id": "p-1",
+                "task_id": "t-1"
+              },
+              "status": "running",
+              "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588"
+            }
+          },
+          "observed_at_ms": 1000
+        },
+        "task:qa-task": {
+          "id": "qa-task",
+          "project_id": "p-1",
+          "revision": 2,
+          "status": "in_progress",
+          "title": "Fixed document scenario",
+          "owner_id": "a-2",
+          "policy_version": "m1-document-candidate-v1",
+          "acceptance_criteria": [
+            "Execute Cases"
+          ],
+          "criteria_digest": "sha256:3709c18e4da4c8480e43f13387a43278f6e1f4c601bcba257f6843eb5c48c1eb",
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+          "lease_epoch": 1,
+          "current_binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease": {
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_governance_ms": 300000,
+            "lease_epoch": 1,
+            "owner_id": "a-2",
+            "revoked": false
+          },
+          "bindings": {
+            "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6": {
+              "agent_id": "a-2",
+              "id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+              "lease_epoch": 1,
+              "resume_checkpoint_id": null,
+              "runtime_id": "fixed-document-v1",
+              "session": {
+                "actor_id": "a-2",
+                "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+                "expires_at_wall_ms": 121000,
+                "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+                "lease_epoch": 1,
+                "project_id": "p-1",
+                "task_id": "qa-task"
+              },
+              "status": "running",
+              "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588"
+            }
+          },
+          "observed_at_ms": 1000
+        }
+      },
+      "guards_zero_calls": [
+        "aetp.acceptance.runner.FixedJsonRunner.run",
+        "aetp.acceptance.runner.FixedJsonRunner.__init__",
+        "aetp.quality.service.TaskQualityService.handle",
+        "aetp.acceptance.service.AcceptanceService.dispatch",
+        "aetp.runtime.document.DocumentRuntime.register",
+        "aetp.runtime.document.DocumentRuntime.lookup",
+        "aetp.runtime.service.ExecutionService.validation_context",
+        "aetp.runtime.service.ExecutionService.recover",
+        "aetp.runtime.service.ExecutionService.dispatch",
+        "aetp.governance.trust.InputAuthority.issue",
+        "aetp.governance.trust.InputAuthority.verify",
+        "aetp.workspace.documents.DocumentWorkspace.write",
+        "aetp.workspace.documents.DocumentWorkspace.query",
+        "pathlib.Path.read_bytes",
+        "pathlib.Path.read_text",
+        "time.time_ns",
+        "subprocess.Popen",
+        "socket.socket",
+        "aetp.integration.service.IntegrationContractService.handle",
+        "aetp.integration.service.IntegrationContractService._evaluate"
+      ],
+      "forged_digest_rejected_without_publishing_any_cursor": true
+    },
+    {
+      "database": {
+        "path": "artifacts/m3-02-integration-demo-v1-facts.sqlite",
+        "bytes": 106496,
+        "sha256": "9da9ea15f051b221fff22204de0cc05c2f0edb7f924be5bf04d7b5c0f5f35ae2"
+      },
+      "tables": [
+        "commands",
+        "events"
+      ],
+      "event_count": 62,
+      "command_count": 31,
+      "prefixes": [
+        {
+          "count": 1,
+          "state_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "pending": [
+            "verification-scenario-1"
+          ]
+        },
+        {
+          "count": 2,
+          "state_digest": "01375f49d440448c1692b994c304f287a547f7da185bd5bd8157eee889d50a4b",
+          "pending": []
+        },
+        {
+          "count": 3,
+          "state_digest": "01375f49d440448c1692b994c304f287a547f7da185bd5bd8157eee889d50a4b",
+          "pending": [
+            "verification-scenario-2"
+          ]
+        },
+        {
+          "count": 4,
+          "state_digest": "e3c10d22fa0a56cad8190e15bfd0e2adeee13add1e67dd532d62a451e46cd14f",
+          "pending": []
+        },
+        {
+          "count": 5,
+          "state_digest": "e3c10d22fa0a56cad8190e15bfd0e2adeee13add1e67dd532d62a451e46cd14f",
+          "pending": [
+            "verification-scenario-3"
+          ]
+        },
+        {
+          "count": 6,
+          "state_digest": "1e683339d76ce52b9ecb17384ceb59332959d7fc1897b3369f29013260ae2aa4",
+          "pending": []
+        },
+        {
+          "count": 7,
+          "state_digest": "1e683339d76ce52b9ecb17384ceb59332959d7fc1897b3369f29013260ae2aa4",
+          "pending": [
+            "verification-scenario-4"
+          ]
+        },
+        {
+          "count": 8,
+          "state_digest": "92531ad3bc10b10c02448c6babd267ab2dbf03179a014d9c0dad3f174fb4c4a9",
+          "pending": []
+        },
+        {
+          "count": 9,
+          "state_digest": "92531ad3bc10b10c02448c6babd267ab2dbf03179a014d9c0dad3f174fb4c4a9",
+          "pending": [
+            "verification-scenario-5"
+          ]
+        },
+        {
+          "count": 10,
+          "state_digest": "f5dc61e7124e9bd7387956656bc9d88b40c4152e7ac4f10f2631b1d81ff16f83",
+          "pending": []
+        },
+        {
+          "count": 11,
+          "state_digest": "f5dc61e7124e9bd7387956656bc9d88b40c4152e7ac4f10f2631b1d81ff16f83",
+          "pending": [
+            "verification-scenario-6"
+          ]
+        },
+        {
+          "count": 12,
+          "state_digest": "8b675e988df474016beb8549b32488f38af9c365bf1ef6f8e9342f29ceeeea1f",
+          "pending": []
+        },
+        {
+          "count": 13,
+          "state_digest": "8b675e988df474016beb8549b32488f38af9c365bf1ef6f8e9342f29ceeeea1f",
+          "pending": [
+            "verification-scenario-7"
+          ]
+        },
+        {
+          "count": 14,
+          "state_digest": "c423d8e85443a440381073b52f0fee6eb65b3be13819bb42882380b1409c1516",
+          "pending": []
+        },
+        {
+          "count": 15,
+          "state_digest": "c423d8e85443a440381073b52f0fee6eb65b3be13819bb42882380b1409c1516",
+          "pending": [
+            "verification-scenario-8"
+          ]
+        },
+        {
+          "count": 16,
+          "state_digest": "de11910054e72a6623e354a63cb9e1cfb7200cf209a2376dfd281243836c6563",
+          "pending": []
+        },
+        {
+          "count": 17,
+          "state_digest": "de11910054e72a6623e354a63cb9e1cfb7200cf209a2376dfd281243836c6563",
+          "pending": [
+            "verification-scenario-9"
+          ]
+        },
+        {
+          "count": 18,
+          "state_digest": "a99041f8e699073b4480d73ffd3a1b2586dd38c8f08b5eb0ef21d7e683acb281",
+          "pending": []
+        },
+        {
+          "count": 19,
+          "state_digest": "a99041f8e699073b4480d73ffd3a1b2586dd38c8f08b5eb0ef21d7e683acb281",
+          "pending": [
+            "verification-scenario-10"
+          ]
+        },
+        {
+          "count": 20,
+          "state_digest": "3d5cbaa884b4f993db21b2fa66c0a6f0d50828eaf6b38a8277162b1479551af0",
+          "pending": []
+        },
+        {
+          "count": 21,
+          "state_digest": "3d5cbaa884b4f993db21b2fa66c0a6f0d50828eaf6b38a8277162b1479551af0",
+          "pending": [
+            "verification-scenario-11"
+          ]
+        },
+        {
+          "count": 22,
+          "state_digest": "69da65159cff9a10b2e24a25f880fe2493208a519370b50fbad47046d33f1abb",
+          "pending": []
+        },
+        {
+          "count": 23,
+          "state_digest": "69da65159cff9a10b2e24a25f880fe2493208a519370b50fbad47046d33f1abb",
+          "pending": [
+            "verification-scenario-12"
+          ]
+        },
+        {
+          "count": 24,
+          "state_digest": "2af199e37118d7186f905b8eceb11f8c21c64658293ad958b0c8f0a2a1c86934",
+          "pending": []
+        },
+        {
+          "count": 25,
+          "state_digest": "2af199e37118d7186f905b8eceb11f8c21c64658293ad958b0c8f0a2a1c86934",
+          "pending": [
+            "verification-scenario-13"
+          ]
+        },
+        {
+          "count": 26,
+          "state_digest": "970da03149e114ca30b2f57485db79fda301017826db7d4f288327f662f17e40",
+          "pending": []
+        },
+        {
+          "count": 27,
+          "state_digest": "970da03149e114ca30b2f57485db79fda301017826db7d4f288327f662f17e40",
+          "pending": [
+            "verification-scenario-14"
+          ]
+        },
+        {
+          "count": 28,
+          "state_digest": "aa0ee2b6779222f39a7edc5d4224d0c841630764e6ebc417b5c0bde4e1da692f",
+          "pending": []
+        },
+        {
+          "count": 29,
+          "state_digest": "aa0ee2b6779222f39a7edc5d4224d0c841630764e6ebc417b5c0bde4e1da692f",
+          "pending": [
+            "verification-scenario-15"
+          ]
+        },
+        {
+          "count": 30,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 31,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-1"
+          ]
+        },
+        {
+          "count": 32,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 33,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-2"
+          ]
+        },
+        {
+          "count": 34,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 35,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-3"
+          ]
+        },
+        {
+          "count": 36,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 37,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-4"
+          ]
+        },
+        {
+          "count": 38,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 39,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-5"
+          ]
+        },
+        {
+          "count": 40,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": []
+        },
+        {
+          "count": 41,
+          "state_digest": "2e1d25dc2c484b7f5b3388e0e47dc1b3ed8dd63799bbd2010a80ef4df239ee29",
+          "pending": [
+            "integration-persistent-6"
+          ]
+        },
+        {
+          "count": 42,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": []
+        },
+        {
+          "count": 43,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": [
+            "integration-persistent-7"
+          ]
+        },
+        {
+          "count": 44,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": []
+        },
+        {
+          "count": 45,
+          "state_digest": "583119c327c88351311bdff0151bed4f0737c99c6765b530709e84dabd589bd6",
+          "pending": [
+            "integration-persistent-8"
+          ]
+        },
+        {
+          "count": 46,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 47,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-9"
+          ]
+        },
+        {
+          "count": 48,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 49,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-10"
+          ]
+        },
+        {
+          "count": 50,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 51,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-11"
+          ]
+        },
+        {
+          "count": 52,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 53,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-12"
+          ]
+        },
+        {
+          "count": 54,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 55,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-13"
+          ]
+        },
+        {
+          "count": 56,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 57,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-14"
+          ]
+        },
+        {
+          "count": 58,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 59,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-15"
+          ]
+        },
+        {
+          "count": 60,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        },
+        {
+          "count": 61,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": [
+            "integration-persistent-16"
+          ]
+        },
+        {
+          "count": 62,
+          "state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+          "pending": []
+        }
+      ],
+      "empty_prefix_checked": true,
+      "final_state_digest": "cc2b82e5763664d2979fc83aed7afe6b5f9d88d8f789b6c5523eef36517d2354",
+      "final_state": {
+        "project:p-1": {
+          "id": "p-1",
+          "project_id": "p-1",
+          "revision": 8,
+          "status": "planning",
+          "observed_at_ms": 1000,
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+          "execution_clock": {
+            "elapsed_ms": 0,
+            "wall_anchor_ms": 1000
+          },
+          "collaboration_clock": {
+            "excluded_ms": 0,
+            "paused_at_ms": null
+          },
+          "governance": {
+            "owner_id": "human-owner",
+            "versions": {
+              "gov-verification-1": {
+                "policy": {
+                  "max_renewals": 2,
+                  "max_ttl_ms": 3600000,
+                  "mode": "selective",
+                  "rules": [
+                    {
+                      "action": "decision.activate",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.append",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.restore",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.write",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "verification.execute",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    }
+                  ],
+                  "subjects": {
+                    "a-1": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "a-2": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "human-owner": {
+                      "roles": [
+                        "human_owner"
+                      ],
+                      "type": "human"
+                    },
+                    "human-peer": {
+                      "roles": [
+                        "human_collaborator"
+                      ],
+                      "type": "human"
+                    }
+                  },
+                  "version": "gov-verification-1"
+                },
+                "content_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-5"
+              },
+              "gov-task-quality-1": {
+                "policy": {
+                  "max_renewals": 2,
+                  "max_ttl_ms": 3600000,
+                  "mode": "selective",
+                  "rules": [
+                    {
+                      "action": "decision.activate",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.append",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.restore",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "document.write",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.integration.exempt",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.quality.evaluate",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.quality.review",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "task.quality.transition",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    },
+                    {
+                      "action": "verification.execute",
+                      "approval": "auto",
+                      "risk_level": "low"
+                    }
+                  ],
+                  "subjects": {
+                    "a-1": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "a-2": {
+                      "roles": [
+                        "agent_reviewer",
+                        "independent_reviewer"
+                      ],
+                      "type": "agent"
+                    },
+                    "human-owner": {
+                      "roles": [
+                        "human_owner"
+                      ],
+                      "type": "human"
+                    },
+                    "human-peer": {
+                      "roles": [
+                        "human_collaborator"
+                      ],
+                      "type": "human"
+                    }
+                  },
+                  "version": "gov-task-quality-1"
+                },
+                "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-13"
+              }
+            },
+            "input_authority_id": "scenario-fixed-input-gateway",
+            "current_version": "gov-task-quality-1"
+          },
+          "quality": {
+            "generation": 1,
+            "versions": {
+              "1": {
+                "policy": {
+                  "runner_id": "aetp.fixed-json-document/v1",
+                  "grant_ttl_ms": 1000,
+                  "max_cases": 32,
+                  "max_case_bytes": 16384,
+                  "max_document_bytes": 65536,
+                  "max_depth": 32,
+                  "max_path": 16,
+                  "independent_authors_required": true
+                },
+                "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-6",
+                "observed_at_ms": 1000
+              }
+            }
+          },
+          "task_quality_policy": {
+            "versions": {
+              "task-quality-1": {
+                "policy": {
+                  "schema": "aetp-task-quality-1",
+                  "version": "task-quality-1",
+                  "max_evidence_age_ms": 60000,
+                  "integration_exemptions": {
+                    "t-1": {
+                      "task_id": "t-1",
+                      "scope": "standalone_fixed_json_document",
+                      "reason": "This specific deliverable is a standalone JSON document with no integration surface",
+                      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                      "owner_id": "a-1",
+                      "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                      "lease_epoch": 1,
+                      "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                      "declared_by": "human-owner",
+                      "command_id": "verification-scenario-14",
+                      "basis": "explicit_human_owner_task_scope"
+                    }
+                  }
+                },
+                "content_digest": "sha256:e9ccd5cf4bf3a868193a6ab6e950e809a5d1f0317fb5d9baf468557fe6a645b1",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-14",
+                "observed_at_ms": 1000
+              },
+              "integration-unexempt": {
+                "policy": {
+                  "schema": "aetp-task-quality-1",
+                  "version": "integration-unexempt",
+                  "max_evidence_age_ms": 60000,
+                  "integration_exemptions": {}
+                },
+                "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa",
+                "configured_by": "human-owner",
+                "command_id": "verification-scenario-15",
+                "observed_at_ms": 1000
+              }
+            },
+            "current_version": "integration-unexempt"
+          },
+          "integration_contract": {
+            "schema": "aetp-integration-contract-1",
+            "tasks": {
+              "t-1": {
+                "current_version": 2,
+                "versions": {
+                  "1": {
+                    "task_id": "t-1",
+                    "expected_task_revision": 2,
+                    "version": 1,
+                    "supersedes_version": null,
+                    "requirement": "required",
+                    "target": {
+                      "provider_id": "future_git_provider",
+                      "repository_id": "project_repository",
+                      "object_format": "sha1",
+                      "source": {
+                        "ref": "refs/heads/agent/task_042",
+                        "commit": "1111111111111111111111111111111111111111"
+                      },
+                      "target": {
+                        "ref": "refs/heads/main",
+                        "expected_commit": "2222222222222222222222222222222222222222"
+                      }
+                    },
+                    "reason": "Fixed human-owner input for Integration contract evidence",
+                    "declared_by": "human-owner",
+                    "command_id": "integration-persistent-6",
+                    "observed_at_ms": 1000,
+                    "project_revision": 6,
+                    "task_revision": 2,
+                    "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                    "owner_id": "a-1",
+                    "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                    "lease_epoch": 1,
+                    "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                    "governance": {
+                      "owner_id": "human-owner",
+                      "version": "gov-task-quality-1",
+                      "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff"
+                    },
+                    "task_quality_policy": {
+                      "version": "integration-unexempt",
+                      "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa"
+                    },
+                    "source": {
+                      "actor_id": "human-owner",
+                      "command_digest": "414c686c651983764678d5c01c3d53b25b11c688c33f2af9f55e1df0430a8e55",
+                      "exposure": "internal",
+                      "receipt_id": "84af362310e2463b8ff73fa0a84fed6a",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "content_digest": "sha256:6fccbb5e0512c23dcf02a9d363788696d0d98b592d8927ea4cd75c6ba24d3607"
+                  },
+                  "2": {
+                    "task_id": "t-1",
+                    "expected_task_revision": 2,
+                    "version": 2,
+                    "supersedes_version": 1,
+                    "requirement": "required",
+                    "target": {
+                      "provider_id": "future_git_provider",
+                      "repository_id": "project_repository",
+                      "object_format": "sha1",
+                      "source": {
+                        "ref": "refs/heads/agent/task_042",
+                        "commit": "1111111111111111111111111111111111111111"
+                      },
+                      "target": {
+                        "ref": "refs/heads/main",
+                        "expected_commit": "2222222222222222222222222222222222222222"
+                      }
+                    },
+                    "reason": "Explicit superseding fixed input",
+                    "declared_by": "human-owner",
+                    "command_id": "integration-persistent-8",
+                    "observed_at_ms": 1000,
+                    "project_revision": 7,
+                    "task_revision": 2,
+                    "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                    "owner_id": "a-1",
+                    "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                    "lease_epoch": 1,
+                    "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                    "governance": {
+                      "owner_id": "human-owner",
+                      "version": "gov-task-quality-1",
+                      "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff"
+                    },
+                    "task_quality_policy": {
+                      "version": "integration-unexempt",
+                      "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa"
+                    },
+                    "source": {
+                      "actor_id": "human-owner",
+                      "command_digest": "7687335c102033bfd4b62fe04510bd0b598a23ddc7a75bdf4aa843cb9242db0b",
+                      "exposure": "internal",
+                      "receipt_id": "84d7738aa55f414cb2cf36e1f0fd102d",
+                      "source_id": "scenario-fixed-input-gateway",
+                      "sources": [],
+                      "untrusted_input": false
+                    },
+                    "content_digest": "sha256:b1929964eeb96722cfebac03d6415050b114f99556e5c2e65c24134f6580c408"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "p-1",
+          "revision": 0,
+          "status": "available",
+          "model_id": "deterministic-fixture-a-1"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "p-1",
+          "revision": 0,
+          "status": "available",
+          "model_id": "deterministic-fixture-a-2"
+        },
+        "task:t-1": {
+          "id": "t-1",
+          "project_id": "p-1",
+          "revision": 2,
+          "status": "in_progress",
+          "title": "Fixed document scenario",
+          "owner_id": "a-1",
+          "policy_version": "m1-document-candidate-v1",
+          "acceptance_criteria": [
+            "Scope",
+            "Recovery"
+          ],
+          "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+          "lease_epoch": 1,
+          "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease": {
+            "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+            "expires_at_governance_ms": 300000,
+            "lease_epoch": 1,
+            "owner_id": "a-1",
+            "revoked": false
+          },
+          "bindings": {
+            "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a": {
+              "agent_id": "a-1",
+              "id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+              "lease_epoch": 1,
+              "resume_checkpoint_id": null,
+              "runtime_id": "fixed-document-v1",
+              "session": {
+                "actor_id": "a-1",
+                "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                "expires_at_wall_ms": 121000,
+                "id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+                "lease_epoch": 1,
+                "project_id": "p-1",
+                "task_id": "t-1"
+              },
+              "status": "running",
+              "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588"
+            }
+          },
+          "observed_at_ms": 1000
+        },
+        "task:qa-task": {
+          "id": "qa-task",
+          "project_id": "p-1",
+          "revision": 2,
+          "status": "in_progress",
+          "title": "Fixed document scenario",
+          "owner_id": "a-2",
+          "policy_version": "m1-document-candidate-v1",
+          "acceptance_criteria": [
+            "Execute Cases"
+          ],
+          "criteria_digest": "sha256:3709c18e4da4c8480e43f13387a43278f6e1f4c601bcba257f6843eb5c48c1eb",
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+          "lease_epoch": 1,
+          "current_binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease": {
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_governance_ms": 300000,
+            "lease_epoch": 1,
+            "owner_id": "a-2",
+            "revoked": false
+          },
+          "bindings": {
+            "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6": {
+              "agent_id": "a-2",
+              "id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+              "lease_epoch": 1,
+              "resume_checkpoint_id": null,
+              "runtime_id": "fixed-document-v1",
+              "session": {
+                "actor_id": "a-2",
+                "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+                "expires_at_wall_ms": 121000,
+                "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+                "lease_epoch": 1,
+                "project_id": "p-1",
+                "task_id": "qa-task"
+              },
+              "status": "running",
+              "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588"
+            }
+          },
+          "observed_at_ms": 1000
+        }
+      },
+      "guards_zero_calls": [
+        "aetp.acceptance.runner.FixedJsonRunner.run",
+        "aetp.acceptance.runner.FixedJsonRunner.__init__",
+        "aetp.quality.service.TaskQualityService.handle",
+        "aetp.acceptance.service.AcceptanceService.dispatch",
+        "aetp.runtime.document.DocumentRuntime.register",
+        "aetp.runtime.document.DocumentRuntime.lookup",
+        "aetp.runtime.service.ExecutionService.validation_context",
+        "aetp.runtime.service.ExecutionService.recover",
+        "aetp.runtime.service.ExecutionService.dispatch",
+        "aetp.governance.trust.InputAuthority.issue",
+        "aetp.governance.trust.InputAuthority.verify",
+        "aetp.workspace.documents.DocumentWorkspace.write",
+        "aetp.workspace.documents.DocumentWorkspace.query",
+        "pathlib.Path.read_bytes",
+        "pathlib.Path.read_text",
+        "time.time_ns",
+        "subprocess.Popen",
+        "socket.socket",
+        "aetp.integration.service.IntegrationContractService.handle",
+        "aetp.integration.service.IntegrationContractService._evaluate"
+      ],
+      "forged_digest_rejected_without_publishing_any_cursor": true
+    }
+  ],
+  "final_state": {
+    "project:p-1": {
+      "id": "p-1",
+      "project_id": "p-1",
+      "revision": 8,
+      "status": "planning",
+      "observed_at_ms": 1000,
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+      "execution_clock": {
+        "elapsed_ms": 0,
+        "wall_anchor_ms": 1000
+      },
+      "collaboration_clock": {
+        "excluded_ms": 0,
+        "paused_at_ms": null
+      },
+      "governance": {
+        "owner_id": "human-owner",
+        "versions": {
+          "gov-verification-1": {
+            "policy": {
+              "max_renewals": 2,
+              "max_ttl_ms": 3600000,
+              "mode": "selective",
+              "rules": [
+                {
+                  "action": "decision.activate",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.append",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.restore",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.write",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "verification.execute",
+                  "approval": "auto",
+                  "risk_level": "low"
+                }
+              ],
+              "subjects": {
+                "a-1": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "a-2": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "human-owner": {
+                  "roles": [
+                    "human_owner"
+                  ],
+                  "type": "human"
+                },
+                "human-peer": {
+                  "roles": [
+                    "human_collaborator"
+                  ],
+                  "type": "human"
+                }
+              },
+              "version": "gov-verification-1"
+            },
+            "content_digest": "sha256:83a1ebebe2ec891c62f601dc1d619ac31fa50c77644cba211817bee86578651a",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-5"
+          },
+          "gov-task-quality-1": {
+            "policy": {
+              "max_renewals": 2,
+              "max_ttl_ms": 3600000,
+              "mode": "selective",
+              "rules": [
+                {
+                  "action": "decision.activate",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.append",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.restore",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "document.write",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "task.integration.exempt",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "task.quality.evaluate",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "task.quality.review",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "task.quality.transition",
+                  "approval": "auto",
+                  "risk_level": "low"
+                },
+                {
+                  "action": "verification.execute",
+                  "approval": "auto",
+                  "risk_level": "low"
+                }
+              ],
+              "subjects": {
+                "a-1": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "a-2": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "human-owner": {
+                  "roles": [
+                    "human_owner"
+                  ],
+                  "type": "human"
+                },
+                "human-peer": {
+                  "roles": [
+                    "human_collaborator"
+                  ],
+                  "type": "human"
+                }
+              },
+              "version": "gov-task-quality-1"
+            },
+            "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-13"
+          }
+        },
+        "input_authority_id": "scenario-fixed-input-gateway",
+        "current_version": "gov-task-quality-1"
+      },
+      "quality": {
+        "generation": 1,
+        "versions": {
+          "1": {
+            "policy": {
+              "runner_id": "aetp.fixed-json-document/v1",
+              "grant_ttl_ms": 1000,
+              "max_cases": 32,
+              "max_case_bytes": 16384,
+              "max_document_bytes": 65536,
+              "max_depth": 32,
+              "max_path": 16,
+              "independent_authors_required": true
+            },
+            "content_digest": "sha256:8ea8d36e78bf96851010de7ed0f0c3a1b056862b7d2fffecfff6a35934423b28",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-6",
+            "observed_at_ms": 1000
+          }
+        }
+      },
+      "task_quality_policy": {
+        "versions": {
+          "task-quality-1": {
+            "policy": {
+              "schema": "aetp-task-quality-1",
+              "version": "task-quality-1",
+              "max_evidence_age_ms": 60000,
+              "integration_exemptions": {
+                "t-1": {
+                  "task_id": "t-1",
+                  "scope": "standalone_fixed_json_document",
+                  "reason": "This specific deliverable is a standalone JSON document with no integration surface",
+                  "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                  "owner_id": "a-1",
+                  "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                  "lease_epoch": 1,
+                  "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                  "declared_by": "human-owner",
+                  "command_id": "verification-scenario-14",
+                  "basis": "explicit_human_owner_task_scope"
+                }
+              }
+            },
+            "content_digest": "sha256:e9ccd5cf4bf3a868193a6ab6e950e809a5d1f0317fb5d9baf468557fe6a645b1",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-14",
+            "observed_at_ms": 1000
+          },
+          "integration-unexempt": {
+            "policy": {
+              "schema": "aetp-task-quality-1",
+              "version": "integration-unexempt",
+              "max_evidence_age_ms": 60000,
+              "integration_exemptions": {}
+            },
+            "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa",
+            "configured_by": "human-owner",
+            "command_id": "verification-scenario-15",
+            "observed_at_ms": 1000
+          }
+        },
+        "current_version": "integration-unexempt"
+      },
+      "integration_contract": {
+        "schema": "aetp-integration-contract-1",
+        "tasks": {
+          "t-1": {
+            "current_version": 2,
+            "versions": {
+              "1": {
+                "task_id": "t-1",
+                "expected_task_revision": 2,
+                "version": 1,
+                "supersedes_version": null,
+                "requirement": "required",
+                "target": {
+                  "provider_id": "future_git_provider",
+                  "repository_id": "project_repository",
+                  "object_format": "sha1",
+                  "source": {
+                    "ref": "refs/heads/agent/task_042",
+                    "commit": "1111111111111111111111111111111111111111"
+                  },
+                  "target": {
+                    "ref": "refs/heads/main",
+                    "expected_commit": "2222222222222222222222222222222222222222"
+                  }
+                },
+                "reason": "Fixed human-owner input for Integration contract evidence",
+                "declared_by": "human-owner",
+                "command_id": "integration-persistent-6",
+                "observed_at_ms": 1000,
+                "project_revision": 6,
+                "task_revision": 2,
+                "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                "owner_id": "a-1",
+                "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                "lease_epoch": 1,
+                "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                "governance": {
+                  "owner_id": "human-owner",
+                  "version": "gov-task-quality-1",
+                  "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff"
+                },
+                "task_quality_policy": {
+                  "version": "integration-unexempt",
+                  "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa"
+                },
+                "source": {
+                  "actor_id": "human-owner",
+                  "command_digest": "414c686c651983764678d5c01c3d53b25b11c688c33f2af9f55e1df0430a8e55",
+                  "exposure": "internal",
+                  "receipt_id": "84af362310e2463b8ff73fa0a84fed6a",
+                  "source_id": "scenario-fixed-input-gateway",
+                  "sources": [],
+                  "untrusted_input": false
+                },
+                "content_digest": "sha256:6fccbb5e0512c23dcf02a9d363788696d0d98b592d8927ea4cd75c6ba24d3607"
+              },
+              "2": {
+                "task_id": "t-1",
+                "expected_task_revision": 2,
+                "version": 2,
+                "supersedes_version": 1,
+                "requirement": "required",
+                "target": {
+                  "provider_id": "future_git_provider",
+                  "repository_id": "project_repository",
+                  "object_format": "sha1",
+                  "source": {
+                    "ref": "refs/heads/agent/task_042",
+                    "commit": "1111111111111111111111111111111111111111"
+                  },
+                  "target": {
+                    "ref": "refs/heads/main",
+                    "expected_commit": "2222222222222222222222222222222222222222"
+                  }
+                },
+                "reason": "Explicit superseding fixed input",
+                "declared_by": "human-owner",
+                "command_id": "integration-persistent-8",
+                "observed_at_ms": 1000,
+                "project_revision": 7,
+                "task_revision": 2,
+                "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+                "owner_id": "a-1",
+                "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+                "lease_epoch": 1,
+                "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+                "governance": {
+                  "owner_id": "human-owner",
+                  "version": "gov-task-quality-1",
+                  "content_digest": "sha256:fd1ac0ead3c25a9b70a80384d48c14ca0d92083aa1c57442797b29ed21b35aff"
+                },
+                "task_quality_policy": {
+                  "version": "integration-unexempt",
+                  "content_digest": "sha256:b6d3ce04caea16c3b95e4b2ab80c1a2918760679328d14a7634b3f253116f2fa"
+                },
+                "source": {
+                  "actor_id": "human-owner",
+                  "command_digest": "7687335c102033bfd4b62fe04510bd0b598a23ddc7a75bdf4aa843cb9242db0b",
+                  "exposure": "internal",
+                  "receipt_id": "84d7738aa55f414cb2cf36e1f0fd102d",
+                  "source_id": "scenario-fixed-input-gateway",
+                  "sources": [],
+                  "untrusted_input": false
+                },
+                "content_digest": "sha256:b1929964eeb96722cfebac03d6415050b114f99556e5c2e65c24134f6580c408"
+              }
+            }
+          }
+        }
+      }
+    },
+    "agent:a-1": {
+      "id": "a-1",
+      "project_id": "p-1",
+      "revision": 0,
+      "status": "available",
+      "model_id": "deterministic-fixture-a-1"
+    },
+    "agent:a-2": {
+      "id": "a-2",
+      "project_id": "p-1",
+      "revision": 0,
+      "status": "available",
+      "model_id": "deterministic-fixture-a-2"
+    },
+    "task:t-1": {
+      "id": "t-1",
+      "project_id": "p-1",
+      "revision": 2,
+      "status": "in_progress",
+      "title": "Fixed document scenario",
+      "owner_id": "a-1",
+      "policy_version": "m1-document-candidate-v1",
+      "acceptance_criteria": [
+        "Scope",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d6b8adc32aa865eba8dfba3f355103205d996ad08d4775e7c48fbe1db37bbe5a",
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+      "lease_epoch": 1,
+      "current_binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+      "lease": {
+        "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+        "expires_at_governance_ms": 300000,
+        "lease_epoch": 1,
+        "owner_id": "a-1",
+        "revoked": false
+      },
+      "bindings": {
+        "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a": {
+          "agent_id": "a-1",
+          "id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+          "lease_epoch": 1,
+          "resume_checkpoint_id": null,
+          "runtime_id": "fixed-document-v1",
+          "session": {
+            "actor_id": "a-1",
+            "binding_id": "binding-c6f53d7b669edf2cdb1e453eed9828f5c35b7a079dd09f6b7431ad64d4bc5a9a",
+            "expires_at_wall_ms": 121000,
+            "id": "session-d19660480bf2a165eb69f0d0f491f3818d6bce30c2225362e071a4e51d372079",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "t-1"
+          },
+          "status": "running",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588"
+        }
+      },
+      "observed_at_ms": 1000
+    },
+    "task:qa-task": {
+      "id": "qa-task",
+      "project_id": "p-1",
+      "revision": 2,
+      "status": "in_progress",
+      "title": "Fixed document scenario",
+      "owner_id": "a-2",
+      "policy_version": "m1-document-candidate-v1",
+      "acceptance_criteria": [
+        "Execute Cases"
+      ],
+      "criteria_digest": "sha256:3709c18e4da4c8480e43f13387a43278f6e1f4c601bcba257f6843eb5c48c1eb",
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588",
+      "lease_epoch": 1,
+      "current_binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+      "lease": {
+        "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+        "expires_at_governance_ms": 300000,
+        "lease_epoch": 1,
+        "owner_id": "a-2",
+        "revoked": false
+      },
+      "bindings": {
+        "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6": {
+          "agent_id": "a-2",
+          "id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+          "lease_epoch": 1,
+          "resume_checkpoint_id": null,
+          "runtime_id": "fixed-document-v1",
+          "session": {
+            "actor_id": "a-2",
+            "binding_id": "binding-5ccbe156b021eda538bb33cdc207157189877c56057acb93fe403a6cc15b06f6",
+            "expires_at_wall_ms": 121000,
+            "id": "session-90ca5e576103269add981d451b19f87ba35dca5841637589c81819eb64833b87",
+            "lease_epoch": 1,
+            "project_id": "p-1",
+            "task_id": "qa-task"
+          },
+          "status": "running",
+          "workspace_provider_id": "workspace-f330abdeeae55d7822abce6edf4d282d1e335bfd64ac82090e6a56796a8ad588"
+        }
+      },
+      "observed_at_ms": 1000
+    }
+  },
+  "event_prefix_checks": 124,
+  "empty_prefix_checks": 2,
+  "live_guards_zero_calls": [
+    "aetp.runtime.service.ExecutionService.dispatch",
+    "aetp.acceptance.service.AcceptanceService.dispatch",
+    "aetp.workspace.documents.DocumentWorkspace.write",
+    "subprocess.Popen",
+    "socket.socket"
+  ],
+  "identity_mode": "deterministic fixed-input host fixture, not model calls or autonomous peers",
+  "limitations": [
+    "Named dependency mocks, not OS sandbox or universal no-IO proof",
+    "Facts DB retains Commands; events-only validates State, not absent rejected Command preconditions",
+    "No merge execution, Action/UNKNOWN, new system Verification, Mission Acceptance, or TEST-028",
+    "One sequential persistent sample; concurrency/rollback remain in existing tests",
+    "No independent reviewer participated; no acceptance promotion"
+  ]
+}

@@ -1,0 +1,1035 @@
+{
+  "work_item": "M3-02",
+  "slice": "integration_live_contract",
+  "created_at": "2026-09-16T02:10:02.199934+08:00",
+  "status": "author_verified_pending_independent_review",
+  "independent_reviewer": null,
+  "new_live_methods": 43,
+  "product_suite_methods": 751,
+  "preparation_methods": 27,
+  "suite_methods_total": 778,
+  "test_methods": {
+    "tests/m3/test_integration_live.py": [
+      "test_real_receipt_declaration_changes_only_project_and_has_no_execution",
+      "test_supersession_preserves_prior_version_and_task",
+      "test_missing_copied_wrong_authority_and_wrong_command_receipts_reject",
+      "test_current_human_owner_required_and_actor_mismatch_not_persisted",
+      "test_project_and_task_revisions_checked_in_writer",
+      "test_exemption_blocks_declaration_and_required_blocks_legacy_configuration",
+      "test_declaring_does_not_require_author_execution_session",
+      "test_paused_project_rejects_declaration",
+      "test_original_retry_and_reopened_connection_skip_authority_clock_and_evaluator",
+      "test_rejected_retry_keeps_original_result_even_after_valid_proof",
+      "test_gate_must_be_entered_before_writer",
+      "test_old_handler_refuses_declaration_with_replayable_project_audits",
+      "test_merge_never_executes_and_distinguishes_missing_stale_and_unavailable",
+      "test_merge_checks_owner_revision_and_base_legacy_handler_too",
+      "test_missing_and_foreign_targets_remain_typed_rejections_and_replayable",
+      "test_receipt_does_not_survive_authority_replacement_or_changed_governance_revision"
+    ],
+    "tests/m3/test_integration_live_concurrency.py": [
+      "test_domain_event_failure_rolls_back_command_receipt_result_and_same_key_retry",
+      "test_result_failure_rolls_back_every_fact_and_same_key_can_succeed",
+      "test_merge_rejection_result_failure_also_rolls_back",
+      "test_lost_response_returns_saved_declaration_without_new_authority_or_clock",
+      "test_two_processes_same_project_revision_commit_one_declaration",
+      "test_two_processes_declaration_and_exemption_cannot_both_commit",
+      "test_task_revision_committed_before_writer_invalidates_declaration",
+      "test_declaration_before_quality_completion_is_fail_closed",
+      "test_completed_task_cannot_later_gain_requirement",
+      "test_declaration_receipt_cannot_interleave_a_quality_compound",
+      "test_deleted_cache_reopen_and_readonly_recovery_use_facts_without_runtime",
+      "test_corrupt_cache_cannot_erase_registry_on_next_writer"
+    ],
+    "tests/m3/test_integration_live_replay.py": [
+      "test_every_prefix_rebuild_and_pending_are_pure",
+      "test_receipt_revision_address_digest_and_scope_are_bound",
+      "test_effect_identity_scope_and_causation_are_bound",
+      "test_exact_envelope_schema_index_count_and_json_types",
+      "test_full_record_and_resealed_history_cannot_be_forged",
+      "test_context_and_command_cannot_change_under_same_receipt",
+      "test_missing_and_duplicate_receipts_and_second_terminal_fail",
+      "test_merge_receipt_cannot_have_a_declaration_success",
+      "test_rejection_address_revision_and_exact_typed_error",
+      "test_supported_schema_is_forbidden_in_audit_and_unrelated_domain",
+      "test_non_declaration_project_effect_cannot_erase_history",
+      "test_cursor_failure_after_reduction_publishes_nothing",
+      "test_cached_state_never_replaces_causal_history",
+      "test_full_store_command_comparison_rejects_changed_original",
+      "test_full_store_rejection_expected_revision_matches_original_command"
+    ]
+  },
+  "source_files": [
+    {
+      "original_path": "src/aetp/core/commands.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/be41086de48bd069b5606a300a77cec1680679b9b961fdb7ec6219652ef80661.py",
+      "bytes": 26721,
+      "sha256": "be41086de48bd069b5606a300a77cec1680679b9b961fdb7ec6219652ef80661"
+    },
+    {
+      "original_path": "src/aetp/core/projection.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/2311ea2daf1f06e04331e72f700804ff5264b6b460c6781b4d675820d35bf7d0.py",
+      "bytes": 30203,
+      "sha256": "2311ea2daf1f06e04331e72f700804ff5264b6b460c6781b4d675820d35bf7d0"
+    },
+    {
+      "original_path": "src/aetp/domain/models.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/e4496f0f3a49357739c4caf13c2677720bcb935c89bb8fc6728bc0a283950281.py",
+      "bytes": 12677,
+      "sha256": "e4496f0f3a49357739c4caf13c2677720bcb935c89bb8fc6728bc0a283950281"
+    },
+    {
+      "original_path": "src/aetp/integration/README.md",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/8c3b5b74b17a91ec8a3ed695728e6112acbe3393d2547edd2823b379997864f1.md",
+      "bytes": 4682,
+      "sha256": "8c3b5b74b17a91ec8a3ed695728e6112acbe3393d2547edd2823b379997864f1"
+    },
+    {
+      "original_path": "src/aetp/integration/__init__.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/80c9d2830cdb995df639ea79adca776c5fc349dbc596e174d5015b5251e57108.py",
+      "bytes": 92,
+      "sha256": "80c9d2830cdb995df639ea79adca776c5fc349dbc596e174d5015b5251e57108"
+    },
+    {
+      "original_path": "src/aetp/integration/causality.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/90bdc115cb503b379846a577f38ea3304cfb82a2e0b55cd409f09120c531fe81.py",
+      "bytes": 4860,
+      "sha256": "90bdc115cb503b379846a577f38ea3304cfb82a2e0b55cd409f09120c531fe81"
+    },
+    {
+      "original_path": "src/aetp/integration/contracts.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/505ca4fa78bd1ff7a0fb8c301b95c430f7b69f74a298e346708596e94c89fefb.py",
+      "bytes": 562,
+      "sha256": "505ca4fa78bd1ff7a0fb8c301b95c430f7b69f74a298e346708596e94c89fefb"
+    },
+    {
+      "original_path": "src/aetp/integration/guards.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/3d5ccf2a5dc5484c5df8ca1832f2fce1cd7467c40821bb44ad921e8e0e7d5c91.py",
+      "bytes": 5426,
+      "sha256": "3d5ccf2a5dc5484c5df8ca1832f2fce1cd7467c40821bb44ad921e8e0e7d5c91"
+    },
+    {
+      "original_path": "src/aetp/integration/projection.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/a0e05595865cc3dbe9a3abff6bdfbed4282278162740311bad4432796e9ab784.py",
+      "bytes": 3328,
+      "sha256": "a0e05595865cc3dbe9a3abff6bdfbed4282278162740311bad4432796e9ab784"
+    },
+    {
+      "original_path": "src/aetp/integration/requests.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/8fc0388d3db6a3129bfa6505f0f0215a96bb9779a87c94f51cee25dea1ee8d56.py",
+      "bytes": 1312,
+      "sha256": "8fc0388d3db6a3129bfa6505f0f0215a96bb9779a87c94f51cee25dea1ee8d56"
+    },
+    {
+      "original_path": "src/aetp/integration/service.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/7553be33bbabb1a835291ceca72fdedf0ad918e70e65fd79f6fd9325b577535d.py",
+      "bytes": 3064,
+      "sha256": "7553be33bbabb1a835291ceca72fdedf0ad918e70e65fd79f6fd9325b577535d"
+    },
+    {
+      "original_path": "tests/m3/integration_live_support.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/62624ab9de0c847b9355705fff75d1359a11c5214a80d17cff3b92b00ad00271.py",
+      "bytes": 2420,
+      "sha256": "62624ab9de0c847b9355705fff75d1359a11c5214a80d17cff3b92b00ad00271"
+    },
+    {
+      "original_path": "tests/m3/test_integration_declaration_records.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/b0e52581fefd4554581e403f3a1731381de8422e60473a0f9d5f69f546080c35.py",
+      "bytes": 21147,
+      "sha256": "b0e52581fefd4554581e403f3a1731381de8422e60473a0f9d5f69f546080c35"
+    },
+    {
+      "original_path": "tests/m3/test_integration_guard_wiring.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/ab3b7aff1b1dc5f126b5d18b73dd14762cd29d9c4e6e52615dd18ce8a2017456.py",
+      "bytes": 13210,
+      "sha256": "ab3b7aff1b1dc5f126b5d18b73dd14762cd29d9c4e6e52615dd18ce8a2017456"
+    },
+    {
+      "original_path": "tests/m3/test_integration_live.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/892b59296399000a49dd0628194a7a1cfff39533252023e5ba52d2aea60165a8.py",
+      "bytes": 13025,
+      "sha256": "892b59296399000a49dd0628194a7a1cfff39533252023e5ba52d2aea60165a8"
+    },
+    {
+      "original_path": "tests/m3/test_integration_live_concurrency.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/0fbadc7f7e14bca1f1fdf21c29c7f96f4e6d45171564cdb44e2ee4e0ae7fc8da.py",
+      "bytes": 12078,
+      "sha256": "0fbadc7f7e14bca1f1fdf21c29c7f96f4e6d45171564cdb44e2ee4e0ae7fc8da"
+    },
+    {
+      "original_path": "tests/m3/test_integration_live_replay.py",
+      "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/ef81e138d937de75d2a1349515b3299f766b2c9b602bacb2051b3a5d862c36ab.py",
+      "bytes": 11093,
+      "sha256": "ef81e138d937de75d2a1349515b3299f766b2c9b602bacb2051b3a5d862c36ab"
+    }
+  ],
+  "runs": [
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "live_red_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:37:59.957984+08:00",
+      "finished_at": "2026-09-16T01:38:00.530496+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_red_v1/inputs.json",
+        "bytes": 68407,
+        "sha256": "d982bf90527785f77d98d28aa2708278846b996c57d5034f047574c76bce7f89"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_red_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_red_v1/stderr.txt",
+        "bytes": 13160,
+        "sha256": "475fd0a6a8b8a23bb7024741c15a38ff4b0e672782745ddb748157f91e3f5f29"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "replay_red_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live_replay",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:39:00.108108+08:00",
+      "finished_at": "2026-09-16T01:39:00.669749+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/replay_red_v1/inputs.json",
+        "bytes": 68737,
+        "sha256": "fb585dc2b847f4a4695ac5d1d478e5a5022691629817bf0b50c42ee2cfd6904b"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/replay_red_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/replay_red_v1/stderr.txt",
+        "bytes": 13060,
+        "sha256": "42990cd51229c76d51b48f9adff65e529b41fa6dfb830b0f4af28018c8a087a4"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "live_green_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live",
+        "tests.m3.test_integration_live_replay",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:40:53.232836+08:00",
+      "finished_at": "2026-09-16T01:41:07.683938+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_green_v1/inputs.json",
+        "bytes": 70023,
+        "sha256": "277fb42e13b7f659ac43885dcb19f1663946479abef74060100f2e14a0e1f094"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_green_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_green_v1/stderr.txt",
+        "bytes": 6345,
+        "sha256": "4f70cdfe4dee3afa269e3420f46769f99449568e00b271b39388e9ef4f5c3592"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "live_green_v2",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live",
+        "tests.m3.test_integration_live_replay",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:44:30.098591+08:00",
+      "finished_at": "2026-09-16T01:44:45.261767+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_green_v2/inputs.json",
+        "bytes": 70023,
+        "sha256": "c9d45bb7c0e5f4cf168b0c66f44ea3269c1df009c63ccbd6fc9e7c010377363a"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_green_v2/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/live_green_v2/stderr.txt",
+        "bytes": 5253,
+        "sha256": "d12856c8a6f027ccf7bee32117a39a27284b52efa07af0c2f82246e5368b8b5d"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "concurrency_first_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live_concurrency",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:47:03.531443+08:00",
+      "finished_at": "2026-09-16T01:47:20.762827+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/concurrency_first_v1/inputs.json",
+        "bytes": 70358,
+        "sha256": "876fd1235e4949fb2d30f41810f1d2743510a9063c4203c9b7a084439fb6be84"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/concurrency_first_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/concurrency_first_v1/stderr.txt",
+        "bytes": 3389,
+        "sha256": "860f98f89d548c6cc4ad25dc126baa3236004daebf06c57f5c67579d1cd36655"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "integration_all_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m3",
+        "-p",
+        "test_integration*.py",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:48:12.999752+08:00",
+      "finished_at": "2026-09-16T01:48:53.216621+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/integration_all_v1/inputs.json",
+        "bytes": 70358,
+        "sha256": "ce560ad3c9e67cea8eda092e1244eb0dee1976a317cdd9532fcfc4c30d41a7ac"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/integration_all_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/integration_all_v1/stderr.txt",
+        "bytes": 26779,
+        "sha256": "002dfa41beb9f5afcc217850e140aafd58cad9d8e6fa38e032e235993d1d1bea"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "rejection_binding_red_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live_replay.IntegrationReplayTests.test_full_store_rejection_expected_revision_matches_original_command",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:50:20.504309+08:00",
+      "finished_at": "2026-09-16T01:50:21.961297+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/rejection_binding_red_v1/inputs.json",
+        "bytes": 70358,
+        "sha256": "5293d0a70ed5b03905741929fecaf5a8f023b4e9d11877e96a656d092e5cd0ae"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/rejection_binding_red_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/rejection_binding_red_v1/stderr.txt",
+        "bytes": 1019,
+        "sha256": "4edcbdc0d94493b60460c39b32e22687fff5098718872e791ce08269aced5f01"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "rejection_binding_green_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_integration_live_replay.IntegrationReplayTests.test_full_store_rejection_expected_revision_matches_original_command",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:50:42.353866+08:00",
+      "finished_at": "2026-09-16T01:50:43.950881+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/rejection_binding_green_v1/inputs.json",
+        "bytes": 70358,
+        "sha256": "b7bbcf2982476c57e7a715c10263de017734f1eaed3b72c3bbd0c1856cd445ff"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/rejection_binding_green_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/rejection_binding_green_v1/stderr.txt",
+        "bytes": 311,
+        "sha256": "aa468c51464aa16d70671d49a78097ea4b25da9045c86e70ab808a6b5faa5c82"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "integration_all_v2",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m3",
+        "-p",
+        "test_integration*.py",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:51:20.006140+08:00",
+      "finished_at": "2026-09-16T01:52:01.195244+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/integration_all_v2/inputs.json",
+        "bytes": 70358,
+        "sha256": "9e949180887c21b7a1f3a1531323bcb5e5c7d5f56e6764fa24e932afcacb3dd3"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/integration_all_v2/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/integration_all_v2/stderr.txt",
+        "bytes": 24769,
+        "sha256": "732cc05fbeafa9dcaabaff6fbcaca3aec8a6b076bd09adcb5adc007e4bfac436"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "compatibility_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-16-m3-02-integration-live-compatibility.py",
+        "v1"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:53:12.115593+08:00",
+      "finished_at": "2026-09-16T01:54:42.137914+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/compatibility_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "53eac0c01b0eb6b0c89ddc793ce52c562b6d533bdefaf5bb2c3c86abc4f19143"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/compatibility_v1/stdout.txt",
+        "bytes": 234,
+        "sha256": "dd1427d9397efcc1d0e006554767ee367bcd4f67073ba5ea907df7b5d2526897"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/compatibility_v1/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "compatibility_v2",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-16-m3-02-integration-live-compatibility.py",
+        "v2"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:55:50.250671+08:00",
+      "finished_at": "2026-09-16T01:57:22.426478+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/compatibility_v2/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/compatibility_v2/stdout.txt",
+        "bytes": 234,
+        "sha256": "4885b56536a3ad47ef78c775d181d42a2764492209068d0e1a0d3cb759b1304b"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/compatibility_v2/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_m0_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:59:09.590440+08:00",
+      "finished_at": "2026-09-16T01:59:57.036870+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m0_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m0_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m0_v1/stderr.txt",
+        "bytes": 27488,
+        "sha256": "6bbefcf7f34ee4737231cae01406a953b0cda2427df206c035f3f625c76017fb"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_m1_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m1",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T01:59:57.475080+08:00",
+      "finished_at": "2026-09-16T02:00:20.080790+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m1_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m1_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m1_v1/stderr.txt",
+        "bytes": 16479,
+        "sha256": "30c5d46299a88d507263b6906dcb26a671f443a5825ecdf1f4ea83fef39927a8"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_m2_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m2",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T02:00:20.461810+08:00",
+      "finished_at": "2026-09-16T02:01:19.984090+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m2_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m2_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m2_v1/stderr.txt",
+        "bytes": 29474,
+        "sha256": "a86cd72dc032d8545d6210bad9e1ff7291a1f64152716658a886b8fd83e69ba9"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_m3_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m3",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T02:01:20.360554+08:00",
+      "finished_at": "2026-09-16T02:07:03.141504+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m3_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m3_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_m3_v1/stderr.txt",
+        "bytes": 60901,
+        "sha256": "29f0d2c9315418dc12b8452b85cb9a5df2322700fb7c5d17c4d8d9e465498242"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_render_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T02:07:03.566260+08:00",
+      "finished_at": "2026-09-16T02:07:03.831060+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_render_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_render_v1/stdout.txt",
+        "bytes": 337,
+        "sha256": "454154e62d15f887c7295c26ecad9dce14559d96bc75d1214665b09d41be6465"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_render_v1/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_check_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T02:07:04.249647+08:00",
+      "finished_at": "2026-09-16T02:07:04.515272+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_check_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_check_v1/stdout.txt",
+        "bytes": 127,
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_check_v1/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "slice": "integration_live_contract",
+      "label": "final_preparation_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-16T02:07:04.895165+08:00",
+      "finished_at": "2026-09-16T02:07:07.706471+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_preparation_v1/inputs.json",
+        "bytes": 70723,
+        "sha256": "248ba1912b811252633289b4505425b7d7d58176062f16b795cf217876645378"
+      },
+      "environment": {
+        "PYTHONPATH": "D:\\Github\\AETP\\src",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_preparation_v1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-runs/final_preparation_v1/stderr.txt",
+        "bytes": 4729,
+        "sha256": "1c6bd32b1e2bf4471224f51791263ce33cc6ee31fd3bb4d1e5a8bc28f58a1e68"
+      }
+    }
+  ],
+  "run_summaries": {
+    "live_red_v1": {
+      "exit_code": 1,
+      "methods": 14,
+      "failure_headers": 14,
+      "error_headers": 0
+    },
+    "replay_red_v1": {
+      "exit_code": 1,
+      "methods": 14,
+      "failure_headers": 14,
+      "error_headers": 0
+    },
+    "live_green_v1": {
+      "exit_code": 1,
+      "methods": 28,
+      "failure_headers": 1,
+      "error_headers": 0
+    },
+    "live_green_v2": {
+      "exit_code": 0,
+      "methods": 28,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "concurrency_first_v1": {
+      "exit_code": 1,
+      "methods": 12,
+      "failure_headers": 0,
+      "error_headers": 1
+    },
+    "integration_all_v1": {
+      "exit_code": 1,
+      "methods": 131,
+      "failure_headers": 3,
+      "error_headers": 0
+    },
+    "rejection_binding_red_v1": {
+      "exit_code": 1,
+      "methods": 1,
+      "failure_headers": 1,
+      "error_headers": 0
+    },
+    "rejection_binding_green_v1": {
+      "exit_code": 0,
+      "methods": 1,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "integration_all_v2": {
+      "exit_code": 0,
+      "methods": 134,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "compatibility_v1": {
+      "exit_code": 0,
+      "methods": null,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "compatibility_v2": {
+      "exit_code": 0,
+      "methods": null,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_m0_v1": {
+      "exit_code": 0,
+      "methods": 156,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_m1_v1": {
+      "exit_code": 0,
+      "methods": 85,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_m2_v1": {
+      "exit_code": 0,
+      "methods": 167,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_m3_v1": {
+      "exit_code": 0,
+      "methods": 343,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_render_v1": {
+      "exit_code": 0,
+      "methods": null,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_check_v1": {
+      "exit_code": 0,
+      "methods": null,
+      "failure_headers": 0,
+      "error_headers": 0
+    },
+    "final_preparation_v1": {
+      "exit_code": 0,
+      "methods": 27,
+      "failure_headers": 0,
+      "error_headers": 0
+    }
+  },
+  "preflight": {
+    "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-preflight-v1.json",
+    "bytes": 36714,
+    "sha256": "57cfb75315bf71a47275d9ddc9ea53ddf9d4c1dce97c967a776eb429dc2f97a2"
+  },
+  "author_self_review": {
+    "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-author-review-v1.json",
+    "bytes": 2454,
+    "sha256": "66fae1b87b154a4e289835afaf8c7282fc0885ae0369400f5c7a3a62902e971c"
+  },
+  "plan": {
+    "original_path": "Docs/superpowers/plans/2026-09-16-m3-02-integration-live-contract.md",
+    "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-input-blobs/23be663cc70331c9b168b0daf741ef19a380d60884df39543300238d87cdf804.md",
+    "bytes": 4911,
+    "sha256": "23be663cc70331c9b168b0daf741ef19a380d60884df39543300238d87cdf804"
+  },
+  "evidence_generator": {
+    "path": "D:/Github/AETP/.tmp/m3-02-integration-live-finalize-v1.py",
+    "bytes": 17047,
+    "sha256": "068fba287e0524f9356f22c89de00df885851c45f63725e6eb863553d2af132d"
+  },
+  "old_database_compatibility": {
+    "path": "Docs/development/evidence/2026-09-16-m3-02-integration-live-compatibility-v2.json",
+    "bytes": 24541,
+    "sha256": "43a2603c870d3159935908742b4819676fe31aab25e480172d0ead52ad4b9751"
+  },
+  "baseline_integrity": {
+    "mappings": 1067,
+    "blobs": 505,
+    "pins": 6,
+    "protected_files": 207,
+    "allowed_existing_changes": [
+      "src/aetp/core/commands.py",
+      "src/aetp/core/projection.py",
+      "src/aetp/domain/models.py",
+      "src/aetp/integration/__init__.py",
+      "src/aetp/integration/contracts.py",
+      "src/aetp/integration/guards.py",
+      "src/aetp/integration/README.md",
+      "tests/m3/test_integration_declaration_records.py",
+      "tests/m3/test_integration_guard_wiring.py"
+    ]
+  },
+  "coverage": [
+    "Human declaration with real receipt; double revision; version append; idempotency; shared legacy guards",
+    "Independent deterministic replay with exact envelope and all five cursors atomic",
+    "Rejection-only git.merge, missing/stale/current declaration refusal and full-store diagnostic binding",
+    "SQLite event/result rollback; response loss; two process revision and exemption races",
+    "Completion/declaration order, compound quality exclusion, deleted/corrupt cache and read-only recovery",
+    "Four immutable old databases, 500 prefix State/pending comparisons between pinned archived and current source"
+  ],
+  "limitations": [
+    "Author verification is not independent review or full M3-02 acceptance",
+    "Initial missing-API REDs do not separately prove every new behavioral test would fail before implementation",
+    "Response loss is simulated after commit, not a process-kill/crash/fsync durability experiment",
+    "Purity mocks check named dependencies; they are not an OS sandbox or proof over every possible IO dependency",
+    "No new persistent live demo database: new-history tests build genuine disposable SQLite fixtures",
+    "Events-only rejection lacks original Command body; full-store additionally binds expected_revision",
+    "No fresh pre-edit full regression; prior guard suite/source hashes were checked and final suites are fresh"
+  ],
+  "remaining": [
+    "Independent review of all Integration contract slices by the original reviewer when available",
+    "Separately design/authorize real Integration Provider and system Verification, including external effect recovery",
+    "Mission Acceptance, actual autonomous peer delivery and TEST-028"
+  ],
+  "boundaries": {
+    "M3-02": "in_progress",
+    "done": 19,
+    "in_progress": 1,
+    "M1": "not_accepted",
+    "phase": "preparation",
+    "product_completion_percent": 0,
+    "bootstrap_status": "not_started",
+    "conformance_registered": 28,
+    "conformance_passed": 0,
+    "git_init_commit_push": false,
+    "network_dependency_install": false,
+    "new_agents": false
+  }
+}

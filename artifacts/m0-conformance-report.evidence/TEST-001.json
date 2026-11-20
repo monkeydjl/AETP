@@ -1,0 +1,1222 @@
+{
+  "test_id": "TEST-001",
+  "project_id": "m0-test-001",
+  "database": ".tmp/m0-conformance-2026-09-11.sqlite",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  },
+  "initial_events": [
+    {
+      "id": "m0-test-001:seed-project:received",
+      "project_id": "m0-test-001",
+      "sequence": 1,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-001",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-project",
+      "correlation_id": "corr-m0-test-001:seed-project",
+      "payload": {
+        "command_type": "project.create",
+        "request_digest": "57175bda9373b49e12183b0bd710c8b8f177e461a01e4ed1f51970a60fa635c8"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-project:effect",
+      "project_id": "m0-test-001",
+      "sequence": 2,
+      "type": "project.created",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-001",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-project",
+      "correlation_id": "corr-m0-test-001:seed-project",
+      "payload": {
+        "status": "planning"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a1:received",
+      "project_id": "m0-test-001",
+      "sequence": 3,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a1",
+      "correlation_id": "corr-m0-test-001:seed-agent-a1",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "a7ec4fbc7f2c667561501b89a03fe358e97d5c03659b53a4c6f73cefebe2174b"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a1:effect",
+      "project_id": "m0-test-001",
+      "sequence": 4,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a1",
+      "correlation_id": "corr-m0-test-001:seed-agent-a1",
+      "payload": {
+        "model_id": "model-1",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a2:received",
+      "project_id": "m0-test-001",
+      "sequence": 5,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a2",
+      "correlation_id": "corr-m0-test-001:seed-agent-a2",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "e5179260f1764d58ec12e38f4498bf5766c428a2dfff1b67c6a85fdf00708d4f"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a2:effect",
+      "project_id": "m0-test-001",
+      "sequence": 6,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a2",
+      "correlation_id": "corr-m0-test-001:seed-agent-a2",
+      "payload": {
+        "model_id": "model-2",
+        "status": "available"
+      }
+    }
+  ],
+  "initial_state": {
+    "agent:a-1": {
+      "id": "a-1",
+      "model_id": "model-1",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "available"
+    },
+    "agent:a-2": {
+      "id": "a-2",
+      "model_id": "model-2",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "available"
+    },
+    "project:m0-test-001": {
+      "id": "m0-test-001",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "planning"
+    }
+  },
+  "commands": [
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-001-create",
+        "project_id": "m0-test-001",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "task",
+        "payload": {
+          "title": "Conformance task"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "create",
+        "correlation_id": "m0-test-001-create"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-001-create",
+        "event_ids": [
+          "m0-test-001-create:received",
+          "m0-test-001-create:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-001-create",
+        "project_id": "m0-test-001",
+        "actor_id": "a-1",
+        "type": "task.create",
+        "target_id": "task",
+        "payload": {
+          "title": "Conformance task"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "create",
+        "correlation_id": "m0-test-001-create"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m0-test-001-create",
+        "event_ids": [
+          "m0-test-001-create:received",
+          "m0-test-001-create:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-001-stale",
+        "project_id": "m0-test-001",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 99,
+        "idempotency_key": "stale",
+        "correlation_id": "m0-test-001-stale"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "m0-test-001-stale",
+        "event_ids": [
+          "m0-test-001-stale:received",
+          "m0-test-001-stale:rejected"
+        ],
+        "aggregate_revision": 0,
+        "error_code": "REVISION_CONFLICT"
+      }
+    },
+    {
+      "source": "trusted conformance caller",
+      "authenticated_actor_id": "a-1",
+      "command": {
+        "id": "m0-test-001-stale",
+        "project_id": "m0-test-001",
+        "actor_id": "a-1",
+        "type": "task.claim",
+        "target_id": "task",
+        "payload": {},
+        "expected_revision": 99,
+        "idempotency_key": "stale",
+        "correlation_id": "m0-test-001-stale"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "m0-test-001-stale",
+        "event_ids": [
+          "m0-test-001-stale:received",
+          "m0-test-001-stale:rejected"
+        ],
+        "aggregate_revision": 0,
+        "error_code": "REVISION_CONFLICT"
+      }
+    }
+  ],
+  "fault_injection": [
+    {
+      "kind": "duplicate delivery",
+      "point": "after atomic commit; same immutable Command/key"
+    }
+  ],
+  "checks": [
+    {
+      "name": "literal initial state",
+      "actual": {
+        "agent:a-1": {
+          "id": "a-1",
+          "model_id": "model-1",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "model_id": "model-2",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "available"
+        },
+        "project:m0-test-001": {
+          "id": "m0-test-001",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "planning"
+        }
+      },
+      "expected": {
+        "project:m0-test-001": {
+          "id": "m0-test-001",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "model_id": "model-1",
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "model_id": "model-2",
+          "status": "available"
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "initial receipt/domain count",
+      "actual": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "name": "first accepted",
+      "actual": "accepted",
+      "expected": "accepted",
+      "passed": true
+    },
+    {
+      "name": "original result returned",
+      "actual": {
+        "status": "accepted",
+        "command_id": "m0-test-001-create",
+        "event_ids": [
+          "m0-test-001-create:received",
+          "m0-test-001-create:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      },
+      "expected": {
+        "status": "accepted",
+        "command_id": "m0-test-001-create",
+        "event_ids": [
+          "m0-test-001-create:received",
+          "m0-test-001-create:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      },
+      "passed": true
+    },
+    {
+      "name": "complete Event stream unchanged",
+      "actual": [
+        {
+          "id": "m0-test-001:seed-project:received",
+          "project_id": "m0-test-001",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "57175bda9373b49e12183b0bd710c8b8f177e461a01e4ed1f51970a60fa635c8"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-project:effect",
+          "project_id": "m0-test-001",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:received",
+          "project_id": "m0-test-001",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "a7ec4fbc7f2c667561501b89a03fe358e97d5c03659b53a4c6f73cefebe2174b"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:effect",
+          "project_id": "m0-test-001",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:received",
+          "project_id": "m0-test-001",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e5179260f1764d58ec12e38f4498bf5766c428a2dfff1b67c6a85fdf00708d4f"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:effect",
+          "project_id": "m0-test-001",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001-create:received",
+          "project_id": "m0-test-001",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "518691f074fa0ea93d72b30cb94ffb5fca2d6e3c8420f1e24ec1a0f529f4528e"
+          }
+        },
+        {
+          "id": "m0-test-001-create:effect",
+          "project_id": "m0-test-001",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        }
+      ],
+      "expected": [
+        {
+          "id": "m0-test-001:seed-project:received",
+          "project_id": "m0-test-001",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "57175bda9373b49e12183b0bd710c8b8f177e461a01e4ed1f51970a60fa635c8"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-project:effect",
+          "project_id": "m0-test-001",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:received",
+          "project_id": "m0-test-001",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "a7ec4fbc7f2c667561501b89a03fe358e97d5c03659b53a4c6f73cefebe2174b"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:effect",
+          "project_id": "m0-test-001",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:received",
+          "project_id": "m0-test-001",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e5179260f1764d58ec12e38f4498bf5766c428a2dfff1b67c6a85fdf00708d4f"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:effect",
+          "project_id": "m0-test-001",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001-create:received",
+          "project_id": "m0-test-001",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "518691f074fa0ea93d72b30cb94ffb5fca2d6e3c8420f1e24ec1a0f529f4528e"
+          }
+        },
+        {
+          "id": "m0-test-001-create:effect",
+          "project_id": "m0-test-001",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "single domain effect",
+      "actual": [
+        "command.received",
+        "task.created"
+      ],
+      "expected": [
+        "command.received",
+        "task.created"
+      ],
+      "passed": true
+    },
+    {
+      "name": "stale rejected",
+      "actual": "REVISION_CONFLICT",
+      "expected": "REVISION_CONFLICT",
+      "passed": true
+    },
+    {
+      "name": "rejected retry is original",
+      "actual": {
+        "status": "rejected",
+        "command_id": "m0-test-001-stale",
+        "event_ids": [
+          "m0-test-001-stale:received",
+          "m0-test-001-stale:rejected"
+        ],
+        "aggregate_revision": 0,
+        "error_code": "REVISION_CONFLICT"
+      },
+      "expected": {
+        "status": "rejected",
+        "command_id": "m0-test-001-stale",
+        "event_ids": [
+          "m0-test-001-stale:received",
+          "m0-test-001-stale:rejected"
+        ],
+        "aggregate_revision": 0,
+        "error_code": "REVISION_CONFLICT"
+      },
+      "passed": true
+    },
+    {
+      "name": "no second rejected batch",
+      "actual": [
+        {
+          "id": "m0-test-001:seed-project:received",
+          "project_id": "m0-test-001",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "57175bda9373b49e12183b0bd710c8b8f177e461a01e4ed1f51970a60fa635c8"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-project:effect",
+          "project_id": "m0-test-001",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:received",
+          "project_id": "m0-test-001",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "a7ec4fbc7f2c667561501b89a03fe358e97d5c03659b53a4c6f73cefebe2174b"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:effect",
+          "project_id": "m0-test-001",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:received",
+          "project_id": "m0-test-001",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e5179260f1764d58ec12e38f4498bf5766c428a2dfff1b67c6a85fdf00708d4f"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:effect",
+          "project_id": "m0-test-001",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001-create:received",
+          "project_id": "m0-test-001",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "518691f074fa0ea93d72b30cb94ffb5fca2d6e3c8420f1e24ec1a0f529f4528e"
+          }
+        },
+        {
+          "id": "m0-test-001-create:effect",
+          "project_id": "m0-test-001",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-001-stale:received",
+          "project_id": "m0-test-001",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-stale",
+          "correlation_id": "m0-test-001-stale",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "a55cc96544be84cb5d2634cee7ab4aa4817d9aa8a41c63f224ddbcd62c83ad26"
+          }
+        },
+        {
+          "id": "m0-test-001-stale:rejected",
+          "project_id": "m0-test-001",
+          "sequence": 10,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-stale",
+          "correlation_id": "m0-test-001-stale",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "m0-test-001-stale",
+                "current_revision": 0,
+                "expected_revision": 99,
+                "target_id": "task"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "expected": [
+        {
+          "id": "m0-test-001:seed-project:received",
+          "project_id": "m0-test-001",
+          "sequence": 1,
+          "type": "command.received",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "command_type": "project.create",
+            "request_digest": "57175bda9373b49e12183b0bd710c8b8f177e461a01e4ed1f51970a60fa635c8"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-project:effect",
+          "project_id": "m0-test-001",
+          "sequence": 2,
+          "type": "project.created",
+          "aggregate_type": "project",
+          "aggregate_id": "m0-test-001",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-project",
+          "correlation_id": "corr-m0-test-001:seed-project",
+          "payload": {
+            "status": "planning"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:received",
+          "project_id": "m0-test-001",
+          "sequence": 3,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "a7ec4fbc7f2c667561501b89a03fe358e97d5c03659b53a4c6f73cefebe2174b"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a1:effect",
+          "project_id": "m0-test-001",
+          "sequence": 4,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-1",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a1",
+          "correlation_id": "corr-m0-test-001:seed-agent-a1",
+          "payload": {
+            "model_id": "model-1",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:received",
+          "project_id": "m0-test-001",
+          "sequence": 5,
+          "type": "command.received",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "command_type": "agent.register",
+            "request_digest": "e5179260f1764d58ec12e38f4498bf5766c428a2dfff1b67c6a85fdf00708d4f"
+          }
+        },
+        {
+          "id": "m0-test-001:seed-agent-a2:effect",
+          "project_id": "m0-test-001",
+          "sequence": 6,
+          "type": "agent.created",
+          "aggregate_type": "agent",
+          "aggregate_id": "a-2",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001:seed-agent-a2",
+          "correlation_id": "corr-m0-test-001:seed-agent-a2",
+          "payload": {
+            "model_id": "model-2",
+            "status": "available"
+          }
+        },
+        {
+          "id": "m0-test-001-create:received",
+          "project_id": "m0-test-001",
+          "sequence": 7,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "command_type": "task.create",
+            "request_digest": "518691f074fa0ea93d72b30cb94ffb5fca2d6e3c8420f1e24ec1a0f529f4528e"
+          }
+        },
+        {
+          "id": "m0-test-001-create:effect",
+          "project_id": "m0-test-001",
+          "sequence": 8,
+          "type": "task.created",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-create",
+          "correlation_id": "m0-test-001-create",
+          "payload": {
+            "status": "pending",
+            "title": "Conformance task"
+          }
+        },
+        {
+          "id": "m0-test-001-stale:received",
+          "project_id": "m0-test-001",
+          "sequence": 9,
+          "type": "command.received",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-stale",
+          "correlation_id": "m0-test-001-stale",
+          "payload": {
+            "command_type": "task.claim",
+            "request_digest": "a55cc96544be84cb5d2634cee7ab4aa4817d9aa8a41c63f224ddbcd62c83ad26"
+          }
+        },
+        {
+          "id": "m0-test-001-stale:rejected",
+          "project_id": "m0-test-001",
+          "sequence": 10,
+          "type": "command.rejected",
+          "aggregate_type": "task",
+          "aggregate_id": "task",
+          "aggregate_revision": 0,
+          "causation_id": "m0-test-001-stale",
+          "correlation_id": "m0-test-001-stale",
+          "payload": {
+            "error": {
+              "code": "REVISION_CONFLICT",
+              "context": {
+                "command_id": "m0-test-001-stale",
+                "current_revision": 0,
+                "expected_revision": 99,
+                "target_id": "task"
+              },
+              "message": "Command rejected: REVISION_CONFLICT",
+              "retryable": false,
+              "severity": "medium"
+            }
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "name": "literal replay state",
+      "actual": {
+        "project:m0-test-001": {
+          "id": "m0-test-001",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "available",
+          "model_id": "model-1"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "available",
+          "model_id": "model-2"
+        },
+        "task:task": {
+          "id": "task",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "pending",
+          "title": "Conformance task",
+          "owner_id": null
+        }
+      },
+      "expected": {
+        "project:m0-test-001": {
+          "id": "m0-test-001",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "status": "planning"
+        },
+        "agent:a-1": {
+          "id": "a-1",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "model_id": "model-1",
+          "status": "available"
+        },
+        "agent:a-2": {
+          "id": "a-2",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "model_id": "model-2",
+          "status": "available"
+        },
+        "task:task": {
+          "id": "task",
+          "project_id": "m0-test-001",
+          "revision": 0,
+          "title": "Conformance task",
+          "status": "pending",
+          "owner_id": null
+        }
+      },
+      "passed": true
+    },
+    {
+      "name": "pending facts",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "name": "no recovery simulation",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    }
+  ],
+  "replay_state": {
+    "project:m0-test-001": {
+      "id": "m0-test-001",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "planning"
+    },
+    "agent:a-1": {
+      "id": "a-1",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "available",
+      "model_id": "model-1"
+    },
+    "agent:a-2": {
+      "id": "a-2",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "available",
+      "model_id": "model-2"
+    },
+    "task:task": {
+      "id": "task",
+      "project_id": "m0-test-001",
+      "revision": 0,
+      "status": "pending",
+      "title": "Conformance task",
+      "owner_id": null
+    }
+  },
+  "final_events": [
+    {
+      "id": "m0-test-001:seed-project:received",
+      "project_id": "m0-test-001",
+      "sequence": 1,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-001",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-project",
+      "correlation_id": "corr-m0-test-001:seed-project",
+      "payload": {
+        "command_type": "project.create",
+        "request_digest": "57175bda9373b49e12183b0bd710c8b8f177e461a01e4ed1f51970a60fa635c8"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-project:effect",
+      "project_id": "m0-test-001",
+      "sequence": 2,
+      "type": "project.created",
+      "aggregate_type": "project",
+      "aggregate_id": "m0-test-001",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-project",
+      "correlation_id": "corr-m0-test-001:seed-project",
+      "payload": {
+        "status": "planning"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a1:received",
+      "project_id": "m0-test-001",
+      "sequence": 3,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a1",
+      "correlation_id": "corr-m0-test-001:seed-agent-a1",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "a7ec4fbc7f2c667561501b89a03fe358e97d5c03659b53a4c6f73cefebe2174b"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a1:effect",
+      "project_id": "m0-test-001",
+      "sequence": 4,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-1",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a1",
+      "correlation_id": "corr-m0-test-001:seed-agent-a1",
+      "payload": {
+        "model_id": "model-1",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a2:received",
+      "project_id": "m0-test-001",
+      "sequence": 5,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a2",
+      "correlation_id": "corr-m0-test-001:seed-agent-a2",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "e5179260f1764d58ec12e38f4498bf5766c428a2dfff1b67c6a85fdf00708d4f"
+      }
+    },
+    {
+      "id": "m0-test-001:seed-agent-a2:effect",
+      "project_id": "m0-test-001",
+      "sequence": 6,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "a-2",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001:seed-agent-a2",
+      "correlation_id": "corr-m0-test-001:seed-agent-a2",
+      "payload": {
+        "model_id": "model-2",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m0-test-001-create:received",
+      "project_id": "m0-test-001",
+      "sequence": 7,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001-create",
+      "correlation_id": "m0-test-001-create",
+      "payload": {
+        "command_type": "task.create",
+        "request_digest": "518691f074fa0ea93d72b30cb94ffb5fca2d6e3c8420f1e24ec1a0f529f4528e"
+      }
+    },
+    {
+      "id": "m0-test-001-create:effect",
+      "project_id": "m0-test-001",
+      "sequence": 8,
+      "type": "task.created",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001-create",
+      "correlation_id": "m0-test-001-create",
+      "payload": {
+        "status": "pending",
+        "title": "Conformance task"
+      }
+    },
+    {
+      "id": "m0-test-001-stale:received",
+      "project_id": "m0-test-001",
+      "sequence": 9,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001-stale",
+      "correlation_id": "m0-test-001-stale",
+      "payload": {
+        "command_type": "task.claim",
+        "request_digest": "a55cc96544be84cb5d2634cee7ab4aa4817d9aa8a41c63f224ddbcd62c83ad26"
+      }
+    },
+    {
+      "id": "m0-test-001-stale:rejected",
+      "project_id": "m0-test-001",
+      "sequence": 10,
+      "type": "command.rejected",
+      "aggregate_type": "task",
+      "aggregate_id": "task",
+      "aggregate_revision": 0,
+      "causation_id": "m0-test-001-stale",
+      "correlation_id": "m0-test-001-stale",
+      "payload": {
+        "error": {
+          "code": "REVISION_CONFLICT",
+          "context": {
+            "command_id": "m0-test-001-stale",
+            "current_revision": 0,
+            "expected_revision": 99,
+            "target_id": "task"
+          },
+          "message": "Command rejected: REVISION_CONFLICT",
+          "retryable": false,
+          "severity": "medium"
+        }
+      }
+    }
+  ],
+  "execution": {
+    "status": "passed",
+    "started_at": "2026-09-11T11:33:18.824500+08:00",
+    "finished_at": "2026-09-11T11:33:20.229505+08:00",
+    "tests_run": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "fixture_complete": true
+  }
+}

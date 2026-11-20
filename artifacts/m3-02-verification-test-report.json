@@ -1,0 +1,1358 @@
+{
+  "work_item": "M3-02",
+  "work_item_status": "in_progress",
+  "candidate_revision": "v1",
+  "scope": "first prerequisite: trusted fixed JSON document Verification only",
+  "created_at": "2026-09-14T23:12:23.017047+08:00",
+  "metadata_finalized_at": "2026-09-14T23:12:22.966697+08:00",
+  "source_sampled_at": "2026-09-14T23:12:23.017047+08:00",
+  "executor": "Codex main agent /root",
+  "review": {
+    "status": "pending",
+    "independent_reviewer": "/root/m1_reviewer"
+  },
+  "source_snapshot": "Docs/development/evidence/2026-09-14-m3-02-candidate-snapshot.json",
+  "design": "Docs/superpowers/specs/2026-09-14-m3-02-verification-design.md",
+  "plan": "Docs/superpowers/plans/2026-09-14-m3-02-verification.md",
+  "first_batch_acceptance_mapping": [
+    {
+      "criterion": "Bounded fixed checker, actual outcomes and immutable input snapshots",
+      "tests": [
+        "test_verification_runner.py",
+        "test_verification_authority.py"
+      ]
+    },
+    {
+      "criterion": "Explicit Quality/Governance/source authority, independent actual execution identity and single use",
+      "tests": [
+        "test_verification_authority.py",
+        "test_verification_integrity.py",
+        "test_verification_processes.py"
+      ]
+    },
+    {
+      "criterion": "Crash, result rollback and global recovery without rerun",
+      "tests": [
+        "test_verification_recovery.py",
+        "test_verification_processes.py"
+      ]
+    },
+    {
+      "criterion": "Receipt/report/terminal integrity, atomic cursor and pure old/new Replay",
+      "tests": [
+        "test_verification_integrity.py",
+        "test_verification_replay.py"
+      ],
+      "legacy_databases": 6
+    }
+  ],
+  "remaining_work_item_criteria": [
+    {
+      "criterion": "集成面任务通过 Integration Gate",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "Mission success criteria 逐条 Acceptance Verification",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    },
+    {
+      "criterion": "两名以上平等 Agent 从粗糙想法讨论到成果交付，人工不拆任务且无隐藏 Manager",
+      "status": "not_accepted",
+      "satisfied_by_this_batch": false
+    }
+  ],
+  "suites": [
+    {
+      "label": "candidate_m3",
+      "tests": 120,
+      "command": {
+        "work_item": "M3-02",
+        "label": "candidate_m3",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m3",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-14T22:45:44.595912+08:00",
+        "finished_at": "2026-09-14T22:47:05.180135+08:00",
+        "exit_code": 0,
+        "inputs": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m3/inputs.json",
+          "bytes": 39387,
+          "sha256": "a67f341608f6f46b1a523ff5aeabc89cbd9a7a8e32cd20e338e24a761dbc6614"
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m3/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m3/stderr.txt",
+          "bytes": 21733,
+          "sha256": "0bc7d239f5e0bcd802e840b6e673eb42fcdfb77c6111b8af63e259f9c130ee60"
+        }
+      }
+    },
+    {
+      "label": "candidate_m2",
+      "tests": 167,
+      "command": {
+        "work_item": "M3-02",
+        "label": "candidate_m2",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m2",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-14T22:50:26.327084+08:00",
+        "finished_at": "2026-09-14T22:51:13.131257+08:00",
+        "exit_code": 0,
+        "inputs": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m2/inputs.json",
+          "bytes": 39387,
+          "sha256": "a67f341608f6f46b1a523ff5aeabc89cbd9a7a8e32cd20e338e24a761dbc6614"
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m2/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m2/stderr.txt",
+          "bytes": 30977,
+          "sha256": "0edf85ceb1637300aa39e150f286a245be63d3c136635ed8bf3ed479cbe5e32e"
+        }
+      }
+    },
+    {
+      "label": "candidate_m1",
+      "tests": 85,
+      "command": {
+        "work_item": "M3-02",
+        "label": "candidate_m1",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m1",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-14T22:53:27.020102+08:00",
+        "finished_at": "2026-09-14T22:53:46.668797+08:00",
+        "exit_code": 0,
+        "inputs": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m1/inputs.json",
+          "bytes": 40713,
+          "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m1/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m1/stderr.txt",
+          "bytes": 17244,
+          "sha256": "d72f6a59912657e2d0ed1ec4df03b533bb5c88bd1d96fe261fa05a2581735355"
+        }
+      }
+    },
+    {
+      "label": "candidate_m0",
+      "tests": 156,
+      "command": {
+        "work_item": "M3-02",
+        "label": "candidate_m0",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/m0",
+          "-t",
+          ".",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-14T22:56:02.398353+08:00",
+        "finished_at": "2026-09-14T22:56:45.828934+08:00",
+        "exit_code": 0,
+        "inputs": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m0/inputs.json",
+          "bytes": 40713,
+          "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m0/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m0/stderr.txt",
+          "bytes": 28892,
+          "sha256": "f5399d5c2fd21eb9ea0b0a47177c52898c0269c332a14c12cbb15ed022bc152f"
+        }
+      }
+    },
+    {
+      "label": "candidate_preparation",
+      "tests": 27,
+      "command": {
+        "work_item": "M3-02",
+        "label": "candidate_preparation",
+        "argv": [
+          "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+          "-B",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests/preparation",
+          "-v"
+        ],
+        "cwd": "D:\\Github\\AETP",
+        "started_at": "2026-09-14T23:11:52.744145+08:00",
+        "finished_at": "2026-09-14T23:11:57.244334+08:00",
+        "exit_code": 0,
+        "inputs": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_preparation/inputs.json",
+          "bytes": 41044,
+          "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+        },
+        "stdout": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_preparation/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_preparation/stderr.txt",
+          "bytes": 4729,
+          "sha256": "80d1e498b17965c8350a6aae4ec75143f3e95c8c87229dfe9259532b6643221c"
+        }
+      }
+    }
+  ],
+  "checks": [
+    {
+      "work_item": "M3-02",
+      "label": "candidate_compile",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests",
+        "conformance",
+        "tools"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:06:16.714178+08:00",
+      "finished_at": "2026-09-14T23:06:17.067204+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_compile/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_compile/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_compile/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_render",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:11:50.003938+08:00",
+      "finished_at": "2026-09-14T23:11:50.277917+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_render/inputs.json",
+        "bytes": 41044,
+        "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_render/stdout.txt",
+        "bytes": 337,
+        "sha256": "454154e62d15f887c7295c26ecad9dce14559d96bc75d1214665b09d41be6465"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_render/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_check",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:11:51.438809+08:00",
+      "finished_at": "2026-09-14T23:11:51.652771+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_check/inputs.json",
+        "bytes": 41044,
+        "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_check/stdout.txt",
+        "bytes": 127,
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_check/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_demo",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-14-m3-02-demo.py",
+        "m3-02-verification-demo-v1"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:57:38.984814+08:00",
+      "finished_at": "2026-09-14T22:57:55.728203+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_demo/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_demo/stdout.txt",
+        "bytes": 319,
+        "sha256": "88aea80df77dc75c5963112ac3e5aad249f0e72a88c7a0b529c4fbbb1eb6ec2b"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_demo/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "compatibility",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-14-m3-02-compatibility.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:03:30.881480+08:00",
+      "finished_at": "2026-09-14T23:03:40.638287+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/compatibility/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/compatibility/stdout.txt",
+        "bytes": 202,
+        "sha256": "3d469a10e1ccf266a0126636724da669ce7972809a19a71df7fd2fa265c70572"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/compatibility/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "executed_input_checks": [
+    {
+      "label": "candidate_m3",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_m2",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_m1",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_m0",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_preparation",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_compile",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_render",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_check",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "candidate_demo",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    },
+    {
+      "label": "compatibility",
+      "files_checked": 127,
+      "current_bytes_match_executed_inputs": true
+    }
+  ],
+  "development_runs": [
+    {
+      "work_item": "M3-02",
+      "label": "baseline_v1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-14-m3-02-baseline.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:28:10.017239+08:00",
+      "finished_at": "2026-09-14T21:28:17.692062+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/baseline_v1/inputs.json",
+        "bytes": 35040,
+        "sha256": "acf370525e2e4db2247ef9e575b1652fb1e4fd3fe66ac548da0aff17795c2efd"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/baseline_v1/stdout.txt",
+        "bytes": 236,
+        "sha256": "1fa564e54317499d71d1bd602288c38a29f58cf2cc37c78d97fce67eb019df07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/baseline_v1/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "runner_red",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_runner",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:41:18.740260+08:00",
+      "finished_at": "2026-09-14T21:41:19.024014+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/runner_red/inputs.json",
+        "bytes": 35022,
+        "sha256": "1017f58d7ec3e82576fec15a2c71a5ee19594bbcb2e12ef751aac6c1154379d1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/runner_red/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/runner_red/stderr.txt",
+        "bytes": 6948,
+        "sha256": "735e63d78e11b415b4d892c1f8b40fb8f8ac471ec4d4b9f2ebecae5506ae20f7"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "runner_green",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_runner",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:42:17.674633+08:00",
+      "finished_at": "2026-09-14T21:42:18.000061+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/runner_green/inputs.json",
+        "bytes": 35945,
+        "sha256": "c183e121e291050dcb93e6a7e65ed38de625fdcd6c22e862889d5239ea4beba2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/runner_green/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/runner_green/stderr.txt",
+        "bytes": 1441,
+        "sha256": "6b596a4c34d484ef313a401ba0334ec887ee69cf227fba65e5f9cc169402e172"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "authority_red",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_authority",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T21:49:13.542753+08:00",
+      "finished_at": "2026-09-14T21:49:14.010681+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_red/inputs.json",
+        "bytes": 36573,
+        "sha256": "0b85fbb52f1a45561c744f1ab3bc52d7e0ab73c0eddea0935e095ddf7806b124"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_red/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_red/stderr.txt",
+        "bytes": 16274,
+        "sha256": "c2aab26670049fb62718e1380ff698bd14e1ed4a09157ee76ddd8ec71811a565"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "authority_initial",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_authority",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:02:37.943613+08:00",
+      "finished_at": "2026-09-14T22:02:55.292344+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_initial/inputs.json",
+        "bytes": 37812,
+        "sha256": "7f79be5497b0e4d9c7cb00ddf27c710869483c88ce003cdca62c99529bd624d2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_initial/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_initial/stderr.txt",
+        "bytes": 4708,
+        "sha256": "82f0a4e8dcfc2f484284618c0bfba4d66aea5ffe5a336d9312df8ef7ba4a3148"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "authority_green",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_authority",
+        "tests.m3.test_verification_runner",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:06:16.749883+08:00",
+      "finished_at": "2026-09-14T22:06:33.446801+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_green/inputs.json",
+        "bytes": 37812,
+        "sha256": "b56fe8a8146b97e788b45ac3c5dec77fb6c52a1326ab51e46756a8e02a5a14a8"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_green/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/authority_green/stderr.txt",
+        "bytes": 4829,
+        "sha256": "586d6e042a082ae666d796a8c10114a54bf59456db3d1648669dd836d1271cab"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "recovery_red",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_recovery",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:09:22.968443+08:00",
+      "finished_at": "2026-09-14T22:09:38.779858+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_red/inputs.json",
+        "bytes": 38128,
+        "sha256": "5b0ef43d5cc5d05c1899521905855f761b6fc3b5415a2d889e6631f287ae2d63"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_red/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_red/stderr.txt",
+        "bytes": 12987,
+        "sha256": "cc048e0f69ab68e5ed384f01f790090bafcc0448bea3f6fbe4cff5221474f927"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "recovery_red_v2",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_recovery",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:10:56.533384+08:00",
+      "finished_at": "2026-09-14T22:11:12.944872+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_red_v2/inputs.json",
+        "bytes": 38128,
+        "sha256": "ff4d9bd86fb790a2d80faa05d529b968382c69510d1736262ef289776d204ecd"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_red_v2/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_red_v2/stderr.txt",
+        "bytes": 5127,
+        "sha256": "637ba574bfa759d1cdd05cd58e999eee314dbd5536efc002eca87efd57c9ef87"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "recovery_green",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_recovery",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:21:19.006814+08:00",
+      "finished_at": "2026-09-14T22:21:36.009614+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_green/inputs.json",
+        "bytes": 38128,
+        "sha256": "4ff79383717c0c379b13103c6348244545a668e0257dbdafaf53222467185360"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_green/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/recovery_green/stderr.txt",
+        "bytes": 2741,
+        "sha256": "c59c7b86038f2dcf7c42a958871adb918ae00511c8a9d4d5a44a69fc2d1b5759"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "integrity_red",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_integrity",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:28:26.371122+08:00",
+      "finished_at": "2026-09-14T22:28:36.797480+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/integrity_red/inputs.json",
+        "bytes": 38445,
+        "sha256": "fe6e7d14d1db684d56e95e2010371b07ba61c0f03f539a464e1da6d7a0e1125c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/integrity_red/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/integrity_red/stderr.txt",
+        "bytes": 8961,
+        "sha256": "da868cd7eed15762e522d1415b7e920fd318a8e903416f15a62bc66cff8b6e3f"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "integrity_green",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_integrity",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:30:50.969367+08:00",
+      "finished_at": "2026-09-14T22:31:01.310617+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/integrity_green/inputs.json",
+        "bytes": 38445,
+        "sha256": "0b45f48d79b390024802ae908cc7a0c3a23897b84689552c249f3e2aa0827a56"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/integrity_green/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/integrity_green/stderr.txt",
+        "bytes": 2184,
+        "sha256": "074204929478ed799f7b3ac0e532a30e3376faede5969e29fae0f2fe6aa767f4"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "process_checks",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_processes",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:38:48.757515+08:00",
+      "finished_at": "2026-09-14T22:39:03.313739+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/process_checks/inputs.json",
+        "bytes": 39073,
+        "sha256": "218aa5a7e5a0b524f64ff6ad831a5b632136c6b1763aff1e7c8d1c644f453ef1"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/process_checks/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/process_checks/stderr.txt",
+        "bytes": 680,
+        "sha256": "bffc83cc07fbc08cf42e75c33a7c58003308269cb73fab70535cf0054a38a02c"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "replay_red",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_replay",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:40:38.170235+08:00",
+      "finished_at": "2026-09-14T22:40:42.015737+08:00",
+      "exit_code": 1,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/replay_red/inputs.json",
+        "bytes": 39387,
+        "sha256": "fc714bcd65e08a64691bf36a7d032465274f551c638f81a55932e4b70334d6b5"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/replay_red/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/replay_red/stderr.txt",
+        "bytes": 4168,
+        "sha256": "0e335e8f2ce004813be3ad94897030f127aede60c737ccb25b8f6626ad244e1b"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "replay_green",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.m3.test_verification_replay",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:42:24.748774+08:00",
+      "finished_at": "2026-09-14T22:42:28.808298+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/replay_green/inputs.json",
+        "bytes": 39387,
+        "sha256": "a67f341608f6f46b1a523ff5aeabc89cbd9a7a8e32cd20e338e24a761dbc6614"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/replay_green/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/replay_green/stderr.txt",
+        "bytes": 653,
+        "sha256": "0274dc065f21cacd1c45feac5696d6d0f5ad25db168e872e71f7cf8e33b9af47"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_m3",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m3",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:45:44.595912+08:00",
+      "finished_at": "2026-09-14T22:47:05.180135+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m3/inputs.json",
+        "bytes": 39387,
+        "sha256": "a67f341608f6f46b1a523ff5aeabc89cbd9a7a8e32cd20e338e24a761dbc6614"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m3/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m3/stderr.txt",
+        "bytes": 21733,
+        "sha256": "0bc7d239f5e0bcd802e840b6e673eb42fcdfb77c6111b8af63e259f9c130ee60"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_m2",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m2",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:50:26.327084+08:00",
+      "finished_at": "2026-09-14T22:51:13.131257+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m2/inputs.json",
+        "bytes": 39387,
+        "sha256": "a67f341608f6f46b1a523ff5aeabc89cbd9a7a8e32cd20e338e24a761dbc6614"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m2/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m2/stderr.txt",
+        "bytes": 30977,
+        "sha256": "0edf85ceb1637300aa39e150f286a245be63d3c136635ed8bf3ed479cbe5e32e"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_m1",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m1",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:53:27.020102+08:00",
+      "finished_at": "2026-09-14T22:53:46.668797+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m1/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m1/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m1/stderr.txt",
+        "bytes": 17244,
+        "sha256": "d72f6a59912657e2d0ed1ec4df03b533bb5c88bd1d96fe261fa05a2581735355"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_m0",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m0",
+        "-t",
+        ".",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:56:02.398353+08:00",
+      "finished_at": "2026-09-14T22:56:45.828934+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m0/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m0/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_m0/stderr.txt",
+        "bytes": 28892,
+        "sha256": "f5399d5c2fd21eb9ea0b0a47177c52898c0269c332a14c12cbb15ed022bc152f"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_demo",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-14-m3-02-demo.py",
+        "m3-02-verification-demo-v1"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T22:57:38.984814+08:00",
+      "finished_at": "2026-09-14T22:57:55.728203+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_demo/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_demo/stdout.txt",
+        "bytes": 319,
+        "sha256": "88aea80df77dc75c5963112ac3e5aad249f0e72a88c7a0b529c4fbbb1eb6ec2b"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_demo/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "compatibility",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-14-m3-02-compatibility.py"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:03:30.881480+08:00",
+      "finished_at": "2026-09-14T23:03:40.638287+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/compatibility/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/compatibility/stdout.txt",
+        "bytes": 202,
+        "sha256": "3d469a10e1ccf266a0126636724da669ce7972809a19a71df7fd2fa265c70572"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/compatibility/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_compile",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "compileall",
+        "-q",
+        "src",
+        "tests",
+        "conformance",
+        "tools"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:06:16.714178+08:00",
+      "finished_at": "2026-09-14T23:06:17.067204+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_compile/inputs.json",
+        "bytes": 40713,
+        "sha256": "8db354705bf62dce25e4474b41e8f971d4b7fce35ccb13c45b654a0c181c9fa2"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_compile/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_compile/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_prepare",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "Docs/development/evidence/2026-09-14-m3-02-freeze.py",
+        "--prepare"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:11:04.987714+08:00",
+      "finished_at": "2026-09-14T23:11:07.536653+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_prepare/inputs.json",
+        "bytes": 41044,
+        "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_prepare/stdout.txt",
+        "bytes": 289,
+        "sha256": "261c4605aaa1caa83c69da79fd5495387c088ef450f004a5b5a2834a96657ed7"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_prepare/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_render",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "render"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:11:50.003938+08:00",
+      "finished_at": "2026-09-14T23:11:50.277917+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_render/inputs.json",
+        "bytes": 41044,
+        "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_render/stdout.txt",
+        "bytes": 337,
+        "sha256": "454154e62d15f887c7295c26ecad9dce14559d96bc75d1214665b09d41be6465"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_render/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_check",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "tools/devprep.py",
+        "check"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:11:51.438809+08:00",
+      "finished_at": "2026-09-14T23:11:51.652771+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_check/inputs.json",
+        "bytes": 41044,
+        "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_check/stdout.txt",
+        "bytes": 127,
+        "sha256": "db0b80417ea618bab1fc20e62bc3783f47a9ffd38e301f4e5c95451d11aa8e07"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_check/stderr.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "work_item": "M3-02",
+      "label": "candidate_preparation",
+      "argv": [
+        "C:\\Users\\Alin\\AppData\\Local\\Programs\\Python\\Python314\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/preparation",
+        "-v"
+      ],
+      "cwd": "D:\\Github\\AETP",
+      "started_at": "2026-09-14T23:11:52.744145+08:00",
+      "finished_at": "2026-09-14T23:11:57.244334+08:00",
+      "exit_code": 0,
+      "inputs": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_preparation/inputs.json",
+        "bytes": 41044,
+        "sha256": "3ef4323911ddd43d1523ff2b62f87ac175a146a251d19019bde986aaad57893c"
+      },
+      "stdout": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_preparation/stdout.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "Docs/development/evidence/2026-09-14-m3-02-runs/candidate_preparation/stderr.txt",
+        "bytes": 4729,
+        "sha256": "80d1e498b17965c8350a6aae4ec75143f3e95c8c87229dfe9259532b6643221c"
+      }
+    }
+  ],
+  "failure_notes": [
+    "runner_red: eight missing-feature assertions; authority_red: eighteen missing-feature assertions.",
+    "authority_initial: one invalid candidate_only fixture rejected by TASK_GRAPH_ALREADY_EXISTS; corrected fixture, not relaxed authorization. authority_green 26/26 including Runner.",
+    "recovery_red: four wrong raw SQLite exception expectations; Store wraps ValueError with SQLite cause. recovery_red_v2 then records three actual product assertions; recovery_green 14/14.",
+    "integrity_red: five real assertions for report ID reservation, capture-origin proof and non-null digest; integrity_green 11/11.",
+    "replay_red: four receipt revision subcases failed across three methods; replay_green 3/3. process_checks 3/3 with real process crash and contention.",
+    "All raw outputs and executed input blobs remain immutable. Mid-development reviewer notes were static only, not formal acceptance."
+  ],
+  "demonstration": {
+    "path": "artifacts/m3-02-verification-demo-v1.json",
+    "sha256": "655027a59a69eccaa5b3de1e873abb7326a67f7cda67a2a0636f993c403e3661"
+  },
+  "legacy_compatibility": {
+    "path": "artifacts/m3-02-verification-compatibility.json",
+    "sha256": "b457930fda4fcf1dbcc4b3639cac489a13d1c870b03a728ecaa5704810c32bc7"
+  },
+  "review_response": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-review-response.md",
+    "sha256": "9ffcbcf599b33895ddf76f39b163a32992198b4062e77f1136e683fc41c8b580"
+  },
+  "baseline": {
+    "path": "Docs/development/evidence/2026-09-14-m3-02-baseline.json",
+    "sha256": "cded7ae963c9f7d3cf9f44f4ab6cbd1d2e7cda79b565be6b52591783cce92249"
+  },
+  "history": {
+    "archived_files_checked": 235,
+    "accepted_history_pins_checked": 6,
+    "intentional_changed_baseline_paths": [
+      {
+        "path": "Docs/development/backlog.json",
+        "accepted_sha256": "2ac74328256c8de7e5bee68de1996969ba76abdca056b8077fddd6a8ee25fb37",
+        "current_sha256": "2fe465d0a3530d3c047f0a20f73e3380d47e5d167be085532d0dc41b74eae958"
+      },
+      {
+        "path": "Docs/development/evidence/devprep-check.json",
+        "accepted_sha256": "5ff0c9c11738e35ef29dc4f3123b1d7691922c82b69ee902ed22e5e51b1ce626",
+        "current_sha256": "ccba6a3b5b9a977a7d43d6bbf478f607e932bdfffda158fca71797fa3d72c7fc"
+      },
+      {
+        "path": "Docs/development/evidence/preparation-report.json",
+        "accepted_sha256": "41515ce45bd7a261a0970c36fa2f1513f4414c2815bdd37096f7f0d50b076070",
+        "current_sha256": "25c574bc079a83ae8a26ef4620368fa322af7abd1424c7c0df812a01a6d0183e"
+      },
+      {
+        "path": "Docs/development/status.json",
+        "accepted_sha256": "757856ceec8517d3e34077d61da02f7300951aa009c2f35d260cf7f26a83a67c",
+        "current_sha256": "943405f8791b12502b4d3ec82520a99f1a59411162721f2a1f6124e0698b1084"
+      },
+      {
+        "path": "MEMORY.md",
+        "accepted_sha256": "0a38abca47dd375ce40d37679a804d735948cd209831a1954e49a08e1d2bd279",
+        "current_sha256": "3a130c582576616025d8510241d5e37c9b5e975b68fec7e60af8e45a33ddfbf5"
+      },
+      {
+        "path": "src/aetp/core/commands.py",
+        "accepted_sha256": "c5d5f9f21deab739cc6bb9a0a8401f4e24f1101209275242f4adaa118d373c70",
+        "current_sha256": "a17e1d9a631470597729a181716da10b6ff814a2c66b05be9728173e9a9665c5"
+      },
+      {
+        "path": "src/aetp/core/projection.py",
+        "accepted_sha256": "886be46e6c2d6a96a26440c953e6b22c28761d91efe9072cbf883305d16481c8",
+        "current_sha256": "d0bf117e101f8328ce0083217b3a315427f0a15feb339376c8d893e41789181a"
+      },
+      {
+        "path": "src/aetp/domain/models.py",
+        "accepted_sha256": "c68c12ac9331bce504f74583779aab6b0badea364d528113755eb97b3218aff3",
+        "current_sha256": "ff5094f07d20c4033b50d078b4ad6ddd4027c3e2417c3bb7057012a898c3244a"
+      },
+      {
+        "path": "src/aetp/governance/contracts.py",
+        "accepted_sha256": "4fd6dd0a857acd1dbd95fa6c681bd0726ba3366da68a11face6685f3f399704d",
+        "current_sha256": "9bfabf4781f0781f9be37d20a4eb99dce1833fc9a3e4fcfcf53ff7dc39a053ad"
+      },
+      {
+        "path": "src/aetp/governance/controls.py",
+        "accepted_sha256": "eef25de9487a10db2e0cc27059a681ce126b7ab8082e59bff5619f2541d14280",
+        "current_sha256": "8787f9f6aa63f91a4efb247f844622144aaa9a9c44056d4d9d82df818746cc92"
+      },
+      {
+        "path": "src/aetp/runtime/service.py",
+        "accepted_sha256": "c5f6a287b958e893217e55dd6cdeaec2096ea535b2d38e87b3eb2407430026a9",
+        "current_sha256": "a2aa99d717774b86d26ed2a5adfbc54efed05da599d1190d83715fff5faa23be"
+      }
+    ]
+  },
+  "limitations": [
+    "工作区没有 Git repository，未创建 commit、branch 或 push。",
+    "User explicitly disabled ClaudeLink; one independent reviewer is reused.",
+    "M0 five-object simulation and fixed M0-only conformance subset are independently accepted in their stated scope; full Runtime/Orchestrator, external Action recovery beyond the fixed document Provider, dependency lock and full-protocol Conformance acceptance remain unestablished.",
+    "M1-01 and fixed M1-02 work-item criteria are independently accepted. Whole M1 remains not_accepted. Legacy M1 verification.run stays INCONCLUSIVE; M3-02 adds a bounded trusted JSON Runner pending independent review. Positive Task quality transitions and explicit Integration exemption remain outstanding. Working copies are not a general OS sandbox; five additional reviewer methods were not executed against M1-02 v2.",
+    "M2-01 and M2-02 work-item criteria are independently accepted within their frozen local scopes. Approval and governed Decision activation exist only for decision/task adapters at the fixed document boundary. Original M2-01 examples stay proposed; admission metering is not model billing. Full M2/protocol, general execution isolation and positive quality/acceptance gates remain unestablished.",
+    "M3-01's three work-item criteria are independently accepted in candidate-only planning. Formal Bootstrap, Team/Blueprint activation, executable planning graphs, Integration, Mission Acceptance and TEST-028 remain unaccepted; deterministic identity fixtures do not certify autonomous models.",
+    "M3-02's first prerequisite implements fixed, data-only JSON Verification with human Quality/Governance limits, independent execution Task, single-use dispatch, immutable reports and recovery. First-batch review is pending. PASSED means fixed checks matched; Task completion, Integration, Mission Acceptance, real model delivery and TEST-028 remain unaccepted. The original three work-item criteria are unchanged."
+  ],
+  "claims": {
+    "fixed_verification_results": [
+      "PASSED",
+      "FAILED",
+      "INCONCLUSIVE"
+    ],
+    "legacy_m1_verification": "INCONCLUSIVE",
+    "task_completed": false,
+    "full_m1_acceptance": "not_accepted",
+    "integration_accepted": false,
+    "mission_acceptance": false,
+    "bootstrap_status": "not_started",
+    "full_conformance_passed": 0,
+    "test_028_passed": false
+  }
+}

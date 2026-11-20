@@ -1,0 +1,53 @@
+{
+  "work_item": "M3-02",
+  "slice": "mission_acceptance",
+  "candidate_revision": "v1",
+  "report_generated_at": "2026-09-17T03:36:00+08:00",
+  "author": "/root",
+  "test_runs": [
+    {
+      "command": "PYTHONPATH=src python -m unittest tests/m3/test_mission_acceptance.py -v",
+      "exit_code": 0,
+      "passed_count": 6,
+      "total_count": 6,
+      "elapsed_seconds": 1.522,
+      "description": "Mission Acceptance state machine & TEST-010 delivery gate unit tests"
+    },
+    {
+      "command": "PYTHONPATH=src python -m unittest tests/m3/test_integration_gate.py -v",
+      "exit_code": 0,
+      "passed_count": 9,
+      "total_count": 9,
+      "elapsed_seconds": 29.343,
+      "description": "Regression: Integration Gate state machine tests"
+    },
+    {
+      "command": "PYTHONPATH=src python -m unittest discover -s tests/m3 -p \"test_planning*.py\" -t .",
+      "exit_code": 0,
+      "passed_count": 40,
+      "total_count": 40,
+      "elapsed_seconds": 11.957,
+      "description": "Regression: Planning subsystem unit tests"
+    },
+    {
+      "command": "python tools/devprep.py check",
+      "exit_code": 0,
+      "output_summary": "OK graph nodes=101 edges=144; backlog items=20; skills=3; acyclic=yes; status phase=preparation product_completion_percent=0%",
+      "description": "Knowledge graph and backlog invariants check"
+    },
+    {
+      "command": "python -m unittest discover -s tests/preparation -v",
+      "exit_code": 0,
+      "passed_count": 27,
+      "total_count": 27,
+      "elapsed_seconds": 2.185,
+      "description": "Repository preparation and fail-closed integrity checks"
+    }
+  ],
+  "summary": {
+    "slice_unit_tests": 6,
+    "regression_tests": 76,
+    "total_verified": 82,
+    "status": "all_passed"
+  }
+}

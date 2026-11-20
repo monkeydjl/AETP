@@ -1,0 +1,171 @@
+{
+  "work_item": "M3-01",
+  "recorded_at": "2026-09-14T00:47:47.294449+08:00",
+  "scope": "accepted M2-01/M2-02 examples, current M3 reducer, read-only full and facts-only databases",
+  "original_reports": [
+    {
+      "path": "artifacts/m2-01-demo-candidate-v2.json",
+      "sha256": "52edcde45b955ee32eadce334283325ca3fe788b2f7d9905e1fc915dfc578e6f"
+    },
+    {
+      "path": "artifacts/m2-02-demo-candidate-v1.json",
+      "sha256": "52ea422cd4c2c96c0698036da4fb053281092673aaa480c295c1d5eb06d09ec2"
+    }
+  ],
+  "checks": [
+    {
+      "path": "artifacts/m2-01-demo-candidate-v2.sqlite",
+      "sha256": "457f2d86a2e97933131bdbccbad45da6d43d647a0ff8e6d5102a1845e0768591",
+      "event_count": 24,
+      "command_count": 12,
+      "prefixes_checked": 24,
+      "prefixes_with_pending_commands": 12,
+      "state_digest": "e1d331a196848c40de17705b7a349f34f7f7dd4458d1027e46d57021b3b5f09e",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0
+      },
+      "original_demo": "m2-01-demo-candidate-v2",
+      "prior_records_unchanged": true,
+      "planning_not_enabled": true
+    },
+    {
+      "path": "artifacts/m2-01-demo-candidate-v2-facts.sqlite",
+      "sha256": "849095f6857044dcebce52bf62419b38347df47391a415e984daea8f3e7c393d",
+      "event_count": 24,
+      "command_count": 12,
+      "prefixes_checked": 24,
+      "prefixes_with_pending_commands": 12,
+      "state_digest": "e1d331a196848c40de17705b7a349f34f7f7dd4458d1027e46d57021b3b5f09e",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0
+      },
+      "original_demo": "m2-01-demo-candidate-v2",
+      "prior_records_unchanged": true,
+      "planning_not_enabled": true
+    },
+    {
+      "path": "artifacts/m2-02-demo-candidate-v1.sqlite",
+      "sha256": "d40a460f226358bc24aed2512c676101caffe700e13689ef2fd5d2fb1812faf1",
+      "event_count": 100,
+      "command_count": 50,
+      "prefixes_checked": 100,
+      "prefixes_with_pending_commands": 56,
+      "state_digest": "9f00acc983167615aa631f8ea4773945219ba00d8a21403587e78e4ce09d4d9a",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0
+      },
+      "original_demo": "m2-02-demo-candidate-v1",
+      "prior_records_unchanged": true,
+      "planning_not_enabled": true
+    },
+    {
+      "path": "artifacts/m2-02-demo-candidate-v1-facts.sqlite",
+      "sha256": "a5c20dc884254c674d1615485fa3400f25cdc7320335a434963430d3fde83ef6",
+      "event_count": 100,
+      "command_count": 50,
+      "prefixes_checked": 100,
+      "prefixes_with_pending_commands": 56,
+      "state_digest": "9f00acc983167615aa631f8ea4773945219ba00d8a21403587e78e4ce09d4d9a",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0
+      },
+      "original_demo": "m2-02-demo-candidate-v1",
+      "prior_records_unchanged": true,
+      "planning_not_enabled": true
+    }
+  ],
+  "history": {
+    "archived_files_checked": 252,
+    "accepted_history_pins_checked": 6,
+    "intentional_changed_baseline_paths": [
+      {
+        "path": "Docs/development/backlog.json",
+        "accepted_sha256": "e13a8a3fb9b07294fb14a747ddde33e57e79df9dbbe6ff29326574cb5bd06cc2",
+        "current_sha256": "134ce41923ae3617846584d3639f81a6786f2792a29ca40cb7a45f9e2ac1b027"
+      },
+      {
+        "path": "src/aetp/core/commands.py",
+        "accepted_sha256": "cb6bc95a715def0011d331b2f60d76f30954f089b8fa5d50f715fc5255825a92",
+        "current_sha256": "c5d5f9f21deab739cc6bb9a0a8401f4e24f1101209275242f4adaa118d373c70"
+      },
+      {
+        "path": "src/aetp/core/projection.py",
+        "accepted_sha256": "76d73d3c72858fca5dcc844acd4f8ab808242070bf8577055da589c9d42ebc24",
+        "current_sha256": "886be46e6c2d6a96a26440c953e6b22c28761d91efe9072cbf883305d16481c8"
+      },
+      {
+        "path": "src/aetp/domain/models.py",
+        "accepted_sha256": "23b7a2371ca94fe366bce41102a6e0b43f424e52f6bdc46698e170b4d0bf739a",
+        "current_sha256": "c68c12ac9331bce504f74583779aab6b0badea364d528113755eb97b3218aff3"
+      }
+    ]
+  }
+}

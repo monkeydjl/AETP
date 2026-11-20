@@ -1,0 +1,38 @@
+{
+  "work_item": "M2-02",
+  "created_at": "2026-09-12T22:50:07.001041+08:00",
+  "scope": "accepted M2-01 v2 examples, read-only compatibility",
+  "original_demo": {
+    "path": "artifacts/m2-01-demo-candidate-v2.json",
+    "sha256": "52edcde45b955ee32eadce334283325ca3fe788b2f7d9905e1fc915dfc578e6f"
+  },
+  "checks": [
+    {
+      "path": "artifacts/m2-01-demo-candidate-v2.sqlite",
+      "sha256": "457f2d86a2e97933131bdbccbad45da6d43d647a0ff8e6d5102a1845e0768591",
+      "decision_unchanged": true,
+      "meeting_unchanged": true,
+      "database_bytes_unchanged": true
+    },
+    {
+      "path": "artifacts/m2-01-demo-candidate-v2-facts.sqlite",
+      "sha256": "849095f6857044dcebce52bf62419b38347df47391a415e984daea8f3e7c393d",
+      "decision_unchanged": true,
+      "meeting_unchanged": true,
+      "database_bytes_unchanged": true
+    }
+  ],
+  "guard_calls": {
+    "aetp.governance.service.GovernanceService.handle": 0,
+    "aetp.governance.service.GovernanceService._followups": 0,
+    "aetp.meetings.process.ProcessLog.read": 0,
+    "aetp.runtime.document.DocumentRuntime.register": 0,
+    "aetp.runtime.service.ExecutionService.start_session": 0,
+    "aetp.runtime.service.ExecutionService.dispatch": 0,
+    "aetp.workspace.documents.DocumentWorkspace.query": 0,
+    "aetp.workspace.documents.DocumentWorkspace.write": 0,
+    "aetp.core.runtime.SimulatedRuntime.execute": 0,
+    "time.time_ns": 0,
+    "subprocess.Popen": 0
+  }
+}

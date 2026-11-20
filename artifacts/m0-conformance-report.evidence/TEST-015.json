@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-015",
+  "requirement": "无 Manager 的 Agent 可直接发言、回复、质疑与提案；独立审查不要求接管被审 Task，无职级前置",
+  "status": "not_applicable",
+  "reason": "M1: Message/dialogue and independent Review are absent; test-worker roles are not product Agent hierarchy.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

@@ -1,0 +1,1795 @@
+{
+  "work_item": "M2-02",
+  "recorded_at": "2026-09-12T22:43:41.922690+08:00",
+  "scope": "deterministic host channels and real fixed Windows document effects; no model calls",
+  "original_demo": {
+    "path": "artifacts/m2-01-demo-candidate-v2.json",
+    "sha256": "52edcde45b955ee32eadce334283325ca3fe788b2f7d9905e1fc915dfc578e6f"
+  },
+  "original_database_unchanged": {
+    "path": "artifacts/m2-01-demo-candidate-v2.sqlite",
+    "sha256": "457f2d86a2e97933131bdbccbad45da6d43d647a0ff8e6d5102a1845e0768591"
+  },
+  "database": {
+    "path": "artifacts/m2-02-demo-v1.sqlite",
+    "sha256": "41868807fdb06018e2e26af2a431b717c90a19043efb9947433cc6447fc03cdd"
+  },
+  "facts_only_database": {
+    "path": "artifacts/m2-02-demo-v1-facts.sqlite",
+    "sha256": "0aadecab006b44765faf70f28769550aada5446d03f5fa69332096f56e3b43ff"
+  },
+  "document": {
+    "path": "artifacts/m2-02-demo-v1.md",
+    "sha256": "d0fc1b780c31dc6f1ca4db69be720637eb3eabaf5f52386dfedb64a4451619c7"
+  },
+  "workspace_outputs": [
+    {
+      "path": "artifacts/m2-02-demo-v1-workspace/p-q2s6bfgu3waqhebegwbz2ulylikqf7kcimzvaabth3xpihoywb2q/b-iw4j3zqb2p6s4chnnfriywd7r3bllpspwud4ihtqz3jxoduyjmvq/jdfmkbtg7casoq2e6hdrkpu4mdzbssqyjtkubxg5xuzozjiwew5q.json",
+      "sha256": "0a747387dfa643c18da806a5f571ea4a4c50a0733327628be4c58447e2052c2d"
+    },
+    {
+      "path": "artifacts/m2-02-demo-v1-workspace/p-q2s6bfgu3waqhebegwbz2ulylikqf7kcimzvaabth3xpihoywb2q/b-gesb5zonoelvwtp3ruqeqdz4gppliyymqyrqt7vwmromnfjfia6a/pvvkae5rfgwvfnfhyj5oic3jtcb2apigisk5g6tyevc6v3vlj6sq.json",
+      "sha256": "56c14e5db88c22d8b8bafbfcb7086fb849291d6d9a2d42d71d05e14af578108b"
+    }
+  ],
+  "commands_sent": [
+    {
+      "command": {
+        "id": "governance-demo-1",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.governance.configure",
+        "target_id": "demo-project",
+        "payload": {
+          "policy": {
+            "version": "demo-governance-1",
+            "mode": "selective",
+            "max_ttl_ms": 3600000,
+            "max_renewals": 2,
+            "subjects": {
+              "human-owner": {
+                "type": "human",
+                "roles": [
+                  "human_owner"
+                ]
+              },
+              "agent-a": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              },
+              "agent-b": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              }
+            },
+            "rules": [
+              {
+                "action": "decision.activate",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "document.append",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "document.restore",
+                "risk_level": "low",
+                "approval": "auto"
+              },
+              {
+                "action": "document.write",
+                "risk_level": "low",
+                "approval": "delegated",
+                "delegate": "agent-b",
+                "revocable_within_ms": 100
+              }
+            ]
+          }
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-1",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-1",
+        "event_ids": [
+          "governance-demo-1:received",
+          "governance-demo-1:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-2",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "decision.review",
+        "target_id": "storage-proposal",
+        "payload": {
+          "feedback": "Reviewed atomic commits and the retained inspection objection."
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-2",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-2",
+        "event_ids": [
+          "governance-demo-2:received",
+          "governance-demo-2:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-3",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "decision.submit",
+        "target_id": "storage-proposal",
+        "payload": {},
+        "expected_revision": 1,
+        "idempotency_key": "governance-demo-3",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-3",
+        "event_ids": [
+          "governance-demo-3:received",
+          "governance-demo-3:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-4",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "approval.request",
+        "target_id": "storage-approval",
+        "payload": {
+          "target": {
+            "type": "decision",
+            "id": "storage-proposal",
+            "revision": 0,
+            "content_digest": "sha256:d20a56d9a415d4af35ff46a0bfe7cdf8c1b6c4c83e0d736943f3ac8710f4005e",
+            "revision_kind": "proposal"
+          },
+          "action": "decision.activate",
+          "arguments": {
+            "choice": "SQLite"
+          },
+          "ttl_ms": 1000
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-4",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-4",
+        "event_ids": [
+          "governance-demo-4:received",
+          "governance-demo-4:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-5",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "approval.grant",
+        "target_id": "storage-approval",
+        "payload": {
+          "reason": "Independent source and scope review"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-5",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-5",
+        "event_ids": [
+          "governance-demo-5:received",
+          "governance-demo-5:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-6",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "decision.approve",
+        "target_id": "storage-proposal",
+        "payload": {
+          "approval_id": "storage-approval",
+          "arguments": {
+            "choice": "SQLite"
+          }
+        },
+        "expected_revision": 2,
+        "idempotency_key": "governance-demo-6",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-6",
+        "event_ids": [
+          "governance-demo-6:received",
+          "governance-demo-6:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-7",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "decision.activate",
+        "target_id": "storage-proposal",
+        "payload": {
+          "approval_id": "storage-approval",
+          "arguments": {
+            "choice": "SQLite"
+          }
+        },
+        "expected_revision": 3,
+        "idempotency_key": "governance-demo-7",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-7",
+        "event_ids": [
+          "governance-demo-7:received",
+          "governance-demo-7:effect:1"
+        ],
+        "aggregate_revision": 4,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-8",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "project.execution.configure",
+        "target_id": "demo-project",
+        "payload": {},
+        "expected_revision": 1,
+        "idempotency_key": "governance-demo-8",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-8",
+        "event_ids": [
+          "governance-demo-8:received",
+          "governance-demo-8:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-9",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "task.create",
+        "target_id": "governance-guide",
+        "payload": {
+          "title": "Write a governance guide",
+          "acceptance_criteria": [
+            "Approval binding",
+            "Recovery"
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-9",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-9",
+        "event_ids": [
+          "governance-demo-9:received",
+          "governance-demo-9:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-10",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "task.claim",
+        "target_id": "governance-guide",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-10",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-10",
+        "event_ids": [
+          "governance-demo-10:received",
+          "governance-demo-10:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-11",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "execution.start",
+        "target_id": "governance-guide",
+        "payload": {
+          "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+          "lease_epoch": 1
+        },
+        "expected_revision": 1,
+        "idempotency_key": "governance-demo-11",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-11",
+        "event_ids": [
+          "governance-demo-11:received",
+          "governance-demo-11:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-12",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "approval.request",
+        "target_id": "document-approval",
+        "payload": {
+          "target": {
+            "type": "task",
+            "id": "governance-guide",
+            "revision": 2,
+            "content_digest": "sha256:403bca823fa0902294d617694cc66f5c27b1d7a07ded0c32ba72ff81fa81dd9f",
+            "revision_kind": "aggregate"
+          },
+          "action": "document.write",
+          "arguments": {
+            "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+            "lease_epoch": 1,
+            "session_id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903",
+            "document": {
+              "content": "# AETP governance example\n\nApproval binding: exact Task, actor, arguments, Policy and Session.\n\nRecovery: query prior effects before any new write.\n"
+            }
+          },
+          "ttl_ms": 1000
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-12",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-12",
+        "event_ids": [
+          "governance-demo-12:received",
+          "governance-demo-12:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-13",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "approval.grant",
+        "target_id": "document-approval",
+        "payload": {
+          "reason": "Peer reviewed the bounded document"
+        },
+        "expected_revision": 1,
+        "idempotency_key": "governance-demo-13",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-13",
+        "event_ids": [
+          "governance-demo-13:received",
+          "governance-demo-13:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-14",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "tool.request",
+        "target_id": "governance-guide",
+        "payload": {
+          "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+          "lease_epoch": 1,
+          "session_id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903",
+          "operation": "document.write",
+          "arguments": {
+            "content": "# AETP governance example\n\nApproval binding: exact Task, actor, arguments, Policy and Session.\n\nRecovery: query prior effects before any new write.\n"
+          },
+          "approval_id": "document-approval"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "governance-demo-14",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-14",
+        "event_ids": [
+          "governance-demo-14:received",
+          "governance-demo-14:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-15",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "checkpoint.create",
+        "target_id": "governance-guide",
+        "payload": {
+          "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+          "lease_epoch": 1,
+          "session_id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903",
+          "context_snapshot": "Preserve reviewed document; this Agent context remains untrusted.",
+          "remaining_work": [
+            "Recover into another Binding"
+          ]
+        },
+        "expected_revision": 2,
+        "idempotency_key": "governance-demo-15",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-15",
+        "event_ids": [
+          "governance-demo-15:received",
+          "governance-demo-15:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-16",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.pause",
+        "target_id": "demo-project",
+        "payload": {
+          "intervention_id": "demo-pause",
+          "reason": "Human requests a safe handoff",
+          "impact": "project"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "governance-demo-16",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-16",
+        "event_ids": [
+          "governance-demo-16:received",
+          "governance-demo-16:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-17",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.resume",
+        "target_id": "demo-project",
+        "payload": {
+          "intervention_id": "failed-resume",
+          "reason": "Restarted host checks recovery",
+          "impact": "project"
+        },
+        "expected_revision": 3,
+        "idempotency_key": "governance-demo-17",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "governance-demo-17",
+        "event_ids": [
+          "governance-demo-17:received",
+          "governance-demo-17:rejected"
+        ],
+        "aggregate_revision": 3,
+        "error_code": "RECOVERY_REQUIRED"
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-18",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "lease.revoke",
+        "target_id": "governance-guide",
+        "payload": {
+          "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+          "lease_epoch": 1,
+          "session_id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903",
+          "reason": "handoff"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "governance-demo-18",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-18",
+        "event_ids": [
+          "governance-demo-18:received",
+          "governance-demo-18:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-19",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "approval.revoke",
+        "target_id": "document-approval",
+        "payload": {
+          "reason": "Human vetoes future use; prior output remains",
+          "mode": "veto"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "governance-demo-19",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-19",
+        "event_ids": [
+          "governance-demo-19:received",
+          "governance-demo-19:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-20",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.resume",
+        "target_id": "demo-project",
+        "payload": {
+          "intervention_id": "demo-resume",
+          "reason": "Lost execution authority was revoked",
+          "impact": "project"
+        },
+        "expected_revision": 3,
+        "idempotency_key": "governance-demo-20",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-20",
+        "event_ids": [
+          "governance-demo-20:received",
+          "governance-demo-20:effect:1"
+        ],
+        "aggregate_revision": 4,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-21",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "task.requeue",
+        "target_id": "governance-guide",
+        "payload": {},
+        "expected_revision": 3,
+        "idempotency_key": "governance-demo-21",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-21",
+        "event_ids": [
+          "governance-demo-21:received",
+          "governance-demo-21:effect:1"
+        ],
+        "aggregate_revision": 4,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-22",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "task.claim",
+        "target_id": "governance-guide",
+        "payload": {},
+        "expected_revision": 4,
+        "idempotency_key": "governance-demo-22",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-22",
+        "event_ids": [
+          "governance-demo-22:received",
+          "governance-demo-22:effect:1"
+        ],
+        "aggregate_revision": 5,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-23",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "execution.start",
+        "target_id": "governance-guide",
+        "payload": {
+          "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+          "lease_epoch": 2
+        },
+        "expected_revision": 5,
+        "idempotency_key": "governance-demo-23",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-23",
+        "event_ids": [
+          "governance-demo-23:received",
+          "governance-demo-23:effect:1"
+        ],
+        "aggregate_revision": 6,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-24",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "approval.request",
+        "target_id": "restore-approval",
+        "payload": {
+          "target": {
+            "type": "task",
+            "id": "governance-guide",
+            "revision": 6,
+            "content_digest": "sha256:637d7c8344478d30817b5143fd416013b4d4859c47bc87a8aeba706b2167ddb1",
+            "revision_kind": "aggregate"
+          },
+          "action": "document.restore",
+          "arguments": {
+            "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+            "lease_epoch": 2,
+            "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b",
+            "document": {
+              "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+            }
+          },
+          "ttl_ms": 1000
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-24",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-24",
+        "event_ids": [
+          "governance-demo-24:received",
+          "governance-demo-24:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-25",
+        "project_id": "demo-project",
+        "actor_id": "agent-a",
+        "type": "approval.grant",
+        "target_id": "restore-approval",
+        "payload": {
+          "reason": "Independent review of source Action and Checkpoint context"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-25",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-25",
+        "event_ids": [
+          "governance-demo-25:received",
+          "governance-demo-25:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-26",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "tool.request",
+        "target_id": "governance-guide",
+        "payload": {
+          "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+          "lease_epoch": 2,
+          "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b",
+          "operation": "document.restore",
+          "arguments": {
+            "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+          },
+          "approval_id": "restore-approval"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "governance-demo-26",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-26",
+        "event_ids": [
+          "governance-demo-26:received",
+          "governance-demo-26:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "governance-demo-27",
+        "project_id": "demo-project",
+        "actor_id": "agent-b",
+        "type": "approval.request",
+        "target_id": "expiring-high-approval",
+        "payload": {
+          "target": {
+            "type": "task",
+            "id": "governance-guide",
+            "revision": 6,
+            "content_digest": "sha256:637d7c8344478d30817b5143fd416013b4d4859c47bc87a8aeba706b2167ddb1",
+            "revision_kind": "aggregate"
+          },
+          "action": "document.restore",
+          "arguments": {
+            "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+            "lease_epoch": 2,
+            "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b",
+            "document": {
+              "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+            }
+          },
+          "ttl_ms": 5,
+          "risk_level": "high"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "governance-demo-27",
+        "correlation_id": "governance-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "governance-demo-27",
+        "event_ids": [
+          "governance-demo-27:received",
+          "governance-demo-27:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    }
+  ],
+  "host_observations": [
+    {
+      "fresh_runtime": {
+        "barrier": "closed",
+        "missing_sessions": [
+          "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903"
+        ],
+        "unknown_actions": [],
+        "reconciled_actions": [],
+        "cancelled_actions": [],
+        "pending_commands": []
+      }
+    },
+    {
+      "expiry_tick": {
+        "expired_approval_ids": [
+          "expiring-high-approval"
+        ]
+      }
+    }
+  ],
+  "event_count": 100,
+  "command_count": 50,
+  "decision": {
+    "id": "storage-proposal",
+    "project_id": "demo-project",
+    "revision": 4,
+    "status": "active",
+    "title": "Storage proposal",
+    "choice": "SQLite",
+    "alternatives": [
+      "SQLite",
+      "JSON"
+    ],
+    "reasoning": "Prefer atomic commits while preserving the inspection concern.",
+    "risk_level": "low",
+    "proposed_by": "agent-b",
+    "origin_command_id": "demo-command-8",
+    "policy_version": "m2-local-discussion-v1",
+    "authority": "governed_decision_only",
+    "untrusted_input": true,
+    "proposal_metering": "outside_process_admission",
+    "source": {
+      "checkpoint": {
+        "analysis_authors": [
+          "agent-a",
+          "agent-b"
+        ],
+        "consensus_peak": 0.5,
+        "digest": "sha256:0d2cff8507216cb42ef4e99c3da0ceddb8c8ba2bedcd6dee9cc42551260b9ef3",
+        "evidence": [],
+        "messages": 4,
+        "tokens": 8
+      },
+      "id": "storage-meeting",
+      "kind": "meeting",
+      "metering_scope": "process_admission",
+      "participants": [
+        "agent-a",
+        "agent-b"
+      ],
+      "records": [
+        {
+          "author_id": "agent-a",
+          "category": "analysis",
+          "content": "SQLite gives atomic append and query.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "independent-a",
+          "observed_at_ms": 1000000,
+          "phase": "individual_analysis",
+          "position": "SQLite",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:independent-a",
+            "purpose": "process_admission",
+            "receipt_id": "41efd6d7203a411ab7b2ed00014f3978",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:08520a5c783a75b768aa66c971c4180df0dfd28cd3f0fb01dbccb2ef3d8b2ebb",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 0,
+          "semantic_digest": "sha256:08520a5c783a75b768aa66c971c4180df0dfd28cd3f0fb01dbccb2ef3d8b2ebb",
+          "untrusted_input": true
+        },
+        {
+          "author_id": "agent-b",
+          "category": "analysis",
+          "content": "Append-only JSON is easier to inspect.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "independent-b",
+          "observed_at_ms": 1000000,
+          "phase": "individual_analysis",
+          "position": "JSON",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:independent-b",
+            "purpose": "process_admission",
+            "receipt_id": "7599df4b5c6d4d7f9f44495148f0fcd9",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 0,
+          "semantic_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+          "untrusted_input": true
+        },
+        {
+          "author_id": "agent-a",
+          "category": "recommendation",
+          "content": "Use SQLite to commit the shared facts atomically.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "response-a",
+          "observed_at_ms": 1000000,
+          "phase": "debate",
+          "position": "SQLite",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:response-a",
+            "purpose": "process_admission",
+            "receipt_id": "40b08485ebf34f99845324437f79ba95",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:63b9e9bedc1fa14b2d1eaa57d5890ff56d2d31992d8bd63607a28832c72865ee",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 1,
+          "semantic_digest": "sha256:63b9e9bedc1fa14b2d1eaa57d5890ff56d2d31992d8bd63607a28832c72865ee",
+          "untrusted_input": true
+        },
+        {
+          "author_id": "agent-b",
+          "category": "disagreement",
+          "content": "Retain the concern that a SQLite file needs inspection tools.",
+          "context": "",
+          "conversation_id": "storage-meeting",
+          "conversation_type": "meeting",
+          "evidence": [],
+          "id": "dissent-b",
+          "observed_at_ms": 1000000,
+          "phase": "debate",
+          "position": "JSON",
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "fixture-call:dissent-b",
+            "purpose": "process_admission",
+            "receipt_id": "b987cbfb3daa4ceeba4115eeb35b2730",
+            "source_id": "fixture-local-admission-only",
+            "subject_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+            "tokens": 2,
+            "unit": "token"
+          },
+          "references": [],
+          "round": 1,
+          "semantic_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+          "untrusted_input": true
+        }
+      ],
+      "revision": 4,
+      "termination_reason": "token_budget",
+      "untrusted_input": true
+    },
+    "source_digest": "sha256:f301486de4e55ef5163d4f45d50aa452d5392503eaf9b95589a7a7de17e24887",
+    "supersedes": null,
+    "supporting_agents": [
+      "agent-a"
+    ],
+    "minority_opinions": [
+      {
+        "author_id": "agent-b",
+        "category": "analysis",
+        "content": "Append-only JSON is easier to inspect.",
+        "context": "",
+        "conversation_id": "storage-meeting",
+        "conversation_type": "meeting",
+        "evidence": [],
+        "id": "independent-b",
+        "observed_at_ms": 1000000,
+        "phase": "individual_analysis",
+        "position": "JSON",
+        "project_id": "demo-project",
+        "receipt": {
+          "call_id": "fixture-call:independent-b",
+          "purpose": "process_admission",
+          "receipt_id": "7599df4b5c6d4d7f9f44495148f0fcd9",
+          "source_id": "fixture-local-admission-only",
+          "subject_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+          "tokens": 2,
+          "unit": "token"
+        },
+        "references": [],
+        "round": 0,
+        "semantic_digest": "sha256:dd0e1f60c62e80702b5e199f306ff92f3379de744b2eaf32afdd85527d3e6a9b",
+        "untrusted_input": true
+      },
+      {
+        "author_id": "agent-b",
+        "category": "disagreement",
+        "content": "Retain the concern that a SQLite file needs inspection tools.",
+        "context": "",
+        "conversation_id": "storage-meeting",
+        "conversation_type": "meeting",
+        "evidence": [],
+        "id": "dissent-b",
+        "observed_at_ms": 1000000,
+        "phase": "debate",
+        "position": "JSON",
+        "project_id": "demo-project",
+        "receipt": {
+          "call_id": "fixture-call:dissent-b",
+          "purpose": "process_admission",
+          "receipt_id": "b987cbfb3daa4ceeba4115eeb35b2730",
+          "source_id": "fixture-local-admission-only",
+          "subject_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+          "tokens": 2,
+          "unit": "token"
+        },
+        "references": [],
+        "round": 1,
+        "semantic_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+        "untrusted_input": true
+      }
+    ],
+    "missing_participants": [],
+    "unexpressed_participants": [],
+    "concerns": [
+      {
+        "author_id": "agent-b",
+        "category": "disagreement",
+        "content": "Retain the concern that a SQLite file needs inspection tools.",
+        "context": "",
+        "conversation_id": "storage-meeting",
+        "conversation_type": "meeting",
+        "evidence": [],
+        "id": "dissent-b",
+        "observed_at_ms": 1000000,
+        "phase": "debate",
+        "position": "JSON",
+        "project_id": "demo-project",
+        "receipt": {
+          "call_id": "fixture-call:dissent-b",
+          "purpose": "process_admission",
+          "receipt_id": "b987cbfb3daa4ceeba4115eeb35b2730",
+          "source_id": "fixture-local-admission-only",
+          "subject_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+          "tokens": 2,
+          "unit": "token"
+        },
+        "references": [],
+        "round": 1,
+        "semantic_digest": "sha256:5c3074b17c247e64f31714c1992969f452034a8542554bd36e351dcdcf471892",
+        "untrusted_input": true
+      }
+    ],
+    "unresolved": [],
+    "consensus_level": 0.5,
+    "escalation": [
+      "independent_review",
+      "human_governance"
+    ],
+    "content_digest": "sha256:d20a56d9a415d4af35ff46a0bfe7cdf8c1b6c4c83e0d736943f3ac8710f4005e",
+    "observed_at_ms": 1000010,
+    "last_actor_id": "agent-b",
+    "proposal_revision": 0,
+    "governance_review": {
+      "reviewer_id": "agent-a",
+      "feedback": "Reviewed atomic commits and the retained inspection objection.",
+      "command_id": "governance-demo-2",
+      "proposal_digest": "sha256:d20a56d9a415d4af35ff46a0bfe7cdf8c1b6c4c83e0d736943f3ac8710f4005e",
+      "untrusted_input": true
+    },
+    "approval_id": "storage-approval",
+    "authorization_status": "current"
+  },
+  "task": {
+    "id": "governance-guide",
+    "project_id": "demo-project",
+    "revision": 7,
+    "status": "blocked",
+    "title": "Write a governance guide",
+    "owner_id": "agent-b",
+    "policy_version": "m1-document-candidate-v1",
+    "acceptance_criteria": [
+      "Approval binding",
+      "Recovery"
+    ],
+    "criteria_digest": "sha256:6807392f7198209da64997a38c6be26605cab473997f21a817e1623212818514",
+    "execution_policy_version": "m1-fixed-document-execution-v1",
+    "workspace_provider_id": "workspace-57a051cc4579b4936f62972d528359794fb054aa649646ff66e5f3769413fd50",
+    "lease_epoch": 2,
+    "current_binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+    "lease": {
+      "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+      "expires_at_governance_ms": 300010,
+      "lease_epoch": 2,
+      "owner_id": "agent-b",
+      "revoked": false
+    },
+    "bindings": {
+      "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303": {
+        "agent_id": "agent-a",
+        "id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+        "lease_epoch": 1,
+        "resume_checkpoint_id": null,
+        "runtime_id": "fixed-document-v1",
+        "session": {
+          "actor_id": "agent-a",
+          "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+          "expires_at_wall_ms": 1120010,
+          "id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903",
+          "lease_epoch": 1,
+          "project_id": "demo-project",
+          "task_id": "governance-guide"
+        },
+        "status": "revoked",
+        "workspace_provider_id": "workspace-57a051cc4579b4936f62972d528359794fb054aa649646ff66e5f3769413fd50"
+      },
+      "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc": {
+        "agent_id": "agent-b",
+        "id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+        "lease_epoch": 2,
+        "resume_checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260",
+        "runtime_id": "fixed-document-v1",
+        "session": {
+          "actor_id": "agent-b",
+          "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+          "expires_at_wall_ms": 1120070,
+          "id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b",
+          "lease_epoch": 2,
+          "project_id": "demo-project",
+          "task_id": "governance-guide"
+        },
+        "status": "running",
+        "workspace_provider_id": "workspace-57a051cc4579b4936f62972d528359794fb054aa649646ff66e5f3769413fd50"
+      }
+    },
+    "observed_at_ms": 1000075,
+    "blocked_from": "in_progress",
+    "blocked_reason": "approval_expired",
+    "governance_approval_id": "expiring-high-approval"
+  },
+  "approvals": {
+    "approval:storage-approval": {
+      "id": "storage-approval",
+      "project_id": "demo-project",
+      "revision": 1,
+      "status": "approved",
+      "validity": "current",
+      "target": {
+        "content_digest": "sha256:d20a56d9a415d4af35ff46a0bfe7cdf8c1b6c4c83e0d736943f3ac8710f4005e",
+        "id": "storage-proposal",
+        "revision": 0,
+        "revision_kind": "proposal",
+        "type": "decision"
+      },
+      "scope": {
+        "action": "decision.activate",
+        "arguments_digest": "sha256:2947117cb92ddaf93941620da6889531d2a2ea8ac858b94fc428b6696c925364"
+      },
+      "arguments": {
+        "choice": "SQLite"
+      },
+      "requested_arguments": {
+        "choice": "SQLite"
+      },
+      "policy_version": "demo-governance-1",
+      "policy_digest": "sha256:20ba919bcc3cf5847fa127d44155e4cf00168d0e8c0a1edeb15e8a262679ca2b",
+      "requested_by": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "executor": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "approver": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "approved_by": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "authority": {
+        "type": "agent",
+        "required_role": "agent_reviewer"
+      },
+      "routing": {
+        "risk_level": "medium",
+        "mode": "decision_based",
+        "required_role": "agent_reviewer",
+        "rule": {
+          "action": "decision.activate",
+          "approval": "auto",
+          "risk_level": "low"
+        }
+      },
+      "risk_level": "medium",
+      "declared_risk": "low",
+      "delegated_to": null,
+      "revocable_until": null,
+      "source": {
+        "receipt_id": null,
+        "source_id": null,
+        "command_digest": "2e051944f07bcf03f2cb8f95544d40206d50f4575e9ea2f78a5d97337533adac",
+        "actor_id": "agent-b",
+        "exposure": "unknown",
+        "sources": [],
+        "untrusted_input": true,
+        "target_source": {
+          "type": "decision",
+          "id": "storage-proposal",
+          "source_digest": "sha256:f301486de4e55ef5163d4f45d50aa452d5392503eaf9b95589a7a7de17e24887",
+          "untrusted_input": true
+        }
+      },
+      "ttl_ms": 1000,
+      "requested_at": 1000010,
+      "expires_at": 1001010,
+      "on_expire": "escalate",
+      "renew_limit": 2,
+      "renewal_count": 0,
+      "renewed_from": null,
+      "origin_command_id": "governance-demo-4",
+      "observed_at_ms": 1000010,
+      "last_actor_id": "agent-a",
+      "request_digest": "sha256:2a1c79bf56ed10da00edd893bb5edcbfeb4c837dbc5173ad644fb81f70bedc7a",
+      "decided_by": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "decision_reason": "Independent source and scope review"
+    },
+    "approval:document-approval": {
+      "id": "document-approval",
+      "project_id": "demo-project",
+      "revision": 4,
+      "status": "revoked",
+      "validity": "current",
+      "target": {
+        "content_digest": "sha256:403bca823fa0902294d617694cc66f5c27b1d7a07ded0c32ba72ff81fa81dd9f",
+        "id": "governance-guide",
+        "revision": 2,
+        "revision_kind": "aggregate",
+        "type": "task"
+      },
+      "scope": {
+        "action": "document.write",
+        "arguments_digest": "sha256:bb8dea83163d45cb143af50bd1e54ade7f41df56c7898bff8ebd0e82595fa8c4"
+      },
+      "arguments": {
+        "operation": "document.write",
+        "arguments": {
+          "content": "# AETP governance example\n\nApproval binding: exact Task, actor, arguments, Policy and Session.\n\nRecovery: query prior effects before any new write.\n"
+        },
+        "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+        "lease_epoch": 1,
+        "session_id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903"
+      },
+      "requested_arguments": {
+        "binding_id": "binding-e6a9add96b2274a22a62de87396d96b85bc4e3ff7a70dbdabc794e0f3c629303",
+        "document": {
+          "content": "# AETP governance example\n\nApproval binding: exact Task, actor, arguments, Policy and Session.\n\nRecovery: query prior effects before any new write.\n"
+        },
+        "lease_epoch": 1,
+        "session_id": "session-7a813931f41061b1b653478a0c1adda02396c9c73eee4cd1d9228fd13d84a903"
+      },
+      "policy_version": "demo-governance-1",
+      "policy_digest": "sha256:20ba919bcc3cf5847fa127d44155e4cf00168d0e8c0a1edeb15e8a262679ca2b",
+      "requested_by": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "executor": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "approver": {
+        "type": "human",
+        "id": "human-owner"
+      },
+      "approved_by": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "authority": {
+        "type": "agent",
+        "required_role": "agent_reviewer"
+      },
+      "routing": {
+        "risk_level": "medium",
+        "mode": "delegated",
+        "required_role": "agent_reviewer",
+        "rule": {
+          "action": "document.write",
+          "approval": "delegated",
+          "delegate": "agent-b",
+          "revocable_within_ms": 100,
+          "risk_level": "low"
+        }
+      },
+      "risk_level": "medium",
+      "declared_risk": "low",
+      "delegated_to": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "revocable_until": 1000110,
+      "source": {
+        "receipt_id": null,
+        "source_id": null,
+        "command_digest": "06ed88b10cfadc3fc7b72cf99e700f47b0a705e69df86b12b97a7c72a8bba1bb",
+        "actor_id": "agent-a",
+        "exposure": "unknown",
+        "sources": [],
+        "untrusted_input": true
+      },
+      "ttl_ms": 1000,
+      "requested_at": 1000010,
+      "expires_at": 1001010,
+      "on_expire": "escalate",
+      "renew_limit": 2,
+      "renewal_count": 0,
+      "renewed_from": null,
+      "origin_command_id": "governance-demo-12",
+      "observed_at_ms": 1000070,
+      "last_actor_id": "governance-system-86a5e094d4dd8103902435839d51785a1502fd4243335000333eeef41dd8b075",
+      "request_digest": "sha256:af002d5f121e4947d57e4a4d8501374d87f829c4ed867fb29f441bc971aa6148",
+      "decided_by": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "decision_reason": "Peer reviewed the bounded document",
+      "revocation": {
+        "by": {
+          "type": "human",
+          "id": "human-owner"
+        },
+        "reason": "Human vetoes future use; prior output remains",
+        "mode": "veto"
+      },
+      "impact": {
+        "reason": "approval_revoked",
+        "target": {
+          "content_digest": "sha256:403bca823fa0902294d617694cc66f5c27b1d7a07ded0c32ba72ff81fa81dd9f",
+          "id": "governance-guide",
+          "revision": 2,
+          "revision_kind": "aggregate",
+          "type": "task"
+        },
+        "actions": [
+          {
+            "id": "action-bbb2e8e698f10732f906e56cf1c246a09e6903e8a9a11db53c49c06a8c8c9a0b",
+            "status": "completed",
+            "result": {
+              "action_id": "action-bbb2e8e698f10732f906e56cf1c246a09e6903e8a9a11db53c49c06a8c8c9a0b",
+              "arguments_digest": "sha256:f32a1c38b43b23019c84f364c448c7a45e93c13a59aa2f2d3ee0a02eba4d71dc",
+              "content_digest": "sha256:d0fc1b780c31dc6f1ca4db69be720637eb3eabaf5f52386dfedb64a4451619c7",
+              "envelope_digest": "sha256:0a747387dfa643c18da806a5f571ea4a4c50a0733327628be4c58447e2052c2d",
+              "object_key": "p-q2s6bfgu3waqhebegwbz2ulylikqf7kcimzvaabth3xpihoywb2q/b-iw4j3zqb2p6s4chnnfriywd7r3bllpspwud4ihtqz3jxoduyjmvq/jdfmkbtg7casoq2e6hdrkpu4mdzbssqyjtkubxg5xuzozjiwew5q.json"
+            }
+          }
+        ],
+        "external_effects_undone": false,
+        "replanning_required": true,
+        "followup": "new_review_and_approval; reconcile_unknown_actions"
+      },
+      "escalation": {
+        "reason": "approval_revoked",
+        "notification_level": "urgent",
+        "route": {
+          "type": "human",
+          "required_role": "human_owner",
+          "id": "human-owner"
+        }
+      }
+    },
+    "approval:restore-approval": {
+      "id": "restore-approval",
+      "project_id": "demo-project",
+      "revision": 1,
+      "status": "approved",
+      "validity": "current",
+      "target": {
+        "content_digest": "sha256:637d7c8344478d30817b5143fd416013b4d4859c47bc87a8aeba706b2167ddb1",
+        "id": "governance-guide",
+        "revision": 6,
+        "revision_kind": "aggregate",
+        "type": "task"
+      },
+      "scope": {
+        "action": "document.restore",
+        "arguments_digest": "sha256:58cdd7d1e57ebfa742a342a8afa0ef1cc864f0f3cd87c4c4c247415f9acd730e"
+      },
+      "arguments": {
+        "operation": "document.restore",
+        "arguments": {
+          "content": "# AETP governance example\n\nApproval binding: exact Task, actor, arguments, Policy and Session.\n\nRecovery: query prior effects before any new write.\n",
+          "source_action_id": "action-bbb2e8e698f10732f906e56cf1c246a09e6903e8a9a11db53c49c06a8c8c9a0b",
+          "source_result_digest": "sha256:0a747387dfa643c18da806a5f571ea4a4c50a0733327628be4c58447e2052c2d",
+          "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+        },
+        "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+        "lease_epoch": 2,
+        "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b"
+      },
+      "requested_arguments": {
+        "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+        "document": {
+          "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+        },
+        "lease_epoch": 2,
+        "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b"
+      },
+      "policy_version": "demo-governance-1",
+      "policy_digest": "sha256:20ba919bcc3cf5847fa127d44155e4cf00168d0e8c0a1edeb15e8a262679ca2b",
+      "requested_by": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "executor": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "approver": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "approved_by": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "authority": {
+        "type": "agent",
+        "required_role": "agent_reviewer"
+      },
+      "routing": {
+        "risk_level": "medium",
+        "mode": "decision_based",
+        "required_role": "agent_reviewer",
+        "rule": {
+          "action": "document.restore",
+          "approval": "auto",
+          "risk_level": "low"
+        }
+      },
+      "risk_level": "medium",
+      "declared_risk": "low",
+      "delegated_to": null,
+      "revocable_until": null,
+      "source": {
+        "receipt_id": null,
+        "source_id": null,
+        "command_digest": "ec809774c7f21722d5b2c730de407912153858c904b7f7f008c74a2500d887c3",
+        "actor_id": "agent-b",
+        "exposure": "unknown",
+        "sources": [],
+        "untrusted_input": true,
+        "derived_sources": [
+          {
+            "type": "action",
+            "id": "action-bbb2e8e698f10732f906e56cf1c246a09e6903e8a9a11db53c49c06a8c8c9a0b",
+            "content_digest": "sha256:0a747387dfa643c18da806a5f571ea4a4c50a0733327628be4c58447e2052c2d",
+            "source_digest": "sha256:31a363ea6c4b49322f93acee457157b1cf6dae595459c66352d6dc1b494b298e",
+            "source": {
+              "actor_id": "agent-a",
+              "command_digest": "06ed88b10cfadc3fc7b72cf99e700f47b0a705e69df86b12b97a7c72a8bba1bb",
+              "exposure": "unknown",
+              "receipt_id": null,
+              "source_id": null,
+              "sources": [],
+              "untrusted_input": true
+            },
+            "untrusted_input": true
+          },
+          {
+            "type": "checkpoint",
+            "id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260",
+            "content_digest": "sha256:083e31cfe56530b79b94335f50ebac1e2374d2ea56984433389d15104b3d5e16",
+            "source_digest": "sha256:976a7edff0aad0901d30f159e9e5c9689b0bab77c50df0bad42ef66d9c14fa6b",
+            "source": {
+              "actor_id": "agent-a",
+              "authority": "context_only",
+              "command_id": "governance-demo-15",
+              "untrusted_input": true
+            },
+            "untrusted_input": true
+          }
+        ]
+      },
+      "ttl_ms": 1000,
+      "requested_at": 1000020,
+      "expires_at": 1001020,
+      "on_expire": "escalate",
+      "renew_limit": 2,
+      "renewal_count": 0,
+      "renewed_from": null,
+      "origin_command_id": "governance-demo-24",
+      "observed_at_ms": 1000070,
+      "last_actor_id": "agent-a",
+      "request_digest": "sha256:0954caaf1a37e353398f1f1909b51213faaf01d760dadbd2e65fdfe9b1e73545",
+      "decided_by": {
+        "type": "agent",
+        "id": "agent-a"
+      },
+      "decision_reason": "Independent review of source Action and Checkpoint context"
+    },
+    "approval:expiring-high-approval": {
+      "id": "expiring-high-approval",
+      "project_id": "demo-project",
+      "revision": 2,
+      "status": "expired",
+      "validity": "current",
+      "target": {
+        "content_digest": "sha256:637d7c8344478d30817b5143fd416013b4d4859c47bc87a8aeba706b2167ddb1",
+        "id": "governance-guide",
+        "revision": 6,
+        "revision_kind": "aggregate",
+        "type": "task"
+      },
+      "scope": {
+        "action": "document.restore",
+        "arguments_digest": "sha256:58cdd7d1e57ebfa742a342a8afa0ef1cc864f0f3cd87c4c4c247415f9acd730e"
+      },
+      "arguments": {
+        "operation": "document.restore",
+        "arguments": {
+          "content": "# AETP governance example\n\nApproval binding: exact Task, actor, arguments, Policy and Session.\n\nRecovery: query prior effects before any new write.\n",
+          "source_action_id": "action-bbb2e8e698f10732f906e56cf1c246a09e6903e8a9a11db53c49c06a8c8c9a0b",
+          "source_result_digest": "sha256:0a747387dfa643c18da806a5f571ea4a4c50a0733327628be4c58447e2052c2d",
+          "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+        },
+        "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+        "lease_epoch": 2,
+        "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b"
+      },
+      "requested_arguments": {
+        "binding_id": "binding-db3f9cf780ed18930ed270a34327141ed1e0fb736d6ee97207fee2a7d4f4e6fc",
+        "document": {
+          "checkpoint_id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260"
+        },
+        "lease_epoch": 2,
+        "session_id": "session-6451bc1044ba8bd088361724485548af79cfc3250621bf2e4960c356a772f28b"
+      },
+      "policy_version": "demo-governance-1",
+      "policy_digest": "sha256:20ba919bcc3cf5847fa127d44155e4cf00168d0e8c0a1edeb15e8a262679ca2b",
+      "requested_by": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "executor": {
+        "type": "agent",
+        "id": "agent-b"
+      },
+      "approver": null,
+      "approved_by": null,
+      "authority": {
+        "type": "human",
+        "required_role": "human_collaborator"
+      },
+      "routing": {
+        "risk_level": "high",
+        "mode": "human",
+        "required_role": "human_collaborator",
+        "rule": {
+          "action": "document.restore",
+          "approval": "auto",
+          "risk_level": "low"
+        }
+      },
+      "risk_level": "high",
+      "declared_risk": "high",
+      "delegated_to": null,
+      "revocable_until": null,
+      "source": {
+        "receipt_id": null,
+        "source_id": null,
+        "command_digest": "6c599280c61565c5f34c02d42c5eb540d7017cdb4d2c4b8726f1b25f6c3d9c08",
+        "actor_id": "agent-b",
+        "exposure": "unknown",
+        "sources": [],
+        "untrusted_input": true,
+        "derived_sources": [
+          {
+            "type": "action",
+            "id": "action-bbb2e8e698f10732f906e56cf1c246a09e6903e8a9a11db53c49c06a8c8c9a0b",
+            "content_digest": "sha256:0a747387dfa643c18da806a5f571ea4a4c50a0733327628be4c58447e2052c2d",
+            "source_digest": "sha256:31a363ea6c4b49322f93acee457157b1cf6dae595459c66352d6dc1b494b298e",
+            "source": {
+              "actor_id": "agent-a",
+              "command_digest": "06ed88b10cfadc3fc7b72cf99e700f47b0a705e69df86b12b97a7c72a8bba1bb",
+              "exposure": "unknown",
+              "receipt_id": null,
+              "source_id": null,
+              "sources": [],
+              "untrusted_input": true
+            },
+            "untrusted_input": true
+          },
+          {
+            "type": "checkpoint",
+            "id": "checkpoint-08ede94eb4e201dbe338e73536edcd68566c6a6fe6a5bc643d7c9758aa0af260",
+            "content_digest": "sha256:083e31cfe56530b79b94335f50ebac1e2374d2ea56984433389d15104b3d5e16",
+            "source_digest": "sha256:976a7edff0aad0901d30f159e9e5c9689b0bab77c50df0bad42ef66d9c14fa6b",
+            "source": {
+              "actor_id": "agent-a",
+              "authority": "context_only",
+              "command_id": "governance-demo-15",
+              "untrusted_input": true
+            },
+            "untrusted_input": true
+          }
+        ]
+      },
+      "ttl_ms": 5,
+      "requested_at": 1000020,
+      "expires_at": 1000025,
+      "on_expire": "escalate",
+      "renew_limit": 2,
+      "renewal_count": 0,
+      "renewed_from": null,
+      "origin_command_id": "governance-demo-27",
+      "observed_at_ms": 1000075,
+      "last_actor_id": "governance-system-86a5e094d4dd8103902435839d51785a1502fd4243335000333eeef41dd8b075",
+      "request_digest": "sha256:4aad1a026f973b991082640a5f6bd48e1f25ba5d89abbb4fd9893535ae2441d1",
+      "expiration_resolution": {
+        "kind": "escalate",
+        "reason": "deadline_reached"
+      },
+      "impact": {
+        "reason": "approval_expired",
+        "target": {
+          "content_digest": "sha256:637d7c8344478d30817b5143fd416013b4d4859c47bc87a8aeba706b2167ddb1",
+          "id": "governance-guide",
+          "revision": 6,
+          "revision_kind": "aggregate",
+          "type": "task"
+        },
+        "actions": [],
+        "external_effects_undone": false,
+        "replanning_required": true,
+        "followup": "new_review_and_approval; reconcile_unknown_actions"
+      },
+      "escalation": {
+        "reason": "deadline_reached",
+        "notification_level": "urgent",
+        "route": {
+          "type": "human",
+          "required_role": "human_owner",
+          "id": "human-owner"
+        }
+      }
+    }
+  },
+  "interventions": {
+    "intervention:demo-pause": {
+      "id": "demo-pause",
+      "project_id": "demo-project",
+      "revision": 0,
+      "observed_at_ms": 1000020,
+      "origin_command_id": "governance-713b4fa6e4c0e39c67dc37846cf84cc5fd71a8f1430ddc497ee639a38d27a4c3",
+      "actor": {
+        "type": "human",
+        "id": "human-owner"
+      },
+      "action": "pause",
+      "command": "governance-demo-16",
+      "target": {
+        "type": "project",
+        "id": "demo-project",
+        "revision": 2
+      },
+      "reason": "Human requests a safe handoff",
+      "impact": "project"
+    },
+    "intervention:demo-resume": {
+      "id": "demo-resume",
+      "project_id": "demo-project",
+      "revision": 0,
+      "observed_at_ms": 1000070,
+      "origin_command_id": "governance-f0c6af8814b2fbbddf2cec6a28b8dcc5ca4095ac58171ff3bb696846f32ccb2b",
+      "actor": {
+        "type": "human",
+        "id": "human-owner"
+      },
+      "action": "resume",
+      "command": "governance-demo-20",
+      "target": {
+        "type": "project",
+        "id": "demo-project",
+        "revision": 3
+      },
+      "reason": "Lost execution authority was revoked",
+      "impact": "project"
+    }
+  },
+  "state_digest": "944d08898d28bb1d5c5fdebb621d511cf3b3d1bb572b8138c874c6b3881ffc7e",
+  "replay": {
+    "equal": true,
+    "prefixes_checked": 100,
+    "prefixes_with_pending_commands": 56,
+    "databases_byte_unchanged": true,
+    "guard_calls": {
+      "aetp.governance.service.GovernanceService.handle": 0,
+      "aetp.governance.service.GovernanceService._followups": 0,
+      "aetp.governance.service.GovernanceService.tick": 0,
+      "aetp.governance.trust.InputAuthority.issue": 0,
+      "aetp.governance.trust.InputAuthority.verify": 0,
+      "aetp.meetings.process.ProcessLog.read": 0,
+      "aetp.runtime.document.DocumentRuntime.register": 0,
+      "aetp.runtime.service.ExecutionService.start_session": 0,
+      "aetp.runtime.service.ExecutionService.dispatch": 0,
+      "aetp.runtime.service.ExecutionService.recover": 0,
+      "aetp.workspace.documents.DocumentWorkspace.write": 0,
+      "aetp.workspace.documents.DocumentWorkspace.query": 0,
+      "aetp.core.runtime.SimulatedRuntime.execute": 0,
+      "time.time_ns": 0,
+      "subprocess.Popen": 0
+    }
+  },
+  "limits": {
+    "formal_verification": "INCONCLUSIVE",
+    "task_completed": false,
+    "full_m1_acceptance": "not_accepted",
+    "full_conformance_passed": 0,
+    "bootstrap_status": "not_started"
+  }
+}

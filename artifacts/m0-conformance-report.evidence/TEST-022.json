@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-022",
+  "requirement": "新代次生效后旧执行可留档但不能推进 Task / 合并；已在途效果仍对账",
+  "status": "not_applicable",
+  "reason": "M1+: no Lease epochs, late reports or in-flight external effects.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

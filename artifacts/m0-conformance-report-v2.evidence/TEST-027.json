@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-027",
+  "requirement": "输入来源标记跨 Agent 转述保留；来源未知按不可信处理，普通讨论不要求审批",
+  "status": "not_applicable",
+  "reason": "M2: cross-Agent input provenance and trust handling are absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

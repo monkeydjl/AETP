@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-007",
+  "requirement": "Untrusted Input 不得直接授权 Command",
+  "status": "not_applicable",
+  "reason": "M2: end-to-end untrusted-input authorization is absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

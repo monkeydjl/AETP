@@ -1,0 +1,37 @@
+{
+  "conformance_test": "TEST-028",
+  "title": "Two or more equal agents negotiate and deliver without a Manager",
+  "database": "artifacts/m3-test-028.sqlite",
+  "events_count": 26,
+  "steps_verified": [
+    {
+      "step": "bootstrap_equal_agents_registered",
+      "status": "passed"
+    },
+    {
+      "step": "governance_and_planning_configured",
+      "status": "passed"
+    },
+    {
+      "step": "human_intent_mission_activated",
+      "status": "passed"
+    },
+    {
+      "step": "peer_agents_negotiated_without_manager",
+      "status": "passed"
+    },
+    {
+      "step": "autonomous_team_and_blueprint_dag_created",
+      "status": "passed"
+    },
+    {
+      "step": "mission_acceptance_and_delivery_passed",
+      "status": "passed"
+    },
+    {
+      "step": "deterministic_event_replay_verified",
+      "status": "passed"
+    }
+  ],
+  "verdict": "PASSED"
+}

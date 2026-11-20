@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-013",
+  "requirement": "Agent 主动发起的协作与 Orchestrator 下发走同一条 Command 校验路径",
+  "status": "not_applicable",
+  "reason": "M1: Agent collaboration/router and scheduler paths are absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

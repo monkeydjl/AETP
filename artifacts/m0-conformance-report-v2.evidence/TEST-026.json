@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-026",
+  "requirement": "绕过代理执行高风险操作被真实边界阻止；未具备能力不得宣称完整兼容",
+  "status": "not_applicable",
+  "reason": "M1+: real execution and high-risk enforcement boundaries are absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

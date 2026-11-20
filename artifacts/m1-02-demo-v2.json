@@ -1,0 +1,2346 @@
+{
+  "work_item": "M1-02",
+  "created_at": "2026-09-12T03:18:41.029780+08:00",
+  "scope": "Real Windows document effects; two trusted actor fixtures, not autonomous model agents; whole-M1 acceptance remains outstanding",
+  "summary": {
+    "first_action_before_query": "unknown",
+    "first_action_after_query": "completed",
+    "first_action_dispatch_count": 1,
+    "checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+    "new_epoch": 2,
+    "new_owner": "successor",
+    "old_report_error": "STALE_EXECUTION",
+    "task_status": "in_progress",
+    "review": "approved",
+    "formal_verification": "INCONCLUSIVE",
+    "completion_error": "QUALITY_GATE_NOT_MET",
+    "replay_equal": true,
+    "pending_commands": []
+  },
+  "commands": [
+    {
+      "command": {
+        "id": "m1-02-demo-001",
+        "project_id": "demo",
+        "actor_id": "bootstrap",
+        "type": "project.create",
+        "target_id": null,
+        "payload": {
+          "status": "active"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-001",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-001",
+        "event_ids": [
+          "m1-02-demo-001:received",
+          "m1-02-demo-001:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-002",
+        "project_id": "demo",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "writer",
+        "payload": {
+          "model_id": "model-a-fixture"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-002",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-002",
+        "event_ids": [
+          "m1-02-demo-002:received",
+          "m1-02-demo-002:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-003",
+        "project_id": "demo",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "successor",
+        "payload": {
+          "model_id": "model-b-fixture"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-003",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-003",
+        "event_ids": [
+          "m1-02-demo-003:received",
+          "m1-02-demo-003:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-004",
+        "project_id": "demo",
+        "actor_id": "bootstrap",
+        "type": "project.execution.configure",
+        "target_id": "demo",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-004",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-004",
+        "event_ids": [
+          "m1-02-demo-004:received",
+          "m1-02-demo-004:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-005",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "task.create",
+        "target_id": "guide",
+        "payload": {
+          "title": "Document recovery guide",
+          "acceptance_criteria": [
+            "Overview",
+            "Failure case",
+            "Recovery"
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-005",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-005",
+        "event_ids": [
+          "m1-02-demo-005:received",
+          "m1-02-demo-005:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-006",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "task.claim",
+        "target_id": "guide",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-006",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-006",
+        "event_ids": [
+          "m1-02-demo-006:received",
+          "m1-02-demo-006:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-007",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "execution.start",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1
+        },
+        "expected_revision": 1,
+        "idempotency_key": "m1-02-demo-007",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-007",
+        "event_ids": [
+          "m1-02-demo-007:received",
+          "m1-02-demo-007:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-008",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "tool.request",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "operation": "document.write",
+          "arguments": {
+            "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n"
+          }
+        },
+        "expected_revision": 2,
+        "idempotency_key": "m1-02-demo-008",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-008",
+        "event_ids": [
+          "m1-02-demo-008:received",
+          "m1-02-demo-008:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-009",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "tool.request",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "operation": "document.write",
+          "arguments": {
+            "content": "blind retry with a fresh key"
+          }
+        },
+        "expected_revision": 2,
+        "idempotency_key": "m1-02-demo-009",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "m1-02-demo-009",
+        "event_ids": [
+          "m1-02-demo-009:received",
+          "m1-02-demo-009:rejected"
+        ],
+        "aggregate_revision": 2,
+        "error_code": "RECONCILIATION_REQUIRED"
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-010",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "checkpoint.create",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "context_snapshot": "The original response was lost; querying the exact Action confirmed its output.",
+          "remaining_work": [
+            "Add Recovery instructions from a new Agent"
+          ]
+        },
+        "expected_revision": 2,
+        "idempotency_key": "m1-02-demo-010",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-010",
+        "event_ids": [
+          "m1-02-demo-010:received",
+          "m1-02-demo-010:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-011",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "lease.revoke",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "reason": "handoff"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "m1-02-demo-011",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-011",
+        "event_ids": [
+          "m1-02-demo-011:received",
+          "m1-02-demo-011:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-012",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "task.requeue",
+        "target_id": "guide",
+        "payload": {},
+        "expected_revision": 3,
+        "idempotency_key": "m1-02-demo-012",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-012",
+        "event_ids": [
+          "m1-02-demo-012:received",
+          "m1-02-demo-012:effect:1"
+        ],
+        "aggregate_revision": 4,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-013",
+        "project_id": "demo",
+        "actor_id": "successor",
+        "type": "task.claim",
+        "target_id": "guide",
+        "payload": {},
+        "expected_revision": 4,
+        "idempotency_key": "m1-02-demo-013",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-013",
+        "event_ids": [
+          "m1-02-demo-013:received",
+          "m1-02-demo-013:effect:1"
+        ],
+        "aggregate_revision": 5,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-014",
+        "project_id": "demo",
+        "actor_id": "successor",
+        "type": "execution.start",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "lease_epoch": 2
+        },
+        "expected_revision": 5,
+        "idempotency_key": "m1-02-demo-014",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-014",
+        "event_ids": [
+          "m1-02-demo-014:received",
+          "m1-02-demo-014:effect:1"
+        ],
+        "aggregate_revision": 6,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-015",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "execution.report",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "summary": "late report from writer"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "m1-02-demo-015",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "m1-02-demo-015",
+        "event_ids": [
+          "m1-02-demo-015:received",
+          "m1-02-demo-015:rejected"
+        ],
+        "aggregate_revision": 6,
+        "error_code": "STALE_EXECUTION"
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-016",
+        "project_id": "demo",
+        "actor_id": "successor",
+        "type": "tool.request",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "lease_epoch": 2,
+          "session_id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+          "operation": "document.restore",
+          "arguments": {
+            "checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3"
+          }
+        },
+        "expected_revision": 6,
+        "idempotency_key": "m1-02-demo-016",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-016",
+        "event_ids": [
+          "m1-02-demo-016:received",
+          "m1-02-demo-016:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-017",
+        "project_id": "demo",
+        "actor_id": "successor",
+        "type": "tool.request",
+        "target_id": "guide",
+        "payload": {
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "lease_epoch": 2,
+          "session_id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+          "operation": "document.append",
+          "arguments": {
+            "source_action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+            "text": "\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n"
+          }
+        },
+        "expected_revision": 6,
+        "idempotency_key": "m1-02-demo-017",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-017",
+        "event_ids": [
+          "m1-02-demo-017:received",
+          "m1-02-demo-017:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-018",
+        "project_id": "demo",
+        "actor_id": "successor",
+        "type": "artifact.submit",
+        "target_id": "guide-candidate",
+        "payload": {
+          "task_id": "guide",
+          "type": "document",
+          "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-018",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-018",
+        "event_ids": [
+          "m1-02-demo-018:received",
+          "m1-02-demo-018:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-019",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "review.request",
+        "target_id": "guide-review",
+        "payload": {
+          "artifact_id": "guide-candidate",
+          "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+          "reviewer_id": "writer"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-019",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-019",
+        "event_ids": [
+          "m1-02-demo-019:received",
+          "m1-02-demo-019:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-020",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "review.submit",
+        "target_id": "guide-review",
+        "payload": {
+          "status": "approved",
+          "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+          "feedback": "Reviewed the fixed candidate as a peer without taking its Lease."
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-020",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-020",
+        "event_ids": [
+          "m1-02-demo-020:received",
+          "m1-02-demo-020:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-021",
+        "project_id": "demo",
+        "actor_id": "writer",
+        "type": "verification.run",
+        "target_id": "guide-precheck",
+        "payload": {
+          "artifact_id": "guide-candidate",
+          "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "m1-02-demo-021",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "m1-02-demo-021",
+        "event_ids": [
+          "m1-02-demo-021:received",
+          "m1-02-demo-021:effect:1",
+          "m1-02-demo-021:effect:2"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "m1-02-demo-022",
+        "project_id": "demo",
+        "actor_id": "successor",
+        "type": "task.complete",
+        "target_id": "guide",
+        "payload": {
+          "artifact_id": "guide-candidate",
+          "review_id": "guide-review",
+          "verification_id": "guide-precheck"
+        },
+        "expected_revision": 6,
+        "idempotency_key": "m1-02-demo-022",
+        "correlation_id": "m1-02-document-handoff"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "m1-02-demo-022",
+        "event_ids": [
+          "m1-02-demo-022:received",
+          "m1-02-demo-022:rejected"
+        ],
+        "aggregate_revision": 6,
+        "error_code": "QUALITY_GATE_NOT_MET"
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "m1-02-demo-001:received",
+      "project_id": "demo",
+      "sequence": 1,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "demo",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-001",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "project.create",
+        "request_digest": "ad485e515d53cc574f603b0b59f3dc75a0490bb79392dbc6f10a3fea4b9226d2"
+      }
+    },
+    {
+      "id": "m1-02-demo-001:effect",
+      "project_id": "demo",
+      "sequence": 2,
+      "type": "project.created",
+      "aggregate_type": "project",
+      "aggregate_id": "demo",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-001",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "status": "active"
+      }
+    },
+    {
+      "id": "m1-02-demo-002:received",
+      "project_id": "demo",
+      "sequence": 3,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "writer",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-002",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "a64b19377cb435343712e1ae1f270b7b0492e0e68f19c4ab2953e6609fdc313d"
+      }
+    },
+    {
+      "id": "m1-02-demo-002:effect",
+      "project_id": "demo",
+      "sequence": 4,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "writer",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-002",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "model_id": "model-a-fixture",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m1-02-demo-003:received",
+      "project_id": "demo",
+      "sequence": 5,
+      "type": "command.received",
+      "aggregate_type": "agent",
+      "aggregate_id": "successor",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-003",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "agent.register",
+        "request_digest": "2c3fc355f7e53a826c69276a7fd08d5a6758bbd2d63c3055be8ebca6689ea863"
+      }
+    },
+    {
+      "id": "m1-02-demo-003:effect",
+      "project_id": "demo",
+      "sequence": 6,
+      "type": "agent.created",
+      "aggregate_type": "agent",
+      "aggregate_id": "successor",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-003",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "model_id": "model-b-fixture",
+        "status": "available"
+      }
+    },
+    {
+      "id": "m1-02-demo-004:received",
+      "project_id": "demo",
+      "sequence": 7,
+      "type": "command.received",
+      "aggregate_type": "project",
+      "aggregate_id": "demo",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-004",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "project.execution.configure",
+        "request_digest": "2a160f796c6ed4d407d655086f3384c270f06cfa285726d95878c882844f7cde"
+      }
+    },
+    {
+      "id": "m1-02-demo-004:effect:1",
+      "project_id": "demo",
+      "sequence": 8,
+      "type": "project.execution_configured",
+      "aggregate_type": "project",
+      "aggregate_id": "demo",
+      "aggregate_revision": 1,
+      "causation_id": "m1-02-demo-004",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "bootstrap",
+        "observed_at_ms": 1789154322072,
+        "policy_version": "m1-fixed-document-execution-v1",
+        "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+      }
+    },
+    {
+      "id": "m1-02-demo-005:received",
+      "project_id": "demo",
+      "sequence": 9,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-005",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "task.create",
+        "request_digest": "b7c33e9ee93bfda41c6dd40bccebae180943f24c41eeb7f9747c58ab635ebe90"
+      }
+    },
+    {
+      "id": "m1-02-demo-005:effect",
+      "project_id": "demo",
+      "sequence": 10,
+      "type": "task.created",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-005",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "acceptance_criteria": [
+          "Overview",
+          "Failure case",
+          "Recovery"
+        ],
+        "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+        "execution_policy_version": "m1-fixed-document-execution-v1",
+        "policy_version": "m1-document-candidate-v1",
+        "status": "pending",
+        "title": "Document recovery guide",
+        "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+      }
+    },
+    {
+      "id": "m1-02-demo-006:received",
+      "project_id": "demo",
+      "sequence": 11,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-006",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "task.claim",
+        "request_digest": "d8d7ba81b6b75e4c97d312e47cf0e45762fe97199b57836825acae8375e587b7"
+      }
+    },
+    {
+      "id": "m1-02-demo-006:effect:1",
+      "project_id": "demo",
+      "sequence": 12,
+      "type": "task.claimed",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-02-demo-006",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "binding": {
+          "agent_id": "writer",
+          "id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "resume_checkpoint_id": null,
+          "runtime_id": "fixed-document-v1",
+          "session": null,
+          "status": "assigned",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        },
+        "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+        "lease": {
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "expires_at_governance_ms": 300293,
+          "lease_epoch": 1,
+          "owner_id": "writer",
+          "revoked": false
+        },
+        "lease_epoch": 1,
+        "observed_at_ms": 1789154322365
+      }
+    },
+    {
+      "id": "m1-02-demo-007:received",
+      "project_id": "demo",
+      "sequence": 13,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 1,
+      "causation_id": "m1-02-demo-007",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "execution.start",
+        "request_digest": "c4459110e9948e95966c14169f47cdbf470eb539746c226498158c4d8a4c3548"
+      }
+    },
+    {
+      "id": "m1-02-demo-007:effect:1",
+      "project_id": "demo",
+      "sequence": 14,
+      "type": "task.started",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 2,
+      "causation_id": "m1-02-demo-007",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+        "lease_epoch": 1,
+        "observed_at_ms": 1789154322495,
+        "session": {
+          "actor_id": "writer",
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "expires_at_wall_ms": 1789154442495,
+          "id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "lease_epoch": 1,
+          "project_id": "demo",
+          "task_id": "guide"
+        }
+      }
+    },
+    {
+      "id": "m1-02-demo-008:received",
+      "project_id": "demo",
+      "sequence": 15,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 2,
+      "causation_id": "m1-02-demo-008",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.request",
+        "request_digest": "2a4e64a9cf6be0c6d0768c8c3a6740e40062aaea07dcb83881e6f0b35b590d60"
+      }
+    },
+    {
+      "id": "m1-02-demo-008:effect:1",
+      "project_id": "demo",
+      "sequence": 16,
+      "type": "tool.requested",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-008",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "action": {
+          "actor_id": "writer",
+          "arguments": {
+            "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n"
+          },
+          "arguments_digest": "sha256:8b9a4bd8b0d6fc20021e2f02a4d6ce425946e0f91557082270d4db63c1e7dc78",
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "correlation_id": "m1-02-document-handoff",
+          "id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+          "lease_epoch": 1,
+          "operation": "document.write",
+          "policy_version": "m1-fixed-document-execution-v1",
+          "project_id": "demo",
+          "request_command_id": "m1-02-demo-008",
+          "requested_arguments": {
+            "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n"
+          },
+          "requested_task_revision": 2,
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "task_id": "guide",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        },
+        "actor_id": "writer",
+        "observed_at_ms": 1789154322615
+      }
+    },
+    {
+      "id": "broker-68bc7d4f73c36ba3deff29cd59a5addf67bfc2f009245fb7e6c2ecfe1070e8c7:received",
+      "project_id": "demo",
+      "sequence": 17,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 0,
+      "causation_id": "broker-68bc7d4f73c36ba3deff29cd59a5addf67bfc2f009245fb7e6c2ecfe1070e8c7",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.dispatch",
+        "request_digest": "4261b379ca5181a33663194d6e8da55e7ba323370446a418849875d496045c36"
+      }
+    },
+    {
+      "id": "broker-68bc7d4f73c36ba3deff29cd59a5addf67bfc2f009245fb7e6c2ecfe1070e8c7:effect:1",
+      "project_id": "demo",
+      "sequence": 18,
+      "type": "tool.invoked",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 1,
+      "causation_id": "broker-68bc7d4f73c36ba3deff29cd59a5addf67bfc2f009245fb7e6c2ecfe1070e8c7",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "observed_at_ms": 1789154322781
+      }
+    },
+    {
+      "id": "broker-7f46e36d69536eb16b26de189b95cac6762749ad8545ec325222e2154a0215c3:received",
+      "project_id": "demo",
+      "sequence": 19,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 1,
+      "causation_id": "broker-7f46e36d69536eb16b26de189b95cac6762749ad8545ec325222e2154a0215c3",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.report",
+        "request_digest": "fa73d4d4963103fa65de76199f96ef5ac52948e65a1e46b159d8b575ae1a2cd5"
+      }
+    },
+    {
+      "id": "broker-7f46e36d69536eb16b26de189b95cac6762749ad8545ec325222e2154a0215c3:effect:1",
+      "project_id": "demo",
+      "sequence": 20,
+      "type": "tool.outcome_unknown",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 2,
+      "causation_id": "broker-7f46e36d69536eb16b26de189b95cac6762749ad8545ec325222e2154a0215c3",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "observed_at_ms": 1789154322978,
+        "queried": false,
+        "reason": "PROVIDER_OUTCOME_UNKNOWN"
+      }
+    },
+    {
+      "id": "m1-02-demo-009:received",
+      "project_id": "demo",
+      "sequence": 21,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 2,
+      "causation_id": "m1-02-demo-009",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.request",
+        "request_digest": "a01acfcb46e8d8670bbd6f0bddec04e0b2262b47d00d082e9f91049c0d1b2634"
+      }
+    },
+    {
+      "id": "m1-02-demo-009:rejected",
+      "project_id": "demo",
+      "sequence": 22,
+      "type": "command.rejected",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 2,
+      "causation_id": "m1-02-demo-009",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "error": {
+          "code": "RECONCILIATION_REQUIRED",
+          "context": {
+            "command_id": "m1-02-demo-009",
+            "current_revision": 2,
+            "expected_revision": 2,
+            "target_id": "guide"
+          },
+          "message": "Command rejected: RECONCILIATION_REQUIRED",
+          "retryable": false,
+          "severity": "medium"
+        }
+      }
+    },
+    {
+      "id": "broker-f4d4b036a81152048e4e143f69d29c19080c58e902b6178651b34a91ad007511:received",
+      "project_id": "demo",
+      "sequence": 23,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 2,
+      "causation_id": "broker-f4d4b036a81152048e4e143f69d29c19080c58e902b6178651b34a91ad007511",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.reconcile",
+        "request_digest": "9f240c3d504d8de493d49cd40c3ecc48e5ea6730c7f725141e3162178a467299"
+      }
+    },
+    {
+      "id": "broker-f4d4b036a81152048e4e143f69d29c19080c58e902b6178651b34a91ad007511:effect:1",
+      "project_id": "demo",
+      "sequence": 24,
+      "type": "tool.reconciled",
+      "aggregate_type": "action",
+      "aggregate_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "aggregate_revision": 3,
+      "causation_id": "broker-f4d4b036a81152048e4e143f69d29c19080c58e902b6178651b34a91ad007511",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "observed_at_ms": 1789154323266,
+        "queried": true,
+        "result": {
+          "action_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+          "arguments_digest": "sha256:8b9a4bd8b0d6fc20021e2f02a4d6ce425946e0f91557082270d4db63c1e7dc78",
+          "content_digest": "sha256:44cf3dc79d1858de8f0505e6e63225c814432772920865ddddb10e4b4ab09bd3",
+          "envelope_digest": "sha256:3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b",
+          "object_key": "p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-extgg2f6gtohtkxnzt62te3bwk5vjs3lzxwcfrbkvs543wzo2mha/oaj5opotfeevh2w3olnlkdgylzs3kwhqxqniwt7bj7htm6jxmi3q.json"
+        }
+      }
+    },
+    {
+      "id": "m1-02-demo-010:received",
+      "project_id": "demo",
+      "sequence": 25,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 2,
+      "causation_id": "m1-02-demo-010",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "checkpoint.create",
+        "request_digest": "f75bdbd2257618ae914e64d0d95f0707f4e45a84686df45a2fdf923b8f929680"
+      }
+    },
+    {
+      "id": "m1-02-demo-010:effect:1",
+      "project_id": "demo",
+      "sequence": 26,
+      "type": "checkpoint.created",
+      "aggregate_type": "checkpoint",
+      "aggregate_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-010",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "checkpoint": {
+          "actor_id": "writer",
+          "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+          "lease_epoch": 1,
+          "policy_version": "m1-fixed-document-execution-v1",
+          "project_id": "demo",
+          "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+          "snapshot": {
+            "agent": {
+              "id": "writer",
+              "model_id": "model-a-fixture",
+              "project_id": "demo",
+              "revision": 0,
+              "status": "available"
+            },
+            "artifacts": [],
+            "context_snapshot": {
+              "source": {
+                "actor_id": "writer",
+                "authority": "context_only",
+                "command_id": "m1-02-demo-010",
+                "untrusted_input": true
+              },
+              "text": "The original response was lost; querying the exact Action confirmed its output."
+            },
+            "decisions": {
+              "reason": "M1 has no Decision implementation",
+              "status": "not_applicable"
+            },
+            "document_actions": [
+              {
+                "action_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+                "content_digest": "sha256:44cf3dc79d1858de8f0505e6e63225c814432772920865ddddb10e4b4ab09bd3",
+                "result_digest": "sha256:3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b"
+              }
+            ],
+            "git": {
+              "reason": "fixed document Runtime has no Git working tree",
+              "status": "not_applicable"
+            },
+            "remaining_work": [
+              "Add Recovery instructions from a new Agent"
+            ],
+            "task": {
+              "acceptance_criteria": [
+                "Overview",
+                "Failure case",
+                "Recovery"
+              ],
+              "bindings": {
+                "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644": {
+                  "agent_id": "writer",
+                  "id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+                  "lease_epoch": 1,
+                  "resume_checkpoint_id": null,
+                  "runtime_id": "fixed-document-v1",
+                  "session": {
+                    "actor_id": "writer",
+                    "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+                    "expires_at_wall_ms": 1789154442495,
+                    "id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+                    "lease_epoch": 1,
+                    "project_id": "demo",
+                    "task_id": "guide"
+                  },
+                  "status": "running",
+                  "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+                }
+              },
+              "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+              "current_binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+              "execution_policy_version": "m1-fixed-document-execution-v1",
+              "id": "guide",
+              "lease": {
+                "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+                "expires_at_governance_ms": 300293,
+                "lease_epoch": 1,
+                "owner_id": "writer",
+                "revoked": false
+              },
+              "lease_epoch": 1,
+              "observed_at_ms": 1789154322495,
+              "owner_id": "writer",
+              "policy_version": "m1-document-candidate-v1",
+              "project_id": "demo",
+              "revision": 2,
+              "status": "in_progress",
+              "title": "Document recovery guide",
+              "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+            }
+          },
+          "snapshot_digest": "sha256:9512aff5369fcd81c6d7d6aa325f36ee92c5b59b701a751fb947c3ea758a20b0",
+          "task_id": "guide"
+        },
+        "observed_at_ms": 1789154323409
+      }
+    },
+    {
+      "id": "m1-02-demo-011:received",
+      "project_id": "demo",
+      "sequence": 27,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 2,
+      "causation_id": "m1-02-demo-011",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "lease.revoke",
+        "request_digest": "f3b81782b8845d45e9809d8afd7d48731bf48f8a9d3ca1fb5c463746ffd22344"
+      }
+    },
+    {
+      "id": "m1-02-demo-011:effect:1",
+      "project_id": "demo",
+      "sequence": 28,
+      "type": "lease.revoked",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 3,
+      "causation_id": "m1-02-demo-011",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+        "lease_epoch": 1,
+        "observed_at_ms": 1789154323565,
+        "reason": "handoff"
+      }
+    },
+    {
+      "id": "m1-02-demo-012:received",
+      "project_id": "demo",
+      "sequence": 29,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 3,
+      "causation_id": "m1-02-demo-012",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "task.requeue",
+        "request_digest": "70f56ed122958e18e2022ce0652b51480a7c2e3c9d48485e581ee737aa36c05a"
+      }
+    },
+    {
+      "id": "m1-02-demo-012:effect:1",
+      "project_id": "demo",
+      "sequence": 30,
+      "type": "task.requeued",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 4,
+      "causation_id": "m1-02-demo-012",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "writer",
+        "observed_at_ms": 1789154323726,
+        "reason": "execution_requeue"
+      }
+    },
+    {
+      "id": "m1-02-demo-013:received",
+      "project_id": "demo",
+      "sequence": 31,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 4,
+      "causation_id": "m1-02-demo-013",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "task.claim",
+        "request_digest": "de87817d4879556c6e9ed3159d0bafb759327346e40c7ed44d264b7bed5d8db7"
+      }
+    },
+    {
+      "id": "m1-02-demo-013:effect:1",
+      "project_id": "demo",
+      "sequence": 32,
+      "type": "task.claimed",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 5,
+      "causation_id": "m1-02-demo-013",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "successor",
+        "binding": {
+          "agent_id": "successor",
+          "id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "lease_epoch": 2,
+          "resume_checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+          "runtime_id": "fixed-document-v1",
+          "session": null,
+          "status": "assigned",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        },
+        "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+        "lease": {
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "expires_at_governance_ms": 301816,
+          "lease_epoch": 2,
+          "owner_id": "successor",
+          "revoked": false
+        },
+        "lease_epoch": 2,
+        "observed_at_ms": 1789154323888
+      }
+    },
+    {
+      "id": "m1-02-demo-014:received",
+      "project_id": "demo",
+      "sequence": 33,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 5,
+      "causation_id": "m1-02-demo-014",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "execution.start",
+        "request_digest": "7b62387f3b0a2c1b03a377ed6dbec106bc92eb11afb243699414cecbee8ea2d8"
+      }
+    },
+    {
+      "id": "m1-02-demo-014:effect:1",
+      "project_id": "demo",
+      "sequence": 34,
+      "type": "task.started",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-014",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "successor",
+        "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+        "lease_epoch": 2,
+        "observed_at_ms": 1789154324063,
+        "session": {
+          "actor_id": "successor",
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "expires_at_wall_ms": 1789154444063,
+          "id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+          "lease_epoch": 2,
+          "project_id": "demo",
+          "task_id": "guide"
+        }
+      }
+    },
+    {
+      "id": "m1-02-demo-015:received",
+      "project_id": "demo",
+      "sequence": 35,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-015",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "execution.report",
+        "request_digest": "9488d4b62df63eb34d0f43d733b6be6394cf3e09fc39b730f4a1529ab7e2c4bf"
+      }
+    },
+    {
+      "id": "m1-02-demo-015:rejected",
+      "project_id": "demo",
+      "sequence": 36,
+      "type": "command.rejected",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-015",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "error": {
+          "code": "STALE_EXECUTION",
+          "context": {
+            "command_id": "m1-02-demo-015",
+            "current_revision": 6,
+            "expected_revision": 6,
+            "target_id": "guide"
+          },
+          "message": "Command rejected: STALE_EXECUTION",
+          "retryable": false,
+          "severity": "medium"
+        }
+      }
+    },
+    {
+      "id": "m1-02-demo-016:received",
+      "project_id": "demo",
+      "sequence": 37,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-016",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.request",
+        "request_digest": "c3757b1d93e40b396a5db3c7587dcf3311e86629587f6b48e981ccf2360dbe4f"
+      }
+    },
+    {
+      "id": "m1-02-demo-016:effect:1",
+      "project_id": "demo",
+      "sequence": 38,
+      "type": "tool.requested",
+      "aggregate_type": "action",
+      "aggregate_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-016",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "action": {
+          "actor_id": "successor",
+          "arguments": {
+            "checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+            "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n",
+            "source_action_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+            "source_result_digest": "sha256:3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b"
+          },
+          "arguments_digest": "sha256:dde258d73c69aa7a8cfae3b19cf9606dbf8b511f2523bc820e7bafdabd4f5bd7",
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "correlation_id": "m1-02-document-handoff",
+          "id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+          "lease_epoch": 2,
+          "operation": "document.restore",
+          "policy_version": "m1-fixed-document-execution-v1",
+          "project_id": "demo",
+          "request_command_id": "m1-02-demo-016",
+          "requested_arguments": {
+            "checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3"
+          },
+          "requested_task_revision": 6,
+          "session_id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+          "task_id": "guide",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        },
+        "actor_id": "successor",
+        "observed_at_ms": 1789154324384
+      }
+    },
+    {
+      "id": "broker-adb2f463ecf4885555f706f0d1f6d8a57b3f1079b817387b1d9aba01d8cf1b68:received",
+      "project_id": "demo",
+      "sequence": 39,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+      "aggregate_revision": 0,
+      "causation_id": "broker-adb2f463ecf4885555f706f0d1f6d8a57b3f1079b817387b1d9aba01d8cf1b68",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.dispatch",
+        "request_digest": "a015b535a0a57d87c40facfa972ecc648793dd3e1b13107beec66b1911c2913a"
+      }
+    },
+    {
+      "id": "broker-adb2f463ecf4885555f706f0d1f6d8a57b3f1079b817387b1d9aba01d8cf1b68:effect:1",
+      "project_id": "demo",
+      "sequence": 40,
+      "type": "tool.invoked",
+      "aggregate_type": "action",
+      "aggregate_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+      "aggregate_revision": 1,
+      "causation_id": "broker-adb2f463ecf4885555f706f0d1f6d8a57b3f1079b817387b1d9aba01d8cf1b68",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "successor",
+        "observed_at_ms": 1789154324547
+      }
+    },
+    {
+      "id": "broker-b4e828ec5eb14325506fa1a0fa089853ad3b67d1b40b0c230e258226131fdce2:received",
+      "project_id": "demo",
+      "sequence": 41,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+      "aggregate_revision": 1,
+      "causation_id": "broker-b4e828ec5eb14325506fa1a0fa089853ad3b67d1b40b0c230e258226131fdce2",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.report",
+        "request_digest": "250692f9271dec02901005e10b45717d73a7be1deb1047e7132e588a92571a8f"
+      }
+    },
+    {
+      "id": "broker-b4e828ec5eb14325506fa1a0fa089853ad3b67d1b40b0c230e258226131fdce2:effect:1",
+      "project_id": "demo",
+      "sequence": 42,
+      "type": "tool.completed",
+      "aggregate_type": "action",
+      "aggregate_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+      "aggregate_revision": 2,
+      "causation_id": "broker-b4e828ec5eb14325506fa1a0fa089853ad3b67d1b40b0c230e258226131fdce2",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "successor",
+        "observed_at_ms": 1789154324764,
+        "queried": false,
+        "result": {
+          "action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+          "arguments_digest": "sha256:dde258d73c69aa7a8cfae3b19cf9606dbf8b511f2523bc820e7bafdabd4f5bd7",
+          "content_digest": "sha256:44cf3dc79d1858de8f0505e6e63225c814432772920865ddddb10e4b4ab09bd3",
+          "envelope_digest": "sha256:36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c",
+          "object_key": "p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/7n3zniopwuf7xdghpndxrqsrn5ldcv7twyynsxs7byw34videbaq.json"
+        }
+      }
+    },
+    {
+      "id": "m1-02-demo-017:received",
+      "project_id": "demo",
+      "sequence": 43,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-017",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.request",
+        "request_digest": "1e7c7a1f1354a67d3f7217abdc7e1f1782885a6cc07886ffb79fdd08351d83b9"
+      }
+    },
+    {
+      "id": "m1-02-demo-017:effect:1",
+      "project_id": "demo",
+      "sequence": 44,
+      "type": "tool.requested",
+      "aggregate_type": "action",
+      "aggregate_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-017",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "action": {
+          "actor_id": "successor",
+          "arguments": {
+            "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n",
+            "source_action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+            "source_result_digest": "sha256:36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c"
+          },
+          "arguments_digest": "sha256:90053c56d983eed0de816968a54acfb967be760f0c37c78eab7696f49052c5cc",
+          "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "correlation_id": "m1-02-document-handoff",
+          "id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+          "lease_epoch": 2,
+          "operation": "document.append",
+          "policy_version": "m1-fixed-document-execution-v1",
+          "project_id": "demo",
+          "request_command_id": "m1-02-demo-017",
+          "requested_arguments": {
+            "source_action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+            "text": "\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n"
+          },
+          "requested_task_revision": 6,
+          "session_id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+          "task_id": "guide",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        },
+        "actor_id": "successor",
+        "observed_at_ms": 1789154324939
+      }
+    },
+    {
+      "id": "broker-a8a9885bd39442bc56a29354f42f20faf9a97bbae9b44c39137341ba8d4122ff:received",
+      "project_id": "demo",
+      "sequence": 45,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+      "aggregate_revision": 0,
+      "causation_id": "broker-a8a9885bd39442bc56a29354f42f20faf9a97bbae9b44c39137341ba8d4122ff",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.dispatch",
+        "request_digest": "e187250d32530926fdaec9e955d5b1e5605c9d8631c77218ee36f48be57803bd"
+      }
+    },
+    {
+      "id": "broker-a8a9885bd39442bc56a29354f42f20faf9a97bbae9b44c39137341ba8d4122ff:effect:1",
+      "project_id": "demo",
+      "sequence": 46,
+      "type": "tool.invoked",
+      "aggregate_type": "action",
+      "aggregate_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+      "aggregate_revision": 1,
+      "causation_id": "broker-a8a9885bd39442bc56a29354f42f20faf9a97bbae9b44c39137341ba8d4122ff",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "successor",
+        "observed_at_ms": 1789154325079
+      }
+    },
+    {
+      "id": "broker-1a03c42c10b00fd45a630799a75394f1aa603bf9407abf5a7b810d55a84cb77b:received",
+      "project_id": "demo",
+      "sequence": 47,
+      "type": "command.received",
+      "aggregate_type": "action",
+      "aggregate_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+      "aggregate_revision": 1,
+      "causation_id": "broker-1a03c42c10b00fd45a630799a75394f1aa603bf9407abf5a7b810d55a84cb77b",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "tool.report",
+        "request_digest": "6ceac315e4de7d089f85e33142d3a3b04f846d7ed7704c2b82c86398a281d7ed"
+      }
+    },
+    {
+      "id": "broker-1a03c42c10b00fd45a630799a75394f1aa603bf9407abf5a7b810d55a84cb77b:effect:1",
+      "project_id": "demo",
+      "sequence": 48,
+      "type": "tool.completed",
+      "aggregate_type": "action",
+      "aggregate_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+      "aggregate_revision": 2,
+      "causation_id": "broker-1a03c42c10b00fd45a630799a75394f1aa603bf9407abf5a7b810d55a84cb77b",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "actor_id": "successor",
+        "observed_at_ms": 1789154325308,
+        "queried": false,
+        "result": {
+          "action_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+          "arguments_digest": "sha256:90053c56d983eed0de816968a54acfb967be760f0c37c78eab7696f49052c5cc",
+          "content_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+          "envelope_digest": "sha256:3101749e627b1a868448b19f5a3b6a5527f3af6ba06808666426ba2c275fff66",
+          "object_key": "p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/ohlqqhwowwuinqz7mlslvvj65jwd3maxu6memk23ryuwivpx4hza.json"
+        }
+      }
+    },
+    {
+      "id": "m1-02-demo-018:received",
+      "project_id": "demo",
+      "sequence": 49,
+      "type": "command.received",
+      "aggregate_type": "artifact",
+      "aggregate_id": "guide-candidate",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-018",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "artifact.submit",
+        "request_digest": "5ac8141cf9ab946e321dfd2d594c3865e92a84d80db9e15e9f65b05aac760985"
+      }
+    },
+    {
+      "id": "m1-02-demo-018:effect:1",
+      "project_id": "demo",
+      "sequence": 50,
+      "type": "artifact.created",
+      "aggregate_type": "artifact",
+      "aggregate_id": "guide-candidate",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-018",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n",
+        "content_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+        "created_by": "successor",
+        "criteria": [
+          "Overview",
+          "Failure case",
+          "Recovery"
+        ],
+        "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+        "data_classification": "internal",
+        "derived_from": [],
+        "id": "guide-candidate",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "demo",
+        "revision": 0,
+        "source": {
+          "command_id": "m1-02-demo-018",
+          "execution_authority": "candidate_only",
+          "external_input_exposure": "unknown",
+          "input_origin": "authenticated_agent_claim",
+          "kind": "inline_candidate",
+          "messages": [],
+          "untrusted_input": true
+        },
+        "supersedes": null,
+        "task_id": "guide",
+        "task_revision": 6,
+        "type": "document"
+      }
+    },
+    {
+      "id": "m1-02-demo-019:received",
+      "project_id": "demo",
+      "sequence": 51,
+      "type": "command.received",
+      "aggregate_type": "review",
+      "aggregate_id": "guide-review",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-019",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "review.request",
+        "request_digest": "d063abd2c0d9f1bd3fdc1f4986e5a2d8e4d50b67c38bdb5845ec78fc60624668"
+      }
+    },
+    {
+      "id": "m1-02-demo-019:effect:1",
+      "project_id": "demo",
+      "sequence": 52,
+      "type": "review.requested",
+      "aggregate_type": "review",
+      "aggregate_id": "guide-review",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-019",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+        "artifact_id": "guide-candidate",
+        "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+        "feedback": null,
+        "id": "guide-review",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "demo",
+        "requested_by": "writer",
+        "reviewer_id": "writer",
+        "revision": 0,
+        "status": "pending",
+        "task_id": "guide",
+        "task_revision": 6
+      }
+    },
+    {
+      "id": "m1-02-demo-020:received",
+      "project_id": "demo",
+      "sequence": 53,
+      "type": "command.received",
+      "aggregate_type": "review",
+      "aggregate_id": "guide-review",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-020",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "review.submit",
+        "request_digest": "07831b60ef84e66de040071d162db17f3fd63a95b295eb9c2f0da207d838f68e"
+      }
+    },
+    {
+      "id": "m1-02-demo-020:effect:1",
+      "project_id": "demo",
+      "sequence": 54,
+      "type": "review.approved",
+      "aggregate_type": "review",
+      "aggregate_id": "guide-review",
+      "aggregate_revision": 1,
+      "causation_id": "m1-02-demo-020",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "feedback": "Reviewed the fixed candidate as a peer without taking its Lease.",
+        "reviewer_id": "writer",
+        "status": "approved"
+      }
+    },
+    {
+      "id": "m1-02-demo-021:received",
+      "project_id": "demo",
+      "sequence": 55,
+      "type": "command.received",
+      "aggregate_type": "verification",
+      "aggregate_id": "guide-precheck",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-021",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "verification.run",
+        "request_digest": "d7981bcb9ff8b9bf60aaf0003752b97a57152a977147f184032a97af1956481c"
+      }
+    },
+    {
+      "id": "m1-02-demo-021:effect:1",
+      "project_id": "demo",
+      "sequence": 56,
+      "type": "artifact.created",
+      "aggregate_type": "artifact",
+      "aggregate_id": "guide-precheck:evidence",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-021",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "content": "{\"artifact_digest\":\"sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a\",\"artifact_id\":\"guide-candidate\",\"checks\":[{\"criterion\":\"Overview\",\"matched\":true},{\"criterion\":\"Failure case\",\"matched\":true},{\"criterion\":\"Recovery\",\"matched\":true}],\"command\":\"aetp.document.contains_all/v1\",\"criteria_ref\":{\"content_digest\":\"sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590\",\"revision\":6,\"task_id\":\"guide\"},\"environment\":{\"implementation\":\"cpython\",\"platform\":\"win32\",\"python\":\"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\",\"scope\":\"in_process_text_precheck\"},\"environment_digest\":\"sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6\",\"limitation\":\"Internal precheck only; Runner action authorization is unavailable.\",\"method\":\"literal_text_contains_all\",\"observed_at\":\"2026-09-11T19:18:46.023383+00:00\",\"observed_result\":\"PASSED\",\"schema_version\":\"0.1\",\"test_suite_digest\":\"sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c\"}",
+        "content_digest": "sha256:6cc2715ab573f778a42c04a8eee0e23ceee6db2fa53791f155eab28c51e0e985",
+        "created_by": "system:document-precheck",
+        "criteria": [
+          "Overview",
+          "Failure case",
+          "Recovery"
+        ],
+        "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+        "data_classification": "internal",
+        "derived_from": [
+          "guide-candidate"
+        ],
+        "id": "guide-precheck:evidence",
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "demo",
+        "revision": 0,
+        "source": {
+          "artifact_id": "guide-candidate",
+          "command_id": "m1-02-demo-021",
+          "execution_authority": "unavailable",
+          "kind": "trusted_precheck",
+          "untrusted_input": true
+        },
+        "supersedes": null,
+        "task_id": "guide",
+        "task_revision": 6,
+        "type": "report"
+      }
+    },
+    {
+      "id": "m1-02-demo-021:effect:2",
+      "project_id": "demo",
+      "sequence": 57,
+      "type": "verification.completed",
+      "aggregate_type": "verification",
+      "aggregate_id": "guide-precheck",
+      "aggregate_revision": 0,
+      "causation_id": "m1-02-demo-021",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+        "artifact_id": "guide-candidate",
+        "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+        "evidence_digest": "sha256:6cc2715ab573f778a42c04a8eee0e23ceee6db2fa53791f155eab28c51e0e985",
+        "evidence_id": "guide-precheck:evidence",
+        "execution": {
+          "action_id": null,
+          "authorization": "unavailable",
+          "binding_id": null,
+          "kind": "internal_precheck",
+          "request_command_id": "m1-02-demo-021",
+          "runner_id": "aetp.document.precheck/v1"
+        },
+        "id": "guide-precheck",
+        "inputs": {
+          "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+          "command": "aetp.document.contains_all/v1",
+          "criteria_ref": {
+            "content_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+            "revision": 6,
+            "task_id": "guide"
+          },
+          "environment_digest": "sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6",
+          "test_suite_digest": "sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+        },
+        "method": {
+          "name": "literal_text_contains_all",
+          "type": "runtime_check"
+        },
+        "policy_version": "m1-document-candidate-v1",
+        "project_id": "demo",
+        "reason": "ENFORCEMENT_UNAVAILABLE",
+        "result": "INCONCLUSIVE",
+        "revision": 0,
+        "task_id": "guide",
+        "task_revision": 6,
+        "verifier_id": "writer"
+      }
+    },
+    {
+      "id": "m1-02-demo-022:received",
+      "project_id": "demo",
+      "sequence": 58,
+      "type": "command.received",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-022",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "command_type": "task.complete",
+        "request_digest": "84ff2dc143c1793bcf336000e2e023f6363a2c179c94e385aae557c83df67de4"
+      }
+    },
+    {
+      "id": "m1-02-demo-022:rejected",
+      "project_id": "demo",
+      "sequence": 59,
+      "type": "command.rejected",
+      "aggregate_type": "task",
+      "aggregate_id": "guide",
+      "aggregate_revision": 6,
+      "causation_id": "m1-02-demo-022",
+      "correlation_id": "m1-02-document-handoff",
+      "payload": {
+        "error": {
+          "code": "QUALITY_GATE_NOT_MET",
+          "context": {
+            "command_id": "m1-02-demo-022",
+            "current_revision": 6,
+            "expected_revision": 6,
+            "target_id": "guide"
+          },
+          "message": "Command rejected: QUALITY_GATE_NOT_MET",
+          "retryable": false,
+          "severity": "medium"
+        }
+      }
+    }
+  ],
+  "projection": {
+    "action:action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123": {
+      "actor_id": "successor",
+      "arguments": {
+        "checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+        "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n",
+        "source_action_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+        "source_result_digest": "sha256:3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b"
+      },
+      "arguments_digest": "sha256:dde258d73c69aa7a8cfae3b19cf9606dbf8b511f2523bc820e7bafdabd4f5bd7",
+      "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+      "correlation_id": "m1-02-document-handoff",
+      "created_sequence": 38,
+      "dispatch_count": 1,
+      "historical": false,
+      "id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+      "lease_epoch": 2,
+      "observed_at_ms": 1789154324764,
+      "operation": "document.restore",
+      "policy_version": "m1-fixed-document-execution-v1",
+      "project_id": "demo",
+      "query_count": 0,
+      "reason": null,
+      "request_command_id": "m1-02-demo-016",
+      "requested_arguments": {
+        "checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3"
+      },
+      "requested_task_revision": 6,
+      "result": {
+        "action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+        "arguments_digest": "sha256:dde258d73c69aa7a8cfae3b19cf9606dbf8b511f2523bc820e7bafdabd4f5bd7",
+        "content_digest": "sha256:44cf3dc79d1858de8f0505e6e63225c814432772920865ddddb10e4b4ab09bd3",
+        "envelope_digest": "sha256:36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c",
+        "object_key": "p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/7n3zniopwuf7xdghpndxrqsrn5ldcv7twyynsxs7byw34videbaq.json"
+      },
+      "revision": 2,
+      "session_id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+      "status": "completed",
+      "task_id": "guide",
+      "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+    },
+    "action:action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6": {
+      "actor_id": "successor",
+      "arguments": {
+        "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n",
+        "source_action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+        "source_result_digest": "sha256:36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c"
+      },
+      "arguments_digest": "sha256:90053c56d983eed0de816968a54acfb967be760f0c37c78eab7696f49052c5cc",
+      "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+      "correlation_id": "m1-02-document-handoff",
+      "created_sequence": 44,
+      "dispatch_count": 1,
+      "historical": false,
+      "id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+      "lease_epoch": 2,
+      "observed_at_ms": 1789154325308,
+      "operation": "document.append",
+      "policy_version": "m1-fixed-document-execution-v1",
+      "project_id": "demo",
+      "query_count": 0,
+      "reason": null,
+      "request_command_id": "m1-02-demo-017",
+      "requested_arguments": {
+        "source_action_id": "action-06dc10f1c598b252af4a5703d87f107c57f72b05c33fc7bf3980e9a4107ca123",
+        "text": "\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n"
+      },
+      "requested_task_revision": 6,
+      "result": {
+        "action_id": "action-1b3f5e5492f8795b2e49bbbcb83d55dfd040b25374b56cc052744e1ec2d334b6",
+        "arguments_digest": "sha256:90053c56d983eed0de816968a54acfb967be760f0c37c78eab7696f49052c5cc",
+        "content_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+        "envelope_digest": "sha256:3101749e627b1a868448b19f5a3b6a5527f3af6ba06808666426ba2c275fff66",
+        "object_key": "p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/ohlqqhwowwuinqz7mlslvvj65jwd3maxu6memk23ryuwivpx4hza.json"
+      },
+      "revision": 2,
+      "session_id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+      "status": "completed",
+      "task_id": "guide",
+      "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+    },
+    "action:action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72": {
+      "actor_id": "writer",
+      "arguments": {
+        "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n"
+      },
+      "arguments_digest": "sha256:8b9a4bd8b0d6fc20021e2f02a4d6ce425946e0f91557082270d4db63c1e7dc78",
+      "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+      "correlation_id": "m1-02-document-handoff",
+      "created_sequence": 16,
+      "dispatch_count": 1,
+      "historical": false,
+      "id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+      "lease_epoch": 1,
+      "observed_at_ms": 1789154323266,
+      "operation": "document.write",
+      "policy_version": "m1-fixed-document-execution-v1",
+      "project_id": "demo",
+      "query_count": 1,
+      "reason": null,
+      "request_command_id": "m1-02-demo-008",
+      "requested_arguments": {
+        "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n"
+      },
+      "requested_task_revision": 2,
+      "result": {
+        "action_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+        "arguments_digest": "sha256:8b9a4bd8b0d6fc20021e2f02a4d6ce425946e0f91557082270d4db63c1e7dc78",
+        "content_digest": "sha256:44cf3dc79d1858de8f0505e6e63225c814432772920865ddddb10e4b4ab09bd3",
+        "envelope_digest": "sha256:3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b",
+        "object_key": "p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-extgg2f6gtohtkxnzt62te3bwk5vjs3lzxwcfrbkvs543wzo2mha/oaj5opotfeevh2w3olnlkdgylzs3kwhqxqniwt7bj7htm6jxmi3q.json"
+      },
+      "revision": 3,
+      "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+      "status": "completed",
+      "task_id": "guide",
+      "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+    },
+    "agent:successor": {
+      "id": "successor",
+      "model_id": "model-b-fixture",
+      "project_id": "demo",
+      "revision": 0,
+      "status": "available"
+    },
+    "agent:writer": {
+      "id": "writer",
+      "model_id": "model-a-fixture",
+      "project_id": "demo",
+      "revision": 0,
+      "status": "available"
+    },
+    "artifact:guide-candidate": {
+      "content": "# Document recovery guide\n\nOverview: keep each Binding in its own working copy.\n\nFailure case: a document was written, but its response was lost.\n\nRecovery: query the original Action, reconcile its exact result, then continue from the Checkpoint.\n",
+      "content_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+      "created_by": "successor",
+      "criteria": [
+        "Overview",
+        "Failure case",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+      "data_classification": "internal",
+      "derived_from": [],
+      "id": "guide-candidate",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "demo",
+      "revision": 0,
+      "source": {
+        "command_id": "m1-02-demo-018",
+        "execution_authority": "candidate_only",
+        "external_input_exposure": "unknown",
+        "input_origin": "authenticated_agent_claim",
+        "kind": "inline_candidate",
+        "messages": [],
+        "untrusted_input": true
+      },
+      "supersedes": null,
+      "task_id": "guide",
+      "task_revision": 6,
+      "type": "document"
+    },
+    "artifact:guide-precheck:evidence": {
+      "content": "{\"artifact_digest\":\"sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a\",\"artifact_id\":\"guide-candidate\",\"checks\":[{\"criterion\":\"Overview\",\"matched\":true},{\"criterion\":\"Failure case\",\"matched\":true},{\"criterion\":\"Recovery\",\"matched\":true}],\"command\":\"aetp.document.contains_all/v1\",\"criteria_ref\":{\"content_digest\":\"sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590\",\"revision\":6,\"task_id\":\"guide\"},\"environment\":{\"implementation\":\"cpython\",\"platform\":\"win32\",\"python\":\"3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]\",\"scope\":\"in_process_text_precheck\"},\"environment_digest\":\"sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6\",\"limitation\":\"Internal precheck only; Runner action authorization is unavailable.\",\"method\":\"literal_text_contains_all\",\"observed_at\":\"2026-09-11T19:18:46.023383+00:00\",\"observed_result\":\"PASSED\",\"schema_version\":\"0.1\",\"test_suite_digest\":\"sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c\"}",
+      "content_digest": "sha256:6cc2715ab573f778a42c04a8eee0e23ceee6db2fa53791f155eab28c51e0e985",
+      "created_by": "system:document-precheck",
+      "criteria": [
+        "Overview",
+        "Failure case",
+        "Recovery"
+      ],
+      "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+      "data_classification": "internal",
+      "derived_from": [
+        "guide-candidate"
+      ],
+      "id": "guide-precheck:evidence",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "demo",
+      "revision": 0,
+      "source": {
+        "artifact_id": "guide-candidate",
+        "command_id": "m1-02-demo-021",
+        "execution_authority": "unavailable",
+        "kind": "trusted_precheck",
+        "untrusted_input": true
+      },
+      "supersedes": null,
+      "task_id": "guide",
+      "task_revision": 6,
+      "type": "report"
+    },
+    "checkpoint:checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3": {
+      "actor_id": "writer",
+      "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+      "created_sequence": 26,
+      "id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+      "lease_epoch": 1,
+      "observed_at_ms": 1789154323409,
+      "policy_version": "m1-fixed-document-execution-v1",
+      "project_id": "demo",
+      "revision": 0,
+      "session_id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+      "snapshot": {
+        "agent": {
+          "id": "writer",
+          "model_id": "model-a-fixture",
+          "project_id": "demo",
+          "revision": 0,
+          "status": "available"
+        },
+        "artifacts": [],
+        "context_snapshot": {
+          "source": {
+            "actor_id": "writer",
+            "authority": "context_only",
+            "command_id": "m1-02-demo-010",
+            "untrusted_input": true
+          },
+          "text": "The original response was lost; querying the exact Action confirmed its output."
+        },
+        "decisions": {
+          "reason": "M1 has no Decision implementation",
+          "status": "not_applicable"
+        },
+        "document_actions": [
+          {
+            "action_id": "action-5d95c859ade2b8a843df31775e531998805da76247d5c3ac73825222fc8c4f72",
+            "content_digest": "sha256:44cf3dc79d1858de8f0505e6e63225c814432772920865ddddb10e4b4ab09bd3",
+            "result_digest": "sha256:3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b"
+          }
+        ],
+        "git": {
+          "reason": "fixed document Runtime has no Git working tree",
+          "status": "not_applicable"
+        },
+        "remaining_work": [
+          "Add Recovery instructions from a new Agent"
+        ],
+        "task": {
+          "acceptance_criteria": [
+            "Overview",
+            "Failure case",
+            "Recovery"
+          ],
+          "bindings": {
+            "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644": {
+              "agent_id": "writer",
+              "id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+              "lease_epoch": 1,
+              "resume_checkpoint_id": null,
+              "runtime_id": "fixed-document-v1",
+              "session": {
+                "actor_id": "writer",
+                "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+                "expires_at_wall_ms": 1789154442495,
+                "id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+                "lease_epoch": 1,
+                "project_id": "demo",
+                "task_id": "guide"
+              },
+              "status": "running",
+              "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+            }
+          },
+          "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+          "current_binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "execution_policy_version": "m1-fixed-document-execution-v1",
+          "id": "guide",
+          "lease": {
+            "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+            "expires_at_governance_ms": 300293,
+            "lease_epoch": 1,
+            "owner_id": "writer",
+            "revoked": false
+          },
+          "lease_epoch": 1,
+          "observed_at_ms": 1789154322495,
+          "owner_id": "writer",
+          "policy_version": "m1-document-candidate-v1",
+          "project_id": "demo",
+          "revision": 2,
+          "status": "in_progress",
+          "title": "Document recovery guide",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        }
+      },
+      "snapshot_digest": "sha256:9512aff5369fcd81c6d7d6aa325f36ee92c5b59b701a751fb947c3ea758a20b0",
+      "task_id": "guide"
+    },
+    "project:demo": {
+      "execution_clock": {
+        "elapsed_ms": 0,
+        "wall_anchor_ms": 1789154322072
+      },
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "id": "demo",
+      "observed_at_ms": 1789154322072,
+      "project_id": "demo",
+      "revision": 1,
+      "status": "active",
+      "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+    },
+    "review:guide-review": {
+      "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+      "artifact_id": "guide-candidate",
+      "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+      "feedback": "Reviewed the fixed candidate as a peer without taking its Lease.",
+      "id": "guide-review",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "demo",
+      "requested_by": "writer",
+      "reviewer_id": "writer",
+      "revision": 1,
+      "status": "approved",
+      "task_id": "guide",
+      "task_revision": 6
+    },
+    "task:guide": {
+      "acceptance_criteria": [
+        "Overview",
+        "Failure case",
+        "Recovery"
+      ],
+      "bindings": {
+        "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644": {
+          "agent_id": "writer",
+          "id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+          "lease_epoch": 1,
+          "resume_checkpoint_id": null,
+          "runtime_id": "fixed-document-v1",
+          "session": {
+            "actor_id": "writer",
+            "binding_id": "binding-181d0df59d26ebd082cf1bdab64d424c9a5df6b32631e54e354555c514d2f644",
+            "expires_at_wall_ms": 1789154442495,
+            "id": "session-b6a6a47229afcd454bf3c834563b0f14b551b2d8f4e3d0ac0e44eb98a47ffccb",
+            "lease_epoch": 1,
+            "project_id": "demo",
+            "task_id": "guide"
+          },
+          "status": "revoked",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        },
+        "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940": {
+          "agent_id": "successor",
+          "id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+          "lease_epoch": 2,
+          "resume_checkpoint_id": "checkpoint-f65921385a80dabfb4b0d725b5b39799b1ca6766b8bd78dfdf21c018a28264f3",
+          "runtime_id": "fixed-document-v1",
+          "session": {
+            "actor_id": "successor",
+            "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+            "expires_at_wall_ms": 1789154444063,
+            "id": "session-397ebe16a507740a2b0b4b88966e7a9155d7e7e9aaa2a0095a3dab097bd0e8db",
+            "lease_epoch": 2,
+            "project_id": "demo",
+            "task_id": "guide"
+          },
+          "status": "running",
+          "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+        }
+      },
+      "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+      "current_binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+      "execution_policy_version": "m1-fixed-document-execution-v1",
+      "id": "guide",
+      "lease": {
+        "binding_id": "binding-5c14d5a13ab00e8e963d1dab2b22cfd7b88487a8808588ff566239dab350b940",
+        "expires_at_governance_ms": 301816,
+        "lease_epoch": 2,
+        "owner_id": "successor",
+        "revoked": false
+      },
+      "lease_epoch": 2,
+      "observed_at_ms": 1789154324063,
+      "owner_id": "successor",
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "demo",
+      "revision": 6,
+      "status": "in_progress",
+      "title": "Document recovery guide",
+      "workspace_provider_id": "workspace-dde79ce4631b0e69d69083c4c4e77933d5706bb03a36f81aa19fd670c53ecc2f"
+    },
+    "verification:guide-precheck": {
+      "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+      "artifact_id": "guide-candidate",
+      "criteria_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+      "evidence_digest": "sha256:6cc2715ab573f778a42c04a8eee0e23ceee6db2fa53791f155eab28c51e0e985",
+      "evidence_id": "guide-precheck:evidence",
+      "execution": {
+        "action_id": null,
+        "authorization": "unavailable",
+        "binding_id": null,
+        "kind": "internal_precheck",
+        "request_command_id": "m1-02-demo-021",
+        "runner_id": "aetp.document.precheck/v1"
+      },
+      "id": "guide-precheck",
+      "inputs": {
+        "artifact_digest": "sha256:8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a",
+        "command": "aetp.document.contains_all/v1",
+        "criteria_ref": {
+          "content_digest": "sha256:d5182e8ab46b77fe1751b05baaea1dacdeec3b4dda2489da594c8ecd1f67b590",
+          "revision": 6,
+          "task_id": "guide"
+        },
+        "environment_digest": "sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6",
+        "test_suite_digest": "sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+      },
+      "method": {
+        "name": "literal_text_contains_all",
+        "type": "runtime_check"
+      },
+      "policy_version": "m1-document-candidate-v1",
+      "project_id": "demo",
+      "reason": "ENFORCEMENT_UNAVAILABLE",
+      "result": "INCONCLUSIVE",
+      "revision": 0,
+      "task_id": "guide",
+      "task_revision": 6,
+      "verifier_id": "writer"
+    }
+  },
+  "database": {
+    "path": "artifacts/m1-02-demo-v2.sqlite",
+    "sha256": "941793646ec4249631aee742dc056f98bce8d9c96795ee97fef94595c9d60f25"
+  },
+  "document": {
+    "path": "artifacts/m1-02-candidate-v2.md",
+    "sha256": "8c6fc4baf0be171c56856e364d80c9588397f7cd57818053492fdfc71f11475a"
+  },
+  "objects": [
+    {
+      "path": "artifacts/m1-02-workspace-v2/p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/7n3zniopwuf7xdghpndxrqsrn5ldcv7twyynsxs7byw34videbaq.json",
+      "sha256": "36ac2fed7669b2be8be3b662fb36928e7eb5106f73370fecb6f8415fb0f0ed7c"
+    },
+    {
+      "path": "artifacts/m1-02-workspace-v2/p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-h4ufa7f5y36twxm2kpe4767xlouwk7eyyts4key2eda74lqpinra/ohlqqhwowwuinqz7mlslvvj65jwd3maxu6memk23ryuwivpx4hza.json",
+      "sha256": "3101749e627b1a868448b19f5a3b6a5527f3af6ba06808666426ba2c275fff66"
+    },
+    {
+      "path": "artifacts/m1-02-workspace-v2/p-nw4sa2xo7vmmh57zlcsroetplephjb2uivkkr6wgmbzxzmnmsaxa/b-extgg2f6gtohtkxnzt62te3bwk5vjs3lzxwcfrbkvs543wzo2mha/oaj5opotfeevh2w3olnlkdgylzs3kwhqxqniwt7bj7htm6jxmi3q.json",
+      "sha256": "3e75b447c98083173fc6505dafbbfd4a62a40cfdc5e198d4c7e40c8b949b4b0b"
+    }
+  ]
+}

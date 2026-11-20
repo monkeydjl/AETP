@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-025",
+  "requirement": "PAUSED 继续记录在途事实而不派发；重启保持暂停，不把软暂停显示成彻底停止",
+  "status": "not_applicable",
+  "reason": "Later recovery scope: retaining a paused creation value is not operational pause/in-flight fact handling.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

@@ -1,0 +1,4400 @@
+{
+  "work_item": "M3-01",
+  "recorded_at": "2026-09-14T00:45:48.657642+08:00",
+  "scope": "deterministic local identity fixture; candidate planning only",
+  "rough_idea": "我想写一份短指南，让两个平等 Agent 直接讨论，并解释方案变化和恢复。",
+  "database": {
+    "path": "artifacts/m3-01-demo-candidate-v1.sqlite",
+    "sha256": "e8e99e1b30f99317aaa632a20e106f1811c1b6a2f0a200f9830af9c3388800fc"
+  },
+  "facts_only_database": {
+    "path": "artifacts/m3-01-demo-candidate-v1-facts.sqlite",
+    "sha256": "44624f4851d74604e655b4ef2702d45a938ab775b05633787de107113bf429e9"
+  },
+  "document": {
+    "path": "artifacts/m3-01-demo-candidate-v1.md",
+    "sha256": "283579344c14236be1c7374f5c12e9a35b5d24d0fd5d0523911e5dc689b8f438"
+  },
+  "commands_sent": [
+    {
+      "command": {
+        "id": "planning-demo-1",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "project.create",
+        "target_id": null,
+        "payload": {
+          "status": "planning"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-1",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-1",
+        "event_ids": [
+          "planning-demo-1:received",
+          "planning-demo-1:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-2",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "writer",
+        "payload": {
+          "model_id": "fixture-writer",
+          "status": "available"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-2",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-2",
+        "event_ids": [
+          "planning-demo-2:received",
+          "planning-demo-2:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-3",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "peer",
+        "payload": {
+          "model_id": "fixture-peer",
+          "status": "available"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-3",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-3",
+        "event_ids": [
+          "planning-demo-3:received",
+          "planning-demo-3:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-4",
+        "project_id": "demo-project",
+        "actor_id": "bootstrap",
+        "type": "agent.register",
+        "target_id": "researcher",
+        "payload": {
+          "model_id": "fixture-researcher",
+          "status": "available"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-4",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-4",
+        "event_ids": [
+          "planning-demo-4:received",
+          "planning-demo-4:effect"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-5",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.governance.configure",
+        "target_id": "demo-project",
+        "payload": {
+          "policy": {
+            "version": "demo-governance-1",
+            "mode": "selective",
+            "max_ttl_ms": 3600000,
+            "max_renewals": 2,
+            "rules": [
+              {
+                "action": "decision.activate",
+                "risk_level": "low",
+                "approval": "auto"
+              }
+            ],
+            "subjects": {
+              "human-owner": {
+                "type": "human",
+                "roles": [
+                  "human_owner"
+                ]
+              },
+              "writer": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              },
+              "peer": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              },
+              "researcher": {
+                "type": "agent",
+                "roles": [
+                  "agent_reviewer",
+                  "independent_reviewer"
+                ]
+              }
+            }
+          }
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-5",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-5",
+        "event_ids": [
+          "planning-demo-5:received",
+          "planning-demo-5:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-6",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.planning.configure",
+        "target_id": "demo-project",
+        "payload": {
+          "mode": "candidate_only"
+        },
+        "expected_revision": 1,
+        "idempotency_key": "planning-demo-6",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-6",
+        "event_ids": [
+          "planning-demo-6:received",
+          "planning-demo-6:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-7",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "discussion.open",
+        "target_id": "guide-discussion",
+        "payload": {
+          "topic": "我想写一份短指南，让两个平等 Agent 直接讨论，并解释方案变化和恢复。",
+          "participants": [
+            "writer",
+            "peer"
+          ],
+          "moderator_id": "writer",
+          "policy": {
+            "token_budget": 20
+          }
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-7",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-7",
+        "event_ids": [
+          "planning-demo-7:received",
+          "planning-demo-7:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-8",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "discussion.synthesize",
+        "target_id": "guide-discussion",
+        "payload": {
+          "reason": "moderator_decision"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-8",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-8",
+        "event_ids": [
+          "planning-demo-8:received",
+          "planning-demo-8:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-9",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "decision.propose",
+        "target_id": "guide-decision",
+        "payload": {
+          "title": "指南范围候选",
+          "choice": "单篇指南和恢复说明",
+          "alternatives": [
+            "单篇指南和恢复说明",
+            "仅职责列表"
+          ],
+          "reasoning": "回应 peer 对恢复和权限边界的质疑",
+          "risk_level": "low",
+          "source": {
+            "kind": "discussion",
+            "id": "guide-discussion",
+            "revision": 1
+          }
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-9",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-9",
+        "event_ids": [
+          "planning-demo-9:received",
+          "planning-demo-9:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-10",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "discussion.close",
+        "target_id": "guide-discussion",
+        "payload": {
+          "decision_id": "guide-decision"
+        },
+        "expected_revision": 1,
+        "idempotency_key": "planning-demo-10",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-10",
+        "event_ids": [
+          "planning-demo-10:received",
+          "planning-demo-10:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-11",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "mission.propose",
+        "target_id": "guide-mission",
+        "payload": {
+          "content": {
+            "title": "平等协作指南",
+            "objective": "我想写一份短指南，让两个平等 Agent 直接讨论，并解释方案变化和恢复。",
+            "constraints": [
+              "本地文档候选",
+              "不授予执行权限"
+            ],
+            "success_criteria": [
+              "解释平等角色",
+              "保留异议与恢复说明"
+            ]
+          },
+          "source_decisions": [
+            {
+              "type": "decision",
+              "id": "guide-decision",
+              "revision": 0,
+              "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5"
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-11",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-11",
+        "event_ids": [
+          "planning-demo-11:received",
+          "planning-demo-11:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-12",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "team.propose",
+        "target_id": "guide-team",
+        "payload": {
+          "content": {
+            "mission": {
+              "type": "mission",
+              "id": "guide-mission",
+              "version": 1,
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729"
+            },
+            "purpose": "协作提出指南方案",
+            "structure": {
+              "mode": "adaptive"
+            },
+            "roles": [
+              {
+                "id": "draft",
+                "name": "Writer",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "authority": [
+                  "task.propose"
+                ]
+              },
+              {
+                "id": "feedback",
+                "name": "Reviewer",
+                "required_capabilities": [
+                  "review"
+                ],
+                "authority": [
+                  "task.propose"
+                ]
+              }
+            ],
+            "members": [
+              {
+                "agent_id": "writer",
+                "roles": [
+                  "draft"
+                ],
+                "confidence": 0.8
+              },
+              {
+                "agent_id": "peer",
+                "roles": [
+                  "feedback"
+                ],
+                "confidence": 0.8
+              }
+            ],
+            "contracts": [
+              {
+                "agent_id": "writer",
+                "role_id": "draft",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              },
+              {
+                "agent_id": "peer",
+                "role_id": "feedback",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              }
+            ],
+            "interfaces": [
+              {
+                "roles": [
+                  "draft",
+                  "feedback"
+                ],
+                "purpose": "直接质疑和回应"
+              }
+            ],
+            "estimated_cost": {
+              "amount": 0,
+              "unit": "USD"
+            },
+            "estimated_duration_ms": 60000,
+            "risk_level": "low"
+          },
+          "source_decisions": [
+            {
+              "type": "decision",
+              "id": "guide-decision",
+              "revision": 0,
+              "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5"
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-12",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-12",
+        "event_ids": [
+          "planning-demo-12:received",
+          "planning-demo-12:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-13",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "blueprint.propose",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "content": {
+            "mission": {
+              "type": "mission",
+              "id": "guide-mission",
+              "version": 1,
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729"
+            },
+            "team": {
+              "type": "team",
+              "id": "guide-team",
+              "version": 1,
+              "content_digest": "sha256:d2b57009a0f2015af0d24a658789feeab6c113851ede7155828285f25a92f83a"
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "technology": [
+              "Markdown"
+            ],
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "tasks": [
+              {
+                "id": "draft",
+                "title": "起草指南",
+                "type": "documentation",
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "dependencies": [
+                  {
+                    "type": "decision",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5"
+                  }
+                ],
+                "inputs": [],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ]
+              },
+              {
+                "id": "feedback",
+                "title": "评审指南",
+                "type": "documentation",
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "dependencies": [
+                  {
+                    "type": "task",
+                    "id": "draft"
+                  }
+                ],
+                "inputs": [],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ]
+              }
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ]
+          },
+          "source_decisions": [
+            {
+              "type": "decision",
+              "id": "guide-decision",
+              "revision": 0,
+              "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5"
+            }
+          ]
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-13",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-13",
+        "event_ids": [
+          "planning-demo-13:received",
+          "planning-demo-13:effect:1"
+        ],
+        "aggregate_revision": 0,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-14",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "task.propose",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "proposal_id": "peer-recovery-proposal",
+          "base": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 1,
+            "content_digest": "sha256:4a059d5054e84e53c50f3548ac665c377481e377fed5a64cd3b806250517e2b0"
+          },
+          "task": {
+            "id": "recovery",
+            "title": "补充恢复案例",
+            "type": "documentation",
+            "milestone_id": "guide",
+            "required_capabilities": [
+              "writing"
+            ],
+            "dependencies": [
+              {
+                "type": "task",
+                "id": "draft"
+              }
+            ],
+            "inputs": [],
+            "expected_outputs": [
+              "补充恢复案例"
+            ],
+            "acceptance_criteria": [
+              "说明来源并保持角色平等"
+            ]
+          },
+          "reason": "peer 在讨论中指出恢复说明缺失",
+          "risk_level": "low",
+          "estimated_cost": {
+            "amount": 0,
+            "unit": "USD"
+          },
+          "estimated_delay_ms": 5000
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-14",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-14",
+        "event_ids": [
+          "planning-demo-14:received",
+          "planning-demo-14:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-15",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "team.revise",
+        "target_id": "guide-team",
+        "payload": {
+          "base": {
+            "type": "team",
+            "id": "guide-team",
+            "version": 1,
+            "content_digest": "sha256:d2b57009a0f2015af0d24a658789feeab6c113851ede7155828285f25a92f83a"
+          },
+          "content": {
+            "mission": {
+              "type": "mission",
+              "id": "guide-mission",
+              "version": 1,
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729"
+            },
+            "purpose": "协作提出指南方案",
+            "structure": {
+              "mode": "adaptive"
+            },
+            "roles": [
+              {
+                "id": "draft",
+                "name": "Writer",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "authority": [
+                  "task.propose"
+                ]
+              },
+              {
+                "id": "feedback",
+                "name": "Reviewer",
+                "required_capabilities": [
+                  "review"
+                ],
+                "authority": [
+                  "task.propose"
+                ]
+              }
+            ],
+            "members": [
+              {
+                "agent_id": "writer",
+                "roles": [
+                  "draft"
+                ],
+                "confidence": 0.8
+              },
+              {
+                "agent_id": "peer",
+                "roles": [
+                  "feedback"
+                ],
+                "confidence": 0.8
+              },
+              {
+                "agent_id": "researcher",
+                "roles": [
+                  "draft"
+                ],
+                "confidence": 0.8
+              }
+            ],
+            "contracts": [
+              {
+                "agent_id": "writer",
+                "role_id": "draft",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              },
+              {
+                "agent_id": "peer",
+                "role_id": "feedback",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              },
+              {
+                "agent_id": "researcher",
+                "role_id": "draft",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              }
+            ],
+            "interfaces": [
+              {
+                "roles": [
+                  "draft",
+                  "feedback"
+                ],
+                "purpose": "直接质疑和回应"
+              }
+            ],
+            "estimated_cost": {
+              "amount": 0,
+              "unit": "USD"
+            },
+            "estimated_duration_ms": 60000,
+            "risk_level": "low"
+          },
+          "reason": "先增补资料能力，再调整候选工作量"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-15",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-15",
+        "event_ids": [
+          "planning-demo-15:received",
+          "planning-demo-15:effect:1"
+        ],
+        "aggregate_revision": 1,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-16",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "blueprint.change.request",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "change_id": "team-reference-3",
+          "base": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 2,
+            "content_digest": "sha256:c8c022d683025ee18c0fc17f3e6197c838a7a08b56a53130fa566cea460bde69"
+          },
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "type": "team",
+              "id": "guide-team",
+              "version": 2,
+              "content_digest": "sha256:3196d4130fe6c99926db975ae6b98109785af7c6c390103d5af9e5404fcf00f6"
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "reason": "修订候选团队与依赖",
+          "risk_level": "low",
+          "estimated_cost": {
+            "amount": 0,
+            "unit": "USD"
+          },
+          "estimated_delay_ms": 1000
+        },
+        "expected_revision": 1,
+        "idempotency_key": "planning-demo-16",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-16",
+        "event_ids": [
+          "planning-demo-16:received",
+          "planning-demo-16:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-17",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "team.revise",
+        "target_id": "guide-team",
+        "payload": {
+          "base": {
+            "type": "team",
+            "id": "guide-team",
+            "version": 2,
+            "content_digest": "sha256:3196d4130fe6c99926db975ae6b98109785af7c6c390103d5af9e5404fcf00f6"
+          },
+          "content": {
+            "mission": {
+              "type": "mission",
+              "id": "guide-mission",
+              "version": 1,
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729"
+            },
+            "purpose": "协作提出指南方案",
+            "structure": {
+              "mode": "adaptive"
+            },
+            "roles": [
+              {
+                "id": "draft",
+                "name": "Writer",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "authority": [
+                  "task.propose"
+                ]
+              },
+              {
+                "id": "feedback",
+                "name": "Reviewer",
+                "required_capabilities": [
+                  "review"
+                ],
+                "authority": [
+                  "task.propose"
+                ]
+              }
+            ],
+            "members": [
+              {
+                "agent_id": "writer",
+                "roles": [
+                  "draft"
+                ],
+                "confidence": 0.8
+              },
+              {
+                "agent_id": "researcher",
+                "roles": [
+                  "feedback"
+                ],
+                "confidence": 0.8
+              }
+            ],
+            "contracts": [
+              {
+                "agent_id": "writer",
+                "role_id": "draft",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              },
+              {
+                "agent_id": "researcher",
+                "role_id": "feedback",
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "acceptance": {
+                  "reviewer_required": true
+                }
+              }
+            ],
+            "interfaces": [
+              {
+                "roles": [
+                  "draft",
+                  "feedback"
+                ],
+                "purpose": "直接质疑和回应"
+              }
+            ],
+            "estimated_cost": {
+              "amount": 0,
+              "unit": "USD"
+            },
+            "estimated_duration_ms": 60000,
+            "risk_level": "low"
+          },
+          "reason": "先增补资料能力，再调整候选工作量"
+        },
+        "expected_revision": 1,
+        "idempotency_key": "planning-demo-17",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-17",
+        "event_ids": [
+          "planning-demo-17:received",
+          "planning-demo-17:effect:1"
+        ],
+        "aggregate_revision": 2,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-18",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "blueprint.change.request",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "change_id": "team-reference-2",
+          "base": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 3,
+            "content_digest": "sha256:191700a483398e53fa667a560d19385b6462e3da50e6e443f5dc8a7ffbde7e74"
+          },
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "type": "team",
+              "id": "guide-team",
+              "version": 3,
+              "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1"
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "reason": "修订候选团队与依赖",
+          "risk_level": "low",
+          "estimated_cost": {
+            "amount": 0,
+            "unit": "USD"
+          },
+          "estimated_delay_ms": 1000
+        },
+        "expected_revision": 2,
+        "idempotency_key": "planning-demo-18",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-18",
+        "event_ids": [
+          "planning-demo-18:received",
+          "planning-demo-18:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-19",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "blueprint.change.request",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "change_id": "cycle-refusal",
+          "base": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 4,
+            "content_digest": "sha256:bec6d48c3de42fc601c0d59a7dd593781080726ec28a8a5792752e5fd144d772"
+          },
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  },
+                  {
+                    "type": "task",
+                    "id": "feedback"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1",
+              "id": "guide-team",
+              "type": "team",
+              "version": 3
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "reason": "修订候选团队与依赖",
+          "risk_level": "low",
+          "estimated_cost": {
+            "amount": 0,
+            "unit": "USD"
+          },
+          "estimated_delay_ms": 1000
+        },
+        "expected_revision": 3,
+        "idempotency_key": "planning-demo-19",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "planning-demo-19",
+        "event_ids": [
+          "planning-demo-19:received",
+          "planning-demo-19:rejected"
+        ],
+        "aggregate_revision": 3,
+        "error_code": "DAG_CYCLE"
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-20",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "blueprint.change.request",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "change_id": "stale-refusal",
+          "base": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 1,
+            "content_digest": "sha256:4a059d5054e84e53c50f3548ac665c377481e377fed5a64cd3b806250517e2b0"
+          },
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1",
+              "id": "guide-team",
+              "type": "team",
+              "version": 3
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "reason": "修订候选团队与依赖",
+          "risk_level": "low",
+          "estimated_cost": {
+            "amount": 0,
+            "unit": "USD"
+          },
+          "estimated_delay_ms": 1000
+        },
+        "expected_revision": 3,
+        "idempotency_key": "planning-demo-20",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "planning-demo-20",
+        "event_ids": [
+          "planning-demo-20:received",
+          "planning-demo-20:rejected"
+        ],
+        "aggregate_revision": 3,
+        "error_code": "REFERENCE_STALE"
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-21",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "blueprint.activate",
+        "target_id": "guide-blueprint",
+        "payload": {},
+        "expected_revision": 3,
+        "idempotency_key": "planning-demo-21",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "planning-demo-21",
+        "event_ids": [
+          "planning-demo-21:received",
+          "planning-demo-21:rejected"
+        ],
+        "aggregate_revision": 3,
+        "error_code": "ENFORCEMENT_UNAVAILABLE"
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-22",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "task.create",
+        "target_id": "bypass-task",
+        "payload": {
+          "title": "没有规划字段也不得执行"
+        },
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-22",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "planning-demo-22",
+        "event_ids": [
+          "planning-demo-22:received",
+          "planning-demo-22:rejected"
+        ],
+        "aggregate_revision": null,
+        "error_code": "PLANNING_NOT_ACTIVE"
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-23",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.pause",
+        "target_id": "demo-project",
+        "payload": {
+          "intervention_id": "pause-demo",
+          "reason": "人类暂停调度",
+          "impact": "project"
+        },
+        "expected_revision": 2,
+        "idempotency_key": "planning-demo-23",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-23",
+        "event_ids": [
+          "planning-demo-23:received",
+          "planning-demo-23:effect:1"
+        ],
+        "aggregate_revision": 3,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-24",
+        "project_id": "demo-project",
+        "actor_id": "peer",
+        "type": "blueprint.change.request",
+        "target_id": "guide-blueprint",
+        "payload": {
+          "change_id": "paused-proposal",
+          "base": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 4,
+            "content_digest": "sha256:bec6d48c3de42fc601c0d59a7dd593781080726ec28a8a5792752e5fd144d772"
+          },
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限",
+              "暂停期间候选仍可被修订"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1",
+              "id": "guide-team",
+              "type": "team",
+              "version": 3
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "reason": "修订候选团队与依赖",
+          "risk_level": "low",
+          "estimated_cost": {
+            "amount": 0,
+            "unit": "USD"
+          },
+          "estimated_delay_ms": 1000
+        },
+        "expected_revision": 3,
+        "idempotency_key": "planning-demo-24",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-24",
+        "event_ids": [
+          "planning-demo-24:received",
+          "planning-demo-24:effect:1"
+        ],
+        "aggregate_revision": 4,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-25",
+        "project_id": "demo-project",
+        "actor_id": "human-owner",
+        "type": "project.resume",
+        "target_id": "demo-project",
+        "payload": {
+          "intervention_id": "resume-demo",
+          "reason": "继续接收候选方案",
+          "impact": "project"
+        },
+        "expected_revision": 3,
+        "idempotency_key": "planning-demo-25",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "accepted",
+        "command_id": "planning-demo-25",
+        "event_ids": [
+          "planning-demo-25:received",
+          "planning-demo-25:effect:1"
+        ],
+        "aggregate_revision": 4,
+        "error_code": null
+      }
+    },
+    {
+      "command": {
+        "id": "planning-demo-26",
+        "project_id": "demo-project",
+        "actor_id": "writer",
+        "type": "tool.dispatch",
+        "target_id": "missing-action",
+        "payload": {},
+        "expected_revision": 0,
+        "idempotency_key": "planning-demo-26",
+        "correlation_id": "m3-demo"
+      },
+      "result": {
+        "status": "rejected",
+        "command_id": "planning-demo-26",
+        "event_ids": [
+          "planning-demo-26:received",
+          "planning-demo-26:rejected"
+        ],
+        "aggregate_revision": null,
+        "error_code": "PLANNING_NOT_ACTIVE"
+      }
+    }
+  ],
+  "discussion_posts": [
+    {
+      "contribution": {
+        "id": "idea",
+        "project_id": "demo-project",
+        "conversation_type": "discussion",
+        "conversation_id": "guide-discussion",
+        "author_id": "writer",
+        "category": "recommendation",
+        "content": "建议写单篇 Markdown，先草稿再独立评审。",
+        "position": null,
+        "references": [],
+        "evidence": [],
+        "context": "",
+        "schema_version": "0.1"
+      },
+      "new_events": 0
+    },
+    {
+      "contribution": {
+        "id": "challenge",
+        "project_id": "demo-project",
+        "conversation_type": "discussion",
+        "conversation_id": "guide-discussion",
+        "author_id": "peer",
+        "category": "challenge",
+        "content": "只写职责不够；要保留不同意见，并单列恢复和权限边界。",
+        "position": null,
+        "references": [
+          "idea"
+        ],
+        "evidence": [],
+        "context": "",
+        "schema_version": "0.1"
+      },
+      "new_events": 0
+    },
+    {
+      "contribution": {
+        "id": "reply",
+        "project_id": "demo-project",
+        "conversation_type": "discussion",
+        "conversation_id": "guide-discussion",
+        "author_id": "writer",
+        "category": "clarification",
+        "content": "接受补充恢复说明；角色只是职责建议，任何成员都能提案。",
+        "position": null,
+        "references": [
+          "challenge"
+        ],
+        "evidence": [],
+        "context": "",
+        "schema_version": "0.1"
+      },
+      "new_events": 0
+    }
+  ],
+  "direct_messages": [
+    {
+      "id": "removed-peer-question",
+      "project_id": "demo-project",
+      "sender_id": "peer",
+      "recipients": [
+        "researcher"
+      ],
+      "type": "question",
+      "content": "离开候选团队后还能参与吗？",
+      "references": [],
+      "target_message": null,
+      "untrusted_input": true,
+      "schema_version": "0.1"
+    },
+    {
+      "id": "researcher-answer",
+      "project_id": "demo-project",
+      "sender_id": "researcher",
+      "recipients": [
+        "peer"
+      ],
+      "type": "response",
+      "content": "可以，Agent 身份和直接通信权限都保留。",
+      "references": [
+        "removed-peer-question"
+      ],
+      "target_message": "removed-peer-question",
+      "untrusted_input": true,
+      "schema_version": "0.1"
+    }
+  ],
+  "host_observations": [
+    {
+      "after_team_revision": 2,
+      "preview": {
+        "blueprint_id": "guide-blueprint",
+        "version": 2,
+        "content_digest": "sha256:c8c022d683025ee18c0fc17f3e6197c838a7a08b56a53130fa566cea460bde69",
+        "observed_at_ms": 1000000,
+        "layers": [
+          [
+            "draft"
+          ],
+          [
+            "feedback",
+            "recovery"
+          ]
+        ],
+        "topological_order": [
+          "draft",
+          "feedback",
+          "recovery"
+        ],
+        "decision_dependencies": [
+          {
+            "task_id": "draft",
+            "reference": {
+              "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+              "id": "guide-decision",
+              "revision": 0,
+              "type": "decision"
+            },
+            "satisfied": false,
+            "reason": "DECISION_NOT_ACTIVE"
+          }
+        ],
+        "blockers": [
+          "PLANNING_NOT_ACTIVE",
+          "BOOTSTRAP_ENFORCEMENT_UNAVAILABLE",
+          "TARGET_APPROVAL_UNAVAILABLE",
+          "TEAM_REFERENCE_STALE"
+        ],
+        "claimable_task_ids": [],
+        "execution_readiness": "unavailable",
+        "authority": "proposal_only"
+      }
+    },
+    {
+      "after_team_revision": 3,
+      "preview": {
+        "blueprint_id": "guide-blueprint",
+        "version": 3,
+        "content_digest": "sha256:191700a483398e53fa667a560d19385b6462e3da50e6e443f5dc8a7ffbde7e74",
+        "observed_at_ms": 1000000,
+        "layers": [
+          [
+            "draft"
+          ],
+          [
+            "feedback",
+            "recovery"
+          ]
+        ],
+        "topological_order": [
+          "draft",
+          "feedback",
+          "recovery"
+        ],
+        "decision_dependencies": [
+          {
+            "task_id": "draft",
+            "reference": {
+              "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+              "id": "guide-decision",
+              "revision": 0,
+              "type": "decision"
+            },
+            "satisfied": false,
+            "reason": "DECISION_NOT_ACTIVE"
+          }
+        ],
+        "blockers": [
+          "PLANNING_NOT_ACTIVE",
+          "BOOTSTRAP_ENFORCEMENT_UNAVAILABLE",
+          "TARGET_APPROVAL_UNAVAILABLE",
+          "TEAM_REFERENCE_STALE"
+        ],
+        "claimable_task_ids": [],
+        "execution_readiness": "unavailable",
+        "authority": "proposal_only"
+      }
+    },
+    {
+      "paused_preview": {
+        "blueprint_id": "guide-blueprint",
+        "version": 5,
+        "content_digest": "sha256:8a3281a8fadf27caf68444a85597112e7b7c06453ed5007b2eecaace083f8617",
+        "observed_at_ms": 1000000,
+        "layers": [
+          [
+            "draft"
+          ],
+          [
+            "feedback",
+            "recovery"
+          ]
+        ],
+        "topological_order": [
+          "draft",
+          "feedback",
+          "recovery"
+        ],
+        "decision_dependencies": [
+          {
+            "task_id": "draft",
+            "reference": {
+              "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+              "id": "guide-decision",
+              "revision": 0,
+              "type": "decision"
+            },
+            "satisfied": false,
+            "reason": "DECISION_NOT_ACTIVE"
+          }
+        ],
+        "blockers": [
+          "PLANNING_NOT_ACTIVE",
+          "BOOTSTRAP_ENFORCEMENT_UNAVAILABLE",
+          "TARGET_APPROVAL_UNAVAILABLE",
+          "PROJECT_PAUSED"
+        ],
+        "claimable_task_ids": [],
+        "execution_readiness": "unavailable",
+        "authority": "proposal_only"
+      }
+    }
+  ],
+  "final_preview": {
+    "blueprint_id": "guide-blueprint",
+    "version": 5,
+    "content_digest": "sha256:8a3281a8fadf27caf68444a85597112e7b7c06453ed5007b2eecaace083f8617",
+    "observed_at_ms": 1000010,
+    "layers": [
+      [
+        "draft"
+      ],
+      [
+        "feedback",
+        "recovery"
+      ]
+    ],
+    "topological_order": [
+      "draft",
+      "feedback",
+      "recovery"
+    ],
+    "decision_dependencies": [
+      {
+        "task_id": "draft",
+        "reference": {
+          "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+          "id": "guide-decision",
+          "revision": 0,
+          "type": "decision"
+        },
+        "satisfied": false,
+        "reason": "DECISION_NOT_ACTIVE"
+      }
+    ],
+    "blockers": [
+      "PLANNING_NOT_ACTIVE",
+      "BOOTSTRAP_ENFORCEMENT_UNAVAILABLE",
+      "TARGET_APPROVAL_UNAVAILABLE"
+    ],
+    "claimable_task_ids": [],
+    "execution_readiness": "unavailable",
+    "authority": "proposal_only"
+  },
+  "final_state": {
+    "project:demo-project": {
+      "id": "demo-project",
+      "project_id": "demo-project",
+      "revision": 4,
+      "status": "planning",
+      "observed_at_ms": 1000010,
+      "governance": {
+        "owner_id": "human-owner",
+        "versions": {
+          "demo-governance-1": {
+            "policy": {
+              "max_renewals": 2,
+              "max_ttl_ms": 3600000,
+              "mode": "selective",
+              "rules": [
+                {
+                  "action": "decision.activate",
+                  "approval": "auto",
+                  "risk_level": "low"
+                }
+              ],
+              "subjects": {
+                "human-owner": {
+                  "roles": [
+                    "human_owner"
+                  ],
+                  "type": "human"
+                },
+                "peer": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "researcher": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                },
+                "writer": {
+                  "roles": [
+                    "agent_reviewer",
+                    "independent_reviewer"
+                  ],
+                  "type": "agent"
+                }
+              },
+              "version": "demo-governance-1"
+            },
+            "content_digest": "sha256:da34d62971d9fc0a94c8724f1535fa1a320777c7192e37bf402b299b010f246b",
+            "configured_by": "human-owner",
+            "command_id": "planning-demo-5"
+          }
+        },
+        "input_authority_id": null,
+        "current_version": "demo-governance-1"
+      },
+      "planning": {
+        "schema": "aetp-planning-candidate-1",
+        "mode": "candidate_only",
+        "configured_by": "human-owner",
+        "origin_command_id": "planning-demo-6",
+        "policy_version": "demo-governance-1"
+      },
+      "paused_from": "planning",
+      "dispatch_barrier": "requires_host_recovery",
+      "execution_quiescence": "unconfirmed",
+      "binding_pause_status": {},
+      "collaboration_clock": {
+        "excluded_ms": 10,
+        "paused_at_ms": null
+      },
+      "last_control": {
+        "intervention_id": "resume-demo",
+        "actor": {
+          "type": "human",
+          "id": "human-owner"
+        },
+        "action": "resume",
+        "command": "planning-demo-25",
+        "target": {
+          "type": "project",
+          "id": "demo-project",
+          "revision": 3
+        },
+        "reason": "继续接收候选方案",
+        "impact": "project"
+      },
+      "resume_checks": {
+        "ready": true,
+        "missing_sessions": [],
+        "expired_leases": [],
+        "membership_denied": [],
+        "unknown_actions": [],
+        "invalid_approvals": [],
+        "pending_commands": [],
+        "runtime": "not_configured",
+        "observed_at_ms": 1000010,
+        "budget_scope": "fixed_bounded_document_operations_no_paid_calls"
+      }
+    },
+    "agent:writer": {
+      "id": "writer",
+      "project_id": "demo-project",
+      "revision": 0,
+      "status": "available",
+      "model_id": "fixture-writer"
+    },
+    "agent:peer": {
+      "id": "peer",
+      "project_id": "demo-project",
+      "revision": 0,
+      "status": "available",
+      "model_id": "fixture-peer"
+    },
+    "agent:researcher": {
+      "id": "researcher",
+      "project_id": "demo-project",
+      "revision": 0,
+      "status": "available",
+      "model_id": "fixture-researcher"
+    },
+    "discussion:guide-discussion": {
+      "id": "guide-discussion",
+      "project_id": "demo-project",
+      "kind": "discussion",
+      "revision": 2,
+      "status": "closed",
+      "topic": "我想写一份短指南，让两个平等 Agent 直接讨论，并解释方案变化和恢复。",
+      "objective": null,
+      "participants": [
+        "writer",
+        "peer"
+      ],
+      "moderator_id": "writer",
+      "created_by": "writer",
+      "policy_version": "m2-local-discussion-v1",
+      "policy": {
+        "token_budget": 20,
+        "time_budget_ms": 1200000,
+        "consensus_threshold": 0.8
+      },
+      "meter_source": "demo-admission-meter",
+      "origin_command_id": "planning-demo-7",
+      "last_command_id": "planning-demo-10",
+      "last_actor_id": "writer",
+      "observed_at_ms": 1000000,
+      "governance_at_ms": 1000000,
+      "started_at_ms": 1000000,
+      "deadline_ms": 2200000,
+      "round": 0,
+      "completed_rounds": 0,
+      "no_new_evidence": 0,
+      "evidence_seen": [],
+      "termination_reason": "moderator_decision",
+      "decision_id": "guide-decision",
+      "checkpoint": {
+        "analysis_authors": [],
+        "consensus_peak": 0.0,
+        "digest": "sha256:b15bc5c3cd9ac41baa1fd6795e5ef1c41e079b22603a3450d2b579feb3158ec8",
+        "evidence": [],
+        "messages": 3,
+        "tokens": 3
+      },
+      "checkpoint_history": [
+        {
+          "messages": 0,
+          "tokens": 0,
+          "digest": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "analysis_authors": [],
+          "evidence": [],
+          "consensus_peak": 0.0
+        },
+        {
+          "analysis_authors": [],
+          "consensus_peak": 0.0,
+          "digest": "sha256:b15bc5c3cd9ac41baa1fd6795e5ef1c41e079b22603a3450d2b579feb3158ec8",
+          "evidence": [],
+          "messages": 3,
+          "tokens": 3
+        }
+      ]
+    },
+    "decision:guide-decision": {
+      "id": "guide-decision",
+      "project_id": "demo-project",
+      "revision": 0,
+      "status": "proposed",
+      "title": "指南范围候选",
+      "choice": "单篇指南和恢复说明",
+      "alternatives": [
+        "单篇指南和恢复说明",
+        "仅职责列表"
+      ],
+      "reasoning": "回应 peer 对恢复和权限边界的质疑",
+      "risk_level": "low",
+      "proposed_by": "peer",
+      "origin_command_id": "planning-demo-9",
+      "policy_version": "m2-local-discussion-v1",
+      "authority": "proposal_only",
+      "untrusted_input": true,
+      "proposal_metering": "outside_process_admission",
+      "source": {
+        "checkpoint": {
+          "analysis_authors": [],
+          "consensus_peak": 0.0,
+          "digest": "sha256:b15bc5c3cd9ac41baa1fd6795e5ef1c41e079b22603a3450d2b579feb3158ec8",
+          "evidence": [],
+          "messages": 3,
+          "tokens": 3
+        },
+        "id": "guide-discussion",
+        "kind": "discussion",
+        "metering_scope": "process_admission",
+        "participants": [
+          "writer",
+          "peer"
+        ],
+        "records": [
+          {
+            "author_id": "writer",
+            "category": "recommendation",
+            "content": "建议写单篇 Markdown，先草稿再独立评审。",
+            "context": "",
+            "conversation_id": "guide-discussion",
+            "conversation_type": "discussion",
+            "evidence": [],
+            "id": "idea",
+            "observed_at_ms": 1000000,
+            "phase": "open",
+            "position": null,
+            "project_id": "demo-project",
+            "receipt": {
+              "call_id": "admission-idea",
+              "purpose": "process_admission",
+              "receipt_id": "7502577242064717b31fe39535c9cf29",
+              "source_id": "demo-admission-meter",
+              "subject_digest": "sha256:57b5dbd27a6ffdb2b207f768d7e7c40848629e98c29f8e98b1b65ca3699f3647",
+              "tokens": 1,
+              "unit": "token"
+            },
+            "references": [],
+            "round": 0,
+            "semantic_digest": "sha256:57b5dbd27a6ffdb2b207f768d7e7c40848629e98c29f8e98b1b65ca3699f3647",
+            "untrusted_input": true
+          },
+          {
+            "author_id": "peer",
+            "category": "challenge",
+            "content": "只写职责不够；要保留不同意见，并单列恢复和权限边界。",
+            "context": "",
+            "conversation_id": "guide-discussion",
+            "conversation_type": "discussion",
+            "evidence": [],
+            "id": "challenge",
+            "observed_at_ms": 1000000,
+            "phase": "open",
+            "position": null,
+            "project_id": "demo-project",
+            "receipt": {
+              "call_id": "admission-challenge",
+              "purpose": "process_admission",
+              "receipt_id": "44d47e9db8b449eda4a4d5098d7a56f9",
+              "source_id": "demo-admission-meter",
+              "subject_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+              "tokens": 1,
+              "unit": "token"
+            },
+            "references": [
+              "idea"
+            ],
+            "round": 0,
+            "semantic_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+            "untrusted_input": true
+          },
+          {
+            "author_id": "writer",
+            "category": "clarification",
+            "content": "接受补充恢复说明；角色只是职责建议，任何成员都能提案。",
+            "context": "",
+            "conversation_id": "guide-discussion",
+            "conversation_type": "discussion",
+            "evidence": [],
+            "id": "reply",
+            "observed_at_ms": 1000000,
+            "phase": "open",
+            "position": null,
+            "project_id": "demo-project",
+            "receipt": {
+              "call_id": "admission-reply",
+              "purpose": "process_admission",
+              "receipt_id": "290a399e573e41a5b631494c96c1d097",
+              "source_id": "demo-admission-meter",
+              "subject_digest": "sha256:9447c03a40e43a36c56646d91ee82b5754063df53f0a9e0079bdf2c185bfa8a7",
+              "tokens": 1,
+              "unit": "token"
+            },
+            "references": [
+              "challenge"
+            ],
+            "round": 0,
+            "semantic_digest": "sha256:9447c03a40e43a36c56646d91ee82b5754063df53f0a9e0079bdf2c185bfa8a7",
+            "untrusted_input": true
+          }
+        ],
+        "revision": 1,
+        "termination_reason": "moderator_decision",
+        "untrusted_input": true
+      },
+      "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+      "supersedes": null,
+      "supporting_agents": [],
+      "minority_opinions": [
+        {
+          "author_id": "peer",
+          "category": "challenge",
+          "content": "只写职责不够；要保留不同意见，并单列恢复和权限边界。",
+          "context": "",
+          "conversation_id": "guide-discussion",
+          "conversation_type": "discussion",
+          "evidence": [],
+          "id": "challenge",
+          "observed_at_ms": 1000000,
+          "phase": "open",
+          "position": null,
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "admission-challenge",
+            "purpose": "process_admission",
+            "receipt_id": "44d47e9db8b449eda4a4d5098d7a56f9",
+            "source_id": "demo-admission-meter",
+            "subject_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+            "tokens": 1,
+            "unit": "token"
+          },
+          "references": [
+            "idea"
+          ],
+          "round": 0,
+          "semantic_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+          "untrusted_input": true
+        }
+      ],
+      "missing_participants": [],
+      "unexpressed_participants": [
+        "peer",
+        "writer"
+      ],
+      "concerns": [
+        {
+          "author_id": "peer",
+          "category": "challenge",
+          "content": "只写职责不够；要保留不同意见，并单列恢复和权限边界。",
+          "context": "",
+          "conversation_id": "guide-discussion",
+          "conversation_type": "discussion",
+          "evidence": [],
+          "id": "challenge",
+          "observed_at_ms": 1000000,
+          "phase": "open",
+          "position": null,
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "admission-challenge",
+            "purpose": "process_admission",
+            "receipt_id": "44d47e9db8b449eda4a4d5098d7a56f9",
+            "source_id": "demo-admission-meter",
+            "subject_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+            "tokens": 1,
+            "unit": "token"
+          },
+          "references": [
+            "idea"
+          ],
+          "round": 0,
+          "semantic_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+          "untrusted_input": true
+        }
+      ],
+      "unresolved": [
+        {
+          "author_id": "peer",
+          "category": "challenge",
+          "content": "只写职责不够；要保留不同意见，并单列恢复和权限边界。",
+          "context": "",
+          "conversation_id": "guide-discussion",
+          "conversation_type": "discussion",
+          "evidence": [],
+          "id": "challenge",
+          "observed_at_ms": 1000000,
+          "phase": "open",
+          "position": null,
+          "project_id": "demo-project",
+          "receipt": {
+            "call_id": "admission-challenge",
+            "purpose": "process_admission",
+            "receipt_id": "44d47e9db8b449eda4a4d5098d7a56f9",
+            "source_id": "demo-admission-meter",
+            "subject_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+            "tokens": 1,
+            "unit": "token"
+          },
+          "references": [
+            "idea"
+          ],
+          "round": 0,
+          "semantic_digest": "sha256:b4a2e81b83c86279cb44cc64f397051e745dec1b25ea830d4cd32c62c927e6ca",
+          "untrusted_input": true
+        }
+      ],
+      "consensus_level": 0.0,
+      "escalation": [
+        "independent_review",
+        "human_governance"
+      ],
+      "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5"
+    },
+    "mission:guide-mission": {
+      "schema_version": "0.1",
+      "id": "guide-mission",
+      "project_id": "demo-project",
+      "kind": "mission",
+      "status": "proposed",
+      "active_version": null,
+      "versions": {
+        "1": {
+          "schema_version": "0.1",
+          "type": "mission",
+          "id": "guide-mission",
+          "project_id": "demo-project",
+          "version": 1,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "writer",
+          "origin_command_id": "planning-demo-11",
+          "observed_at_ms": 1000000,
+          "content": {
+            "constraints": [
+              "本地文档候选",
+              "不授予执行权限"
+            ],
+            "objective": "我想写一份短指南，让两个平等 Agent 直接讨论，并解释方案变化和恢复。",
+            "success_criteria": [
+              "解释平等角色",
+              "保留异议与恢复说明"
+            ],
+            "title": "平等协作指南"
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": null,
+          "supersedes": null,
+          "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729"
+        }
+      },
+      "authority": "proposal_only",
+      "revision": 0,
+      "latest_proposal_version": 1,
+      "observed_at_ms": 1000000,
+      "last_command_id": "planning-demo-11"
+    },
+    "team:guide-team": {
+      "schema_version": "0.1",
+      "id": "guide-team",
+      "project_id": "demo-project",
+      "kind": "team",
+      "status": "forming",
+      "active_version": null,
+      "versions": {
+        "1": {
+          "schema_version": "0.1",
+          "type": "team",
+          "id": "guide-team",
+          "project_id": "demo-project",
+          "version": 1,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "writer",
+          "origin_command_id": "planning-demo-12",
+          "observed_at_ms": 1000000,
+          "content": {
+            "contracts": [
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "writer",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "draft"
+              },
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "peer",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "feedback"
+              }
+            ],
+            "estimated_cost": {
+              "amount": 0,
+              "unit": "USD"
+            },
+            "estimated_duration_ms": 60000,
+            "interfaces": [
+              {
+                "purpose": "直接质疑和回应",
+                "roles": [
+                  "draft",
+                  "feedback"
+                ]
+              }
+            ],
+            "members": [
+              {
+                "agent_id": "writer",
+                "confidence": 0.8,
+                "roles": [
+                  "draft"
+                ]
+              },
+              {
+                "agent_id": "peer",
+                "confidence": 0.8,
+                "roles": [
+                  "feedback"
+                ]
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "purpose": "协作提出指南方案",
+            "risk_level": "low",
+            "roles": [
+              {
+                "authority": [
+                  "task.propose"
+                ],
+                "id": "draft",
+                "name": "Writer",
+                "required_capabilities": [
+                  "writing"
+                ]
+              },
+              {
+                "authority": [
+                  "task.propose"
+                ],
+                "id": "feedback",
+                "name": "Reviewer",
+                "required_capabilities": [
+                  "review"
+                ]
+              }
+            ],
+            "structure": {
+              "mode": "adaptive"
+            }
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": null,
+          "supersedes": null,
+          "member_models": {
+            "writer": "fixture-writer",
+            "peer": "fixture-peer"
+          },
+          "qualification": "not_evaluated",
+          "content_digest": "sha256:d2b57009a0f2015af0d24a658789feeab6c113851ede7155828285f25a92f83a"
+        },
+        "2": {
+          "schema_version": "0.1",
+          "type": "team",
+          "id": "guide-team",
+          "project_id": "demo-project",
+          "version": 2,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "peer",
+          "origin_command_id": "planning-demo-15",
+          "observed_at_ms": 1000000,
+          "content": {
+            "contracts": [
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "writer",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "draft"
+              },
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "peer",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "feedback"
+              },
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "researcher",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "draft"
+              }
+            ],
+            "estimated_cost": {
+              "amount": 0,
+              "unit": "USD"
+            },
+            "estimated_duration_ms": 60000,
+            "interfaces": [
+              {
+                "purpose": "直接质疑和回应",
+                "roles": [
+                  "draft",
+                  "feedback"
+                ]
+              }
+            ],
+            "members": [
+              {
+                "agent_id": "writer",
+                "confidence": 0.8,
+                "roles": [
+                  "draft"
+                ]
+              },
+              {
+                "agent_id": "peer",
+                "confidence": 0.8,
+                "roles": [
+                  "feedback"
+                ]
+              },
+              {
+                "agent_id": "researcher",
+                "confidence": 0.8,
+                "roles": [
+                  "draft"
+                ]
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "purpose": "协作提出指南方案",
+            "risk_level": "low",
+            "roles": [
+              {
+                "authority": [
+                  "task.propose"
+                ],
+                "id": "draft",
+                "name": "Writer",
+                "required_capabilities": [
+                  "writing"
+                ]
+              },
+              {
+                "authority": [
+                  "task.propose"
+                ],
+                "id": "feedback",
+                "name": "Reviewer",
+                "required_capabilities": [
+                  "review"
+                ]
+              }
+            ],
+            "structure": {
+              "mode": "adaptive"
+            }
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": "先增补资料能力，再调整候选工作量",
+          "supersedes": {
+            "type": "team",
+            "id": "guide-team",
+            "version": 1,
+            "content_digest": "sha256:d2b57009a0f2015af0d24a658789feeab6c113851ede7155828285f25a92f83a"
+          },
+          "member_models": {
+            "writer": "fixture-writer",
+            "peer": "fixture-peer",
+            "researcher": "fixture-researcher"
+          },
+          "qualification": "not_evaluated",
+          "impact": {
+            "added_members": [
+              "researcher"
+            ],
+            "removed_members": [],
+            "scope": "candidate_team_only"
+          },
+          "content_digest": "sha256:3196d4130fe6c99926db975ae6b98109785af7c6c390103d5af9e5404fcf00f6"
+        },
+        "3": {
+          "schema_version": "0.1",
+          "type": "team",
+          "id": "guide-team",
+          "project_id": "demo-project",
+          "version": 3,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "peer",
+          "origin_command_id": "planning-demo-17",
+          "observed_at_ms": 1000000,
+          "content": {
+            "contracts": [
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "writer",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "draft"
+              },
+              {
+                "acceptance": {
+                  "reviewer_required": true
+                },
+                "agent_id": "researcher",
+                "authority": {
+                  "can": [
+                    "task.propose"
+                  ],
+                  "cannot": [
+                    "production.deploy"
+                  ]
+                },
+                "deliverables": [
+                  "带理由的方案"
+                ],
+                "responsibilities": [
+                  "起草或独立反馈"
+                ],
+                "role_id": "feedback"
+              }
+            ],
+            "estimated_cost": {
+              "amount": 0,
+              "unit": "USD"
+            },
+            "estimated_duration_ms": 60000,
+            "interfaces": [
+              {
+                "purpose": "直接质疑和回应",
+                "roles": [
+                  "draft",
+                  "feedback"
+                ]
+              }
+            ],
+            "members": [
+              {
+                "agent_id": "writer",
+                "confidence": 0.8,
+                "roles": [
+                  "draft"
+                ]
+              },
+              {
+                "agent_id": "researcher",
+                "confidence": 0.8,
+                "roles": [
+                  "feedback"
+                ]
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "purpose": "协作提出指南方案",
+            "risk_level": "low",
+            "roles": [
+              {
+                "authority": [
+                  "task.propose"
+                ],
+                "id": "draft",
+                "name": "Writer",
+                "required_capabilities": [
+                  "writing"
+                ]
+              },
+              {
+                "authority": [
+                  "task.propose"
+                ],
+                "id": "feedback",
+                "name": "Reviewer",
+                "required_capabilities": [
+                  "review"
+                ]
+              }
+            ],
+            "structure": {
+              "mode": "adaptive"
+            }
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": "先增补资料能力，再调整候选工作量",
+          "supersedes": {
+            "type": "team",
+            "id": "guide-team",
+            "version": 2,
+            "content_digest": "sha256:3196d4130fe6c99926db975ae6b98109785af7c6c390103d5af9e5404fcf00f6"
+          },
+          "member_models": {
+            "writer": "fixture-writer",
+            "researcher": "fixture-researcher"
+          },
+          "qualification": "not_evaluated",
+          "impact": {
+            "added_members": [],
+            "removed_members": [
+              "peer"
+            ],
+            "scope": "candidate_team_only"
+          },
+          "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1"
+        }
+      },
+      "authority": "proposal_only",
+      "revision": 2,
+      "latest_proposal_version": 3,
+      "observed_at_ms": 1000000,
+      "last_command_id": "planning-demo-17"
+    },
+    "blueprint:guide-blueprint": {
+      "schema_version": "0.1",
+      "id": "guide-blueprint",
+      "project_id": "demo-project",
+      "kind": "blueprint",
+      "status": "proposed",
+      "active_version": null,
+      "versions": {
+        "1": {
+          "schema_version": "0.1",
+          "type": "blueprint",
+          "id": "guide-blueprint",
+          "project_id": "demo-project",
+          "version": 1,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "writer",
+          "origin_command_id": "planning-demo-13",
+          "observed_at_ms": 1000000,
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:d2b57009a0f2015af0d24a658789feeab6c113851ede7155828285f25a92f83a",
+              "id": "guide-team",
+              "type": "team",
+              "version": 1
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": null,
+          "supersedes": null,
+          "dag": {
+            "version": 1,
+            "task_ids": [
+              "draft",
+              "feedback"
+            ],
+            "edges": [
+              {
+                "from": "draft",
+                "to": "feedback"
+              }
+            ],
+            "layers": [
+              [
+                "draft"
+              ],
+              [
+                "feedback"
+              ]
+            ],
+            "topological_order": [
+              "draft",
+              "feedback"
+            ],
+            "decision_dependencies": [
+              {
+                "task_id": "draft",
+                "reference": {
+                  "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                  "id": "guide-decision",
+                  "revision": 0,
+                  "type": "decision"
+                },
+                "origin_command_id": "planning-demo-9",
+                "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+                "untrusted_input": true,
+                "authority": "proposal_only"
+              }
+            ],
+            "content_digest": "sha256:6b250fbff576ef9283b43293e96708e38fc97ca7572cc838ad88dcb0a5a7866d"
+          },
+          "change_request": null,
+          "content_digest": "sha256:4a059d5054e84e53c50f3548ac665c377481e377fed5a64cd3b806250517e2b0"
+        },
+        "2": {
+          "schema_version": "0.1",
+          "type": "blueprint",
+          "id": "guide-blueprint",
+          "project_id": "demo-project",
+          "version": 2,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "peer",
+          "origin_command_id": "planning-demo-14",
+          "observed_at_ms": 1000000,
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:d2b57009a0f2015af0d24a658789feeab6c113851ede7155828285f25a92f83a",
+              "id": "guide-team",
+              "type": "team",
+              "version": 1
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": "peer 在讨论中指出恢复说明缺失",
+          "supersedes": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 1,
+            "content_digest": "sha256:4a059d5054e84e53c50f3548ac665c377481e377fed5a64cd3b806250517e2b0"
+          },
+          "dag": {
+            "version": 2,
+            "task_ids": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "edges": [
+              {
+                "from": "draft",
+                "to": "feedback"
+              },
+              {
+                "from": "draft",
+                "to": "recovery"
+              }
+            ],
+            "layers": [
+              [
+                "draft"
+              ],
+              [
+                "feedback",
+                "recovery"
+              ]
+            ],
+            "topological_order": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "decision_dependencies": [
+              {
+                "task_id": "draft",
+                "reference": {
+                  "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                  "id": "guide-decision",
+                  "revision": 0,
+                  "type": "decision"
+                },
+                "origin_command_id": "planning-demo-9",
+                "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+                "untrusted_input": true,
+                "authority": "proposal_only"
+              }
+            ],
+            "content_digest": "sha256:8b2119348a738882885932bbffd083ba4fd710a200042eb7b98e2b4853cb71a8"
+          },
+          "change_request": {
+            "id": "peer-recovery-proposal",
+            "kind": "task_proposal",
+            "base": {
+              "content_digest": "sha256:4a059d5054e84e53c50f3548ac665c377481e377fed5a64cd3b806250517e2b0",
+              "id": "guide-blueprint",
+              "type": "blueprint",
+              "version": 1
+            },
+            "reason": "peer 在讨论中指出恢复说明缺失",
+            "status": "proposed",
+            "route": "discussion_decision_approval",
+            "approval_status": "not_requested",
+            "impact": {
+              "scope": "candidate_graph_only",
+              "changed_tasks": [
+                "recovery"
+              ],
+              "affected_tasks": [
+                "recovery"
+              ],
+              "affected_artifacts": [],
+              "affected_decisions": [],
+              "affected_dependencies": [
+                {
+                  "task_id": "recovery",
+                  "dependency": {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                }
+              ],
+              "affected_team_members": [
+                "peer",
+                "writer"
+              ],
+              "risk_level": "low",
+              "estimated_cost": {
+                "amount": 0,
+                "unit": "USD"
+              },
+              "estimated_delay_ms": 5000,
+              "estimates_are": "proposer_declarations"
+            }
+          },
+          "content_digest": "sha256:c8c022d683025ee18c0fc17f3e6197c838a7a08b56a53130fa566cea460bde69"
+        },
+        "3": {
+          "schema_version": "0.1",
+          "type": "blueprint",
+          "id": "guide-blueprint",
+          "project_id": "demo-project",
+          "version": 3,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "peer",
+          "origin_command_id": "planning-demo-16",
+          "observed_at_ms": 1000000,
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:3196d4130fe6c99926db975ae6b98109785af7c6c390103d5af9e5404fcf00f6",
+              "id": "guide-team",
+              "type": "team",
+              "version": 2
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": "修订候选团队与依赖",
+          "supersedes": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 2,
+            "content_digest": "sha256:c8c022d683025ee18c0fc17f3e6197c838a7a08b56a53130fa566cea460bde69"
+          },
+          "dag": {
+            "version": 3,
+            "task_ids": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "edges": [
+              {
+                "from": "draft",
+                "to": "feedback"
+              },
+              {
+                "from": "draft",
+                "to": "recovery"
+              }
+            ],
+            "layers": [
+              [
+                "draft"
+              ],
+              [
+                "feedback",
+                "recovery"
+              ]
+            ],
+            "topological_order": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "decision_dependencies": [
+              {
+                "task_id": "draft",
+                "reference": {
+                  "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                  "id": "guide-decision",
+                  "revision": 0,
+                  "type": "decision"
+                },
+                "origin_command_id": "planning-demo-9",
+                "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+                "untrusted_input": true,
+                "authority": "proposal_only"
+              }
+            ],
+            "content_digest": "sha256:c5edd88789eb4fa4d2a9adb9845817933007ba183a22ca57af2b00c3bcf31e90"
+          },
+          "change_request": {
+            "id": "team-reference-3",
+            "kind": "blueprint_change_request",
+            "base": {
+              "content_digest": "sha256:c8c022d683025ee18c0fc17f3e6197c838a7a08b56a53130fa566cea460bde69",
+              "id": "guide-blueprint",
+              "type": "blueprint",
+              "version": 2
+            },
+            "reason": "修订候选团队与依赖",
+            "status": "proposed",
+            "route": "discussion_decision_approval",
+            "approval_status": "not_requested",
+            "impact": {
+              "scope": "candidate_graph_only",
+              "changed_tasks": [
+                "draft",
+                "feedback",
+                "recovery"
+              ],
+              "affected_tasks": [
+                "draft",
+                "feedback",
+                "recovery"
+              ],
+              "affected_artifacts": [],
+              "affected_decisions": [
+                "guide-decision"
+              ],
+              "affected_dependencies": [
+                {
+                  "task_id": "draft",
+                  "dependency": {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                },
+                {
+                  "task_id": "feedback",
+                  "dependency": {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                },
+                {
+                  "task_id": "recovery",
+                  "dependency": {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                }
+              ],
+              "affected_team_members": [
+                "peer",
+                "researcher",
+                "writer"
+              ],
+              "risk_level": "low",
+              "estimated_cost": {
+                "amount": 0,
+                "unit": "USD"
+              },
+              "estimated_delay_ms": 1000,
+              "estimates_are": "proposer_declarations"
+            }
+          },
+          "content_digest": "sha256:191700a483398e53fa667a560d19385b6462e3da50e6e443f5dc8a7ffbde7e74"
+        },
+        "4": {
+          "schema_version": "0.1",
+          "type": "blueprint",
+          "id": "guide-blueprint",
+          "project_id": "demo-project",
+          "version": 4,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "peer",
+          "origin_command_id": "planning-demo-18",
+          "observed_at_ms": 1000000,
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1",
+              "id": "guide-team",
+              "type": "team",
+              "version": 3
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": "修订候选团队与依赖",
+          "supersedes": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 3,
+            "content_digest": "sha256:191700a483398e53fa667a560d19385b6462e3da50e6e443f5dc8a7ffbde7e74"
+          },
+          "dag": {
+            "version": 4,
+            "task_ids": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "edges": [
+              {
+                "from": "draft",
+                "to": "feedback"
+              },
+              {
+                "from": "draft",
+                "to": "recovery"
+              }
+            ],
+            "layers": [
+              [
+                "draft"
+              ],
+              [
+                "feedback",
+                "recovery"
+              ]
+            ],
+            "topological_order": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "decision_dependencies": [
+              {
+                "task_id": "draft",
+                "reference": {
+                  "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                  "id": "guide-decision",
+                  "revision": 0,
+                  "type": "decision"
+                },
+                "origin_command_id": "planning-demo-9",
+                "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+                "untrusted_input": true,
+                "authority": "proposal_only"
+              }
+            ],
+            "content_digest": "sha256:ed3ed5219d3ccad6bfeaa964a5f10dd9b148f09ccaea87bb6ebc9f323d13e80d"
+          },
+          "change_request": {
+            "id": "team-reference-2",
+            "kind": "blueprint_change_request",
+            "base": {
+              "content_digest": "sha256:191700a483398e53fa667a560d19385b6462e3da50e6e443f5dc8a7ffbde7e74",
+              "id": "guide-blueprint",
+              "type": "blueprint",
+              "version": 3
+            },
+            "reason": "修订候选团队与依赖",
+            "status": "proposed",
+            "route": "discussion_decision_approval",
+            "approval_status": "not_requested",
+            "impact": {
+              "scope": "candidate_graph_only",
+              "changed_tasks": [
+                "draft",
+                "feedback",
+                "recovery"
+              ],
+              "affected_tasks": [
+                "draft",
+                "feedback",
+                "recovery"
+              ],
+              "affected_artifacts": [],
+              "affected_decisions": [
+                "guide-decision"
+              ],
+              "affected_dependencies": [
+                {
+                  "task_id": "draft",
+                  "dependency": {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                },
+                {
+                  "task_id": "feedback",
+                  "dependency": {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                },
+                {
+                  "task_id": "recovery",
+                  "dependency": {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                }
+              ],
+              "affected_team_members": [
+                "peer",
+                "researcher",
+                "writer"
+              ],
+              "risk_level": "low",
+              "estimated_cost": {
+                "amount": 0,
+                "unit": "USD"
+              },
+              "estimated_delay_ms": 1000,
+              "estimates_are": "proposer_declarations"
+            }
+          },
+          "content_digest": "sha256:bec6d48c3de42fc601c0d59a7dd593781080726ec28a8a5792752e5fd144d772"
+        },
+        "5": {
+          "schema_version": "0.1",
+          "type": "blueprint",
+          "id": "guide-blueprint",
+          "project_id": "demo-project",
+          "version": 5,
+          "status": "proposed",
+          "authority": "proposal_only",
+          "untrusted_input": true,
+          "proposed_by": "peer",
+          "origin_command_id": "planning-demo-24",
+          "observed_at_ms": 1000000,
+          "content": {
+            "acceptance_criteria": [
+              "回应双方提出的问题"
+            ],
+            "architecture": "一份指南与独立反馈",
+            "components": [
+              "职责",
+              "恢复"
+            ],
+            "milestones": [
+              {
+                "id": "guide",
+                "title": "指南草稿"
+              }
+            ],
+            "mission": {
+              "content_digest": "sha256:fc6c3fec54d6472b692127f315a4302e050a88aaa500b3735a5d06eabc1f9729",
+              "id": "guide-mission",
+              "type": "mission",
+              "version": 1
+            },
+            "requirements": [
+              "角色平等",
+              "保留恢复边界"
+            ],
+            "risks": [
+              "可能误把候选职责当作权限",
+              "暂停期间候选仍可被修订"
+            ],
+            "tasks": [
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                    "id": "guide-decision",
+                    "revision": 0,
+                    "type": "decision"
+                  }
+                ],
+                "expected_outputs": [
+                  "起草指南"
+                ],
+                "id": "draft",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "起草指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "评审指南"
+                ],
+                "id": "feedback",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "评审指南",
+                "type": "documentation"
+              },
+              {
+                "acceptance_criteria": [
+                  "说明来源并保持角色平等"
+                ],
+                "dependencies": [
+                  {
+                    "id": "draft",
+                    "type": "task"
+                  }
+                ],
+                "expected_outputs": [
+                  "补充恢复案例"
+                ],
+                "id": "recovery",
+                "inputs": [],
+                "milestone_id": "guide",
+                "required_capabilities": [
+                  "writing"
+                ],
+                "title": "补充恢复案例",
+                "type": "documentation"
+              }
+            ],
+            "team": {
+              "content_digest": "sha256:cad98a9c0e2841075322900732c81c47536a24d6af95bc59b52b1230a8eb08a1",
+              "id": "guide-team",
+              "type": "team",
+              "version": 3
+            },
+            "technology": [
+              "Markdown"
+            ]
+          },
+          "source_decisions": [
+            {
+              "reference": {
+                "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                "id": "guide-decision",
+                "revision": 0,
+                "type": "decision"
+              },
+              "origin_command_id": "planning-demo-9",
+              "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+              "untrusted_input": true,
+              "authority": "proposal_only"
+            }
+          ],
+          "reason": "修订候选团队与依赖",
+          "supersedes": {
+            "type": "blueprint",
+            "id": "guide-blueprint",
+            "version": 4,
+            "content_digest": "sha256:bec6d48c3de42fc601c0d59a7dd593781080726ec28a8a5792752e5fd144d772"
+          },
+          "dag": {
+            "version": 5,
+            "task_ids": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "edges": [
+              {
+                "from": "draft",
+                "to": "feedback"
+              },
+              {
+                "from": "draft",
+                "to": "recovery"
+              }
+            ],
+            "layers": [
+              [
+                "draft"
+              ],
+              [
+                "feedback",
+                "recovery"
+              ]
+            ],
+            "topological_order": [
+              "draft",
+              "feedback",
+              "recovery"
+            ],
+            "decision_dependencies": [
+              {
+                "task_id": "draft",
+                "reference": {
+                  "content_digest": "sha256:068c43097f4430cd435bba084470239914cdd373edd33f05e7078734ec64a5d5",
+                  "id": "guide-decision",
+                  "revision": 0,
+                  "type": "decision"
+                },
+                "origin_command_id": "planning-demo-9",
+                "source_digest": "sha256:e42745aca7a76418e89a0584e0c7c0b0d14c6819f7d5ddfbc4e83cb7c890cd4d",
+                "untrusted_input": true,
+                "authority": "proposal_only"
+              }
+            ],
+            "content_digest": "sha256:3ed51769be76600a93ea01bbdf84fab03f8aafd6b7b376a189800ff2f78195b4"
+          },
+          "change_request": {
+            "id": "paused-proposal",
+            "kind": "blueprint_change_request",
+            "base": {
+              "content_digest": "sha256:bec6d48c3de42fc601c0d59a7dd593781080726ec28a8a5792752e5fd144d772",
+              "id": "guide-blueprint",
+              "type": "blueprint",
+              "version": 4
+            },
+            "reason": "修订候选团队与依赖",
+            "status": "proposed",
+            "route": "discussion_decision_approval",
+            "approval_status": "not_requested",
+            "impact": {
+              "scope": "candidate_graph_only",
+              "changed_tasks": [],
+              "affected_tasks": [],
+              "affected_artifacts": [],
+              "affected_decisions": [],
+              "affected_dependencies": [],
+              "affected_team_members": [
+                "researcher",
+                "writer"
+              ],
+              "risk_level": "low",
+              "estimated_cost": {
+                "amount": 0,
+                "unit": "USD"
+              },
+              "estimated_delay_ms": 1000,
+              "estimates_are": "proposer_declarations"
+            }
+          },
+          "content_digest": "sha256:8a3281a8fadf27caf68444a85597112e7b7c06453ed5007b2eecaace083f8617"
+        }
+      },
+      "authority": "proposal_only",
+      "revision": 4,
+      "latest_proposal_version": 5,
+      "observed_at_ms": 1000000,
+      "last_command_id": "planning-demo-24",
+      "change_requests": {
+        "peer-recovery-proposal": {
+          "version": 2,
+          "kind": "task_proposal",
+          "status": "proposed",
+          "candidate_digest": "sha256:c8c022d683025ee18c0fc17f3e6197c838a7a08b56a53130fa566cea460bde69"
+        },
+        "team-reference-3": {
+          "version": 3,
+          "kind": "blueprint_change_request",
+          "status": "proposed",
+          "candidate_digest": "sha256:191700a483398e53fa667a560d19385b6462e3da50e6e443f5dc8a7ffbde7e74"
+        },
+        "team-reference-2": {
+          "version": 4,
+          "kind": "blueprint_change_request",
+          "status": "proposed",
+          "candidate_digest": "sha256:bec6d48c3de42fc601c0d59a7dd593781080726ec28a8a5792752e5fd144d772"
+        },
+        "paused-proposal": {
+          "version": 5,
+          "kind": "blueprint_change_request",
+          "status": "proposed",
+          "candidate_digest": "sha256:8a3281a8fadf27caf68444a85597112e7b7c06453ed5007b2eecaace083f8617"
+        }
+      }
+    },
+    "intervention:pause-demo": {
+      "id": "pause-demo",
+      "project_id": "demo-project",
+      "revision": 0,
+      "observed_at_ms": 1000000,
+      "origin_command_id": "governance-a3db7dbe83307858315f4cf7011d8642e1312552575b588f3f1441ffdddb1434",
+      "actor": {
+        "type": "human",
+        "id": "human-owner"
+      },
+      "action": "pause",
+      "command": "planning-demo-23",
+      "target": {
+        "type": "project",
+        "id": "demo-project",
+        "revision": 2
+      },
+      "reason": "人类暂停调度",
+      "impact": "project"
+    },
+    "intervention:resume-demo": {
+      "id": "resume-demo",
+      "project_id": "demo-project",
+      "revision": 0,
+      "observed_at_ms": 1000010,
+      "origin_command_id": "governance-e37e6fad32ac2afdd6a95a2a9c5e95d2a1a7b0c314a417441c861d859a9f27c6",
+      "actor": {
+        "type": "human",
+        "id": "human-owner"
+      },
+      "action": "resume",
+      "command": "planning-demo-25",
+      "target": {
+        "type": "project",
+        "id": "demo-project",
+        "revision": 3
+      },
+      "reason": "继续接收候选方案",
+      "impact": "project"
+    }
+  },
+  "event_count": 56,
+  "command_count": 28,
+  "state_digest": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+  "replay": [
+    {
+      "path": "artifacts/m3-01-demo-candidate-v1.sqlite",
+      "sha256": "e8e99e1b30f99317aaa632a20e106f1811c1b6a2f0a200f9830af9c3388800fc",
+      "event_count": 56,
+      "command_count": 28,
+      "prefixes_checked": 56,
+      "prefixes_with_pending_commands": 30,
+      "state_digest": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0
+      }
+    },
+    {
+      "path": "artifacts/m3-01-demo-candidate-v1-facts.sqlite",
+      "sha256": "44624f4851d74604e655b4ef2702d45a938ab775b05633787de107113bf429e9",
+      "event_count": 56,
+      "command_count": 28,
+      "prefixes_checked": 56,
+      "prefixes_with_pending_commands": 30,
+      "state_digest": "0a87ff864f312251a3f5617fe036d6e0d9b76a586e1adbede3447040df16e9ae",
+      "database_bytes_unchanged": true,
+      "guard_calls": {
+        "aetp.planning.service.PlanningService.handle": 0,
+        "aetp.planning.service.PlanningService.candidate": 0,
+        "aetp.planning.service.PlanningService.preview": 0,
+        "aetp.governance.service.GovernanceService._followups": 0,
+        "aetp.governance.service.GovernanceService.tick": 0,
+        "aetp.governance.trust.InputAuthority.issue": 0,
+        "aetp.governance.trust.InputAuthority.verify": 0,
+        "aetp.meetings.process.ProcessLog.read": 0,
+        "aetp.runtime.document.DocumentRuntime.register": 0,
+        "aetp.runtime.service.ExecutionService.start_session": 0,
+        "aetp.runtime.service.ExecutionService.dispatch": 0,
+        "aetp.runtime.service.ExecutionService.recover": 0,
+        "aetp.workspace.documents.DocumentWorkspace.write": 0,
+        "aetp.workspace.documents.DocumentWorkspace.query": 0,
+        "aetp.core.runtime.SimulatedRuntime.execute": 0,
+        "time.time_ns": 0,
+        "subprocess.Popen": 0
+      }
+    }
+  ],
+  "limits": {
+    "model_calls": 0,
+    "formal_verification": "INCONCLUSIVE",
+    "runtime_tasks": 0,
+    "full_m1_acceptance": "not_accepted",
+    "full_conformance_passed": 0,
+    "bootstrap_status": "not_started",
+    "test_028_passed": false
+  }
+}

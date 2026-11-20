@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-004",
+  "requirement": "未经 Approval 的高风险 Command 必须拒绝",
+  "status": "not_applicable",
+  "reason": "M2: Approval and real high-risk enforcement are absent; unsupported Commands are not an Approval implementation.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

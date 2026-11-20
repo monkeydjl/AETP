@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-009",
+  "requirement": "有集成面任务未经 Integration Gate 不得 COMPLETED；豁免必须显式留痕",
+  "status": "not_applicable",
+  "reason": "M3: Integration Gate and explicit exemption evidence are absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

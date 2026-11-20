@@ -1,0 +1,557 @@
+{
+  "frozen_at": "2026-10-05T14:24:10.924123+00:00",
+  "element_keys": [
+    "initial_state",
+    "input_surface",
+    "runtime_capability",
+    "fault_injection",
+    "expected",
+    "replay_result"
+  ],
+  "database": ".tmp/conformance-frozen-run.sqlite",
+  "counts": {
+    "total": 28,
+    "executed_passed": 28,
+    "executed_failed": 0,
+    "not_run": 0,
+    "status_passed": 28,
+    "status_pending": 0,
+    "status_failed": 0
+  },
+  "suite_digest": "sha256:69acdab6a7ab5b1c9ed85643b86bf985eb8f640c502a5976bd5fc94d57a57310",
+  "snapshot_digest": "sha256:9b0de6d2ba618b7918b5260ec24a22b0b893a94615325a24fedf21ac3a0fcdb0",
+  "entries": {
+    "TEST-001": {
+      "title": "同键同内容重试返回原结果，不重复提交领域 Event 批次",
+      "invariant": "INV-014",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "已登记 Project 与 Agents，无目标 Task 事实",
+        "input_surface": "task.create（同 idempotency_key、同 payload）提交两次",
+        "runtime_capability": "simulation-only；无模型/Shell/网络",
+        "fault_injection": "无（重复提交即触发幂等分支）",
+        "expected": "两次均 accepted；Event 总数不变，返回原结果",
+        "replay_result": "重放得到单一 task.created，状态与首次一致"
+      },
+      "elements_digest": "sha256:0a3dd23f0cff092d8fa023c2051e0b246476b64b1813562ac8a828f729a03135",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Identical retry returned cached result without duplicate events",
+      "duration_ms": 558.9
+    },
+    "TEST-002": {
+      "title": "Agent 不得直接修改 State",
+      "invariant": "INV-001",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 处于 planning，已有持久 Event",
+        "input_surface": "对 Projection 返回的 State 副本做直接赋值",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "直接改写派生 State 对象字段",
+        "expected": "Event Store 不受影响；重建 State 保持原值",
+        "replay_result": "Projection.rebuild 结果与修改前逐字节一致"
+      },
+      "elements_digest": "sha256:852da641e5dbb9bb3c73303db3a2a5a1150e74cd164cbc79f3f03e3e37c28bdc",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "State is derived and immutable; direct mutations do not alter event store truth",
+      "duration_ms": 498.66
+    },
+    "TEST-003": {
+      "title": "Task 不得跳过 Review / Verification 进入 VERIFIED",
+      "invariant": "INV-017",
+      "domain": "task_lease",
+      "fixture_kind": "boundary_assertion",
+      "elements": {
+        "initial_state": "Task 状态为 active，无质量周期记录",
+        "input_surface": "task.quality.evaluate 直接提交",
+        "runtime_capability": "simulation-only；无 Runner 执行",
+        "fault_injection": "在非 in_review 状态下发起求值",
+        "expected": "拒绝 INVALID_TRANSITION，Task 状态不变",
+        "replay_result": "重放不产生质量事件，状态保持 active"
+      },
+      "elements_digest": "sha256:c1648e9c8dc09a41103db78f6c252a2640f093b08a6046bad32938f1fea2e1b8",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Direct transition to verified without in_review blocked",
+      "duration_ms": 0.05
+    },
+    "TEST-004": {
+      "title": "未经 Approval 的高风险 Command 必须拒绝",
+      "invariant": "INV-006",
+      "domain": "governance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Governance 已配置，mission.activate 规则为 critical/manual",
+        "input_surface": "非 human_owner 的 Agent 提交 mission.activate",
+        "runtime_capability": "simulation-only；Approval 未授予",
+        "fault_injection": "缺失或错配 actor 的高风险命令",
+        "expected": "拒绝，无 mission.activated 事件",
+        "replay_result": "重放后 Mission 仍为 proposed"
+      },
+      "elements_digest": "sha256:82ed076d9f7d1690eca09d9f97e7c4194525b1b14e2c15b9314b1caa1989575d",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Unapproved high-risk command properly rejected",
+      "duration_ms": 1139.28
+    },
+    "TEST-005": {
+      "title": "删除 State Store 后重放 Event 得到一致状态",
+      "invariant": "INV-015",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "已完成若干 Command，产生持久 Event",
+        "input_surface": "清空派生缓存后仅凭 Event 重建",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "移除 Projection 缓存表",
+        "expected": "重建 State 与缓存前完全一致",
+        "replay_result": "两次 rebuild 结果相等（确定性）"
+      },
+      "elements_digest": "sha256:432b26e75960f85a46b96fa5d6864a1d26312130f74ed3edbb378a5c9010e698",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Derived cache deleted; pure event replay reconstructed identical state",
+      "duration_ms": 803.88
+    },
+    "TEST-006": {
+      "title": "Agent 崩溃后 Task 可按 Lease 重新分配",
+      "invariant": "Lease",
+      "domain": "task_lease",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Task 已创建，未被认领",
+        "input_surface": "task.claim(a-1) → task.release(a-1) → task.claim(a-2)",
+        "runtime_capability": "simulation-only；无真实进程死亡",
+        "fault_injection": "持有者主动释放（等价于崩溃后回收）",
+        "expected": "三次均 accepted；最终 owner 为 a-2，lease_epoch 单调递增",
+        "replay_result": "重放得到 owner=a-2 且 epoch 一致"
+      },
+      "elements_digest": "sha256:597a55633ce144cfeef481b7f278be6dddae26dcb01f5451632d9283db34646e",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Task safely reassigned to new agent after release",
+      "duration_ms": 1237.49
+    },
+    "TEST-007": {
+      "title": "Untrusted Input 不得直接授权 Command",
+      "invariant": "INV-020",
+      "domain": "governance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap，InputAuthority 已建立",
+        "input_surface": "以 receipt=None 调用 InputAuthority.verify",
+        "runtime_capability": "simulation-only；无受信入口",
+        "fault_injection": "缺失受信收据的输入",
+        "expected": "拒绝 INPUT_CONTEXT_INVALID",
+        "replay_result": "无授权事实写入，Event 流不变"
+      },
+      "elements_digest": "sha256:892dc66c051ef23e445ff164bfdef79e14512020b232600199f98d0fd9d89b22",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Untrusted input rejected without valid verification receipt",
+      "duration_ms": 386.12
+    },
+    "TEST-008": {
+      "title": "Review 通过但 Verification 缺失不得 VERIFIED",
+      "invariant": "冻结区分⑥",
+      "domain": "acceptance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Task 处于 in_review，Review 已 approved",
+        "input_surface": "task.quality.evaluate（无任何 Verification 记录）",
+        "runtime_capability": "simulation-only；Runner 未执行",
+        "fault_injection": "只提供 Review、完全省略 Verification",
+        "expected": "Task 停留 in_review，不进入 verified",
+        "replay_result": "重放后仍为 in_review，无 verified 事实"
+      },
+      "elements_digest": "sha256:ce414fda2219ab1a31758ff943241c1ad193c572b2515fcdbb6fe457ed2d4f47",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Real quality path kept task in_review after approval without verification",
+      "duration_ms": 1712.86
+    },
+    "TEST-009": {
+      "title": "有集成面任务未经 Integration Gate 不得 COMPLETED；豁免必须显式留痕",
+      "invariant": "INV-004",
+      "domain": "integration",
+      "fixture_kind": "boundary_assertion",
+      "elements": {
+        "initial_state": "Task 状态 verified，Integration 声明为 required",
+        "input_surface": "validate_can_complete(task, contract, quality_policy)",
+        "runtime_capability": "simulation-only；无真实 Git",
+        "fault_injection": "缺少 Gate 通过与豁免声明的完成请求",
+        "expected": "抛出 INTEGRATION_GATE_REQUIRED",
+        "replay_result": "无 completed 事实，Task 保持 verified"
+      },
+      "elements_digest": "sha256:8f1b2f880ab9da2283d1db2847b6d7c32bb3e5b215288e549202fbb42feecbab",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Unexempted task blocked from completion without Integration Gate",
+      "duration_ms": 0.02
+    },
+    "TEST-010": {
+      "title": "Mission Acceptance 失败不得 Delivery",
+      "invariant": "INV-019",
+      "domain": "acceptance",
+      "fixture_kind": "boundary_assertion",
+      "elements": {
+        "initial_state": "Mission 处于 acceptance，crit_2 无验证记录",
+        "input_surface": "mission.complete（actor=human_owner）",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "success_criteria 存在未验证项",
+        "expected": "拒绝 CRITERIA_UNVERIFIED",
+        "replay_result": "重放后 Mission 仍为 acceptance，无 completed"
+      },
+      "elements_digest": "sha256:d2c374a3424130d54521377713d13c9629707f0590e3d0b81314f46d208046f9",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Unverified criteria successfully blocked mission delivery",
+      "duration_ms": 0.04
+    },
+    "TEST-011": {
+      "title": "Approval 过期后必须产生升级路径，不得静默悬挂",
+      "invariant": "Governance",
+      "domain": "governance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Approval 状态 pending，expires_at=1000，on_expire=escalate",
+        "input_surface": "approval.expire（at=2000，已过期）",
+        "runtime_capability": "simulation-only；Governance Clock 冻结语义",
+        "fault_injection": "越过 expires_at 的时间推进",
+        "expected": "产生 approval.expired，expiration_resolution.kind=escalate",
+        "replay_result": "重放得到 status=expired 与相同 resolution"
+      },
+      "elements_digest": "sha256:e1f0760ffdcb5045ddbe34ca7ead6a5c1855197eb488d8e3c1c267c7c3ce8d18",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Approval expiration produced explicit escalation resolution",
+      "duration_ms": 0.08
+    },
+    "TEST-012": {
+      "title": "Orchestrator 重启后调度状态完整恢复",
+      "invariant": "INV-021",
+      "domain": "runtime",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap，无 Task",
+        "input_surface": "task.create 后仅凭 Event Store 重建调度状态",
+        "runtime_capability": "simulation-only；Orchestrator 无状态",
+        "fault_injection": "丢弃内存中的调度视图",
+        "expected": "重建后 task 事实完整可读",
+        "replay_result": "Projection.rebuild 恢复 title 等全部字段"
+      },
+      "elements_digest": "sha256:ea78aabf96e072d637555f9d75447babbe82bea0871881d20efc754d6ba2d642",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Scheduling state completely recovered from durable event store",
+      "duration_ms": 635.12
+    },
+    "TEST-013": {
+      "title": "Agent 主动发起的协作与 Orchestrator 下发走同一条 Command 校验路径",
+      "invariant": "Architecture",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap，Agents 已登记",
+        "input_surface": "Agent 提交 task.create；bootstrap 提交 agent.register",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "无（对照两种来源走同一 handler）",
+        "expected": "两类命令均经同一 CommandHandler 校验并被接受",
+        "replay_result": "重放得到两类事件，均符合各自契约"
+      },
+      "elements_digest": "sha256:9a8968806a80921d0e4190ba941d3bdad76ff19174b5ed81ac9c7c230d8de0df",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Unified command validation pipeline verified across actors",
+      "duration_ms": 718.16
+    },
+    "TEST-014": {
+      "title": "工作副本不相互污染；声称安全隔离的 Provider 还须阻止越界访问",
+      "invariant": "Provider",
+      "domain": "runtime",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "本工作区 DocumentWorkspace 已建立并持有身份",
+        "input_surface": "path_for(action)，其中 action.workspace_provider_id 属外部工作区",
+        "runtime_capability": "Windows 固定文档 Provider（真实边界）",
+        "fault_injection": "跨工作区身份的动作引用",
+        "expected": "抛出 WorkspaceViolation，拒绝解析路径",
+        "replay_result": "无文件效果产生，工作区内容不变"
+      },
+      "elements_digest": "sha256:d1fb64cc36a231bf2d292cbc7cdfe12dda3f571401e769d2ea6b299cafc1af93",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Foreign workspace action blocked by provider boundary",
+      "duration_ms": 2.32
+    },
+    "TEST-015": {
+      "title": "无 Manager 的 Agent A / B 可直接发言、回复、质疑与提案；独立审查不要求接管被审 Task，无职级前置",
+      "invariant": "Equal Peer",
+      "domain": "collaboration",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "两名平等 Agent 已登记",
+        "input_surface": "a-1 发 proposal；a-2 以 agreement 直接回复",
+        "runtime_capability": "simulation-only；消息总线为进程内记录",
+        "fault_injection": "无（不引入 Manager 中转）",
+        "expected": "两条消息均被接受，回复可显式引用原消息",
+        "replay_result": "消息记录保留 sender/recipients/references"
+      },
+      "elements_digest": "sha256:27ba891e5796e311adb6eb8a96d0e969f25c16ba09183f1054b0c8231b3e0566",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Equal agents communicate without manager mediation",
+      "duration_ms": 415.49
+    },
+    "TEST-016": {
+      "title": "伪造 actor 或冒用他人 Binding 不得取得执行权",
+      "invariant": "Security",
+      "domain": "task_lease",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap，a-1 与 a-2 已登记",
+        "input_surface": "Command.actor_id=a-1，但 authenticated_actor_id=a-2",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "声明身份与受信身份不一致",
+        "expected": "拒绝 ACTOR_MISMATCH，无事件写入",
+        "replay_result": "Event 流长度不变"
+      },
+      "elements_digest": "sha256:37813d442e0b676f67b53d07a6dc410c5e615caf9a0c61bccfb2b28025072f58",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Spoofed actor identity rejected by boundary handler",
+      "duration_ms": 565.01
+    },
+    "TEST-017": {
+      "title": "提交 Event 后、返回响应前崩溃，恢复重试得到原结果且无重复效果",
+      "invariant": "Recovery",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap",
+        "input_surface": "同一 Command 由新的 CommandHandler 实例重投",
+        "runtime_capability": "simulation-only；以新实例模拟重启",
+        "fault_injection": "提交后丢弃客户端响应",
+        "expected": "返回原结果与相同 aggregate_revision，无新事件",
+        "replay_result": "Event 总数不变，状态一致"
+      },
+      "elements_digest": "sha256:29ce452fb7eb9868c7628707af6a4e9afb6a5a858d7ab1ac177f423141dfa9de",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Post-commit recovery returns preserved receipt without duplicate events",
+      "duration_ms": 648.84
+    },
+    "TEST-018": {
+      "title": "同幂等键异内容被拒绝；释放后用新键可合法再次认领",
+      "invariant": "Idempotency",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap，无目标 Task",
+        "input_surface": "先 task.create(key=k, payload=A)，再同 key 提交 payload=B",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "复用幂等键但改变内容摘要",
+        "expected": "第二次拒绝 IDEMPOTENCY_CONFLICT",
+        "replay_result": "仅一条 task.created 事实"
+      },
+      "elements_digest": "sha256:109bf8ca54f034fde3731c51d40e9caa977da7d272f654eaff6ce4357890f3e6",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Reused idempotency key with different content correctly rejected",
+      "duration_ms": 724.35
+    },
+    "TEST-019": {
+      "title": "两个 Agent 基于同一旧版本认领，最多一个成功并保持 Lease / Binding 一致",
+      "invariant": "Concurrency",
+      "domain": "task_lease",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Task 已创建，revision 已知",
+        "input_surface": "a-1 与 a-2 以同一 expected_revision 提交 task.claim",
+        "runtime_capability": "simulation-only；单进程 CAS",
+        "fault_injection": "同版本并发认领",
+        "expected": "恰好一个 accepted，另一个 rejected（REVISION_CONFLICT）",
+        "replay_result": "重放得到唯一 owner 与唯一 binding"
+      },
+      "elements_digest": "sha256:e985142c1bbc7ccf39992f1933e7b102df78b2bd78ce80efd0d0265c6180f5ac",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Concurrent claims serialized by CAS; exactly one succeeded",
+      "duration_ms": 1032.74
+    },
+    "TEST-020": {
+      "title": "外部结果 UNKNOWN 时查询 / 对账，不重复创建资源或发布",
+      "invariant": "External",
+      "domain": "runtime",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Action 处于 IN_FLIGHT，pinned 工作区根存在",
+        "input_surface": "ActionBroker.dispatch 后调用 service.reconcile",
+        "runtime_capability": "Windows 固定文档 Provider（真实文件效果）",
+        "fault_injection": "移除 pinned 工作区根，使写入产生 UNKNOWN",
+        "expected": "dispatch 与 reconcile 均为 unknown；资源不被重建",
+        "replay_result": "重放后 Action 仍为 unknown，无 completed 事实"
+      },
+      "elements_digest": "sha256:1846a71f0da20ae926928a7b10641bf894dade3429b2ed532688ec23cbb06375",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Real UNKNOWN action reconciled as UNKNOWN without re-creating the resource",
+      "duration_ms": 241.36
+    },
+    "TEST-021": {
+      "title": "Replay 不执行模型、Shell、Runtime.start 或已确认的工具动作",
+      "invariant": "Replay",
+      "domain": "command_event",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "已有持久 Event 流",
+        "input_surface": "Projection.rebuild(events)",
+        "runtime_capability": "simulation-only；无任何适配器",
+        "fault_injection": "无（观测重放期间是否有副作用）",
+        "expected": "重建完成且不触发外部动作",
+        "replay_result": "纯函数式：结果仅由 Event 决定"
+      },
+      "elements_digest": "sha256:0dba3577aeff7c5d27a577c749688584d5ba94fc20d9d39c6ebf6ccad0c8e4ec",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Replay completed with 7 effect tripwires armed and untripped",
+      "duration_ms": 618.18
+    },
+    "TEST-022": {
+      "title": "新代次生效后旧执行可留档但不能推进 Task / 合并；已在途效果仍对账",
+      "invariant": "Epoch",
+      "domain": "task_lease",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Task 已被认领，revision 已推进至 1",
+        "input_surface": "以过期 expected_revision=0 提交 task.release",
+        "runtime_capability": "simulation-only",
+        "fault_injection": "使用陈旧 revision 推进状态",
+        "expected": "拒绝 REVISION_CONFLICT",
+        "replay_result": "重放后 Task 状态与 owner 不变"
+      },
+      "elements_digest": "sha256:3f8943f6eaa1f9176e69bc3ca01d7737698ea083de4ed3f7c98d3ea6b4fda20c",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Stale revision command rejected by CAS guard",
+      "duration_ms": 1075.05
+    },
+    "TEST-023": {
+      "title": "审批后改变目标 / 参数被拒绝；Mission 审批绑定准则与交付快照",
+      "invariant": "Governance",
+      "domain": "governance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Approval ap-023 已按 arguments=A 请求并获授权",
+        "input_surface": "以同一 approval_id 提交 arguments=B 的 tool.request",
+        "runtime_capability": "Windows 固定文档 Provider；受信入口",
+        "fault_injection": "审批后篡改执行参数",
+        "expected": "拒绝 APPROVAL_STALE；原批准参数仍可执行",
+        "replay_result": "仅原参数对应的效果事实存在"
+      },
+      "elements_digest": "sha256:d4044044341bf2fdaec5f9a1fd546bc49b217ee47988fe51b45099d623ede5fe",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Real approval binding rejected tampered arguments and accepted the approved ones",
+      "duration_ms": 341.66
+    },
+    "TEST-024": {
+      "title": "更换代码、测试集、环境或验收标准后旧验证不能自动放行；合并基线检查有效",
+      "invariant": "Integration",
+      "domain": "integration",
+      "fixture_kind": "boundary_assertion",
+      "elements": {
+        "initial_state": "Task 处于 ready_for_integration，目标基线已记录",
+        "input_surface": "validate_merge(task, payload)，expected 与 current target commit 不一致",
+        "runtime_capability": "simulation-only；无真实 Git 执行",
+        "fault_injection": "目标分支基线前移",
+        "expected": "抛出 BASELINE_ADVANCED",
+        "replay_result": "无 merged 事实，Task 保持 ready_for_integration"
+      },
+      "elements_digest": "sha256:edb2c67f0268c31a789b7956f75fb17cb71033471adea827da6fe397caf8f0c8",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Baseline advancement successfully detected and blocked",
+      "duration_ms": 0.02
+    },
+    "TEST-025": {
+      "title": "PAUSED 继续记录在途事实而不派发；重启保持暂停，不把软暂停显示成彻底停止",
+      "invariant": "Governance",
+      "domain": "governance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 处于 active，Governance 已配置",
+        "input_surface": "project.pause 后提交 project.planning.configure",
+        "runtime_capability": "simulation-only；Governance Clock 在暂停期冻结",
+        "fault_injection": "在 PAUSED 期间尝试推进状态",
+        "expected": "pause 被接受；后续配置命令拒绝 PROJECT_PAUSED",
+        "replay_result": "重放后 Project 保持 paused"
+      },
+      "elements_digest": "sha256:40e3e28f86c0dd79c12f463836b05428f9bcb036239b646d545dd4a7b15e8500",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "PAUSED project correctly rejects state advancing commands",
+      "duration_ms": 1047.63
+    },
+    "TEST-026": {
+      "title": "绕过代理执行高风险操作被真实边界阻止；未具备能力不得宣称完整兼容",
+      "invariant": "Execution",
+      "domain": "runtime",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "协议命令类型集合已固定",
+        "input_surface": "构造未注册的 privileged action 命令类型",
+        "runtime_capability": "simulation-only；模型层边界",
+        "fault_injection": "绕过命令代理直接构造特权操作",
+        "expected": "ModelValidationError（unsupported type）",
+        "replay_result": "无事件产生，事实链不受污染"
+      },
+      "elements_digest": "sha256:c1ab2779588ebb12bb9b717a54d50e5e3a0ccf9aeb878ae743b9ff0cf4d88afb",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Privileged bypass blocked by protocol model boundary",
+      "duration_ms": 0.03
+    },
+    "TEST-027": {
+      "title": "输入来源标记跨 Agent 转述保留；来源未知按不可信处理，但普通讨论不要求审批",
+      "invariant": "Trust",
+      "domain": "governance",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "两名平等 Agent 已登记",
+        "input_surface": "带 untrusted_input=True 的 proposal，与普通 response 消息",
+        "runtime_capability": "simulation-only；消息总线为进程内记录",
+        "fault_injection": "跨 Agent 转述不可信来源",
+        "expected": "标记被保留；普通讨论不触发审批阻断",
+        "replay_result": "消息记录保留 untrusted_input 标记"
+      },
+      "elements_digest": "sha256:f00aa9170ba955fa2f07ac6d41198ddfadeff38ec924b908e30eb28dbe85c15d",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Untrusted input flag preserved; normal peer discussion requires no approval",
+      "duration_ms": 503.43
+    },
+    "TEST-028": {
+      "title": "两个以上平等 Agent 从粗糙想法讨论方案并按方案交付，无 Manager 必经路径",
+      "invariant": "End-to-End",
+      "domain": "collaboration",
+      "fixture_kind": "real_path",
+      "elements": {
+        "initial_state": "Project 已 bootstrap，两名平等 Agent 已登记",
+        "input_surface": "mission.propose → 对等消息协商 → team/blueprint 提案 → 门禁 → mission.verify/complete",
+        "runtime_capability": "simulation-only；无 Manager、无隐藏主 Agent",
+        "fault_injection": "无（端到端正向链路）",
+        "expected": "全链路 accepted；Mission 终态 completed",
+        "replay_result": "重放得到 mission=completed 与完整步骤清单"
+      },
+      "elements_digest": "sha256:65287bd3dc40dbb33d910016421a8150f37dd669d833e24418e3ef893b554b9a",
+      "observed_status": "passed",
+      "observed_execution_status": "passed",
+      "observed_summary": "Autonomous two equal agents negotiation and end-to-end delivery passed",
+      "duration_ms": 417.03
+    }
+  }
+}

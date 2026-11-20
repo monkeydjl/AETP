@@ -1,0 +1,20 @@
+{
+  "test_id": "TEST-014",
+  "requirement": "工作副本不相互污染；声称安全隔离的 Provider 还须阻止越界访问",
+  "status": "not_applicable",
+  "reason": "M1: Workspace isolation and real Provider enforcement are absent.",
+  "execution": "not_run",
+  "runtime_capabilities": {
+    "runtime": "deterministic simulation-only",
+    "real_adapters": [],
+    "model": false,
+    "shell": false,
+    "network": false,
+    "runtime_start": false,
+    "external_actions": false,
+    "lease_binding": false,
+    "approval": false,
+    "review_verification": false,
+    "bootstrap_acceptance": false
+  }
+}

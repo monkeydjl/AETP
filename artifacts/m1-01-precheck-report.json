@@ -1,0 +1,37 @@
+{
+  "artifact_digest": "sha256:d09a7e5214b858894bcbb5c4ca015cc3a8e34eec90453ab080627043c7880bd5",
+  "artifact_id": "guide-v1",
+  "checks": [
+    {
+      "criterion": "直接对话",
+      "matched": true
+    },
+    {
+      "criterion": "独立审查",
+      "matched": true
+    },
+    {
+      "criterion": "证据与权限",
+      "matched": true
+    }
+  ],
+  "command": "aetp.document.contains_all/v1",
+  "criteria_ref": {
+    "content_digest": "sha256:4039b336d5e8a2e5183f4f8feba5e66e9be7cf890a63534fe7a08246fb580e99",
+    "revision": 1,
+    "task_id": "guide"
+  },
+  "environment": {
+    "implementation": "cpython",
+    "platform": "win32",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "scope": "in_process_text_precheck"
+  },
+  "environment_digest": "sha256:ee0544342bd7da8367b4892d13be618f7a81c721a1cbaf63f531bb349f5d97c6",
+  "limitation": "Internal precheck only; Runner action authorization is unavailable.",
+  "method": "literal_text_contains_all",
+  "observed_at": "2026-09-11T16:12:58.760466+00:00",
+  "observed_result": "PASSED",
+  "schema_version": "0.1",
+  "test_suite_digest": "sha256:ea2942f29cef54067884dea22c23fd3698d5ad3e2509a318d793b541cf1eea6c"
+}
