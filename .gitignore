@@ -30,3 +30,17 @@ var/
 # would otherwise abort `git add`.
 Docs/development/evidence/**/temp/
 Docs/development/evidence/**/tmp/
+
+# Historical evidence run output: the per-run files sitting directly under
+# Docs/development/evidence/ are superseded drafts and intermediate run
+# directories (review-runs/, *-input-blobs/, fixtures/) from earlier sessions.
+# None of them is read by tools/devprep.py, which works from fixed paths only.
+# The accepted evidence for every work item is tracked and stays visible below;
+# anything new that does belong in evidence must be `git add -f`-ed explicitly.
+Docs/development/evidence/*
+!Docs/development/evidence/preparation-report.json
+!Docs/development/evidence/environment.json
+!Docs/development/evidence/devprep-check.json
+!Docs/development/evidence/knowledge-graph-check.json
+!Docs/development/evidence/backlog-check.json
+!Docs/development/evidence/preparation-log.md
