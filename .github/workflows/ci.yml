@@ -25,6 +25,19 @@ jobs:
             --db .tmp/ci-conformance.sqlite \
             --json .tmp/ci-conformance.json \
             --frozen-evidence .tmp/ci-conformance-frozen.json
+      # Without this, a failing conformance run reports only the pass/fail
+      # totals: the per-test detail stays inside the JSON the runner wrote and
+      # dies with the job. `if: always()` is the point - the artifact matters
+      # most on the runs that fail.
+      - name: Upload conformance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: conformance-report
+          path: |
+            .tmp/ci-conformance.json
+            .tmp/ci-conformance-frozen.json
+          if-no-files-found: warn
   note:
     runs-on: ubuntu-latest
     if: false
