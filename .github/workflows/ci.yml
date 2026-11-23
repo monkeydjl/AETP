@@ -6,7 +6,13 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    # The conformance suite enforces platform requirements rather than skipping
+    # them: seven fixtures raise EnforcementUnavailable unless they run on
+    # Windows with a durable local database (TEST-004/025/028) or the fixed
+    # document provider is available (TEST-008/014/020/023). On ubuntu-latest
+    # those seven fail by design, so the suite cannot go green there. Running on
+    # Windows is the honest choice: it tests what the code actually supports.
+    runs-on: windows-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +26,9 @@ jobs:
         run: |
           python -m unittest discover -s tests/preparation -v
       - name: Conformance runner (clean db)
+        # bash for the POSIX env-assignment prefix and the line continuations
+        # below; pwsh would read "PYTHONPATH=src python ..." as one command name.
+        shell: bash
         run: |
           PYTHONPATH=src python -m conformance.runner \
             --db .tmp/ci-conformance.sqlite \
