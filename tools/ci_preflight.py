@@ -53,11 +53,13 @@ def _parse_workflow(text: str) -> dict[str, Any]:
     # Each `- name:` opens a step; collect the run bodies that follow.
     steps = re.findall(r"- name:\s*(.+?)\n\s+run:\s*\|\n((?:\s{10,}.*\n?)+)", text)
     facts["steps"] = [{"name": n.strip(), "run": _dedent(b)} for n, b in steps]
-    # A disabled job that advertises the skeleton is a deliberate disclaimer.
-    facts["disclaimer_job_disabled"] = bool(
-        re.search(r"- run:\s*echo \"This workflow is a config skeleton", text)
-        and re.search(r"if:\s*false", text)
-    )
+    # The workflow used to carry a disabled `if: false` job whose text said it had
+    # never run against a real remote. It has now: run 45193365904 completed on
+    # windows-latest with conformance 28/28. So the fact to check flipped - a
+    # workflow that still *claims* it never ran would now be the stale one.
+    disabled_jobs = re.findall(r"^\s{2}(\w+):\s*\n(?:\s+.*\n)*?\s+if:\s*false", text, re.M)
+    facts["disabled_jobs"] = sorted(set(disabled_jobs))
+    facts["claims_never_run"] = bool(re.search(r"has NOT been run against a real", text))
     return facts
 
 
@@ -116,10 +118,11 @@ def check_workflow() -> dict[str, Any]:
             "minor series such as '3.14' to pick an interpreter"
         )
 
-    if not facts.get("disclaimer_job_disabled"):
+    if facts.get("claims_never_run"):
         problems.append(
-            "the skeleton disclaimer job is gone or enabled: either the workflow really ran "
-            "(update this tool's premise and the backlog) or the disclaimer was lost"
+            "ci.yml still says the workflow has never run against a real remote, but run "
+            "45193365904 completed on windows-latest. Update that text instead of keeping a "
+            "disclaimer that is no longer true"
         )
 
     # Every command the workflow runs must be runnable from the repo root as written.

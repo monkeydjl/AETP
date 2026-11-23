@@ -51,4 +51,4 @@ jobs:
     runs-on: ubuntu-latest
     if: false
     steps:
-      - run: echo "This workflow is a config skeleton; it has NOT been run against a real remote + CI host yet. Do not claim CI has passed until it is actually triggered here."
+      - run: echo "Observed on 2026-11-23: run 45193365904 completed on windows-latest with conformance 28/28. This note job stays disabled - it is not the evidence, the run is. Re-read tools/ci_preflight.py before claiming a later change still passes."

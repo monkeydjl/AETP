@@ -904,7 +904,13 @@ preparation 27/27；准备检查不计完整 Conformance。固定候选 210 输�
 
 - 用户选择：写 CI/lint 配置骨架（不伪造跑通）。
 - 产出：`.github/workflows/ci.yml`（preparation check + preparation unittest + conformance runner clean-db 三步骤）+ `ruff.toml`（select E/F/W/I，py314 target）。
-- 关键披露：这些是 **config skeleton**，未在真实 remote+CI host 上运行；不宣称 CI/lint 已 pass。CI 需用户提供 remote 仓库 + CI 服务，lint 需 pinned lint 工具（ruff 未安装、产品零第三方依赖）。
+- 关键披露（2026-11-23 已过期，见下行更正）：这些曾是 **config skeleton**，未在真实 remote+CI host 上运行。
+- **2026-11-23 更正：CI 已真实跑通。** 用户提供 remote `https://github.com/monkeydjl/AETP.git`，首次 push 后 CI 触发两次失败，第三次成功：
+  - run 45049575858 / 45049990953（ubuntu-latest）：conformance 21 passed / 7 failed。7 条全为 `EnforcementUnavailable`——TEST-004/025/028 要求 "Windows and a durable local database"，TEST-008/014/020/023 要求 "fixed document provider currently supports Windows only"。**不是 bug，是 workflow 平台与代码支持平台不匹配。**
+  - 第一次失败只能看到汇总，故提交 `31fb3e8` 加 `actions/upload-artifact@v4`（`if: always()`）上传报告，才拿到逐条明细。**教训：失败时先确保诊断信息能带出来，再谈修因。**
+  - 用户决定改跑 Windows（权衡：放弃 Linux 覆盖，换取与代码实际支持面一致）。提交 `6e97804`：`runs-on: windows-latest`，且 conformance 步骤必须 `shell: bash`——`PYTHONPATH=src python ...` 前缀与 `\` 续行是 bash 语法，Windows 默认 `pwsh` 会把它当单一命令名。
+  - run 45193365904（windows-latest）**success，Conformance Results: 28 passed, 0 failed, 0 not run (Total: 28)**。这是实测结果，不是推断。
+- lint 仍是骨架：ruff 未安装、产品零第三方依赖，**不得**宣称 lint 已通过。
 - 证据：`Docs/development/evidence/2026-10-09-m4-01-b4-ci-lint-skeleton.json`。
 - status_effect：仅配置制品；不改 status.json；bootstrap_status 仍 not_started、phase 仍 preparation。
 - 至此 M4-01 状态：B0/B1/B2/B3 通过，B4 build 通过 + CI/lint 骨架（未实测），B5 待 CRITICAL 人类验收（§9.4/INV-019）。正式 `bootstrap_status=verified` 仍不能写入，直到真实 CI 跑通 + CRITICAL 人类盖章。
@@ -2042,7 +2048,9 @@ M1/M2(既有测试不守新 pin;4 条新测试里 2 条对变异不敏感)**接�
 
 **摘除登记**：11 处 expectedFailure/skipped 全部删掉（mission_acceptance 5、TEST-028 2+1、bootstrap 3），`conformance/m3/test_028.py` 的 `EVIDENCE_CAPTURE_AVAILABLE` 跳过分支一并删除，TEST-028 恢复 28/28。
 
-**全量**：1036 tests，只剩 `tests.conformance.test_isolation_probe` 两条红——**git stash 掉本轮全部改动后单跑同样失败**，是 Docker daemon 不可达的既有环境缺口，与本轮无关。再次验证了 FI-05 那条"看 FAIL 行要认文件和行号"的教训：全量日志里那行来自 `test_runner_report.py:78` 的注入用例。
+**全量**：1036 tests，只剩 `tests.conformance.test_isolation_probe` 两条红。**当时判断为「Docker daemon 不可达」——该判断已证伪，见下条更正。** 再次验证了 FI-05 那条"看 FAIL 行要认文件和行号"的教训：全量日志里那行来自 `test_runner_report.py:78` 的注入用例。
+
+**2026-11-11 更正（同日）**：`docker info` 实测 **可达**（ServerVersion 29.2.1，`docker ps` 有运行中容器）。两条红的真因是探针自身判据错误——它把「容器内 `/outside_escape` 可写」当作越界证据，而该路径位于容器自己的可写根文件系统内，任何容器都成立，**证明不了任何边界**。改为宿主侧实测（探针根目录只读挂载 + 检查宿主 canary 是否被创建）后，探针 **Ran 4 tests OK**，`os_sandbox` 实测 `observed=true`。教训：**宣布环境缺口前必须先实测，不能把测试失败归因于环境**——这与 FI-05 是同一类错误的两面。
 
 **证据**：`Docs/development/evidence/2026-11-11-b5-bootstrap-evidence-command.json`；M4-01 仍 blocked（真实 CI remote + CRITICAL 人类验收）。
 
