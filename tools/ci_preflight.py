@@ -39,11 +39,37 @@ def _git(*args: str) -> tuple[int, str]:
     return r.returncode, (r.stdout if r.returncode == 0 else r.stderr).strip()
 
 
+def _yaml_parse_error(text: str) -> str:
+    """Return a description of the first YAML error, or "" when it parses.
+
+    PyYAML is a development dependency of this tool, not of the product: the
+    product itself stays dependency-free. If it is missing we cannot claim the
+    file is well formed, so the absence is reported as an error instead of being
+    treated as a pass - a check that silently skips is worse than no check.
+    """
+    try:
+        import yaml
+    except ImportError:
+        return "PyYAML is not installed, so this tool cannot verify the file parses"
+    try:
+        yaml.safe_load(text)
+    except yaml.YAMLError as exc:
+        # The scanner message plus its line/column is what made 0422d6a's cause
+        # obvious; keep it to one line so it reads as a problem, not a traceback.
+        return " ".join(str(exc).split())
+    return ""
+
+
 def _parse_workflow(text: str) -> dict[str, Any]:
     """Read the few facts we need without a YAML dependency.
 
     A missing PyYAML must not turn this check into a silent pass, so every field
     is required to be found explicitly rather than defaulted.
+
+    These regexes read a file they assume is already valid YAML. They cannot
+    decide that themselves - which is exactly how commit 7c885bd shipped an
+    unparseable workflow while this tool reported OK. `check_workflow` therefore
+    parses the document first and only reaches these extractors once it loads.
     """
     facts: dict[str, Any] = {}
     python = re.search(r'python-version:\s*"([^"]+)"', text)
@@ -107,7 +133,18 @@ def check_workflow() -> dict[str, Any]:
     if not WORKFLOW_PATH.exists():
         return {"ok": False, "problems": [f"missing {WORKFLOW_PATH.relative_to(ROOT)}"], "notes": []}
 
-    facts = _parse_workflow(WORKFLOW_PATH.read_text(encoding="utf-8"))
+    text = WORKFLOW_PATH.read_text(encoding="utf-8")
+    # Parse before extracting. Every regex below assumes a well-formed document,
+    # so a scanner error has to stop the check here rather than slip past it.
+    parse_error = _yaml_parse_error(text)
+    if parse_error:
+        return {
+            "ok": False,
+            "problems": [f"ci.yml is not valid YAML, so nothing below can be trusted: {parse_error}"],
+            "notes": [],
+        }
+
+    facts = _parse_workflow(text)
     for key in ("python_version", "runs_on", "actions", "steps"):
         if not facts.get(key):
             problems.append(f"ci.yml has no {key}")
