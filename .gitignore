@@ -44,3 +44,9 @@ Docs/development/evidence/*
 !Docs/development/evidence/knowledge-graph-check.json
 !Docs/development/evidence/backlog-check.json
 !Docs/development/evidence/preparation-log.md
+
+# Docs/Docs.zip is a 2026-09-04 bundling of the two design documents that are
+# already tracked here as .md files (and at larger, newer versions). Nothing in
+# the repository references it, so it is not evidence and must not be mistaken
+# for a snapshot of the current spec. Kept on disk, out of version control.
+Docs/Docs.zip
