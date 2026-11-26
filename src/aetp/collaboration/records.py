@@ -4,10 +4,21 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from aetp.domain.models import (
-    ModelValidationError, VersionedModel, _json_value, _non_empty_string, _non_negative_int,
+from aetp.collaboration.policy import (
+    POLICY_VERSION,
+    PolicyViolation,
+    digest_text,
+    digest_value,
+    strings,
+    text,
 )
-from aetp.collaboration.policy import POLICY_VERSION, PolicyViolation, digest_text, digest_value, strings, text
+from aetp.domain.models import (
+    ModelValidationError,
+    VersionedModel,
+    _json_value,
+    _non_empty_string,
+    _non_negative_int,
+)
 
 
 def _identifiers(record, names) -> None:

@@ -1,14 +1,23 @@
-# Lint configuration skeleton (ruff). NOTE: ruff is not installed in this
-# workspace and the product is stdlib-only, so this file is a config skeleton
-# only; it has NOT been executed. Do not claim lint has passed until a pinned
-# lint tool is actually run.
+# Lint configuration (ruff).
+#
+# ruff IS installed here (0.17.6). This file previously claimed it was not, and
+# carried a `target-version` key under [format], which ruff rejects outright: it
+# is a command-line flag, not a configuration field, so every `ruff check` in
+# this repo died parsing this file before looking at a single source file. That
+# is how lint went unexecuted without anyone noticing.
+#
+# Run it as:
+#   python -m ruff check --target-version py314 src/ tests/ tools/ conformance/
+#
+# Line length: E501 is deliberately NOT enabled. The 1626 E501 findings under
+# the default 88-column limit are all pre-existing formatting choices, not
+# defects, and reformatting them would rewrite most of src/ for no behavioural
+# gain. If a limit is ever adopted it should come with a formatting pass of its
+# own, not be smuggled in through a lint config.
 
 [lint]
 select = ["E", "F", "W", "I"]
-ignore = []
+ignore = ["E501"]
 
 [format]
 quote-style = "double"
-
-# Product sources use Python 3.14 features (str | None unions etc.).
-target-version = "py314"

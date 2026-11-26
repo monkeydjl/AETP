@@ -4,16 +4,23 @@ from __future__ import annotations
 
 from dataclasses import replace
 
+from aetp.collaboration.contracts import COMMAND_AGGREGATES
+from aetp.collaboration.messages import MessageBus, MessageError, participant
+from aetp.collaboration.policy import (
+    POLICY_VERSION,
+    PolicyViolation,
+    canonical_json,
+    digest_text,
+    digest_value,
+    strings,
+    text,
+    validate_payload,
+)
+from aetp.collaboration.records import Artifact, Review, Verification
 from aetp.core.commands import CommandHandler, CommandResult
 from aetp.core.projection import Projection
 from aetp.domain.models import Command, Event, ModelValidationError
 from aetp.storage.sqlite_store import SQLiteStore
-from aetp.collaboration.contracts import COMMAND_AGGREGATES
-from aetp.collaboration.messages import MessageBus, MessageError, participant
-from aetp.collaboration.policy import (
-    POLICY_VERSION, PolicyViolation, canonical_json, digest_text, digest_value, strings, text, validate_payload,
-)
-from aetp.collaboration.records import Artifact, Review, Verification
 
 
 class CollaborationService(CommandHandler):

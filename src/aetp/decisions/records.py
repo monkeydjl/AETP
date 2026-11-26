@@ -2,10 +2,21 @@
 
 import copy
 
-from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value, strings, text
+from aetp.collaboration.policy import (
+    PolicyViolation,
+    canonical_json,
+    digest_value,
+    strings,
+    text,
+)
 from aetp.meetings.contracts import POLICY_VERSION
 from aetp.meetings.policy import evidence_refs, natural, payload
-from aetp.meetings.records import Contribution, require_member, summarize, validate_checkpoint_prefixes
+from aetp.meetings.records import (
+    Contribution,
+    require_member,
+    summarize,
+    validate_checkpoint_prefixes,
+)
 
 
 def source_reference(value, state, actor):

@@ -7,10 +7,10 @@
     No path supplied by an Agent reaches these functions.
 """
 
-from contextlib import contextmanager
 import ctypes
-from ctypes import wintypes
 import os
+from contextlib import contextmanager
+from ctypes import wintypes
 from pathlib import Path
 
 from aetp.workspace.gate import EnforcementUnavailable

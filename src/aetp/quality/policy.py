@@ -9,7 +9,8 @@ from aetp.governance.policy import current, fields, principal, revision, route
 from aetp.governance.trust import source_record
 from aetp.meetings.policy import natural
 from aetp.quality.contracts import SCHEMA
-from aetp.runtime.contracts import POLICY_VERSION as EXECUTION_POLICY, UNSETTLED
+from aetp.runtime.contracts import POLICY_VERSION as EXECUTION_POLICY
+from aetp.runtime.contracts import UNSETTLED
 from aetp.runtime.policy import governance
 
 

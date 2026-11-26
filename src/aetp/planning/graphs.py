@@ -2,7 +2,13 @@
 
 import copy
 
-from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value, strings, text
+from aetp.collaboration.policy import (
+    PolicyViolation,
+    canonical_json,
+    digest_value,
+    strings,
+    text,
+)
 from aetp.governance.policy import fields
 from aetp.planning.references import decisions, resolve
 

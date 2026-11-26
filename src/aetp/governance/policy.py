@@ -3,7 +3,11 @@
 import copy
 
 from aetp.collaboration.messages import participant
-from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value, text
+from aetp.collaboration.policy import (
+    PolicyViolation,
+    digest_value,
+    text,
+)
 from aetp.governance.contracts import ACTION_RISKS, RISKS, ROLES, system_actor
 from aetp.meetings.policy import natural
 

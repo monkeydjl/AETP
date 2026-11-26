@@ -1,22 +1,20 @@
 """Trusted governance host. Compounds commit atomically; Replay never invokes it."""
 
-from contextvars import ContextVar
 import copy
+from contextvars import ContextVar
 
 from aetp.collaboration.policy import PolicyViolation
 from aetp.core.idempotency import IdempotencyConflict
 from aetp.core.projection import Projection
 from aetp.domain.models import Command, ModelValidationError
-from aetp.governance.contracts import COMMAND_AGGREGATES, SCHEMA, system_actor
 from aetp.governance.causality import command_id, continuations, expiry_id
-from aetp.governance.credential_broker import CredentialBrokerError
+from aetp.governance.contracts import COMMAND_AGGREGATES, SCHEMA, system_actor
 from aetp.governance.policy import current
 from aetp.governance.projection import evaluate
 from aetp.governance.snapshots import snapshot
 from aetp.governance.trust import InputAuthority
-from aetp.meetings.service import MeetingService
 from aetp.meetings.policy import projected_time
-from aetp.runtime.contracts import child_id
+from aetp.meetings.service import MeetingService
 from aetp.runtime.policy import observed_time
 from aetp.workspace.gate import ResourceGate
 
@@ -337,7 +335,10 @@ class GovernanceService(MeetingService):
         authority, so the Broker is asked on behalf of the record's owner: the
         Broker itself has no human concept and checks ownership by agent id.
         """
-        broker = self._require_reachable_broker()
+        # The call is the check: it raises CREDENTIAL_UNAVAILABLE when the
+        # Broker is missing or unwired, and that must happen before a revoke is
+        # reported as applied. Only the binding is unused.
+        self._require_reachable_broker()
         token_ref = record.get("token_ref")
         owner = record.get("owner_id")
         if not isinstance(token_ref, str) or not token_ref:

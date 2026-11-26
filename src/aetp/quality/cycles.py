@@ -3,7 +3,12 @@
 import copy
 
 from aetp.acceptance.records import require
-from aetp.collaboration.policy import POLICY_VERSION, canonical_json, digest_text, digest_value
+from aetp.collaboration.policy import (
+    POLICY_VERSION,
+    canonical_json,
+    digest_text,
+    digest_value,
+)
 from aetp.governance.policy import current
 from aetp.quality.contracts import SCHEMA
 from aetp.quality.policy import current_policy, execution_context, observed_live

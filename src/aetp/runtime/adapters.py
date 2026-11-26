@@ -7,9 +7,8 @@ External execution agents interface with AETP through structured Runtime Adapter
 from __future__ import annotations
 
 import abc
-import copy
 from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 
 class AdapterSecurityError(PermissionError):

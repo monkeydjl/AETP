@@ -2,7 +2,7 @@
 
 import math
 
-from aetp.collaboration.policy import PolicyViolation, strings, text
+from aetp.collaboration.policy import PolicyViolation, text
 from aetp.meetings.contracts import POLICY_VERSION
 
 DEFAULTS = {"token_budget": 100000, "time_budget_ms": 1200000, "max_rounds": 3,

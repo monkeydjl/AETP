@@ -6,7 +6,12 @@ from aetp.acceptance.records import require
 from aetp.collaboration.policy import canonical_json, text
 from aetp.governance.policy import current, fields, has_role, principal, revision
 from aetp.quality.contracts import SCHEMA, review_id
-from aetp.quality.cycles import active_cycle, advance_task, artifact_sources, target_binding
+from aetp.quality.cycles import (
+    active_cycle,
+    advance_task,
+    artifact_sources,
+    target_binding,
+)
 from aetp.quality.policy import authorize, no_unsettled
 
 

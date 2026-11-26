@@ -2,8 +2,14 @@
 
 from aetp.collaboration.policy import PolicyViolation, canonical_json
 from aetp.domain.models import Command, ModelValidationError
-from aetp.governance.contracts import COMMAND_AGGREGATES, COMMAND_TERMINALS, INTERNAL_COMMANDS, SCHEMA, system_actor
 from aetp.governance.causality import continuations, validate_context
+from aetp.governance.contracts import (
+    COMMAND_AGGREGATES,
+    COMMAND_TERMINALS,
+    INTERNAL_COMMANDS,
+    SCHEMA,
+    system_actor,
+)
 from aetp.governance.policy import configure, current, principal
 from aetp.runtime.policy import observed_time
 

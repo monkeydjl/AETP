@@ -3,8 +3,8 @@
 from aetp.collaboration.policy import PolicyViolation, canonical_json
 from aetp.domain.models import Command, ModelValidationError
 from aetp.quality.contracts import COMMAND_AGGREGATES, COMMAND_TERMINALS, SCHEMA
-from aetp.quality.records import evaluate
 from aetp.quality.lifecycle import finish_continuation
+from aetp.quality.records import evaluate
 
 
 def reduce_record(event, previous, state):

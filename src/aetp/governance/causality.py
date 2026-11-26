@@ -4,7 +4,12 @@ import copy
 
 from aetp.collaboration.policy import PolicyViolation, canonical_json, text
 from aetp.domain.models import ModelValidationError
-from aetp.governance.contracts import COMMAND_AGGREGATES, INTERNAL_COMMANDS, SCHEMA, system_actor
+from aetp.governance.contracts import (
+    COMMAND_AGGREGATES,
+    INTERNAL_COMMANDS,
+    SCHEMA,
+    system_actor,
+)
 from aetp.runtime.contracts import child_id
 
 

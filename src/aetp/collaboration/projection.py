@@ -4,9 +4,14 @@ from __future__ import annotations
 
 import json
 
-from aetp.domain.models import Event, ModelValidationError
-from aetp.collaboration.policy import POLICY_VERSION, PolicyViolation, digest_value, strings
+from aetp.collaboration.policy import (
+    POLICY_VERSION,
+    PolicyViolation,
+    digest_value,
+    strings,
+)
 from aetp.collaboration.records import Artifact, Review, Verification
+from aetp.domain.models import Event, ModelValidationError
 
 
 def task_metadata(payload: dict) -> dict:

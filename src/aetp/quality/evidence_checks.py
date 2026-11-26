@@ -2,10 +2,22 @@
 
 import json
 
-from aetp.acceptance.contracts import SCHEMA as ACCEPTANCE_SCHEMA, report_id, system_actor
-from aetp.acceptance.records import _observation, _quality, _runner_descriptor, require, target_snapshot
+from aetp.acceptance.contracts import SCHEMA as ACCEPTANCE_SCHEMA
+from aetp.acceptance.contracts import report_id, system_actor
+from aetp.acceptance.records import (
+    _observation,
+    _quality,
+    _runner_descriptor,
+    require,
+    target_snapshot,
+)
 from aetp.acceptance.runner import normalize_cases
-from aetp.collaboration.policy import POLICY_VERSION, canonical_json, digest_text, digest_value
+from aetp.collaboration.policy import (
+    POLICY_VERSION,
+    canonical_json,
+    digest_text,
+    digest_value,
+)
 from aetp.governance.policy import current, principal, route
 
 

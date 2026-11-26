@@ -7,10 +7,9 @@ ensuring all external MCP tool calls remain within AETP authority boundaries.
 
 from __future__ import annotations
 
-import copy
 import hashlib
 import json
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 from aetp.runtime.adapters import AdapterSecurityError
 from aetp.runtime.mcp_policy import MCPToolRegistry
@@ -271,7 +270,6 @@ class MCPClientAdapter:
 
     def query(self, action):
         """Conservative reconciliation: no replay of a possibly-applied tool call."""
-        from aetp.runtime.records import receipt
 
         return {"status": "unknown", "reason": "MCP_CALL_NOT_QUERYABLE"}
 

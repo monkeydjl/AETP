@@ -11,45 +11,118 @@ import copy
 from collections.abc import Iterable
 from typing import Any
 
-from aetp.domain.models import AGENT_STATUSES, PROJECT_STATUSES, Command, Event, ModelValidationError
-from aetp.collaboration.contracts import COMMAND_AGGREGATES, COMMAND_TERMINALS, DOMAIN_EVENTS
-from aetp.runtime.contracts import (
-    COMMAND_AGGREGATES as EXECUTION_COMMANDS, COMMAND_TERMINALS as EXECUTION_TERMINALS,
-    DOMAIN_EVENTS as EXECUTION_EVENTS, EVENT_AGGREGATES as EXECUTION_ADDRESSES,
-    effect_address,
+from aetp.acceptance.causality import AcceptanceCursor
+from aetp.acceptance.contracts import (
+    COMMAND_AGGREGATES as ACCEPTANCE_COMMANDS,
 )
-from aetp.meetings.contracts import (
-    COMMAND_AGGREGATES as DISCUSSION_COMMANDS, COMMAND_TERMINALS as DISCUSSION_TERMINALS,
-    DOMAIN_EVENTS as DISCUSSION_EVENTS,
+from aetp.acceptance.contracts import (
+    COMMAND_TERMINALS as ACCEPTANCE_TERMINALS,
 )
-from aetp.governance.contracts import (
-    COMMAND_AGGREGATES as GOVERNANCE_COMMANDS, COMMAND_TERMINALS as GOVERNANCE_TERMINALS,
-    DOMAIN_EVENTS as GOVERNANCE_EVENTS, SCHEMA as GOVERNANCE_SCHEMA,
+from aetp.acceptance.contracts import (
+    DOMAIN_EVENTS as ACCEPTANCE_EVENTS,
+)
+from aetp.acceptance.contracts import (
+    SCHEMA as ACCEPTANCE_SCHEMA,
+)
+from aetp.acceptance.contracts import (
+    report_id,
+    reserved_report_id,
+)
+from aetp.bootstrap.contracts import DOMAIN_EVENTS as BOOTSTRAP_EVENTS
+from aetp.collaboration.contracts import (
+    COMMAND_AGGREGATES,
+    COMMAND_TERMINALS,
+    DOMAIN_EVENTS,
+)
+from aetp.domain.models import (
+    AGENT_STATUSES,
+    PROJECT_STATUSES,
+    Command,
+    Event,
+    ModelValidationError,
 )
 from aetp.governance.causality import CausalCursor
-from aetp.planning.contracts import (
-    COMMAND_AGGREGATES as PLANNING_COMMANDS, COMMAND_TERMINALS as PLANNING_TERMINALS,
-    DOMAIN_EVENTS as PLANNING_EVENTS, SCHEMA as PLANNING_SCHEMA,
+from aetp.governance.contracts import (
+    COMMAND_AGGREGATES as GOVERNANCE_COMMANDS,
 )
-from aetp.planning.causality import PlanningCursor
-from aetp.acceptance.contracts import (
-    COMMAND_AGGREGATES as ACCEPTANCE_COMMANDS, COMMAND_TERMINALS as ACCEPTANCE_TERMINALS,
-    DOMAIN_EVENTS as ACCEPTANCE_EVENTS, SCHEMA as ACCEPTANCE_SCHEMA, report_id, reserved_report_id,
+from aetp.governance.contracts import (
+    COMMAND_TERMINALS as GOVERNANCE_TERMINALS,
 )
-from aetp.acceptance.causality import AcceptanceCursor
-from aetp.quality.contracts import (
-    COMMAND_AGGREGATES as QUALITY_COMMANDS, COMMAND_TERMINALS as QUALITY_TERMINALS,
-    DOMAIN_EVENTS as QUALITY_EVENTS, SCHEMA as QUALITY_SCHEMA, effect_address as quality_effect_address,
+from aetp.governance.contracts import (
+    DOMAIN_EVENTS as GOVERNANCE_EVENTS,
 )
-from aetp.quality.causality import QualityCursor
-from aetp.integration.contracts import (
-    COMMAND_AGGREGATES as INTEGRATION_COMMANDS, COMMAND_TERMINALS as INTEGRATION_TERMINALS,
-    DOMAIN_EVENTS as INTEGRATION_EVENTS, EVENT_AGGREGATES as INTEGRATION_ADDRESSES,
-    SCHEMA as INTEGRATION_SCHEMA,
+from aetp.governance.contracts import (
+    SCHEMA as GOVERNANCE_SCHEMA,
 )
 from aetp.integration.causality import IntegrationCursor
-from aetp.bootstrap.contracts import DOMAIN_EVENTS as BOOTSTRAP_EVENTS
-
+from aetp.integration.contracts import (
+    COMMAND_AGGREGATES as INTEGRATION_COMMANDS,
+)
+from aetp.integration.contracts import (
+    COMMAND_TERMINALS as INTEGRATION_TERMINALS,
+)
+from aetp.integration.contracts import (
+    DOMAIN_EVENTS as INTEGRATION_EVENTS,
+)
+from aetp.integration.contracts import (
+    EVENT_AGGREGATES as INTEGRATION_ADDRESSES,
+)
+from aetp.integration.contracts import (
+    SCHEMA as INTEGRATION_SCHEMA,
+)
+from aetp.meetings.contracts import (
+    COMMAND_AGGREGATES as DISCUSSION_COMMANDS,
+)
+from aetp.meetings.contracts import (
+    COMMAND_TERMINALS as DISCUSSION_TERMINALS,
+)
+from aetp.meetings.contracts import (
+    DOMAIN_EVENTS as DISCUSSION_EVENTS,
+)
+from aetp.planning.causality import PlanningCursor
+from aetp.planning.contracts import (
+    COMMAND_AGGREGATES as PLANNING_COMMANDS,
+)
+from aetp.planning.contracts import (
+    COMMAND_TERMINALS as PLANNING_TERMINALS,
+)
+from aetp.planning.contracts import (
+    DOMAIN_EVENTS as PLANNING_EVENTS,
+)
+from aetp.planning.contracts import (
+    SCHEMA as PLANNING_SCHEMA,
+)
+from aetp.quality.causality import QualityCursor
+from aetp.quality.contracts import (
+    COMMAND_AGGREGATES as QUALITY_COMMANDS,
+)
+from aetp.quality.contracts import (
+    COMMAND_TERMINALS as QUALITY_TERMINALS,
+)
+from aetp.quality.contracts import (
+    DOMAIN_EVENTS as QUALITY_EVENTS,
+)
+from aetp.quality.contracts import (
+    SCHEMA as QUALITY_SCHEMA,
+)
+from aetp.quality.contracts import (
+    effect_address as quality_effect_address,
+)
+from aetp.runtime.contracts import (
+    COMMAND_AGGREGATES as EXECUTION_COMMANDS,
+)
+from aetp.runtime.contracts import (
+    COMMAND_TERMINALS as EXECUTION_TERMINALS,
+)
+from aetp.runtime.contracts import (
+    DOMAIN_EVENTS as EXECUTION_EVENTS,
+)
+from aetp.runtime.contracts import (
+    EVENT_AGGREGATES as EXECUTION_ADDRESSES,
+)
+from aetp.runtime.contracts import (
+    effect_address,
+)
 
 _AUDIT_TYPES = frozenset({"command.received", "command.rejected"})
 _CREATION_TYPES = frozenset({"project.created", "agent.created", "task.created"})
@@ -164,7 +237,9 @@ class Projection:
         if event.type in _AUDIT_TYPES and "quality_schema" in event.payload:
             raise ModelValidationError("audit Event cannot carry a quality effect envelope")
         if event.type not in _AUDIT_TYPES:
-            from aetp.integration.guards import validate_fact as validate_integration_fact
+            from aetp.integration.guards import (
+                validate_fact as validate_integration_fact,
+            )
             validate_integration_fact(event, self._state)
             from aetp.planning.guards import validate_fact
             validate_fact(event, self._state)
@@ -256,7 +331,9 @@ class Projection:
                 updated["collaboration_clock"] = clock
 
         if updated is not None:
-            from aetp.integration.guards import validate_record as validate_integration_record
+            from aetp.integration.guards import (
+                validate_record as validate_integration_record,
+            )
             validate_integration_record(event, self._state.get(key), updated, self._state)
 
         planning_cursor = self._planning_cursor.advance(event)

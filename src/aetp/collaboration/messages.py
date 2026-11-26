@@ -11,7 +11,6 @@ from aetp.core.projection import Projection
 from aetp.domain.models import ModelValidationError, VersionedModel, _non_empty_string
 from aetp.storage.sqlite_store import SQLiteStore
 
-
 MESSAGE_TYPES = frozenset({
     "question", "proposal", "claim", "challenge", "agreement", "disagreement",
     "evidence", "clarification", "request", "response", "notification",

@@ -3,20 +3,33 @@
 import copy
 
 from aetp.acceptance.contracts import (
-    MAX_CASE_BYTES, MAX_CASES, MAX_DEPTH, MAX_DOCUMENT_BYTES, MAX_PATH,
-    RUNNER_ID, SCHEMA, report_id, system_actor,
+    MAX_CASE_BYTES,
+    MAX_CASES,
+    MAX_DEPTH,
+    MAX_DOCUMENT_BYTES,
+    MAX_PATH,
+    RUNNER_ID,
+    SCHEMA,
+    report_id,
+    system_actor,
 )
 from aetp.acceptance.runner import normalize_cases
 from aetp.collaboration.messages import participant
 from aetp.collaboration.policy import (
-    POLICY_VERSION, PolicyViolation, canonical_json, digest_text, digest_value, text,
+    POLICY_VERSION,
+    PolicyViolation,
+    canonical_json,
+    digest_text,
+    digest_value,
+    text,
 )
 from aetp.collaboration.records import Artifact
 from aetp.governance.policy import current, fields, principal, revision, route
 from aetp.governance.trust import source_record
 from aetp.meetings.policy import natural
 from aetp.planning.guards import candidate_scope
-from aetp.runtime.contracts import POLICY_VERSION as EXECUTION_POLICY, child_id
+from aetp.runtime.contracts import POLICY_VERSION as EXECUTION_POLICY
+from aetp.runtime.contracts import child_id
 from aetp.runtime.policy import governance, observed_time
 from aetp.runtime.records import receipt
 

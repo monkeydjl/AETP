@@ -6,7 +6,6 @@ B0 Discovery -> B1 Architecture -> B2 Environment -> B3 Knowledge -> B4 Infrastr
 
 from __future__ import annotations
 
-import copy
 import json
 import os
 import platform
@@ -18,7 +17,7 @@ from aetp.acceptance.service import AcceptanceService
 from aetp.collaboration.messages import Message, MessageBus
 from aetp.core.commands import CommandHandler
 from aetp.core.projection import Projection
-from aetp.domain.models import Command, Event
+from aetp.domain.models import Command
 from aetp.planning.service import PlanningService
 from aetp.storage.sqlite_store import SQLiteStore
 from tests.m2.governance_support import policy

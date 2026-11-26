@@ -1,7 +1,7 @@
 """Trusted data-only Runtime. It never evaluates Agent-provided code."""
 
-from dataclasses import dataclass
 import threading
+from dataclasses import dataclass
 
 from aetp.workspace.documents import DocumentWorkspace
 

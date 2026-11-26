@@ -16,7 +16,6 @@ from typing import Any, Iterator, Optional
 from aetp.core.projection import Projection
 from aetp.domain.models import Command, Event, ModelValidationError
 
-
 _SCHEMA = """
 PRAGMA foreign_keys = ON;
 

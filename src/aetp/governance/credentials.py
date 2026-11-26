@@ -9,7 +9,6 @@ from __future__ import annotations
 from aetp.collaboration.policy import PolicyViolation
 from aetp.governance.policy import principal, revision
 
-
 # Fixed allowlist of service-scoped permissions available to Agents. A request
 # outside this set is refused, never widened.
 SCOPE_WHITELIST = frozenset({

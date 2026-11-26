@@ -3,7 +3,7 @@
 import copy
 import time
 
-from aetp.collaboration.policy import PolicyViolation, digest_value, text
+from aetp.collaboration.policy import PolicyViolation, digest_value
 from aetp.collaboration.service import CollaborationService
 from aetp.core.projection import Projection
 from aetp.domain.models import Command, ModelValidationError
@@ -11,7 +11,13 @@ from aetp.meetings.contracts import COMMAND_AGGREGATES
 from aetp.meetings.metering import MeteringAuthority
 from aetp.meetings.policy import evidence_refs, governance_time, natural, termination
 from aetp.meetings.process import ProcessLog
-from aetp.meetings.records import Contribution, create_conversation, event_type, require_member, step_conversation
+from aetp.meetings.records import (
+    Contribution,
+    create_conversation,
+    event_type,
+    require_member,
+    step_conversation,
+)
 
 
 class MeetingService(CollaborationService):

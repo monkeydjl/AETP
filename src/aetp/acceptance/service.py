@@ -1,9 +1,14 @@
 """Trusted Verification host; durable single-use grant precedes the fixed call."""
 
-from contextvars import ContextVar
 import copy
+from contextvars import ContextVar
 
-from aetp.acceptance.contracts import COMMAND_AGGREGATES, INTERNAL_COMMANDS, SCHEMA, system_actor
+from aetp.acceptance.contracts import (
+    COMMAND_AGGREGATES,
+    INTERNAL_COMMANDS,
+    SCHEMA,
+    system_actor,
+)
 from aetp.acceptance.records import _observation, authorization_error, evaluate
 from aetp.acceptance.runner import FixedJsonRunner
 from aetp.collaboration.policy import PolicyViolation

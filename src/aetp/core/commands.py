@@ -13,7 +13,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Mapping
 
-from aetp.core.idempotency import IdempotencyConflict, IdempotencyResult, canonical_digest
+from aetp.acceptance.contracts import COMMAND_AGGREGATES as ACCEPTANCE_COMMANDS
+from aetp.acceptance.contracts import reserved_report_id
+from aetp.collaboration.contracts import COMMAND_AGGREGATES
+from aetp.core.idempotency import (
+    IdempotencyConflict,
+    IdempotencyResult,
+    canonical_digest,
+)
 from aetp.domain.models import (
     AGENT_STATUSES,
     PROJECT_STATUSES,
@@ -21,16 +28,14 @@ from aetp.domain.models import (
     Event,
     ModelValidationError,
 )
-from aetp.storage.sqlite_store import SQLiteStore
-from aetp.collaboration.contracts import COMMAND_AGGREGATES
-from aetp.runtime.contracts import COMMAND_AGGREGATES as EXECUTION_COMMANDS
-from aetp.meetings.contracts import COMMAND_AGGREGATES as DISCUSSION_COMMANDS
 from aetp.governance.contracts import COMMAND_AGGREGATES as GOVERNANCE_COMMANDS
-from aetp.planning.contracts import COMMAND_AGGREGATES as PLANNING_COMMANDS, EXECUTION_COMMANDS as PLANNING_GATED_COMMANDS
-from aetp.acceptance.contracts import COMMAND_AGGREGATES as ACCEPTANCE_COMMANDS, reserved_report_id
-from aetp.quality.contracts import COMMAND_AGGREGATES as QUALITY_COMMANDS
 from aetp.integration.contracts import COMMAND_AGGREGATES as INTEGRATION_COMMANDS
-
+from aetp.meetings.contracts import COMMAND_AGGREGATES as DISCUSSION_COMMANDS
+from aetp.planning.contracts import COMMAND_AGGREGATES as PLANNING_COMMANDS
+from aetp.planning.contracts import EXECUTION_COMMANDS as PLANNING_GATED_COMMANDS
+from aetp.quality.contracts import COMMAND_AGGREGATES as QUALITY_COMMANDS
+from aetp.runtime.contracts import COMMAND_AGGREGATES as EXECUTION_COMMANDS
+from aetp.storage.sqlite_store import SQLiteStore
 
 _ACCEPTED = "accepted"
 _REJECTED = "rejected"
@@ -188,7 +193,8 @@ class CommandHandler:
                 planning_error = command_error(command, Projection.rebuild(self.store.read_events(command.project_id)))
             if command.type in {"artifact.submit", "artifact.capture"} and reserved_report_id(command.target_id):
                 planning_error = "ARTIFACT_ID_RESERVED"
-            from aetp.integration.guards import GUARDED_COMMANDS, command_error as integration_error
+            from aetp.integration.guards import GUARDED_COMMANDS
+            from aetp.integration.guards import command_error as integration_error
             if not planning_error and command.type in GUARDED_COMMANDS:
                 from aetp.core.projection import Projection
                 # Never pre-read or cache the required set outside this writer.

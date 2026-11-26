@@ -1,9 +1,9 @@
 """Trusted ingress capabilities. Neither source IDs nor copied JSON prove origin."""
 
 import copy
-from dataclasses import asdict, dataclass
 import threading
 import uuid
+from dataclasses import dataclass
 
 from aetp.collaboration.policy import PolicyViolation, digest_value, text
 from aetp.domain.models import Command

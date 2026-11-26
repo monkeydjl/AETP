@@ -6,7 +6,6 @@ import hashlib
 import json
 from typing import Any
 
-
 POLICY_VERSION = "m1-document-candidate-v1"
 MAX_CONTENT_BYTES = 65536
 _COMMON = frozenset({"policy_version", "risk_level", "approval_required"})

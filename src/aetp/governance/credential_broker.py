@@ -13,8 +13,8 @@ from __future__ import annotations
 
 import hashlib
 import secrets
-from dataclasses import dataclass, field
-from typing import Dict, FrozenSet, Tuple
+from dataclasses import dataclass
+from typing import Dict, Tuple
 
 from aetp.collaboration.policy import PolicyViolation
 

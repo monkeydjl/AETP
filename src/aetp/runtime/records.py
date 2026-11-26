@@ -1,9 +1,15 @@
 """Deterministic document intent and result identities, without IO."""
 
-import copy
 import base64
+import copy
 
-from aetp.collaboration.policy import PolicyViolation, digest_text, digest_value, strings, text
+from aetp.collaboration.policy import (
+    PolicyViolation,
+    digest_text,
+    digest_value,
+    strings,
+    text,
+)
 from aetp.runtime.contracts import POLICY_VERSION, UNSETTLED, child_id
 
 _CREDENTIAL_FIELDS = frozenset({"credential_token_ref", "required_permission"})

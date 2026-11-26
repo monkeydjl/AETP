@@ -4,9 +4,9 @@ import copy
 
 from aetp.collaboration.messages import participant
 from aetp.collaboration.policy import PolicyViolation, canonical_json, text
-from aetp.governance.policy import current, fields, principal, revision
 from aetp.governance.causality import command_id
-from aetp.runtime.contracts import POLICY_VERSION, RUNTIME_ID, child_id
+from aetp.governance.policy import current, fields, revision
+from aetp.runtime.contracts import POLICY_VERSION, RUNTIME_ID
 from aetp.runtime.policy import governance
 
 

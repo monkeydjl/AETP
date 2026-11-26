@@ -9,12 +9,17 @@ transaction; the eventual Projection must validate causal envelopes separately.
 import copy
 
 from aetp.acceptance.records import executable_project, require
-from aetp.collaboration.policy import POLICY_VERSION, PolicyViolation, digest_value, text
+from aetp.collaboration.policy import (
+    POLICY_VERSION,
+    PolicyViolation,
+    digest_value,
+    text,
+)
 from aetp.governance.policy import current, fields, principal
 from aetp.governance.trust import source_record
 from aetp.integration.contracts import MAX_TASKS, MAX_VERSIONS, SCHEMA
-from aetp.integration.validation import validate_declaration_payload
 from aetp.integration.history import validated_history
+from aetp.integration.validation import validate_declaration_payload
 from aetp.quality.policy import current_policy
 from aetp.runtime.contracts import POLICY_VERSION as EXECUTION_POLICY
 from aetp.runtime.policy import observed_time

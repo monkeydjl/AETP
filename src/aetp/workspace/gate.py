@@ -1,10 +1,10 @@
 """Windows resource serialization, always combined with durable fencing."""
 
-from contextlib import contextmanager
 import ctypes
-from ctypes import wintypes
 import hashlib
 import os
+from contextlib import contextmanager
+from ctypes import wintypes
 
 
 class EnforcementUnavailable(RuntimeError):

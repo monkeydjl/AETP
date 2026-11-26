@@ -1,8 +1,13 @@
 """Immutable receipt/terminal cursor for declarations and rejection-only requests."""
 from dataclasses import dataclass, field
 from types import MappingProxyType
+
 from aetp.domain.models import ModelValidationError
-from aetp.integration.contracts import COMMAND_AGGREGATES, DOMAIN_EVENTS, COMMAND_TERMINALS
+from aetp.integration.contracts import (
+    COMMAND_AGGREGATES,
+    COMMAND_TERMINALS,
+    DOMAIN_EVENTS,
+)
 
 
 def _rejection(event, receipt):

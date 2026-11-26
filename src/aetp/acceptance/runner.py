@@ -4,12 +4,17 @@ import copy
 import hashlib
 import json
 import math
-from pathlib import Path
 import platform
+from pathlib import Path
 
 from aetp.acceptance.contracts import (
-    MAX_CASE_BYTES, MAX_CASES, MAX_DEPTH, MAX_DOCUMENT_BYTES, MAX_NUMBER_CHARS,
-    MAX_PATH, RUNNER_ID,
+    MAX_CASE_BYTES,
+    MAX_CASES,
+    MAX_DEPTH,
+    MAX_DOCUMENT_BYTES,
+    MAX_NUMBER_CHARS,
+    MAX_PATH,
+    RUNNER_ID,
 )
 
 

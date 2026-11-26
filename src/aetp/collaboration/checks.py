@@ -6,13 +6,12 @@ or calls this function to reproduce an action; it consumes recorded output.
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import hashlib
-from pathlib import Path
 import sys
+from datetime import datetime, timezone
+from pathlib import Path
 
 from aetp.collaboration.policy import digest_value
-
 
 _SUITE_DIGEST = "sha256:" + hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 _ENVIRONMENT = {"python": sys.version, "implementation": sys.implementation.name,

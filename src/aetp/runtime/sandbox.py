@@ -8,9 +8,8 @@ before dispatching any local command or MCP-style tool call.
 from __future__ import annotations
 
 import copy
-import os
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 
 from aetp.runtime.adapters import (
     AdapterSecurityError,

@@ -2,7 +2,12 @@
 
 import copy
 
-from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value, text
+from aetp.collaboration.policy import (
+    PolicyViolation,
+    canonical_json,
+    digest_value,
+    text,
+)
 from aetp.governance.contracts import system_actor
 from aetp.governance.policy import current, fields, has_role, principal, revision, route
 from aetp.governance.snapshots import arguments, target_record

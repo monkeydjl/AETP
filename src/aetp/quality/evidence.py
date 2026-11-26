@@ -4,7 +4,13 @@ from aetp.acceptance.records import require
 from aetp.collaboration.policy import digest_value
 from aetp.governance.policy import fields, revision
 from aetp.quality.contracts import SCHEMA
-from aetp.quality.cycles import active_cycle, advance_task, artifact_sources, durable_cycle, target_binding
+from aetp.quality.cycles import (
+    active_cycle,
+    advance_task,
+    artifact_sources,
+    durable_cycle,
+    target_binding,
+)
 from aetp.quality.evidence_checks import verification_use
 from aetp.quality.policy import authorize, no_unsettled
 from aetp.quality.reviews import independent_reviewer

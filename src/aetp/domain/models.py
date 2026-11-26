@@ -8,31 +8,58 @@ import json
 from dataclasses import dataclass, fields
 from typing import Any, ClassVar, Mapping, Optional
 
-from aetp.collaboration.contracts import AGGREGATES, COMMAND_AGGREGATES, DOMAIN_EVENTS
-from aetp.runtime.contracts import (
-    AGGREGATES as EXECUTION_AGGREGATES, COMMAND_AGGREGATES as EXECUTION_COMMANDS,
-    DOMAIN_EVENTS as EXECUTION_EVENTS,
-)
-from aetp.meetings.contracts import (
-    AGGREGATES as DISCUSSION_AGGREGATES, COMMAND_AGGREGATES as DISCUSSION_COMMANDS,
-    DOMAIN_EVENTS as DISCUSSION_EVENTS,
-)
-from aetp.governance.contracts import (
-    AGGREGATES as GOVERNANCE_AGGREGATES, COMMAND_AGGREGATES as GOVERNANCE_COMMANDS,
-    DOMAIN_EVENTS as GOVERNANCE_EVENTS,
-)
-from aetp.planning.contracts import (
-    AGGREGATES as PLANNING_AGGREGATES, COMMAND_AGGREGATES as PLANNING_COMMANDS,
-    DOMAIN_EVENTS as PLANNING_EVENTS,
-)
-from aetp.acceptance.contracts import COMMAND_AGGREGATES as ACCEPTANCE_COMMANDS, DOMAIN_EVENTS as ACCEPTANCE_EVENTS
-from aetp.quality.contracts import COMMAND_AGGREGATES as QUALITY_COMMANDS, DOMAIN_EVENTS as QUALITY_EVENTS
-from aetp.integration.contracts import COMMAND_AGGREGATES as INTEGRATION_COMMANDS, DOMAIN_EVENTS as INTEGRATION_EVENTS
+from aetp.acceptance.contracts import COMMAND_AGGREGATES as ACCEPTANCE_COMMANDS
+from aetp.acceptance.contracts import DOMAIN_EVENTS as ACCEPTANCE_EVENTS
 from aetp.bootstrap.contracts import (
-    AGGREGATES as BOOTSTRAP_AGGREGATES, COMMAND_AGGREGATES as BOOTSTRAP_COMMANDS,
+    AGGREGATES as BOOTSTRAP_AGGREGATES,
+)
+from aetp.bootstrap.contracts import (
+    COMMAND_AGGREGATES as BOOTSTRAP_COMMANDS,
+)
+from aetp.bootstrap.contracts import (
     DOMAIN_EVENTS as BOOTSTRAP_EVENTS,
 )
-
+from aetp.collaboration.contracts import AGGREGATES, COMMAND_AGGREGATES, DOMAIN_EVENTS
+from aetp.governance.contracts import (
+    AGGREGATES as GOVERNANCE_AGGREGATES,
+)
+from aetp.governance.contracts import (
+    COMMAND_AGGREGATES as GOVERNANCE_COMMANDS,
+)
+from aetp.governance.contracts import (
+    DOMAIN_EVENTS as GOVERNANCE_EVENTS,
+)
+from aetp.integration.contracts import COMMAND_AGGREGATES as INTEGRATION_COMMANDS
+from aetp.integration.contracts import DOMAIN_EVENTS as INTEGRATION_EVENTS
+from aetp.meetings.contracts import (
+    AGGREGATES as DISCUSSION_AGGREGATES,
+)
+from aetp.meetings.contracts import (
+    COMMAND_AGGREGATES as DISCUSSION_COMMANDS,
+)
+from aetp.meetings.contracts import (
+    DOMAIN_EVENTS as DISCUSSION_EVENTS,
+)
+from aetp.planning.contracts import (
+    AGGREGATES as PLANNING_AGGREGATES,
+)
+from aetp.planning.contracts import (
+    COMMAND_AGGREGATES as PLANNING_COMMANDS,
+)
+from aetp.planning.contracts import (
+    DOMAIN_EVENTS as PLANNING_EVENTS,
+)
+from aetp.quality.contracts import COMMAND_AGGREGATES as QUALITY_COMMANDS
+from aetp.quality.contracts import DOMAIN_EVENTS as QUALITY_EVENTS
+from aetp.runtime.contracts import (
+    AGGREGATES as EXECUTION_AGGREGATES,
+)
+from aetp.runtime.contracts import (
+    COMMAND_AGGREGATES as EXECUTION_COMMANDS,
+)
+from aetp.runtime.contracts import (
+    DOMAIN_EVENTS as EXECUTION_EVENTS,
+)
 
 SCHEMA_VERSION = "0.1"
 

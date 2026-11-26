@@ -5,7 +5,11 @@ import re
 from aetp.collaboration.policy import PolicyViolation, text
 from aetp.governance.policy import fields
 from aetp.integration.contracts import (
-    MAX_IDENTIFIER_CHARS, MAX_REASON_CHARS, MAX_REF_CHARS, MAX_VERSIONS, OID_LENGTHS,
+    MAX_IDENTIFIER_CHARS,
+    MAX_REASON_CHARS,
+    MAX_REF_CHARS,
+    MAX_VERSIONS,
+    OID_LENGTHS,
 )
 from aetp.meetings.policy import natural
 

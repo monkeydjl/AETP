@@ -6,7 +6,15 @@ from types import SimpleNamespace
 from aetp.collaboration.messages import participant
 from aetp.collaboration.policy import PolicyViolation, canonical_json, text
 from aetp.domain.models import ModelValidationError
-from aetp.runtime.contracts import COMMAND_AGGREGATES, LEASE_MS, POLICY_VERSION, RUNTIME_ID, SESSION_MS, UNSETTLED, child_id
+from aetp.runtime.contracts import (
+    COMMAND_AGGREGATES,
+    LEASE_MS,
+    POLICY_VERSION,
+    RUNTIME_ID,
+    SESSION_MS,
+    UNSETTLED,
+    child_id,
+)
 from aetp.runtime.policy import governance, natural, observed_time
 from aetp.runtime.records import action_intent, checkpoint_intent, receipt
 

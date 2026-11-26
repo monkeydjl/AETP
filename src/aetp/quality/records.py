@@ -3,11 +3,11 @@
 from aetp.acceptance.records import executable_project, require
 from aetp.collaboration.policy import text
 from aetp.governance.policy import fields
-from aetp.quality.policy import configure
-from aetp.quality.submission import enroll, submit
-from aetp.quality.reviews import request_reviews, submit_review
 from aetp.quality.evidence import evaluate_task
 from aetp.quality.lifecycle import block, complete, rework
+from aetp.quality.policy import configure
+from aetp.quality.reviews import request_reviews, submit_review
+from aetp.quality.submission import enroll, submit
 from aetp.runtime.policy import observed_time
 
 

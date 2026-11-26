@@ -4,10 +4,10 @@ import hashlib
 import os
 from pathlib import Path
 
-from aetp.workspace.gate import EnforcementUnavailable
-from aetp.workspace import windows_files
 from aetp.collaboration.policy import MAX_CONTENT_BYTES, canonical_json
 from aetp.runtime.records import envelope, object_key, receipt
+from aetp.workspace import windows_files
+from aetp.workspace.gate import EnforcementUnavailable
 
 MAX_OBJECT_BYTES = MAX_CONTENT_BYTES * 6 + 16_384
 

@@ -3,7 +3,7 @@
 import copy
 
 from aetp.acceptance.records import require
-from aetp.collaboration.policy import canonical_json, digest_value, text
+from aetp.collaboration.policy import digest_value, text
 from aetp.governance.policy import current, fields, revision
 from aetp.quality.contracts import SCHEMA
 from aetp.quality.cycles import advance_task, artifact_sources

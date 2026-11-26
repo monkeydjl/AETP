@@ -24,7 +24,7 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any
 
-from aetp.collaboration.messages import MESSAGE_TYPES, Message, MessageBus, MessageError
+from aetp.collaboration.messages import MESSAGE_TYPES, Message, MessageBus
 
 SeatDecision = Callable[["SeatView"], "Decision | None"]
 

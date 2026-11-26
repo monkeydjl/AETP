@@ -2,7 +2,12 @@
 
 import copy
 
-from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value, text
+from aetp.collaboration.policy import (
+    PolicyViolation,
+    canonical_json,
+    digest_value,
+    text,
+)
 from aetp.governance.contracts import TARGET_TYPES
 from aetp.governance.policy import fields
 from aetp.meetings.policy import natural

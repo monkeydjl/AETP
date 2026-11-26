@@ -1,24 +1,35 @@
 """Fixed document execution through the existing atomic Command boundary."""
 
-from contextvars import ContextVar
-from dataclasses import replace
-from dataclasses import asdict
 import time
+from contextvars import ContextVar
+from dataclasses import asdict, replace
 
 from aetp.collaboration.messages import participant
 from aetp.collaboration.policy import PolicyViolation, text
 from aetp.collaboration.service import CollaborationService
 from aetp.core.projection import Projection
 from aetp.domain.models import ModelValidationError
+from aetp.runtime.actions import ActionBroker
 from aetp.runtime.contracts import (
-    COMMAND_AGGREGATES, INTERNAL_COMMANDS, LEASE_MS, POLICY_VERSION, RUNTIME_ID,
-    SESSION_MS, UNSETTLED, child_id,
+    COMMAND_AGGREGATES,
+    INTERNAL_COMMANDS,
+    LEASE_MS,
+    POLICY_VERSION,
+    RUNTIME_ID,
+    SESSION_MS,
+    UNSETTLED,
+    child_id,
 )
 from aetp.runtime.document import DocumentRuntime
-from aetp.runtime.actions import ActionBroker
-from aetp.runtime.policy import FENCE_FIELDS, binding_payload, governance, observed_time, validate
-from aetp.runtime.records import action_intent, checkpoint_intent
+from aetp.runtime.policy import (
+    FENCE_FIELDS,
+    binding_payload,
+    governance,
+    observed_time,
+    validate,
+)
 from aetp.runtime.projection import action_is_current
+from aetp.runtime.records import action_intent, checkpoint_intent
 from aetp.workspace.gate import ResourceGate
 
 

@@ -1,14 +1,14 @@
 """Immutable process inputs; lifecycle snapshots are validated by the pure reducer."""
 
-from dataclasses import dataclass
 import copy
 import re
+from dataclasses import dataclass
 
+from aetp.collaboration.messages import participant
 from aetp.collaboration.policy import PolicyViolation, digest_value, strings, text
 from aetp.domain.models import ModelValidationError, VersionedModel, _freeze_json_value
-from aetp.collaboration.messages import participant
 from aetp.meetings.contracts import POLICY_VERSION
-from aetp.meetings.policy import natural, payload, policy, termination, evidence_refs
+from aetp.meetings.policy import evidence_refs, natural, payload, policy, termination
 
 
 @dataclass(frozen=True, slots=True)
