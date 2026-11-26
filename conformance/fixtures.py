@@ -5,7 +5,6 @@ Specification source: Docs/AETP-设计方案.md §§18.3, 14.1, 9.3, 10.6, 5.2, 
 
 from __future__ import annotations
 
-import copy
 import os
 import tempfile
 from typing import Any, Dict
@@ -13,8 +12,7 @@ from typing import Any, Dict
 from aetp.collaboration.messages import Message, MessageBus
 from aetp.core.commands import CommandHandler
 from aetp.core.projection import Projection
-from aetp.domain.models import Command, Event
-from aetp.integration.service import IntegrationContractService
+from aetp.domain.models import Command
 from aetp.planning.service import PlanningService
 from aetp.storage.sqlite_store import SQLiteStore
 from conformance.registry import register_fixture
@@ -131,8 +129,8 @@ def fixture_test_005(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
 @register_fixture("TEST-009")
 def fixture_test_009(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
     """TEST-009: Task with integration surface cannot complete without Integration Gate."""
-    from aetp.integration.gate import validate_can_complete
     from aetp.collaboration.policy import PolicyViolation
+    from aetp.integration.gate import validate_can_complete
 
     task = {"id": "t-gate", "status": "verified", "revision": 1}
     contract = {
@@ -221,8 +219,8 @@ def fixture_test_018(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
 @register_fixture("TEST-024")
 def fixture_test_024(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
     """TEST-024: Target branch baseline mismatch blocks git merge."""
-    from aetp.integration.gate import validate_merge
     from aetp.collaboration.policy import PolicyViolation
+    from aetp.integration.gate import validate_merge
 
     task = {"id": "t-gate", "status": "ready_for_integration"}
     payload = {
@@ -308,8 +306,8 @@ def fixture_test_003(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
 @register_fixture("TEST-007")
 def fixture_test_007(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
     """TEST-007: Untrusted input cannot directly authorize sensitive commands."""
-    from aetp.governance.trust import InputAuthority
     from aetp.collaboration.policy import PolicyViolation
+    from aetp.governance.trust import InputAuthority
 
     authority = InputAuthority("test-gateway")
     handler = CommandHandler(store)
@@ -553,10 +551,10 @@ def fixture_test_012(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
 
     events = store.read_events(project_id)
     rebuilt_state = Projection.rebuild(events)
-    assert f"task:t-012" in rebuilt_state
-    assert rebuilt_state[f"task:t-012"]["title"] == "Orchestrator Task"
+    assert "task:t-012" in rebuilt_state
+    assert rebuilt_state["task:t-012"]["title"] == "Orchestrator Task"
     return {"status": "passed", "execution_status": "passed", "summary": "Scheduling state completely recovered from durable event store",
-            "details": {"task_title": rebuilt_state[f"task:t-012"]["title"]}}
+            "details": {"task_title": rebuilt_state["task:t-012"]["title"]}}
 
 
 @register_fixture("TEST-013")
@@ -580,9 +578,10 @@ def fixture_test_013(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
 @register_fixture("TEST-014")
 def fixture_test_014(store: SQLiteStore, project_id: str) -> Dict[str, Any]:
     """TEST-014: Cross-workspace access and foreign workspace actions are blocked."""
+    import pathlib
+
     from aetp.workspace.documents import DocumentWorkspace
     from aetp.workspace.windows_files import WorkspaceViolation
-    import pathlib
 
     with tempfile.TemporaryDirectory(prefix="aetp-t014-") as tmpdir:
         ws = DocumentWorkspace(pathlib.Path(tmpdir))

@@ -4,7 +4,7 @@ import copy
 from dataclasses import asdict, replace
 
 from aetp.collaboration.policy import digest_value
-from aetp.domain.models import Command, ModelValidationError
+from aetp.domain.models import Command
 from aetp.governance.trust import InputAuthority
 from tests.m3.integration_record_support import RecordCase
 
@@ -357,9 +357,10 @@ class DeclarationHistoryTests(RecordCase):
         self.reject("INTEGRATION_SCOPE_CONFLICT", self.command(version=2))
 
     def test_evaluation_is_json_roundtrip_deterministic_without_io_or_authority(self):
-        from contextlib import ExitStack
         import json
+        from contextlib import ExitStack
         from unittest.mock import patch
+
         from tests.m3.integration_record_support import evaluate
         self.append()
         command = self.command(version=2)

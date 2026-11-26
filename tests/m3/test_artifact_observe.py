@@ -9,10 +9,8 @@ its own name, in a fixed and replayable shape, and nothing else.
 These cases pin the contract (who may observe what) and the refusal paths.
 """
 
-import unittest
 
 from aetp.acceptance.service import AcceptanceService
-from aetp.domain.models import Command
 from tests.m3.support import PlanningCase
 
 CONTENT = '{"b0":"discovery facts","python":"3.14"}'

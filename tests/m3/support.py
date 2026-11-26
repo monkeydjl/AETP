@@ -3,8 +3,8 @@
 import copy
 
 from aetp.domain.models import Command
-from tests.m2.support import MeetingCase
 from tests.m2.governance_support import policy
+from tests.m2.support import MeetingCase
 
 try:
     from aetp.planning.service import PlanningService

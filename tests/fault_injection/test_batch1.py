@@ -7,7 +7,6 @@ Tests anti-fragility and deterministic recovery under synthetic and environment 
 from __future__ import annotations
 
 import os
-import pathlib
 import tempfile
 import unittest
 

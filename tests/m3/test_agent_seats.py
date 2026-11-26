@@ -11,7 +11,12 @@ import unittest
 
 from aetp.collaboration.messages import Message, MessageBus, MessageError
 from aetp.collaboration.seats import (
-    AgentSeat, Decision, SeatError, SeatView, converse, seat_evidence,
+    AgentSeat,
+    Decision,
+    SeatError,
+    SeatView,
+    converse,
+    seat_evidence,
 )
 from tests.m0.support import open_command_fixture
 

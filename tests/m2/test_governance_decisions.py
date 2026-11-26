@@ -1,7 +1,5 @@
 """Decision content versions survive governance state changes and retain source."""
 
-import copy
-from dataclasses import replace
 
 from tests.m2.governance_support import GovernanceCase
 

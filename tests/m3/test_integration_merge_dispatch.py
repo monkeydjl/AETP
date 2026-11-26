@@ -6,10 +6,7 @@ the target tip and returning conflicts), never trusting caller-supplied
 ``current_target_commit``/``has_conflict``/``result_commit`` strings.
 """
 
-import subprocess
-import tempfile
 import unittest
-from unittest.mock import Mock
 
 from aetp.collaboration.policy import PolicyViolation
 from aetp.integration.gate import dispatch_merge

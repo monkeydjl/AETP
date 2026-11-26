@@ -1,6 +1,6 @@
-from dataclasses import replace
 import multiprocessing
 import sqlite3
+from dataclasses import replace
 
 from aetp.storage.sqlite_store import SQLiteStore
 from tests.m0.support import install_event_failure_fixture

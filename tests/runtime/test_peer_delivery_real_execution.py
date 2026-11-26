@@ -87,7 +87,7 @@ class PeerDeliveryRealExecutionTests(unittest.TestCase):
     def test_the_delivered_task_reaches_a_real_action_under_the_owners_session(self):
         """The delivery actually executes: claim -> start -> tool.request -> dispatch."""
         self.case.claim(actor="a-1")
-        session = self.case.start(actor="a-1")
+        self.case.start(actor="a-1")
         self.assertEqual(self.case.task()["status"], "in_progress")
 
         action = self.case.request(operation="document.write", arguments={"content": "delivered\n"})

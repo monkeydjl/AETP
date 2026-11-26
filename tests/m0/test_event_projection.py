@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import sqlite3
 import unittest
 from contextlib import ExitStack, contextmanager
@@ -10,7 +9,7 @@ from dataclasses import replace
 from unittest.mock import patch
 
 from aetp.core.commands import CommandHandler
-from aetp.domain.models import Event, ModelValidationError
+from aetp.domain.models import Event
 from aetp.storage.sqlite_store import SQLiteStore
 from tests.m0.support import (
     clear_projection_fixture,

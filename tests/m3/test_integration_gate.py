@@ -1,9 +1,6 @@
 """Integration Gate, state machine transitions, TEST-009, and TEST-024 checks."""
-from unittest.mock import patch
 from aetp.core.projection import Projection
-from aetp.domain.models import Command
 from tests.m3.integration_live_support import IntegrationCase
-from tests.m3.test_integration_contract_inputs import target_fixture
 
 
 class IntegrationGateTests(IntegrationCase):

@@ -3,7 +3,6 @@
 import copy
 from contextlib import ExitStack
 from dataclasses import replace
-from pathlib import Path
 from unittest.mock import patch
 
 from aetp.core.projection import Projection
@@ -11,7 +10,6 @@ from aetp.core.runtime import RuntimeRecovery
 from aetp.domain.models import Command, Event, ModelValidationError
 from aetp.quality.contracts import COMMAND_AGGREGATES
 from tests.m3.quality_support import QualityCase
-
 
 GUARDS = (
     "aetp.acceptance.runner.FixedJsonRunner.run", "aetp.acceptance.runner.FixedJsonRunner.__init__",

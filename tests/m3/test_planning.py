@@ -1,9 +1,9 @@
 """Scope and equal-team tests catch authority leaks and history loss."""
 
 import copy
+import tempfile
 from dataclasses import replace
 from pathlib import Path
-import tempfile
 
 from aetp.collaboration.messages import Message
 from aetp.collaboration.service import CollaborationService

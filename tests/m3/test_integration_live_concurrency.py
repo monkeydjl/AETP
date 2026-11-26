@@ -1,5 +1,4 @@
 """Real SQLite failures, two spawned processes, fact-only recovery and ordering."""
-import copy
 import multiprocessing
 import os
 import sqlite3
@@ -13,8 +12,11 @@ from aetp.domain.models import Command, ModelValidationError
 from aetp.governance.trust import InputAuthority
 from aetp.integration.service import IntegrationContractService
 from aetp.storage.sqlite_store import SQLiteStore
-from tests.m0.support import (clear_projection_fixture, install_event_failure_fixture,
-                              install_result_failure_fixture)
+from tests.m0.support import (
+    clear_projection_fixture,
+    install_event_failure_fixture,
+    install_result_failure_fixture,
+)
 from tests.m3.integration_live_support import IntegrationCase
 from tests.m3.test_task_quality_replay import GUARDS
 

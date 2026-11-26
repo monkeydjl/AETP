@@ -1,11 +1,11 @@
 """Pure evaluator fixtures. DraftCommand is NOT an authenticated domain Command."""
 
 import copy
-from dataclasses import asdict, dataclass, replace
 import hashlib
 import unittest
+from dataclasses import asdict, dataclass, replace
 
-from aetp.collaboration.policy import canonical_json, digest_value, PolicyViolation
+from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value
 from tests.m3.quality_support import QualityCase
 from tests.m3.test_integration_contract_inputs import target_fixture
 

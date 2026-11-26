@@ -10,8 +10,8 @@ import tempfile
 import unittest
 
 from aetp.collaboration.policy import PolicyViolation
-from aetp.integration.gitref import resolve_ref
 from aetp.integration.gate import validate_merge_against_repo
+from aetp.integration.gitref import resolve_ref
 
 
 def _git(repo, *args):

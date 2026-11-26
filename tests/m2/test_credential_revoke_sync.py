@@ -232,7 +232,6 @@ class CredentialRevokeSyncTests(GovernanceCase):
 
     def test_an_unknown_minted_entry_is_left_alone_rather_than_guessed_at(self):
         """A malformed entry cannot be attributed to a Broker, so cleanup skips it."""
-        broker = self.broker
         request = self.command("credential.request", "cred-1",
                                {"permissions": ["github.repo.read"], "ttl_ms": 30_000}, actor="a-1")
         for entry in (("only-one",), (None, "body", "extra"), "not-a-tuple"):

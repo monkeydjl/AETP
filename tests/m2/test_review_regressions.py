@@ -1,8 +1,8 @@
 """Behavioral regressions for the independent M2-01 R1/R2 findings."""
 
+import json
 from copy import deepcopy
 from dataclasses import replace
-import json
 from unittest.mock import patch
 
 from aetp.collaboration.policy import PolicyViolation, canonical_json, digest_value

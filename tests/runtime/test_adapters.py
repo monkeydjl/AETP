@@ -1,6 +1,7 @@
 """Unit tests for RuntimeAdapter contract and capability declarations."""
 
 import unittest
+
 from aetp.runtime.adapters import (
     AdapterSecurityError,
     RuntimeAdapter,

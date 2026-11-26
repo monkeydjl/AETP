@@ -11,7 +11,6 @@ from unittest.mock import patch
 from tools import devprep
 from tools.devprep import validate_markdown_links
 
-
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "tools" / "devprep.py"
 

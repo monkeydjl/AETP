@@ -1,8 +1,7 @@
 """Governance integration fixtures over real Commands, SQLite and document Sessions."""
 
-import copy
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
 from aetp.domain.models import Command
 from aetp.runtime.document import DocumentRuntime
@@ -149,6 +148,7 @@ class GovernanceCase(MeetingCase):
 def governance_process(db_path, mode, command_data, at, ready, go, output, done):
     """A separate writer/process, synchronized at the real OS resource gate."""
     import os
+
     from aetp.storage.sqlite_store import SQLiteStore
     try:
         with SQLiteStore.open(db_path) as store:

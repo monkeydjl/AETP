@@ -13,12 +13,19 @@ import platform
 import sys
 import time
 from dataclasses import asdict, dataclass
-from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
-from conformance.definitions import CONFORMANCE_DEFINITIONS, FIXTURE_KINDS, ConformanceDefinition
-from conformance.registry import FIXTURE_HANDLERS, register_fixture
-import conformance.fixtures  # Register standard executable fixtures
+# Imported for its side effect: this module's @register_fixture decorators are
+# what populate FIXTURE_HANDLERS with the 28 executable fixtures. It looks
+# unused to a linter and removing it leaves the registry empty, so every fixture
+# silently reports "not run". Kept with the noqa for exactly that reason.
+import conformance.fixtures  # noqa: F401  (registers standard executable fixtures)
+from conformance.definitions import (
+    CONFORMANCE_DEFINITIONS,
+    FIXTURE_KINDS,
+    ConformanceDefinition,
+)
+from conformance.registry import FIXTURE_HANDLERS
 
 
 @dataclass

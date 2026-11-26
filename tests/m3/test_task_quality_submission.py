@@ -1,6 +1,5 @@
 """Submission must prove a real current execution, not a claimed completion."""
 
-from dataclasses import replace
 
 from aetp.runtime.document import Session
 from tests.m3.quality_support import QualityCase

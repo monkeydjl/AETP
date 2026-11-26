@@ -20,7 +20,6 @@ What the probe asserts once a container boundary exists (§13.9 anti-bypass):
 from __future__ import annotations
 
 import json
-import os
 import shutil
 import subprocess
 import unittest

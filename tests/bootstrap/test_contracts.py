@@ -1,10 +1,11 @@
 """Unit tests for Project Bootstrap contracts and reducers."""
 
 import unittest
+
 from aetp.bootstrap.contracts import AGGREGATES, COMMAND_AGGREGATES, DOMAIN_EVENTS
 from aetp.bootstrap.records import evaluate_bootstrap_finalize, reduce_bootstrap_event
 from aetp.collaboration.policy import PolicyViolation
-from aetp.domain.models import Command, Event, ModelValidationError
+from aetp.domain.models import Command, Event
 
 
 class BootstrapContractsTests(unittest.TestCase):

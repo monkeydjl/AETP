@@ -1,17 +1,15 @@
 """Real SQLite fixtures; the meter explicitly models process admission only."""
 
-import json
 import unittest
 
-from aetp.core.projection import Projection
 from aetp.core.runtime import RuntimeRecovery
 from aetp.domain.models import Command
 from tests.m0.support import open_command_fixture
 
 try:
-    from aetp.meetings.service import MeetingService
-    from aetp.meetings.records import Contribution
     from aetp.meetings.metering import MeteringAuthority
+    from aetp.meetings.records import Contribution
+    from aetp.meetings.service import MeetingService
 except ModuleNotFoundError as exc:
     if not exc.name.startswith("aetp.meetings"):
         raise
@@ -115,9 +113,9 @@ class MeetingCase(unittest.TestCase):
 
 def admission_worker(path, entry_data, call_id, gate, queue):
     """Independent process; no in-memory lock or receipt set shared with parent."""
-    from aetp.meetings.service import MeetingService
-    from aetp.meetings.records import Contribution
     from aetp.meetings.metering import MeteringAuthority
+    from aetp.meetings.records import Contribution
+    from aetp.meetings.service import MeetingService
     from aetp.storage.sqlite_store import SQLiteStore
     try:
         with SQLiteStore.open(path) as store:

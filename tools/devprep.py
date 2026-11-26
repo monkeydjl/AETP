@@ -15,12 +15,11 @@ import re
 import shutil
 import subprocess
 import sys
-from collections import Counter, defaultdict
-from datetime import date, datetime, timezone
+from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import unquote
-
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "Docs" / "development"

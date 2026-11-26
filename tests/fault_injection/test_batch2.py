@@ -13,7 +13,6 @@ import unittest
 
 from aetp.collaboration.policy import PolicyViolation
 from aetp.core.commands import CommandHandler
-from aetp.core.projection import Projection
 from aetp.domain.models import Command
 from aetp.governance.approvals import transition
 from aetp.governance.trust import InputAuthority

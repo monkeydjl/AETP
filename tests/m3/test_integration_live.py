@@ -1,15 +1,19 @@
 """Live trust, dual-CAS, shared rejection and exact retry behavior."""
-import copy
 from contextlib import ExitStack
 from dataclasses import replace
 from unittest.mock import patch
+
 from aetp.core.commands import CommandHandler
 from aetp.core.projection import Projection
 from aetp.governance.trust import InputAuthority
 from aetp.quality.service import TaskQualityService
 from aetp.storage.sqlite_store import SQLiteStore
-from tests.m3.integration_live_support import IntegrationCase, IntegrationContractService
+from tests.m3.integration_live_support import (
+    IntegrationCase,
+    IntegrationContractService,
+)
 from tests.m3.test_integration_shared_guards import configuration
+
 
 class IntegrationLiveTests(IntegrationCase):
     def test_real_receipt_declaration_changes_only_project_and_has_no_execution(self):

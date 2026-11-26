@@ -1,16 +1,16 @@
 """Real SQLite/Windows fixtures for execution-boundary tests."""
 
-from pathlib import Path
+import os
 import tempfile
 import unittest
-import os
+from pathlib import Path
 
 from aetp.domain.models import Command
 from tests.m0.support import open_command_fixture
 
 try:
-    from aetp.runtime.service import ExecutionService
     from aetp.runtime.document import DocumentRuntime
+    from aetp.runtime.service import ExecutionService
     from aetp.workspace.documents import DocumentWorkspace
 except ModuleNotFoundError as exc:
     if not exc.name.startswith(("aetp.runtime", "aetp.workspace")):

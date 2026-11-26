@@ -10,9 +10,8 @@ declared here per test so the runner can emit a frozen-evidence snapshot.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from typing import Dict, Tuple
-
+from dataclasses import dataclass
+from typing import Dict
 
 # The only values `fixture_kind` may take. The frozen snapshot republishes this
 # field, and for a reader of that snapshot it is the sole signal of how strong

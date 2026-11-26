@@ -6,22 +6,22 @@ they do not append those candidates to the Event Store or mint an InputReceipt.
 """
 
 import copy
-from dataclasses import replace
 import unittest
+from dataclasses import replace
 from unittest.mock import patch
 
+from aetp.acceptance.service import AcceptanceService
+from aetp.collaboration.service import CollaborationService
 from aetp.core.commands import CommandHandler
 from aetp.core.projection import Projection
 from aetp.domain.models import Event, ModelValidationError
-from aetp.collaboration.service import CollaborationService
-from aetp.meetings.service import MeetingService
 from aetp.governance.service import GovernanceService
-from aetp.planning.service import PlanningService
-from aetp.acceptance.service import AcceptanceService
 from aetp.integration import guards
-from tests.m3.quality_support import QualityCase
+from aetp.meetings.service import MeetingService
+from aetp.planning.service import PlanningService
 from tests.m3.integration_record_support import RecordCase
-from tests.m3.test_integration_shared_guards import request, configuration
+from tests.m3.quality_support import QualityCase
+from tests.m3.test_integration_shared_guards import configuration, request
 
 
 class CommandGuardWiringTests(QualityCase):

@@ -5,8 +5,6 @@ import tempfile
 import unittest
 
 from aetp.core.projection import Projection
-from aetp.domain.models import Command
-from aetp.planning.service import PlanningService
 from aetp.storage.sqlite_store import SQLiteStore
 from conformance.m3.test_028 import run_test_028_scenario
 
@@ -36,7 +34,7 @@ class ConformanceTest028Tests(unittest.TestCase):
 
     def test_test_028_deterministic_event_replay_matches(self):
         """Events produced by TEST-028 can be deterministically replayed."""
-        report = run_test_028_scenario(self.db_path)
+        run_test_028_scenario(self.db_path)
         store = SQLiteStore.open(self.db_path)
         events = store.read_events("p-test-028")
         state = Projection.rebuild(events)

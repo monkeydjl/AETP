@@ -1,16 +1,20 @@
 """Faults and forged candidate facts must not bypass the Command chain."""
 
 import copy
+import sqlite3
 from contextlib import ExitStack
 from dataclasses import replace
-import sqlite3
 from unittest.mock import patch
 
 from aetp.collaboration.policy import digest_value
 from aetp.core.projection import Projection
 from aetp.core.runtime import RuntimeRecovery
-from aetp.domain.models import Command, Event, ModelValidationError
-from tests.m0.support import clear_projection_fixture, install_event_failure_fixture, install_result_failure_fixture
+from aetp.domain.models import Event, ModelValidationError
+from tests.m0.support import (
+    clear_projection_fixture,
+    install_event_failure_fixture,
+    install_result_failure_fixture,
+)
 from tests.m3.support import PlanningCase
 
 
@@ -30,10 +34,10 @@ class PlanningReplayTests(PlanningCase):
         events, commands, expected = self.facts(), self.commands(), self.state()
         self.assertEqual(expected["blueprint:bp-1"]["latest_proposal_version"], 3)
         self.assertIsNone(expected["blueprint:bp-1"]["active_version"])
+        from aetp.meetings.process import ProcessLog
         from aetp.runtime.document import DocumentRuntime
         from aetp.runtime.service import ExecutionService
         from aetp.workspace.documents import DocumentWorkspace
-        from aetp.meetings.process import ProcessLog
         guarded = []
         with ExitStack() as stack:
             for target, name in ((self.service, "clock"), (self.service, "handle"), (self.service, "_followups"),

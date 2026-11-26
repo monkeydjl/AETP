@@ -1,24 +1,29 @@
 """M1-02 behavioral failure fixtures; not full-protocol conformance."""
 
-from dataclasses import replace
-from contextlib import closing, contextmanager
 import json
 import multiprocessing
 import os
-from pathlib import Path
 import sqlite3
+from contextlib import closing, contextmanager
+from dataclasses import replace
+from pathlib import Path
 from unittest.mock import patch
 
+from aetp.collaboration.policy import PolicyViolation, canonical_json
+from aetp.collaboration.service import CollaborationService
 from aetp.core.commands import CommandHandler
 from aetp.core.projection import Projection
 from aetp.core.runtime import RuntimeRecovery
-from aetp.collaboration.policy import PolicyViolation, canonical_json
 from aetp.domain.models import Event, ModelValidationError
-from aetp.collaboration.service import CollaborationService
 from tests.m0.support import install_event_failure_fixture
 from tests.m1.execution_support import (
-    ExecutionCase, ExecutionService, DocumentRuntime, competing_claim,
-    foreign_workspace_reconciler, process_document_worker, process_revoker,
+    DocumentRuntime,
+    ExecutionCase,
+    ExecutionService,
+    competing_claim,
+    foreign_workspace_reconciler,
+    process_document_worker,
+    process_revoker,
 )
 
 

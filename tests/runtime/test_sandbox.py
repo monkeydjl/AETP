@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 from aetp.runtime.adapters import AdapterSecurityError
-from aetp.runtime.sandbox import PreToolAuthorizer, SandboxRuntimeAdapter
+from aetp.runtime.sandbox import SandboxRuntimeAdapter
 
 
 class SandboxRuntimeAdapterTests(unittest.TestCase):

@@ -6,7 +6,7 @@ scored from, with no re-minting and no token body materializing.
 
 import unittest
 
-from aetp.collaboration.policy import PolicyViolation, canonical_json
+from aetp.collaboration.policy import canonical_json
 from aetp.domain.models import Command, Event
 from aetp.governance import credentials
 from aetp.governance.projection import reduce_record

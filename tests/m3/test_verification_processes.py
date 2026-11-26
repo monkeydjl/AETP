@@ -1,11 +1,11 @@
 """Actual processes compete at the shared grant/OS gate; no Session is copied."""
 
-from concurrent.futures import ThreadPoolExecutor
 import multiprocessing
 import os
-from pathlib import Path
 import tempfile
 import unittest
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from unittest.mock import patch
 
 from aetp.acceptance.runner import FixedJsonRunner

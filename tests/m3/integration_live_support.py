@@ -1,7 +1,7 @@
 """Real registered Commands and authentic fixture ingress, never DraftCommand."""
-from aetp.domain.models import Command
 from tests.m3.quality_support import QualityCase
 from tests.m3.test_integration_contract_inputs import target_fixture
+
 try:
     from aetp.integration.service import IntegrationContractService
 except ModuleNotFoundError as exc:

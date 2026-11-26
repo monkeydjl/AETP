@@ -1,17 +1,17 @@
 """Exercise real Project pause/resume facts through the existing M1 service."""
 
-from pathlib import Path
 import json
 import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
-from aetp.runtime.document import DocumentRuntime
 from aetp.core.projection import Projection
 from aetp.domain.models import Event
+from aetp.runtime.document import DocumentRuntime
 from aetp.runtime.service import ExecutionService
 from aetp.workspace.documents import DocumentWorkspace
-from tests.m2.support import MeetingCase
 from tests.m2.governance_support import GovernanceCase, GovernanceService, policy
+from tests.m2.support import MeetingCase
 
 
 class GovernanceTests(MeetingCase):

@@ -7,7 +7,6 @@ from pathlib import Path
 from aetp.domain import models
 from aetp.storage.sqlite_store import SQLiteStore
 
-
 ROOT = Path(__file__).resolve().parents[2]
 VALID_FIXTURES = ROOT / "schemas" / "m0" / "valid"
 INVALID_FIXTURES = ROOT / "schemas" / "m0" / "invalid"

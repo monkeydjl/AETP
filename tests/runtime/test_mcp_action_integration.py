@@ -1,7 +1,5 @@
 """MCP to existing Action/Event integration tests."""
 
-import hashlib
-import json
 import unittest
 
 from aetp.core.projection import Projection
@@ -53,7 +51,7 @@ class MCPActionLifecycleTests(unittest.TestCase):
         })
 
     def test_registered_call_persists_action_events_and_replays(self):
-        result = self.case.accept(self._mcp_request(), session=self.case.session)
+        self.case.accept(self._mcp_request(), session=self.case.session)
         state = self.case.state()
         action = next(value for key, value in state.items() if key.startswith("action:"))
         dispatched = self.case.dispatch(action)

@@ -11,15 +11,12 @@ Conformance Specification (Docs/AETP-设计方案.md §§1.1, 15.1, 18.3):
 
 from __future__ import annotations
 
-import copy
-import json
 import os
-import sqlite3
 from typing import Any, Dict, List, Optional
 
+from aetp.acceptance.service import AcceptanceService
 from aetp.collaboration.messages import Message, MessageBus
 from aetp.core.commands import CommandHandler
-from aetp.acceptance.service import AcceptanceService
 from aetp.core.projection import Projection
 from aetp.domain.models import Command
 from aetp.integration.service import IntegrationContractService
@@ -36,7 +33,7 @@ def run_test_028_scenario(db_path: str) -> Dict[str, Any]:
     store = SQLiteStore.open(db_path)
     handler = CommandHandler(store)
     planning_service = PlanningService(store, owner_id="human-owner")
-    integration_service = IntegrationContractService(store)
+    IntegrationContractService(store)  # establishes the resource gate for the run
     project_id = "p-test-028"
 
     counter = 0

@@ -1,17 +1,20 @@
 """Observable authority and execution contracts for the new Verification path."""
 
 import copy
-from dataclasses import replace
 import json
+from dataclasses import replace
 from unittest.mock import patch
 
 from aetp.acceptance.runner import FixedJsonRunner
-from aetp.collaboration.policy import PolicyViolation
 from aetp.core.projection import Projection
 from aetp.runtime.document import Session
 from tests.m2.governance_support import policy
 from tests.m3.support import PlanningCase
-from tests.m3.verification_support import AcceptanceService, VerificationCase, verification_policy
+from tests.m3.verification_support import (
+    AcceptanceService,
+    VerificationCase,
+    verification_policy,
+)
 
 
 class VerificationAuthorityTests(VerificationCase):

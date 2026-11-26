@@ -1,15 +1,18 @@
 """Actual SQLite rollback and separate connections at the quality boundary."""
 
-from concurrent.futures import ThreadPoolExecutor
 import sqlite3
 import threading
+from concurrent.futures import ThreadPoolExecutor
 from unittest.mock import patch
 
 from aetp.core.projection import Projection
 from aetp.quality.service import TaskQualityService
 from aetp.runtime.service import ExecutionService
 from aetp.storage.sqlite_store import SQLiteStore
-from tests.m0.support import install_event_failure_fixture, install_result_failure_fixture
+from tests.m0.support import (
+    install_event_failure_fixture,
+    install_result_failure_fixture,
+)
 from tests.m3.quality_support import QualityCase
 
 

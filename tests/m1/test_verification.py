@@ -1,14 +1,13 @@
 """Real precheck evidence cannot replace unavailable execution authorization."""
 
 import hashlib
-from contextlib import closing
 import json
 import multiprocessing
-from pathlib import Path
 import sqlite3
+from contextlib import closing
+from pathlib import Path
 from unittest.mock import patch
 
-from aetp.core.projection import Projection
 from aetp.core.runtime import RuntimeRecovery
 from tests.m1.support import CollaborationCase, review_worker
 

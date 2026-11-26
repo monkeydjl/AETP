@@ -1,7 +1,7 @@
 """Peer communication is independent of authoritative Task/Event writes."""
 
-from dataclasses import FrozenInstanceError, replace
 import unittest
+from dataclasses import FrozenInstanceError, replace
 
 from tests.m0.support import make_command, open_command_fixture
 

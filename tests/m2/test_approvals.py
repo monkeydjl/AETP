@@ -1,6 +1,5 @@
 """Approval authority and exact snapshots; each denial exercises the real writer."""
 
-import copy
 from dataclasses import replace
 
 from aetp.collaboration.policy import PolicyViolation
